@@ -1,0 +1,85 @@
+DOMESTIC  |  /solutions/domestic,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+"domestic parcel delivery
+
+",/solutions/domestic,"Service page
+Landing page",Commercial,"Hero section for the domestic page.
+
+Key headings: Domestic parcel delivery for UK businesses of all sizes.
+Subheading: From single parcels to bulk shipments, ITD Global connects you to X+ UK carriers with automated rate comparison, real-time tracking and simple label generation.
+Jump links: eCommerce, Marketplace, 3PL, B2B, Enterprise, Small Business, Consolidation.
+CTAs: Get Started / Contact Sales.
+
+Internal links: All audience sections on this page.","Copy: Hero headline, subheading, jump link labels.
+Design: Hero with jump link navigation bar.
+Dev: Jump link anchors required for each section.
+Approvals: Sign off on page structure.","Write conent 
+Build jump link navigation.
+add anchor links for each section."
+"e-commerce shipping
+
+",/solutions/domestic#ecommerce,"Service page
+Audience section",Commercial,"eCommerce section covering domestic shipping for online stores.
+
+Key headings: E-commerce shipping that scales with your store.
+Key points: 
+Delivery to X+ countries with next-day, 24/48 hour tracked and low-cost postal options
+Returns management: online returns portal with automated label generation for UK and worldwide
+Local depot network in Manchester, Birmingham and London: One collection for all carriers
+Connects to your order management, stock and dispatch systems via Connexx
+Integrates with Shopify, WooCommerce, Amazon and more
+CTA: Get Started.
+Internal links: /integrations, /connexx.","Copy: Section headline and three to four paragraphs or bullet points.
+Design: Audience section layout consistent with page.
+Imagery: eCommerce-relevant visual or UI screenshot.
+Stats: X% cost reduction case study stat if approved.","Write eCommerce content 
+Include Shopify and WooCommerce integration references.
+Link to /integrations."
+"multi-carrier shipping platform
+",/solutions/domestic#marketplace,"Service page
+Audience section",Commercial,"Marketplace Sellers section covering domestic shipping for sellers on Amazon, eBay, Etsy and TikTok Shop.
+
+Key headings: One platform for every marketplace you sell on.
+Key points: Unified order management, multi-carrier rate selection, batch label generation, tracking across all channels.
+
+CTA: Get Started.
+Internal links: /integrations, /connexx.","Copy: Section headline and three to four paragraphs or bullet points.
+Design: Audience section layout.
+Imagery: Marketplace logos or platform visual.","Write Marketplace content
+Reference multi-carrier platform as core proposition.
+List supported marketplaces."
+"3PL provider UK
+
+",/solutions/domestic#3PL,"Service page
+Audience section",Commercial,Not sure about this section. ,"Copy: Section headline and three to four paragraphs or bullet points.
+Design: Audience section layout.
+Content: case study quote - confirm approval.
+Stats: X% accuracy.","Write 3PL content
+Include a case study stat.
+Confirm case study approved for use."
+"Enterprise Shipping
+
+",/solutions/domestic#enterprise,"Service page
+Audience section",Commercial,"Enterprise section covering domestic shipping for larger businesses.
+
+Key headings: Enterprise shipping at scale.
+Key points: Multi-carrier management, advanced shipping rules, ERP and WMS integration via API, dedicated account management.
+
+CTA: Contact Sales.
+Internal links: /connexx, /integrations.","Copy: Section headline and three to four paragraphs or bullet points.
+Design: Audience section layout.
+Imagery: Enterprise or supply chain visual.
+Approvals: Dedicated account management claim to be confirmed.","Write Enterprise content 
+"
+"Small Businesses 
+
+",/solutions/domestic#small-business,"Service page
+Audience section",Commercial,"Small Business section covering domestic shipping for SMEs.
+
+Key headings: Affordable parcel delivery for small businesses.
+Key points: Compare rates across X+ carriers to find the best price for every shipment. Send parcels from as little as £X. No contracts, no minimum volumes, no IT setup required. Built for businesses that need simple, cost-effective shipping from day one.
+CTA: Get Started.
+Internal links: /parcel rate checker","Copy: Section headline and three to four paragraphs or bullet points.
+Design: Audience section layout.
+Imagery: Small business or online seller visual.","Write Small Business content 
+Lead with simplicity and cost efficiency."

@@ -1,0 +1,40 @@
+SHIPPING  ,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+"logistics partner
+
+",/solutions,"Landing page
+Hub page",Commercial,"Short page intro positioning ITD as a logistics partner offering two clear shipping solutions.
+
+Key headings: Shipping solutions built around your business.
+
+Intro: Two to three sentences max. Leads directly into the two solution cards.
+
+Internal links: /solutions/domestic, /solutions/international.","Copy: Two to three sentence intro only.
+Design: Clean hub layout, two cards below intro.
+","Write short intro from scratch.
+Two cards below - see rows below."
+"domestic parcel delivery
+
+",/solutions  →  /solutions/domestic,"Landing page
+Solution card",Commercial,"Domestic solution card covering ITD's UK parcel delivery offering.
+
+Key points: Multi-carrier rate comparison, competitive pricing because of our relationships, . Audiences: eCommerce, Marketplace, 3PL, B2B, Enterprise, Small Business.
+
+CTA: Explore Domestic Shipping → /solutions/domestic.","Copy: Four lines plus audience list.
+Design: Card component, CTA button.
+Approvals: Confirm audience list.","Write domestic card copy.
+List audiences clearly.
+Link to /solutions/domestic."
+"international parcel delivery
+
+",/solutions  →  /solutions/international,"Landing page
+Solution card",Commercial,"International solution card covering shipping to X+ countries.
+
+Key points: Export and import, automated customs documentation, carrier rate comparison. Audiences: eCommerce brands, B2B exporters and importers, 3PL providers.
+
+CTA: Explore International Shipping → /solutions/international.","Copy: Four lines plus audience list.
+Design: Card component, CTA button.
+Approvals: Confirm audience list.","Write international card copy.
+Highlight compliance automation.
+Link to /solutions/international."
+,Add Freight,,,,,

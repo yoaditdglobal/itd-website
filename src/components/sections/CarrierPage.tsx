@@ -44,16 +44,16 @@ export default function CarrierPage({
                 ← All integrations
               </Link>
               <div className="flex items-center gap-4 mb-6">
-                <IntegrationLogo name={name} logo={logo} size="md" />
+                <IntegrationLogo name={name} logo={logo} size="md" fit="contain" />
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary">{name}</h1>
+                  <h1 className="text-display-xl text-text-primary">{name}</h1>
                   <span className="text-sm font-medium text-accent">{region}</span>
                 </div>
               </div>
               <p className="text-xl text-text-secondary">{tagline}</p>
               <p className="mt-4 text-text-secondary leading-relaxed">{description}</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button href="#">Get Started with {name}</Button>
+                <Button href={`/contact?enquiry=${name.toLowerCase().replace(/\s+/g, "-")}`}>Connect {name} to Connexx</Button>
                 <Button href="/contact" variant="secondary">Contact Sales</Button>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function CarrierPage({
       <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="text-2xl font-bold tracking-tight text-text-primary mb-8">Services available via Connexx</h2>
+            <h2 className="text-2xl text-display-lg text-text-primary mb-8">Services available via Connexx</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {services.map((service) => (
                 <div key={service} className="bg-white rounded-xl border border-border p-5 flex items-start gap-3">
@@ -96,7 +96,7 @@ export default function CarrierPage({
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="text-2xl font-bold tracking-tight text-text-primary mb-3">
+            <h2 className="text-2xl text-display-lg text-text-primary mb-3">
               {name} + Connexx
             </h2>
             <p className="text-text-secondary mb-10 max-w-2xl">

@@ -1,0 +1,76 @@
+CONNEXX  |  /connexx,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+"multi-carrier shipping platform
+
+Secondary:
+",/connexx,"Product page
+",Commercial,"Hero section introducing Connexx.
+
+Key headings: One platform. Every shipment.
+Subheading: Rate comparison, label generation, tracking, returns, analytics and compliance - unified in one dashboard.
+
+Stats: X+ carriers, X% uptime, X+ shipments.
+CTAs: Get Started
+Internal links: /connexx#modules, /connexx#api.","Copy: Hero headline and subheading. Write from scratch.
+Design: Hero layout with Connexx dashboard visual and stats bar.
+Imagery: Connexx dashboard screenshot high resolution.
+Approvals: Sign off on stats before publishing.","Write content
+Confirm all stats
+Design to supply dashboard visual."
+"shipping platform
+
+Secondary:
+",/connexx#modules,"Product page
+Feature section",Commercial,"Six modules section.
+
+Key headings: Everything you need.
+Modules with headline, bullet points and key stat:
+1. Rate Comparison - saves X% in first quarter
+2. Label Generation - one-click and batch
+3. Real-Time Tracking - reduces WISMO tickets by X%
+4. Returns Management -automated workflows
+5. Analytics and Reporting - per-carrier cost breakdowns
+6. Compliance and Customs Engine - auto-generated documentation
+
+CTA: Learn more
+Internal links: /solutions/domestic, /solutions/international.","Copy: Headline and three bullet points per module. Include key stat.
+Design: Six-module grid layout with icons and UI previews.
+Imagery: UI preview for each module - six assets required.
+Stats: Confirm all module stats with product team.
+Approvals: Stats sign off.","Write copy for each module .
+Design needs six UI preview assets.
+Confirm all stats before publishing."
+"multi carrier shipping software
+
+",/connexx#proof,"Product page
+Social proof section",Commercial,"Social proof section.
+
+Stats bar: X+ shipments processed, X+ carriers connected, X% uptime, under Xms API response.
+Case study:  X% accuracy across X+ destination countries.
+Quote: 
+
+CTA: Book a Demo.
+Internal links: /resources/CS","Copy: Stat descriptions and case study block with quote.
+Design: Stats bar layout and case study card.
+Content: SwiftLog quote and stat - confirm approval for use.
+Approvals: Legal sign off on quote.","Confirm all stats are accurate.
+Link to full case study on /resources."
+"shipping API integration
+
+
+",/connexx#api,"Product page
+Developer section","Informational
+Transactional","Developer API section.
+
+Key headings: Built for developers. Ready in minutes.
+Key points: RESTful API, ship labels, track parcels and manage carriers programmatically. 
+Links: Documentation, API Reference, Status Page.
+Visual: Code snippet showing shipment creation request.
+
+CTAs: View API Docs / API Reference / Status Page.
+Internal links: /help/developers.","Copy: Developer section headline and two to three paragraphs.
+Design: Code snippet block - dark background, syntax highlighting.
+Dev: Confirm API documentation is live and linked correctly.
+Approvals: Dev team to approve API code snippet.","Write content
+Dev team to confirm API docs URL.
+Design to supply code snippet visual."

@@ -2,51 +2,30 @@ import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { Zap, Eye, ShieldCheck, LayoutDashboard, BarChart3, Settings } from "lucide-react";
 
-const benefits = [
-  {
-    icon: Zap,
-    title: "Automated rate comparison",
-    desc: "because choosing the wrong carrier on every shipment compounds into thousands lost per quarter.",
-  },
-  {
-    icon: Eye,
-    title: "Real-time tracking dashboard",
-    desc: "because your CS team shouldn't need 4 carrier portals open to answer one customer question.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Built-in compliance engine",
-    desc: "because a single customs error can hold an entire container at the border for days.",
-  },
-];
-
 export default function ConnexxPreview() {
   return (
     <section className="bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — benefits */}
+          {/* Left — copy */}
           <ScrollReveal>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-3">The Connexx Platform</p>
-              <h2 className="font-bold tracking-tight text-text-primary">
-                One platform.<br />Every shipment.
+              <p className="text-eyebrow text-accent mb-3">
+                The Connexx Platform
+              </p>
+              <h2 className="text-display-lg text-text-primary">
+                One platform. Every shipment.
               </h2>
-              <div className="mt-8 space-y-6">
-                {benefits.map((b) => (
-                  <div key={b.title} className="flex gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center">
-                      <b.icon className="w-5 h-5 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-text-primary">{b.title}</h3>
-                      <p className="text-sm text-text-secondary mt-0.5">{b.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-6 text-base md:text-lg text-text-secondary leading-relaxed">
+                Connexx is the multi-carrier shipping platform behind ITD Global.
+                It compares live rates across every connected carrier, generates
+                the right label, tracks the parcel from collection to delivery,
+                and handles customs paperwork on cross-border shipments. Rate
+                engine, label generation, tracking, and compliance run in a
+                single dashboard.
+              </p>
               <div className="mt-8">
-                <Button href="/connexx">Explore Connexx</Button>
+                <Button href="/connexx">See the platform</Button>
               </div>
             </div>
           </ScrollReveal>
@@ -71,7 +50,7 @@ export default function ConnexxPreview() {
                 ].map((mod) => (
                   <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
                     <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />
-                    <div className="text-xs font-medium text-text-primary">{mod.name}</div>
+                    <p className="text-xs font-medium text-text-primary">{mod.name}</p>
                   </div>
                 ))}
               </div>

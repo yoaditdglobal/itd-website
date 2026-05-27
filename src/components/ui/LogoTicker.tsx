@@ -22,7 +22,7 @@ export default function LogoTicker() {
         {[...logos, ...logos].map((name, i) => (
           <div
             key={i}
-            className="mx-8 flex-shrink-0 text-white/30 text-sm font-semibold tracking-wider uppercase"
+            className="mx-8 flex-shrink-0 text-white/55 text-sm font-semibold tracking-wider uppercase"
           >
             {name}
           </div>

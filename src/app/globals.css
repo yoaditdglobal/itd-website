@@ -1,36 +1,241 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #111827;
-  --color-bg-secondary: #f9fafb;
-  --color-bg-dark: #0f1729;
-  --color-bg-dark-card: #182038;
-  --color-text-primary: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-tertiary: #9ca3af;
-  --color-accent: #2563eb;
-  --color-accent-light: #e8effd;
-  --color-accent-dark: #1e40af;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-strong: rgba(0, 0, 0, 0.16);
+  /* ─── Core neutrals — warm ivory family (modern-refined direction) ─── */
+  --color-background: #faf8f4;
+  --color-foreground: #1a1a1f;
+  --color-bg-secondary: #f4f0e8;
+  --color-bg-tertiary: #eee8dc;
+  --color-bg-dark: #15192b;
+  --color-bg-dark-card: #1e243f;
+  --color-bg-dark-tertiary: #252c4d;
+
+  /* Text — warm-tinted greys */
+  --color-text-primary: #1a1a1f;
+  --color-text-secondary: #4a4a55;
+  --color-text-tertiary: #6b6b75;
+  --color-text-quaternary: #9a9a9f;
+
+  /* Brand accent — deeper cobalt for premium feel */
+  --color-accent: #1d3fb8;
+  --color-accent-light: #e4ecff;
+  --color-accent-dark: #142e8c;
+  --color-accent-50: #eff3ff;
+  --color-accent-100: #dbe5ff;
+  --color-accent-200: #bfd0ff;
+  --color-accent-500: #1d3fb8;
+  --color-accent-600: #1733a0;
+  --color-accent-700: #142e8c;
+
+  /* Secondary accent — warm terracotta, used sparingly */
+  --color-accent-secondary: #c8743d;
+  --color-accent-secondary-light: #f5e8dc;
+
+  /* Semantic colours — functional, retained */
+  --color-success: #10b981;
+  --color-success-light: #d1fae5;
+  --color-success-dark: #047857;
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+  --color-warning-dark: #b45309;
+  --color-danger: #ef4444;
+  --color-danger-light: #fee2e2;
+  --color-info: #3b82f6;
+  --color-info-light: #dbeafe;
+
+  /* Borders — warm-tinted */
+  --color-border: rgba(26, 26, 31, 0.10);
+  --color-border-strong: rgba(26, 26, 31, 0.20);
+  --color-border-accent: rgba(29, 63, 184, 0.22);
+
+  /* Shadows — deeper, warmer, layered ambient + cast */
+  --shadow-xs: 0 1px 2px 0 rgba(26, 26, 31, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(26, 26, 31, 0.06), 0 1px 2px -1px rgba(26, 26, 31, 0.04);
+  --shadow-md: 0 4px 8px -2px rgba(26, 26, 31, 0.08), 0 2px 4px -2px rgba(26, 26, 31, 0.06);
+  --shadow-lg: 0 16px 32px -12px rgba(26, 26, 31, 0.14), 0 8px 16px -8px rgba(26, 26, 31, 0.08);
+  --shadow-xl: 0 32px 64px -16px rgba(26, 26, 31, 0.20), 0 16px 32px -12px rgba(26, 26, 31, 0.10);
+  --shadow-accent: 0 16px 32px -12px rgba(29, 63, 184, 0.28), 0 4px 8px -4px rgba(29, 63, 184, 0.16);
+  --shadow-inner: inset 0 2px 4px 0 rgba(26, 26, 31, 0.04);
+
+  /* Gradient presets — warm radial + sand wash */
+  --gradient-hero:
+    radial-gradient(ellipse 80% 60% at 75% 15%, rgba(29, 63, 184, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 25% 85%, rgba(200, 116, 61, 0.05) 0%, transparent 55%),
+    linear-gradient(180deg, #faf8f4 0%, #f4f0e8 100%);
+  --gradient-accent: linear-gradient(135deg, #1d3fb8 0%, #142e8c 100%);
+  --gradient-accent-soft: linear-gradient(135deg, rgba(29, 63, 184, 0.06) 0%, rgba(200, 116, 61, 0.06) 100%);
+  --gradient-dark: linear-gradient(180deg, #15192b 0%, #252c4d 100%);
+  --gradient-dark-radial: radial-gradient(ellipse at top, rgba(29, 63, 184, 0.18) 0%, transparent 60%), #15192b;
+
+  /* Fonts */
+  --font-display: "Cabinet Grotesk", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Anchor links account for the fixed 72px navbar + 16px breathing room. */
+  scroll-padding-top: 88px;
+}
+
+/* Apply to any element that is a named anchor target (id="..."). Adds the
+   navbar offset when the browser scrolls the element into view, so the
+   element's top edge clears the fixed nav. */
+.scroll-mt-nav {
+  scroll-margin-top: 88px;
+}
+
+/* Treat every element with an id (excluding interactive form/UI elements)
+   as a scroll target so anchor links automatically respect the nav offset. */
+[id]:not(input):not(select):not(textarea):not(button):not([id=""]) {
+  scroll-margin-top: 88px;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fluid typography */
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+/* ─── Typography utilities (Rule 16, see docs/brand-voice/style-guide.md) ───
+   Every text element uses one of these semantic classes. Apply colour
+   separately (text-text-primary / text-text-secondary / text-accent etc.).
+   Never set text-xs / text-sm / font-bold etc. directly outside these
+   utilities — extend the system here first if a new use case appears.
+
+   Display + heading use the brand display face (Cabinet Grotesk).
+   Body + microtext use the body face (Inter). */
+
+/* Display — page-level, fluid, marketing scale (Cabinet Grotesk) */
+.text-display-xl { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em;  line-height: 0.98; font-size: clamp(2.75rem, 6.5vw, 5rem); }
+.text-display-lg { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.022em; line-height: 1.08; font-size: clamp(1.875rem, 4vw, 3rem); }
+.text-display-md { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.018em; line-height: 1.20; font-size: clamp(1.375rem, 2.75vw, 2rem); }
+
+/* Heading — interface-scale, static (Cabinet Grotesk) */
+.text-heading-lg { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; line-height: 1.3;  font-size: 1.25rem; }
+.text-heading-md { font-family: var(--font-display); font-weight: 600;                          line-height: 1.35; font-size: 1.125rem; }
+.text-heading-sm { font-family: var(--font-display); font-weight: 600;                          line-height: 1.4;  font-size: 1rem; }
+
+/* Body — Inter */
+.text-body-lg    { line-height: 1.6;  font-size: 1.125rem; }
+.text-body-md    { line-height: 1.65; font-size: 1rem; }
+.text-body-sm    { line-height: 1.6;  font-size: 0.875rem; }
+
+/* Labels and microtext — Inter */
+.text-label      { font-weight: 500; font-size: 0.875rem; }
+.text-eyebrow    { font-weight: 600; font-size: 0.75rem; letter-spacing: 0.05em; line-height: 1.4; text-transform: uppercase; }
+.text-caption    { font-size: 0.75rem; line-height: 1.5; }
+.text-micro      { font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.04em; line-height: 1.3; }
+
+/* Stats / display numerals — Cabinet Grotesk for character at large sizes */
+.text-stat-xl    { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1;   font-size: 1.875rem; }
+.text-stat-lg    { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.022em; line-height: 1.1; font-size: 1.5rem; }
+
+@media (min-width: 768px) {
+  .text-stat-xl  { font-size: 2.5rem; }
+  .text-stat-lg  { font-size: 1.875rem; }
+}
+
+/* Backward-compatible defaults for bare semantic tags.
+   Most usage applies explicit typography utility classes; these only
+   catch orphan headings (e.g. inside MDX or third-party content). */
+h1:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(2.75rem, 6.5vw, 5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 0.98; }
+h2:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.022em; line-height: 1.08; }
+h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.375rem, 2.75vw, 2rem); font-weight: 600; letter-spacing: -0.018em; line-height: 1.20; }
+
+/* Subtle noise / grain — adds organic texture without imagery cost.
+   Apply as overlay (absolute, pointer-events: none) inside hero or CTA sections. */
+.bg-noise {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.12 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Hero radial blob — for use behind hero headlines */
+.hero-bg {
+  background: var(--gradient-hero);
+}
+.hero-bg-blob {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-blob::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  aspect-ratio: 1;
+  background: var(--color-accent);
+  opacity: 0.07;
+  filter: blur(90px);
+  border-radius: 50%;
+}
+.hero-bg-blob::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 50%;
+  aspect-ratio: 1;
+  background: var(--color-accent-secondary);
+  opacity: 0.05;
+  filter: blur(90px);
+  border-radius: 50%;
+}
+
+/* Card hover lift utility */
+.card-hover {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── Hero entrance choreography — the differentiation moment ───
+   H1 lands, subhead arrives, CTAs follow, aside slides in.
+   Total runtime ~800ms. All elements start at opacity 0 to avoid FOUT
+   when the JS-free CSS animation runs server-side rendered. */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-entrance-h1,
+.hero-entrance-sub,
+.hero-entrance-cta {
+  opacity: 0;
+  animation: hero-fade-up 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-entrance-aside {
+  opacity: 0;
+  animation: hero-fade-in-right 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-entrance-h1    { animation-delay: 60ms; }
+.hero-entrance-sub   { animation-delay: 240ms; }
+.hero-entrance-cta   { animation-delay: 420ms; }
+.hero-entrance-aside { animation-delay: 300ms; }
 
 /* Logo ticker animation */
 @keyframes ticker {
@@ -42,7 +247,95 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
   animation: ticker 30s linear infinite;
 }
 
-/* Reduced motion */
+/* Subtle pulse for stat dots */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ─── View Transitions API — soft fade between routes ───
+   Activates only in browsers supporting the View Transitions API.
+   Falls back to instant navigation elsewhere. */
+@keyframes route-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes route-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: route-fade-out 180ms ease-in both;
+}
+::view-transition-new(root) {
+  animation: route-fade-in 240ms ease-out both;
+}
+
+/* Link underline draw-in — applied to inline link CTAs */
+.link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ─── Carrier comparison table — sticky-column scroll shadow ───
+   When the table horizontally overflows on narrow viewports, the carrier
+   column stays pinned to the left edge. A subtle right-edge gradient cues
+   the user that there's more content to scroll into. */
+.carrier-sticky-cell {
+  position: sticky;
+  left: 0;
+}
+.carrier-sticky-cell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -12px;
+  bottom: 0;
+  width: 12px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(26, 26, 31, 0.08) 0%,
+    rgba(26, 26, 31, 0.02) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+/* Show the shadow whenever the table can scroll horizontally.
+   We can't trivially detect this in CSS, so we lean on `overflow-x-auto`
+   parent: when the inner table is wider than the viewport, the user sees
+   the cue. For the common (lg+) case where everything fits, the shadow
+   stays subtle and doesn't hurt. */
+@media (max-width: 1100px) {
+  .carrier-sticky-cell::after {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion — disable entrance choreography + ticker + pulses.
+   Honours WCAG 2.3.3 (Animation from Interactions). */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -50,4 +343,16 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+  .card-hover:hover { transform: none; }
+  .hero-entrance-h1,
+  .hero-entrance-sub,
+  .hero-entrance-cta,
+  .hero-entrance-aside {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }

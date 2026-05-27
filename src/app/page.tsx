@@ -1,23 +1,45 @@
 import Hero from "@/components/sections/Hero";
-import PainPoints from "@/components/sections/PainPoints";
 import SocialProof from "@/components/sections/SocialProof";
+import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
 import ConnexxPreview from "@/components/sections/ConnexxPreview";
 import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import { buildMetadata } from "@/lib/metadata";
+
+export const metadata = buildMetadata({
+  title: "Multi-carrier shipping platform for UK businesses",
+  description:
+    "Compare every UK and international carrier on every shipment. Connexx routes the cheapest compliant option, prints the label, and tracks the parcel from one dashboard.",
+  path: "/",
+});
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Hero
+        title={
+          <>
+            Smarter Shipping for a Simpler Tomorrow.
+          </>
+        }
+        subtitle="ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters. Connexx compares every active carrier on every parcel, picks the cheapest compliant option, and prints the label in one click. Domestic, international, returns, and customs all run from a single dashboard."
+        primaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
+        secondaryCta={{ label: "Request a demo", href: "/contact" }}
+      />
       <SocialProof />
-      <PainPoints />
+      <DomesticInternationalCards />
       <SolutionsRouting />
       <ConnexxPreview />
       <IntegrationHighlights />
       <CaseStudyCards />
-      <ClosingCTA />
+      <ClosingCTA
+        headline="Two minutes. No commitment. See what you'd save."
+        subtitle="The savings estimator compares your current carrier mix against the live Connexx rate engine. No card, no call, no obligation."
+        primaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
+        secondaryCta={{ label: "Request a demo", href: "/contact" }}
+      />
     </>
   );
 }

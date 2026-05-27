@@ -42,7 +42,7 @@ const models = [
   { name: "3PL", icon: Truck, href: "/solutions/3pl", full: true, pain: "Managing logistics for multiple clients", value: "Multi-client logistics automation with per-brand configuration." },
   { name: "Export", icon: Globe, href: "#export", full: false, pain: "Complex customs documentation", value: "Automated export compliance, documentation, and carrier booking.", capabilities: ["Auto-generated export documents", "HS code classification", "Carrier booking in one workflow"] },
   { name: "Import", icon: Package, href: "#import", full: false, pain: "Unpredictable customs clearance", value: "Pre-clearance documentation and duty calculation for smooth imports.", capabilities: ["Tariff classification", "Duty cost estimation", "Real-time clearance tracking"] },
-  { name: "B2B Manufacturing", icon: Factory, href: "#b2b", full: false, pain: "Manual carrier selection for every order", value: "ERP-connected dispatch with rule-based carrier selection.", capabilities: ["Direct ERP integration", "Weight/destination-based routing", "Automated booking confirmations"] },
+  { name: "B2B", icon: Factory, href: "#b2b", full: false, pain: "Manual carrier selection for every order", value: "ERP-connected dispatch with rule-based carrier selection.", capabilities: ["Direct ERP integration", "Weight/destination-based routing", "Automated booking confirmations"] },
 ];
 
 export default function SolutionsPage() {
@@ -52,7 +52,7 @@ export default function SolutionsPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <h1 className="font-bold tracking-tight text-text-primary">
+            <h1 className="text-display-xl text-text-primary">
               Solutions built for how you ship.
             </h1>
             <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
@@ -66,7 +66,7 @@ export default function SolutionsPage() {
       <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">By Stage</p>
+            <p className="text-eyebrow text-accent mb-2">By Stage</p>
             <h2 className="text-2xl font-bold text-text-primary mb-8">Where is your business today?</h2>
           </ScrollReveal>
 
@@ -95,7 +95,7 @@ export default function SolutionsPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">By Business Model</p>
+            <p className="text-eyebrow text-accent mb-2">By Business Model</p>
             <h2 className="text-2xl font-bold text-text-primary mb-8">What does your business do?</h2>
           </ScrollReveal>
 

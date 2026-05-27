@@ -1,30 +1,86 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import { Building2, Store, ShoppingCart, Globe, Package, Factory, Truck, ArrowRight } from "lucide-react";
+import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { getCaseStudiesBySolution, type SolutionTag } from "@/lib/data";
+import {
+  Building2,
+  Store,
+  ShoppingCart,
+  Globe,
+  Package,
+  Factory,
+  Truck,
+  Boxes,
+  ArrowRight,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const stages = [
+interface Icp {
+  name: string;
+  hook: string;
+  icon: LucideIcon;
+  href: string;
+  solutionTag: SolutionTag;
+}
+
+const icps: Icp[] = [
+  {
+    name: "eCommerce",
+    hook: "Stop logging into four carrier portals to answer one WISMO ticket.",
+    icon: ShoppingCart,
+    href: "/solutions/ecommerce",
+    solutionTag: "eCommerce",
+  },
+  {
+    name: "Marketplace Seller",
+    hook: "Penalty fees to zero. One queue across Amazon, eBay, and the rest.",
+    icon: Package,
+    href: "/solutions/marketplace-seller",
+    solutionTag: "Marketplace",
+  },
+  {
+    name: "3PL",
+    hook: "Onboard a new client in two days, not two weeks.",
+    icon: Truck,
+    href: "/solutions/3pl",
+    solutionTag: "3PL",
+  },
+  {
+    name: "B2B",
+    hook: "Order confirmed in the ERP, carrier booked automatically.",
+    icon: Factory,
+    href: "/solutions/b2b",
+    solutionTag: "B2B",
+  },
   {
     name: "Enterprise",
-    desc: "Global logistics orchestration at scale. Multi-region carrier management, advanced analytics, and dedicated support for complex supply chains.",
+    hook: "40 carrier relationships, one set of numbers you can trust.",
     icon: Building2,
     href: "/solutions/enterprise",
+    solutionTag: "Enterprise",
   },
   {
     name: "Small Business",
-    desc: "Start shipping smarter from day one. Automated rate comparison, one-click labels, and integrated tracking — no enterprise budget required.",
+    hook: "Sixty labels printed in one batch before 10am.",
     icon: Store,
     href: "/solutions/small-business",
+    solutionTag: "Small Business",
   },
-];
-
-const models = [
-  { name: "eCommerce", icon: ShoppingCart, href: "/solutions/ecommerce", featured: true, hook: "Multi-carrier shipping for online stores" },
-  { name: "Marketplace Seller", icon: Package, href: "/solutions/marketplace-seller", featured: true, hook: "Unified fulfilment across platforms" },
-  { name: "3PL", icon: Truck, href: "/solutions/3pl", featured: true, hook: "Multi-client logistics automation" },
-  { name: "Export", icon: Globe, href: "/solutions/export", featured: false, hook: "Compliance and documentation" },
-  { name: "Import", icon: Package, href: "/solutions/import", featured: false, hook: "Customs and clearance automation" },
-  { name: "B2B Manufacturing", icon: Factory, href: "/solutions/b2b", featured: false, hook: "ERP-connected dispatch" },
+  {
+    name: "Export",
+    hook: "Six documents per shipment, generated from the data you already have.",
+    icon: Globe,
+    href: "/solutions/export",
+    solutionTag: "Export",
+  },
+  {
+    name: "Import",
+    hook: "Landed cost calculated before the goods leave the origin country.",
+    icon: Boxes,
+    href: "/solutions/import",
+    solutionTag: "Import",
+  },
 ];
 
 export default function SolutionsRouting() {
@@ -32,59 +88,82 @@ export default function SolutionsRouting() {
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <SectionLabel title="Who we serve" subtitle="Choose your path. Every business ships differently — we built for that." align="center" />
+          <SectionLabel
+            title="Find the page built for your operation."
+            subtitle="Each route below curates the carriers, integrations, and real customer stories that match how you ship."
+            align="center"
+          />
         </ScrollReveal>
 
-        {/* By Stage — 2 large cards */}
-        <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8">
-          {stages.map((stage, i) => (
-            <ScrollReveal key={stage.name} delay={i * 0.1}>
-              <Link
-                href={stage.href}
-                className="group block p-6 md:p-8 rounded-xl border border-border hover:border-accent/30 hover:shadow-lg transition-all bg-bg-secondary"
-              >
-                <stage.icon className="w-8 h-8 text-accent mb-4" />
-                <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors">
-                  {stage.name}
-                </h3>
-                <p className="mt-2 text-sm text-text-secondary leading-relaxed">{stage.desc}</p>
-                <div className="mt-4 flex items-center gap-1 text-sm text-accent font-medium">
-                  Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        {/* By Business Model — 6 cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {models.map((model, i) => (
-            <ScrollReveal key={model.name} delay={i * 0.07}>
-              <Link
-                href={model.href}
-                className={`group block p-5 rounded-xl border transition-all ${
-                  model.featured
-                    ? "border-accent/20 bg-accent-light/30 hover:border-accent/40 hover:shadow-md"
-                    : "border-border hover:border-accent/30 hover:shadow-md bg-white"
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <model.icon className="w-6 h-6 text-accent" />
-                  {model.featured && (
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-accent bg-accent-light px-2 py-0.5 rounded-full">
-                      Popular
-                    </span>
-                  )}
-                </div>
-                <h3 className="mt-3 text-sm font-semibold text-text-primary group-hover:text-accent transition-colors">
-                  {model.name}
-                </h3>
-                <p className="mt-1 text-xs text-text-secondary">{model.hook}</p>
-              </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 items-stretch">
+          {icps.map((icp, i) => (
+            <ScrollReveal key={icp.name} delay={i * 0.05} className="h-full">
+              <IcpCard icp={icp} />
             </ScrollReveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function IcpCard({ icp }: { icp: Icp }) {
+  const studies = getCaseStudiesBySolution(icp.solutionTag);
+  const visible = studies.slice(0, 3);
+  const overflow = studies.length - visible.length;
+  const Icon = icp.icon;
+
+  return (
+    <Link
+      href={icp.href}
+      className="group flex h-full flex-col rounded-2xl border border-border bg-white p-5 md:p-6 transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <span
+          aria-hidden
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-accent-light text-accent group-hover:bg-accent group-hover:text-white transition-colors duration-200"
+        >
+          <Icon className="h-5 w-5" strokeWidth={2} />
+        </span>
+        <ArrowRight
+          className="w-4 h-4 text-text-tertiary group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-200 motion-reduce:group-hover:translate-x-0 mt-1.5"
+          aria-hidden
+        />
+      </div>
+      <p className="text-heading-sm text-text-primary group-hover:text-accent transition-colors">
+        {icp.name}
+      </p>
+      <p className="mt-2 text-body-sm text-text-secondary leading-relaxed">
+        {icp.hook}
+      </p>
+
+      {visible.length > 0 && (
+        <div className="mt-auto pt-4 border-t border-border">
+          <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
+          <div className="flex items-center gap-2">
+            <div className="flex -space-x-1.5">
+              {visible.map((cs) => (
+                <span
+                  key={cs.id}
+                  className="ring-2 ring-white rounded-md inline-block"
+                  title={cs.brandName}
+                >
+                  <IntegrationLogo
+                    name={cs.brandName}
+                    logo={cs.logo}
+                    size="xs"
+                  />
+                </span>
+              ))}
+            </div>
+            {overflow > 0 && (
+              <span className="text-caption text-text-tertiary">
+                + {overflow} more
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+    </Link>
   );
 }

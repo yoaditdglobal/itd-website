@@ -1,0 +1,41 @@
+INTEGRATIONS  |  /integrations,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+"ecommerce shipping integration
+
+",/integrations,"Integrations directory
+Landing page",Commercial,"Page intro and Tech Integrations section.
+
+Key headings: Works with your stack. Connects to your carriers.
+Intro: Two lines referencing ecommerce shipping integration and plug-and-play setup.
+Filters: All, ERP/WMS, Logistics, eCommerce, Marketplaces.
+Integrations shown: SAP, Oracle NetSuite, Microsoft Dynamics, Sage, Cin7, Linnworks, Mintsoft, Selro, ShipHero, StoreFeeder, Shopify, WooCommerce, Amazon, eBay, Etsy, Walmart, Zalando, Temu, TikTok Shop.
+
+CTA: Get Started.
+Internal links: Individual integration pages.","Copy: Two-line intro.
+Design: Filterable grid layout.
+Assets: All integration logos at correct resolution - confirm with design team.
+Dev: Filter functionality required.
+Approvals: Confirm integration list is accurate.","Write content
+Design to supply logo grid and filter component.
+Dev to build filter functionality.
+Confirm integration list "
+,,,,,,
+  CARRIER INTEGRATIONS,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+"multi-carrier
+",/integrations#carriers,"Integrations directory
+Carrier section","Informational
+Commercial","Carrier integrations section on the integrations page.
+
+Key headings: Ship with the carriers your customers trust.
+Carriers shown: DHL Express (Global), FedEx (Global), UPS (Global), Royal Mail (UK), DPD (EU), Evri (UK), Amazon Shipping.
+Organised by region: UK Domestic, Europe, Global.
+Each carrier links to a dedicated carrier page.
+
+CTA: See all carriers.
+Internal links: /integrations/[carrier].","Copy: Section headline and one-line intro.
+Design: Carrier logo grid with region labels.
+Assets: All carrier logos -high resolution.
+Dev: Each carrier card links to dedicated page.","Write content
+Design to supply carrier logo grid.
+Confirm full carrier list"

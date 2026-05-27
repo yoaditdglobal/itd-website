@@ -23,8 +23,8 @@ const carrierLogos = [
   { name: "DHL Express", region: "Global", logo: "/logos/carriers/dhl_logo.webp" },
   { name: "FedEx", region: "Global", logo: "/logos/carriers/fedex_logo.png" },
   { name: "UPS", region: "Global", logo: "/logos/carriers/ups_logo.png" },
-  { name: "Royal Mail", region: "UK", logo: "/logos/carriers/royalmail_logo.png" },
-  { name: "DPD", region: "EU", logo: "/logos/carriers/dpd_logo.png" },
+  { name: "Royal Mail", region: "UK", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { name: "DPD", region: "EU", logo: "/logos/carriers/DPD-LOGO.png" },
   { name: "Evri", region: "UK", logo: "/logos/carriers/evri_logo.png" },
   { name: "Amazon Shipping", region: "UK", logo: "/logos/carriers/amazonshipping_logo.png" },
   { name: "Yodel", region: "UK", logo: "/logos/carriers/yodel_logo.avif" },
@@ -39,7 +39,11 @@ export default function IntegrationHighlights() {
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <SectionLabel title="Integrations" subtitle="Works with your stack. Connects to your carriers." align="center" />
+          <SectionLabel
+            title="Works with what you already run."
+            subtitle="Connexx connects directly to your storefront, your ERP, your WMS, and every active carrier on your account. No CSV exports. No re-keying tracking numbers."
+            align="center"
+          />
         </ScrollReveal>
 
         {/* Toggle */}
@@ -72,7 +76,7 @@ export default function IntegrationHighlights() {
             {(tab === "tech" ? techLogos : carrierLogos).map((logo) => (
               <div
                 key={logo.name}
-                className="flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary hover:shadow-md transition-shadow"
+                className="card-hover flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary"
               >
                 <IntegrationLogo name={logo.name} logo={logo.logo} size="sm" className="mb-3" />
                 <span className="text-sm font-medium text-text-primary text-center">{logo.name}</span>
@@ -85,8 +89,8 @@ export default function IntegrationHighlights() {
         </ScrollReveal>
 
         <div className="mt-8 text-center">
-          <Link href="/integrations" className="text-sm text-accent font-medium hover:underline">
-            See all integrations →
+          <Link href="/integrations" className="link-underline text-sm text-accent font-medium">
+            Browse integrations →
           </Link>
         </div>
       </div>

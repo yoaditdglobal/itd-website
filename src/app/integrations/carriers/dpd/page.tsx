@@ -11,7 +11,7 @@ export default function DpdPage() {
   return (
     <CarrierPage
       name="DPD"
-      logo="/logos/carriers/dpd_logo.png"
+      logo="/logos/carriers/DPD-LOGO.png"
       tagline="Europe's leading parcel delivery network with one-hour delivery windows, connected to Connexx."
       description="DPD is known for its Predict service — one-hour delivery windows with real-time driver tracking. Through Connexx, you get full access to DPD's domestic and European network, with automated label generation, proactive notifications, and cost optimisation across all DPD services."
       region="UK & Europe"

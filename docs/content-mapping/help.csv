@@ -1,0 +1,62 @@
+HELP  |  /help,,,,,,
+Keyword,URL / Placement,Category,Search Intent,Content Summary,Production Requirements,Next Steps
+,/help,"Help hub
+Navigational page",Navigational,"Help hub page.
+
+Key headings: How can we help?
+Layout: Search bar at top. Three section cards: Help Centre, Submit a Request, Developers.
+Each card has a headline, one-line description and a CTA button.
+
+CTAs: Browse Help Centre / Submit a Request / View API Docs.
+Internal links: /help/centre, /help/submit-request, /help/developers.","Copy: Page headline and three card descriptions.
+Design: Clean hub layout with search bar and three cards.
+Dev: Search functionality required.
+Approvals: Support team to approve response time SLA wording.","Write content
+Dev to build search functionality.
+Support team to confirm SLA."
+,/help/centre,"Help Centre
+Documentation hub","Navigational
+Informational","Help Centre — searchable documentation hub.
+
+Key headings: Help Centre.
+Organised by product area: Connexx Platform, Integrations, Carriers, Billing, Account.
+Most popular articles section at top.
+
+CTA: Browse Help Centre.
+Internal links: All help articles.","Copy: Section labels and article titles.
+Design: Documentation hub layout with search and category filters.
+Content: Help articles to be written by product and support teams.
+Dev: Search and category filter functionality.","create articles
+build documentation hub.
+Identify top 10 most popular articles for featured section."
+,/help/submit-request,"Support form
+Contact page",Navigational,"Submit a Request form.
+
+Key headings: Submit a request.
+Fields: Name, email, account details, issue type (Platform, Carrier, Billing, Onboarding, Other), description, file attachment.
+Response time SLA displayed on page.
+Alternative: Live chat if available.
+
+CTA: Submit Request.
+Internal links: /help.","Copy: Form labels and SLA statement.
+Design: Clean form layout.
+Dev: Form submission — confirm CRM or ticketing system to route requests to.
+Approvals: Support team to confirm SLA wording and routing.","Support team to confirm request routing (CRM or ticketing system)
+build form and set up routing.
+"
+,/help/developers,"Developer hub
+Documentation","Informational
+Transactional","Developer resources section.
+
+Key headings: Developer resources.
+Key links: API Documentation, API Reference, Status Page, Changelog.
+Covers all Connexx API endpoints for shipment creation, label generation, tracking, carrier management and customs.
+Under 200ms average response time.
+
+CTAs: View API Docs / API Reference / Status Page.
+Internal links: /connexx#api.","Copy: Section labels and intro.
+Design: Developer hub layout.
+Dev: Confirm all documentation URLs are live.
+Content: API documentation to be written and maintained by dev team.","Dev team to confirm all API documentation URLs.
+Link to /connexx#api.
+Dev team to maintain API documentation and changelog."

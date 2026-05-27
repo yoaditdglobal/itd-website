@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
@@ -81,7 +82,7 @@ export default function ContactPage() {
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
               <span className="text-2xl">&#10003;</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary">
+            <h1 className="text-display-xl text-text-primary">
               Thanks for reaching out!
             </h1>
             <p className="mt-4 text-lg text-text-secondary">
@@ -100,7 +101,7 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-10">
-              <h1 className="font-bold tracking-tight text-text-primary">
+              <h1 className="text-display-xl text-text-primary">
                 Contact Sales
               </h1>
               <p className="mt-3 text-lg text-text-secondary">
@@ -301,9 +302,10 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitting || !shippingType || !weeklyVolume}
-                className="w-full min-h-[44px] bg-bg-dark text-white font-medium rounded-lg px-6 py-3 text-sm hover:bg-bg-dark-card transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 bg-bg-dark text-white font-medium rounded-lg px-6 py-3 text-sm hover:bg-bg-dark-card transition-colors disabled:opacity-70 disabled:cursor-not-allowed active:scale-[0.99]"
               >
-                {submitting ? "Submitting..." : "Submit Enquiry"}
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" aria-hidden />}
+                <span>{submitting ? "Submitting…" : "Submit Enquiry"}</span>
               </button>
             </form>
           </ScrollReveal>

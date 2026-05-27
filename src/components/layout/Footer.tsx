@@ -7,7 +7,7 @@ const footerLinks = {
     { name: "3PL", href: "/solutions/3pl" },
     { name: "Export", href: "/solutions/export" },
     { name: "Import", href: "/solutions/import" },
-    { name: "B2B Manufacturing", href: "/solutions/b2b" },
+    { name: "B2B", href: "/solutions/b2b" },
   ],
   platform: [
     { name: "Connexx", href: "/connexx" },
@@ -33,7 +33,7 @@ export default function Footer() {
         {/* Link columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Solutions</h4>
+            <h3 className="text-eyebrow text-white/55 mb-4">Solutions</h3>
             <ul className="space-y-2.5">
               {footerLinks.solutions.map((link) => (
                 <li key={link.name}>
@@ -45,7 +45,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Platform</h4>
+            <h3 className="text-eyebrow text-white/55 mb-4">Platform</h3>
             <ul className="space-y-2.5">
               {footerLinks.platform.map((link) => (
                 <li key={link.name}>
@@ -57,7 +57,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Resources</h4>
+            <h3 className="text-eyebrow text-white/55 mb-4">Resources</h3>
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -69,7 +69,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Company</h4>
+            <h3 className="text-eyebrow text-white/55 mb-4">Company</h3>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>

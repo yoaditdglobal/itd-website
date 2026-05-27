@@ -1,0 +1,56 @@
+# ITD Global
+
+> ITD Global is the multi-carrier shipping platform for UK retailers, eCommerce brands, marketplace sellers, 3PLs, exporters, and B2B manufacturers. The product is called Connexx. It routes every parcel through the cheapest compliant carrier, automates customs documentation, and gives one dashboard for every dispatch across Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, Yodel, DX, InPost, and more.
+
+ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooCommerce, Magento, BigCommerce, Amazon, eBay, Etsy, SAP, Oracle NetSuite, Microsoft Dynamics, Linnworks, Mintsoft, Veeqo, ShipStation, and other commerce and operations platforms.
+
+## Product
+
+- [Connexx platform](https://itdglobal.com/connexx): the multi-carrier shipping, customs, and analytics platform. Modules: rates engine, multi-carrier dispatch, customs automation, returns, analytics, integrations.
+
+## Solutions by buyer type
+
+- [eCommerce](https://itdglobal.com/solutions/ecommerce): for online retailers shipping direct-to-consumer across the UK and internationally.
+- [Marketplace Seller](https://itdglobal.com/solutions/marketplace-seller): for Amazon, eBay, Etsy, TikTok Shop, and other marketplace sellers managing SLA compliance and penalty fee exposure.
+- [3PL](https://itdglobal.com/solutions/3pl): for third-party logistics providers running multi-brand, multi-client fulfilment with child accounts and tenant-isolated reporting.
+- [B2B Manufacturing](https://itdglobal.com/solutions/b2b): for manufacturers and wholesalers shipping palletised B2B orders through ERP-connected dispatch.
+- [Enterprise](https://itdglobal.com/solutions/enterprise): for large shippers consolidating multiple carrier contracts under a single platform with negotiated rate cards.
+- [Small Business](https://itdglobal.com/solutions/small-business): for growing UK SMBs needing one platform across every UK carrier.
+- [Export](https://itdglobal.com/solutions/export): for outbound international shipments needing automated customs documentation, HS code lookup, EORI, and IOSS handling.
+- [Import](https://itdglobal.com/solutions/import): for inbound shipments needing pre-clearance, duty calculation, and customs visibility.
+
+## Shipping coverage
+
+- [UK Domestic](https://itdglobal.com/shipping/domestic): every mainland UK postcode, Highlands & Islands, Channel Islands, Northern Ireland.
+- [International](https://itdglobal.com/shipping/international): export and import across 200+ countries with customs automation.
+- [Freight](https://itdglobal.com/shipping/freight): palletised and consignment freight across UK, EU, and global lanes.
+
+## Integrations
+
+- [Integrations hub](https://itdglobal.com/integrations): full directory of all platform connections.
+- [ERP & WMS](https://itdglobal.com/integrations/erp-wms): SAP, NetSuite, Microsoft Dynamics, Sage, Linnworks, Mintsoft, Veeqo, Selro, StoreFeeder, ShipHero, Cin7.
+- [eCommerce](https://itdglobal.com/integrations/ecommerce): Shopify, WooCommerce, Magento, BigCommerce.
+- [Marketplaces](https://itdglobal.com/integrations/marketplaces): Amazon, eBay, Etsy, Walmart, Zalando, Temu, TikTok Shop.
+- [Logistics](https://itdglobal.com/integrations/logistics): ShipStation, Shippo, Freightview, Project44.
+
+## Carriers
+
+- [Royal Mail](https://itdglobal.com/integrations/carriers/royal-mail): UK national postal carrier — Tracked 24, Tracked 48, Signed, First/Second Class.
+- [DPD](https://itdglobal.com/integrations/carriers/dpd): UK and European parcel — Next Day, Two Day, Saturday.
+- [Evri](https://itdglobal.com/integrations/carriers/evri): UK parcel and ParcelShop network.
+- [DHL Express](https://itdglobal.com/integrations/carriers/dhl): international express delivery to 220+ countries.
+- [Amazon Shipping](https://itdglobal.com/integrations/carriers/amazon-shipping): Amazon's UK logistics network.
+- Also integrated: UPS, FedEx, Parcel Force, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, PostNL, GLS, Australia Post.
+
+## Customer stories
+
+- [Peak Commerce](https://itdglobal.com/resources/case-studies/peak-ecommerce): eCommerce. 42% cost reduction across 12 markets.
+- [Velocity Sellers](https://itdglobal.com/resources/case-studies/velocity-marketplace): Marketplace. 3x faster fulfilment; zero penalty fees.
+- [SwiftLog Fulfilment](https://itdglobal.com/resources/case-studies/swiftlog-3pl): 3PL. 98.7% shipment accuracy across 40+ countries.
+- [Meridian Trade Co](https://itdglobal.com/resources/case-studies/meridian-exports): Export. 75% reduction in documentation time.
+- [Northgate Imports](https://itdglobal.com/resources/case-studies/northgate-import): Import. 60% fewer customs delays.
+- [Atlas Industrial](https://itdglobal.com/resources/case-studies/atlas-b2b): B2B Manufacturing. 90% of shipments routed automatically.
+
+## Contact
+
+- [Contact Sales](https://itdglobal.com/contact): get a tailored proposal and rate card review.
