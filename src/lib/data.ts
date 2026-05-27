@@ -89,6 +89,23 @@ export interface Integration {
   logo?: string;
 }
 
+export interface TeamMember {
+  name: string;
+  role: string;
+  /** Headshot, relative to /public. */
+  photo: string;
+  /** Full LinkedIn profile URL. */
+  linkedin?: string;
+  /** Shown in the About-page gateway + the "Leadership" row on the team page. */
+  leadership?: boolean;
+  /** CSS object-position override for off-centre crops (e.g. "right", "30% top"). */
+  objectPosition?: string;
+  /** Zoom factor for wide/distant shots (e.g. 1.6). Anchored to objectPosition. */
+  objectScale?: number;
+  /** Leadership member shown on the team page but hidden from the About gateway. */
+  hideFromGateway?: boolean;
+}
+
 export const caseStudies: CaseStudy[] = [
   {
     id: "1",
@@ -369,6 +386,57 @@ export const caseStudies: CaseStudy[] = [
     integrations: ["linnworks", "connexx"],
     solutions: ["eCommerce", "Small Business"],
   },
+  {
+    id: "10",
+    slug: "oddballs",
+    brandName: "OddBalls",
+    industry: "Freight",
+    headline:
+      "OddBalls moved a large China shipment on time and on budget with a mixed-mode freight solution",
+    metric: "Air + rail + sea, one managed shipment",
+    summary:
+      "ITD Global split a large China→UK consignment across air, rail and sea — matching each tranche of stock to the right mode so every delivery window was met at the lowest blended freight cost.",
+    challenge:
+      "OddBalls had a large volume of stock ready to leave China in a short window, but the goods were needed in the UK across several different time frames. Not everything was needed at once, and not everything justified the same freight cost. A single air-freight solution would have been fast but commercially inefficient across the full volume; sea freight alone could not meet the tighter windows on part of the cargo. A one-size approach would either blow the budget or leave the business short of stock.",
+    solution:
+      "ITD Global designed a mixed-mode freight solution that split the cargo across three modes. The most time-sensitive stock went by air freight to land ahead of the earliest required date. The mid-window tranche was routed via rail freight from China — a cost-effective, reliable alternative to air. The remaining volume, where lead time allowed, shipped by sea to keep costs lowest. Each mode was chosen on commercial logic, not just speed.",
+    result:
+      "Every part of the shipment landed in the UK within its required window — no delays, no shortfalls, no compromise on availability. By routing each tranche through the most commercially appropriate option, ITD Global kept overall freight costs significantly lower than a single air-freight solution would have allowed.",
+    logo: "/case-studies/oddballs/logo.png",
+    stats: [
+      {
+        value: 3,
+        suffix: "-mode",
+        label: "Freight solution",
+        sub: "air, rail & sea combined",
+        featured: true,
+      },
+      {
+        value: "On time",
+        label: "All cargo delivered",
+        sub: "every delivery window met",
+      },
+      {
+        value: "Lowest",
+        label: "Blended freight cost",
+        sub: "vs a single air-freight option",
+      },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Fashion & Lifestyle, eCommerce" },
+      { label: "ICP", value: "Freight" },
+      { label: "Market", value: "China → UK" },
+      { label: "Service", value: "Mixed-mode freight (air, rail & sea)" },
+      {
+        label: "Key Feature",
+        value: "Split-mode shipping to meet multiple delivery windows",
+      },
+    ],
+    shippingTypes: ["Freight"],
+    carriers: [],
+    integrations: [],
+    solutions: ["eCommerce"],
+  },
 ];
 
 export const integrations: Integration[] = [
@@ -423,7 +491,187 @@ export const integrations: Integration[] = [
   { id: "c18", name: "Parcel Force", category: "carrier", type: "carrier", region: "UK", featured: true, description: "UK tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
 ];
 
-export const industries = ["eCommerce", "Marketplace", "3PL", "Export", "Import", "B2B"] as const;
+// ─── Team ─────────────────────────────────────────────────────────────────────
+// Leadership shown in the About-page "Meet the Team" gateway + the top of the
+// /about/team page. Append non-leadership members and they flow into the wider
+// grid automatically.
+
+export const team: TeamMember[] = [
+  {
+    name: "Avi Mechlowitz",
+    role: "Co-founder",
+    photo: "/team/avi-mechlowitz.jpg",
+    leadership: true,
+    hideFromGateway: true,
+  },
+  {
+    name: "Jonathan Mocton",
+    role: "Co-founder, Group CEO",
+    photo: "/team/jonathan-mocton-v2.jpg",
+    linkedin: "https://www.linkedin.com/in/jonathan-mocton-2173ba2b8/",
+    leadership: true,
+  },
+  {
+    name: "Dani Mechlowitz",
+    role: "Group CRO",
+    photo: "/team/dani-mechlowitz-v2.jpg",
+    linkedin: "https://www.linkedin.com/in/danimechlowitz/",
+    leadership: true,
+  },
+  {
+    name: "Dov Uhrmacher",
+    role: "Group CTO",
+    photo: "/team/dov-uhrmacher.jpg",
+    linkedin: "https://www.linkedin.com/in/dov-uhrmasher-23b54b85/",
+    leadership: true,
+  },
+  {
+    name: "Charles Chait",
+    role: "Sales Director",
+    photo: "/team/charles-chait-v2.jpg",
+    linkedin: "https://www.linkedin.com/in/charles-chait-b50a7930/",
+    leadership: true,
+  },
+  {
+    name: "Dalya Henry",
+    role: "Head of Carrier Management",
+    photo: "/team/dalya-henry.jpg",
+    linkedin: "https://www.linkedin.com/in/dalya-henry-60387b31/",
+    leadership: true,
+  },
+  {
+    name: "Louise Powell",
+    role: "Head of Account Management",
+    photo: "/team/louise-powell-v2.jpg",
+    linkedin: "https://www.linkedin.com/in/louise-powell-0b999058/",
+    leadership: true,
+  },
+  {
+    name: "Yoad Tzor",
+    role: "Group Head of Product & Marketing",
+    photo: "/team/yoad-tzor-v2.jpg",
+    leadership: true,
+    hideFromGateway: true,
+  },
+  {
+    name: "Jennifer Totty",
+    role: "Group HR",
+    photo: "/team/jennifer-totty.jpg",
+    leadership: true,
+    hideFromGateway: true,
+  },
+  // ─── Wider team ───
+  {
+    name: "Amber Stonley",
+    role: "Account Manager",
+    photo: "/team/amber-stonley.jpg",
+  },
+  {
+    name: "Dublin Ebude",
+    role: "Trainee Full Stack Developer",
+    photo: "/team/dublin-ebude.jpg",
+  },
+  {
+    name: "Dalya Rotgolz",
+    role: "Group Marketing Manager",
+    photo: "/team/dalya-rotgolz.jpg",
+  },
+  {
+    name: "Rafi Grosskopf",
+    role: "3PL & Strategic Partnership",
+    photo: "/team/rafi-grosskopf.jpg",
+  },
+  {
+    name: "Leah Faulk",
+    role: "Account Manager",
+    photo: "/team/leah-faulk.jpg",
+  },
+  {
+    name: "Milad Shukri",
+    role: "Senior Software Engineer",
+    photo: "/team/milad-shukri.jpg",
+  },
+  {
+    name: "Emily Fallows",
+    role: "Onboarding Manager",
+    photo: "/team/emily-fallows.jpg",
+  },
+  {
+    name: "Nathan Rankin",
+    role: "Business Development Manager, Scotland",
+    photo: "/team/nathan-rankin.jpg",
+  },
+  {
+    name: "Sylwia Rutkowska",
+    role: "National Account Manager",
+    photo: "/team/sylwia-rutkowska.jpg",
+  },
+  {
+    name: "Klieo Duthie",
+    role: "Account Manager",
+    photo: "/team/klieo-duthie.jpg",
+  },
+  {
+    name: "Chris Heath",
+    role: "Senior Business Development Manager, West Midlands",
+    photo: "/team/chris-heath.jpg",
+  },
+  {
+    name: "Georgina Davis",
+    role: "Invoice Queries Manager",
+    photo: "/team/georgina-davis.jpg",
+  },
+  {
+    name: "Ross Xu",
+    role: "Finance Business Partner",
+    photo: "/team/ross-xu.jpg",
+  },
+  {
+    name: "Saul Mocton",
+    role: "Product Data Analyst",
+    photo: "/team/saul-mocton.jpg",
+  },
+  {
+    name: "Romeela Bibi",
+    role: "Claims and Queries Admin Assistant",
+    photo: "/team/romeela-bibi.jpg",
+  },
+  {
+    name: "Suri Leitner",
+    role: "Business Development Manager, Delta Fulfilment",
+    photo: "/team/suri-leitner.jpg",
+  },
+];
+
+export function getLeadership(): TeamMember[] {
+  return team.filter((m) => m.leadership);
+}
+
+// ─── Company photos ───────────────────────────────────────────────────────────
+// Single shared pool used by the homepage "More than a platform" band and the
+// About page carousel. Warehouse first (the visual hook). One source — both
+// carousels stay in sync.
+
+export interface CompanyPhoto {
+  src: string;
+  alt: string;
+}
+
+export const companyPhotos: CompanyPhoto[] = [
+  { src: "/about/warehouse.jpg", alt: "Aerial view of the ITD Global headquarters and warehouse" },
+  { src: "/about/team-training.jpg", alt: "The ITD Global team in a standards and expectations session" },
+  { src: "/about/account-update.jpg", alt: "The ITD Global account management team in a weekly update" },
+  { src: "/about/green-wall.jpg", alt: "Two ITD Global team members reviewing shipping data together" },
+  { src: "/about/team-meeting.jpg", alt: "ITD Global team members in discussion under the company logo" },
+  { src: "/about/resellers-talk.jpg", alt: "An ITD Global team member presenting carrier pricing" },
+  { src: "/about/staircase-mural.jpg", alt: "ITD Global colleagues reviewing a tablet by the company mural" },
+];
+
+export function getWiderTeam(): TeamMember[] {
+  return team.filter((m) => !m.leadership);
+}
+
+export const industries = ["eCommerce", "Marketplace", "3PL", "Export", "Import", "B2B", "Freight"] as const;
 
 export function getCaseStudies(industry?: string) {
   if (!industry || industry === "All") return caseStudies;

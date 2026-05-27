@@ -20,9 +20,9 @@ const footerLinks = {
     { name: "Status", href: "#" },
   ],
   company: [
-    { name: "About", href: "#" },
+    { name: "About", href: "/about" },
     { name: "Careers", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Contact", href: "/contact" },
   ],
 };
 

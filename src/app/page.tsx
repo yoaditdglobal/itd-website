@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import SocialProof from "@/components/sections/SocialProof";
 import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
+import LogisticsPartnerBand from "@/components/sections/LogisticsPartnerBand";
 import ConnexxPreview from "@/components/sections/ConnexxPreview";
 import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
@@ -31,6 +32,7 @@ export default function Home() {
       <SocialProof />
       <DomesticInternationalCards />
       <SolutionsRouting />
+      <LogisticsPartnerBand />
       <ConnexxPreview />
       <IntegrationHighlights />
       <CaseStudyCards />
