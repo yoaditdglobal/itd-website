@@ -2,7 +2,18 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Route, Zap, LayoutDashboard, RefreshCw } from "lucide-react";
+import {
+  Route,
+  Zap,
+  LayoutDashboard,
+  RefreshCw,
+  ShoppingCart,
+  Package,
+  Truck,
+  Factory,
+  Building2,
+  Store,
+} from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "UK domestic parcel shipping across every carrier",
@@ -64,50 +75,62 @@ export default function ShippingDomesticPage() {
       audienceAnchors={[
         {
           anchor: "ecommerce",
-          title: "eCommerce — DTC and online retailers",
+          headline: "Built for eCommerce",
           summary:
-            "Shopify, WooCommerce, Magento, and BigCommerce orders flow into Connexx the moment a customer checks out. The rate engine compares Royal Mail, DPD, Evri, and Amazon Shipping on every order, picks the cheapest compliant carrier, and prints the label in one click. Peak Commerce cut shipping costs 42% and WISMO tickets 68% with this exact setup.",
-          ctaLabel: "See the full eCommerce solution",
+            "Shopify, WooCommerce, and BigCommerce orders route to the cheapest compliant UK carrier the moment a customer checks out. One click prints the label.",
+          solutionTag: "eCommerce",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: ShoppingCart },
           href: "/solutions/ecommerce",
         },
         {
           anchor: "marketplace",
-          title: "Marketplace — Amazon, eBay, Etsy, TikTok Shop sellers",
+          headline: "Built for Marketplace sellers",
           summary:
-            "Marketplace sellers know Amazon's 4% late shipment rate threshold by heart. Connexx pulls orders from Amazon, eBay, Etsy, TikTok Shop, and Temu into a single dispatch queue with SLA deadlines and carrier eligibility already applied. Velocity Sellers eliminated marketplace penalty fees overnight and scaled from 200 to 800 daily orders without adding headcount.",
-          ctaLabel: "See the full Marketplace solution",
+            "Amazon, eBay, Etsy, TikTok Shop, and Temu orders flow into a single dispatch queue with SLA deadlines applied. Penalty fees go to zero.",
+          solutionTag: "Marketplace",
+          category: "By business model",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Package },
           href: "/solutions/marketplace-seller",
         },
         {
           anchor: "3pl",
-          title: "3PL — Multi-client fulfilment providers",
+          headline: "Built for 3PLs",
           summary:
-            "3PLs configure each client's carrier preferences, packaging rules, and routing logic once in Connexx, then dispatch across every UK carrier from one platform. Child accounts isolate each brand's data, rates, and reporting. SwiftLog Fulfilment dropped client onboarding from two weeks to two days and lifted shipment accuracy from 93% to 98.7% across 60 brands.",
-          ctaLabel: "See the full 3PL solution",
+            "Configure each client's carriers, packaging, and routing rules once. Onboard new brands in two days, not two weeks.",
+          solutionTag: "3PL",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Truck },
           href: "/solutions/3pl",
         },
         {
           anchor: "b2b",
-          title: "B2B — UK wholesalers and manufacturers",
+          headline: "Built for B2B",
           summary:
-            "B2B dispatch runs straight from your ERP. Connexx connects to SAP, Sage, NetSuite, and Microsoft Dynamics, then routes parcels and pallets across DPD, Parcelforce, DHL, and the UK pallet networks. Atlas Industrial automated 90% of its 500-weekly-pallet routing and reduced redelivery costs to near zero by booking against carrier and postcode rules.",
-          ctaLabel: "See the full B2B solution",
+            "Pallet and parcel dispatch runs straight from your ERP — SAP, Sage, NetSuite, or Dynamics. Carrier booked the moment the order is confirmed.",
+          solutionTag: "B2B",
+          category: "By business model",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Factory },
           href: "/solutions/b2b",
         },
         {
           anchor: "enterprise",
-          title: "Enterprise — Multi-region, high-volume operations",
+          headline: "Built for Enterprise",
           summary:
-            "Enterprise shippers consolidate 6 to 12 carrier portals, multiple regional accounts, and a legacy TMS into one dashboard. Connexx delivers SAP and NetSuite integration, dedicated account management, and a single data view across every lane and region. The platform handles 5,000+ parcels a day without an IT project for each new market or carrier added.",
-          ctaLabel: "See the full Enterprise solution",
+            "Consolidate 6 to 12 carrier portals and a legacy TMS into one view. 5,000+ parcels a day across every UK lane, no IT project per market.",
+          solutionTag: "Enterprise",
+          category: "By stage",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Building2 },
           href: "/solutions/enterprise",
         },
         {
           anchor: "small-business",
-          title: "Small Business — Founders and small ops teams",
+          headline: "Built for Small Business",
           summary:
-            "No minimum volume, no IT setup, no contract lock-in. Connexx compares Royal Mail, Evri, and DPD side by side on every parcel, batches your labels in one print run, and answers WISMO emails with a single tracking link. Get your morning back. Most small shops are live within a day.",
-          ctaLabel: "See the full Small Business solution",
+            "No minimum volume, no IT setup, no contract lock-in. Compare Royal Mail, Evri, and DPD side by side and batch labels in one print run.",
+          solutionTag: "Small Business",
+          category: "By stage",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Store },
           href: "/solutions/small-business",
         },
       ]}

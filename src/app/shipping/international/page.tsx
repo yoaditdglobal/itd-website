@@ -2,7 +2,15 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { FileCheck, Globe, Zap, Calculator } from "lucide-react";
+import {
+  FileCheck,
+  Globe,
+  Zap,
+  Calculator,
+  ShoppingCart,
+  Building2,
+  Boxes,
+} from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "International shipping with automated customs documentation",
@@ -66,34 +74,42 @@ export default function ShippingInternationalPage() {
       audienceAnchors={[
         {
           anchor: "export",
-          title: "Export — Export managers and trade compliance teams",
+          headline: "Built for Export",
           summary:
-            "You prepare 6 to 8 documents per shipment by hand. Commercial invoice, packing list, certificate of origin, EUR.1, phytosanitary certificate where required. Connexx generates the full document pack from the product data, HS codes, and destination country rules already in the system. Meridian Trade Co cut documentation prep from 4 hours to 1 hour per shipment and saw customs holds drop 90%.",
-          ctaLabel: "See the full Export solution",
+            "Generate the full document pack — commercial invoice, packing list, certificate of origin, EUR.1 — from the product data already in Connexx. Customs holds drop sharply.",
+          solutionTag: "Export",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Globe },
           href: "/solutions/export",
         },
         {
           anchor: "import",
-          title: "Import — Import managers, supply chain, and finance",
+          headline: "Built for Import",
           summary:
-            "One in four import shipments hits a clearance delay. The Import Manager finds out when the customs broker calls asking for a document that should have been filed before the goods left the origin country. Connexx pre-clears the documentation, calculates landed cost to 97% accuracy, and gives finance the duty number before the goods arrive. Northgate Imports dropped clearance delays 60% and lifted duty cost accuracy from 82% to 97%.",
-          ctaLabel: "See the full Import solution",
+            "Pre-clear documentation, calculate landed cost to 97% accuracy, and give finance the duty number before the goods leave origin. Clearance delays cut in half.",
+          solutionTag: "Import",
+          category: "By business model",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Boxes },
           href: "/solutions/import",
         },
         {
           anchor: "ecommerce",
-          title: "eCommerce — Cross-border DTC and online retailers",
+          headline: "Built for cross-border eCommerce",
           summary:
-            "Shopify, WooCommerce, and BigCommerce orders going to the EU need IOSS for under €150, CN22 for postal services, and accurate HS codes for everything else. Connexx applies the right paperwork pack to every cross-border order automatically. Peak Commerce ran 12 markets through Connexx and cut shipping costs 42% with the cheapest compliant carrier picked on every order.",
-          ctaLabel: "See the full eCommerce solution",
+            "IOSS, CN22, and HS-code paperwork applied automatically to every Shopify, WooCommerce, and BigCommerce order. The cheapest compliant carrier is picked per market.",
+          solutionTag: "eCommerce",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: ShoppingCart },
           href: "/solutions/ecommerce",
         },
         {
           anchor: "enterprise",
-          title: "Enterprise — Multi-region, high-volume operations",
+          headline: "Built for Enterprise",
           summary:
-            "Enterprise shippers manage 40 carrier relationships, 6 to 12 portals, and an ERP that does not talk to the customs declaration system. Connexx delivers SAP and NetSuite integration, single-data-view reporting across every international lane, and dedicated account management. The platform handles 5,000+ daily parcels across multiple regions without an IT project for each new market.",
-          ctaLabel: "See the full Enterprise solution",
+            "40 carrier relationships and a dozen portals consolidated into one view. SAP and NetSuite integration, dedicated account management, 5,000+ daily parcels across every lane.",
+          solutionTag: "Enterprise",
+          category: "By stage",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Building2 },
           href: "/solutions/enterprise",
         },
       ]}

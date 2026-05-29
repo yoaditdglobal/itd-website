@@ -15,7 +15,8 @@ import type {
 } from "@/components/sections/CarrierComparisonTable";
 import FaqAccordion from "@/components/sections/FaqAccordion";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
-import type { CaseStudy } from "@/lib/data";
+import type { CaseStudy, SolutionTag } from "@/lib/data";
+import { getCaseStudiesBySolution } from "@/lib/data";
 import { Zap, Eye, ShieldCheck, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -36,12 +37,33 @@ export interface FaqItem {
   answer: string;
 }
 
+export type AudienceCategory = "By stage" | "By business model";
+
+export interface AudienceImage {
+  /** Optional photo path under /public. When set, renders next/image. */
+  src?: string;
+  alt?: string;
+  /** Tailwind gradient classes for the placeholder (without the bg-gradient-to-br prefix). */
+  gradient?: string;
+  /** Lucide icon shown low-opacity at the centre of the placeholder. */
+  icon?: LucideIcon;
+}
+
 export interface AudienceAnchor {
-  anchor: string; // hash slug, e.g. "ecommerce"
-  title: string;
-  summary: string; // ~60 words
-  ctaLabel: string;
+  anchor: string; // hash slug, e.g. "ecommerce" — also used for deep-link scroll
+  /** Short, punchy. e.g. "Built for eCommerce". */
+  headline: string;
+  /** Up to 2 sentences, ~30 words. */
+  summary: string;
   href: string;
+  /** Drives the chip + the "Used by" case-study lookup. */
+  solutionTag: SolutionTag;
+  category: AudienceCategory;
+  image: AudienceImage;
+  /** Defaults to "Learn more". */
+  ctaLabel?: string;
+  /** @deprecated kept for back-compat; no longer rendered. Use `headline`. */
+  title?: string;
 }
 
 export interface CtaButton {
@@ -191,16 +213,10 @@ export default function VerticalPage({
                 Each audience uses the same platform differently. Jump to the section that fits you.
               </p>
             </ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               {audienceAnchors.map((a, i) => (
-                <ScrollReveal key={a.anchor} delay={i * 0.05}>
-                  <div id={a.anchor} className="card-hover bg-bg-secondary rounded-2xl border border-border p-6 h-full flex flex-col">
-                    <h3 className="text-heading-md text-text-primary mb-2">{a.title}</h3>
-                    <p className="text-body-sm text-text-secondary mb-4 flex-1">{a.summary}</p>
-                    <Link href={a.href} className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:underline">
-                      {a.ctaLabel} <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
+                <ScrollReveal key={a.anchor} delay={i * 0.05} className="h-full">
+                  <BuiltForCard anchor={a} />
                 </ScrollReveal>
               ))}
             </div>
@@ -441,5 +457,99 @@ export default function VerticalPage({
         <ClosingCTA />
       )}
     </>
+  );
+}
+
+/** Image-led ICP card for the "Built for" section on shipping pages. */
+function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
+  const studies = getCaseStudiesBySolution(anchor.solutionTag);
+  const visible = studies.slice(0, 3);
+  const overflow = studies.length - visible.length;
+  const Icon = anchor.image.icon;
+  const ctaLabel = anchor.ctaLabel ?? "Learn more";
+  const gradient =
+    anchor.image.gradient ?? "from-accent-light via-white to-bg-secondary";
+  const altText =
+    anchor.image.alt ?? `${anchor.headline} illustration`;
+
+  return (
+    <Link
+      id={anchor.anchor}
+      href={anchor.href}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+    >
+      {/* Image / gradient placeholder */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden">
+        {anchor.image.src ? (
+          <Image
+            src={anchor.image.src}
+            alt={altText}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+          />
+        ) : (
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center`}
+            aria-hidden
+          >
+            {Icon ? (
+              <Icon className="w-1/4 h-1/4 text-accent/30" strokeWidth={1.5} />
+            ) : null}
+          </div>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <span className="self-start inline-flex items-center rounded-full bg-bg-secondary text-text-tertiary text-eyebrow px-2.5 py-1 mb-3">
+          {anchor.category}
+        </span>
+        <h3 className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
+          {anchor.headline}
+        </h3>
+        <p className="mt-2 text-body-sm text-text-secondary leading-relaxed">
+          {anchor.summary}
+        </p>
+
+        {/* "Used by" strip — only when there are matching case studies */}
+        {visible.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-border">
+            <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-1.5">
+                {visible.map((cs) => (
+                  <span
+                    key={cs.id}
+                    className="ring-2 ring-white rounded-md inline-block"
+                    title={cs.brandName}
+                  >
+                    <IntegrationLogo
+                      name={cs.brandName}
+                      logo={cs.logo}
+                      size="xs"
+                    />
+                  </span>
+                ))}
+              </div>
+              {overflow > 0 && (
+                <span className="text-caption text-text-tertiary">
+                  + {overflow} more
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* CTA — visual button (the whole card is the actual link) */}
+        <span
+          aria-hidden
+          className="mt-5 inline-flex items-center justify-center gap-1.5 self-start rounded-lg bg-bg-secondary px-4 py-2 text-sm font-semibold text-text-primary group-hover:bg-accent group-hover:text-white transition-colors"
+        >
+          {ctaLabel}
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform motion-reduce:group-hover:translate-x-0" />
+        </span>
+      </div>
+    </Link>
   );
 }

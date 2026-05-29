@@ -2,7 +2,15 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Route, Clock, Eye, RefreshCw } from "lucide-react";
+import {
+  Route,
+  Clock,
+  Eye,
+  RefreshCw,
+  Factory,
+  Building2,
+  Truck,
+} from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Pallet and freight shipping software for UK businesses",
@@ -57,26 +65,32 @@ export default function ShippingFreightPage() {
       audienceAnchors={[
         {
           anchor: "b2b",
-          title: "B2B — UK wholesalers and manufacturers",
+          headline: "Built for B2B",
           summary:
-            "You ship 200 to 800 palletised and parcel orders a week to distributors and retailers. The dispatch team spends mornings on the phone with carriers when it should be running exceptions. Connexx connects to SAP, Sage, NetSuite, and Microsoft Dynamics. Pallet routing runs from the ERP order. Atlas Industrial automated 90% of routing and reduced redelivery costs from £8,000 a month to near zero.",
-          ctaLabel: "See the full B2B solution",
+            "Pallet routing runs straight from your ERP — SAP, Sage, NetSuite, or Dynamics. 200 to 800 palletised orders a week, booked the moment the order is confirmed.",
+          solutionTag: "B2B",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Factory },
           href: "/solutions/b2b",
         },
         {
           anchor: "enterprise",
-          title: "Enterprise — Multi-site, high-volume freight operations",
+          headline: "Built for Enterprise",
           summary:
-            "Enterprise freight programmes span pallet networks, LTL, air freight, and FCL containers across multiple regions. The data lives in 6 to 12 portals. Connexx consolidates rate cards, lane performance, and SLA reporting into one view. The platform handles 5,000+ shipments daily without an IT project for each new lane or carrier added. SAP and NetSuite integration is standard.",
-          ctaLabel: "See the full Enterprise solution",
+            "Pallet networks, LTL, air, and FCL containers across every region in one view. Rate cards, lane performance, and SLA reporting consolidated from 6–12 portals into one.",
+          solutionTag: "Enterprise",
+          category: "By stage",
+          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Building2 },
           href: "/solutions/enterprise",
         },
         {
           anchor: "3pl",
-          title: "3PL — Multi-client fulfilment providers handling pallets and parcels",
+          headline: "Built for 3PLs",
           summary:
-            "3PLs running fulfilment for 20 to 80 brands need pallets and parcels in one workflow. Each client has different carrier preferences and packaging rules. Connexx configures per-client routing once, then dispatches across UK pallet networks and parcel carriers from one platform. SwiftLog Fulfilment hit 98.7% accuracy and dropped client onboarding from two weeks to two days.",
-          ctaLabel: "See the full 3PL solution",
+            "Pallets and parcels in one workflow for 20 to 80 brands. Per-client carrier preferences and packaging rules configured once, dispatched across every UK network.",
+          solutionTag: "3PL",
+          category: "By business model",
+          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Truck },
           href: "/solutions/3pl",
         },
       ]}
