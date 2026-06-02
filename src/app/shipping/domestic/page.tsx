@@ -26,8 +26,8 @@ export default function ShippingDomesticPage() {
   return (
     <VerticalPage
       label="Domestic Shipping"
-      title="UK domestic shipping across every carrier, every postcode."
-      subtitle="From Mainland UK to the Highlands, the Channel Islands, and Northern Ireland, Connexx routes every parcel through the cheapest compliant carrier in milliseconds. Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping all run from one screen. Your operations team stops switching portals. Your customers stop chasing tracking links."
+      title="Run all your carriers from one screen."
+      subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
       primaryCta={{ label: "Get Quote", href: "#estimator" }}
       heroImage={{
         gradient: "from-accent-light via-white to-accent/15",
@@ -62,18 +62,18 @@ export default function ShippingDomesticPage() {
       pains={[
         {
           num: "01",
-          title: "Out-of-area surcharges hidden until the invoice arrives",
-          desc: "Carriers publish a headline rate. The Highlands & Islands surcharge, the Channel Islands fuel adjustment, the Northern Ireland green-lane fee, the residential delivery levy. Each one shows up on the invoice three weeks later. You priced the shipping wrong at checkout and the margin walks out the door.",
+          title: "The rate you're quoted is never the rate you pay",
+          desc: "Carriers advertise a headline price, then bill the extras weeks later: Highlands surcharges, residential levies, re-weighs, address corrections. You priced the order on the quote. The margin leaves on the invoice.",
         },
         {
           num: "02",
-          title: "Regional carrier variability nobody warned you about",
-          desc: "DPD is strong in central England and weak in rural Scotland. Evri is competitive on weight but inconsistent above 10kg. Yodel covers residential addresses cheaply and struggles with business postcodes. Every UK shipper learns these patterns through failed deliveries and angry CS calls. The patterns should be in the rate engine, not in your dispatch supervisor's head.",
+          title: "No carrier is the best choice for all your parcels",
+          desc: "The right one depends on where a parcel's going and what it weighs. Send it all the same way and you overpay on some and miss the delivery date on others.",
         },
         {
           num: "03",
-          title: "Multi-carrier portal switching that eats the morning",
-          desc: "Royal Mail Click and Drop, DPD Shipping Portal, Evri Business Direct, Parcelforce Worldwide Manager, Yodel Connect, DX Direct, Amazon Shipping Console. Each has a different login, a different label format, and a different way to report a missed collection. The operations team spends three hours a day before they touch a physical parcel.",
+          title: "A parcel goes missing and somehow it's your problem",
+          desc: "Tracking goes quiet, the customer chases you, and the refund comes out of your pocket while the carrier caps the claim and takes weeks to pay. You did everything right and you're still the one apologising.",
         },
       ]}
       audienceAnchors={[
@@ -81,7 +81,7 @@ export default function ShippingDomesticPage() {
           anchor: "ecommerce",
           headline: "Built for eCommerce",
           summary:
-            "Shopify, WooCommerce, and BigCommerce orders route to the cheapest compliant UK carrier the moment a customer checks out. One click prints the label.",
+            "Courier rates climb year on year, and the carrier that saves you most shifts from one order to the next. Connect your Shopify, WooCommerce or BigCommerce store and each order routes to the best-value carrier the moment it's placed, with labels and returns handled in one click.",
           solutionTag: "eCommerce",
           category: "By business model",
           image: { gradient: "from-accent-light via-white to-bg-secondary", icon: ShoppingCart },
@@ -91,7 +91,7 @@ export default function ShippingDomesticPage() {
           anchor: "marketplace",
           headline: "Built for Marketplace sellers",
           summary:
-            "Amazon, eBay, Etsy, TikTok Shop, and Temu orders flow into a single dispatch queue with SLA deadlines applied. Penalty fees go to zero.",
+            "On a marketplace, one late delivery becomes a defect, and a defect costs you the rating you've spent years building. Amazon, eBay, Etsy, TikTok Shop and Temu orders flow into one dispatch queue with each marketplace's deadline applied, so the carrier that can actually hit it gets the parcel.",
           solutionTag: "Marketplace",
           category: "By business model",
           image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Package },
@@ -101,7 +101,7 @@ export default function ShippingDomesticPage() {
           anchor: "3pl",
           headline: "Built for 3PLs",
           summary:
-            "Configure each client's carriers, packaging, and routing rules once. Onboard new brands in two days, not two weeks.",
+            "Single-carrier deals cap your rates and leave nothing to earn on shipping. Set each client's carriers, packaging and routing rules once, onboard new brands in days instead of weeks, and make a margin on the parcels you ship instead of passing the carrier's bill straight through.",
           solutionTag: "3PL",
           category: "By business model",
           image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Truck },
@@ -111,7 +111,7 @@ export default function ShippingDomesticPage() {
           anchor: "b2b",
           headline: "Built for B2B",
           summary:
-            "Pallet and parcel dispatch runs straight from your ERP — SAP, Sage, NetSuite, or Dynamics. Carrier booked the moment the order is confirmed.",
+            "Wholesale and Amazon injection are won or lost on the SLA. ITD routes each consignment to a service that meets your partner's delivery and labelling terms and protects your margin, turning compliance into growth instead of chargebacks.",
           solutionTag: "B2B",
           category: "By business model",
           image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Factory },
@@ -121,7 +121,7 @@ export default function ShippingDomesticPage() {
           anchor: "enterprise",
           headline: "Built for Enterprise",
           summary:
-            "Consolidate 6 to 12 carrier portals and a legacy TMS into one view. 5,000+ parcels a day across every UK lane, no IT project per market.",
+            "Carrier portals, a legacy WMS, and each new lane turns into an IT project. Run 2,000+ parcels a day the way you've always pictured it: one dashboard across the full parcel journey, carriers and regions added without a build or a binding contract, and the MI reporting your board asks for.",
           solutionTag: "Enterprise",
           category: "By stage",
           image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Building2 },
@@ -131,7 +131,7 @@ export default function ShippingDomesticPage() {
           anchor: "small-business",
           headline: "Built for Small Business",
           summary:
-            "No minimum volume, no IT setup, no contract lock-in. Compare Royal Mail, Evri, and DPD side by side and batch labels in one print run.",
+            "No volume means no leverage on rates, and most contracts want a commitment you can't make yet. Compare Royal Mail, Evri and DPD side by side with no minimum and no lock-in, and batch the whole day's labels in one run.",
           solutionTag: "Small Business",
           category: "By stage",
           image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Store },
@@ -353,42 +353,42 @@ export default function ShippingDomesticPage() {
       rateChecker="domestic"
       faq={[
         {
-          question: "Does Connexx cover Highlands & Islands and the Channel Islands?",
+          question: "Does ITD cover the Highlands & Islands and the Channel Islands?",
           answer:
-            "Yes, every UK postcode. Connexx routes Highlands & Islands postcodes (AB, IV, KW, PA, PH, HS, ZE) through Royal Mail, Parcelforce, DPD, and any other carrier that holds coverage for that postcode. Channel Islands (JE, GY) are treated as third-country shipments with CN22 or commercial invoice generated automatically. Northern Ireland (BT) is routed under Windsor Framework rules. No manual postcode lookups required.",
+            "Yes. Routing reads the destination postcode and picks a carrier that covers it, including the Highlands and Islands, the Channel Islands, Northern Ireland and BFPO. The area surcharge is priced in before you ship, so you see the real cost up front, not on the invoice weeks later.",
         },
         {
-          question: "Which UK carriers does ITD Global integrate with?",
+          question: "Which UK carriers can I ship with through ITD?",
           answer:
-            "Seven major UK carriers: Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping. The Connexx rate engine compares all seven on every order in milliseconds. You bring your own carrier accounts and rate cards, or use ITD's negotiated rates if your contracts are weak. Additional regional carriers can be added on request through the integrations team.",
+            "Royal Mail, DPD, Evri, Yodel, DX, Parcelforce and Amazon Shipping, with more added over time. They all run from one account, so you can compare services and switch carrier per order without opening another portal.",
         },
         {
-          question: "Can I use my own Royal Mail account?",
+          question: "Can I keep my own Royal Mail account?",
           answer:
-            "Yes. Connexx supports your existing Royal Mail OBA (Online Business Account) or Click and Drop account directly. Tracked 24, Tracked 48, Signed, Special Delivery, First Class, Second Class, and standard letter services all flow through Connexx with your own negotiated rates. If your Royal Mail rates are weak, ITD's aggregated volume across thousands of UK shippers gets you better pricing.",
+            "Yes. Bring your own negotiated rates and run them alongside ITD's, or ship entirely on ITD's. The routing compares both and picks the best-value service for the parcel.",
         },
         {
           question: "How do you handle out-of-area surcharges?",
           answer:
-            "Surcharges are applied in the rate engine on every order, not on the invoice three weeks later. Connexx reads each carrier's surcharge schedule (Highlands & Islands, Channel Islands, residential, oversized, fuel) against the destination postcode and shows the all-in cost at the point of dispatch. You price the shipping correctly at checkout and the margin stays where it belongs.",
+            "They're built into the rate at the point of routing. The system knows the Highlands and Islands surcharge, the Channel Islands fuel adjustment, the Northern Ireland fee and residential levies, so the price you see is the price you pay.",
         },
         {
-          question: "Do you offer Saturday delivery?",
+          question: "Do you offer next-day and Saturday delivery?",
           answer:
-            "Yes, through DPD Saturday, Yodel Sunday, and Royal Mail Special Delivery (Saturday). Connexx makes weekend service options visible alongside weekday rates in the same comparison. Choose the carrier and tier per order, or set a routing rule (for example, all orders placed Friday after 2pm route to DPD Saturday). Weekend coverage varies by postcode and Connexx flags the postcodes where it does not apply.",
+            "Yes. Next-day, timed and Saturday services are available across the carriers that run them, and routing can prioritise speed or price on each order to match the promise you've made the customer.",
         },
         {
           question: "How quickly can I get set up for UK domestic shipping?",
           answer:
-            "Most UK domestic shippers are live on Connexx within two business days. Setup includes carrier account linking, label printer configuration, rule setup for your service tiers and surcharge handling, and a live label test before you go live. Shopify and WooCommerce stores connect via the official app. Linnworks, Mintsoft, and Veeqo setups take three to five days.",
+            "Most businesses are live within a few days. The store and ERP integrations are ready-built, so you connect your accounts and routing rules rather than waiting on a development project. 3PLs can onboard a new brand in about two days.",
         },
       ]}
       closingCta={{
-        headline: "See the saving on your top five UK lanes.",
+        headline: "Unlock the margin hiding in your shipping",
         subhead:
-          "Two minutes with the Domestic Savings Estimator. We compare every active UK carrier on the postcodes you ship to most. No commitment, no card.",
-        primary: { label: "Get Quote", href: "#estimator" },
-        secondary: { label: "Contact Us", href: "/contact?enquiry=domestic" },
+          "The Parcel Rate Checker compares live carriers on the postcodes you ship from and shows you where the margin's leaking. Put your current dims, weight and rate in and the gaps show up straight away.",
+        primary: { label: "Check your rates", href: "#estimator" },
+        secondary: { label: "Request a tailored review", href: "/contact?enquiry=domestic" },
       }}
     />
   );
