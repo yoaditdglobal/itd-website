@@ -29,6 +29,10 @@ export default function ShippingInternationalPage() {
         label: "Get my international rate review",
         href: "/contact?enquiry=international",
       }}
+      heroImage={{
+        gradient: "from-bg-secondary via-accent-light to-accent/10",
+        icon: Globe,
+      }}
       secondaryCta={{
         label: "Read the Arlo Fulfilment story (3 min)",
         href: "/resources/case-studies/arlo-fulfilment",

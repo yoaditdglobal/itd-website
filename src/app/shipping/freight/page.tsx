@@ -10,6 +10,7 @@ import {
   Factory,
   Building2,
   Truck,
+  PackageOpen,
 } from "lucide-react";
 
 export const metadata = buildMetadata({
@@ -26,6 +27,10 @@ export default function ShippingFreightPage() {
       title="Pallet, freight, and parcel shipping on one platform."
       subtitle="UK pallet networks, European LTL lanes, worldwide LCL and FCL containers, and parcel carriers all run through Connexx. Home Bargains consolidates samples from 200+ Chinese factories into one weekly air freight shipment, cutting costs 30–35% and guaranteeing Tuesday delivery for every buyer. Stop calling three brokers for every freight quote. Stop running pallets through one system and parcels through another. One workflow, every weight tier."
       primaryCta={{ label: "Get a freight quote", href: "/contact?enquiry=freight" }}
+      heroImage={{
+        gradient: "from-accent-light via-white to-accent/15",
+        icon: PackageOpen,
+      }}
       secondaryCta={{
         label: "Read the Home Bargains story (3 min)",
         href: "/resources/case-studies/home-bargains",

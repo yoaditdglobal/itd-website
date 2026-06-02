@@ -71,6 +71,16 @@ export interface CtaButton {
   href: string;
 }
 
+export interface VerticalHeroImage {
+  /** Optional photo path under /public. Renders next/image fill object-cover. */
+  src?: string;
+  alt?: string;
+  /** Tailwind gradient classes for the placeholder (without bg-gradient-to-br). */
+  gradient?: string;
+  /** Lucide icon shown faint at the centre of the placeholder. */
+  icon?: LucideIcon;
+}
+
 export interface ClosingCtaOverride {
   headline?: string;
   subhead?: string;
@@ -102,6 +112,9 @@ interface VerticalPageProps {
   /** Optional override for the hero CTAs. Defaults: primary="Run the savings check" → "/shipping/domestic#estimator", secondary="Contact Sales" → "/contact". */
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
+
+  /** Optional hero image / gradient placeholder rendered to the right of the headline copy. */
+  heroImage?: VerticalHeroImage;
 
   /** Optional "Built for" section between pain points and features. Used by shipping pages. */
   audienceAnchors?: AudienceAnchor[];
@@ -142,6 +155,7 @@ export default function VerticalPage({
   rateChecker,
   primaryCta,
   secondaryCta,
+  heroImage,
   audienceAnchors,
   carrierComparison,
   faq,
@@ -167,18 +181,48 @@ export default function VerticalPage({
         <div className="hero-bg-blob" aria-hidden />
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            {label && (
-              <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
-                {label}
-              </span>
-            )}
-            <h1 className="hero-entrance-h1 text-display-xl text-text-primary">{title}</h1>
-            <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary">{subtitle}</p>
-            <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
-              <Button href={heroPrimary.href}>{heroPrimary.label}</Button>
-              <Button href={heroSecondary.href} variant="secondary">{heroSecondary.label}</Button>
+          <div className={heroImage ? "grid lg:grid-cols-2 lg:gap-12 items-center" : ""}>
+            <div className={heroImage ? "max-w-2xl" : "max-w-3xl"}>
+              {label && (
+                <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
+                  {label}
+                </span>
+              )}
+              <h1 className="hero-entrance-h1 text-display-xl text-text-primary">{title}</h1>
+              <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary">{subtitle}</p>
+              <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+                <Button href={heroPrimary.href}>{heroPrimary.label}</Button>
+                <Button href={heroSecondary.href} variant="secondary">{heroSecondary.label}</Button>
+              </div>
             </div>
+            {heroImage && (
+              <div className="hero-entrance-sub mt-10 lg:mt-0">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-bg-secondary">
+                  {heroImage.src ? (
+                    <Image
+                      src={heroImage.src}
+                      alt={heroImage.alt ?? `${title} hero illustration`}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${heroImage.gradient ?? "from-accent-light via-white to-accent/15"} flex items-center justify-center`}
+                      aria-hidden
+                    >
+                      {heroImage.icon ? (
+                        <heroImage.icon
+                          className="w-1/4 h-1/4 text-accent/30"
+                          strokeWidth={1.5}
+                        />
+                      ) : null}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
