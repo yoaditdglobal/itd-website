@@ -137,12 +137,12 @@ function IcpCard({ icp }: { icp: Icp }) {
         {icp.hook}
       </p>
 
-      {visible.length > 0 && (
-        <div className="mt-auto pt-4 border-t border-border">
-          <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-1.5">
-              {visible.map((cs) => (
+      <div className="mt-auto pt-4 border-t border-border">
+        <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
+        <div className="flex items-center gap-2">
+          <div className="flex -space-x-1.5">
+            {visible.length > 0 ? (
+              visible.map((cs) => (
                 <span
                   key={cs.id}
                   className="ring-2 ring-white rounded-md inline-block"
@@ -154,16 +154,26 @@ function IcpCard({ icp }: { icp: Icp }) {
                     size="xs"
                   />
                 </span>
-              ))}
-            </div>
-            {overflow > 0 && (
-              <span className="text-caption text-text-tertiary">
-                + {overflow} more
-              </span>
+              ))
+            ) : (
+              // Placeholder tiles — swap for real customer logos when case
+              // studies exist for this solution tag.
+              [0, 1, 2].map((n) => (
+                <span
+                  key={n}
+                  aria-hidden
+                  className="ring-2 ring-white rounded-md inline-block h-5 w-5 bg-bg-tertiary"
+                />
+              ))
             )}
           </div>
+          {overflow > 0 && (
+            <span className="text-caption text-text-tertiary">
+              + {overflow} more
+            </span>
+          )}
         </div>
-      )}
+      </div>
     </Link>
   );
 }
