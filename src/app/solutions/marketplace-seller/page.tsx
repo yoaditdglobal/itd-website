@@ -17,8 +17,8 @@ export default function MarketplaceSellerPage() {
       label="Marketplace Seller"
       title="Stop paying Amazon and eBay late shipment penalty fees."
       subtitle="You ship 200 to 2,000 orders a day across Amazon, eBay, Etsy, and TikTok Shop. Every platform has a different SLA, a different label format, and its own penalty structure. Connexx pulls every order into one dispatch queue, routes each one to a Valid Tracking Rate-compliant carrier, and writes the tracking number back to Seller Central before the cut-off."
-      primaryCta={{ label: "Request the marketplace demo", href: "/contact?enquiry=marketplace" }}
-      secondaryCta={{ label: "Read the West Ham United story (3 min)", href: "/resources/case-studies/west-ham-united" }}
+      primaryCta={{ label: "Contact Us", href: "/contact?enquiry=marketplace" }}
+      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/west-ham-united" }}
       pains={[
         {
           num: "01",
@@ -145,8 +145,8 @@ export default function MarketplaceSellerPage() {
         headline: "Cut penalty fees to zero before the next peak.",
         subhead:
           "The demo shows the unified order queue and SLA-aware routing in the first five minutes. Scoped to your marketplace mix.",
-        primary: { label: "Request the marketplace demo", href: "/contact?enquiry=marketplace" },
-        secondary: { label: "Read the West Ham United story", href: "/resources/case-studies/west-ham-united" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=marketplace" },
+        secondary: { label: "Learn More", href: "/resources/case-studies/west-ham-united" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

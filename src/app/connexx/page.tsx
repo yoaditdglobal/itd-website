@@ -614,8 +614,8 @@ export default function ConnexxPage() {
       <ClosingCTA
         headline="Stop running shipping in browser tabs."
         subtitle="Request a 30-minute demo scoped to your carrier mix and ERP. We will run a live rate comparison on a real shipment you define."
-        primaryCta={{ label: "Request a Connexx demo", href: "/contact?enquiry=connexx-demo" }}
-        secondaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
+        primaryCta={{ label: "Contact Us", href: "/contact?enquiry=connexx-demo" }}
+        secondaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       />
     </>
   );

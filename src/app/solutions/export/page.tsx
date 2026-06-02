@@ -17,8 +17,8 @@ export default function ExportPage() {
       label="Export"
       title="Export documentation that updates before the regulations do."
       subtitle="UK exporters ship to 25 countries with 6 to 8 documents per consignment, prepared by hand. One wrong HS code on a Saudi Arabia shipment is three days at the border. Connexx auto-generates commercial invoices, packing lists, certificates of origin, EUR.1 forms, and CDS declarations from a single sales order. The rules engine updates before you do."
-      primaryCta={{ label: "Run the export documentation estimator", href: "#estimator" }}
-      secondaryCta={{ label: "Read the Arlo Fulfilment story (3 min)", href: "/resources/case-studies/arlo-fulfilment" }}
+      primaryCta={{ label: "Get Quote", href: "#estimator" }}
+      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/arlo-fulfilment" }}
       pains={[
         {
           num: "01",
@@ -153,8 +153,8 @@ export default function ExportPage() {
         headline: "Stop dreading regulatory updates.",
         subhead:
           "Run the export documentation estimator for your top 5 destination countries. Two minutes, no commitment.",
-        primary: { label: "Run the estimator", href: "#estimator" },
-        secondary: { label: "Request a tailored compliance walkthrough", href: "/contact?enquiry=export" },
+        primary: { label: "Get Quote", href: "#estimator" },
+        secondary: { label: "Contact Us", href: "/contact?enquiry=export" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

@@ -18,11 +18,11 @@ export default function EnterprisePage() {
       title="Enterprise shipping software that consolidates every carrier contract you hold."
       subtitle="At 50,000+ parcels a month you are running six carrier portals, two ERPs, and a quarterly spreadsheet nobody trusts. Connexx ties SAP, Oracle NetSuite, and Microsoft Dynamics to every carrier you use, routes every order through pre-set rules, and produces one reconciled data set. Lane performance, SLA compliance, and rate card spend live in one view."
       primaryCta={{
-        label: "Request a tailored platform review",
+        label: "Contact Us",
         href: "/contact?enquiry=enterprise",
       }}
       secondaryCta={{
-        label: "Read the Connexx vs Metapack comparison",
+        label: "Learn More",
         href: "/resources/connexx-vs-metapack",
       }}
       breadcrumbs={[
@@ -165,11 +165,11 @@ export default function EnterprisePage() {
         subhead:
           "A tailored platform review scoped to your ERP, your carriers, and your regions. No procurement deck.",
         primary: {
-          label: "Request a tailored platform review",
+          label: "Contact Us",
           href: "/contact?enquiry=enterprise",
         },
         secondary: {
-          label: "Request the enterprise RFI guide",
+          label: "Learn More",
           href: "/resources/enterprise-rfi-guide",
         },
       }}

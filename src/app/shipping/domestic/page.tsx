@@ -28,13 +28,13 @@ export default function ShippingDomesticPage() {
       label="Domestic Shipping"
       title="UK domestic shipping across every carrier, every postcode."
       subtitle="From Mainland UK to the Highlands, the Channel Islands, and Northern Ireland, Connexx routes every parcel through the cheapest compliant carrier in milliseconds. Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping all run from one screen. Your operations team stops switching portals. Your customers stop chasing tracking links."
-      primaryCta={{ label: "Run the Domestic Savings Estimator", href: "#estimator" }}
+      primaryCta={{ label: "Get Quote", href: "#estimator" }}
       heroImage={{
         gradient: "from-accent-light via-white to-accent/15",
         icon: Truck,
       }}
       secondaryCta={{
-        label: "Read the Tatti Lashes story (3 min)",
+        label: "Learn More",
         href: "/resources/case-studies/tatti-lashes",
       }}
       breadcrumbs={[
@@ -387,8 +387,8 @@ export default function ShippingDomesticPage() {
         headline: "See the saving on your top five UK lanes.",
         subhead:
           "Two minutes with the Domestic Savings Estimator. We compare every active UK carrier on the postcodes you ship to most. No commitment, no card.",
-        primary: { label: "Run the Domestic Savings Estimator", href: "#estimator" },
-        secondary: { label: "Request a tailored review", href: "/contact?enquiry=domestic" },
+        primary: { label: "Get Quote", href: "#estimator" },
+        secondary: { label: "Contact Us", href: "/contact?enquiry=domestic" },
       }}
     />
   );

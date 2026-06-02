@@ -26,7 +26,7 @@ export default function ShippingInternationalPage() {
       title="International shipping with customs documentation done before dispatch."
       subtitle="EU, North America, APAC, the Middle East. Connexx generates the HS codes, the EORI declarations, the IOSS filings, and the country-specific paperwork before the carrier scans the label. DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International compete in real time on every cross-border order. Customs holds drop. Margins hold steady."
       primaryCta={{
-        label: "Get my international rate review",
+        label: "Get Quote",
         href: "/contact?enquiry=international",
       }}
       heroImage={{
@@ -34,7 +34,7 @@ export default function ShippingInternationalPage() {
         icon: Globe,
       }}
       secondaryCta={{
-        label: "Read the Arlo Fulfilment story (3 min)",
+        label: "Learn More",
         href: "/resources/case-studies/arlo-fulfilment",
       }}
       breadcrumbs={[
@@ -318,12 +318,12 @@ export default function ShippingInternationalPage() {
         subhead:
           "A tailored international rate review covers your top five destination countries, your current paperwork process, and the per-shipment saving across the carriers that match each lane.",
         primary: {
-          label: "Get my international rate review",
+          label: "Get Quote",
           href: "/contact?enquiry=international",
         },
         secondary: {
-          label: "Read the Meridian story (3 min)",
-          href: "/resources/case-studies/arlo-fulfilment",
+          label: "Explore",
+          href: "/resources/case-studies",
         },
       }}
     />

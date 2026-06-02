@@ -109,7 +109,7 @@ interface VerticalPageProps {
   caseStudies?: CaseStudy[];
   rateChecker?: 'domestic' | 'international' | '3pl' | 'export' | 'import';
 
-  /** Optional override for the hero CTAs. Defaults: primary="Run the savings check" → "/shipping/domestic#estimator", secondary="Contact Sales" → "/contact". */
+  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → "/shipping/domestic#estimator", secondary="Contact Us" → "/contact". */
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 
@@ -169,8 +169,8 @@ export default function VerticalPage({
   if (breadcrumbs && breadcrumbs.length > 0) ldData.push(breadcrumbSchema(breadcrumbs));
   if (faq && faq.length > 0) ldData.push(faqSchema(faq));
 
-  const heroPrimary = primaryCta ?? { label: "Run the savings check", href: "/shipping/domestic#estimator" };
-  const heroSecondary = secondaryCta ?? { label: "Contact Sales", href: "/contact" };
+  const heroPrimary = primaryCta ?? { label: "Get Quote", href: "/shipping/domestic#estimator" };
+  const heroSecondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
     <>
@@ -314,7 +314,7 @@ export default function VerticalPage({
                   })}
                 </div>
                 <div className="mt-8">
-                  <Button href="/connexx">See the platform</Button>
+                  <Button href="/connexx">Explore</Button>
                 </div>
               </div>
             </ScrollReveal>

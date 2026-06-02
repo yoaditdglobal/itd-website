@@ -112,8 +112,8 @@ export default function EcommercePage() {
       closingCta={{
         headline: "Connect your Shopify store in 10 minutes.",
         subhead: "Install the app. Authorise your carrier accounts. Ship the next order through Connexx.",
-        primary: { label: "Get the Shopify app", href: "/contact?enquiry=ecommerce" },
-        secondary: { label: "Request a tailored setup walkthrough", href: "/contact?enquiry=ecommerce" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=ecommerce" },
+        secondary: { label: "Explore", href: "/integrations" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

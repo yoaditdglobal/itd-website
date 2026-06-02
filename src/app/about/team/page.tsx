@@ -91,8 +91,8 @@ export default function TeamPage() {
       <ClosingCTA
         headline="Work with a team that knows your lanes."
         subtitle="Talk to an operator who manages shipping like yours every day."
-        primaryCta={{ label: "Talk to the team", href: "/contact" }}
-        secondaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
+        primaryCta={{ label: "Contact Us", href: "/contact" }}
+        secondaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       />
     </>
   );

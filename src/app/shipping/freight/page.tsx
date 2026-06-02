@@ -26,13 +26,13 @@ export default function ShippingFreightPage() {
       label="Freight"
       title="Pallet, freight, and parcel shipping on one platform."
       subtitle="UK pallet networks, European LTL lanes, worldwide LCL and FCL containers, and parcel carriers all run through Connexx. Home Bargains consolidates samples from 200+ Chinese factories into one weekly air freight shipment, cutting costs 30–35% and guaranteeing Tuesday delivery for every buyer. Stop calling three brokers for every freight quote. Stop running pallets through one system and parcels through another. One workflow, every weight tier."
-      primaryCta={{ label: "Get a freight quote", href: "/contact?enquiry=freight" }}
+      primaryCta={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
       heroImage={{
         gradient: "from-accent-light via-white to-accent/15",
         icon: PackageOpen,
       }}
       secondaryCta={{
-        label: "Read the Home Bargains story (3 min)",
+        label: "Learn More",
         href: "/resources/case-studies/home-bargains",
       }}
       breadcrumbs={[
@@ -252,10 +252,10 @@ export default function ShippingFreightPage() {
         headline: "One platform for every pallet, parcel, and container.",
         subhead:
           "A tailored review covers your top freight lanes, your current pallet network mix, and the per-consignment saving across UK pallet, LTL, and international freight tiers.",
-        primary: { label: "Get a freight quote", href: "/contact?enquiry=freight" },
+        primary: { label: "Get Quote", href: "/contact?enquiry=freight" },
         secondary: {
-          label: "Request a tailored review",
-          href: "/contact?enquiry=freight",
+          label: "Explore",
+          href: "/resources/case-studies",
         },
       }}
     />

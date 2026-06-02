@@ -82,9 +82,9 @@ export default function AboutPage() {
               platform that powers it. Operators first, software second.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Button href="/contact">Talk to the team</Button>
+              <Button href="/contact">Contact Us</Button>
               <Button href="/connexx" variant="secondary">
-                See the platform
+                Explore
               </Button>
             </div>
           </div>
@@ -191,8 +191,8 @@ export default function AboutPage() {
       <ClosingCTA
         headline="Ready to ship smarter?"
         subtitle="Two minutes with the savings estimator, or talk to an operator who knows your lanes."
-        primaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
-        secondaryCta={{ label: "Talk to the team", href: "/contact" }}
+        primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+        secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
     </>
   );

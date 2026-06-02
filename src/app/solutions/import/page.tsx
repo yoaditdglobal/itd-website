@@ -17,8 +17,8 @@ export default function ImportPage() {
       label="Import"
       title="Landed cost in the PO, not after the C79."
       subtitle="UK importers price products against duty estimates that are off by 15 to 20%. Connexx calculates landed cost from the HS code, origin country, Incoterms, and current UK Global Tariff rates before the goods leave the supplier. CDS declarations pre-file with HMRC. PVA and C79 reconcile against your accounting system automatically."
-      primaryCta={{ label: "Run the landed cost calculator", href: "#estimator" }}
-      secondaryCta={{ label: "Read the Home Bargains story (3 min)", href: "/resources/case-studies/home-bargains" }}
+      primaryCta={{ label: "Get Quote", href: "#estimator" }}
+      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
       pains={[
         {
           num: "01",
@@ -150,8 +150,8 @@ export default function ImportPage() {
         headline: "Price products against duty, not against guesses.",
         subhead:
           "Two minutes with the landed cost calculator. Pick three import origins. Compare against your current estimate.",
-        primary: { label: "Run the calculator", href: "#estimator" },
-        secondary: { label: "Request a tailored import compliance review", href: "/contact?enquiry=import" },
+        primary: { label: "Get Quote", href: "#estimator" },
+        secondary: { label: "Contact Us", href: "/contact?enquiry=import" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

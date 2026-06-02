@@ -25,7 +25,7 @@ export default function ConnexxPreview() {
                 single dashboard.
               </p>
               <div className="mt-8">
-                <Button href="/connexx">See the platform</Button>
+                <Button href="/connexx">Explore</Button>
               </div>
             </div>
           </ScrollReveal>

@@ -112,8 +112,8 @@ export default function LogisticsPage() {
       closingCta={{
         headline: "See where Connexx fits in your current stack.",
         subhead: "Send us your tooling. We'll tell you what to keep, what to replace, and where the savings are.",
-        primary: { label: "Request a tailored stack review", href: "/contact?enquiry=logistics" },
-        secondary: { label: "Read the Delta Fulfilment story (3 min)", href: "/resources/case-studies/delta-fulfilment" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=logistics" },
+        secondary: { label: "Learn More", href: "/resources/case-studies/delta-fulfilment" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

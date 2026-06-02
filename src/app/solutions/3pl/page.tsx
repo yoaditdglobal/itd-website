@@ -18,11 +18,11 @@ export default function ThreePLPage() {
       title="3PL shipping software with child accounts and customs built in."
       subtitle="You run fulfilment for 20 to 80 brand clients across Mintsoft, Linnworks, or ShipHero. Each one has different carriers, different packaging rules, and different SLAs. Connexx adds a child account architecture, per-brand routing rules, and a customs engine on top of your WMS. Client onboarding drops from two weeks to two days, and customs accuracy lifts past 98%."
       primaryCta={{
-        label: "Request the multi-client demo",
+        label: "Contact Us",
         href: "/contact?enquiry=3pl",
       }}
       secondaryCta={{
-        label: "Read the Delta Fulfilment story (3 min)",
+        label: "Learn More",
         href: "/resources/case-studies/delta-fulfilment",
       }}
       breadcrumbs={[
@@ -169,11 +169,11 @@ export default function ThreePLPage() {
         subhead:
           "The demo covers child accounts, per-brand routing, and the customs engine. Scoped to your WMS.",
         primary: {
-          label: "Request the multi-client demo",
+          label: "Contact Us",
           href: "/contact?enquiry=3pl",
         },
         secondary: {
-          label: "Read the 3PL onboarding playbook",
+          label: "Learn More",
           href: "/resources/3pl-onboarding-playbook",
         },
       }}

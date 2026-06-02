@@ -17,9 +17,9 @@ export default function EcommercePage() {
       label="eCommerce"
       title="Multi-carrier shipping that pays you back on every order."
       subtitle="Online retailers lose margin on dispatch decisions made in a hurry. Connexx compares every UK and international carrier on every order, picks the cheapest compliant option, and prints the label in one click. Shopify, WooCommerce, and BigCommerce orders flow in automatically. Your operations team stops switching between carrier portals."
-      primaryCta={{ label: "Run the savings estimator", href: "/shipping/domestic#estimator" }}
+      primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       secondaryCta={{
-        label: "Read the Tatti Lashes story (3 min)",
+        label: "Learn More",
         href: "/resources/case-studies/tatti-lashes",
       }}
       breadcrumbs={[
@@ -160,8 +160,8 @@ export default function EcommercePage() {
       closingCta={{
         headline: "Stop guessing which carrier wins.",
         subhead: "Two minutes with the savings estimator. No commitment, no card.",
-        primary: { label: "Run the estimator", href: "/shipping/domestic#estimator" },
-        secondary: { label: "Request a tailored review", href: "/contact?enquiry=ecommerce" },
+        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
+        secondary: { label: "Contact Us", href: "/contact?enquiry=ecommerce" },
       }}
     />
   );

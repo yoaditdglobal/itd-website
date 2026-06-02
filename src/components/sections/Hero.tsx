@@ -41,10 +41,10 @@ export default function Hero({
     subtitle ??
     "ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters. Connexx compares every active carrier on every parcel, picks the cheapest compliant option, and prints the label in one click. Domestic, international, returns, and customs all run from a single dashboard.";
   const primary = primaryCta ?? {
-    label: "Run the savings estimator",
+    label: "Get Quote",
     href: "/shipping/domestic#estimator",
   };
-  const secondary = secondaryCta ?? { label: "Request a demo", href: "/contact" };
+  const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
     <section className="relative hero-bg overflow-hidden min-h-[calc(100vh-72px)] flex items-center">

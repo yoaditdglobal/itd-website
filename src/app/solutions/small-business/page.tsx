@@ -17,9 +17,9 @@ export default function SmallBusinessPage() {
       label="Small Business"
       title="Cheaper parcel shipping for UK small businesses, no contracts."
       subtitle="You ship 40 to 200 parcels a day from a spare room, a small unit, or a shared warehouse. You spend two hours every morning logging into Royal Mail Click and Drop. Connexx compares Royal Mail, Evri, DPD, and Parcelforce on every order, prints labels in one batch, and pulls in Shopify and WooCommerce orders automatically."
-      primaryCta={{ label: "Get my per-parcel saving", href: "/shipping/domestic#estimator" }}
+      primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       secondaryCta={{
-        label: "See the small business carrier comparison",
+        label: "Learn More",
         href: "/shipping/domestic/courier-comparison",
       }}
       breadcrumbs={[
@@ -163,8 +163,8 @@ export default function SmallBusinessPage() {
         headline: "Get back two hours of every working morning.",
         subhead:
           "Run the Domestic Savings Estimator in two minutes. See your per-parcel saving before you sign up.",
-        primary: { label: "Get my per-parcel saving", href: "/shipping/domestic#estimator" },
-        secondary: { label: "Create my account", href: "/signup?plan=small-business" },
+        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
+        secondary: { label: "Sign Up", href: "/signup?plan=small-business" },
       }}
     />
   );

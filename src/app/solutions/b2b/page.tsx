@@ -17,8 +17,8 @@ export default function B2BManufacturingPage() {
       label="B2B"
       title="B2B dispatch that runs from your ERP, not a portal."
       subtitle="UK wholesalers and manufacturers ship 500 palletised orders a week through carrier portals nobody has time to manage. Connexx connects to SAP, Sage, NetSuite, and Microsoft Dynamics. Orders confirmed in the ERP trigger carrier selection, booking, and label generation automatically. Tracking numbers and PODs write back to the ERP within seconds."
-      primaryCta={{ label: "Request a tailored ERP review", href: "/contact?enquiry=b2b" }}
-      secondaryCta={{ label: "Read the RIOZ Global story (3 min)", href: "/resources/case-studies/rioz-global" }}
+      primaryCta={{ label: "Contact Us", href: "/contact?enquiry=b2b" }}
+      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/rioz-global" }}
       pains={[
         {
           num: "01",
@@ -147,8 +147,8 @@ export default function B2BManufacturingPage() {
         headline: "Get the dispatch team off the phone.",
         subhead:
           "30 minutes with an integration engineer. We show you the order-to-tracking flow inside your ERP. No demo deck.",
-        primary: { label: "Request a tailored ERP review", href: "/contact?enquiry=b2b" },
-        secondary: { label: "Read the RIOZ Global story (3 min)", href: "/resources/case-studies/rioz-global" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=b2b" },
+        secondary: { label: "Learn More", href: "/resources/case-studies/rioz-global" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

@@ -112,8 +112,8 @@ export default function MarketplacesPage() {
       closingCta={{
         headline: "Pull every marketplace order into one queue.",
         subhead: "Connect Amazon, eBay, Etsy, Walmart, Zalando, Temu, and TikTok Shop. Set the SLA rules once. Ship from one screen.",
-        primary: { label: "Connect a marketplace", href: "/contact?enquiry=marketplaces" },
-        secondary: { label: "Read the West Ham United story (3 min)", href: "/resources/case-studies/west-ham-united" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=marketplaces" },
+        secondary: { label: "Learn More", href: "/resources/case-studies/west-ham-united" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

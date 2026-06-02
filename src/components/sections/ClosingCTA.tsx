@@ -22,8 +22,8 @@ export default function ClosingCTA({
   secondaryCta,
   asyncNote,
 }: ClosingCTAProps) {
-  const primary = primaryCta ?? { label: "Run the savings check", href: "/shipping/domestic#estimator" };
-  const secondary = secondaryCta ?? { label: "Contact Sales", href: "/contact" };
+  const primary = primaryCta ?? { label: "Get Quote", href: "/shipping/domestic#estimator" };
+  const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
     <section className="bg-bg-dark py-16 md:py-24">

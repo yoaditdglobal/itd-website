@@ -112,8 +112,8 @@ export default function ErpWmsPage() {
       closingCta={{
         headline: "Request a technical integration review.",
         subhead: "Bring your ERP or WMS specifics. We'll map the order, label, and write-back flow before you commit.",
-        primary: { label: "Request a tailored review", href: "/contact?enquiry=erp-wms" },
-        secondary: { label: "Browse the integrations directory", href: "/integrations" },
+        primary: { label: "Contact Us", href: "/contact?enquiry=erp-wms" },
+        secondary: { label: "Explore", href: "/integrations" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
