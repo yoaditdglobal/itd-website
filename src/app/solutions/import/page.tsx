@@ -1,4 +1,6 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import SolutionHero from "@/components/sections/SolutionHero";
+import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
@@ -11,31 +13,63 @@ export const metadata = buildMetadata({
   path: "/solutions/import",
 });
 
+const PAINS = [
+  {
+    num: "01",
+    title: "One in four shipments hits a customs delay you didn't see coming",
+    desc: "Incorrect tariff classifications. Missing pre-clearance documentation. A rules-of-origin question that should have been answered before the container left China. The first sign is a phone call from the customs broker asking for a document that should already be on file. By that point, the delay is 48 hours in and the warehouse is already idle.",
+  },
+  {
+    num: "02",
+    title: "Landed costs estimated in a spreadsheet that's wrong by 20%",
+    desc: "Duty rates, import VAT, carrier surcharges, customs broker fees, fuel surcharges. All estimated from last quarter's actuals in a workbook the Import Manager updates monthly. When a supplier changes packing or a carrier adds a surcharge, the spreadsheet is wrong before it is used. Pricing decisions are made against numbers nobody trusts.",
+  },
+  {
+    num: "03",
+    title: "Finance can't price products until the shipment clears",
+    desc: "The CFO asks for landed cost data for the pricing review. The Import Manager gives them a number two weeks after the goods arrive, once the C79 is in and the duty deferment statement reconciles. By then the pricing decision was made on the old estimate. Margin erodes one quarter at a time.",
+  },
+];
+
 export default function ImportPage() {
   return (
-    <VerticalPage
+    <>
+      <SolutionHero
+        label="Import"
+        title="Landed cost in the PO, not after the C79."
+        subtitle="Duty calculated against the live UK Global Tariff before goods leave the supplier. CDS declarations pre-file with HMRC; PVA and C79 reconcile straight back into your accounting system."
+        primary={{ label: "Get Quote", href: "#estimator" }}
+        secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
+        image={{
+          src: "/solutions/import-hero-v3.webp",
+          alt: "Airbus A330-300 cargo aircraft being loaded with palletised air freight",
+          objectPosition: "80% 50%",
+        }}
+        chips={[
+          { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
+          { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
+          { name: "FedEx", logo: "/logos/carriers/fedex_logo.png" },
+          { name: "SAP" },
+          { name: "HMRC CDS" },
+        ]}
+      />
+      <SolutionPains
+        pains={PAINS}
+        image={{
+          src: "/solutions/import-pains-v2.webp",
+          alt: "Boeing 737 aircraft being loaded with palletised air freight on the apron",
+          objectPosition: "55% 50%",
+        }}
+      />
+      <VerticalPage
+        hideDefaultHero
+        hidePainPoints
       label="Import"
       title="Landed cost in the PO, not after the C79."
       subtitle="UK importers price products against duty estimates that are off by 15 to 20%. Connexx calculates landed cost from the HS code, origin country, Incoterms, and current UK Global Tariff rates before the goods leave the supplier. CDS declarations pre-file with HMRC. PVA and C79 reconcile against your accounting system automatically."
       primaryCta={{ label: "Get Quote", href: "#estimator" }}
       secondaryCta={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
-      pains={[
-        {
-          num: "01",
-          title: "One in four shipments hits a customs delay you didn't see coming",
-          desc: "Incorrect tariff classifications. Missing pre-clearance documentation. A rules-of-origin question that should have been answered before the container left China. The first sign is a phone call from the customs broker asking for a document that should already be on file. By that point, the delay is 48 hours in and the warehouse is already idle.",
-        },
-        {
-          num: "02",
-          title: "Landed costs estimated in a spreadsheet that's wrong by 20%",
-          desc: "Duty rates, import VAT, carrier surcharges, customs broker fees, fuel surcharges. All estimated from last quarter's actuals in a workbook the Import Manager updates monthly. When a supplier changes packing or a carrier adds a surcharge, the spreadsheet is wrong before it is used. Pricing decisions are made against numbers nobody trusts.",
-        },
-        {
-          num: "03",
-          title: "Finance can't price products until the shipment clears",
-          desc: "The CFO asks for landed cost data for the pricing review. The Import Manager gives them a number two weeks after the goods arrive, once the C79 is in and the duty deferment statement reconciles. By then the pricing decision was made on the old estimate. Margin erodes one quarter at a time.",
-        },
-      ]}
+      pains={PAINS}
       features={[
         {
           icon: Calculator,
@@ -168,6 +202,7 @@ export default function ImportPage() {
           areaServed: ["United Kingdom", "European Union"],
         }),
       ]}
-    />
+      />
+    </>
   );
 }

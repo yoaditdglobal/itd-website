@@ -30,6 +30,9 @@ export default function ShippingDomesticPage() {
       subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
       primaryCta={{ label: "Get Quote", href: "#estimator" }}
       heroImage={{
+        src: "/shipping/domestic-hero-v2.webp",
+        alt: "Warehouse loading bays branded with UK carrier logos — Evri, InPost, DPD, Amazon Shipping",
+        aspect: "aspect-[16/9]",
         gradient: "from-accent-light via-white to-accent/15",
         icon: Truck,
       }}
@@ -84,7 +87,12 @@ export default function ShippingDomesticPage() {
             "Courier rates climb year on year, and the carrier that saves you most shifts from one order to the next. Connect your Shopify, WooCommerce or BigCommerce store and each order routes to the best-value carrier the moment it's placed, with labels and returns handled in one click.",
           solutionTag: "eCommerce",
           category: "By business model",
-          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: ShoppingCart },
+          image: {
+            src: "/icp/ecommerce-domestic.webp",
+            alt: "Shopper checking out at a UK fashion eCommerce store with a contactless card",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: ShoppingCart,
+          },
           href: "/solutions/ecommerce",
         },
         {
@@ -94,7 +102,12 @@ export default function ShippingDomesticPage() {
             "On a marketplace, one late delivery becomes a defect, and a defect costs you the rating you've spent years building. Amazon, eBay, Etsy, TikTok Shop and Temu orders flow into one dispatch queue with each marketplace's deadline applied, so the carrier that can actually hit it gets the parcel.",
           solutionTag: "Marketplace",
           category: "By business model",
-          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Package },
+          image: {
+            src: "/icp/marketplace-domestic.webp",
+            alt: "Hand holding an Amazon Prime parcel on UK doorstep steps",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Package,
+          },
           href: "/solutions/marketplace-seller",
         },
         {
@@ -104,7 +117,12 @@ export default function ShippingDomesticPage() {
             "Single-carrier deals cap your rates and leave nothing to earn on shipping. Set each client's carriers, packaging and routing rules once, onboard new brands in days instead of weeks, and make a margin on the parcels you ship instead of passing the carrier's bill straight through.",
           solutionTag: "3PL",
           category: "By business model",
-          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Truck },
+          image: {
+            src: "/icp/3pl-domestic.webp",
+            alt: "Deep aisle inside a UK pallet-storage warehouse with high racking on both sides",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: Truck,
+          },
           href: "/solutions/3pl",
         },
         {
@@ -114,7 +132,12 @@ export default function ShippingDomesticPage() {
             "Wholesale and Amazon injection are won or lost on the SLA. ITD routes each consignment to a service that meets your partner's delivery and labelling terms and protects your margin, turning compliance into growth instead of chargebacks.",
           solutionTag: "B2B",
           category: "By business model",
-          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Factory },
+          image: {
+            src: "/icp/b2b-domestic.webp",
+            alt: "Stacked beverage crates awaiting B2B distribution from a wholesale yard",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Factory,
+          },
           href: "/solutions/b2b",
         },
         {
@@ -124,7 +147,12 @@ export default function ShippingDomesticPage() {
             "Carrier portals, a legacy WMS, and each new lane turns into an IT project. Run 2,000+ parcels a day the way you've always pictured it: one dashboard across the full parcel journey, carriers and regions added without a build or a binding contract, and the MI reporting your board asks for.",
           solutionTag: "Enterprise",
           category: "By stage",
-          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Building2 },
+          image: {
+            src: "/icp/enterprise-domestic.webp",
+            alt: "Live performance dashboard showing trending lane and SLA metrics on a laptop screen",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: Building2,
+          },
           href: "/solutions/enterprise",
         },
         {
@@ -134,7 +162,12 @@ export default function ShippingDomesticPage() {
             "No volume means no leverage on rates, and most contracts want a commitment you can't make yet. Compare Royal Mail, Evri and DPD side by side with no minimum and no lock-in, and batch the whole day's labels in one run.",
           solutionTag: "Small Business",
           category: "By stage",
-          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Store },
+          image: {
+            src: "/icp/small-business-domestic.webp",
+            alt: "Small-business founder packing orders at a kitchen-table workspace",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Store,
+          },
           href: "/solutions/small-business",
         },
       ]}

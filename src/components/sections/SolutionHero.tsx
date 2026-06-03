@@ -1,0 +1,140 @@
+import Image from "next/image";
+import Button from "@/components/ui/Button";
+import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import type { LucideIcon } from "lucide-react";
+
+export interface SolutionHeroChip {
+  name: string;
+  logo?: string;
+}
+
+export interface SolutionHeroImage {
+  /** Photo path under /public. When set, renders next/image fill object-cover. */
+  src?: string;
+  alt?: string;
+  /** Tailwind gradient classes (without bg-gradient-to-br). */
+  gradient?: string;
+  /** Lucide icon shown low-opacity at the centre of the placeholder. */
+  icon?: LucideIcon;
+  /** CSS object-position override, e.g. "80% 50%". */
+  objectPosition?: string;
+}
+
+export interface SolutionHeroProps {
+  label: string;
+  title: string;
+  subtitle: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+  image: SolutionHeroImage;
+  chips?: SolutionHeroChip[];
+}
+
+/**
+ * Full-bleed photographic hero used on Solutions pages (Import, 3PL, B2B, …).
+ *
+ * - Background: full-bleed `next/image priority fill object-cover`. Falls back
+ *   to a brand gradient + centred Lucide icon when `image.src` is not set.
+ * - Scrim: bg-dark gradient from left, keeps the glass card readable.
+ * - Glass card: frosted backdrop-blur on the left third — chip, H1, lead,
+ *   two CTAs, and an optional row of carrier / system chips.
+ *
+ * Motion: reuses the existing global `hero-entrance-*` keyframes. Server-rendered.
+ */
+export default function SolutionHero({
+  label,
+  title,
+  subtitle,
+  primary,
+  secondary,
+  image,
+  chips,
+}: SolutionHeroProps) {
+  const Icon = image.icon;
+  const gradient = image.gradient ?? "from-bg-dark via-bg-dark-card to-bg-dark";
+  const altText = image.alt ?? `${label} hero image`;
+  const objectPosition = image.objectPosition ?? "60% 50%";
+
+  return (
+    <section className="relative overflow-hidden min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
+      {/* Background photo (or gradient + icon placeholder) */}
+      {image.src ? (
+        <Image
+          src={image.src}
+          alt={altText}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition }}
+        />
+      ) : (
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center`}
+          aria-hidden
+        >
+          {Icon ? (
+            <Icon
+              className="w-1/3 h-1/3 text-white/10"
+              strokeWidth={1.5}
+            />
+          ) : null}
+        </div>
+      )}
+
+      {/* Left-to-right scrim */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-r from-bg-dark/90 via-bg-dark/55 to-transparent md:from-bg-dark/85 md:via-bg-dark/45"
+      />
+
+      {/* Film grain */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-noise opacity-[0.4] mix-blend-soft-light pointer-events-none"
+      />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32 min-h-[inherit] flex items-center">
+        <div className="max-w-xl rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 shadow-2xl p-7 md:p-10">
+          <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-white/15 text-white text-eyebrow tracking-wider mb-5">
+            {label}
+          </span>
+          <h1 className="hero-entrance-h1 text-display-xl text-white">
+            {title}
+          </h1>
+          <p className="hero-entrance-sub mt-5 text-body-lg text-white/80">
+            {subtitle}
+          </p>
+          <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+            <Button href={primary.href}>{primary.label}</Button>
+            <Button href={secondary.href} variant="secondary" surface="dark">
+              {secondary.label}
+            </Button>
+          </div>
+
+          {chips && chips.length > 0 && (
+            <div
+              className="hero-entrance-aside mt-7 flex flex-wrap items-center gap-2"
+              aria-label="Connected carriers and systems"
+            >
+              {chips.map((item) => (
+                <span
+                  key={item.name}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-1 text-caption text-white/85"
+                >
+                  <IntegrationLogo
+                    name={item.name}
+                    logo={item.logo}
+                    size="xs"
+                  />
+                  {item.name}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

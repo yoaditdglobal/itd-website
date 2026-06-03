@@ -1,8 +1,10 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import SolutionHero from "@/components/sections/SolutionHero";
+import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Settings, ArrowLeftRight, MapPin, Package } from "lucide-react";
+import { Settings, ArrowLeftRight, MapPin, Package, Factory } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "B2B shipping software for UK wholesalers and manufacturers",
@@ -11,31 +13,67 @@ export const metadata = buildMetadata({
   path: "/solutions/b2b",
 });
 
+const PAINS = [
+  {
+    num: "01",
+    title: "The dispatch team spends the morning on the phone",
+    desc: "At 500 orders a week, your dispatch supervisor and their team work through carrier portals for the first three hours of every shift. By the time they touch a physical shipment, half the day is gone. Exceptions get missed because the routine bookings crowd them out.",
+  },
+  {
+    num: "02",
+    title: "Routing errors trigger redelivery charges the CFO notices",
+    desc: "A Highlands postcode booked through the wrong carrier. A two-pallet consignment sent on a parcel service. Each routing mistake turns into a redelivery charge, a difficult call with the buyer, and a P&L line the Finance Director eventually asks about. Atlas Industrial was losing £8,000 a month to this before automation.",
+  },
+  {
+    num: "03",
+    title: "Tracking numbers re-keyed from the carrier portal into the ERP",
+    desc: "Order data goes into the ERP. Booking data goes into the carrier portal. Tracking data comes back on a CSV the dispatch supervisor opens at 4pm and pastes into SAP by hand. Transposition errors slip through. Sales forwards the wrong tracking number. The first WISMO call goes to the wrong team.",
+  },
+];
+
 export default function B2BManufacturingPage() {
   return (
-    <VerticalPage
+    <>
+      <SolutionHero
+        label="B2B"
+        title="B2B dispatch that runs from your ERP, not a portal."
+        subtitle="Orders confirmed in SAP, Sage, NetSuite, or Dynamics trigger carrier selection, booking, and label generation automatically. Tracking and PODs write back within seconds."
+        primary={{ label: "Contact Us", href: "/contact?enquiry=b2b" }}
+        secondary={{ label: "Learn More", href: "/resources/case-studies/rioz-global" }}
+        image={{
+          src: "/solutions/b2b-hero.webp",
+          alt: "Warehouse stacked with palletised B2B cargo boxes ready for dispatch",
+          gradient: "from-bg-dark via-bg-dark-card to-accent/30",
+          icon: Factory,
+        }}
+        chips={[
+          { name: "SAP" },
+          { name: "NetSuite" },
+          { name: "Sage" },
+          { name: "Dynamics 365" },
+          { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+          { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
+        ]}
+      />
+      <SolutionPains
+        pains={PAINS}
+        image={{
+          src: "/solutions/b2b-pains-v2.webp",
+          alt: "Warehouse-club B2B display stacked with Kristin Ess hair-care duo packs on branded pallets",
+          gradient: "from-accent-light via-white to-accent/15",
+          icon: Factory,
+        }}
+        lead="Three places palletised dispatch leaks margin before the next P&L lands on the Finance Director's desk."
+      />
+      <VerticalPage
+        hideDefaultHero
+        hidePainPoints
       label="B2B"
       title="B2B dispatch that runs from your ERP, not a portal."
       subtitle="UK wholesalers and manufacturers ship 500 palletised orders a week through carrier portals nobody has time to manage. Connexx connects to SAP, Sage, NetSuite, and Microsoft Dynamics. Orders confirmed in the ERP trigger carrier selection, booking, and label generation automatically. Tracking numbers and PODs write back to the ERP within seconds."
       primaryCta={{ label: "Contact Us", href: "/contact?enquiry=b2b" }}
       secondaryCta={{ label: "Learn More", href: "/resources/case-studies/rioz-global" }}
-      pains={[
-        {
-          num: "01",
-          title: "The dispatch team spends the morning on the phone",
-          desc: "At 500 orders a week, your dispatch supervisor and their team work through carrier portals for the first three hours of every shift. By the time they touch a physical shipment, half the day is gone. Exceptions get missed because the routine bookings crowd them out.",
-        },
-        {
-          num: "02",
-          title: "Routing errors trigger redelivery charges the CFO notices",
-          desc: "A Highlands postcode booked through the wrong carrier. A two-pallet consignment sent on a parcel service. Each routing mistake turns into a redelivery charge, a difficult call with the buyer, and a P&L line the Finance Director eventually asks about. Atlas Industrial was losing £8,000 a month to this before automation.",
-        },
-        {
-          num: "03",
-          title: "Tracking numbers re-keyed from the carrier portal into the ERP",
-          desc: "Order data goes into the ERP. Booking data goes into the carrier portal. Tracking data comes back on a CSV the dispatch supervisor opens at 4pm and pastes into SAP by hand. Transposition errors slip through. Sales forwards the wrong tracking number. The first WISMO call goes to the wrong team.",
-        },
-      ]}
+      pains={PAINS}
       features={[
         {
           icon: Settings,
@@ -165,6 +203,7 @@ export default function B2BManufacturingPage() {
           areaServed: ["United Kingdom", "European Union"],
         }),
       ]}
-    />
+      />
+    </>
   );
 }

@@ -10,6 +10,8 @@ import {
   ShoppingCart,
   Building2,
   Boxes,
+  Package,
+  Truck,
 } from "lucide-react";
 
 export const metadata = buildMetadata({
@@ -23,19 +25,19 @@ export default function ShippingInternationalPage() {
   return (
     <VerticalPage
       label="International Shipping"
-      title="International shipping with customs documentation done before dispatch."
-      subtitle="EU, North America, APAC, the Middle East. Connexx generates the HS codes, the EORI declarations, the IOSS filings, and the country-specific paperwork before the carrier scans the label. DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International compete in real time on every cross-border order. Customs holds drop. Margins hold steady."
+      title="Ship worldwide and keep more margin on each order."
+      subtitle="Your overseas orders ship on the buying power of a global carrier network. You keep more margin on shipments in and out of the UK."
       primaryCta={{
         label: "Get Quote",
-        href: "/contact?enquiry=international",
+        href: "#estimator",
       }}
       heroImage={{
         gradient: "from-bg-secondary via-accent-light to-accent/10",
         icon: Globe,
       }}
       secondaryCta={{
-        label: "Learn More",
-        href: "/resources/case-studies/arlo-fulfilment",
+        label: "Explore",
+        href: "/contact?enquiry=international",
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
@@ -61,18 +63,18 @@ export default function ShippingInternationalPage() {
       pains={[
         {
           num: "01",
-          title: "Customs holds nobody saw coming",
-          desc: "A wrong HS code at the 10-digit level. A missing certificate of origin. A packing list that does not match the commercial invoice. Each one stops the shipment at the border for two to five days. The first sign is a freight forwarder asking for a document that should have been in the pack. By then the customer is already chasing.",
+          title: "There's margin sitting in your overseas rates",
+          desc: "Going direct, you pay the carrier's standard price. The same parcels through our buying power come in 20 to 30% lower.",
         },
         {
           num: "02",
-          title: "Regulatory updates that catch you after the fact",
-          desc: "Saudi Arabia changes its SABER conformity requirements for a product category. Turkey introduces a new certificate. The EU updates IOSS thresholds. Your Export Manager finds out when a shipment is already in transit. The documentation team rebuilds the pack while goods sit on a dock.",
+          title: "Surcharges are where going direct really costs you",
+          desc: "Direct, the fees stack on top of the rate, and you're billed on a parcel's size as well as its weight. With us, that surcharge exposure is far lower.",
         },
         {
           num: "03",
-          title: "Multi-country documentation pulled together by hand",
-          desc: "Commercial invoice in Word. Packing list in Excel. EUR.1 from the chamber of commerce. Phytosanitary certificate from Defra. Customs declaration on the carrier portal. Six documents, five tools, one shipment. Errors live in the gaps between them.",
+          title: "Delivery into your biggest markets is hit and miss",
+          desc: "A parcel into the US or Australia can stall for days, and the customer holds you responsible. Steady service into the places you sell most keeps them coming back.",
         },
       ]}
       audienceAnchors={[
@@ -80,40 +82,90 @@ export default function ShippingInternationalPage() {
           anchor: "export",
           headline: "Built for Export",
           summary:
-            "Generate the full document pack — commercial invoice, packing list, certificate of origin, EUR.1 — from the product data already in Connexx. Customs holds drop sharply.",
+            "Sell overseas on rates that keep your prices competitive. Our buying power across the global carriers turns exporting into a growth line for the business.",
           solutionTag: "Export",
           category: "By business model",
-          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: Globe },
+          image: {
+            src: "/icp/export.jpg",
+            alt: "British Airways aircraft taking off at sunset — UK exports",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: Globe,
+          },
           href: "/solutions/export",
         },
         {
           anchor: "import",
           headline: "Built for Import",
           summary:
-            "Pre-clear documentation, calculate landed cost to 97% accuracy, and give finance the duty number before the goods leave origin. Clearance delays cut in half.",
+            "Importing isn't just about the rate. Our Far East Hub in China works hand in hand with your suppliers, on shipping accounts built around your supply chain strategy and production SLAs, so samples arrive cheaper and on schedule.",
           solutionTag: "Import",
           category: "By business model",
-          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Boxes },
+          image: {
+            src: "/icp/import.jpg",
+            alt: "Wide-body cargo aircraft on final approach — UK imports",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Boxes,
+          },
           href: "/solutions/import",
         },
         {
           anchor: "ecommerce",
-          headline: "Built for cross-border eCommerce",
+          headline: "Built for eCommerce",
           summary:
-            "IOSS, CN22, and HS-code paperwork applied automatically to every Shopify, WooCommerce, and BigCommerce order. The cheapest compliant carrier is picked per market.",
+            "Connect your Shopify, WooCommerce or BigCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
           solutionTag: "eCommerce",
           category: "By business model",
-          image: { gradient: "from-accent-light via-white to-bg-secondary", icon: ShoppingCart },
+          image: {
+            src: "/icp/ecommerce-intl.webp",
+            alt: "Customer paying at an international online checkout with a Mastercard",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: ShoppingCart,
+          },
           href: "/solutions/ecommerce",
+        },
+        {
+          anchor: "marketplace",
+          headline: "Built for Marketplace sellers",
+          summary:
+            "Sell to buyers worldwide on Amazon, eBay, Etsy and TikTok Shop without the shipping cost eating the margin. Competitive cross-border rates keep overseas orders worth taking.",
+          solutionTag: "Marketplace",
+          category: "By business model",
+          image: {
+            src: "/icp/marketplace-intl.jpg",
+            alt: "Shopper browsing the Temu app next to a Temu-branded box — cross-border marketplace orders",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Package,
+          },
+          href: "/solutions/marketplace-seller",
+        },
+        {
+          anchor: "3pl",
+          headline: "Built for 3PLs",
+          summary:
+            "Add a competitive international service without holding your own global carrier accounts. You win new clients on overseas rates and earn a margin on the shipping you handle for them.",
+          solutionTag: "3PL",
+          category: "By business model",
+          image: {
+            src: "/icp/3pl-intl.jpg",
+            alt: "Two operators walking a warehouse aisle with a trolley — 3PL fulfilment",
+            gradient: "from-accent-light via-white to-bg-secondary",
+            icon: Truck,
+          },
+          href: "/solutions/3pl",
         },
         {
           anchor: "enterprise",
           headline: "Built for Enterprise",
           summary:
-            "40 carrier relationships and a dozen portals consolidated into one view. SAP and NetSuite integration, dedicated account management, 5,000+ daily parcels across every lane.",
+            "Run your international shipping through one managed relationship. A dedicated account manager gives you a single view of your global shipping spend, with MI and reporting on your shipping data. You see where margin can grow and how your performance is tracking.",
           solutionTag: "Enterprise",
           category: "By stage",
-          image: { gradient: "from-bg-secondary via-white to-accent-light", icon: Building2 },
+          image: {
+            src: "/icp/enterprise-intl.webp",
+            alt: "Live performance dashboard showing trade volumes and SLA metrics in an enterprise operations room",
+            gradient: "from-bg-secondary via-white to-accent-light",
+            icon: Building2,
+          },
           href: "/solutions/enterprise",
         },
       ]}
@@ -283,47 +335,52 @@ export default function ShippingInternationalPage() {
       rateChecker="international"
       faq={[
         {
-          question: "How many countries can I ship to with Connexx?",
+          question: "How many countries can I ship to?",
           answer:
-            "Over 220 countries through the integrated carrier network. DHL Express, FedEx, and UPS each cover 220+ destinations. Royal Mail International covers 230+ countries and Parcelforce International covers 240+. The Connexx rate engine selects the carrier with the best combination of price, speed, and clearance capability for each destination. Country coverage is updated as carriers expand or restrict service.",
+            "Worldwide. The carrier network reaches 220+ countries and territories, from the EU and North America to the Middle East and Asia. Each lane goes on the service that suits it.",
         },
         {
-          question: "Does Connexx handle customs documentation automatically?",
+          question: "Which international carriers can I ship with through ITD?",
           answer:
-            "Yes. Commercial invoices, packing lists, CN22, CN23, certificates of origin, EUR.1 movement certificates, and country-specific declarations are generated from the product data and HS codes already in your system. The rules engine applies the right document pack to each destination automatically. Meridian Trade Co cut documentation preparation from 4 hours to 1 hour per shipment using this exact workflow.",
+            "The major global and postal carriers: DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International and Parcelforce International. We compare them on each order and route to the best-value one for the destination.",
         },
         {
-          question: "How does Connexx handle EORI, IOSS, and HS codes?",
+          question: "Will my customers get charged surprise duties or taxes?",
           answer:
-            "EORI numbers are applied to UK exporter declarations automatically. IOSS is applied to EU B2C consignments under €150 for VAT collection at checkout. HS codes are pulled from your product catalogue, classified to the right level for each destination country (6-digit harmonised, 8-digit EU TARIC, 10-digit US Schedule B), and applied to the customs declaration without manual entry. Updates to tariff schedules flow into the engine.",
+            "You decide. You can settle duties and taxes up front so the price your customer pays is final, or pass them on with the cost shown before they buy. There's no surprise bill at the door.",
         },
         {
-          question: "Which international carriers does ITD integrate with?",
+          question: "How does shipping to the EU work now?",
           answer:
-            "Seven major international carriers: DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International. Each holds different strengths by region (DHL strong worldwide, DPD strong EU, PostNL strong EU postal, Royal Mail strong low-value postal). Connexx compares all seven on every cross-border order. Additional regional carriers can be added on request.",
+            "Same as anywhere else from your side. The export paperwork and EU declarations are prepared with each shipment, including IOSS for low-value B2C orders, so EU deliveries keep moving.",
         },
         {
-          question: "Can Connexx handle imports as well as exports?",
+          question: "Can ITD handle imports as well as exports?",
           answer:
-            "Yes. Inbound shipments from supplier countries get the same automated treatment as outbound. Pre-clearance documentation is generated from the PO data and HS codes before the goods leave the origin country. Duty calculation runs from the actual tariff schedule, not a spreadsheet estimate. Northgate Imports lifted duty cost accuracy from 82% to 97% with this setup. Customs brokers continue to handle clearance alongside the platform.",
+            "Yes. Our Far East Hub in China works directly with your suppliers on inbound shipping, consolidating freight and putting the landed cost in front of finance before goods leave origin. Stock arrives cheaper and on schedule.",
         },
         {
-          question: "How does post-Brexit EU-UK shipping work with Connexx?",
+          question: "How much can I save shipping internationally?",
           answer:
-            "EU-UK shipments are treated as third-country movements with full customs documentation on every parcel. Connexx applies the EORI number to UK exporter declarations, generates the commercial invoice and CN23 for postal services, and handles rules of origin under the Trade and Cooperation Agreement. Northern Ireland shipments are routed under the Windsor Framework with the green-lane/red-lane decision applied automatically based on the goods and the consignee.",
+            "In our reviews of recent international shipments, most businesses are paying more than they need to. The saving comes from our buying power across the global carriers. Upload a recent invoice to the Parcel Rate Checker and you'll see indicative numbers in seconds.",
+        },
+        {
+          question: "How do international returns work?",
+          answer:
+            "Returns route back through the same network, with labels and routing set up for each market. That gives you one process to manage across the countries you sell to.",
         },
       ]}
       closingCta={{
-        headline: "Stop preparing customs documents by hand.",
+        headline: "See what you should be paying to ship abroad.",
         subhead:
-          "A tailored international rate review covers your top five destination countries, your current paperwork process, and the per-shipment saving across the carriers that match each lane.",
+          "A bespoke review looks at the countries you ship to most and shows the per-shipment saving across the carriers that fit each lane.",
         primary: {
           label: "Get Quote",
-          href: "/contact?enquiry=international",
+          href: "#estimator",
         },
         secondary: {
           label: "Explore",
-          href: "/resources/case-studies",
+          href: "/contact?enquiry=international",
         },
       }}
     />

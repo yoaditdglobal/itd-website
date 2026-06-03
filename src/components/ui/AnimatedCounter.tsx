@@ -8,6 +8,8 @@ interface AnimatedCounterProps {
   prefix?: string;
   label: string;
   duration?: number;
+  /** "dark" (default) → white text on dark bg. "light" → dark text on light bg. */
+  surface?: "dark" | "light";
 }
 
 export default function AnimatedCounter({
@@ -16,6 +18,7 @@ export default function AnimatedCounter({
   prefix = "",
   label,
   duration = 2000,
+  surface = "dark",
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -52,14 +55,18 @@ export default function AnimatedCounter({
     return () => observer.disconnect();
   }, [end, duration, hasAnimated]);
 
+  const numberClass =
+    surface === "light" ? "text-text-primary" : "text-white";
+  const labelClass =
+    surface === "light" ? "text-text-tertiary" : "text-white/60";
   return (
     <div ref={ref} className="text-center">
-      <div className="text-3xl md:text-4xl font-bold text-white">
+      <div className={`text-3xl md:text-4xl font-bold ${numberClass}`}>
         {prefix}
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className="mt-1 text-sm text-white/60">{label}</div>
+      <div className={`mt-1 text-sm ${labelClass}`}>{label}</div>
     </div>
   );
 }

@@ -12,6 +12,8 @@ const cards: HeroShippingCardData[] = [
     audiences: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "Small Business"],
     href: "/shipping/domestic",
     image: {
+      src: "/shipping/domestic.webp",
+      alt: "Royal Mail truck reversing into a UK warehouse loading bay",
       gradient: "from-accent-light via-white to-accent/15",
     },
   },
@@ -22,6 +24,8 @@ const cards: HeroShippingCardData[] = [
     audiences: ["Export", "Import", "Cross-border eCommerce", "Enterprise"],
     href: "/shipping/international",
     image: {
+      src: "/shipping/international.jpg",
+      alt: "Air freight pallets being loaded onto a wide-body aircraft for international shipping",
       gradient: "from-bg-secondary via-accent-light to-accent/10",
     },
   },

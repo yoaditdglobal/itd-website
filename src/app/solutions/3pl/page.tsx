@@ -1,8 +1,10 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import SolutionHero from "@/components/sections/SolutionHero";
+import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Users, Plug, ShieldCheck, BarChart3 } from "lucide-react";
+import { Users, Plug, ShieldCheck, BarChart3, Truck } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "3PL shipping software with child accounts and customs automation",
@@ -11,9 +13,58 @@ export const metadata = buildMetadata({
   path: "/solutions/3pl",
 });
 
+const PAINS = [
+  {
+    num: "01",
+    title: "Two weeks of manual setup for every new client",
+    desc: "Each brand has a different carrier whitelist, label dimensions, and routing rule set. Setup is done in a spreadsheet then re-entered into the WMS. One misconfiguration causes a wrong-carrier shipment, and the first you hear about it is a client call.",
+  },
+  {
+    num: "02",
+    title: "Customs errors are costing client trust, not just money",
+    desc: "At a 5 to 7% documentation error rate on cross-border shipments, the question is not whether a client will receive a customs hold. It is when. Each hold pulls a senior ops manager off the floor for two hours of escalation work.",
+  },
+  {
+    num: "03",
+    title: "Clients want real-time data, you can send them a spreadsheet",
+    desc: "Brands have live dashboards in every other supplier relationship. Sending a monthly Excel export for shipping volume, cost per carrier, and exception rate is no longer acceptable. Account management eats analyst time you do not have.",
+  },
+];
+
 export default function ThreePLPage() {
   return (
-    <VerticalPage
+    <>
+      <SolutionHero
+        label="3PL"
+        title="3PL shipping software with child accounts and customs built in."
+        subtitle="A child-account architecture for every brand you fulfil, per-client routing rules, and a customs engine on top of your WMS. Onboard new clients in days, not weeks."
+        primary={{ label: "Contact Us", href: "/contact?enquiry=3pl" }}
+        secondary={{ label: "Learn More", href: "/resources/case-studies/delta-fulfilment" }}
+        image={{
+          gradient: "from-bg-dark via-bg-dark-card to-accent/30",
+          icon: Truck,
+        }}
+        chips={[
+          { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
+          { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
+          { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+          { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+          { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+        ]}
+      />
+      <SolutionPains
+        pains={PAINS}
+        image={{
+          gradient: "from-accent-light via-white to-accent/15",
+          icon: Truck,
+        }}
+        eyebrow="Where the margin leaves"
+        heading="What gets in the way today."
+        lead="Three places client trust, fulfilment margin, and onboarding speed slip out of a 3PL operation before the next month-end report lands."
+      />
+      <VerticalPage
+        hideDefaultHero
+        hidePainPoints
       label="3PL"
       title="3PL shipping software with child accounts and customs built in."
       subtitle="You run fulfilment for 20 to 80 brand clients across Mintsoft, Linnworks, or ShipHero. Each one has different carriers, different packaging rules, and different SLAs. Connexx adds a child account architecture, per-brand routing rules, and a customs engine on top of your WMS. Client onboarding drops from two weeks to two days, and customs accuracy lifts past 98%."
@@ -40,23 +91,7 @@ export default function ThreePLPage() {
           areaServed: ["United Kingdom", "European Union", "Worldwide"],
         }),
       ]}
-      pains={[
-        {
-          num: "01",
-          title: "Two weeks of manual setup for every new client",
-          desc: "Each brand has a different carrier whitelist, label dimensions, and routing rule set. Setup is done in a spreadsheet then re-entered into the WMS. One misconfiguration causes a wrong-carrier shipment, and the first you hear about it is a client call.",
-        },
-        {
-          num: "02",
-          title: "Customs errors are costing client trust, not just money",
-          desc: "At a 5 to 7% documentation error rate on cross-border shipments, the question is not whether a client will receive a customs hold. It is when. Each hold pulls a senior ops manager off the floor for two hours of escalation work.",
-        },
-        {
-          num: "03",
-          title: "Clients want real-time data, you can send them a spreadsheet",
-          desc: "Brands have live dashboards in every other supplier relationship. Sending a monthly Excel export for shipping volume, cost per carrier, and exception rate is no longer acceptable. Account management eats analyst time you do not have.",
-        },
-      ]}
+      pains={PAINS}
       features={[
         {
           icon: Users,
@@ -177,6 +212,7 @@ export default function ThreePLPage() {
           href: "/resources/3pl-onboarding-playbook",
         },
       }}
-    />
+      />
+    </>
   );
 }

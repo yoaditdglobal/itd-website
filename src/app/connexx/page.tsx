@@ -5,6 +5,7 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import CountUp from "@/components/ui/CountUp";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import ConnexxOrbit from "@/components/sections/ConnexxOrbit";
 import FaqSection from "@/components/sections/FaqSection";
 import { buildMetadata } from "@/lib/metadata";
 import {
@@ -302,17 +303,21 @@ export default function ConnexxPage() {
         </div>
       </section>
 
-      {/* Hero stats strip */}
-      <section className="bg-bg-dark py-10 md:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero stats strip — matches the hero background for visual continuity */}
+      <section className="relative hero-bg overflow-hidden py-10 md:py-12">
+        <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <AnimatedCounter end={16} suffix="" label="Carrier integrations" />
-            <AnimatedCounter end={26} suffix="" label="Tech integrations" />
-            <AnimatedCounter end={99} suffix="%" label="Platform uptime" />
-            <AnimatedCounter end={200} suffix="ms" prefix="<" label="Avg API response" />
+            <AnimatedCounter end={16} suffix="" label="Carrier integrations" surface="light" />
+            <AnimatedCounter end={26} suffix="" label="Tech integrations" surface="light" />
+            <AnimatedCounter end={99} suffix="%" label="Platform uptime" surface="light" />
+            <AnimatedCounter end={200} suffix="ms" prefix="<" label="Avg API response" surface="light" />
           </div>
         </div>
       </section>
+
+      {/* Ecosystem orbit — interactive radar showing what Connexx connects to */}
+      <ConnexxOrbit />
 
       {/* What Connexx actually does — GEO snippet block */}
       <section className="bg-white py-16 md:py-24">

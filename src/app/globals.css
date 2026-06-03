@@ -268,6 +268,29 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   to { opacity: 0; }
 }
 
+/* Connexx ecosystem orbit — radar-style rotating layers on /connexx.
+   The two orbit wrappers spin at slightly different speeds in opposite
+   directions; each child pill gets a counter-rotation so the brand text
+   stays upright. The centre Connexx mark slow-spins. The "in-between"
+   ERP/WMS layer floats with a gentle vertical bob. All gated by
+   prefers-reduced-motion. */
+@keyframes connexx-orbit-cw    { from { transform: rotate(0deg); } to { transform: rotate(360deg);  } }
+@keyframes connexx-orbit-ccw   { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes connexx-counter-cw  { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes connexx-counter-ccw { from { transform: rotate(0deg); } to { transform: rotate(360deg);  } }
+@keyframes connexx-bob         { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes connexx-spin        { from { transform: rotate(0deg); } to { transform: rotate(360deg);  } }
+
+/* Sentinel utility classes — attached to every animated Connexx-orbit
+   element so reduced-motion can freeze them all in one rule. */
+.connexx-anim { /* marker */ }
+
+@media (prefers-reduced-motion: reduce) {
+  .connexx-anim {
+    animation: none !important;
+  }
+}
+
 ::view-transition-old(root) {
   animation: route-fade-out 180ms ease-in both;
 }

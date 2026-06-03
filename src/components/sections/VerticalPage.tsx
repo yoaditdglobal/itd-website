@@ -79,6 +79,8 @@ export interface VerticalHeroImage {
   gradient?: string;
   /** Lucide icon shown faint at the centre of the placeholder. */
   icon?: LucideIcon;
+  /** Aspect-ratio Tailwind class override (e.g. "aspect-[16/9]"). Defaults to aspect-[4/3]. */
+  aspect?: string;
 }
 
 export interface ClosingCtaOverride {
@@ -115,6 +117,12 @@ interface VerticalPageProps {
 
   /** Optional hero image / gradient placeholder rendered to the right of the headline copy. */
   heroImage?: VerticalHeroImage;
+
+  /** When true, suppresses the default hero block so the page can render a bespoke hero above this shell. */
+  hideDefaultHero?: boolean;
+
+  /** When true, suppresses the default 3-col pain-points block so the page can render a bespoke pains section. */
+  hidePainPoints?: boolean;
 
   /** Optional "Built for" section between pain points and features. Used by shipping pages. */
   audienceAnchors?: AudienceAnchor[];
@@ -156,6 +164,8 @@ export default function VerticalPage({
   primaryCta,
   secondaryCta,
   heroImage,
+  hideDefaultHero,
+  hidePainPoints,
   audienceAnchors,
   carrierComparison,
   faq,
@@ -177,6 +187,7 @@ export default function VerticalPage({
       {ldData.length > 0 && <JsonLd data={ldData} />}
 
       {/* Hero */}
+      {!hideDefaultHero && (
       <section className="relative hero-bg overflow-hidden py-16 md:py-24">
         <div className="hero-bg-blob" aria-hidden />
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
@@ -197,7 +208,7 @@ export default function VerticalPage({
             </div>
             {heroImage && (
               <div className="hero-entrance-sub mt-10 lg:mt-0">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-bg-secondary">
+                <div className={`relative ${heroImage.aspect ?? "aspect-[4/3]"} w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-bg-secondary`}>
                   {heroImage.src ? (
                     <Image
                       src={heroImage.src}
@@ -226,8 +237,10 @@ export default function VerticalPage({
           </div>
         </div>
       </section>
+      )}
 
       {/* Pain Points */}
+      {!hidePainPoints && (
       <section className="bg-bg-secondary py-12 md:py-16 border-t border-border" aria-labelledby="pain-points-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="pain-points-heading" className="sr-only">What gets in the way today</h2>
@@ -246,6 +259,7 @@ export default function VerticalPage({
           </div>
         </div>
       </section>
+      )}
 
       {/* "Built for" — optional audience anchors (used by shipping pages) */}
       {audienceAnchors && audienceAnchors.length > 0 && (
@@ -522,7 +536,7 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
       href={anchor.href}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
     >
-      {/* Image / gradient placeholder */}
+      {/* Image / gradient placeholder — no overlay, photo is clean */}
       <div className="relative aspect-[16/9] w-full overflow-hidden">
         {anchor.image.src ? (
           <Image
@@ -544,48 +558,109 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
         )}
       </div>
 
-      {/* Body */}
+      {/* Body — content area (chip / headline / Used by ⇄ summary on hover)
+          sits inside a `flex-1` wrapper so the absolute hover layer is
+          bounded to it. CTA below is a sibling, never overlapped. */}
       <div className="flex flex-1 flex-col p-5 md:p-6">
-        <span className="self-start inline-flex items-center rounded-full bg-bg-secondary text-text-tertiary text-eyebrow px-2.5 py-1 mb-3">
-          {anchor.category}
-        </span>
-        <h3 className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
-          {anchor.headline}
-        </h3>
-        <p className="mt-2 text-body-sm text-text-secondary leading-relaxed">
-          {anchor.summary}
-        </p>
+        {/* sr-only summary so screen readers always announce it */}
+        <span className="sr-only">{anchor.summary}</span>
 
-        {/* "Used by" strip — only when there are matching case studies */}
-        {visible.length > 0 && (
-          <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-1.5">
-                {visible.map((cs) => (
-                  <span
-                    key={cs.id}
-                    className="ring-2 ring-white rounded-md inline-block"
-                    title={cs.brandName}
-                  >
-                    <IntegrationLogo
-                      name={cs.brandName}
-                      logo={cs.logo}
-                      size="xs"
-                    />
-                  </span>
-                ))}
+        {/* Content area — the two states are layered here so the card height
+            stays constant across hover. A `min-h` reserves enough vertical
+            room for a full summary (~6 lines) even on cards that lack a
+            "Used by" strip, so the absolute hover text can never bleed into
+            the CTA below. */}
+        <div className="relative flex-1 min-h-[210px] md:min-h-[200px]">
+          {/* Static layer (default) — fades to 0 on hover/focus (only on
+              hover-capable devices) so the summary layer can take its place. */}
+          <div
+            className="
+              transition-opacity duration-200 ease-out
+              motion-reduce:transition-none
+              [@media(hover:hover)]:group-hover:opacity-0
+              [@media(hover:hover)]:group-focus-within:opacity-0
+            "
+          >
+            <span className="self-start inline-flex items-center rounded-full bg-bg-secondary text-text-tertiary text-eyebrow px-2.5 py-1 mb-3">
+              {anchor.category}
+            </span>
+            <h3 className="text-heading-md text-text-primary group-hover:text-accent transition-colors mt-1">
+              {anchor.headline}
+            </h3>
+
+            {/* "Used by" strip — always rendered. Shows real case-study
+                avatars when matches exist, or dashed placeholders + a
+                "Coming soon" caption when this ICP has no published
+                customers yet. Keeps every card's vertical rhythm
+                consistent. */}
+            <div className="mt-4 pt-4 border-t border-border">
+              <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
+              <div className="flex items-center gap-2">
+                {visible.length > 0 ? (
+                  <>
+                    <div className="flex -space-x-1.5">
+                      {visible.map((cs) => (
+                        <span
+                          key={cs.id}
+                          className="ring-2 ring-white rounded-md inline-block"
+                          title={cs.brandName}
+                        >
+                          <IntegrationLogo
+                            name={cs.brandName}
+                            logo={cs.logo}
+                            size="xs"
+                          />
+                        </span>
+                      ))}
+                    </div>
+                    {overflow > 0 && (
+                      <span className="text-caption text-text-tertiary">
+                        + {overflow} more
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="flex -space-x-1.5">
+                      {[0, 1, 2].map((i) => (
+                        <span
+                          key={i}
+                          aria-hidden
+                          className="ring-2 ring-white rounded-md inline-block"
+                        >
+                          <span className="block w-5 h-5 rounded-md border border-dashed border-border bg-bg-secondary" />
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-caption text-text-tertiary ml-1">
+                      Customers landing soon
+                    </span>
+                  </>
+                )}
               </div>
-              {overflow > 0 && (
-                <span className="text-caption text-text-tertiary">
-                  + {overflow} more
-                </span>
-              )}
             </div>
           </div>
-        )}
 
-        {/* CTA — visual button (the whole card is the actual link) */}
+          {/* Hover layer — summary text. Absolutely positioned over the static
+              layer (bounded to this content wrapper, so it can never reach
+              the CTA below). Hidden by default on hover-capable devices. */}
+          <div
+            aria-hidden
+            className="
+              pointer-events-none absolute inset-0
+              opacity-0 transition-opacity duration-200 ease-out
+              motion-reduce:transition-none
+              [@media(hover:hover)]:group-hover:opacity-100
+              [@media(hover:hover)]:group-focus-within:opacity-100
+            "
+          >
+            <p className="text-body-sm text-text-secondary leading-relaxed">
+              {anchor.summary}
+            </p>
+          </div>
+        </div>
+
+        {/* CTA — sibling below the content area, never overlapped */}
         <span
           aria-hidden
           className="mt-5 inline-flex items-center justify-center gap-1.5 self-start rounded-lg bg-bg-secondary px-4 py-2 text-sm font-semibold text-text-primary group-hover:bg-accent group-hover:text-white transition-colors"
