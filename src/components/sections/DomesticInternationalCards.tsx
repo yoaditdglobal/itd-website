@@ -1,4 +1,4 @@
-import { Truck, Globe2 } from "lucide-react";
+import { Truck, Globe2, PackageOpen } from "lucide-react";
 import HeroShippingCard from "@/components/sections/HeroShippingCard";
 import type { HeroShippingCardData } from "@/components/sections/HeroShippingCard";
 
@@ -29,6 +29,16 @@ const cards: HeroShippingCardData[] = [
       gradient: "from-bg-secondary via-accent-light to-accent/10",
     },
   },
+  {
+    iconNode: <PackageOpen className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
+    title: "Freight and pallet shipping",
+    body: "UK pallet networks, EU lanes, and worldwide LCL/FCL containers on one platform. Mixed-mode freight planned in minutes, not days.",
+    audiences: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
+    href: "/shipping/freight",
+    image: {
+      gradient: "from-accent-light via-white to-accent/15",
+    },
+  },
 ];
 
 export default function DomesticInternationalCards() {
@@ -41,7 +51,7 @@ export default function DomesticInternationalCards() {
         <h2 id="shipping-solutions-heading" className="sr-only">
           Shipping solutions
         </h2>
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {cards.map((card, i) => (
             <HeroShippingCard
               key={card.title}
