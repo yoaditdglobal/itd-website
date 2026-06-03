@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -42,6 +43,19 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        {/* Google Analytics 4 — gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V31LJTEG1R"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V31LJTEG1R');
+          `}
+        </Script>
         <ScrollToTop />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <QueryProvider>
