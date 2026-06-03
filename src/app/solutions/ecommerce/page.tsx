@@ -2,7 +2,7 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Zap, LayoutDashboard, RefreshCw, ShieldCheck } from "lucide-react";
+import { Zap, LayoutDashboard, RefreshCw, ShieldCheck, ShoppingCart } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "eCommerce shipping software for UK retailers",
@@ -15,12 +15,18 @@ export default function EcommercePage() {
   return (
     <VerticalPage
       label="eCommerce"
-      title="Multi-carrier shipping that pays you back on every order."
-      subtitle="Online retailers lose margin on dispatch decisions made in a hurry. Connexx compares every UK and international carrier on every order, picks the cheapest compliant option, and prints the label in one click. Shopify, WooCommerce, and BigCommerce orders flow in automatically. Your operations team stops switching between carrier portals."
-      primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+      title="Give shoppers more delivery choice while you grow your margins."
+      subtitle="Our multi-carrier solution fits into your workflow. We integrate with your eCommerce platform, giving you more delivery options to offer shoppers and lower rates to ship orders."
+      primaryCta={{ label: "Get Quote", href: "#estimator" }}
       secondaryCta={{
-        label: "Learn More",
-        href: "/resources/case-studies/tatti-lashes",
+        label: "Explore",
+        href: "/resources/case-studies/freedom-fire",
+      }}
+      heroImage={{
+        src: "/solutions/ecommerce-hero.webp",
+        alt: "Online shopper at a keyboard with a Visa card — eCommerce checkout",
+        gradient: "from-accent-light via-white to-accent/15",
+        icon: ShoppingCart,
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
@@ -40,18 +46,18 @@ export default function EcommercePage() {
       pains={[
         {
           num: "01",
-          title: "Carrier portals eating the day",
-          desc: "Royal Mail, DPD, Evri, and DHL each have their own portal, label format, and tracking interface. The operations team spends three hours a day switching between them. The numbers in the case studies on this site started here.",
+          title: "Big-volume rates, without the big volume",
+          desc: "You ship at the price one carrier handed you. We buy across many, so the same orders cost less.",
         },
         {
           num: "02",
-          title: "Margin leaks on every cross-border order",
-          desc: "A bad carrier choice on a single international parcel can wipe out the margin on twelve domestic ones. Without real-time rate comparison, the cheapest compliant carrier is whichever one the team remembered to use last.",
+          title: "When carriers raise prices, yours barely move",
+          desc: "Rates climb year after year. Our volume keeps yours close to flat.",
         },
         {
           num: "03",
-          title: "WISMO tickets the CS team can't answer",
-          desc: "\"Where is my order\" tickets need access to four tracking systems. By the time a Customer Service agent finds the right one, the customer has emailed twice. CSAT drops, ticket volume rises, the loop never closes.",
+          title: "One delivery option loses you sales",
+          desc: "Shoppers want to choose their speed and price. Offer it, and fewer drop the basket.",
         },
       ]}
       features={[
@@ -127,41 +133,44 @@ export default function EcommercePage() {
       caseStudy={getCaseStudiesBySolution("eCommerce")[0] ?? caseStudies[0]}
       faq={[
         {
-          question: "Does Connexx integrate with Shopify?",
+          question: "Does ITD integrate with my eCommerce platform?",
           answer:
-            "Yes. Connexx connects to Shopify in under 10 minutes through the official app. Orders flow into the multi-carrier dashboard the moment a customer checks out. Each order is rate-checked across every active UK and international carrier, the cheapest compliant option is selected, and the label is generated in one click. No CSV exports, no manual entry.",
+            "Yes. We connect to Shopify, WooCommerce, Magento and BigCommerce. Orders flow in and labels print from the setup you already use.",
         },
         {
-          question: "Can I use my own negotiated carrier rates?",
+          question: "Can shoppers choose their delivery at checkout?",
           answer:
-            "Yes. Connexx supports your existing carrier accounts and rate cards across Royal Mail, DPD, Evri, DHL, FedEx, UPS, and others. If your contracts are weak, ITD's volume across thousands of UK shippers unlocks better rates. You keep the relationship, we improve the price.",
+            "Yes. You can show a range of speeds and prices at checkout, so shoppers pick what suits them. More choice means fewer abandoned baskets.",
         },
         {
-          question: "How does Connexx choose which carrier to use?",
+          question: "How much can I save on shipping?",
           answer:
-            "On every order, Connexx checks live rates across every carrier you've connected. The cheapest carrier that meets your rules (speed, weight, destination, service type) is selected automatically. You can override rules per product, per market, or per customer segment. Manual overrides are always available.",
+            "Most online sellers come to us paying more than they need to. The saving comes from our buying power across the carriers. Send a recent invoice and we'll show you the numbers.",
         },
         {
-          question: "What about returns?",
+          question: "What happens at the next carrier rate rise?",
           answer:
-            "Connexx includes a branded returns portal for your customers. Returns are routed through the right carrier automatically. Pre-paid labels are generated on demand. Returns data flows back into your eCommerce platform for refund processing. Standard for every eCommerce subscription.",
+            "Carriers raise rates most years. Because your shipping sits on our volume, your rates rise far less than they would on your own account.",
         },
         {
-          question: "Does it work for international orders?",
+          question: "Do you handle returns?",
           answer:
-            "Yes. Connexx handles HS code lookup, EORI numbers, IOSS for EU under €150, and country-specific customs paperwork automatically. International orders go through the same dashboard as domestic. Your operations team doesn't switch tools for cross-border shipping.",
+            "Yes. Shoppers get a returns portal and pre-paid labels, and each return routes back on the right carrier automatically. Returns stop being the part that eats your margin.",
         },
         {
           question: "How quickly can I get set up?",
           answer:
-            "Most Shopify and WooCommerce stores are live on Connexx within two business days. ERP-connected setups (Linnworks, Mintsoft, Veeqo, ShipStation) take three to five days depending on the integration scope. Onboarding includes carrier account linking, rule configuration, and a label-printing test before you go live.",
+            "Most sellers are live within a few days. The platform integrations are ready-built, so getting started is a connection we handle, not a project for your team.",
         },
       ]}
       closingCta={{
-        headline: "Stop guessing which carrier wins.",
-        subhead: "Two minutes with the savings estimator. No commitment, no card.",
-        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
-        secondary: { label: "Contact Us", href: "/contact?enquiry=ecommerce" },
+        headline: "See the rate your orders should ship at.",
+        subhead: "Let us show you what the same orders would cost on our rates.",
+        primary: { label: "Get Quote", href: "#estimator" },
+        secondary: {
+          label: "Explore",
+          href: "/resources/case-studies/freedom-fire",
+        },
       }}
     />
   );

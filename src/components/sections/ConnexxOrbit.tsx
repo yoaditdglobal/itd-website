@@ -132,8 +132,16 @@ export default function ConnexxOrbit() {
             <p className="text-eyebrow text-accent-secondary mb-3">
               One platform, every connection
             </p>
+            <Image
+              src="/logos/connexx/connexx-logo-white-tight.svg"
+              alt="Connexx"
+              width={225}
+              height={76}
+              priority
+              className="block mx-auto h-20 md:h-28 w-auto mb-6"
+            />
             <h2 className="text-display-lg text-white">
-              Connexx connects your stack to every carrier.
+              Connects your stack to every carrier.
             </h2>
             <p className="mt-5 text-body-md text-white/75">
               One platform, every integration — eCommerce platforms,

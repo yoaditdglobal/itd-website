@@ -187,9 +187,9 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          {/* Connexx — direct link */}
+          {/* Platform (Connexx) — direct link */}
           <Link href="/connexx" className="px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
-            Connexx
+            Platform
           </Link>
 
           {/* Integrations */}
@@ -359,13 +359,13 @@ export default function Navbar() {
               </div>
             )}
 
-            {/* Connexx direct */}
+            {/* Platform (Connexx) direct */}
             <Link
               href="/connexx"
               className="py-3 text-white text-base font-medium border-b border-white/10"
               onClick={() => setMobileOpen(false)}
             >
-              Connexx
+              Platform
             </Link>
 
             {/* Integrations accordion */}
