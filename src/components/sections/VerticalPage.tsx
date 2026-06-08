@@ -102,8 +102,8 @@ interface VerticalPageProps {
   subtitle: string;
   label?: string;
   pains: PainPoint[];
-  features: Feature[];
-  integrations: IntegrationItem[];
+  features?: Feature[];
+  integrations?: IntegrationItem[];
   caseStudy: CaseStudy;
   /** When provided, replaces the single-case-study spotlight with a multi-card carousel.
    *  Use the taxonomy helpers (getCaseStudiesByShippingType / BySolution / etc.) to
@@ -295,7 +295,7 @@ export default function VerticalPage({
       )}
 
       {/* Connexx for [vertical] */}
-      <section className="bg-white py-16 md:py-24">
+      {features && features.length > 0 && <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
@@ -390,9 +390,9 @@ export default function VerticalPage({
             </ScrollReveal>
           </div>
         </div>
-      </section>
+      </section>}
 
-      {/* Integration highlights */}
+      {integrations && integrations.length > 0 && (
       <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -401,6 +401,7 @@ export default function VerticalPage({
           </ScrollReveal>
         </div>
       </section>
+      )}
 
       {/* Featured case study(ies) — multi-card carousel when `caseStudies` provided,
           single-spotlight fallback otherwise. */}
