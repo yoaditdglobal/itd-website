@@ -1,0 +1,16 @@
+# Netlify build configuration.
+# Keeps Deploy Previews (per pull request) building identically to production.
+# Netlify auto-applies the Next.js runtime, so no publish dir / plugin block is needed here.
+
+[build]
+  command = "next build"
+
+[build.environment]
+  # Pin the Node version so local machines and Netlify build the same way.
+  # Matches .nvmrc. Next.js 16 requires Node >= 20.
+  NODE_VERSION = "20"
+
+# Production = the `main` branch (Netlify deploys this to the live site).
+# Deploy Previews are generated automatically for every pull request opened
+# against `main` — confirm this is enabled under:
+#   Site configuration → Build & deploy → Deploy contexts → Deploy Previews.

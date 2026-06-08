@@ -245,6 +245,11 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
 
 .animate-ticker {
   animation: ticker 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker { animation: none; }
 }
 
 /* Subtle pulse for stat dots */

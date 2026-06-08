@@ -2,7 +2,7 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { LayoutGrid, Zap, Search, Plug } from "lucide-react";
+import { LayoutGrid, Zap, Search, Plug, Store } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Amazon and eBay shipping software for UK marketplace sellers",
@@ -15,25 +15,31 @@ export default function MarketplaceSellerPage() {
   return (
     <VerticalPage
       label="Marketplace Seller"
-      title="Stop paying Amazon and eBay late shipment penalty fees."
-      subtitle="You ship 200 to 2,000 orders a day across Amazon, eBay, Etsy, and TikTok Shop. Every platform has a different SLA, a different label format, and its own penalty structure. Connexx pulls every order into one dispatch queue, routes each one to a Valid Tracking Rate-compliant carrier, and writes the tracking number back to Seller Central before the cut-off."
-      primaryCta={{ label: "Contact Us", href: "/contact?enquiry=marketplace" }}
-      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/west-ham-united" }}
+      title="Protect your marketplace SLAs and your margin."
+      subtitle="When a carrier misses the promise, the penalty lands on you. A refund off your margin and a late mark on your account. We match each order to a Prime-ready carrier, with the rates and support to grow your channel."
+      primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+      secondaryCta={{ label: "Explore", href: "/resources/case-studies/west-ham-united" }}
+      heroImage={{
+        src: "/solutions/marketplace-seller-hero.webp",
+        alt: "Shopper browsing a marketplace app on a phone — local warehouse listings",
+        gradient: "from-accent-light via-white to-accent/15",
+        icon: Store,
+      }}
       pains={[
         {
           num: "01",
-          title: "Amazon and eBay rules change and your labels stop printing",
-          desc: "Amazon's Buy Shipping requirements changed twice in the last 12 months. eBay's late shipment rate threshold tightened. Miss a label format update and a batch of shipments gets rejected, triggering a late delivery flag that takes three months of clean performance to recover from.",
+          title: "A late parcel becomes your penalty",
+          desc: "When the carrier runs late, the refund and the account mark both land on you. The slip was often never yours to control.",
         },
         {
           num: "02",
-          title: "On a high-volume day, orders fall through the cracks",
-          desc: "When 400 orders come in across five platforms during a promotion, the tab-switching workflow breaks. An order buried in Etsy gets missed. It ships a day late, costs a 5-star rating, and lands on the Amazon On-Time Delivery Rate report.",
+          title: "Each marketplace runs its own clock",
+          desc: "Different cut-offs, different speed promises, weekend dispatch to keep up. Miss one and the rating that wins you sales takes the hit.",
         },
         {
           num: "03",
-          title: "Penalty invoices arrive and you cannot trace the cause",
-          desc: "Amazon and eBay itemise penalty fees by ASIN or listing, not by carrier or SLA breach type. Tracing a £400 penalty back to a single dispatch decision takes two hours. By then the same root cause has already triggered another one.",
+          title: "Your rating rides on things you don't fully control",
+          desc: "Marketplaces grade you on tracking and on-time delivery, and a missed scan or a slow lane drags the score down. One bad run and you're close to suspension.",
         },
       ]}
       features={[
@@ -111,42 +117,42 @@ export default function MarketplaceSellerPage() {
       caseStudy={getCaseStudiesBySolution("Marketplace")[0] ?? caseStudies[1]}
       faq={[
         {
-          question: "How do I keep my Amazon Valid Tracking Rate above 95%?",
+          question: "How do you help me hit each marketplace's delivery SLA?",
           answer:
-            "Use a carrier that pushes scan events back to Amazon within the Valid Tracking Rate window. Royal Mail Tracked 24, Royal Mail Tracked 48, Amazon Shipping, and DPD Next Day all meet the VTR standard. Connexx routes every Amazon order through a VTR-compliant carrier by default, writes the tracking number back to Seller Central automatically, and flags any order at risk of dropping below 95% before it ships.",
+            "We route each order to a carrier that meets that marketplace's cut-off and speed promise, Prime included where you offer it. The right carrier per order keeps your on-time rate where it needs to be.",
         },
         {
-          question: "What's the difference between Amazon Buy Shipping and Connexx?",
+          question: "Will this protect my seller metrics?",
           answer:
-            "Amazon Buy Shipping gives you discounted rates on a limited carrier list, but only for Amazon orders. Connexx covers Amazon, eBay, Etsy, TikTok Shop, and your own Shopify store from one dispatch queue, with rate shopping across Royal Mail, Evri, DPD, Parcelforce, and Amazon Shipping. Velocity Sellers eliminated £12,000 a month in penalty fees by moving to Connexx multi-channel dispatch.",
+            "Yes. Late deliveries are what drag marketplace ratings down, so we route to carriers that hit the promise and use tracking the platforms recognise. Your metrics hold without manual checking.",
         },
         {
-          question: "Does Connexx work with Linnworks for Amazon and eBay?",
+          question: "Does ITD work with my listing tool?",
           answer:
-            "Yes. Connexx integrates with Linnworks as the shipping layer. Linnworks handles listings and order import from Amazon, eBay, Etsy, and TikTok Shop. Connexx handles rate shopping, label generation, and tracking write-back. Orders move from listed to dispatched in one workflow, with no double data entry. Selro, StoreFeeder, and Veeqo integrations follow the same pattern.",
+            "Yes. We sit alongside Linnworks, Selro, StoreFeeder and Veeqo as the shipping layer. Orders come in, labels print, and tracking writes back to the marketplace.",
         },
         {
-          question: "How do I stop getting Amazon late shipment penalties?",
+          question: "Can I keep offering Seller Fulfilled Prime?",
           answer:
-            "Three things. Ship by the carrier cut-off, use a tracked service that scans within the SLA, and write the tracking number back to Seller Central before the dispatch deadline. Connexx automates all three. Routing rules pick a VTR-compliant carrier, batch labels print before cut-off, and tracking writes back through the Amazon API in real time.",
+            "Yes. We route Prime orders to carriers that meet the dispatch and tracking rules, weekend collections included, so you hold the badge without burning out your team.",
         },
         {
-          question: "Can I use Connexx for Seller Fulfilled Prime?",
+          question: "How much can I save on shipping?",
           answer:
-            "Yes. Connexx routes Seller Fulfilled Prime orders through Amazon-approved carriers: Royal Mail Tracked 24, DPD Next Day, and Amazon Shipping. The platform respects the SFP On-Time Delivery Rate (OTDR) and Valid Tracking Rate requirements. Orders display the Prime badge as long as your account meets the eligibility thresholds, and Connexx flags any order at risk.",
+            "Most sellers come to us paying more than they need to. Our buying power across the carriers brings the rate down. Send a recent invoice and we'll show you the numbers.",
         },
         {
-          question: "How do I trace a penalty fee back to a single dispatch decision?",
+          question: "What happens when an order goes wrong?",
           answer:
-            "Open the penalty in the Connexx dashboard. Each penalty invoice ties to a specific shipment, listing, ASIN or eBay item number, carrier, and SLA breach type. You see the dispatch timestamp, the carrier scan history, and the marketplace ack receipt in one view. Velocity Sellers identified the root cause of every penalty within two minutes using this dashboard.",
+            "You get a dedicated account manager who handles claims, returns and disputes. A lost parcel or a penalty isn't yours to chase alone.",
         },
       ]}
       closingCta={{
-        headline: "Cut penalty fees to zero before the next peak.",
+        headline: "Protect your ratings before the next peak.",
         subhead:
-          "The demo shows the unified order queue and SLA-aware routing in the first five minutes. Scoped to your marketplace mix.",
-        primary: { label: "Contact Us", href: "/contact?enquiry=marketplace" },
-        secondary: { label: "Learn More", href: "/resources/case-studies/west-ham-united" },
+          "Share with us your carrier mix or a recent invoice. We'll show you where your metrics slip and what the same orders would cost on our rates.",
+        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
+        secondary: { label: "Explore", href: "/resources/case-studies/west-ham-united" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
