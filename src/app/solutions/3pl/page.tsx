@@ -4,7 +4,7 @@ import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Users, Plug, ShieldCheck, BarChart3, Truck } from "lucide-react";
+import { Users, Plug, ShieldCheck, BarChart3 } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "3PL shipping software with child accounts and customs automation",
@@ -16,18 +16,18 @@ export const metadata = buildMetadata({
 const PAINS = [
   {
     num: "01",
-    title: "Two weeks of manual setup for every new client",
-    desc: "Each brand has a different carrier whitelist, label dimensions, and routing rule set. Setup is done in a spreadsheet then re-entered into the WMS. One misconfiguration causes a wrong-carrier shipment, and the first you hear about it is a client call.",
+    title: "Lose one client and the rest get pricier",
+    desc: "Your rate hangs on hitting a volume tier. Lose a client and it climbs for the ones who stayed.",
   },
   {
     num: "02",
-    title: "Customs errors are costing client trust, not just money",
-    desc: "At a 5 to 7% documentation error rate on cross-border shipments, the question is not whether a client will receive a customs hold. It is when. Each hold pulls a senior ops manager off the floor for two hours of escalation work.",
+    title: "The best rates are locked behind volume you don't have",
+    desc: "Carriers save their sharpest rates for committed volume you haven't won yet.",
   },
   {
     num: "03",
-    title: "Clients want real-time data, you can send them a spreadsheet",
-    desc: "Brands have live dashboards in every other supplier relationship. Sending a monthly Excel export for shipping volume, cost per carrier, and exception rate is no longer acceptable. Account management eats analyst time you do not have.",
+    title: "Your volume only stretches to a couple of carriers",
+    desc: "On your own, two or three carriers is the most you can offer at a margin. We let you offer as many as the client needs, here or abroad.",
   },
 ];
 
@@ -36,13 +36,14 @@ export default function ThreePLPage() {
     <>
       <SolutionHero
         label="3PL"
-        title="3PL shipping software with child accounts and customs built in."
-        subtitle="A child-account architecture for every brand you fulfil, per-client routing rules, and a customs engine on top of your WMS. Onboard new clients in days, not weeks."
-        primary={{ label: "Contact Us", href: "/contact?enquiry=3pl" }}
-        secondary={{ label: "Learn More", href: "/resources/case-studies/delta-fulfilment" }}
+        title="Undercut your rivals without undercutting yourself."
+        subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
+        primary={{ label: "Get Quote", href: "#estimator" }}
+        secondary={{ label: "Explore", href: "/resources/case-studies/delta-fulfilment" }}
         image={{
-          gradient: "from-bg-dark via-bg-dark-card to-accent/30",
-          icon: Truck,
+          src: "/solutions/3pl-hero-v2.webp",
+          alt: "Warehouse operative with a picking trolley reaching stock from racking in a 3PL fulfilment centre",
+          objectPosition: "72% 60%",
         }}
         chips={[
           { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
@@ -55,25 +56,26 @@ export default function ThreePLPage() {
       <SolutionPains
         pains={PAINS}
         image={{
-          gradient: "from-accent-light via-white to-accent/15",
-          icon: Truck,
+          src: "/solutions/3pl-pains.webp",
+          alt: "Tall pallet racking aisle in a large distribution warehouse",
+          objectPosition: "50% 50%",
         }}
         eyebrow="Where the margin leaves"
         heading="What gets in the way today."
-        lead="Three places client trust, fulfilment margin, and onboarding speed slip out of a 3PL operation before the next month-end report lands."
+        lead="Three places your margin and your pitch leak away before you've even won the client."
       />
       <VerticalPage
         hideDefaultHero
         hidePainPoints
       label="3PL"
-      title="3PL shipping software with child accounts and customs built in."
-      subtitle="You run fulfilment for 20 to 80 brand clients across Mintsoft, Linnworks, or ShipHero. Each one has different carriers, different packaging rules, and different SLAs. Connexx adds a child account architecture, per-brand routing rules, and a customs engine on top of your WMS. Client onboarding drops from two weeks to two days, and customs accuracy lifts past 98%."
+      title="Undercut your rivals without undercutting yourself."
+      subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
       primaryCta={{
-        label: "Contact Us",
-        href: "/contact?enquiry=3pl",
+        label: "Get Quote",
+        href: "#estimator",
       }}
       secondaryCta={{
-        label: "Learn More",
+        label: "Explore",
         href: "/resources/case-studies/delta-fulfilment",
       }}
       breadcrumbs={[
@@ -169,47 +171,47 @@ export default function ThreePLPage() {
       rateChecker="3pl"
       faq={[
         {
-          question: "What is a child account in multi-carrier shipping?",
+          question: "Do I need to commit volume to unlock your rates?",
           answer:
-            "A child account is a sub-account under a 3PL's master carrier contract. The 3PL holds the master agreement with Royal Mail, DPD, Evri, or DHL Express, and creates a child account for each brand client. Each client gets their own rate card, dispatch rules, branded tracking page, and reporting view. Connexx manages unlimited child accounts under one parent contract.",
+            "No. You ship on our pooled volume, so the rates hold whatever your own numbers do that month.",
         },
         {
-          question: "Does Connexx integrate with Mintsoft?",
+          question: "How many carriers can I offer my clients?",
           answer:
-            "Yes. Connexx connects to Mintsoft as the shipping and rate shopping layer. Mintsoft handles warehouse operations and inventory. Connexx handles carrier selection, label generation, customs documentation, and tracking write-back. Together they cover the full 3PL workflow from order import to dispatch to per-client billing. ShipHero, Linnworks, and Veeqo integrations follow the same pattern.",
+            "As many as the brand needs, at home or abroad. Your own volume stops being the limit, so you match the carrier to each client's service and budget.",
         },
         {
-          question: "How does Connexx work for a 3PL with 50 brand clients?",
+          question: "Can I run a separate account for each client brand?",
           answer:
-            "Each brand becomes a tenant in Connexx with its own carrier rules, rate card, branded tracking, and reporting. Orders import from each client's Shopify, Amazon, eBay, or marketplace. Dispatch rules pick the right carrier per client. Billing data exports per child account at month-end. SwiftLog Fulfilment onboards new brands in 2 days using this model.",
+            "Yes. Each brand runs as its own account under yours, with its own rates, rules and branded tracking. Billing splits out per brand at month-end.",
         },
         {
-          question: "How do 3PLs handle customs documentation for client shipments?",
+          question: "Does ITD sit on top of my WMS?",
           answer:
-            "A 3PL operates its own EORI plus a client-specific EORI for each brand. Connexx pulls the right EORI per shipment, looks up the HS code per SKU, generates the commercial invoice and CN22/CN23, and applies IOSS where the client has registered. SwiftLog Fulfilment lifted customs accuracy from 93% to 98.7% using this workflow.",
+            "Yes. We're the shipping and rate-shopping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders push in and tracking writes back, with no double entry.",
         },
         {
-          question: "Can clients see their own shipping data in real time?",
+          question: "What happens when a parcel's lost or a bill's wrong?",
           answer:
-            "Yes. Each brand gets a live reporting view inside Connexx covering volume, cost per carrier, SLA performance, and exception rate. Client account managers send a login, not a spreadsheet. Branded tracking pages show your client's logo and colours, not the carrier's, so the end customer experience stays on-brand throughout.",
+            "A dedicated account manager handles the claim or the query, so the exception doesn't eat your ops team's day or reach your client.",
         },
         {
-          question: "How long does it take to onboard a new client on Connexx?",
+          question: "How fast can I onboard a new client?",
           answer:
-            "Two days for a standard onboarding (single warehouse, four to six carriers, one marketplace stack). SwiftLog Fulfilment cut onboarding from two weeks to two days and added 15 new brands in the first year without expanding their ops team. Carrier whitelist, packaging rules, EORI registration, and tracking template are configured once per client.",
+            "Days, not weeks. A new brand's carriers, rules and rates are set once and go live, with no IT project at your end.",
         },
       ]}
       closingCta={{
-        headline: "Onboard three clients a quarter without adding ops headcount.",
+        headline: "Find out what our rates do for your margin.",
         subhead:
-          "The demo covers child accounts, per-brand routing, and the customs engine. Scoped to your WMS.",
+          "A bespoke review of your carrier setup shows the rates you could put in front of clients and the margin left for you.",
         primary: {
-          label: "Contact Us",
-          href: "/contact?enquiry=3pl",
+          label: "Get Quote",
+          href: "#estimator",
         },
         secondary: {
-          label: "Learn More",
-          href: "/resources/3pl-onboarding-playbook",
+          label: "Explore",
+          href: "/resources/case-studies/delta-fulfilment",
         },
       }}
       />

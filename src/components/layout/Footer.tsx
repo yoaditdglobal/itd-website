@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   solutions: [
@@ -84,7 +85,15 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-white font-bold text-lg tracking-tight">ITD Global</div>
+          <Link href="/" aria-label="ITD Global — home">
+            <Image
+              src="/logos/itd/itd-global-logo.webp"
+              alt="ITD Global"
+              width={576}
+              height={240}
+              className="h-8 w-auto"
+            />
+          </Link>
           <div className="flex flex-wrap gap-6 text-xs text-white/40">
             <Link href="#" className="hover:text-white/70">Privacy Policy</Link>
             <Link href="#" className="hover:text-white/70">Terms of Service</Link>

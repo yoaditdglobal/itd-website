@@ -41,8 +41,8 @@ export default function ImportPage() {
         primary={{ label: "Get Quote", href: "#estimator" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
         image={{
-          src: "/solutions/import-hero-v3.webp",
-          alt: "Airbus A330-300 cargo aircraft being loaded with palletised air freight",
+          src: "/solutions/import-hero-v4.webp",
+          alt: "Cargo aircraft being loaded with palletised air freight",
           objectPosition: "80% 50%",
         }}
         chips={[

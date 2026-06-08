@@ -10,14 +10,14 @@ const stats = [
 
 export default function SocialProof() {
   return (
-    <section className="bg-bg-dark py-12 md:py-16">
+    <section className="bg-white border-y border-border py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm text-white/60 mb-6">
+        <p className="text-center text-sm text-text-tertiary mb-6">
           Connected to the carriers and platforms you already run.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           {stats.map((stat) => (
-            <AnimatedCounter key={stat.label} {...stat} />
+            <AnimatedCounter key={stat.label} surface="light" {...stat} />
           ))}
         </div>
         <LogoTicker />

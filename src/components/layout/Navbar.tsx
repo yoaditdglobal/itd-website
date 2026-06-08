@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
@@ -108,12 +109,15 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-white font-bold text-lg flex-shrink-0"
-          style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
-        >
-          ITD Global
+        <Link href="/" className="flex-shrink-0" aria-label="ITD Global — home">
+          <Image
+            src="/logos/itd/itd-global-logo.webp"
+            alt="ITD Global"
+            width={576}
+            height={240}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
 
         {/* Desktop nav */}
