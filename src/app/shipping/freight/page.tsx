@@ -44,9 +44,9 @@ export default function ShippingFreightPage() {
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
         image={{
-          src: "/shipping/freight-hero.webp",
+          src: "/shipping/Freight hero - 1.jpeg",
           alt: "Container port at sunset with cargo ship and aircraft",
-          objectPosition: "50% 20%",
+          objectPosition: "50% 50%",
         }}
       />
       <SolutionPains
@@ -60,8 +60,8 @@ export default function ShippingFreightPage() {
         lead="Three things that make international freight work — when they're built into the service from the start."
       />
       <FreightCarrierTicker />
-      <FreightAudience />
       <FreightServices />
+      <FreightAudience />
       <VerticalPage
         hideDefaultHero
         hidePainPoints

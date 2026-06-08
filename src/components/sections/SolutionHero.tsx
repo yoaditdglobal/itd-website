@@ -18,6 +18,8 @@ export interface SolutionHeroImage {
   icon?: LucideIcon;
   /** CSS object-position override, e.g. "80% 50%". */
   objectPosition?: string;
+  /** CSS object-fit override. Defaults to "cover". */
+  objectFit?: "cover" | "contain";
 }
 
 export interface SolutionHeroProps {
@@ -54,6 +56,7 @@ export default function SolutionHero({
   const gradient = image.gradient ?? "from-bg-dark via-bg-dark-card to-bg-dark";
   const altText = image.alt ?? `${label} hero image`;
   const objectPosition = image.objectPosition ?? "60% 50%";
+  const objectFit = image.objectFit ?? "cover";
 
   return (
     <section className="relative overflow-hidden min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
@@ -66,7 +69,7 @@ export default function SolutionHero({
           priority
           quality={90}
           sizes="100vw"
-          className="object-cover"
+          className={objectFit === "contain" ? "object-contain" : "object-cover"}
           style={{ objectPosition }}
         />
       ) : (

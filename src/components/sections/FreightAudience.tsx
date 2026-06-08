@@ -13,7 +13,7 @@ const POINTS = [
 
 export default function FreightAudience() {
   return (
-    <section className="bg-bg-dark py-16 md:py-24">
+    <section className="bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -23,10 +23,10 @@ export default function FreightAudience() {
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-4">
                 Who this is built for
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight leading-snug mb-6">
                 Built for Importers.
               </h2>
-              <p className="text-white/65 text-base leading-relaxed mb-8">
+              <p className="text-text-secondary text-base leading-relaxed mb-8">
                 If you import regularly from China and need a freight partner who can manage the full journey — from factory floor to UK door — this is the service for you.
               </p>
               <Button href="/contact?enquiry=freight">
@@ -41,10 +41,10 @@ export default function FreightAudience() {
               {POINTS.map((point, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-xl px-5 py-4"
+                  className="flex items-start gap-4 bg-white border border-border rounded-xl px-5 py-4"
                 >
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-white/85 text-sm leading-relaxed">{point}</span>
+                  <span className="text-text-secondary text-sm leading-relaxed">{point}</span>
                 </li>
               ))}
             </ul>
