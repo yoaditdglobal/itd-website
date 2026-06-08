@@ -24,7 +24,7 @@ const stages = [
   },
   {
     id: "small-business",
-    name: "Small Business",
+    name: "SMEs",
     icon: Store,
     desc: "Ship smarter from day one.",
     details: [

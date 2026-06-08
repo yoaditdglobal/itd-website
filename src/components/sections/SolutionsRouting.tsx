@@ -61,7 +61,7 @@ const icps: Icp[] = [
     solutionTag: "Enterprise",
   },
   {
-    name: "Small Business",
+    name: "SMEs",
     hook: "Sixty labels printed in one batch before 10am.",
     icon: Store,
     href: "/solutions/small-business",
