@@ -2,56 +2,62 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Zap, Printer, Eye, CreditCard } from "lucide-react";
+import { Zap, Printer, Eye, CreditCard, Store } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Shipping software for small business UK, no contracts",
+  title: "SME shipping software UK, no contracts",
   description:
-    "Print Royal Mail, Evri, and DPD labels from one screen. No monthly minimum, no carrier accounts, no setup call. Live with Shopify or WooCommerce in under 10 minutes.",
+    "Multi-carrier shipping built for SMEs. Royal Mail, Evri, and DPD from one screen, no monthly minimum, no carrier accounts, no setup call. Live with Shopify or WooCommerce in under 10 minutes.",
   path: "/solutions/small-business",
 });
 
 export default function SmallBusinessPage() {
   return (
     <VerticalPage
-      label="Small Business"
-      title="Cheaper parcel shipping for UK small businesses, no contracts."
-      subtitle="You ship 40 to 200 parcels a day from a spare room, a small unit, or a shared warehouse. You spend two hours every morning logging into Royal Mail Click and Drop. Connexx compares Royal Mail, Evri, DPD, and Parcelforce on every order, prints labels in one batch, and pulls in Shopify and WooCommerce orders automatically."
+      label="SMEs"
+      title="Punch above your shipping weight."
+      subtitle="You ship on the rates and carrier choice a big retailer gets, without committing to their volume. No minimum and no lock-in, just shipping sized for a smaller operation."
       primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       secondaryCta={{
-        label: "Learn More",
-        href: "/shipping/domestic/courier-comparison",
+        label: "Explore",
+        href: "/resources/case-studies",
+      }}
+      heroImage={{
+        src: "/solutions/sme-hero.webp",
+        alt: "Small-business owner checking a padded mailer at a packing desk surrounded by parcels",
+        gradient: "from-accent-light via-white to-accent/15",
+        icon: Store,
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Solutions", path: "/solutions" },
-        { name: "Small Business", path: "/solutions/small-business" },
+        { name: "SMEs", path: "/solutions/small-business" },
       ]}
       jsonLd={[
         serviceSchema({
-          name: "Small business shipping software",
+          name: "SME shipping software",
           description:
-            "Multi-carrier shipping platform for UK small businesses. Compares Royal Mail, Evri, DPD, Parcelforce, Yodel and Amazon Shipping on every order with no monthly minimum and no contract. Connects to Shopify, WooCommerce and Etsy in under 10 minutes.",
+            "Multi-carrier shipping platform for UK SMEs. Compares Royal Mail, Evri, DPD, Parcelforce, Yodel and Amazon Shipping on every order with no monthly minimum and no contract. Connects to Shopify, WooCommerce and Etsy in under 10 minutes.",
           path: "/solutions/small-business",
-          serviceType: "Small Business Multi-Carrier Shipping Software",
+          serviceType: "SME Multi-Carrier Shipping Software",
           areaServed: ["United Kingdom"],
         }),
       ]}
       pains={[
         {
           num: "01",
-          title: "Two hours every morning printing labels one at a time",
-          desc: "At 60 orders a day, the Click and Drop workflow eats the first two hours of the working morning. Address paste, service choice, label print, repeat. You start the real work after 10am, when you should have started at 8.",
+          title: "You pay more per parcel just for being small",
+          desc: "Carriers save their best rates for big volume. Ship less and you pay closer to list, while bigger sellers undercut you.",
         },
         {
           num: "02",
-          title: "You know you are not on the cheapest carrier",
-          desc: "Royal Mail rack rates are expensive. Evri is cheaper but not always right. Without a side-by-side rate comparison on each shipment, you pick whichever carrier you used last, and that decision costs money on every order.",
+          title: "One courier, no plan B",
+          desc: "Most small businesses run on a single carrier. When it hikes prices or drops the ball, you've no fallback and no leverage.",
         },
         {
           num: "03",
-          title: "Customer emails about delivery eat the rest of the day",
-          desc: "Where's my order emails arrive through email, Instagram DM, and the website chat. Each one means a carrier website login, a tracking search, and a copy-paste back to the customer. Ten queries a day is half an hour gone.",
+          title: "You're the warehouse and the support desk",
+          desc: "There's no ops team to lean on. The hours lost to labels and chasing parcels are hours you're not growing.",
         },
       ]}
       features={[
@@ -129,42 +135,42 @@ export default function SmallBusinessPage() {
       caseStudy={getCaseStudiesBySolution("Small Business")[0] ?? caseStudies[8]}
       faq={[
         {
-          question: "What is the cheapest way to ship parcels for a UK small business?",
+          question: "Is there a minimum volume?",
           answer:
-            "For UK small businesses, the cheapest carrier depends on weight and destination. Evri is usually cheapest for sub-2kg parcels to Mainland UK. Royal Mail Tracked 48 wins for letter-box items and Highlands & Islands. DPD beats both for next-day parcels over 5kg. Connexx compares all of them in real time and prints the cheapest compliant label on every order.",
+            "No. No minimum, and no contract to commit to. You ship what you ship, on our rates.",
         },
         {
-          question: "Do I need a separate account with Royal Mail, Evri, and DPD?",
+          question: "Will I really get better rates than going direct?",
           answer:
-            "No. Connexx lets you ship through Royal Mail, Evri, DPD, Parcelforce, Yodel, and Amazon Shipping from one account. You do not sign individual contracts and you do not manage separate portals. You inherit Connexx's negotiated rates, which are usually lower than the rates you would get opening accounts directly.",
+            "Yes. You ship on our buying power, so the rate beats what a business your size would get on its own.",
         },
         {
-          question: "Is there a minimum monthly volume to use Connexx?",
+          question: "Can I keep my current courier?",
           answer:
-            "No. There is no monthly minimum, no setup fee, and no contract. Pay per label at Connexx's published rate. Ship 20 parcels a month or 2,000, the per-parcel price is the same. Sign up online, connect Shopify or WooCommerce, and ship the same day. No sales call required.",
+            "Yes. Keep the couriers you trust and add others through us at better rates. Nothing gets ripped out.",
         },
         {
-          question: "How long does it take to set up Connexx with Shopify?",
+          question: "How long does setup take?",
           answer:
-            "Under 10 minutes. Install the Connexx app from the Shopify App Store, authorise the connection, choose which carriers to enable (Royal Mail, Evri, DPD, Parcelforce, Yodel, Amazon Shipping), and orders start flowing automatically. Labels print one-click, tracking writes back to Shopify, and the customer gets a branded tracking page.",
+            "A few days. We connect your store, set your rules, and you're away. No developer required.",
         },
         {
-          question: "Can I print labels in batches?",
+          question: "Do I get support, or am I on my own?",
           answer:
-            "Yes. Select 60 orders and print 60 labels in one batch. Connexx generates each label with the cheapest compliant carrier per order based on weight, postcode, and the rules you set once. Branded packing slips print alongside the labels. The workflow is built for a one-person operation packing from a kitchen or a small unit.",
+            "You get a real person to call when something needs sorting. Handy when you're the whole team.",
         },
         {
-          question: "How do I handle returns?",
+          question: "What about returns?",
           answer:
-            "Connexx includes a customer-facing returns portal in every subscription. Customers request a return online, choose a drop-off point (Royal Mail Post Office, Evri ParcelShop, or InPost locker), and a pre-paid label is generated. Returns data feeds back into Shopify or WooCommerce for refund processing. No phone calls, no manual label generation.",
+            "Handled. A returns portal and pre-paid labels mean a return doesn't cost you a morning.",
         },
       ]}
       closingCta={{
-        headline: "Get back two hours of every working morning.",
+        headline: "Find out what shipping should cost a business your size.",
         subhead:
-          "Run the Domestic Savings Estimator in two minutes. See your per-parcel saving before you sign up.",
+          "Send a recent invoice and the Parcel Rate Checker shows what the same parcels would cost on our rates. Minutes of your time, that's it.",
         primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
-        secondary: { label: "Sign Up", href: "/signup?plan=small-business" },
+        secondary: { label: "Explore", href: "/resources/case-studies" },
       }}
     />
   );

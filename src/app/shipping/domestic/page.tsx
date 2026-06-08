@@ -157,7 +157,7 @@ export default function ShippingDomesticPage() {
         },
         {
           anchor: "small-business",
-          headline: "Built for Small Business",
+          headline: "Built for SMEs",
           summary:
             "No volume means no leverage on rates, and most contracts want a commitment you can't make yet. Compare Royal Mail, Evri and DPD side by side with no minimum and no lock-in, and batch the whole day's labels in one run.",
           solutionTag: "Small Business",
