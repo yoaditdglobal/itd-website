@@ -1,13 +1,12 @@
-import Link from "next/link";
-import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import CarrierDirectory from "@/components/sections/CarrierDirectory";
 import { buildMetadata } from "@/lib/metadata";
-import { getIntegrationsByType, getIntegrationSlug } from "@/lib/data";
+import { getIntegrationsByType } from "@/lib/data";
 
 export const metadata = buildMetadata({
-  title: "Carrier integrations — every carrier on one platform",
+  title: "Carrier integrations — one connection to an entire network",
   description:
-    "Connexx connects UK, EU, and global carriers — Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping and more — with rate comparison on every order.",
+    "Domestic and international carriers in one network — Royal Mail, Evri, DPD, InPost, DHL, FedEx, UPS, Amazon Shipping and more. Pick a carrier to see its services and how it works with us.",
   path: "/integrations/carriers",
 });
 
@@ -17,7 +16,9 @@ export default function CarrierIntegrationsPage() {
   const carriers = getIntegrationsByType("carrier");
   const groups = REGION_ORDER.map((region) => ({
     region,
-    items: carriers.filter((c) => c.region === region),
+    items: carriers.filter((c) =>
+      (c.regions ?? (c.region ? [c.region] : [])).includes(region),
+    ),
   })).filter((g) => g.items.length > 0);
 
   return (
@@ -26,42 +27,28 @@ export default function CarrierIntegrationsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <p className="text-eyebrow text-accent-secondary mb-3">Carrier integrations</p>
           <h1 className="text-display-xl text-text-primary max-w-3xl">
-            Every carrier you ship with, on one platform.
+            One connection to an entire carrier network.
           </h1>
           <p className="mt-4 text-body-lg text-text-secondary max-w-2xl">
-            {carriers.length} domestic and international carriers connect to Connexx, with
-            live rate comparison and one-click labels on every dispatch. Pick a carrier to
-            see services and how it works with Connexx.
+            Domestic and international carriers in one network, on rates you
+            wouldn&apos;t reach alone. Pick a carrier to see its services and how it
+            works with us.
           </p>
         </div>
       </section>
 
       <section className="bg-white py-14 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-          {groups.map((group) => (
-            <div key={group.region}>
-              <h2 className="text-heading-md text-text-primary mb-6">{group.region}</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {group.items.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/integrations/carriers/${getIntegrationSlug(c)}`}
-                    className="bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/20 transition-all text-center"
-                  >
-                    <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="mx-auto mb-3" />
-                    <p className="text-sm font-medium text-text-primary">{c.name}</p>
-                    {c.description && (
-                      <p className="text-xs text-text-tertiary mt-1">{c.description}</p>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CarrierDirectory groups={groups} />
         </div>
       </section>
 
-      <ClosingCTA headline="Don't see your carrier?" />
+      <ClosingCTA
+        headline="The network keeps growing."
+        subtitle="Tell us who you ship with — if a carrier isn't on the list yet, we'll look at adding it."
+        primaryCta={{ label: "Talk to us", href: "/contact" }}
+        secondaryCta={{ label: "Browse tech integrations", href: "/integrations/tech" }}
+      />
     </>
   );
 }
