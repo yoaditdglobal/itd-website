@@ -3,9 +3,9 @@ import { getIntegrations } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "eCommerce & logistics integrations",
+  title: "eCommerce and logistics integrations",
   description:
-    "Connect Connexx to your eCommerce platforms and logistics tools — Shopify, WooCommerce, Veeqo, ShipStation, Mintsoft and more. Multi-carrier rate comparison and labels on every order.",
+    "We connect to the eCommerce platforms and logistics tools you already run — Shopify, WooCommerce, Veeqo, ShipStation, Mintsoft and more. Orders flow in and ship on our carrier rates, with tracking back in your store.",
   path: "/integrations/ecommerce-logistics",
 });
 
@@ -14,17 +14,17 @@ export default function EcommerceLogisticsPage() {
 
   return (
     <IntegrationCategoryPage
-      title="eCommerce & logistics integrations"
-      subtitle="Connexx connects to the eCommerce platforms and logistics tools you already run. Orders push into Connexx, the cheapest compliant carrier is selected on every order, labels print in one click, and tracking writes back to your store or system — no double entry."
+      title="eCommerce and logistics integrations"
+      subtitle="We connect to the eCommerce platforms and logistics tools you already run. Orders flow in and ship on our carrier rates, with tracking back in your store."
       integrations={integrations}
       heroLabel="eCommerce & Logistics"
-      heroH1="eCommerce & logistics integrations for multi-carrier shipping."
-      heroSubhead="Connexx connects to the eCommerce platforms and logistics tools you already run. Orders push into Connexx, the cheapest compliant carrier is selected on every order, labels print in one click, and tracking writes back to your store or system."
+      heroH1="eCommerce and logistics integrations for multi-carrier shipping."
+      heroSubhead="We connect to the eCommerce platforms and logistics tools you already run. Orders flow in and ship on our carrier rates, with tracking back in your store."
       heroPrimaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
       heroSecondaryCta={{ label: "Browse all tech integrations", href: "/integrations/tech" }}
       closingCta={{
-        headline: "Connect your store or system to Connexx.",
-        subhead: "Orders in, labels out, tracking back — across every carrier in your account.",
+        headline: "Connect your store or system.",
+        subhead: "One connection puts your orders on the carriers in your account, and the tracking lands back where you work.",
         primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
         secondary: { label: "Browse integrations", href: "/integrations/tech" },
       }}
