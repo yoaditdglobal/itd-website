@@ -52,12 +52,13 @@ export default function ShippingFreightPage() {
       <SolutionPains
         pains={PAINS}
         image={{
-          gradient: "from-accent-light via-white to-accent/15",
-          icon: PackageOpen,
+          src: "/shipping/what sets ITD apart.png",
+          alt: "What sets ITD apart",
+          objectPosition: "50% 70%",
         }}
         eyebrow=""
         heading="What sets ITD apart."
-        lead="Three things that make international freight work, when they're built into the service from the start."
+        lead="Three things that make freight work, when they're built into the service from the start."
       />
       <FreightCarrierTicker />
       <FreightServices />

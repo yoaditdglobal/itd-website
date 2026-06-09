@@ -1,8 +1,8 @@
 "use client";
 
 import { Plane, Ship, Package, Warehouse, Star, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import Button from "@/components/ui/Button";
 
 const services = [
   {
@@ -17,17 +17,14 @@ const services = [
       "Customs clearance",
       "End-to-end tracking",
     ],
-    visual: {
-      gradient: "from-sky-50 to-blue-100",
-      iconBg: "bg-blue-500",
-    },
+    image: "/shipping/air freight.jpg",
     featured: false,
   },
   {
     icon: Ship,
     label: "Sea Freight",
     heading: "The most cost-efficient way to move significant volumes internationally.",
-    body: "FCL, LCL, or buyers consolidation — all with full customs handling included.",
+    body: "FCL, LCL, or buyers consolidation, all with full customs handling included.",
     points: [
       "FCL – Full Container Load",
       "LCL – Less than Container Load",
@@ -35,10 +32,7 @@ const services = [
       "Customs clearance handled",
       "Door-to-door worldwide",
     ],
-    visual: {
-      gradient: "from-teal-50 to-cyan-100",
-      iconBg: "bg-teal-500",
-    },
+    image: "/shipping/sea freight.jpg",
     featured: false,
   },
   {
@@ -53,11 +47,7 @@ const services = [
       "Set rate with no hidden costs",
       "Used by major UK retailers",
     ],
-    visual: {
-      gradient: "from-accent-light to-accent/20",
-      iconBg: "bg-accent",
-      stat: { figure: "30–35%", label: "reduction in sample logistics costs" },
-    },
+    image: "/shipping/console sample service.jpg",
     featured: true,
   },
   {
@@ -72,10 +62,8 @@ const services = [
       "Trade show and event freight",
       "Regular import schedules",
     ],
-    visual: {
-      gradient: "from-orange-50 to-amber-100",
-      iconBg: "bg-orange-500",
-    },
+    image: "/shipping/shipment consolidation.jpg",
+    objectPosition: "50% 80%",
     featured: false,
   },
   {
@@ -90,10 +78,7 @@ const services = [
       "Marketplace integrations",
       "Returns handling",
     ],
-    visual: {
-      gradient: "from-purple-50 to-violet-100",
-      iconBg: "bg-purple-500",
-    },
+    image: "/shipping/Warehousing and Fulfilment.jpg",
     featured: false,
   },
 ];
@@ -131,29 +116,18 @@ export default function FreightServices() {
 
                   {/* Visual panel */}
                   <div style={{ direction: "ltr" }}>
-                    <div className={`relative rounded-2xl bg-gradient-to-br ${service.visual.gradient} p-10 md:p-14 flex items-center justify-center min-h-[280px] overflow-hidden`}>
-                      {/* Background icon */}
-                      <Icon
-                        className="absolute -bottom-6 -right-6 w-48 h-48 opacity-[0.07] text-text-primary"
-                        strokeWidth={1}
+                    <div className="relative rounded-2xl overflow-hidden min-h-[320px] shadow-sm border border-border">
+                      <Image
+                        src={service.image}
+                        alt={service.label}
+                        fill
+                        className="object-cover"
+                        style={"objectPosition" in service ? { objectPosition: service.objectPosition } : undefined}
                       />
-                      {service.featured && "stat" in service.visual && service.visual.stat ? (
-                        <div className="relative z-10 text-center">
-                          <div className={`w-14 h-14 rounded-2xl ${service.visual.iconBg} flex items-center justify-center mx-auto mb-6`}>
-                            <Icon className="w-7 h-7 text-white" strokeWidth={1.5} />
-                          </div>
-                          <p className="text-6xl font-bold text-accent mb-2">{service.visual.stat.figure}</p>
-                          <p className="text-sm text-text-secondary max-w-[200px] mx-auto">{service.visual.stat.label}</p>
-                          <div className="mt-4 inline-flex items-center gap-1.5 bg-accent/10 border border-accent/20 rounded-full px-3 py-1">
-                            <Star className="w-3 h-3 text-accent fill-accent" />
-                            <span className="text-xs font-semibold text-accent uppercase tracking-wide">Signature service</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="relative z-10 text-center">
-                          <div className={`w-14 h-14 rounded-2xl ${service.visual.iconBg} flex items-center justify-center mx-auto`}>
-                            <Icon className="w-7 h-7 text-white" strokeWidth={1.5} />
-                          </div>
+                      {service.featured && (
+                        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-bg-dark/80 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
+                          <Star className="w-3 h-3 text-accent fill-accent" />
+                          <span className="text-xs font-semibold text-white uppercase tracking-wide">Signature service</span>
                         </div>
                       )}
                     </div>
@@ -178,9 +152,6 @@ export default function FreightServices() {
                         </li>
                       ))}
                     </ul>
-                    <Button href="/contact?enquiry=freight" variant="secondary">
-                      Find out more
-                    </Button>
                   </div>
 
                 </div>

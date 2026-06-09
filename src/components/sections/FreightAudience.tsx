@@ -19,11 +19,8 @@ export default function FreightAudience() {
         {/* Section header */}
         <ScrollReveal>
           <div className="mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
-              Who this is built for
-            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
-              Built for Importers.
+              Built for Importers
             </h2>
           </div>
         </ScrollReveal>
@@ -35,7 +32,7 @@ export default function FreightAudience() {
             <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
               <div className="relative aspect-[4/3] bg-bg-secondary">
                 <Image
-                  src="/shipping/Freight hero - 1.jpeg"
+                  src="/shipping/import.jpg"
                   alt="International freight importing"
                   fill
                   className="object-cover"
