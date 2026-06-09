@@ -3,6 +3,22 @@
 import { useEffect, useRef } from "react";
 import createGlobe, { type COBEOptions } from "cobe";
 
+/** Feature-detect a usable WebGL context. Returns false on browsers/devices
+ *  without WebGL (older Safari, some mobile, privacy-hardened, GPU-blocklisted)
+ *  so we never attempt to initialise cobe where it would throw. */
+function isWebGLAvailable(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    return (
+      !!window.WebGLRenderingContext &&
+      !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 /** UK home node — every primary arc originates here. */
 const LONDON: [number, number] = [51.5074, -0.1278];
 
@@ -80,6 +96,12 @@ export default function CarrierGlobe({ reduce = false }: { reduce?: boolean }) {
     window.addEventListener("resize", measure);
     measure();
 
+    // Bail gracefully if WebGL is unavailable — the CSS "planet" fallback below
+    // still renders, and the page never crashes.
+    if (!isWebGLAvailable()) {
+      return () => window.removeEventListener("resize", measure);
+    }
+
     const opts = {
       devicePixelRatio: dpr,
       width: size * dpr,
@@ -112,15 +134,24 @@ export default function CarrierGlobe({ reduce = false }: { reduce?: boolean }) {
       },
     };
 
-    const globe = createGlobe(canvas, opts as unknown as COBEOptions);
-
-    const frame = requestAnimationFrame(() => {
-      canvas.style.opacity = "1";
-    });
+    // createGlobe can throw if the WebGL context is lost/unavailable at init.
+    // Swallow it so a globe failure never takes down the page — the CSS planet
+    // fallback remains visible.
+    let globe: { destroy: () => void } | undefined;
+    let frame = 0;
+    try {
+      globe = createGlobe(canvas, opts as unknown as COBEOptions);
+      frame = requestAnimationFrame(() => {
+        canvas.style.opacity = "1";
+      });
+    } catch (err) {
+      console.warn("CarrierGlobe: WebGL globe failed to initialise, using fallback.", err);
+      return () => window.removeEventListener("resize", measure);
+    }
 
     return () => {
       cancelAnimationFrame(frame);
-      globe.destroy();
+      globe?.destroy();
       window.removeEventListener("resize", measure);
     };
   }, [reduce]);
