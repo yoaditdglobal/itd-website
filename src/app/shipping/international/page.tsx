@@ -25,8 +25,8 @@ export default function ShippingInternationalPage() {
   return (
     <VerticalPage
       label="International Shipping"
-      title="Ship worldwide and keep more margin on each order."
-      subtitle="Your overseas orders ship on the buying power of a global carrier network. You keep more margin on shipments in and out of the UK."
+      title="Ship worldwide with a team that knows what works where."
+      subtitle="Wherever you're shipping, there are choices to make: express or economy, duties up front or at the door. We lay out the options and tell you which we'd pick."
       primaryCta={{
         label: "Get Quote",
         href: "#estimator",
@@ -63,18 +63,18 @@ export default function ShippingInternationalPage() {
       pains={[
         {
           num: "01",
-          title: "There's margin sitting in your overseas rates",
-          desc: "Going direct, you pay the carrier's standard price. The same parcels through our buying power come in 20 to 30% lower.",
+          title: "What worked last year doesn't work now",
+          desc: "The US rewrites its import rules, the EU shifts its thresholds, a market tightens overnight. You usually find out when a shipment is stuck at the border.",
         },
         {
           num: "02",
-          title: "Surcharges are where going direct really costs you",
-          desc: "Direct, the fees stack on top of the rate, and you're billed on a parcel's size as well as its weight. With us, that surcharge exposure is far lower.",
+          title: "A price list is not advice",
+          desc: "Express, economy, postal, duties paid or unpaid. Each lane has a best answer that turns on weight, value and speed. Go direct and you get a rate card, with no one to ask.",
         },
         {
           num: "03",
-          title: "Delivery into your biggest markets is hit and miss",
-          desc: "A parcel into the US or Australia can stall for days, and the customer holds you responsible. Steady service into the places you sell most keeps them coming back.",
+          title: "There's margin sitting in your overseas rates",
+          desc: "Going direct, you pay the carrier's standard price. The same parcels through our buying power come in 20 to 30% lower.",
         },
       ]}
       audienceAnchors={[
@@ -82,7 +82,7 @@ export default function ShippingInternationalPage() {
           anchor: "export",
           headline: "Built for Export",
           summary:
-            "Sell overseas on rates that keep your prices competitive. Our buying power across the global carriers turns exporting into a growth line for the business.",
+            "A new market brings new rules and service choices you've not faced before. We set your export lanes up properly and keep them right as things change, on rates that keep you competitive.",
           solutionTag: "Export",
           category: "By business model",
           image: {
@@ -335,6 +335,11 @@ export default function ShippingInternationalPage() {
       rateChecker="international"
       faq={[
         {
+          question: "How do I know which service fits each market?",
+          answer:
+            "Your account manager walks you through the options for each lane and recommends the setup that fits. When the rules change, we tell you before it bites.",
+        },
+        {
           question: "How many countries can I ship to?",
           answer:
             "Worldwide. The carrier network reaches 220+ countries and territories, from the EU and North America to the Middle East and Asia. Each lane goes on the service that suits it.",
@@ -352,7 +357,7 @@ export default function ShippingInternationalPage() {
         {
           question: "How does shipping to the EU work now?",
           answer:
-            "Same as anywhere else from your side. The export paperwork and EU declarations are prepared with each shipment, including IOSS for low-value B2C orders, so EU deliveries keep moving.",
+            "The EU rules don't sit still, and another change is coming. We keep your export paperwork and declarations current as they move, so your deliveries aren't the ones held up.",
         },
         {
           question: "Can ITD handle imports as well as exports?",
@@ -371,9 +376,9 @@ export default function ShippingInternationalPage() {
         },
       ]}
       closingCta={{
-        headline: "See what you should be paying to ship abroad.",
+        headline: "Talk through your lanes with someone who ships them daily.",
         subhead:
-          "A bespoke review looks at the countries you ship to most and shows the per-shipment saving across the carriers that fit each lane.",
+          "A bespoke review covers your top lanes, the service that fits each one, and where the rules are heading next. The saving sits alongside.",
         primary: {
           label: "Get Quote",
           href: "#estimator",

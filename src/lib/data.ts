@@ -83,6 +83,7 @@ export interface Integration {
   name: string;
   category: string;
   type: "tech" | "carrier";
+  /** Primary region (drives the detail-page label). */
   region?: string;
   /** Optional explicit directory membership. Overrides `region` when present —
    *  e.g. FedEx / UPS belong in both Domestic and International groups. */
@@ -480,8 +481,8 @@ export const integrations: Integration[] = [
   // ─── Carriers — International ───────────────────────────────────────
   { id: "c-parcel-force", name: "Parcel Force", category: "carrier", type: "carrier", region: "International", featured: true, description: "Tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
   { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
-  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Global parcel & freight", logo: "/logos/carriers/fedex_logo.png" },
-  { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
+  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & global parcel and freight", logo: "/logos/carriers/fedex_logo.png" },
+  { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
   { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
   { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery" },
   { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express" },

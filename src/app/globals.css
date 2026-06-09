@@ -252,6 +252,17 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   .animate-ticker { animation: none; }
 }
 
+/* Carrier network map (globe / UK) — arc flow, sphere rotation, node pulse */
+@keyframes net-flow { to { stroke-dashoffset: -120; } }
+@keyframes net-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes net-pulse { 0%, 100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+.net-flow { stroke-dasharray: 4 8; animation: net-flow 2.4s linear infinite; }
+.net-spin { animation: net-spin 70s linear infinite; transform-origin: center; }
+.net-pulse { animation: net-pulse 2.6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) {
+  .net-flow, .net-spin, .net-pulse { animation: none; }
+}
+
 /* Subtle pulse for stat dots */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
