@@ -1,12 +1,12 @@
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import CarrierDirectory from "@/components/sections/CarrierDirectory";
 import { buildMetadata } from "@/lib/metadata";
-import { getIntegrationsByType, getIntegrationSlug } from "@/lib/data";
+import { getIntegrationsByType } from "@/lib/data";
 
 export const metadata = buildMetadata({
-  title: "Carrier integrations",
+  title: "Carrier integrations — one connection to an entire network",
   description:
-    "Domestic and international carriers in one network. Pick a carrier to see its services and how it works with ITD Global.",
+    "Domestic and international carriers in one network — Royal Mail, Evri, DPD, InPost, DHL, FedEx, UPS, Amazon Shipping and more. Pick a carrier to see its services and how it works with us.",
   path: "/integrations/carriers",
 });
 
@@ -16,15 +16,10 @@ export default function CarrierIntegrationsPage() {
   const carriers = getIntegrationsByType("carrier");
   const groups = REGION_ORDER.map((region) => ({
     region,
-    carriers: carriers
-      .filter((c) => (c.regions ?? [c.region]).includes(region))
-      .map((c) => ({
-        name: c.name,
-        slug: getIntegrationSlug(c),
-        logo: c.logo,
-        description: c.description,
-      })),
-  })).filter((g) => g.carriers.length > 0);
+    items: carriers.filter((c) =>
+      (c.regions ?? (c.region ? [c.region] : [])).includes(region),
+    ),
+  })).filter((g) => g.items.length > 0);
 
   return (
     <>
@@ -35,8 +30,9 @@ export default function CarrierIntegrationsPage() {
             One connection to an entire carrier network.
           </h1>
           <p className="mt-4 text-body-lg text-text-secondary max-w-2xl">
-            Domestic and international carriers in one network, on rates you wouldn&apos;t
-            reach alone. Pick a carrier to see its services and how it works with us.
+            Domestic and international carriers in one network, on rates you
+            wouldn&apos;t reach alone. Pick a carrier to see its services and how it
+            works with us.
           </p>
         </div>
       </section>
@@ -49,7 +45,9 @@ export default function CarrierIntegrationsPage() {
 
       <ClosingCTA
         headline="The network keeps growing."
-        subtitle="Tell us who you ship with. We add carriers regularly, and we'll look at bringing yours into the network."
+        subtitle="Tell us who you ship with — if a carrier isn't on the list yet, we'll look at adding it."
+        primaryCta={{ label: "Talk to us", href: "/contact" }}
+        secondaryCta={{ label: "Browse tech integrations", href: "/integrations/tech" }}
       />
     </>
   );

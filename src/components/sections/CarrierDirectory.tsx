@@ -2,48 +2,42 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Globe, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import CarrierNetworkMap from "@/components/sections/CarrierNetworkMap";
+import { getIntegrationSlug, type Integration } from "@/lib/data";
 
-export interface DirectoryCarrier {
-  name: string;
-  slug: string;
-  logo?: string;
-  description?: string;
+type Region = "Domestic" | "International";
+
+interface Group {
+  region: Region;
+  items: Integration[];
 }
 
-export interface DirectoryGroup {
-  region: string;
-  carriers: DirectoryCarrier[];
-}
-
-const REGION_ICON: Record<string, typeof MapPin> = {
+const REGION_ICON: Record<Region, typeof MapPin> = {
   Domestic: MapPin,
   International: Globe,
 };
 
-export default function CarrierDirectory({ groups }: { groups: DirectoryGroup[] }) {
-  const [active, setActive] = useState(groups[0]?.region ?? "Domestic");
-  const reduce = useReducedMotion();
-
-  const current = groups.find((g) => g.region === active) ?? groups[0];
+export default function CarrierDirectory({ groups }: { groups: Group[] }) {
+  const [active, setActive] = useState<Region>(groups[0]?.region ?? "Domestic");
+  const activeGroup = groups.find((g) => g.region === active) ?? groups[0];
 
   return (
     <div>
-      {/* 3D-style network visual — reflects the active region */}
+      {/* motion-led geographic visual */}
       <CarrierNetworkMap region={active} />
 
-      {/* Segmented control */}
-      <div className="mt-6 flex justify-center">
+      {/* segmented switch */}
+      <div className="mt-8 flex justify-center">
         <div
           role="tablist"
           aria-label="Carrier region"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-bg-secondary p-1"
+          className="inline-flex rounded-full border border-border bg-white p-1 shadow-sm"
         >
           {groups.map((g) => {
-            const Icon = REGION_ICON[g.region] ?? MapPin;
+            const Icon = REGION_ICON[g.region];
             const selected = g.region === active;
             return (
               <button
@@ -51,62 +45,65 @@ export default function CarrierDirectory({ groups }: { groups: DirectoryGroup[] 
                 role="tab"
                 aria-selected={selected}
                 onClick={() => setActive(g.region)}
-                className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors min-h-[44px] cursor-pointer ${
+                className={`relative inline-flex min-h-[44px] items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
                   selected
-                    ? "bg-accent text-white shadow-sm"
+                    ? "text-white"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
-                <Icon className="w-4 h-4" strokeWidth={1.75} />
-                {g.region}
+                {selected && (
+                  <motion.span
+                    layoutId="carrier-seg"
+                    className="absolute inset-0 rounded-full bg-accent"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <span className="relative flex items-center gap-2">
+                  <Icon className="h-4 w-4" aria-hidden />
+                  {g.region}
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Tiles */}
-      <div className="mt-8">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current?.region}
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
-            {current?.carriers.map((c, i) => (
-              <motion.div
-                key={c.slug}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, ease: "easeOut", delay: reduce ? 0 : i * 0.04 }}
+      {/* reveal tiles */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={active}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
+        >
+          {activeGroup?.items.map((c, i) => (
+            <motion.div
+              key={c.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: i * 0.04, ease: "easeOut" }}
+            >
+              <Link
+                href={`/integrations/carriers/${getIntegrationSlug(c)}`}
+                className="group relative flex h-full min-h-[164px] flex-col items-center justify-start rounded-xl border border-border bg-white p-5 text-center transition-all hover:border-accent/30 hover:shadow-md focus-visible:border-accent/40 focus-visible:shadow-md focus-visible:outline-none"
               >
-                <Link
-                  href={`/integrations/carriers/${c.slug}`}
-                  className="group relative flex flex-col items-center justify-center text-center h-44 rounded-2xl border border-border bg-white px-5 pt-8 pb-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                >
-                  <IntegrationLogo name={c.name} logo={c.logo} size="md" fit="contain" />
-                  <p className="mt-4 text-sm font-semibold text-text-primary">{c.name}</p>
-
-                  {/* Reveal strip — reserved height, no layout shift */}
-                  <div className="mt-2 h-9 flex flex-col items-center justify-start">
-                    {c.description && (
-                      <span className="text-xs text-text-tertiary opacity-100 sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:translate-y-0 transition-all duration-200">
-                        {c.description}
-                      </span>
-                    )}
-                    <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-200">
-                      View <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="mb-3" />
+                <p className="text-sm font-medium text-text-primary">{c.name}</p>
+                <div className="mt-2 flex flex-col items-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  {c.description && (
+                    <p className="text-xs text-text-tertiary">{c.description}</p>
+                  )}
+                  <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-accent">
+                    View <ArrowRight className="h-3 w-3" aria-hidden />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

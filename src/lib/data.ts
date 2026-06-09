@@ -85,8 +85,8 @@ export interface Integration {
   type: "tech" | "carrier";
   /** Primary region (drives the detail-page label). */
   region?: string;
-  /** Index grouping override — list every region this carrier should appear under
-      (e.g. FedEx/UPS in both Domestic and International). Defaults to [region]. */
+  /** Optional explicit directory membership. Overrides `region` when present —
+   *  e.g. FedEx / UPS belong in both Domestic and International groups. */
   regions?: string[];
   featured: boolean;
   description?: string;
