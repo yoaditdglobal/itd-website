@@ -40,7 +40,7 @@ export default function ShippingFreightPage() {
       <SolutionHero
         label="Freight"
         title="Freight services built around your supply chain."
-        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. In-house customs. A China team on the ground."
+        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
         image={{
@@ -55,9 +55,9 @@ export default function ShippingFreightPage() {
           gradient: "from-accent-light via-white to-accent/15",
           icon: PackageOpen,
         }}
-        eyebrow="Where the margin leaves"
+        eyebrow=""
         heading="What sets ITD apart."
-        lead="Three things that make international freight work — when they're built into the service from the start."
+        lead="Three things that make international freight work, when they're built into the service from the start."
       />
       <FreightCarrierTicker />
       <FreightServices />
@@ -67,7 +67,7 @@ export default function ShippingFreightPage() {
         hidePainPoints
         label="Freight"
         title="Freight services built around your supply chain."
-        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. In-house customs. A China team on the ground."
+        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
         primaryCta={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         heroImage={{
           gradient: "from-accent-light via-white to-accent/15",

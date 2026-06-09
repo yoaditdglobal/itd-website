@@ -1,11 +1,11 @@
 import { CheckCircle2 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 const POINTS = [
-  "Weekly sample consolidations from China — fixed rate, guaranteed departure",
+  "Weekly sample consolidations from China, fixed rate, guaranteed departure",
   "FCL, LCL, and buyers consolidation from one account",
-  "In-house customs clearance — no broker fees",
+  "Customs clearance handled for you, no broker fees",
   "Named account contact throughout",
   "China office managing collections on the ground",
   "Warehousing and fulfilment via Delta Fulfilment",
@@ -13,41 +13,63 @@ const POINTS = [
 
 export default function FreightAudience() {
   return (
-    <section className="bg-bg-secondary py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left — copy */}
+        {/* Section header */}
+        <ScrollReveal>
+          <div className="mb-12">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+              Who this is built for
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
+              Built for Importers.
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+          {/* Left — image card */}
           <ScrollReveal>
-            <div>
-              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-4">
-                Who this is built for
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight leading-snug mb-6">
-                Built for Importers.
-              </h2>
-              <p className="text-text-secondary text-base leading-relaxed mb-8">
-                If you import regularly from China and need a freight partner who can manage the full journey — from factory floor to UK door — this is the service for you.
-              </p>
-              <Button href="/contact?enquiry=freight">
-                Get a Quote
-              </Button>
+            <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
+              <div className="relative aspect-[4/3] bg-bg-secondary">
+                <Image
+                  src="/shipping/Freight hero - 1.jpeg"
+                  alt="International freight importing"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 bg-white">
+                <h3 className="text-lg font-bold text-text-primary mb-2">
+                  Built for businesses that import regularly
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  If you source from multiple suppliers internationally and need a freight partner who handles everything from collection to UK delivery, ITD is built for you.
+                </p>
+              </div>
             </div>
           </ScrollReveal>
 
           {/* Right — checklist */}
           <ScrollReveal delay={120}>
-            <ul className="space-y-4">
-              {POINTS.map((point, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-4 bg-white border border-border rounded-xl px-5 py-4"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-text-secondary text-sm leading-relaxed">{point}</span>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Everything you need to import regularly from China, managed by one team from start to finish.
+              </p>
+              <ul className="space-y-3">
+                {POINTS.map((point, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 py-3 border-b border-border last:border-0"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-text-primary text-sm leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </ScrollReveal>
 
         </div>

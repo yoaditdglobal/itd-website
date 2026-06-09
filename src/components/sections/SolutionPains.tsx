@@ -89,7 +89,7 @@ export default function SolutionPains({
           {/* Header + pain rows */}
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <p className="text-eyebrow text-accent mb-3">{eyebrow}</p>
+              {eyebrow && <p className="text-eyebrow text-accent mb-3">{eyebrow}</p>}
               <h2 className="text-display-md text-text-primary">{heading}</h2>
               <p className="mt-4 text-body-md text-text-secondary max-w-prose">
                 {lead}
