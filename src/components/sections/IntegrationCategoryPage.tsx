@@ -258,19 +258,6 @@ export default function IntegrationCategoryPage({
       {/* FAQ */}
       {faq && faq.length > 0 && <FaqSection items={faq} />}
 
-      {/* Request integration nudge — kept on category pages too for parity with the previous behaviour */}
-      <section className="bg-white py-12 md:py-16 border-t border-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal>
-            <h3 className="text-xl font-semibold text-text-primary">Don&apos;t see your tool?</h3>
-            <p className="mt-2 text-text-secondary">We&apos;re adding new integrations every month. Tell us what you need.</p>
-            <div className="mt-6">
-              <Button href="/contact?enquiry=integrations">Request an Integration</Button>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Closing CTA — custom override or default */}
       {closingCta ? (
         <section className="bg-bg-dark py-16 md:py-20 text-center">
