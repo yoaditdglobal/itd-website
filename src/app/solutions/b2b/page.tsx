@@ -138,7 +138,7 @@ export default function B2BManufacturingPage() {
           name: "UPS",
           logo: "/logos/carriers/ups_logo.png",
           description: "UPS Standard and Expedited for B2B routing across the UK and EU lanes.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "DHL Express",

@@ -14,7 +14,7 @@ export default function AmazonShippingPage() {
       logo="/logos/carriers/amazonshipping_logo.png"
       tagline="Access Amazon's logistics network for competitive parcel rates, now connected to Connexx."
       description="Amazon Shipping brings Amazon's world-class logistics infrastructure to third-party sellers and businesses. Through Connexx, you can compare Amazon Shipping rates against your other carriers, generate labels automatically, and track every delivery with Amazon's precision tracking — all from one dashboard."
-      region="UK"
+      region="Domestic"
       services={[
         "Amazon Standard Delivery",
         "Amazon Next Day",

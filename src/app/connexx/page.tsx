@@ -599,7 +599,7 @@ export default function ConnexxPage() {
 
           <div className="mt-10 text-center">
             <Link
-              href="/integrations"
+              href="/integrations/carriers"
               className="inline-flex items-center gap-1.5 text-sm text-accent font-medium hover:underline"
             >
               See every integration <ArrowRight className="w-4 h-4" />

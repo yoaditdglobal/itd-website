@@ -39,17 +39,16 @@ const solutionsMenu = {
 
 const integrationsMenu = {
   tech: [
-    { label: "ERP / WMS", href: "/integrations/erp-wms", names: "SAP, NetSuite, Dynamics" },
-    { label: "Logistics", href: "/integrations/logistics", names: "ShipStation, Shippo, Project44" },
-    { label: "eCommerce", href: "/integrations/ecommerce", names: "Shopify, WooCommerce, Magento" },
+    { label: "ERP / WMS", href: "/integrations/erp-wms", names: "Linnworks, NetSuite, Magento" },
+    { label: "eCommerce & Logistics", href: "/integrations/ecommerce-logistics", names: "Shopify, WooCommerce, Veeqo" },
     { label: "Marketplaces", href: "/integrations/marketplaces", names: "Amazon, eBay, Etsy" },
   ],
   carriers: [
     { name: "Evri", desc: "UK parcel delivery", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo.png" },
     { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
     { name: "DPD", desc: "European parcel delivery", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
-    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations", logo: "/logos/carriers/InPost_Logo_yellow.png" },
-    { name: "Parcel Force", desc: "UK tracked parcel delivery", href: "/integrations", logo: "/logos/carriers/parcel-force.svg" },
+    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+    { name: "Parcel Force", desc: "UK tracked parcel delivery", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
     { name: "Amazon Shipping", desc: "Amazon logistics network", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
     { name: "DHL", desc: "Global express & freight", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },
   ],
@@ -221,7 +220,7 @@ export default function Navbar() {
                         <div className="text-xs text-text-secondary">{cat.names}</div>
                       </Link>
                     ))}
-                    <Link href="/integrations" className="link-underline text-xs text-accent mt-1">Browse integrations →</Link>
+                    <Link href="/integrations/tech" className="link-underline text-xs text-accent mt-1">Browse integrations →</Link>
                   </div>
                   <div>
                     <div className="text-eyebrow text-text-tertiary mb-3">Carrier Integrations</div>
@@ -238,7 +237,7 @@ export default function Navbar() {
                         </li>
                       ))}
                     </ul>
-                    <Link href="/integrations" className="link-underline text-xs text-accent mt-3">Browse carriers →</Link>
+                    <Link href="/integrations/carriers" className="link-underline text-xs text-accent mt-3">Browse carriers →</Link>
                   </div>
                 </motion.div>
               )}
@@ -393,7 +392,7 @@ export default function Navbar() {
                     {c.name}
                   </Link>
                 ))}
-                <Link href="/integrations" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
+                <Link href="/integrations/carriers" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
               </div>
             )}
 

@@ -105,14 +105,14 @@ export default function ImportPage() {
           logo: "/logos/carriers/fedex_logo.png",
           description:
             "FedEx inbound priority and economy with HS code validation and CDS pre-filing per consignment.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "UPS",
           logo: "/logos/carriers/ups_logo.png",
           description:
             "UPS inbound worldwide with landed cost calculated against the UK Global Tariff before goods arrive.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "SAP",
@@ -142,7 +142,7 @@ export default function ImportPage() {
           name: "HMRC CDS API",
           description:
             "Direct CDS API integration. Pre-clearance declarations filed to HMRC from the same workflow as the PO.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
       ]}
       caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}

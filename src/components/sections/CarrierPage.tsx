@@ -6,13 +6,13 @@ import ClosingCTA from "@/components/sections/ClosingCTA";
 import { Truck, Globe, Clock, ShieldCheck, Zap, BarChart3 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-interface CarrierFeature {
+export interface CarrierFeature {
   icon: LucideIcon;
   title: string;
   desc: string;
 }
 
-interface CarrierPageProps {
+export interface CarrierPageProps {
   name: string;
   logo?: string;
   tagline: string;
@@ -40,8 +40,8 @@ export default function CarrierPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="max-w-3xl">
-              <Link href="/integrations" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6">
-                ← All integrations
+              <Link href="/integrations/carriers" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6">
+                ← All carriers
               </Link>
               <div className="flex items-center gap-4 mb-6">
                 <IntegrationLogo name={name} logo={logo} size="md" fit="contain" />

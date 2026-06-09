@@ -20,16 +20,16 @@ const techLogos = [
 ];
 
 const carrierLogos = [
-  { name: "DHL Express", region: "Global", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", region: "Global", logo: "/logos/carriers/fedex_logo.png" },
-  { name: "UPS", region: "Global", logo: "/logos/carriers/ups_logo.png" },
-  { name: "Royal Mail", region: "UK", logo: "/logos/carriers/Royal-Mail-Logo.png" },
-  { name: "DPD", region: "EU", logo: "/logos/carriers/DPD-LOGO.png" },
-  { name: "Evri", region: "UK", logo: "/logos/carriers/evri_logo.png" },
-  { name: "Amazon Shipping", region: "UK", logo: "/logos/carriers/amazonshipping_logo.png" },
-  { name: "Yodel", region: "UK", logo: "/logos/carriers/yodel_logo.avif" },
-  { name: "DHL Parcel", region: "EU", logo: "/logos/carriers/dhlparcel_logo.svg" },
-  { name: "Deutsche Post", region: "EU", logo: "/logos/carriers/deutschepost_logo.avif" },
+  { name: "DHL", region: "International", logo: "/logos/carriers/dhl_logo.webp" },
+  { name: "FedEx", region: "International", logo: "/logos/carriers/fedex_logo.png" },
+  { name: "UPS", region: "International", logo: "/logos/carriers/ups_logo.png" },
+  { name: "Royal Mail", region: "Domestic", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { name: "DPD", region: "Domestic", logo: "/logos/carriers/DPD-LOGO.png" },
+  { name: "Evri", region: "Domestic", logo: "/logos/carriers/evri_logo.png" },
+  { name: "Amazon Shipping", region: "Domestic", logo: "/logos/carriers/amazonshipping_logo.png" },
+  { name: "InPost", region: "Domestic", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+  { name: "DHL Parcel", region: "Domestic", logo: "/logos/carriers/dhlparcel_logo.svg" },
+  { name: "Parcel Force", region: "International", logo: "/logos/carriers/parcel-force.svg" },
 ];
 
 export default function IntegrationHighlights() {
@@ -89,7 +89,7 @@ export default function IntegrationHighlights() {
         </ScrollReveal>
 
         <div className="mt-8 text-center">
-          <Link href="/integrations" className="link-underline text-sm text-accent font-medium">
+          <Link href="/integrations/carriers" className="link-underline text-sm text-accent font-medium">
             Browse integrations →
           </Link>
         </div>

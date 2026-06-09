@@ -12,7 +12,8 @@ const footerLinks = {
   ],
   platform: [
     { name: "Connexx", href: "/connexx" },
-    { name: "Integrations", href: "/integrations" },
+    { name: "Carrier integrations", href: "/integrations/carriers" },
+    { name: "Tech integrations", href: "/integrations/tech" },
   ],
   resources: [
     { name: "Case Studies", href: "/resources/case-studies" },

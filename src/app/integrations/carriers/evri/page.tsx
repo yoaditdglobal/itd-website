@@ -14,7 +14,7 @@ export default function EvriPage() {
       logo="/logos/carriers/evri_logo.png"
       tagline="UK's largest dedicated parcel delivery network, fully integrated with Connexx."
       description="Evri delivers to over 30 million UK addresses. Through Connexx, you get automated label generation, real-time tracking, and seamless returns processing — all without leaving your dashboard. Ideal for eCommerce businesses with high UK domestic volumes."
-      region="UK"
+      region="Domestic"
       services={[
         "Standard Delivery (2-3 days)",
         "Next Day Delivery",

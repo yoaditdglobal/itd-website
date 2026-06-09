@@ -350,7 +350,7 @@ export default function ShippingDomesticPage() {
           logo: "/logos/carriers/yodel_logo.avif",
           description:
             "UK residential strength including Sunday delivery. Next Day and 48-hour services.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "Parcelforce",

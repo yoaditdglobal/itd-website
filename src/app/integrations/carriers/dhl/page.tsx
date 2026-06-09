@@ -14,7 +14,7 @@ export default function DhlPage() {
       logo="/logos/carriers/dhl_logo.webp"
       tagline="The world's leading international express carrier, fully integrated with Connexx."
       description="DHL Express connects you to 220+ countries with time-definite international delivery. Through Connexx, you get automated customs documentation, real-time global tracking, and intelligent rate comparison across all DHL services — from Express Worldwide to Economy Select."
-      region="Global"
+      region="International"
       services={[
         "DHL Express Worldwide",
         "DHL Express 9:00 / 10:30 / 12:00",
