@@ -481,6 +481,8 @@ export const integrations: Integration[] = [
   { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", featured: true, description: "Worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
   { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
   { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery" },
+  { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express" },
+  { id: "c-deutsche-post", name: "Deutsche Post", category: "carrier", type: "carrier", region: "International", featured: false, description: "German postal & international mail", logo: "/logos/carriers/deutschepost_logo.avif" },
 ];
 
 // ─── Integration slugs + lookups ───────────────────────────────────────────────
