@@ -59,6 +59,8 @@ interface IntegrationCategoryPageProps {
 
   /** Optional "Common use cases" cards rendered below the catalogue. */
   useCases?: UseCase[];
+  /** Optional heading override for the use cases section. Defaults to "Common use cases". */
+  useCasesHeading?: string;
   /** Optional intro paragraph above the use cases grid. */
   useCasesIntro?: string;
 
@@ -101,6 +103,7 @@ export default function IntegrationCategoryPage({
   heroPrimaryCta,
   heroSecondaryCta,
   useCases,
+  useCasesHeading = "Common use cases",
   useCasesIntro,
   howItWorks,
   howItWorksHeading = "How the integration works",
@@ -194,7 +197,7 @@ export default function IntegrationCategoryPage({
         <section className="bg-white py-16 md:py-24 border-t border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-3">Common use cases</h2>
+              <h2 className="text-display-lg text-text-primary mb-3">{useCasesHeading}</h2>
               {useCasesIntro && (
                 <p className="text-text-secondary max-w-2xl mb-10">{useCasesIntro}</p>
               )}
