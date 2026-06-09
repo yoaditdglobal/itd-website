@@ -6,7 +6,7 @@ import { itemListSchema } from "@/components/seo/JsonLd";
 export const metadata = buildMetadata({
   title: "ERP and WMS integrations",
   description:
-    "Connect Connexx to SAP, NetSuite, Microsoft Dynamics, Sage, Cin7, Linnworks, Mintsoft, Veeqo, ShipHero, StoreFeeder, and Selro.",
+    "Your ERP or WMS stays the source of truth. We plug in so orders pull in and shipping data writes back when a label prints — NetSuite, Linnworks, Mintsoft, Magento, OrderWise and more.",
   path: "/integrations/erp-wms",
 });
 
@@ -15,103 +15,99 @@ export default function ErpWmsPage() {
 
   return (
     <IntegrationCategoryPage
-      title="ERP and WMS integrations"
-      subtitle="Connexx connects to the ERP and WMS systems your finance and operations teams already run. Orders pull in from the system of record. Shipping data writes back the moment a label prints. The dispatch team works in Connexx. The finance team keeps SAP, NetSuite, Sage, or Dynamics as the source of truth."
+      title="Your ERP and WMS stay the source of truth. We handle the carriers."
+      subtitle="We plug into the ERP or WMS your team already runs, so it stays your single source of truth. Orders pull in, and shipping data writes back the moment a label prints."
       integrations={integrations}
       heroLabel="ERP and WMS"
-      heroH1="ERP and WMS integrations for multi-carrier dispatch."
-      heroSubhead="Connexx connects to the ERP and WMS systems your finance and operations teams already run. Orders pull in from the system of record. Shipping data writes back the moment a label prints. The dispatch team works in Connexx. The finance team keeps SAP, NetSuite, Sage, or Dynamics as the source of truth."
-      heroPrimaryCta={{ label: "Request a technical integration review", href: "/contact?enquiry=erp-wms" }}
-      heroSecondaryCta={{ label: "Browse the full integrations directory", href: "/integrations/tech" }}
-      useCasesIntro="Eleven ERP and WMS integrations live today. All connections are native, with order pull, label generation, and shipping write-back included as standard."
+      heroH1="Your ERP and WMS stay the source of truth. We handle the carriers."
+      heroSubhead="We plug into the ERP or WMS your team already runs, so it stays your single source of truth. Orders pull in, and shipping data writes back the moment a label prints."
+      heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=erp-wms" }}
+      heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
+      useCasesHeading="How teams use it"
+      useCasesIntro="These are setups teams run today. Each one's a native connection, so your orders and shipping data stay in step without anyone copying between screens."
       useCases={[
         {
-          headline: "SAP plus DHL Express for cross-border B2B",
+          headline: "NetSuite plus DHL Express for cross-border B2B",
           description:
-            "Manufacturer with SAP S/4HANA. Confirmed orders pull into Connexx with the HS code, EORI number, and value already on the order line. The customs paperwork generates against the SAP product master. DHL Express books the international leg. Tracking and POD write back into SAP for the AR team.",
-          namedIntegrations: ["SAP", "DHL Express"],
+            "A manufacturer running NetSuite. Orders pull in with the weight and destination the label needs, our DHL Express rate is applied, and the label prints. The tracking writes straight back into NetSuite.",
+          namedIntegrations: ["NetSuite", "DHL Express"],
         },
         {
           headline: "NetSuite plus FedEx and UPS for North American export",
           description:
-            "Brand running NetSuite for global orders. Connexx selects between FedEx and UPS on every parcel using live rates, weight bands, and service level. Item fulfilment records update with the carrier, tracking number, and dispatch timestamp. Returns post back as RMAs.",
-          namedIntegrations: ["Oracle NetSuite", "FedEx", "UPS"],
+            "A brand running NetSuite. On each order we compare FedEx and UPS rates and pick the better one. The label prints, and the carrier and tracking write back into NetSuite.",
+          namedIntegrations: ["NetSuite", "FedEx", "UPS"],
         },
         {
           headline: "Linnworks plus seven UK carriers",
           description:
-            "Multi-channel seller using Linnworks for inventory and order management. Connexx replaces the per-carrier integrations inside Linnworks with one connection exposing Royal Mail, DPD, Evri, Yodel, Parcel Force, Amazon Shipping, and DHL Express. The seller stops paying per-carrier integration fees and gets rate comparison on every dispatch.",
+            "A multi-channel seller on Linnworks. One connection brings seven UK carriers and their rates into the dispatch screen, so each order goes on the best-priced one. The label prints and tracking writes back, with no per-carrier integration to maintain.",
           namedIntegrations: ["Linnworks", "Royal Mail", "DPD", "Evri", "Yodel", "Parcel Force", "Amazon Shipping", "DHL Express"],
         },
         {
           headline: "Mintsoft plus 3PL brand routing",
           description:
-            "Mintsoft warehouse running fulfilment for 60 brands. Each brand has different carrier preferences, weight rules, and service-level constraints. Connexx applies the brand-specific routing rules at the moment of label generation. Compliance checks run before the label prints.",
+            "A Mintsoft warehouse fulfilling for 60 brands. The connection pulls each brand's orders with its own routing rules, then applies the right carrier and rate. The label prints and tracking writes back per brand.",
           namedIntegrations: ["Mintsoft", "Royal Mail", "DPD", "DHL Express", "FedEx"],
         },
       ]}
-      howItWorksHeading="How the ERP and WMS integration works"
-      howItWorksIntro="ERP and WMS integrations carry more data both ways than eCommerce or marketplace connections. Connexx ships with three components for every ERP and WMS connector."
+      howItWorksHeading="How it works"
+      howItWorksIntro="ERP and WMS connections move more data both ways than an eCommerce or marketplace one. Each connector does three things."
       howItWorks={[
         {
           step: 1,
           title: "Order pull.",
           description:
-            "The ERP or WMS sends confirmed orders to Connexx. Field mapping covers customer details, line items with weight and HS code, service level, and delivery date. Polling, webhook, and event-driven options are all supported.",
+            "Your ERP or WMS sends each confirmed order across, with the weight, destination, service level and delivery date the label needs. Polling, webhook and event-driven options are all supported.",
         },
         {
           step: 2,
-          title: "Carrier booking and label generation.",
+          title: "Carrier rates and label.",
           description:
-            "The Connexx rate engine compares every active carrier on every order. The cheapest compliant carrier is selected. Labels generate in the right format for the carrier and the warehouse printer.",
+            "We compare the active carriers on each order and apply the best-priced compliant one. The label generates in the right format for the carrier and your warehouse printer.",
         },
         {
           step: 3,
           title: "Write-back.",
           description:
-            "Carrier name, tracking number, dispatch timestamp, freight cost, and POD write back into the ERP or WMS. Finance reconciles freight against the carrier invoice. Customer service sees tracking inside the system of record without a second login.",
+            "The carrier, tracking number, dispatch time and freight cost write straight back into your ERP or WMS. Your team sees tracking in the system they already use, with no second login.",
         },
       ]}
       faq={[
         {
-          question: "Does Connexx work with SAP?",
+          question: "Does ITD integrate with NetSuite?",
           answer:
-            "Yes. Connexx integrates with SAP S/4HANA and SAP ECC. Orders pull from the SD module. Tracking, freight cost, and POD write back to the same module. The integration supports both polling and IDoc/event-driven order release. Setup takes three to five business days depending on your write-back scope and whether you use SAP Business Network for carrier collaboration.",
+            "Yes. NetSuite is native: orders pull in, labels print on our carrier rates, and the carrier and tracking write back.",
         },
         {
-          question: "Does Connexx integrate with Oracle NetSuite?",
+          question: "Does ITD work with Linnworks and Mintsoft?",
           answer:
-            "Yes. Connexx connects to NetSuite as a SuiteApp. Both SuiteCommerce orders and stand-alone NetSuite orders are supported. Item fulfilment records update automatically with the carrier, tracking number, and shipping cost. Returns post as RMA records. The connector handles multi-subsidiary setups and OneWorld instances.",
+            "Yes, both are native. One connection brings our carriers and rates into the tool you already run.",
         },
         {
-          question: "Does Connexx integrate with Sage?",
+          question: "Does ITD work with ShipHero, StoreFeeder or Veeqo?",
           answer:
-            "Yes. Connexx supports Sage 50, Sage 200, and Sage Intacct. Sales order numbers link to shipments inside Connexx so finance and operations work from the same identifier. Freight cost posts back to the order for invoice matching. The integration sits alongside Sage rather than replacing any Sage module.",
+            "Yes, all three are live and native, with order pull, label generation and write-back as standard.",
         },
         {
-          question: "Does Connexx work with Microsoft Dynamics?",
+          question: "What ERPs and order systems do you support today?",
           answer:
-            "Yes. Connexx connects to Dynamics 365 Business Central and Dynamics 365 Finance & Operations. Sales order and shipment statuses sync in both directions. The integration uses the Dynamics OData API and supports custom field mapping for industry-specific extensions.",
+            "NetSuite, Linnworks, Mintsoft, Magento, OrderWise, Peoplevox, Selro, Tradepeg, JonasSports, Brightpearl, ShipHero, StoreFeeder and Veeqo, with more added most months.",
         },
         {
-          question: "Does Connexx work with Linnworks, Mintsoft, or Veeqo?",
+          question: "What if our system isn't on the list?",
           answer:
-            "Yes to all three. Linnworks uses Connexx as a single carrier connection that replaces multiple per-carrier integrations inside Linnworks. Mintsoft customers use Connexx for label printing, manifesting, and rate comparison across their 3PL brand book. Veeqo customers use Connexx alongside Veeqo for UK and EU carrier depth.",
+            "We can still connect it. Our API and custom integrations pull orders in and write the carrier and tracking back, the same as a native connector. Tell us what you run and we'll scope it.",
         },
         {
-          question: "Does Connexx work with Cin7, ShipHero, or StoreFeeder?",
+          question: "Do you have an API for custom integrations?",
           answer:
-            "Yes. Cin7 connects via API for inventory, order, and shipment events. ShipHero integrates for warehouse and shipping management across 3PLs and brands. StoreFeeder connects for multi-channel listing and order management. All three activate within one to two business days.",
-        },
-        {
-          question: "What ERPs and WMSs does Connexx support today?",
-          answer:
-            "Eleven, all native: SAP, Oracle NetSuite, Microsoft Dynamics, Sage, Cin7, Linnworks, Mintsoft, Selro, ShipHero, StoreFeeder, and Veeqo. If your system is not on the list, the Connexx REST API supports custom integrations using the same order, label, tracking, and POD endpoints.",
+            "Yes. If your ERP or WMS isn't natively connected, our API lets us build the link, so orders pull in and labels and tracking flow back like any other integration.",
         },
       ]}
       closingCta={{
         headline: "Request a technical integration review.",
-        subhead: "Bring your ERP or WMS specifics. We'll map the order, label, and write-back flow before you commit.",
+        subhead: "Let's go through your integration requirements together, so our dev team can get up to speed.",
         primary: { label: "Contact Us", href: "/contact?enquiry=erp-wms" },
         secondary: { label: "Explore", href: "/integrations/tech" },
       }}
@@ -125,17 +121,19 @@ export default function ErpWmsPage() {
           path: "/integrations/erp-wms",
           name: "ERP and WMS integrations",
           items: [
-            { name: "SAP", url: "/integrations/erp-wms#sap", description: "Enterprise ERP integration with SAP S/4HANA and ECC. Orders pull from the SD module. Tracking and POD write back." },
-            { name: "Oracle NetSuite", url: "/integrations/erp-wms#oracle-netsuite", description: "Cloud ERP connector. SuiteCommerce and stand-alone NetSuite supported. Item fulfilment records update automatically." },
-            { name: "Microsoft Dynamics", url: "/integrations/erp-wms#microsoft-dynamics", description: "Dynamics 365 Business Central and Finance & Operations. Sales order and shipment statuses sync both ways." },
-            { name: "Sage", url: "/integrations/erp-wms#sage", description: "Sage 50, Sage 200, and Sage Intacct. Shipments and tracking link by sales order number." },
-            { name: "Cin7", url: "/integrations/erp-wms#cin7", description: "Inventory and warehouse management for multi-channel sellers." },
-            { name: "Linnworks", url: "/integrations/erp-wms#linnworks", description: "Multi-channel order management. One Connexx connection replaces per-carrier integrations inside Linnworks." },
-            { name: "Mintsoft", url: "/integrations/erp-wms#mintsoft", description: "Warehouse management system for 3PLs and brand fulfilment. Picks flow into Connexx for label printing." },
-            { name: "Selro", url: "/integrations/erp-wms#selro", description: "Multi-channel listing and order management." },
-            { name: "ShipHero", url: "/integrations/erp-wms#shiphero", description: "Warehouse and shipping management for 3PLs and brands." },
-            { name: "StoreFeeder", url: "/integrations/erp-wms#storefeeder", description: "Multi-channel listing and order management for retailers." },
-            { name: "Veeqo", url: "/integrations/erp-wms#veeqo", description: "Inventory and shipping platform. Used alongside Veeqo for UK and EU carrier depth." },
+            { name: "NetSuite", url: "/integrations/erp-wms#netsuite", description: "Cloud ERP. Orders pull in, labels print on our carrier rates, and carrier and tracking write back." },
+            { name: "Linnworks", url: "/integrations/erp-wms#linnworks", description: "Multi-channel order management. One connection brings our UK carriers and rates into the dispatch screen." },
+            { name: "Mintsoft", url: "/integrations/erp-wms#mintsoft", description: "Warehouse management for 3PLs. Each brand's orders pull with their own routing rules." },
+            { name: "Magento", url: "/integrations/erp-wms#magento", description: "Adobe Commerce orders pull in for carrier selection, label generation, and tracking write-back." },
+            { name: "OrderWise", url: "/integrations/erp-wms#orderwise", description: "Business management and WMS. Orders pull in and shipping data writes back." },
+            { name: "Peoplevox", url: "/integrations/erp-wms#peoplevox", description: "eCommerce warehouse management. Native order pull, label generation, and write-back." },
+            { name: "Selro", url: "/integrations/erp-wms#selro", description: "Multi-channel order management. Native connection with order pull and write-back." },
+            { name: "Tradepeg", url: "/integrations/erp-wms#tradepeg", description: "Inventory and order management. Orders pull in and carrier and tracking write back." },
+            { name: "JonasSports", url: "/integrations/erp-wms#jonassports", description: "Retail and ERP for sports. Native order pull, label generation, and write-back." },
+            { name: "Brightpearl", url: "/integrations/erp-wms#brightpearl", description: "Retail operations platform. Orders pull in and shipping data writes back." },
+            { name: "ShipHero", url: "/integrations/erp-wms#shiphero", description: "Warehouse and shipping management for 3PLs and brands. Live and native." },
+            { name: "StoreFeeder", url: "/integrations/erp-wms#storefeeder", description: "Multi-channel listing and order management. Native order pull, labels, and write-back." },
+            { name: "Veeqo", url: "/integrations/erp-wms#veeqo", description: "Inventory and shipping platform. Native order pull, label generation, and write-back." },
           ],
         }),
       ]}
