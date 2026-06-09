@@ -44,7 +44,7 @@ export default function CarrierPage({
                 ← All carriers
               </Link>
               <div className="flex items-center gap-4 mb-6">
-                <IntegrationLogo name={name} logo={logo} size="md" fit="contain" />
+                <IntegrationLogo name={name} logo={logo} size="xl" fit="contain" />
                 <div>
                   <h1 className="text-display-xl text-text-primary">{name}</h1>
                   <span className="text-sm font-medium text-accent">{region}</span>
@@ -53,8 +53,8 @@ export default function CarrierPage({
               <p className="text-xl text-text-secondary">{tagline}</p>
               <p className="mt-4 text-text-secondary leading-relaxed">{description}</p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button href={`/contact?enquiry=${name.toLowerCase().replace(/\s+/g, "-")}`}>Connect {name} to Connexx</Button>
-                <Button href="/contact" variant="secondary">Contact Sales</Button>
+                <Button href={`/contact?enquiry=${name.toLowerCase().replace(/\s+/g, "-")}`}>Contact Us</Button>
+                <Button href="/integrations/carriers" variant="secondary">Explore</Button>
               </div>
             </div>
           </ScrollReveal>
@@ -79,7 +79,7 @@ export default function CarrierPage({
       <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="text-2xl text-display-lg text-text-primary mb-8">Services available via Connexx</h2>
+            <h2 className="text-2xl text-display-lg text-text-primary mb-8">Services available</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {services.map((service) => (
                 <div key={service} className="bg-white rounded-xl border border-border p-5 flex items-start gap-3">
@@ -97,10 +97,10 @@ export default function CarrierPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-2xl text-display-lg text-text-primary mb-3">
-              {name} + Connexx
+              {name} + ITD
             </h2>
             <p className="text-text-secondary mb-10 max-w-2xl">
-              Everything you get from {name}, enhanced with Connexx&apos;s automation, analytics, and multi-carrier intelligence.
+              Everything you get from {name}, enhanced with ITD&apos;s automation, analytics, and multi-carrier intelligence.
             </p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

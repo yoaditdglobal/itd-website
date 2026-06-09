@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Royal Mail Integration — ITD Global",
-  description: "Connect Royal Mail to Connexx for automated shipping, tracking, and international delivery across the UK and worldwide.",
+  description: "Connect Royal Mail to ITD for automated shipping, tracking, and international delivery across the UK and worldwide.",
 };
 
 export default function RoyalMailPage() {
@@ -12,8 +12,8 @@ export default function RoyalMailPage() {
     <CarrierPage
       name="Royal Mail"
       logo="/logos/carriers/Royal-Mail-Logo.png"
-      tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."
-      description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through Connexx, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
+      tagline="The UK's trusted postal service, fully connected to your ITD dashboard."
+      description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through ITD, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
       region="Domestic"
       services={[
         "Royal Mail Tracked 24",
@@ -26,18 +26,18 @@ export default function RoyalMailPage() {
         "Returns Service",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Batch-generate Royal Mail labels from Connexx with correct service tier auto-selected." },
+        { icon: Zap, title: "Automated label generation", desc: "Batch-generate Royal Mail labels from ITD with correct service tier auto-selected." },
         { icon: Eye, title: "Unified tracking", desc: "Royal Mail and Parcelforce tracking data in one view alongside all your other carriers." },
         { icon: Globe, title: "International shipping", desc: "Automatic customs documentation for Royal Mail international services." },
         { icon: BarChart3, title: "Service comparison", desc: "Compare Tracked 24 vs Tracked 48 vs Special Delivery costs for every shipment." },
         { icon: ShieldCheck, title: "Compensation tracking", desc: "Monitor compensation limits and automate claims for lost or damaged items." },
-        { icon: Clock, title: "Collection scheduling", desc: "Book Royal Mail collections directly through Connexx at your preferred time slots." },
+        { icon: Clock, title: "Collection scheduling", desc: "Book Royal Mail collections directly through ITD at your preferred time slots." },
       ]}
       stats={[
         { label: "UK delivery coverage", value: "100%" },
         { label: "Countries reached", value: "230+" },
         { label: "Daily deliveries", value: "24M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

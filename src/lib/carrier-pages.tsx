@@ -19,12 +19,12 @@ const REGION_DISPLAY: Record<string, string> = {
   International: "International",
 };
 
-/** Carrier-agnostic "+ Connexx" value props — fit any carrier; replace as needed. */
+/** Carrier-agnostic "+ ITD" value props — fit any carrier; replace as needed. */
 const DEFAULT_FEATURES: CarrierContent["features"] = [
   { icon: Zap, title: "Automated label generation", desc: "Generate labels with the correct service and weight tier applied automatically." },
-  { icon: Eye, title: "Live tracking", desc: "Track every parcel from one Connexx dashboard with proactive customer notifications." },
+  { icon: Eye, title: "Live tracking", desc: "Track every parcel from one ITD dashboard with proactive customer notifications." },
   { icon: BarChart3, title: "Rate optimisation", desc: "Auto-select the cheapest compliant service on every order against your rules." },
-  { icon: Clock, title: "Collection booking", desc: "Schedule collections and manage pickup windows directly in Connexx." },
+  { icon: Clock, title: "Collection booking", desc: "Schedule collections and manage pickup windows directly in ITD." },
   { icon: ShieldCheck, title: "Proof of delivery", desc: "Access digital signatures and photo proof of delivery from the dashboard." },
   { icon: Globe, title: "Multi-carrier intelligence", desc: "Compare this carrier against every other in your account on each shipment." },
 ];
@@ -48,13 +48,13 @@ export function getCarrierPageContent(carrier: Integration): CarrierPageProps {
   const desc = carrier.description ?? "multi-carrier delivery";
 
   const defaults: CarrierContent = {
-    tagline: `${carrier.name} — ${desc}, connected to Connexx.`,
-    description: `${carrier.name} connects to Connexx so every eligible order can route through ${carrier.name} alongside your other carriers, with automated labels, tracking, and cost optimisation. Detailed ${carrier.name} services and stats are being added to this page.`,
+    tagline: `${carrier.name} — ${desc}, connected to ITD.`,
+    description: `${carrier.name} connects to ITD so every eligible order can route through ${carrier.name} alongside your other carriers, with automated labels, tracking, and cost optimisation. Detailed ${carrier.name} services and stats are being added to this page.`,
     region,
     services: DEFAULT_SERVICES,
     features: DEFAULT_FEATURES,
     stats: [
-      { label: "Connexx integration", value: "Live" },
+      { label: "ITD integration", value: "Live" },
       { label: "Coverage", value: region },
       { label: "Services", value: "—" },
       { label: "Avg transit", value: "—" },
