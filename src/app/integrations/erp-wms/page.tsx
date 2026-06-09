@@ -22,7 +22,7 @@ export default function ErpWmsPage() {
       heroH1="ERP and WMS integrations for multi-carrier dispatch."
       heroSubhead="Connexx connects to the ERP and WMS systems your finance and operations teams already run. Orders pull in from the system of record. Shipping data writes back the moment a label prints. The dispatch team works in Connexx. The finance team keeps SAP, NetSuite, Sage, or Dynamics as the source of truth."
       heroPrimaryCta={{ label: "Request a technical integration review", href: "/contact?enquiry=erp-wms" }}
-      heroSecondaryCta={{ label: "Browse the full integrations directory", href: "/integrations" }}
+      heroSecondaryCta={{ label: "Browse the full integrations directory", href: "/integrations/tech" }}
       useCasesIntro="Eleven ERP and WMS integrations live today. All connections are native, with order pull, label generation, and shipping write-back included as standard."
       useCases={[
         {
@@ -113,11 +113,11 @@ export default function ErpWmsPage() {
         headline: "Request a technical integration review.",
         subhead: "Bring your ERP or WMS specifics. We'll map the order, label, and write-back flow before you commit.",
         primary: { label: "Contact Us", href: "/contact?enquiry=erp-wms" },
-        secondary: { label: "Explore", href: "/integrations" },
+        secondary: { label: "Explore", href: "/integrations/tech" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
-        { name: "Integrations", path: "/integrations" },
+        { name: "Integrations", path: "/integrations/tech" },
         { name: "ERP and WMS", path: "/integrations/erp-wms" },
       ]}
       jsonLd={[

@@ -365,24 +365,24 @@ export const caseStudies: CaseStudy[] = [
     industry: "eCommerce",
     headline: "Freedom Fire unlocked full shipping visibility with Connexx Shipment Reports",
     metric: "Real-time shipment data",
-    summary: "Connecting Linnworks to ITD Global's multi-carrier network via Connexx gave Freedom Fire DG-approved carriers, dedicated account management, competitive rates across Yodel/Evri/Royal Mail, and — for the first time — real visibility of their parcel data.",
+    summary: "Connecting Linnworks to ITD Global's multi-carrier network via Connexx gave Freedom Fire DG-approved carriers, dedicated account management, competitive rates across InPost/Evri/Royal Mail, and — for the first time — real visibility of their parcel data.",
     challenge: "Freedom Fire is a UK online retailer of fire safety, security, and PPE equipment. As volume grew, the parcel operation hadn't kept pace. Without clear data, the team had no reliable way to see what was being shipped, where, how it was performing, or what it was costing them. Decisions were made without insight. Issues were discovered late. And with no dedicated point of contact at their existing reseller, there was nobody to turn to when things needed investigating. For a business shipping Dangerous Goods volumes, the absence of shipment tracking and reporting was a real operational liability.",
-    solution: "ITD Global connected Freedom Fire's Linnworks platform to ITD's multi-carrier network via Connexx — a single integrated eCommerce shipping workflow and, for the first time, real visibility of parcel data through Shipment Reports. Alongside the integration: Dangerous Goods approvals handled with Yodel, competitive rates across Yodel (DG Approved), Evri, and Royal Mail, and a dedicated account manager to keep everything running smoothly.",
-    result: "Full DG compliance and management through Yodel (something previous resellers couldn't provide). A single dedicated account manager who knows the operation inside out. Commercially competitive rates that weren't available going direct. And complete, real-time visibility through Shipment Reports — performance tracking, SLA monitoring, and a single source of truth for every parcel.",
+    solution: "ITD Global connected Freedom Fire's Linnworks platform to ITD's multi-carrier network via Connexx — a single integrated eCommerce shipping workflow and, for the first time, real visibility of parcel data through Shipment Reports. Alongside the integration: Dangerous Goods approvals handled with InPost, competitive rates across InPost (DG Approved), Evri, and Royal Mail, and a dedicated account manager to keep everything running smoothly.",
+    result: "Full DG compliance and management through InPost (something previous resellers couldn't provide). A single dedicated account manager who knows the operation inside out. Commercially competitive rates that weren't available going direct. And complete, real-time visibility through Shipment Reports — performance tracking, SLA monitoring, and a single source of truth for every parcel.",
     stats: [
       { value: "Real-time", label: "Shipment data via Connexx", sub: "performance, SLAs, single source of truth", featured: true },
-      { value: "DG approved", label: "Dangerous Goods compliance", sub: "managed through Yodel" },
-      { value: 3, label: "Active carriers", sub: "Yodel (DG), Evri, Royal Mail" },
+      { value: "DG approved", label: "Dangerous Goods compliance", sub: "managed through InPost" },
+      { value: 3, label: "Active carriers", sub: "InPost (DG), Evri, Royal Mail" },
     ],
     atGlance: [
       { label: "Industry", value: "Fire Safety & Security retail" },
       { label: "Market", value: "UK Domestic" },
-      { label: "Carriers", value: "Yodel (DG Approved), Evri, Royal Mail" },
+      { label: "Carriers", value: "InPost (DG Approved), Evri, Royal Mail" },
       { label: "Integration", value: "Linnworks via Connexx" },
       { label: "Key Feature", value: "Shipment Reports + dedicated account manager" },
     ],
     shippingTypes: ["Domestic"],
-    carriers: ["yodel", "evri", "royal-mail"],
+    carriers: ["inpost", "evri", "royal-mail"],
     integrations: ["linnworks", "connexx"],
     solutions: ["eCommerce", "Small Business"],
   },
@@ -440,56 +440,90 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export const integrations: Integration[] = [
-  // Tech — ERP/WMS
-  { id: "t1", name: "SAP", category: "erp_wms", type: "tech", featured: true, description: "Enterprise ERP integration" },
-  { id: "t2", name: "Oracle NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP connector" },
-  { id: "t3", name: "Microsoft Dynamics", category: "erp_wms", type: "tech", featured: false, description: "Dynamics 365 integration" },
-  { id: "t4", name: "Sage", category: "erp_wms", type: "tech", featured: false, description: "Sage accounting & ERP" },
-  { id: "t5", name: "Cin7", category: "erp_wms", type: "tech", featured: false, description: "Inventory & warehouse management" },
-  { id: "t19", name: "Linnworks", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { id: "t20", name: "Mintsoft", category: "erp_wms", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/erp-wms/mintsoft_logo.png" },
-  { id: "t21", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel eCommerce management", logo: "/logos/erp-wms/selro_logo.png" },
-  { id: "t22", name: "ShipHero", category: "erp_wms", type: "tech", featured: false, description: "Warehouse & shipping management", logo: "/logos/erp-wms/shiphero_logo.png" },
-  { id: "t23", name: "StoreFeeder", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel listing & order management", logo: "/logos/erp-wms/storefeeder_logo.png" },
-  { id: "t24", name: "Veeqo", category: "erp_wms", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/erp-wms/veeqo_logo.png" },
-  // Tech — Logistics
-  { id: "t6", name: "ShipStation", category: "logistics", type: "tech", featured: true, description: "Shipping automation", logo: "/logos/erp-wms/shipstation_logo.png" },
-  { id: "t7", name: "Shippo", category: "logistics", type: "tech", featured: false, description: "Multi-carrier API" },
-  { id: "t8", name: "Freightview", category: "logistics", type: "tech", featured: false, description: "Freight rate comparison" },
-  { id: "t9", name: "Project44", category: "logistics", type: "tech", featured: false, description: "Supply chain visibility" },
-  // Tech — eCommerce
-  { id: "t10", name: "Shopify", category: "ecommerce", type: "tech", featured: true, description: "eCommerce platform", logo: "/logos/ecommerce/shopify_logo.png" },
-  { id: "t11", name: "WooCommerce", category: "ecommerce", type: "tech", featured: true, description: "WordPress commerce", logo: "/logos/erp-wms/woocommerce_logo.svg" },
-  { id: "t12", name: "Magento", category: "ecommerce", type: "tech", featured: false, description: "Adobe Commerce" },
-  { id: "t13", name: "BigCommerce", category: "ecommerce", type: "tech", featured: false, description: "SaaS eCommerce" },
-  // Tech — Marketplaces
-  { id: "t14", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon_logo.png" },
-  { id: "t15", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay_logo.png" },
-  { id: "t16", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy_logo.png" },
-  { id: "t17", name: "Walmart", category: "marketplace", type: "tech", featured: false, description: "Walmart Marketplace" },
-  { id: "t18", name: "Zalando", category: "marketplace", type: "tech", featured: false, description: "European fashion marketplace" },
-  { id: "t25", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu_logo.webp" },
-  { id: "t26", name: "TikTok Shop", category: "marketplace", type: "tech", featured: false, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok_logo.png" },
-  // Carriers
-  { id: "c1", name: "DHL Express", category: "carrier", type: "carrier", region: "Global", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
-  { id: "c2", name: "FedEx", category: "carrier", type: "carrier", region: "Global", featured: true, description: "Global parcel & freight", logo: "/logos/carriers/fedex_logo.png" },
-  { id: "c3", name: "UPS", category: "carrier", type: "carrier", region: "Global", featured: true, description: "Worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
-  { id: "c4", name: "Royal Mail", category: "carrier", type: "carrier", region: "UK", featured: true, description: "UK postal service", logo: "/logos/carriers/Royal-Mail-Logo.png" },
-  { id: "c5", name: "DPD", category: "carrier", type: "carrier", region: "EU", featured: true, description: "European parcel delivery", logo: "/logos/carriers/DPD-LOGO.png" },
-  { id: "c6", name: "Evri", category: "carrier", type: "carrier", region: "UK", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
-  { id: "c13", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "UK", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo.png" },
-  { id: "c7", name: "TNT", category: "carrier", type: "carrier", region: "EU", featured: false, description: "European express" },
-  { id: "c8", name: "Aramex", category: "carrier", type: "carrier", region: "Global", featured: false, description: "Middle East & global" },
-  { id: "c9", name: "PostNL", category: "carrier", type: "carrier", region: "EU", featured: false, description: "Netherlands & EU postal" },
-  { id: "c10", name: "Yodel", category: "carrier", type: "carrier", region: "UK", featured: false, description: "UK delivery", logo: "/logos/carriers/yodel_logo.avif" },
-  { id: "c11", name: "GLS", category: "carrier", type: "carrier", region: "EU", featured: false, description: "European parcel" },
-  { id: "c12", name: "Australia Post", category: "carrier", type: "carrier", region: "Global", featured: false, description: "Australian postal" },
-  { id: "c14", name: "DHL Parcel", category: "carrier", type: "carrier", region: "EU", featured: false, description: "European parcel delivery", logo: "/logos/carriers/dhlparcel_logo.svg" },
-  { id: "c15", name: "Deutsche Post", category: "carrier", type: "carrier", region: "EU", featured: false, description: "German postal service", logo: "/logos/carriers/deutschepost_logo.avif" },
-  { id: "c16", name: "Evri EU", category: "carrier", type: "carrier", region: "EU", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
-  { id: "c17", name: "InPost", category: "carrier", type: "carrier", region: "EU", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/InPost_Logo_yellow.png" },
-  { id: "c18", name: "Parcel Force", category: "carrier", type: "carrier", region: "UK", featured: true, description: "UK tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
+  // ─── Tech — ERP / WMS ──────────────────────────────────────────────
+  { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks_logo.png" },
+  { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "Adobe Commerce platform" },
+  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP" },
+  { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS" },
+  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management" },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro_logo.png" },
+  { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management" },
+  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports" },
+  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform" },
+  // ─── Tech — eCommerce & Logistics ──────────────────────────────────
+  { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Commerce platform" },
+  { id: "t-aimco", name: "Aimco", category: "ecommerce_logistics", type: "tech", featured: false, description: "Order & inventory management" },
+  { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel commerce" },
+  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "Order management system" },
+  { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipping automation", logo: "/logos/erp-wms/shipstation_logo.png" },
+  { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WordPress commerce", logo: "/logos/erp-wms/woocommerce_logo.svg" },
+  { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel listing & orders", logo: "/logos/erp-wms/storefeeder_logo.png" },
+  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/erp-wms/veeqo_logo.png" },
+  { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "eCommerce platform", logo: "/logos/ecommerce/shopify_logo.png" },
+  { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/erp-wms/mintsoft_logo.png" },
+  // ─── Tech — Marketplace ────────────────────────────────────────────
+  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon_logo.png" },
+  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok_logo.png" },
+  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy_logo.png" },
+  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay_logo.png" },
+  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu_logo.webp" },
+  // ─── Carriers — Domestic ───────────────────────────────────────────
+  { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
+  { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+  { id: "c-royal-mail", name: "Royal Mail", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK postal service", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { id: "c-dpd", name: "DPD", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel delivery network", logo: "/logos/carriers/DPD-LOGO.png" },
+  { id: "c-dhl-parcel", name: "DHL Parcel", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "Parcel delivery", logo: "/logos/carriers/dhlparcel_logo.svg" },
+  { id: "c-amazon-shipping", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo.png" },
+  // ─── Carriers — International ───────────────────────────────────────
+  { id: "c-parcel-force", name: "Parcel Force", category: "carrier", type: "carrier", region: "International", featured: true, description: "Tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
+  { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
+  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", featured: true, description: "Global parcel & freight", logo: "/logos/carriers/fedex_logo.png" },
+  { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", featured: true, description: "Worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
+  { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
+  { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery" },
 ];
+
+// ─── Integration slugs + lookups ───────────────────────────────────────────────
+// Each integration gets a dedicated page at /integrations/carriers/<slug> or
+// /integrations/tech/<slug>. Slugs derive from the name, with overrides where the
+// derived slug differs from an established route (e.g. "DHL Express" → "dhl").
+
+const INTEGRATION_SLUG_OVERRIDES: Record<string, string> = {};
+
+export function slugifyIntegration(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Canonical URL slug for an integration (carrier or tech). */
+export function getIntegrationSlug(i: Integration): string {
+  return INTEGRATION_SLUG_OVERRIDES[i.name] ?? slugifyIntegration(i.name);
+}
+
+/** All integrations of a given type (carriers or tech), in list order. */
+export function getIntegrationsByType(type: "tech" | "carrier"): Integration[] {
+  return integrations.filter((i) => i.type === type);
+}
+
+/** Find one integration by its URL slug, optionally constrained to a type. */
+export function getIntegrationBySlug(
+  slug: string,
+  type?: "tech" | "carrier",
+): Integration | undefined {
+  return integrations.find(
+    (i) => getIntegrationSlug(i) === slug && (!type || i.type === type),
+  );
+}
+
+/** Tech integrations grouped by their category, in a stable display order. */
+export const TECH_CATEGORY_LABELS: Record<string, string> = {
+  erp_wms: "ERP / WMS",
+  ecommerce_logistics: "eCommerce & Logistics",
+  marketplace: "Marketplace",
+};
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
 // Leadership shown in the About-page "Meet the Team" gateway + the top of the
@@ -730,7 +764,7 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
   "parcelforce": { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcelforce", kind: "carrier" },
   "amazon-shipping": { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png", href: "/integrations/carriers/amazon-shipping", kind: "carrier" },
-  "yodel": { name: "Yodel", logo: "/logos/carriers/yodel_logo.avif", href: "/integrations/carriers", kind: "carrier" },
+  "inpost": { name: "InPost", logo: "/logos/carriers/InPost_Logo_yellow.png", href: "/integrations/carriers/inpost", kind: "carrier" },
   "dhl": { name: "DHL", logo: "/logos/carriers/dhl_logo.webp", href: "/integrations/carriers/dhl", kind: "carrier" },
   "fedex": { name: "FedEx", logo: "/logos/carriers/fedex_logo.png", href: "/integrations/carriers", kind: "carrier" },
   "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers", kind: "carrier" },

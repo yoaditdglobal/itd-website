@@ -111,7 +111,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
 
       {/* Browse integrations — always visible below the panel */}
       <div className="mt-4">
-        <Link href="/integrations" className="link-underline text-sm text-text-tertiary hover:text-accent transition-colors">
+        <Link href="/integrations/carriers" className="link-underline text-sm text-text-tertiary hover:text-accent transition-colors">
           Browse integrations →
         </Link>
       </div>

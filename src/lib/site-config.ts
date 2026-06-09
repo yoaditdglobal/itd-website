@@ -50,7 +50,8 @@ export const ROUTES = [
   { path: "/shipping/freight", priority: 0.8, changeFrequency: "monthly" as const },
 
   // Integrations
-  { path: "/integrations", priority: 0.85, changeFrequency: "monthly" as const },
+  { path: "/integrations/carriers", priority: 0.85, changeFrequency: "monthly" as const },
+  { path: "/integrations/tech", priority: 0.85, changeFrequency: "monthly" as const },
   { path: "/integrations/erp-wms", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/integrations/ecommerce", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/integrations/logistics", priority: 0.8, changeFrequency: "monthly" as const },

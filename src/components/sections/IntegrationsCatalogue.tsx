@@ -12,15 +12,14 @@ const carrierSlugs: Record<string, string> = {
   "Royal Mail": "/integrations/carriers/royal-mail",
   "DPD": "/integrations/carriers/dpd",
   "Amazon Shipping": "/integrations/carriers/amazon-shipping",
-  "DHL Express": "/integrations/carriers/dhl",
+  "DHL": "/integrations/carriers/dhl",
 };
 
 const techCategories = [
   { key: "all", label: "All" },
-  { key: "erp_wms", label: "ERP and WMS" },
-  { key: "logistics", label: "Logistics" },
-  { key: "ecommerce", label: "eCommerce" },
-  { key: "marketplace", label: "Marketplaces" },
+  { key: "erp_wms", label: "ERP / WMS" },
+  { key: "ecommerce_logistics", label: "eCommerce & Logistics" },
+  { key: "marketplace", label: "Marketplace" },
 ];
 
 interface IntegrationsCatalogueProps {

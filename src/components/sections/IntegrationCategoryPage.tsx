@@ -130,10 +130,10 @@ export default function IntegrationCategoryPage({
             <div className="max-w-3xl">
               <div className="mb-8">
                 <Link
-                  href="/integrations"
+                  href="/integrations/tech"
                   className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-accent transition-colors"
                 >
-                  <span aria-hidden>←</span> All integrations
+                  <span aria-hidden>←</span> Tech integrations
                 </Link>
               </div>
               {heroLabel && (

@@ -283,14 +283,14 @@ export default function ShippingInternationalPage() {
           logo: "/logos/carriers/fedex_logo.png",
           description:
             "International Priority and Economy services to 220+ countries. US-strong customs brokerage.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "UPS",
           logo: "/logos/carriers/ups_logo.png",
           description:
             "Worldwide Express, Expedited, and Saver services. Customs handling across EU and North America.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "DPD",
@@ -303,7 +303,7 @@ export default function ShippingInternationalPage() {
           name: "PostNL",
           description:
             "EU and worldwide postal delivery for B2C consignments. IOSS supported.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "Royal Mail International",

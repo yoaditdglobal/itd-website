@@ -117,19 +117,19 @@ export default function SmallBusinessPage() {
           name: "Yodel",
           logo: "/logos/carriers/yodel_logo.avif",
           description: "B2C 48 hour delivery across Mainland UK.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "Amazon Shipping",
           logo: "/logos/carriers/amazonshipping_logo.png",
           description: "Amazon-eligible carrier for Prime sellers.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "Parcel Force",
           logo: "/logos/carriers/parcel-force.svg",
           description: "Express24 and Express48 for heavier or signed-for parcels.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
       ]}
       caseStudy={getCaseStudiesBySolution("Small Business")[0] ?? caseStudies[8]}

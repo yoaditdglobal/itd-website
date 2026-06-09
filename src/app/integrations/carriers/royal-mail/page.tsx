@@ -14,7 +14,7 @@ export default function RoyalMailPage() {
       logo="/logos/carriers/Royal-Mail-Logo.png"
       tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."
       description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through Connexx, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
-      region="UK & International"
+      region="Domestic"
       services={[
         "Royal Mail Tracked 24",
         "Royal Mail Tracked 48",

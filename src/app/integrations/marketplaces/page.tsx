@@ -22,7 +22,7 @@ export default function MarketplacesPage() {
       heroH1="Marketplace integrations for sellers across multiple channels."
       heroSubhead="Connexx connects to Amazon, eBay, Etsy, Walmart, Zalando, Temu, and TikTok Shop. Orders from every channel land in one dispatch queue. SLA-aware routing applies the right carrier for each marketplace's promised delivery window. Penalty fees stop. Late shipments stop. Your seller rating goes the right direction."
       heroPrimaryCta={{ label: "Pull every marketplace order into one queue", href: "/contact?enquiry=marketplaces" }}
-      heroSecondaryCta={{ label: "Browse the full integrations directory", href: "/integrations" }}
+      heroSecondaryCta={{ label: "Browse the full integrations directory", href: "/integrations/tech" }}
       useCasesIntro="Seven marketplace integrations live today. Each one pulls orders, applies SLA rules, and pushes tracking back to the marketplace under the right account."
       useCases={[
         {
@@ -117,7 +117,7 @@ export default function MarketplacesPage() {
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },
-        { name: "Integrations", path: "/integrations" },
+        { name: "Integrations", path: "/integrations/tech" },
         { name: "Marketplaces", path: "/integrations/marketplaces" },
       ]}
       jsonLd={[

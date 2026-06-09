@@ -71,14 +71,14 @@ export default function ExportPage() {
           logo: "/logos/carriers/fedex_logo.png",
           description:
             "FedEx International Priority and International Economy with auto-generated commercial invoices and CDS declarations.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "UPS",
           logo: "/logos/carriers/ups_logo.png",
           description:
             "UPS Worldwide Express Plus, Worldwide Saver, and Standard with HS code classification per consignment.",
-          href: "/integrations",
+          href: "/integrations/carriers",
         },
         {
           name: "Parcel Force",
