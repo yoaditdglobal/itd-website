@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import IntegrationDetail from "@/components/sections/IntegrationDetail";
+import TechPage from "@/components/sections/TechPage";
 import { buildMetadata } from "@/lib/metadata";
 import {
   getIntegrationsByType,
   getIntegrationSlug,
   getIntegrationBySlug,
 } from "@/lib/data";
+import { getTechPageContent } from "@/lib/tech-pages";
 
 export const dynamicParams = false;
 
@@ -36,5 +38,6 @@ export default async function TechDetailPage({
   const { slug } = await params;
   const tool = getIntegrationBySlug(slug, "tech");
   if (!tool) notFound();
-  return <IntegrationDetail integration={tool} />;
+  const content = getTechPageContent(tool);
+  return <IntegrationDetail integration={tool} body={<TechPage {...content} />} />;
 }
