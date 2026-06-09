@@ -47,6 +47,7 @@ export default function HeroShippingCard({
   const [hydrated, setHydrated] = useState(false);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
 
   // Hydrate + detect reduced motion.
   useEffect(() => {
@@ -147,13 +148,15 @@ export default function HeroShippingCard({
           ref={imageRef}
           className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:group-hover:scale-100 will-change-transform"
         >
-          {card.image.src ? (
+          {card.image.src && !showFallback ? (
             <Image
               src={card.image.src}
               alt={altText}
               fill
+              unoptimized
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
+              onError={() => setShowFallback(true)}
             />
           ) : (
             <div
