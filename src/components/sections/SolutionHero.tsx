@@ -26,8 +26,8 @@ export interface SolutionHeroProps {
   label: string;
   title: string;
   subtitle: string;
-  primary: { label: string; href: string };
-  secondary: { label: string; href: string };
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
   image: SolutionHeroImage;
   chips?: SolutionHeroChip[];
 }
@@ -110,12 +110,16 @@ export default function SolutionHero({
           <p className="hero-entrance-sub mt-5 text-body-lg text-white/80">
             {subtitle}
           </p>
-          <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
-            <Button href={primary.href}>{primary.label}</Button>
-            <Button href={secondary.href} variant="secondary" surface="dark">
-              {secondary.label}
-            </Button>
-          </div>
+          {(primary || secondary) && (
+            <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+              {primary && <Button href={primary.href}>{primary.label}</Button>}
+              {secondary && (
+                <Button href={secondary.href} variant="secondary" surface="dark">
+                  {secondary.label}
+                </Button>
+              )}
+            </div>
+          )}
 
           {chips && chips.length > 0 && (
             <div
