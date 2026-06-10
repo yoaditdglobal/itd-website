@@ -27,7 +27,7 @@ export default function TimelinePlane() {
 
   return (
     <div
-      className="absolute left-1/2 z-20 hidden md:block"
+      className="absolute left-4 z-20"
       style={{ top: `${progress * 100}%`, transform: "translate(-50%, -50%)" }}
       aria-hidden
     >
