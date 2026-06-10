@@ -19,7 +19,7 @@ export default function FreightAudience() {
         {/* Section header */}
         <ScrollReveal>
           <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
+            <h2 className="text-display-lg text-text-primary">
               Built for Importers
             </h2>
           </div>
@@ -28,7 +28,7 @@ export default function FreightAudience() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
           {/* Left — image card */}
-          <ScrollReveal>
+          <ScrollReveal delay={0.08}>
             <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
               <div className="relative aspect-[4/3] bg-bg-secondary">
                 <Image
@@ -39,10 +39,10 @@ export default function FreightAudience() {
                 />
               </div>
               <div className="p-6 bg-white">
-                <h3 className="text-lg font-bold text-text-primary mb-2">
+                <h3 className="text-heading-lg text-text-primary mb-2">
                   Built for businesses that import regularly
                 </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
+                <p className="text-body-sm text-text-secondary">
                   If you source from multiple suppliers internationally and need a freight partner who handles everything from collection to UK delivery, ITD is built for you.
                 </p>
               </div>
@@ -50,23 +50,20 @@ export default function FreightAudience() {
           </ScrollReveal>
 
           {/* Right — checklist */}
-          <ScrollReveal delay={120}>
-            <div>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                Everything you need to import regularly from China, managed by one team from start to finish.
-              </p>
-              <ul className="space-y-3">
-                {POINTS.map((point, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 py-3 border-b border-border last:border-0"
-                  >
+          <ScrollReveal delay={0.16}>
+            <p className="text-body-md text-text-secondary mb-6">
+              Everything you need to import regularly, managed by one team from start to finish.
+            </p>
+            <ul className="space-y-0">
+              {POINTS.map((point, i) => (
+                <ScrollReveal key={i} delay={0.16 + i * 0.06}>
+                  <li className="flex items-start gap-3 py-3 border-b border-border last:border-0">
                     <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-text-primary text-sm leading-relaxed">{point}</span>
+                    <span className="text-body-sm text-text-primary">{point}</span>
                   </li>
-                ))}
-              </ul>
-            </div>
+                </ScrollReveal>
+              ))}
+            </ul>
           </ScrollReveal>
 
         </div>

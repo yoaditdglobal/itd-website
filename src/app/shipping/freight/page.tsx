@@ -52,7 +52,7 @@ export default function ShippingFreightPage() {
       <SolutionPains
         pains={PAINS}
         image={{
-          src: "/shipping/what sets ITD apart.png",
+          src: "/shipping/What sets ITD Apart.png",
           alt: "What sets ITD apart",
           objectPosition: "50% 70%",
         }}

@@ -1,5 +1,3 @@
-"use client";
-
 import { Plane, Ship, Package, Warehouse, Star, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -91,12 +89,10 @@ export default function FreightServices() {
         {/* Section header */}
         <ScrollReveal>
           <div className="mb-16 md:mb-20">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
-              What we offer
-            </span>
+            <p className="text-eyebrow text-accent mb-3">What we offer</p>
             <h2
               id="freight-services-heading"
-              className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight"
+              className="text-display-lg text-text-primary"
             >
               Our freight services
             </h2>
@@ -110,52 +106,49 @@ export default function FreightServices() {
             const isReversed = i % 2 !== 0;
 
             return (
-              <ScrollReveal key={service.label} delay={80}>
-                <div className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${isReversed ? "lg:flex-row-reverse" : ""}`}
-                  style={{ direction: isReversed ? "rtl" : "ltr" }}>
+              <div key={service.label} className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center`}>
 
-                  {/* Visual panel */}
-                  <div style={{ direction: "ltr" }}>
-                    <div className="relative rounded-2xl overflow-hidden min-h-[320px] shadow-sm border border-border">
-                      <Image
-                        src={service.image}
-                        alt={service.label}
-                        fill
-                        className="object-cover"
-                        style={"objectPosition" in service ? { objectPosition: service.objectPosition } : undefined}
-                      />
-                      {service.featured && (
-                        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-bg-dark/80 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
-                          <Star className="w-3 h-3 text-accent fill-accent" />
-                          <span className="text-xs font-semibold text-white uppercase tracking-wide">Signature service</span>
-                        </div>
-                      )}
-                    </div>
+                {/* Visual panel — order flips on alternate rows */}
+                <ScrollReveal delay={0.08} className={isReversed ? "lg:order-2" : ""}>
+                  <div className="relative rounded-2xl overflow-hidden min-h-[320px] shadow-sm border border-border">
+                    <Image
+                      src={service.image}
+                      alt={service.label}
+                      fill
+                      className="object-cover"
+                      style={"objectPosition" in service ? { objectPosition: service.objectPosition } : undefined}
+                    />
+                    {service.featured && (
+                      <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-bg-dark/80 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
+                        <Star className="w-3 h-3 text-accent fill-accent" />
+                        <span className="text-eyebrow text-white">Signature service</span>
+                      </div>
+                    )}
                   </div>
+                </ScrollReveal>
 
-                  {/* Content */}
-                  <div style={{ direction: "ltr" }}>
-                    <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
-                      {service.label}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-4 leading-snug">
-                      {service.heading}
-                    </h3>
-                    <p className="text-text-secondary text-base leading-relaxed mb-6">
-                      {service.body}
-                    </p>
-                    <ul className="space-y-2.5 mb-8">
-                      {service.points.map((point) => (
-                        <li key={point} className="flex items-center gap-3 text-sm text-text-secondary">
-                          <CheckCircle2 className="w-4.5 h-4.5 text-accent flex-shrink-0" />
+                {/* Content */}
+                <ScrollReveal delay={0.16} className={isReversed ? "lg:order-1" : ""}>
+                  <p className="text-eyebrow text-accent mb-3">{service.label}</p>
+                  <h3 className="text-display-md text-text-primary mb-4">
+                    {service.heading}
+                  </h3>
+                  <p className="text-body-md text-text-secondary mb-6">
+                    {service.body}
+                  </p>
+                  <ul className="space-y-2.5">
+                    {service.points.map((point, j) => (
+                      <ScrollReveal key={point} delay={0.16 + j * 0.06}>
+                        <li className="flex items-center gap-3 text-body-sm text-text-secondary">
+                          <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
                           {point}
                         </li>
-                      ))}
-                    </ul>
-                  </div>
+                      </ScrollReveal>
+                    ))}
+                  </ul>
+                </ScrollReveal>
 
-                </div>
-              </ScrollReveal>
+              </div>
             );
           })}
         </div>
