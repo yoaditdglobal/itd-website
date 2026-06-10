@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 const LOGOS = [
   { name: "Air China", file: "Air China.png" },
@@ -23,6 +24,7 @@ export default function FreightCarrierTicker() {
   const doubled = [...LOGOS, ...LOGOS];
 
   return (
+    <ScrollReveal>
     <div className="bg-white border-y border-border py-5 overflow-hidden relative">
       {/* Fade edges */}
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
@@ -45,5 +47,6 @@ export default function FreightCarrierTicker() {
         ))}
       </div>
     </div>
+    </ScrollReveal>
   );
 }
