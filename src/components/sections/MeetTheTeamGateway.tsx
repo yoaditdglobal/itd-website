@@ -24,7 +24,7 @@ export default function MeetTheTeamGateway() {
               </h2>
               <p className="mt-4 text-body-md text-text-secondary">
                 Operators, not account numbers. The leadership team that owns
-                your logistics outcomes — and the people you&rsquo;ll actually
+                your logistics outcomes and the people you&rsquo;ll actually
                 talk to.
               </p>
             </div>
