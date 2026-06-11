@@ -64,7 +64,7 @@ export default function ImageCarousel({
   return (
     <div
       className={`relative overflow-hidden rounded-2xl shadow-xl ${className}`}
-      style={{ aspectRatio: aspect }}
+      style={aspect ? { aspectRatio: aspect } : undefined}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

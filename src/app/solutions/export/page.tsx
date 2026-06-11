@@ -1,176 +1,258 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import SolutionHero from "@/components/sections/SolutionHero";
+import SolutionPains from "@/components/sections/SolutionPains";
+import ScrollReveal from "@/components/animations/ScrollReveal";
+import Button from "@/components/ui/Button";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { FileText, ShieldCheck, Globe, Zap } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Globe,
+  Package,
+  ShieldCheck,
+  UserCheck,
+  Zap,
+  LayoutDashboard,
+  Eye,
+  BarChart3,
+  TrendingDown,
+  MapPin,
+  Truck,
+  Plug,
+} from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Export shipping software with automated customs documentation",
+  title: "International Export Shipping Services | ITD Global",
   description:
-    "Auto-generate commercial invoices, packing lists, certificates of origin, and CDS declarations from one sales order. Connexx covers 25+ destinations and updates the rules engine before the regulations bite.",
+    "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 190+ countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
   path: "/solutions/export",
 });
 
+const PILLARS = [
+  {
+    num: "01",
+    title: "High volume corporate discounts",
+    desc: "ITD Global's buying power means you access the same rates as the biggest multinationals, without needing their volume to get there. More competitive pricing on every international shipment, from day one.",
+  },
+  {
+    num: "02",
+    title: "Single point of contact",
+    desc: "One contact manages your entire export operation. They compare transit times and costs across couriers, handle documentation, and keep things moving so you are not coordinating across multiple suppliers or chasing updates from different parts of the chain.",
+  },
+  {
+    num: "03",
+    title: "We take care of everything",
+    desc: "Whether your shipments move on DDP or DDU terms, door to door, ITD Global manages the full export journey. You focus on your business. We take care of getting your goods there.",
+  },
+];
+
+const WHAT_YOU_GET: { icon: LucideIcon; text: string }[] = [
+  { icon: Globe,        text: "International parcel delivery to 195+ countries from one account" },
+  { icon: TrendingDown, text: "Access to FedEx, UPS, DHL, DPD, Evri, and more at high-volume corporate rates" },
+  { icon: ShieldCheck,  text: "In-house export customs support including commercial invoices, packing lists, HS codes, and certificates of origin" },
+  { icon: Package,      text: "DDP and DDU shipping managed end to end" },
+  { icon: Zap,          text: "Multi-courier rate comparison and automated carrier selection via Connexx" },
+  { icon: Plug,         text: "Platform integrations with Shopify, WooCommerce, marketplaces, WMS, and ERP systems" },
+  { icon: UserCheck,    text: "One named account manager across freight and parcels" },
+  { icon: MapPin,       text: "Cross-border shipping expertise across ecommerce, retail, and manufacturing" },
+];
+
 export default function ExportPage() {
   return (
-    <VerticalPage
-      label="Export"
-      title="Export documentation that updates before the regulations do."
-      subtitle="UK exporters ship to 25 countries with 6 to 8 documents per consignment, prepared by hand. One wrong HS code on a Saudi Arabia shipment is three days at the border. Connexx auto-generates commercial invoices, packing lists, certificates of origin, EUR.1 forms, and CDS declarations from a single sales order. The rules engine updates before you do."
-      primaryCta={{ label: "Get Quote", href: "#estimator" }}
-      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/arlo-fulfilment" }}
-      pains={[
-        {
-          num: "01",
-          title: "Six to eight documents per consignment, all prepared by hand",
-          desc: "Commercial invoice, packing list, certificate of origin, EUR.1 where preference applies, phytosanitary certificate where required, and a CDS customs entry. Each one is typed or copy-pasted from the ERP. A unit count mismatch between the packing list and the commercial invoice triggers a discrepancy query at customs that takes two days to clear.",
-        },
-        {
-          num: "02",
-          title: "Regulatory changes you find out about from the freight forwarder",
-          desc: "Saudi Arabia updates its SABER conformity rule. Turkey adds a new product certification. Post-Brexit EU rules of origin shift on a UK-to-Germany lane. The Export Manager finds out when the consignment is already in transit and the freight forwarder calls asking for a document that should have been in the pack from the start.",
-        },
-        {
-          num: "03",
-          title: "The gap between documentation and carrier booking",
-          desc: "Documents are prepared in one workflow. The carrier is booked in a separate portal. The weight on the carrier booking does not always match the weight on the customs declaration. The discrepancy is caught at clearance. The shipment sits in a customs warehouse while your team works backwards from the error.",
-        },
-      ]}
-      features={[
-        {
-          icon: FileText,
-          title: "Documents generated from one sales order",
-          desc: "Commercial invoice, packing list, certificate of origin, EUR.1, CDS declaration, and country-specific paperwork all come from the same ERP record. The packing list and the commercial invoice carry identical unit counts because they read from the same source. Discrepancy queries at customs disappear.",
-        },
-        {
-          icon: ShieldCheck,
-          title: "HS code classification applied automatically",
-          desc: "Tariff classification is run from the product catalogue, not the Export Coordinator's memory. The system stores the SKU-to-HS mapping after first classification and applies it on every future consignment. Restricted party screening and dual-use checks run on the same step.",
-        },
-        {
-          icon: Globe,
-          title: "Country rules engine that updates before the shipment moves",
-          desc: "When Saudi Arabia changes its labelling requirement, the documentation template updates inside Connexx before your next consignment leaves the warehouse. EU rules of origin under the UK-EU TCA, ATR for UK-Turkey, EUR.1 for preferential origin, and IOSS for EU consumer goods under €150 all live in the same rules layer.",
-        },
-        {
-          icon: Zap,
-          title: "Carrier booking in the same workflow",
-          desc: "DHL Express, FedEx, UPS, Parcelforce Worldwide, and Royal Mail International all book from the customs-cleared documentation. The carrier weight and dimensions match the customs declaration by construction. No re-entry. No weight discrepancy.",
-        },
-      ]}
-      integrations={[
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description:
-            "DHL Express Worldwide, Express Worldwide Documents, and Economy Select across 220+ destinations with full customs documentation.",
-          href: "/integrations/carriers/dhl",
-        },
-        {
-          name: "FedEx",
-          logo: "/logos/carriers/fedex_logo.png",
-          description:
-            "FedEx International Priority and International Economy with auto-generated commercial invoices and CDS declarations.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "UPS",
-          logo: "/logos/carriers/ups_logo.png",
-          description:
-            "UPS Worldwide Express Plus, Worldwide Saver, and Standard with HS code classification per consignment.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "Parcel Force",
-          logo: "/logos/carriers/parcel-force.svg",
-          description:
-            "Parcelforce Worldwide Global Express, Global Priority, and Global Value for tracked international export.",
-          href: "/integrations/carriers/parcel-force",
-        },
-        {
-          name: "SAP",
-          description:
-            "SAP S/4HANA and SAP Global Trade Services. Export orders flow into Connexx with HS codes and EORI numbers pre-populated.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Oracle NetSuite",
-          description:
-            "NetSuite-confirmed export orders trigger document generation, country rules, and carrier booking in one workflow.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Linnworks",
-          logo: "/logos/erp-wms/linnworks_logo.png",
-          description:
-            "Multi-channel export orders from Linnworks consolidated into one customs documentation flow.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Veeqo",
-          logo: "/logos/erp-wms/veeqo_logo.png",
-          description:
-            "Veeqo orders bound for the EU, US, and ROW lanes route through Connexx with IOSS, EUR.1, and CDS handled automatically.",
-          href: "/integrations/erp-wms",
-        },
-      ]}
-      caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
-      caseStudies={getCaseStudiesBySolution("Export")}
-      rateChecker="export"
-      faq={[
-        {
-          question: "What documents do I need to export from the UK to the EU?",
-          answer:
-            "Five core documents. A commercial invoice with value, HS code, and EORI number. A packing list. A customs declaration filed through HMRC's CDS (your freight forwarder or Connexx handles this). A certificate of origin where UK-EU TCA preference applies, usually an EUR.1. And an Incoterms-aligned contract specifying who pays the duty, normally DAP or DDP. Connexx auto-generates all five from one sales order entry, with country-specific rules for every EU destination.",
-        },
-        {
-          question: "How does Connexx handle export documentation?",
-          answer:
-            "Connexx auto-generates commercial invoices, packing lists, certificates of origin, EUR.1 forms, and CDS declarations for every export based on HS code, destination country, and shipment value. Country-specific rules update automatically inside the platform. Meridian Trade Co cut documentation preparation from 4 hours to 1 hour per shipment using this. Customs holds due to paperwork errors dropped 90%.",
-        },
-        {
-          question: "What is an EORI number and how do I get one?",
-          answer:
-            "An EORI (Economic Operator Registration and Identification) number is the unique identifier HMRC uses to track your exports. UK EORIs start with GB. You apply at gov.uk and receive it in three working days. If you ship to the EU you also need an EU EORI, applied for in any EU member state. Connexx stores both EORIs and applies the correct one per consignment automatically.",
-        },
-        {
-          question: "Do I need IOSS if I'm exporting B2C to the EU?",
-          answer:
-            "Yes, if the consignment is under €150 and shipped to an EU consumer. IOSS (Import One-Stop Shop) lets you charge EU VAT at checkout and remit it monthly to a single tax authority, so the customer is not hit with import VAT on delivery. Connexx applies your IOSS number to every qualifying consignment, generates the right commercial invoice, and routes through IOSS-compatible carriers including DHL Express, DPD, and Evri EU.",
-        },
-        {
-          question: "How does the system handle regulatory changes in destination countries?",
-          answer:
-            "The country rules engine is updated centrally by ITD's compliance team and applied to every customer's documentation templates immediately. When Saudi Arabia introduced SABER conformity for a product category, when Turkey changed its ATR requirement, when EU CBAM took effect, the template changed before customers' next consignment moved. No email alerts to action. No manual template rewrites.",
-        },
-        {
-          question: "Does Connexx file CDS declarations directly with HMRC?",
-          answer:
-            "Yes, via direct CDS API integration. Export declarations are filed to HMRC's Customs Declaration Service from inside the same workflow that generates the commercial invoice and books the carrier. The declaration data is sourced from the ERP order. Exporters who prefer to keep their freight forwarder in the loop can route the documentation pack to the forwarder instead. Both modes are supported.",
-        },
-      ]}
-      closingCta={{
-        headline: "Stop dreading regulatory updates.",
-        subhead:
-          "Run the export documentation estimator for your top 5 destination countries. Two minutes, no commitment.",
-        primary: { label: "Get Quote", href: "#estimator" },
-        secondary: { label: "Contact Us", href: "/contact?enquiry=export" },
-      }}
-      breadcrumbs={[
-        { name: "Home", path: "/" },
-        { name: "Solutions", path: "/solutions" },
-        { name: "Export", path: "/solutions/export" },
-      ]}
-      jsonLd={[
-        serviceSchema({
-          name: "Export shipping software",
-          description:
-            "Automated export documentation and multi-carrier booking for UK exporters. Generates commercial invoices, packing lists, certificates of origin, EUR.1, and CDS declarations from one sales order. Covers EU, US, and ROW destinations.",
-          path: "/solutions/export",
-          serviceType: "Export Shipping and Customs Automation Software",
-          areaServed: ["United Kingdom", "European Union", "United States", "Worldwide"],
-        }),
-      ]}
-    />
+    <>
+      <SolutionHero
+        label="Export"
+        title="Ship internationally with the rates, reach, and support to do it properly."
+        subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
+        image={{
+          src: "/solutions/loading plane.png",
+          alt: "Cargo aircraft on the apron being prepared for an international export flight",
+          objectPosition: "50% 50%",
+        }}
+      />
+
+      <SolutionPains
+        pains={PILLARS}
+        image={{
+          src: "/solutions/reasons why exporters choose us (2).png",
+          alt: "Shipping containers stacked at an export port ready for international departure",
+          objectPosition: "50% 50%",
+        }}
+        eyebrow="Why ITD Global"
+        heading="Three reasons exporters choose us."
+        lead="Corporate rates, total accountability, and a team that handles the full export journey from collection to delivery."
+      />
+
+      {/* Body copy */}
+      <section className="bg-white py-16 md:py-24 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <p className="text-eyebrow text-accent mb-3">The full picture</p>
+            <h2 className="text-display-lg text-text-primary mb-6 max-w-2xl">
+              One account.<br />Every stage of the export journey.
+            </h2>
+            <div className="max-w-3xl space-y-4 text-body-md text-text-secondary leading-relaxed">
+              <p>
+                Shipping internationally means navigating different couriers, customs requirements, and landed cost calculations for every market you sell into. Get any of it wrong and you are either losing margin on service, or losing customers to a poor delivery experience at the other end.
+              </p>
+              <p>
+                ITD Global takes that off your plate. Our network of international couriers, including DPD, FedEx, Evri, DHL, and UPS, is accessed through a single account, with high-volume corporate rates that most businesses could not negotiate independently. Our in-house team supports on export documentation, HS code classification, and DDP shipping so your goods clear borders without delays.
+              </p>
+              <p>
+                Whether you are an ecommerce brand shipping to consumers worldwide, a retailer sending products to distributors, or a manufacturer exporting to markets in Asia and the Middle East, we build the operation around your volumes, your destinations, and your requirements.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Connexx platform section */}
+      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left — copy */}
+            <ScrollReveal>
+              <div>
+                <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
+                <h2 className="text-display-lg text-text-primary">
+                  Compare rates. Book carriers. Track every shipment.
+                </h2>
+                <p className="mt-6 text-base md:text-lg text-text-secondary leading-relaxed">
+                  Connexx is ITD Global's multi-courier shipping platform built for international export. Compare live rates across DHL Express, FedEx, UPS, DPD, and Evri, automate carrier selection per shipment, generate labels and customs documents, and track every consignment from collection to delivery. All from one login.
+                </p>
+                <div className="mt-8">
+                  <Button href="/connexx">Explore Connexx</Button>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Right — platform mockup */}
+            <ScrollReveal delay={0.15}>
+              <div className="bg-white rounded-2xl border border-border p-6 shadow-lg">
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <div className="w-3 h-3 rounded-full bg-green-400" />
+                  <span className="ml-2 text-xs text-text-tertiary">Connexx: Export Modules</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {[
+                    { icon: Zap,           name: "Rate Compare" },
+                    { icon: Truck,         name: "Carrier Select" },
+                    { icon: LayoutDashboard, name: "Label Gen" },
+                    { icon: ShieldCheck,   name: "Customs Docs" },
+                    { icon: Eye,           name: "Tracking" },
+                    { icon: BarChart3,     name: "Analytics" },
+                  ].map((mod) => (
+                    <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
+                      <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />
+                      <p className="text-xs font-medium text-text-primary">{mod.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* What you get — card grid */}
+      <section className="bg-white py-16 md:py-20 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <p className="text-eyebrow text-accent mb-3">What we handle</p>
+            <h2 className="text-display-lg text-text-primary mb-10">
+              What you get with ITD Global.
+            </h2>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {WHAT_YOU_GET.map(({ icon: Icon, text }, i) => (
+              <ScrollReveal key={text} delay={i * 0.06}>
+                <div className="bg-bg-secondary rounded-xl border border-border p-5 h-full hover:border-accent/30 hover:shadow-sm transition-all group">
+                  <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <p className="text-sm font-medium text-text-primary leading-snug">{text}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <VerticalPage
+        hideDefaultHero
+        hidePainPoints
+        label="Export"
+        title="Ship internationally with the rates, reach, and support to do it properly."
+        subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
+        primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=export" }}
+        secondaryCta={{ label: "Request a Quote", href: "#estimator" }}
+        pains={PILLARS}
+        caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
+        caseStudies={getCaseStudiesBySolution("Export")}
+        rateChecker="export"
+        faq={[
+          {
+            question: "Which couriers does ITD work with for international shipping?",
+            answer:
+              "We work with a network of leading international couriers including DPD, FedEx, DHL, UPS, and Evri. Through Connexx, our multi-courier platform, you can compare rates across all of them and choose the right service for each shipment, with the benefit of ITD's corporate pricing.",
+          },
+          {
+            question: "What is DDP shipping and does ITD offer it?",
+            answer:
+              "DDP (Delivered Duty Paid) means ITD manages duties, taxes, and customs clearance in the destination country on your behalf. Your buyer receives the goods without any surprise charges at the door. ITD offers DDP shipping across key international export markets.",
+          },
+          {
+            question: "How does ITD handle export customs clearance?",
+            answer:
+              "In-house. Our customs team manages all export documentation including commercial invoices, packing lists, HS code classification, and certificates of origin. No third-party broker fees. We flag compliance issues before the shipment moves, not after.",
+          },
+          {
+            question: "Can I manage all my export couriers in one place?",
+            answer:
+              "Yes. Through Connexx, our multi-courier shipping platform, you can compare rates, automate carrier selection, generate labels, and track every shipment across all couriers from one login.",
+          },
+          {
+            question: "Does ITD integrate with ecommerce platforms and marketplaces?",
+            answer:
+              "Yes. Connexx integrates with Shopify, WooCommerce, Amazon, eBay, and other major marketplaces, as well as WMS and ERP systems, through plug-and-play setups and custom APIs.",
+          },
+          {
+            question: "What countries does ITD ship to?",
+            answer:
+              "190+ countries. Our network covers major export markets including the US, Europe, China, Australia, and the Middle East, with both parcel and freight options available.",
+          },
+          {
+            question: "Who manages my account?",
+            answer:
+              "A named contact across both freight and parcels. One person who knows your destinations, volumes, and requirements. Not a rotating helpdesk.",
+          },
+        ]}
+        closingCta={{
+          headline: "Ready to take the complexity out of international shipping?",
+          subhead:
+            "One conversation. We'll show you the rates, the courier network, and what a single point of contact actually looks like in practice.",
+          primary: { label: "Get in Touch", href: "/contact?enquiry=export" },
+          secondary: { label: "Request a Quote", href: "#estimator" },
+        }}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Solutions", path: "/solutions" },
+          { name: "Export", path: "/solutions/export" },
+        ]}
+        jsonLd={[
+          serviceSchema({
+            name: "International Export Shipping Services",
+            description:
+              "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 190+ countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
+            path: "/solutions/export",
+            serviceType: "International Export Shipping and Logistics Services",
+            areaServed: ["United Kingdom", "European Union", "United States", "Worldwide"],
+          }),
+        ]}
+      />
+    </>
   );
 }
