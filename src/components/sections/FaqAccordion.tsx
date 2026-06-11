@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useId } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export interface FaqItem {
@@ -15,9 +14,11 @@ interface FaqAccordionProps {
 
 /**
  * Animated, one-at-a-time FAQ accordion. Used by both VerticalPage and
- * FaqSection. Replaces the native <details> implementation so we can animate
- * the panel height and the chevron rotation. Preserves keyboard accessibility
- * via aria-expanded / aria-controls on the trigger button.
+ * FaqSection. CSS-only animation (no framer-motion): the panel collapses via
+ * the grid-template-rows 0fr→1fr trick — `min-h-0` on the inner grid item is
+ * required or it won't collapse. Collapsed answers are `invisible`, keeping
+ * them out of the accessibility tree. Keyboard accessibility preserved via
+ * aria-expanded / aria-controls on the trigger button.
  *
  * Visual styling matches the existing cards (rounded-xl, white background,
  * border, padding) so it drops into either section unchanged.
@@ -47,34 +48,28 @@ export default function FaqAccordion({ items }: FaqAccordionProps) {
                 className="flex items-center justify-between gap-4 w-full text-left cursor-pointer"
               >
                 <span>{item.question}</span>
-                <motion.span
-                  className="flex-shrink-0 inline-flex"
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                <span
                   aria-hidden
+                  className={`flex-shrink-0 inline-flex transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? "rotate-180" : ""}`}
                 >
                   <ChevronDown className="w-5 h-5 text-text-secondary" />
-                </motion.span>
+                </span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={triggerId}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ overflow: "hidden" }}
-                >
-                  <p className="mt-3 text-body-sm text-text-secondary whitespace-pre-line">
-                    {item.answer}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className={`grid transition-[grid-template-rows] duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+            >
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={triggerId}
+                className={`overflow-hidden min-h-0 transition-[opacity] duration-[250ms] ${isOpen ? "visible opacity-100" : "invisible opacity-0"}`}
+              >
+                <p className="mt-3 text-body-sm text-text-secondary whitespace-pre-line">
+                  {item.answer}
+                </p>
+              </div>
+            </div>
           </div>
         );
       })}

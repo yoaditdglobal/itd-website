@@ -49,11 +49,26 @@ export default function HeroShippingCard({
   const [reduced, setReduced] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
 
+  // Tracks an instant (entrance-skipped) reveal so the shine sweep is also
+  // skipped — set before the reveal render commits.
+  const skippedEntrance = useRef(false);
+
   // Hydrate + detect reduced motion.
   useEffect(() => {
     setHydrated(true);
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
+    // Client-side navigation (past the initial load window) with the card
+    // already on screen: reveal instantly — batched with setHydrated so the
+    // card never paints hidden, and route changes don't re-fade content.
+    const el = ref.current;
+    if (el && performance.now() > 4000) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        skippedEntrance.current = true;
+        setVisible(true);
+      }
+    }
     const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
@@ -168,8 +183,8 @@ export default function HeroShippingCard({
           )}
         </div>
 
-        {/* One-shot shine sweep — fires on entry. */}
-        {visible && !reduced && (
+        {/* One-shot shine sweep — fires on entry (skipped on instant reveals). */}
+        {visible && !reduced && !skippedEntrance.current && (
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden"

@@ -1,20 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
-
-// Shared transition for desktop mega-menu dropdowns.
-const dropdownMotion = {
-  initial: { opacity: 0, scale: 0.96, y: -4 },
-  animate: { opacity: 1, scale: 1, y: 0 },
-  exit: { opacity: 0, scale: 0.96, y: -4 },
-  transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] as const },
-};
 
 const shippingMenu = [
   { name: "Domestic", desc: "UK & local parcel delivery", href: "/shipping/domestic" },
@@ -72,11 +64,90 @@ const resourcesMenu = {
   ],
 };
 
+interface NavDropdownProps {
+  id: string;
+  label: string;
+  open: boolean;
+  onToggle: () => void;
+  onHoverOpen: () => void;
+  onHoverClose: () => void;
+  onLinkClick: () => void;
+  setTriggerRef: (el: HTMLButtonElement | null) => void;
+  /** Width/layout classes for the panel — visual classes only. */
+  panelClassName: string;
+  children: ReactNode;
+}
+
+/**
+ * Desktop mega-menu disclosure. Opens on mouse hover (pointerType-gated so a
+ * touch tap doesn't double-fire) and toggles on click/Enter/Space — fixes
+ * "first click does nothing". The panel is always mounted and animated with
+ * the .nav-dropdown CSS class (visibility + opacity + translate + scale), so
+ * it works without framer-motion and closed panels are out of the tab order.
+ */
+function NavDropdown({
+  id,
+  label,
+  open,
+  onToggle,
+  onHoverOpen,
+  onHoverClose,
+  onLinkClick,
+  setTriggerRef,
+  panelClassName,
+  children,
+}: NavDropdownProps) {
+  return (
+    <div
+      className="relative"
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") onHoverOpen();
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") onHoverClose();
+      }}
+    >
+      <button
+        ref={setTriggerRef}
+        type="button"
+        aria-expanded={open}
+        aria-controls={`nav-dropdown-${id}`}
+        onClick={onToggle}
+        className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors"
+      >
+        {label}
+        <ChevronDown
+          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      <div
+        id={`nav-dropdown-${id}`}
+        data-open={open || undefined}
+        onClick={(e) => {
+          // Close when any link inside is clicked — covers query-string-only
+          // navigations where usePathname() doesn't change.
+          if ((e.target as HTMLElement).closest("a")) onLinkClick();
+        }}
+        className={`nav-dropdown before:absolute before:-top-1.5 before:left-0 before:right-0 before:h-1.5 before:content-[''] ${panelClassName}`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  // True while the open dropdown was opened by mouse hover. The first click
+  // after a hover-open is absorbed (mouse users click the already-open menu
+  // expecting it to stay open — closing it reads as "the button is broken").
+  const hoverOpenedRef = useRef(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -93,9 +164,69 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Close all menus on route change (covers back/forward too).
+  useEffect(() => {
+    setOpenDropdown(null);
+    setMobileOpen(false);
+    setMobileAccordion(null);
+  }, [pathname]);
+
+  // Escape closes the open dropdown and returns focus to its trigger.
+  useEffect(() => {
+    if (!openDropdown) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        triggerRefs.current[openDropdown]?.focus();
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [openDropdown]);
+
+  // Tap/click outside the nav closes the open dropdown.
+  useEffect(() => {
+    if (!openDropdown) return;
+    const onDown = (e: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [openDropdown]);
+
   const toggleMobileAccordion = (section: string) => {
     setMobileAccordion(mobileAccordion === section ? null : section);
   };
+
+  const dropdownProps = (id: string) => ({
+    id,
+    open: openDropdown === id,
+    onToggle: () => {
+      // Side effects stay outside the state updater — React double-invokes
+      // updaters in dev, which would flip the ref twice and break the absorb.
+      const wasHoverOpened = hoverOpenedRef.current;
+      hoverOpenedRef.current = false;
+      if (openDropdown === id) {
+        // Hover already opened it — absorb this click and let the next one
+        // (or pointer-leave / Escape / outside click) close it.
+        if (!wasHoverOpened) setOpenDropdown(null);
+      } else {
+        setOpenDropdown(id);
+      }
+    },
+    onHoverOpen: () => {
+      hoverOpenedRef.current = true;
+      setOpenDropdown(id);
+    },
+    onHoverClose: () =>
+      setOpenDropdown((cur) => (cur === id ? null : cur)),
+    onLinkClick: () => setOpenDropdown(null),
+    setTriggerRef: (el: HTMLButtonElement | null) => {
+      triggerRefs.current[id] = el;
+    },
+  });
 
   return (
     <>
@@ -106,7 +237,7 @@ export default function Navbar() {
           : "bg-bg-dark py-4"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <nav ref={navRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0" aria-label="ITD Global — home">
           <Image
@@ -115,6 +246,7 @@ export default function Navbar() {
             width={576}
             height={240}
             priority
+            loading="eager"
             className="h-9 w-auto"
           />
         </Link>
@@ -122,73 +254,45 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-1 ml-8 flex-1 min-w-0">
           {/* Shipping */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenDropdown("shipping")}
-            onMouseLeave={() => setOpenDropdown(null)}
+          <NavDropdown
+            {...dropdownProps("shipping")}
+            label="Shipping"
+            panelClassName="absolute top-full left-0 mt-1 w-[280px] bg-white rounded-xl shadow-2xl border border-border p-6"
           >
-            <button className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
-              Shipping <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-            <AnimatePresence mode="wait">
-              {openDropdown === "shipping" && (
-                <motion.div
-                  key="shipping-dropdown"
-                  {...dropdownMotion}
-                  style={{ transformOrigin: "top center" }}
-                  className="absolute top-full left-0 mt-1 w-[280px] bg-white rounded-xl shadow-2xl border border-border p-6"
-                >
-                  <div className="text-eyebrow text-text-tertiary mb-3">Shipping Type</div>
-                  {shippingMenu.map((item) => (
-                    <Link key={item.name} href={item.href} className="block py-2 group">
-                      <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                      <div className="text-xs text-text-secondary">{item.desc}</div>
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div className="text-eyebrow text-text-tertiary mb-3">Shipping Type</div>
+            {shippingMenu.map((item) => (
+              <Link key={item.name} href={item.href} className="block py-2 group">
+                <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
+                <div className="text-xs text-text-secondary">{item.desc}</div>
+              </Link>
+            ))}
+          </NavDropdown>
 
           {/* Solutions */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenDropdown("solutions")}
-            onMouseLeave={() => setOpenDropdown(null)}
+          <NavDropdown
+            {...dropdownProps("solutions")}
+            label="Solutions"
+            panelClassName="absolute top-full left-0 mt-1 w-[520px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
           >
-            <button className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
-              Solutions <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-            <AnimatePresence mode="wait">
-              {openDropdown === "solutions" && (
-                <motion.div
-                  key="solutions-dropdown"
-                  {...dropdownMotion}
-                  style={{ transformOrigin: "top center" }}
-                  className="absolute top-full left-0 mt-1 w-[520px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
-                >
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">By Stage</div>
-                    {solutionsMenu.byStage.map((item) => (
-                      <Link key={item.name} href={item.href} className="block py-2 group">
-                        <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                        <div className="text-xs text-text-secondary">{item.desc}</div>
-                      </Link>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">By Business Model</div>
-                    {solutionsMenu.byModel.map((item) => (
-                      <Link key={item.name} href={item.href} className="block py-1.5 group">
-                        <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                        <div className="text-xs text-text-secondary">{item.desc}</div>
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">By Stage</div>
+              {solutionsMenu.byStage.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-2 group">
+                  <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
+                  <div className="text-xs text-text-secondary">{item.desc}</div>
+                </Link>
+              ))}
+            </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">By Business Model</div>
+              {solutionsMenu.byModel.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1.5 group">
+                  <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
+                  <div className="text-xs text-text-secondary">{item.desc}</div>
+                </Link>
+              ))}
+            </div>
+          </NavDropdown>
 
           {/* Platform (Connexx) — direct link */}
           <Link href="/connexx" className="px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
@@ -196,100 +300,72 @@ export default function Navbar() {
           </Link>
 
           {/* Integrations */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenDropdown("integrations")}
-            onMouseLeave={() => setOpenDropdown(null)}
+          <NavDropdown
+            {...dropdownProps("integrations")}
+            label="Integrations"
+            panelClassName="absolute top-full left-0 mt-1 w-[460px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
           >
-            <button className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
-              Integrations <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-            <AnimatePresence mode="wait">
-              {openDropdown === "integrations" && (
-                <motion.div
-                  key="integrations-dropdown"
-                  {...dropdownMotion}
-                  style={{ transformOrigin: "top center" }}
-                  className="absolute top-full left-0 mt-1 w-[460px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
-                >
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Tech Integrations</div>
-                    {integrationsMenu.tech.map((cat) => (
-                      <Link key={cat.label} href={cat.href} className="block py-2 group">
-                        <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{cat.label}</div>
-                        <div className="text-xs text-text-secondary">{cat.names}</div>
-                      </Link>
-                    ))}
-                    <Link href="/integrations/tech" className="link-underline text-xs text-accent mt-1">Browse integrations →</Link>
-                  </div>
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Carrier Integrations</div>
-                    <ul className="space-y-1">
-                      {integrationsMenu.carriers.map((c) => (
-                        <li key={c.name}>
-                          <Link href={c.href} className="flex items-center gap-2 py-1.5 group">
-                            <IntegrationLogo name={c.name} logo={c.logo} size="xs" />
-                            <div>
-                              <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{c.name}</div>
-                              <div className="text-xs text-text-secondary">{c.desc}</div>
-                            </div>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link href="/integrations/carriers" className="link-underline text-xs text-accent mt-3">Browse carriers →</Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Tech Integrations</div>
+              {integrationsMenu.tech.map((cat) => (
+                <Link key={cat.label} href={cat.href} className="block py-2 group">
+                  <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{cat.label}</div>
+                  <div className="text-xs text-text-secondary">{cat.names}</div>
+                </Link>
+              ))}
+              <Link href="/integrations/tech" className="link-underline text-xs text-accent mt-1">Browse integrations →</Link>
+            </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Carrier Integrations</div>
+              <ul className="space-y-1">
+                {integrationsMenu.carriers.map((c) => (
+                  <li key={c.name}>
+                    <Link href={c.href} className="flex items-center gap-2 py-1.5 group">
+                      <IntegrationLogo name={c.name} logo={c.logo} size="xs" />
+                      <div>
+                        <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{c.name}</div>
+                        <div className="text-xs text-text-secondary">{c.desc}</div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/integrations/carriers" className="link-underline text-xs text-accent mt-3">Browse carriers →</Link>
+            </div>
+          </NavDropdown>
 
           {/* Resources */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenDropdown("resources")}
-            onMouseLeave={() => setOpenDropdown(null)}
+          <NavDropdown
+            {...dropdownProps("resources")}
+            label="Resources"
+            panelClassName="absolute top-full right-0 mt-1 w-[680px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-4 gap-5"
           >
-            <button className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
-              Resources <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-            <AnimatePresence mode="wait">
-              {openDropdown === "resources" && (
-                <motion.div
-                  key="resources-dropdown"
-                  {...dropdownMotion}
-                  style={{ transformOrigin: "top center" }}
-                  className="absolute top-full right-0 mt-1 w-[680px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-4 gap-5"
-                >
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
-                    {resourcesMenu.customerStories.map((ind) => (
-                      <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1 text-sm text-text-secondary hover:text-accent">{ind}</Link>
-                    ))}
-                    <Link href="/resources/case-studies" className="link-underline text-xs text-accent mt-2">See all →</Link>
-                  </div>
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Knowledge</div>
-                    {resourcesMenu.knowledge.map((item) => (
-                      <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Support</div>
-                    {resourcesMenu.support.map((item) => (
-                      <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="text-eyebrow text-text-tertiary mb-3">Developers</div>
-                    {resourcesMenu.developers.map((item) => (
-                      <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
+              {resourcesMenu.customerStories.map((ind) => (
+                <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1 text-sm text-text-secondary hover:text-accent">{ind}</Link>
+              ))}
+              <Link href="/resources/case-studies" className="link-underline text-xs text-accent mt-2">See all →</Link>
+            </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Knowledge</div>
+              {resourcesMenu.knowledge.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
+              ))}
+            </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Support</div>
+              {resourcesMenu.support.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
+              ))}
+            </div>
+            <div>
+              <div className="text-eyebrow text-text-tertiary mb-3">Developers</div>
+              {resourcesMenu.developers.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
+              ))}
+            </div>
+          </NavDropdown>
         </div>
 
         {/* Desktop CTAs */}
@@ -306,6 +382,7 @@ export default function Navbar() {
         <button
           className="lg:hidden text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -313,17 +390,13 @@ export default function Navbar() {
       </nav>
     </header>
 
-    {/* Mobile overlay — outside <header> to avoid backdrop-filter containing block trap */}
-    <AnimatePresence>
-      {mobileOpen && (
-        <motion.div
-          key="mobile-menu"
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:hidden fixed inset-0 top-[56px] bg-bg-dark z-40 overflow-y-auto"
-        >
+    {/* Mobile overlay — outside <header> to avoid backdrop-filter containing block trap.
+        Always mounted; .nav-mobile-overlay handles the slide + visibility. */}
+    <div
+      data-open={mobileOpen || undefined}
+      aria-hidden={!mobileOpen}
+      className="nav-mobile-overlay lg:hidden fixed inset-0 top-[56px] bg-bg-dark z-40 overflow-y-auto"
+    >
           <div className="px-4 py-6 flex flex-col gap-1">
             {/* Shipping accordion */}
             <button
@@ -436,9 +509,7 @@ export default function Navbar() {
               </Button>
             </div>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </div>
     </>
   );
 }

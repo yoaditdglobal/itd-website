@@ -35,12 +35,37 @@ export default function ImageCarousel({
 }: ImageCarouselProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const reducedMotion = useRef(false);
 
   useEffect(() => {
     reducedMotion.current =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+    // Auto-advance only while on screen and in a visible tab.
+    setPageVisible(!document.hidden);
+    const onVis = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", onVis);
+
+    const el = containerRef.current;
+    let io: IntersectionObserver | undefined;
+    if (el && typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => setInView(entries[0]?.isIntersecting ?? false),
+        { threshold: 0.2 },
+      );
+      io.observe(el);
+    } else {
+      setInView(true);
+    }
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVis);
+      io?.disconnect();
+    };
   }, []);
 
   const go = useCallback(
@@ -52,17 +77,19 @@ export default function ImageCarousel({
 
   useEffect(() => {
     if (autoAdvanceMs <= 0 || paused || reducedMotion.current) return;
+    if (!inView || !pageVisible) return;
     if (images.length <= 1) return;
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, autoAdvanceMs);
     return () => clearInterval(id);
-  }, [autoAdvanceMs, paused, images.length]);
+  }, [autoAdvanceMs, paused, inView, pageVisible, images.length]);
 
   if (images.length === 0) return null;
 
   return (
     <div
+      ref={containerRef}
       className={`relative overflow-hidden rounded-2xl shadow-xl ${className}`}
       style={{ aspectRatio: aspect }}
       onMouseEnter={() => setPaused(true)}
