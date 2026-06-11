@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { MapPin, Globe, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import CarrierNetworkMap from "@/components/sections/CarrierNetworkMap";
@@ -25,6 +25,10 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
   const activeGroup = groups.find((g) => g.region === active) ?? groups[0];
 
   return (
+    // Local MotionConfig — the app-level MotionProvider was removed to keep
+    // framer-motion out of the shared bundle; reduced-motion compliance for
+    // the layoutId spring + tile stagger now lives here.
+    <MotionConfig reducedMotion="user">
     <div>
       {/* motion-led geographic visual */}
       <CarrierNetworkMap region={active} />
@@ -105,5 +109,6 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
         </motion.div>
       </AnimatePresence>
     </div>
+    </MotionConfig>
   );
 }

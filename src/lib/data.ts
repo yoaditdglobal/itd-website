@@ -122,7 +122,7 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Tatti Lashes were running their entire order base on a single next-day service through DPD. Every parcel went out at the same rate regardless of urgency, and the business was absorbing part of that cost to stay competitive. With no economy option and no data on how customers would react to a slower service, adding a second carrier felt like a risk the team couldn't quantify.",
     solution: "ITD Global introduced Evri alongside DPD via Connexx, giving Tatti Lashes a genuine multi-carrier setup with both 24hr and 48hr service options. Customers could now choose their delivery at checkout. The Mintsoft integration via Connexx was plug-and-play. Dedicated vans were allocated quickly, and the brand was live before peak trading season.",
     result: "60% of Tatti Lashes' volume transferred to Evri — a figure that surprised the team. Evri now handles the majority of their domestic parcel volume, with DPD retained for customers selecting the premium next-day service. Per-order shipping costs dropped significantly across the cheaper service, margins came back under control, and the brand entered peak with capacity already proven.",
-    heroImage: "/case-studies/tatti-lashes/hero.png",
+    heroImage: "/case-studies/tatti-lashes/hero.jpg",
     logo: "/case-studies/tatti-lashes/logo.png",
     stats: [
       { value: 60, suffix: "%", label: "Volume shifted to Evri", sub: "from a single-carrier DPD-only setup", featured: true },
@@ -218,7 +218,7 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Arlo's clients were increasingly demanding international shipping, but Arlo had no scalable, competitive solution to offer them. Going direct to carriers as a smaller 3PL meant unfavourable rates and limited service options. Turning clients away or pointing them elsewhere risked damaging relationships and losing accounts. The gap in their offering was beginning to limit Arlo's ability to grow their client base.",
     solution: "Partnering with ITD Global gave Arlo immediate access to a competitive, fully managed international shipping solution without the complexity of building it themselves. ITD introduced FedEx International Priority into Arlo's carrier mix, with the carrier relationship handled end-to-end by ITD — so Arlo's team could focus on fulfilment. ITD's consolidated buying power unlocked volume-backed rates that wouldn't have been accessible going direct.",
     result: "Arlo can now confidently offer a fast, reliable, and commercially competitive international shipping service as part of their core proposition, enabling their clients to sell into global markets and opening a new dimension of growth for the business.",
-    heroImage: "/case-studies/arlo-fulfilment/hero.png",
+    heroImage: "/case-studies/arlo-fulfilment/hero.jpg",
     logo: "/case-studies/arlo-fulfilment/logo.png",
     stats: [
       { value: "International", label: "Capability unlocked", sub: "new dimension of client growth", featured: true },

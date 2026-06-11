@@ -17,26 +17,58 @@ const AUTOPLAY_MS = 3500;
 export default function IntegrationCarousel({ integrations }: { integrations: IntegrationItem[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [inView, setInView] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const startAutoPlay = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % integrations.length);
-    }, AUTOPLAY_MS);
-  };
+  // Gate autoplay: only tick while on screen, in a visible tab, and the user
+  // hasn't asked for reduced motion — no background CPU/battery burn.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onMq = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onMq);
+
+    setPageVisible(!document.hidden);
+    const onVis = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", onVis);
+
+    const el = containerRef.current;
+    let io: IntersectionObserver | undefined;
+    if (el && typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => setInView(entries[0]?.isIntersecting ?? false),
+        { threshold: 0.2 },
+      );
+      io.observe(el);
+    } else {
+      setInView(true);
+    }
+
+    return () => {
+      mq.removeEventListener("change", onMq);
+      document.removeEventListener("visibilitychange", onVis);
+      io?.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
-    if (selectedIndex === null) {
-      startAutoPlay();
-    } else {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+    const shouldPlay =
+      selectedIndex === null && inView && pageVisible && !reducedMotion;
+    if (shouldPlay) {
+      intervalRef.current = setInterval(() => {
+        setActiveIndex((i) => (i + 1) % integrations.length);
+      }, AUTOPLAY_MS);
     }
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedIndex, integrations.length]);
+  }, [selectedIndex, inView, pageVisible, reducedMotion, integrations.length]);
 
   const handleCardClick = (index: number) => {
     if (selectedIndex === index) {
@@ -50,7 +82,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
   const selected = selectedIndex !== null ? integrations[selectedIndex] : null;
 
   return (
-    <div>
+    <div ref={containerRef}>
       {/* Card grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
         {integrations.map((item, i) => {
