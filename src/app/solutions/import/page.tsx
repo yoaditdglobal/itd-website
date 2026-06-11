@@ -1,34 +1,47 @@
 import VerticalPage from "@/components/sections/VerticalPage";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Calculator, ShieldCheck, FileCheck, Receipt } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { MapPin, TrendingDown, Plane, Package, Calendar, Warehouse, ShieldCheck, UserCheck } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Import shipping software with landed cost and CDS pre-clearance",
+  title: "Import Shipping Services UK | ITD Global",
   description:
-    "Calculate landed cost per SKU before goods leave the supplier. Connexx pre-files CDS declarations against HMRC, calculates duty against the UK Global Tariff, and reconciles your C79.",
+    "ITD Global helps UK businesses manage international imports from China and worldwide. In-house customs clearance, competitive rates, and one point of contact for the entire journey.",
   path: "/solutions/import",
 });
 
-const PAINS = [
+const PILLARS = [
   {
     num: "01",
-    title: "One in four shipments hits a customs delay you didn't see coming",
-    desc: "Incorrect tariff classifications. Missing pre-clearance documentation. A rules-of-origin question that should have been answered before the container left China. The first sign is a phone call from the customs broker asking for a document that should already be on file. By that point, the delay is 48 hours in and the warehouse is already idle.",
+    title: "High volume corporate discounts",
+    desc: "ITD Global's buying power means you ship at rates that would otherwise only be available to large multinationals. Whether you are moving samples or express parcels, we provide competitive pricing without needing the volume to negotiate it yourself.",
   },
   {
     num: "02",
-    title: "Landed costs estimated in a spreadsheet that's wrong by 20%",
-    desc: "Duty rates, import VAT, carrier surcharges, customs broker fees, fuel surcharges. All estimated from last quarter's actuals in a workbook the Import Manager updates monthly. When a supplier changes packing or a carrier adds a surcharge, the spreadsheet is wrong before it is used. Pricing decisions are made against numbers nobody trusts.",
+    title: "Single point of contact",
+    desc: "One contact manages the entire import operation. They handle transit comparisons, documentation, collections, and customs so you are not chasing multiple suppliers or piecing together updates from different parts of the chain.",
   },
   {
     num: "03",
-    title: "Finance can't price products until the shipment clears",
-    desc: "The CFO asks for landed cost data for the pricing review. The Import Manager gives them a number two weeks after the goods arrive, once the C79 is in and the duty deferment statement reconciles. By then the pricing decision was made on the old estimate. Margin erodes one quarter at a time.",
+    title: "We take care of everything",
+    desc: "Whether your shipment moves on DDP or DDU terms, door to door, airport to door, or airport to airport, ITD Global manages the full journey. You tell us what needs to move. We handle the rest.",
   },
+];
+
+const WHAT_YOU_GET: { icon: LucideIcon; text: string }[] = [
+  { icon: MapPin,       text: "China offices managing factory collections in the same time zone as your suppliers" },
+  { icon: TrendingDown, text: "High volume corporate rates on express & economy courier" },
+  { icon: Plane,        text: "Air freight, sea freight, and parcel consolidation on one account" },
+  { icon: Package,      text: "Parcel consolidation via our Shenzhen warehouse, cutting costs by 30% or more" },
+  { icon: Calendar,     text: "Weekly sample consolidations from China at a fixed rate with guaranteed departure" },
+  { icon: Warehouse,    text: "UK warehousing and fulfilment available through Delta Fulfilment" },
+  { icon: ShieldCheck,  text: "In-house customs support across all import routes" },
+  { icon: UserCheck,    text: "Named account contact throughout, not a helpdesk" },
 ];
 
 export default function ImportPage() {
@@ -36,172 +49,141 @@ export default function ImportPage() {
     <>
       <SolutionHero
         label="Import"
-        title="Landed cost in the PO, not after the C79."
-        subtitle="Duty calculated against the live UK Global Tariff before goods leave the supplier. CDS declarations pre-file with HMRC; PVA and C79 reconcile straight back into your accounting system."
-        primary={{ label: "Get Quote", href: "#estimator" }}
-        secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
+        title={<>Importing from the<br />Far East or worldwide?</>}
+        subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery, staying focused on your business while we move your goods."
         image={{
-          src: "/solutions/import-hero-v4.webp",
-          alt: "Cargo aircraft being loaded with palletised air freight",
-          objectPosition: "80% 50%",
+          src: "/solutions/port container yard.jpg",
+          alt: "Port container yard with stacked shipping containers",
+          objectPosition: "50% 50%",
         }}
-        chips={[
-          { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
-          { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-          { name: "FedEx", logo: "/logos/carriers/fedex_logo.png" },
-          { name: "SAP" },
-          { name: "HMRC CDS" },
-        ]}
+        glassWidth="max-w-4xl"
       />
+
       <SolutionPains
-        pains={PAINS}
+        pains={PILLARS}
         image={{
           src: "/solutions/import-pains-v2.webp",
           alt: "Boeing 737 aircraft being loaded with palletised air freight on the apron",
           objectPosition: "55% 50%",
         }}
+        eyebrow="Why ITD Global"
+        heading="Three reasons importers choose us."
+        lead="Corporate rates, total accountability, and a team on the ground wherever your goods start."
       />
+
+      {/* Body copy */}
+      <section className="bg-white py-16 md:py-24 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <p className="text-eyebrow text-accent mb-3">The full picture</p>
+            <h2 className="text-display-lg text-text-primary mb-6 max-w-2xl">
+              One account.<br />Every stage of the journey.
+            </h2>
+            <div className="max-w-3xl space-y-4 text-body-md text-text-secondary leading-relaxed">
+              <p>
+                Importing regularly from China or other origins comes with a lot of moving parts. Factories in different time zones. Customs documentation that holds up clearance if it is wrong. Couriers that need booking, tracking, and chasing. Costs that are hard to control when you are managing it all separately.
+              </p>
+              <p>
+                ITD Global removes that friction. We give back control by offering flexibility and visibility to ensure the right carrier is selected to better manage costs. Our China-based team works directly with your factories, managing collections and consolidations on the ground.
+              </p>
+              <p>
+                Because everything runs through one account, you always know where your shipment is and who to call. We work with importers, manufacturers, retailers and ecommerce brands, and we size the solution to what you actually need, not what is easiest to quote.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* What you get — card grid */}
+      <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <p className="text-eyebrow text-accent mb-3">What we handle</p>
+            <h2 className="text-display-lg text-text-primary mb-10">
+              What you get with ITD Global.
+            </h2>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {WHAT_YOU_GET.map(({ icon: Icon, text }, i) => (
+              <ScrollReveal key={text} delay={i * 0.06}>
+                <div className="bg-white rounded-xl border border-border p-5 h-full hover:border-accent/30 hover:shadow-sm transition-all group">
+                  <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <p className="text-sm font-medium text-text-primary leading-snug">{text}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <VerticalPage
         hideDefaultHero
         hidePainPoints
-      label="Import"
-      title="Landed cost in the PO, not after the C79."
-      subtitle="UK importers price products against duty estimates that are off by 15 to 20%. Connexx calculates landed cost from the HS code, origin country, Incoterms, and current UK Global Tariff rates before the goods leave the supplier. CDS declarations pre-file with HMRC. PVA and C79 reconcile against your accounting system automatically."
-      primaryCta={{ label: "Get Quote", href: "#estimator" }}
-      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
-      pains={PAINS}
-      features={[
-        {
-          icon: Calculator,
-          title: "Landed cost calculated against the live UK Global Tariff",
-          desc: "When the purchase order is confirmed, Connexx pulls the HS code, the origin country, the Incoterm, and the supplier value. Duty, import VAT, anti-dumping or countervailing duty where applicable, and freight surcharges resolve against the live UK Global Tariff. Finance gets the landed cost before the goods leave the supplier, not after the C79 arrives.",
-        },
-        {
-          icon: ShieldCheck,
-          title: "Tariff classification stored once, applied per shipment",
-          desc: "HS code lookup runs from the product description, validates against the UK Global Tariff, and stores the SKU-to-HS mapping. Every future consignment for that SKU classifies automatically. Misclassification penalties and underpayment fines stop turning up six months after import.",
-        },
-        {
-          icon: FileCheck,
-          title: "Pre-clearance CDS declarations filed before arrival",
-          desc: "The customs declaration is filed to HMRC's Customs Declaration Service before the container hits the port. PVA-eligible shipments are flagged on the declaration so import VAT goes on the next VAT return rather than at the border. Clearance happens on arrival, not after.",
-        },
-        {
-          icon: Receipt,
-          title: "C79 and duty deferment reconciliation that closes the loop",
-          desc: "The monthly C79 import VAT certificate reconciles against your accounting system automatically. Duty deferment statements from HMRC match against the consignments that drew on them. The Finance team stops chasing paper and starts trusting the landed cost numbers.",
-        },
-      ]}
-      integrations={[
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description:
-            "DHL Express inbound from 220+ origin countries with pre-clearance and PVA-aware customs documentation.",
-          href: "/integrations/carriers/dhl",
-        },
-        {
-          name: "FedEx",
-          logo: "/logos/carriers/fedex_logo.png",
-          description:
-            "FedEx inbound priority and economy with HS code validation and CDS pre-filing per consignment.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "UPS",
-          logo: "/logos/carriers/ups_logo.png",
-          description:
-            "UPS inbound worldwide with landed cost calculated against the UK Global Tariff before goods arrive.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "SAP",
-          description:
-            "SAP S/4HANA and SAP Global Trade Services. Confirmed POs trigger duty calculation and CDS declaration generation.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Oracle NetSuite",
-          description:
-            "NetSuite-confirmed POs flow into Connexx for tariff classification, pre-clearance, and landed cost write-back.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Microsoft Dynamics",
-          description:
-            "Dynamics 365 connector. Landed cost and clearance status visible inside the existing Dynamics order record.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Sage",
-          description:
-            "Sage 200 and Sage X3. PVA-eligible shipments and C79 reconciliation flow back into the Sage VAT return.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "HMRC CDS API",
-          description:
-            "Direct CDS API integration. Pre-clearance declarations filed to HMRC from the same workflow as the PO.",
-          href: "/integrations/carriers",
-        },
-      ]}
-      caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}
-      caseStudies={getCaseStudiesBySolution("Import")}
-      rateChecker="import"
-      faq={[
-        {
-          question: "How does Connexx help with UK customs clearance?",
-          answer:
-            "Connexx auto-classifies imports, calculates duty and import VAT against the UK Global Tariff, and generates the CDS declaration before goods arrive. Pre-clearance means the declaration is filed and accepted before the truck or container hits the port, so clearance happens on arrival rather than after. Northgate Imports cut customs delays 60% and lifted duty cost accuracy from 82% to 97% using this.",
-        },
-        {
-          question: "What is landed cost and how is it calculated?",
-          answer:
-            "Landed cost is the total cost of getting goods from supplier to your warehouse. Supplier price, freight, insurance, duty, import VAT, customs broker fees, and any surcharges. Connexx calculates it per SKU before the goods arrive, using the HS code, origin country, Incoterms, and current UK Global Tariff rates. That lets Finance price products against accurate margins rather than estimates.",
-        },
-        {
-          question: "What's Postponed VAT Accounting and should I use it?",
-          answer:
-            "Postponed VAT Accounting (PVA) lets you account for import VAT on your next VAT return instead of paying it at the border. For most UK importers it's a cash flow win, especially for high-volume importers from China, the EU, or the US. Connexx automatically marks shipments as PVA-eligible on the customs declaration and reconciles the monthly C79 certificate against your accounting system.",
-        },
-        {
-          question: "How do I find the right HS code for an import?",
-          answer:
-            "Use the UK Global Tariff lookup at gov.uk. For any meaningful import volume, automate it. Connexx suggests an HS code from the product description, validates against the UK Global Tariff, and stores the SKU-to-HS mapping so future shipments classify automatically. Misclassification triggers customs delays at the border and HMRC underpayment penalties six months later. Automation cuts both.",
-        },
-        {
-          question: "Does Connexx work with my existing customs broker?",
-          answer:
-            "Yes. Connexx runs in parallel with brokers including Descartes, MIC, and AEB. The platform generates the declaration data, lands it in the broker's workflow, and reads clearance status back so the Import Manager has real-time visibility. You don't have to replace the broker relationship. You replace the email chains and the spreadsheets.",
-        },
-        {
-          question: "How does duty deferment work with Connexx?",
-          answer:
-            "If you hold an HMRC duty deferment account, Connexx flags eligible imports on the customs declaration and tracks the deferment drawdown per consignment. Monthly duty deferment statements reconcile against the imports that drew on them automatically. The Finance team stops manually matching HMRC statements to import records on a spreadsheet at month-end.",
-        },
-      ]}
-      closingCta={{
-        headline: "Price products against duty, not against guesses.",
-        subhead:
-          "Two minutes with the landed cost calculator. Pick three import origins. Compare against your current estimate.",
-        primary: { label: "Get Quote", href: "#estimator" },
-        secondary: { label: "Contact Us", href: "/contact?enquiry=import" },
-      }}
-      breadcrumbs={[
-        { name: "Home", path: "/" },
-        { name: "Solutions", path: "/solutions" },
-        { name: "Import", path: "/solutions/import" },
-      ]}
-      jsonLd={[
-        serviceSchema({
-          name: "Import shipping software",
-          description:
-            "UK customs clearance and landed cost platform for importers. Calculates duty against the UK Global Tariff, pre-files CDS declarations with HMRC, and reconciles PVA and C79 against accounting systems. Integrates with SAP, NetSuite, Dynamics, and Sage.",
-          path: "/solutions/import",
-          serviceType: "Import Shipping and Customs Compliance Software",
-          areaServed: ["United Kingdom", "European Union"],
-        }),
-      ]}
+        label="Import"
+        title="Importing from the Far East or worldwide? We've got it covered."
+        subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."
+        primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=import" }}
+        secondaryCta={{ label: "Request a Quote", href: "#estimator" }}
+        pains={PILLARS}
+        caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}
+        caseStudies={getCaseStudiesBySolution("Import")}
+        rateChecker="import"
+        faq={[
+          {
+            question: "Does ITD Global handle customs clearance for imports?",
+            answer:
+              "Yes, in-house across all import routes. Our customs team prepares and submits all HMRC import entries. You provide invoices and packing lists and we handle everything else. No third-party broker fees.",
+          },
+          {
+            question: "Do you have a team in China?",
+            answer:
+              "Yes. Our China-based team handles factory collections directly, working in the same time zone as your suppliers. No UK-based intermediary managing it remotely.",
+          },
+          {
+            question: "Can you consolidate shipments from multiple Chinese factories?",
+            answer:
+              "Yes. We collect from multiple factories and consolidate into a single movement before it leaves China, whether that is an air freight consolidation for samples or a buyers consolidation by sea. One invoice, one customs entry, lower cost.",
+          },
+          {
+            question: "How does parcel consolidation work?",
+            answer:
+              "We group your smaller consignments through our Shenzhen warehouse before they ship. Consolidating into a single movement typically reduces delivery costs by 20% or more compared to shipping each order individually.",
+          },
+          {
+            question: "Do you offer warehousing once goods arrive in the UK?",
+            answer:
+              "Yes, through Delta Fulfilment. Goods-in, storage, pick and pack, marketplace integrations, and returns are all available as a direct extension of your import service.",
+          },
+          {
+            question: "What size businesses do you work with?",
+            answer:
+              "We work with businesses across a range of sectors and volumes, from growing ecommerce brands to established retailers and manufacturers. If you are importing regularly, we can build a solution around your routes and requirements.",
+          },
+        ]}
+        closingCta={{
+          headline: "Ready to simplify your import operation?",
+          subhead:
+            "One conversation. We'll show you the rates, the route, and what a single point of contact actually looks like in practice.",
+          primary: { label: "Get in Touch", href: "/contact?enquiry=import" },
+          secondary: { label: "Request a Quote", href: "#estimator" },
+        }}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Solutions", path: "/solutions" },
+          { name: "Import", path: "/solutions/import" },
+        ]}
+        jsonLd={[
+          serviceSchema({
+            name: "Import Shipping Services",
+            description:
+              "ITD Global helps UK businesses manage international imports from China and worldwide. In-house customs clearance, competitive rates, parcel consolidation via Shenzhen warehouse, and one point of contact for the entire journey.",
+            path: "/solutions/import",
+            serviceType: "Import Shipping and Logistics Services",
+            areaServed: ["United Kingdom", "China", "Worldwide"],
+          }),
+        ]}
       />
     </>
   );
