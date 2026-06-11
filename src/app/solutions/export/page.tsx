@@ -70,7 +70,6 @@ export default function ExportPage() {
           alt: "Cargo aircraft on the apron being prepared for an international export flight",
           objectPosition: "50% 50%",
         }}
-        glassWidth="max-w-2xl"
       />
 
       <SolutionPains
