@@ -75,8 +75,8 @@ export default function ExportPage() {
       <SolutionPains
         pains={PILLARS}
         image={{
-          src: "/solutions/reasons why exporters choose us (2).png",
-          alt: "Shipping containers stacked at an export port ready for international departure",
+          src: "/solutions/reasons why exporters choose us new.png",
+          alt: "Three reasons exporters choose ITD Global",
           objectPosition: "50% 50%",
         }}
         eyebrow="Why ITD Global"
