@@ -52,9 +52,9 @@ export default function ImportPage() {
         title="Importing from the Far East or worldwide? We've got it covered."
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery, staying focused on your business while we move your goods."
         image={{
-          src: "/solutions/import-hero-v4.webp",
+          src: "/solutions/import hero new.jpg",
           alt: "Cargo aircraft being loaded with palletised air freight",
-          objectPosition: "80% 50%",
+          objectPosition: "50% 50%",
         }}
         glassWidth="max-w-2xl"
       />
