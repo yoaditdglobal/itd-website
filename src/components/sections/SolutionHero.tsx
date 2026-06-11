@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
@@ -24,7 +25,7 @@ export interface SolutionHeroImage {
 
 export interface SolutionHeroProps {
   label: string;
-  title: string;
+  title: ReactNode;
   subtitle: string;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };

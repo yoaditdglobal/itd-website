@@ -49,14 +49,14 @@ export default function ImportPage() {
     <>
       <SolutionHero
         label="Import"
-        title="Importing from the Far East or worldwide? We've got it covered."
+        title={<>Importing from the<br />Far East or worldwide?</>}
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery, staying focused on your business while we move your goods."
         image={{
-          src: "/solutions/import hero new.jpg",
-          alt: "Cargo aircraft being loaded with palletised air freight",
+          src: "/solutions/port container yard.jpg",
+          alt: "Port container yard with stacked shipping containers",
           objectPosition: "50% 50%",
         }}
-        glassWidth="max-w-2xl"
+        glassWidth="max-w-4xl"
       />
 
       <SolutionPains
