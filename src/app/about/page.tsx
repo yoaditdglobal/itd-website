@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MapPin } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import TimelineVan from "@/components/sections/TimelineVan";
 import CountUp from "@/components/ui/CountUp";
@@ -46,13 +45,36 @@ const TIMELINE = [
 ];
 
 const OFFICES = [
-  { city: "Manchester", flag: "🇬🇧", note: "UK HQ — Heywood" },
-  { city: "London", flag: "", note: "UK depot" },
-  { city: "Birmingham", flag: "", note: "UK depot" },
-  { city: "Glasgow", flag: "", note: "UK depot" },
-  { city: "New Jersey", flag: "", note: "ITD Global USA Inc" },
-  { city: "Xiamen / Quanzhou / Shenzhen", flag: "", note: "China offices" },
-  { city: "Netherlands", flag: "", note: "EMEA office" },
+  {
+    region: "United Kingdom",
+    locations: [
+      { city: "Manchester", note: "HQ", address: "Unit A, Birch Business Park, Heywood, OL10 2SX" },
+      { city: "London", note: "Depot", address: "Stonefield Close, Ruislip, HA4 0XT" },
+      { city: "Birmingham", note: "Depot", address: "Unit 6, Marple Business Park, Walter Street, Aston, B7 5ET" },
+      { city: "Glasgow", note: "Depot", address: "Block 23, Unit 3, Motherwell Park, Bellshill, ML4 3NP" },
+      { city: "Leeds", note: "Depot", address: "Unit 4, Latchmore Road, Elland, LS12 6DN" },
+    ],
+  },
+  {
+    region: "Asia Pacific",
+    locations: [
+      { city: "Xiamen", note: "China office", address: "" },
+      { city: "Quanzhou", note: "China office", address: "" },
+      { city: "Shenzhen", note: "China office", address: "" },
+    ],
+  },
+  {
+    region: "United States",
+    locations: [
+      { city: "New Jersey", note: "ITD Global USA Inc", address: "" },
+    ],
+  },
+  {
+    region: "EMEA",
+    locations: [
+      { city: "Netherlands", note: "EMEA office", address: "" },
+    ],
+  },
 ];
 
 export default function AboutPage() {
@@ -122,27 +144,6 @@ export default function AboutPage() {
                 sizes="(max-width: 1024px) 100vw, 600px"
               />
             </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats band */}
-      <section className="bg-bg-dark py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <p className="text-eyebrow text-white/50 text-center mb-10 tracking-widest uppercase">
-              At a glance
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {STATS.map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-stat-xl text-white">
-                  <CountUp to={s.to} suffix={s.suffix} separator={s.separator} />
-                </div>
-                <p className="mt-2 text-sm text-white/60">{s.label}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -226,28 +227,22 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
 
-          {/* HQ featured card */}
-          <ScrollReveal>
-            <div className="bg-white rounded-2xl border border-border p-8 flex items-center gap-6 mb-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-default">
-              <span className="text-5xl" aria-hidden>{OFFICES[0].flag}</span>
-              <div>
-                <p className="text-display-sm text-text-primary">{OFFICES[0].city}</p>
-                <p className="text-body-md text-text-secondary mt-1">{OFFICES[0].note}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Remaining offices */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {OFFICES.slice(1).map((office, i) => (
-              <ScrollReveal key={office.city} delay={i * 0.06}>
-                <div className="bg-white rounded-2xl border border-border p-5 flex flex-col gap-1 transition-all duration-300 hover:-translate-y-2 hover:shadow-md cursor-default">
-                  {office.flag
-                    ? <span className="text-2xl" aria-hidden>{office.flag}</span>
-                    : <MapPin className="w-6 h-6 text-accent" aria-hidden />
-                  }
-                  <p className="text-heading-sm text-text-primary mt-1">{office.city}</p>
-                  <p className="text-body-sm text-text-secondary">{office.note}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {OFFICES.map((group, i) => (
+              <ScrollReveal key={group.region} delay={i * 0.08}>
+                <div className="bg-white rounded-2xl border border-border h-full flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-lg cursor-default">
+                  <div className="h-1 w-full bg-accent" />
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-caption text-accent font-semibold uppercase tracking-widest mb-5">{group.region}</p>
+                    <ul className="space-y-3 flex-1">
+                      {group.locations.map((loc) => (
+                        <li key={loc.city} className="flex flex-col border-b border-border pb-3 last:border-0 last:pb-0">
+                          <span className="text-heading-sm text-text-primary">{loc.city}, {loc.note}</span>
+                          {loc.address && <span className="text-body-sm text-text-secondary mt-0.5">{loc.address}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
