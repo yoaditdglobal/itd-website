@@ -9,17 +9,17 @@ export interface Brand {
 
 /* Innermost orbit — WMS / ERP / eCommerce platforms (closest to Connexx). */
 const WMS: Brand[] = [
-  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
-  { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png" },
+  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft-tile.png" },
+  { name: "Linnworks", logo: "/logos/erp-wms/linnworks-tile.png" },
+  { name: "Veeqo", logo: "/logos/erp-wms/veeqo-tile.png" },
   { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png" },
-  { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png" },
+  { name: "Shopify", logo: "/logos/ecommerce/shopify-tile.png" },
 ];
 
 /* Middle orbit — UK + global carriers. */
 const CARRIERS: Brand[] = [
   { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
-  { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+  { name: "DPD", logo: "/logos/carriers/dpd-tile.png" },
   { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
   { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
   { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
@@ -30,11 +30,11 @@ const CARRIERS: Brand[] = [
 
 /* Outer orbit — marketplaces. */
 const MARKETPLACES: Brand[] = [
-  { name: "Amazon", logo: "/logos/marketplaces/amazon_logo.png" },
-  { name: "eBay", logo: "/logos/marketplaces/ebay_logo.png" },
-  { name: "Etsy", logo: "/logos/marketplaces/etsy_logo.png" },
-  { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok_logo.png" },
-  { name: "Temu", logo: "/logos/marketplaces/temu_logo.webp" },
+  { name: "Amazon", logo: "/logos/marketplaces/amazon-tile.png" },
+  { name: "eBay", logo: "/logos/marketplaces/ebay-tile.png" },
+  { name: "Etsy", logo: "/logos/marketplaces/etsy-tile.png" },
+  { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok-tile.png" },
+  { name: "Temu", logo: "/logos/marketplaces/temu-tile.png" },
 ];
 
 const WMS_MOBILE_HIDE = new Set(["ShipStation", "Veeqo"]);
@@ -52,9 +52,10 @@ export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProper
   };
 }
 
-export function IconChip({ brand, tile = false }: { brand: Brand; tile?: boolean }) {
-  // Square, rounded, edge-to-edge brand tile (carriers — square assets, no white frame).
-  if (tile && brand.logo) {
+export function IconChip({ brand }: { brand: Brand }) {
+  // Edge-to-edge square rounded brand tile — every orbit asset is a full-bleed
+  // 512x512 tile (see scripts/gen-orbit-tiles.py). No white chip, no padding.
+  if (brand.logo) {
     return (
       <span
         title={brand.name}
@@ -71,26 +72,15 @@ export function IconChip({ brand, tile = false }: { brand: Brand; tile?: boolean
       </span>
     );
   }
-  // Contained white chip — mixed (tech/marketplace wordmark) orbit + letter fallback.
+  // Letter fallback — rounded square, matching IntegrationLogo's fallback.
   return (
     <span
       title={brand.name}
-      className="inline-flex items-center justify-center rounded-full bg-white shadow-lg border border-white/10 w-9 h-9 md:w-10 md:h-10"
+      className="inline-flex items-center justify-center rounded-xl bg-accent-light shadow-lg w-9 h-9 md:w-10 md:h-10"
     >
-      {brand.logo ? (
-        <Image
-          src={brand.logo}
-          width={28}
-          height={28}
-          quality={90}
-          alt=""
-          className="object-contain w-6 h-6 md:w-7 md:h-7"
-        />
-      ) : (
-        <span aria-hidden className="text-xs font-bold text-accent">
-          {brand.name[0]}
-        </span>
-      )}
+      <span aria-hidden className="text-xs font-bold text-accent">
+        {brand.name[0]}
+      </span>
     </span>
   );
 }
@@ -103,8 +93,6 @@ interface OrbitLayerProps {
   /** "cw" → wrapper rotates clockwise; child counter-rotates ccw. */
   direction: "cw" | "ccw";
   mobileHide: Set<string>;
-  /** Render chips as edge-to-edge square tiles (carriers) instead of contained white chips. */
-  tile?: boolean;
 }
 
 export function OrbitLayer({
@@ -113,7 +101,6 @@ export function OrbitLayer({
   durationS,
   direction,
   mobileHide,
-  tile = false,
 }: OrbitLayerProps) {
   const wrapperAnim =
     direction === "cw"
@@ -132,7 +119,7 @@ export function OrbitLayer({
         return (
           <div key={brand.name} className={hide} style={orbitStyle(angle, radiusPct)}>
             <div className="connexx-anim" style={{ animation: counterAnim }}>
-              <IconChip brand={brand} tile={tile} />
+              <IconChip brand={brand} />
             </div>
           </div>
         );
@@ -215,7 +202,7 @@ export default function ConnexxOrbit() {
             brands={CARRIERS}
             radiusPct={40}
             durationS={50}
-            direction="ccw"
+            direction="cw"
             mobileHide={CARRIERS_MOBILE_HIDE}
           />
 
