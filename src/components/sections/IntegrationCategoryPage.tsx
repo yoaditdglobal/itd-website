@@ -7,6 +7,7 @@ import FaqSection from "@/components/sections/FaqSection";
 import type { FaqItem } from "@/components/sections/FaqSection";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import type { Integration } from "@/lib/data";
+import { getIntegrationSlug } from "@/lib/data";
 
 export interface UseCase {
   headline: string;
@@ -169,17 +170,18 @@ export default function IntegrationCategoryPage({
           <ScrollReveal>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {integrations.map((integration) => (
-                <div
+                <Link
                   key={integration.id}
                   id={integrationAnchor(integration.name)}
-                  className="card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/20 text-center h-full scroll-mt-24"
+                  href={`/integrations/tech/${getIntegrationSlug(integration)}`}
+                  className="group block card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center h-full scroll-mt-24 transition-all"
                 >
                   <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
                   <p className="text-sm font-semibold text-text-primary">{integration.name}</p>
                   {integration.description && (
                     <p className="text-xs text-text-tertiary mt-1">{integration.description}</p>
                   )}
-                </div>
+                </Link>
               ))}
             </div>
           </ScrollReveal>
@@ -257,19 +259,6 @@ export default function IntegrationCategoryPage({
 
       {/* FAQ */}
       {faq && faq.length > 0 && <FaqSection items={faq} />}
-
-      {/* Request integration nudge — kept on category pages too for parity with the previous behaviour */}
-      <section className="bg-white py-12 md:py-16 border-t border-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal>
-            <h3 className="text-xl font-semibold text-text-primary">Don&apos;t see your tool?</h3>
-            <p className="mt-2 text-text-secondary">We&apos;re adding new integrations every month. Tell us what you need.</p>
-            <div className="mt-6">
-              <Button href="/contact?enquiry=integrations">Request an Integration</Button>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* Closing CTA — custom override or default */}
       {closingCta ? (

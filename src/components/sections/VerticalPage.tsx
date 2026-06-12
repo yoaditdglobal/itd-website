@@ -19,6 +19,7 @@ import type { CaseStudy, SolutionTag } from "@/lib/data";
 import { getCaseStudiesBySolution } from "@/lib/data";
 import { Zap, Eye, ShieldCheck, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 interface PainPoint {
   num: string;
@@ -149,6 +150,9 @@ interface VerticalPageProps {
   /** Optional additional JSON-LD schemas (Service, Product, etc.). Rendered in addition to FAQ + breadcrumb. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonLd?: Record<string, any>[];
+
+  /** Optional content rendered between the "How Connexx solves it" features block and the integrations carousel. */
+  integrationsGateway?: ReactNode;
 }
 
 export default function VerticalPage({
@@ -172,6 +176,7 @@ export default function VerticalPage({
   closingCta,
   breadcrumbs,
   jsonLd,
+  integrationsGateway,
 }: VerticalPageProps) {
   // Assemble JSON-LD payload: explicit schemas + auto-generated faq/breadcrumb.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -391,6 +396,8 @@ export default function VerticalPage({
           </div>
         </div>
       </section>}
+
+      {integrationsGateway}
 
       {integrations && integrations.length > 0 && (
       <section className="bg-bg-secondary py-12 md:py-16">

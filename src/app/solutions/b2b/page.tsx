@@ -4,205 +4,131 @@ import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Settings, ArrowLeftRight, MapPin, Package, Factory } from "lucide-react";
+import { Building2 } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "B2B shipping software for UK wholesalers and manufacturers",
+  title: "B2B & wholesale shipping — the right carrier for every order",
   description:
-    "Connect SAP, Sage, NetSuite, or Dynamics to every UK parcel and pallet carrier. Connexx automates carrier selection, writes tracking back to your ERP, and stops the redelivery charges.",
+    "In wholesale, the delivery is the relationship. We match the right carrier and service to every B2B consignment — heavy, high-value, timed, UK or international — so deliveries land on time.",
   path: "/solutions/b2b",
 });
 
 const PAINS = [
   {
     num: "01",
-    title: "The dispatch team spends the morning on the phone",
-    desc: "At 500 orders a week, your dispatch supervisor and their team work through carrier portals for the first three hours of every shift. By the time they touch a physical shipment, half the day is gone. Exceptions get missed because the routine bookings crowd them out.",
+    title: "One late delivery can lose you the account",
+    desc: "In wholesale, the buyer remembers the consignment that turned up late or not at all. One bad delivery and the next order goes elsewhere.",
   },
   {
     num: "02",
-    title: "Routing errors trigger redelivery charges the CFO notices",
-    desc: "A Highlands postcode booked through the wrong carrier. A two-pallet consignment sent on a parcel service. Each routing mistake turns into a redelivery charge, a difficult call with the buyer, and a P&L line the Finance Director eventually asks about. Atlas Industrial was losing £8,000 a month to this before automation.",
+    title: "Most carriers aren't built for business deliveries",
+    desc: "A heavy, oversized box sent on a standard parcel service, or a business address on a residential network, turns up late or gets turned away. Bulky orders and timed deliveries need a carrier that's actually built for them.",
   },
   {
     num: "03",
-    title: "Tracking numbers re-keyed from the carrier portal into the ERP",
-    desc: "Order data goes into the ERP. Booking data goes into the carrier portal. Tracking data comes back on a CSV the dispatch supervisor opens at 4pm and pastes into SAP by hand. Transposition errors slip through. Sales forwards the wrong tracking number. The first WISMO call goes to the wrong team.",
+    title: "International orders carry more risk and more paperwork",
+    desc: "Send a high-value consignment abroad and the wrong carrier, or a commercial invoice that doesn't add up, can hold it at the border. The bigger the order, the more a delay hurts.",
   },
 ];
 
-export default function B2BManufacturingPage() {
+const HERO_TITLE = "In wholesale, the delivery is the relationship.";
+const HERO_SUBTITLE =
+  "B2B orders are heavy, high-value and tied to a long-term account, so the carrier has to be one that's genuinely good at delivering to businesses, on time. We guide the right carrier and service on each consignment.";
+const PRIMARY = { label: "Get Quote", href: "/shipping/domestic#estimator" };
+const SECONDARY = { label: "Explore", href: "/resources/case-studies" };
+
+export default function B2BPage() {
   return (
     <>
       <SolutionHero
         label="B2B"
-        title="B2B dispatch that runs from your ERP, not a portal."
-        subtitle="Orders confirmed in SAP, Sage, NetSuite, or Dynamics trigger carrier selection, booking, and label generation automatically. Tracking and PODs write back within seconds."
-        primary={{ label: "Contact Us", href: "/contact?enquiry=b2b" }}
-        secondary={{ label: "Learn More", href: "/resources/case-studies/rioz-global" }}
+        title={HERO_TITLE}
+        subtitle={HERO_SUBTITLE}
+        primary={PRIMARY}
+        secondary={SECONDARY}
         image={{
           src: "/solutions/b2b-hero.webp",
-          alt: "Warehouse stacked with palletised B2B cargo boxes ready for dispatch",
+          alt: "Warehouse stacked with B2B cargo boxes ready for dispatch to business addresses",
           gradient: "from-bg-dark via-bg-dark-card to-accent/30",
-          icon: Factory,
+          icon: Building2,
         }}
-        chips={[
-          { name: "SAP" },
-          { name: "NetSuite" },
-          { name: "Sage" },
-          { name: "Dynamics 365" },
-          { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
-          { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
-        ]}
       />
       <SolutionPains
         pains={PAINS}
         image={{
           src: "/solutions/b2b-pains-v2.webp",
-          alt: "Warehouse-club B2B display stacked with Kristin Ess hair-care duo packs on branded pallets",
+          alt: "Warehouse-club B2B display stacked with branded retail goods",
           gradient: "from-accent-light via-white to-accent/15",
-          icon: Factory,
+          icon: Building2,
         }}
-        lead="Three places palletised dispatch leaks margin before the next P&L lands on the Finance Director's desk."
+        eyebrow="Where deliveries go wrong"
+        heading="What gets in the way today."
+        lead="Three places a B2B order slips — a late delivery, the wrong carrier, a border hold — and the account can slip with it."
       />
       <VerticalPage
         hideDefaultHero
         hidePainPoints
-      label="B2B"
-      title="B2B dispatch that runs from your ERP, not a portal."
-      subtitle="UK wholesalers and manufacturers ship 500 palletised orders a week through carrier portals nobody has time to manage. Connexx connects to SAP, Sage, NetSuite, and Microsoft Dynamics. Orders confirmed in the ERP trigger carrier selection, booking, and label generation automatically. Tracking numbers and PODs write back to the ERP within seconds."
-      primaryCta={{ label: "Contact Us", href: "/contact?enquiry=b2b" }}
-      secondaryCta={{ label: "Learn More", href: "/resources/case-studies/rioz-global" }}
-      pains={PAINS}
-      features={[
-        {
-          icon: Settings,
-          title: "Carrier selection from the ERP order",
-          desc: "When an order is confirmed in SAP, Sage, NetSuite, or Microsoft Dynamics, Connexx reads the weight, destination, delivery window, and customer rules. The right parcel carrier or pallet network is selected automatically. DPD, Parcelforce, DHL Express, Pall-Ex, and Palletline all sit in the same rate engine.",
-        },
-        {
-          icon: ArrowLeftRight,
-          title: "ERP write-back without the CSV",
-          desc: "Tracking numbers, booking confirmations, and proofs of delivery flow back into the ERP order record within seconds. Sales sees the tracking against the purchase order. Finance sees the cost against the cost centre. The dispatch supervisor stops touching CSVs.",
-        },
-        {
-          icon: MapPin,
-          title: "Highlands and out-of-area routing handled in the rules",
-          desc: "The platform applies the right out-of-area surcharge and routes the consignment to the carrier that actually delivers to that postcode. Highlands & Islands, Channel Islands, and Northern Ireland are routed automatically. Redelivery charges from miscoded postcodes drop to near zero.",
-        },
-        {
-          icon: Package,
-          title: "Pallets and parcels in one workflow",
-          desc: "A 25kg parcel goes on DPD. A two-pallet consignment goes on Pall-Ex. A timed delivery into a Tesco RDC goes with the booking-in reference embedded on the BOL. One dashboard, one set of routing rules, every weight tier from a single envelope to a full pallet.",
-        },
-      ]}
-      integrations={[
-        {
-          name: "SAP",
-          description:
-            "S/4HANA and SAP ECC. Sales orders and deliveries sync into Connexx. Tracking and POD write back to SAP.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Sage",
-          description:
-            "Sage 200, Sage X3, and Sage 50. Dispatch supervisors stop re-keying tracking numbers from carrier portals.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Microsoft Dynamics",
-          description:
-            "Dynamics 365 and Business Central. Carrier booking triggered on order confirmation inside the existing Dynamics workflow.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Oracle NetSuite",
-          description:
-            "NetSuite-confirmed orders flow into Connexx for rate comparison, booking, and ERP write-back.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description: "DPD Next Day, Two Day, and Saturday for B2B parcel volume across Mainland UK and the EU.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "Parcel Force",
-          logo: "/logos/carriers/parcel-force.svg",
-          description:
-            "Parcelforce Express24, Express48, and Worldwide for tracked B2B parcels and small consignments.",
-          href: "/integrations/carriers/parcel-force",
-        },
-        {
-          name: "UPS",
-          logo: "/logos/carriers/ups_logo.png",
-          description: "UPS Standard and Expedited for B2B routing across the UK and EU lanes.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description:
-            "DHL time-definite for B2B shipments that have to land on the buyer's dock by a named hour.",
-          href: "/integrations/carriers/dhl",
-        },
-      ]}
-      caseStudy={getCaseStudiesBySolution("B2B")[0] ?? caseStudies[5]}
-      faq={[
-        {
-          question: "Does Connexx integrate with SAP for B2B shipping?",
-          answer:
-            "Yes. Connexx integrates with SAP S/4HANA and SAP ECC. Sales orders and deliveries sync into Connexx automatically. The rate engine picks the right parcel carrier or pallet network per consignment based on weight, destination, and delivery window. Tracking numbers, PODs, and audit logs write back to SAP for compliance. Atlas Industrial's dispatch team handles three times the volume on the same headcount since the integration went live.",
-        },
-        {
-          question: "What's the difference between parcel and pallet shipping for B2B?",
-          answer:
-            "Parcel covers consignments under roughly 30kg single-piece, typically through DPD, Parcelforce, DHL Express, or UPS. Pallet covers anything heavier or larger, through networks like Pall-Ex, Palletline, Palletways, or DX Freight. Connexx rate-shops across both layers in one workflow. You pick the cheapest compliant lane for every order without manually deciding parcel versus pallet.",
-        },
-        {
-          question: "Does Connexx work with Sage for dispatch automation?",
-          answer:
-            "Yes. Connexx integrates with Sage 50, Sage 200, and Sage X3. When a sales order is confirmed in Sage, Connexx selects the carrier and books the collection. Tracking numbers and delivery confirmations write back to the Sage order record. There is no CSV step. Most Sage-anchored wholesalers go live in five business days.",
-        },
-        {
-          question: "How do you handle Highlands & Islands and out-of-area surcharges?",
-          answer:
-            "Connexx applies the correct out-of-area surcharge automatically based on the destination postcode. Highlands & Islands, Channel Islands, and Northern Ireland are routed to carriers that actually deliver to those zones, with the right service tier and the right transit time. Redelivery charges from miscoded postcodes drop to near zero once routing rules are configured.",
-        },
-        {
-          question: "How do I book a timed delivery to a UK retailer DC?",
-          answer:
-            "Use a carrier that supports timed and booked-in delivery (DPD AM, DHL Time Definite, Parcelforce Express AM, or a pallet network with booking-in service). The booking reference and delivery slot must travel with the manifest. Connexx stores the DC's booking-in profile per customer, generates the BOL with the reference embedded, and routes through the right service automatically. Tesco, Asda, and major retailer RDCs are pre-configured.",
-        },
-        {
-          question: "Can we keep our existing carrier accounts and contracts?",
-          answer:
-            "Yes. Connexx supports your existing accounts and negotiated rates across DPD, Parcelforce, DHL Express, UPS, Pall-Ex, Palletline, Palletways, and DX Freight. If your contracts are weak, ITD's volume across thousands of UK shippers unlocks better rates. You keep the carrier relationship. We improve the price and remove the data entry.",
-        },
-      ]}
-      closingCta={{
-        headline: "Get the dispatch team off the phone.",
-        subhead:
-          "30 minutes with an integration engineer. We show you the order-to-tracking flow inside your ERP. No demo deck.",
-        primary: { label: "Contact Us", href: "/contact?enquiry=b2b" },
-        secondary: { label: "Learn More", href: "/resources/case-studies/rioz-global" },
-      }}
-      breadcrumbs={[
-        { name: "Home", path: "/" },
-        { name: "Solutions", path: "/solutions" },
-        { name: "B2B", path: "/solutions/b2b" },
-      ]}
-      jsonLd={[
-        serviceSchema({
-          name: "B2B shipping software",
-          description:
-            "ERP-integrated multi-carrier shipping platform for UK wholesalers and manufacturers. Connects SAP, Sage, NetSuite, and Microsoft Dynamics to parcel carriers and pallet networks with automated dispatch and ERP write-back.",
-          path: "/solutions/b2b",
-          serviceType: "B2B and Wholesale Shipping Software",
-          areaServed: ["United Kingdom", "European Union"],
-        }),
-      ]}
+        label="B2B"
+        title={HERO_TITLE}
+        subtitle={HERO_SUBTITLE}
+        primaryCta={PRIMARY}
+        secondaryCta={SECONDARY}
+        pains={PAINS}
+        caseStudy={getCaseStudiesBySolution("B2B")[0] ?? caseStudies[5]}
+        faq={[
+          {
+            question: "Which timed delivery options can I offer?",
+            answer:
+              "Pre-9, Pre-10, Pre-12 and Next Day, on the carriers that run them. We match the service to what each delivery actually needs.",
+          },
+          {
+            question: "How do you choose the right carrier for a business delivery?",
+            answer:
+              "We know which carriers are strong on business addresses and heavy goods, and which fall down. Each consignment goes to one that's built for it.",
+          },
+          {
+            question: "Can you handle heavy and oversized boxes?",
+            answer:
+              "Yes. From a standard parcel up to a heavy, oversized box, we route it on a carrier built for the weight, with the booking-in details where the receiving site needs them.",
+          },
+          {
+            question: "How does international B2B work?",
+            answer:
+              "For high-value orders abroad we'd usually point you to FedEx, UPS or DHL. We're not customs advisors, but we guide the basics and help you lay out and complete the commercial invoice, so it isn't the one held at the border.",
+          },
+          {
+            question: "Do you handle Highlands and out-of-area deliveries?",
+            answer:
+              "Yes. The surcharge is priced in up front and the consignment routes to a carrier that covers the postcode, so a surprise redelivery charge doesn't land later.",
+          },
+          {
+            question: "Can we keep our own carrier accounts?",
+            answer:
+              "Yes. Keep the accounts and contracts that work, and we'll add the carriers and rates you're missing alongside them.",
+          },
+        ]}
+        closingCta={{
+          headline: "Let's get the right carrier on your B2B lanes.",
+          subhead:
+            "Tell us where your orders go and how fast they need to be there. We'll line up the right carrier and service for each lane, at home and abroad.",
+          primary: PRIMARY,
+          secondary: SECONDARY,
+        }}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Solutions", path: "/solutions" },
+          { name: "B2B", path: "/solutions/b2b" },
+        ]}
+        jsonLd={[
+          serviceSchema({
+            name: "B2B and wholesale shipping",
+            description:
+              "Multi-carrier shipping for UK wholesalers and B2B sellers. We guide the right carrier and service for each consignment — heavy and oversized goods, timed deliveries, Highlands and out-of-area, and high-value international — so business deliveries land on time.",
+            path: "/solutions/b2b",
+            serviceType: "B2B and Wholesale Shipping",
+            areaServed: ["United Kingdom", "European Union", "Worldwide"],
+          }),
+        ]}
       />
     </>
   );

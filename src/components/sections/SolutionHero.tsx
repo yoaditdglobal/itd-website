@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
@@ -24,12 +25,14 @@ export interface SolutionHeroImage {
 
 export interface SolutionHeroProps {
   label: string;
-  title: string;
+  title: ReactNode;
   subtitle: string;
-  primary: { label: string; href: string };
-  secondary: { label: string; href: string };
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
   image: SolutionHeroImage;
   chips?: SolutionHeroChip[];
+  /** Tailwind max-width class for the glass card. Defaults to "max-w-xl". */
+  glassWidth?: string;
 }
 
 /**
@@ -51,6 +54,7 @@ export default function SolutionHero({
   secondary,
   image,
   chips,
+  glassWidth = "max-w-xl",
 }: SolutionHeroProps) {
   const Icon = image.icon;
   const gradient = image.gradient ?? "from-bg-dark via-bg-dark-card to-bg-dark";
@@ -100,7 +104,7 @@ export default function SolutionHero({
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32 min-h-[inherit] flex items-center">
-        <div className="max-w-xl rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 shadow-2xl p-7 md:p-10">
+        <div className={`${glassWidth} rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 shadow-2xl p-7 md:p-10`}>
           <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-white/15 text-white text-eyebrow tracking-wider mb-5">
             {label}
           </span>
@@ -110,12 +114,16 @@ export default function SolutionHero({
           <p className="hero-entrance-sub mt-5 text-body-lg text-white/80">
             {subtitle}
           </p>
-          <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
-            <Button href={primary.href}>{primary.label}</Button>
-            <Button href={secondary.href} variant="secondary" surface="dark">
-              {secondary.label}
-            </Button>
-          </div>
+          {(primary || secondary) && (
+            <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+              {primary && <Button href={primary.href}>{primary.label}</Button>}
+              {secondary && (
+                <Button href={secondary.href} variant="secondary" surface="dark">
+                  {secondary.label}
+                </Button>
+              )}
+            </div>
+          )}
 
           {chips && chips.length > 0 && (
             <div

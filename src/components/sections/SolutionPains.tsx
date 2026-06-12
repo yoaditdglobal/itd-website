@@ -59,8 +59,8 @@ export default function SolutionPains({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* Photo / placeholder */}
-          <ScrollReveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-[560px] rounded-2xl overflow-hidden shadow-xl border border-border">
+          <ScrollReveal className="lg:col-span-5 lg:h-full">
+            <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full rounded-2xl overflow-hidden shadow-xl border border-border">
               {image.src ? (
                 <Image
                   src={image.src}
@@ -89,7 +89,7 @@ export default function SolutionPains({
           {/* Header + pain rows */}
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <p className="text-eyebrow text-accent mb-3">{eyebrow}</p>
+              {eyebrow && <p className="text-eyebrow text-accent mb-3">{eyebrow}</p>}
               <h2 className="text-display-md text-text-primary">{heading}</h2>
               <p className="mt-4 text-body-md text-text-secondary max-w-prose">
                 {lead}

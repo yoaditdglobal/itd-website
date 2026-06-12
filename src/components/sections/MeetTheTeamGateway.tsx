@@ -20,11 +20,11 @@ export default function MeetTheTeamGateway() {
             <div className="max-w-2xl">
               <p className="text-eyebrow text-accent mb-3">Our team</p>
               <h2 className="text-display-lg text-text-primary">
-                The people behind the platform.
+                The people behind ITD Global.
               </h2>
               <p className="mt-4 text-body-md text-text-secondary">
                 Operators, not account numbers. The leadership team that owns
-                your logistics outcomes — and the people you&rsquo;ll actually
+                your logistics outcomes and the people you&rsquo;ll actually
                 talk to.
               </p>
             </div>

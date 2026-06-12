@@ -1,6 +1,8 @@
 import VerticalPage from "@/components/sections/VerticalPage";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
+import SolutionRealities from "@/components/sections/SolutionRealities";
+import IntegrationsGateway from "@/components/sections/IntegrationsGateway";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
@@ -28,6 +30,11 @@ const PAINS = [
     num: "03",
     title: "Your volume only stretches to a couple of carriers",
     desc: "On your own, two or three carriers is the most you can offer at a margin. We let you offer as many as the client needs, here or abroad.",
+  },
+  {
+    num: "04",
+    title: "Carrier billing you can actually reconcile",
+    desc: "Separate invoices from each carrier make it a slog to work out what a client's shipping really cost. You get one bill, broken down line by line across your carriers, so rebilling each client is clean.",
   },
 ];
 
@@ -62,7 +69,43 @@ export default function ThreePLPage() {
         }}
         eyebrow="Where the margin leaves"
         heading="What gets in the way today."
-        lead="Three places your margin and your pitch leak away before you've even won the client."
+        lead="Four places a 3PL's margin and pitch leak away — from winning the client to reconciling the monthly bill."
+      />
+      <SolutionRealities
+        heading="The realities of operating a 3PL"
+        lead="We understand the realities of operating a 3PL. We own one. 3PLs are expected to do more, with less."
+        items={[
+          {
+            title: "Retail Brands",
+            description:
+              "Delivery expectations, cost pressure and service consistency across a book of different accounts.",
+          },
+          {
+            title: "Subscription Brands",
+            description:
+              "Predictable recurring shipments, squeezed by margin pressure, cut-off sensitivity and churn risk.",
+          },
+          {
+            title: "Marketplace Customers",
+            description:
+              "Fast-moving sellers, complex accounts and the responsiveness to keep up across channels.",
+          },
+          {
+            title: "Retention & Growth",
+            description:
+              "Keeping the clients you have happy while building a carrier proposition that wins the next ones.",
+          },
+          {
+            title: "Billing, Setup & IT",
+            description:
+              "Onboarding, account structures, client-specific setup and the reporting visibility to back it up.",
+          },
+          {
+            title: "Multi-Carrier Management",
+            description:
+              "Good rates usually demand hard volume commitments, which makes real carrier choice on your own volume tough.",
+          },
+        ]}
       />
       <VerticalPage
         hideDefaultHero
@@ -78,6 +121,19 @@ export default function ThreePLPage() {
         label: "Explore",
         href: "/resources/case-studies/delta-fulfilment",
       }}
+      integrationsGateway={
+        <IntegrationsGateway
+          heading="Sits over the WMS you already run."
+          subtext="We're the shipping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders pull in with each brand's rules, we apply the carrier and rate, and the tracking and cost write back. Nothing gets re-keyed."
+          logos={[
+            { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
+            { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
+            { name: "ShipHero", logo: "/logos/erp-wms/shiphero_logo.png" },
+            { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png" },
+          ]}
+          browseHref="/integrations/erp-wms"
+        />
+      }
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Solutions", path: "/solutions" },
@@ -186,9 +242,9 @@ export default function ThreePLPage() {
             "Yes. Each brand runs as its own account under yours, with its own rates, rules and branded tracking. Billing splits out per brand at month-end.",
         },
         {
-          question: "Does ITD sit on top of my WMS?",
+          question: "Does ITD integrate with my WMS?",
           answer:
-            "Yes. We're the shipping and rate-shopping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders push in and tracking writes back, with no double entry.",
+            "Yes. We connect to Mintsoft, Linnworks, ShipHero and Veeqo. The integrations section above shows how the flow works.",
         },
         {
           question: "What happens when a parcel's lost or a bill's wrong?",

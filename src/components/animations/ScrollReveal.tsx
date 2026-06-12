@@ -64,6 +64,13 @@ export default function ScrollReveal({
     const rect = el.getBoundingClientRect();
     const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
     if (inViewport) {
+      // After the initial page-load window this mount is a client-side
+      // navigation: reveal instantly so pages don't re-fade on every route
+      // change. Only the first load gets the entrance animation.
+      if (performance.now() > 4000) {
+        setVisible(true);
+        return;
+      }
       // Fire on next paint so the user sees the entrance animation.
       requestAnimationFrame(() => setVisible(true));
       return;

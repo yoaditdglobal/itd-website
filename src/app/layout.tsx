@@ -3,7 +3,6 @@ import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { QueryProvider } from "@/components/providers/QueryProvider";
-import { MotionProvider } from "@/components/providers/MotionProvider";
 import ScrollToTop from "@/components/util/ScrollToTop";
 import { rootMetadata } from "@/lib/metadata";
 import {
@@ -26,7 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" className={`${inter.variable} h-full antialiased`}>
+    // data-scroll-behavior: Next 16 no longer overrides `scroll-behavior:
+    // smooth` during SPA navigations by default — without this attribute every
+    // route change animates a scroll-to-top instead of jumping instantly.
+    <html
+      lang="en-GB"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} h-full antialiased`}
+    >
       <head>
         {/* Cabinet Grotesk (Fontshare) — display face for all .text-display-* and .text-heading-*.
             Preconnect + preload the stylesheet to remove render-blocking on first paint. */}
@@ -59,11 +65,9 @@ export default function RootLayout({
         <ScrollToTop />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <QueryProvider>
-          <MotionProvider>
-            <Navbar />
-            <main className="flex-1 pt-[72px]">{children}</main>
-            <Footer />
-          </MotionProvider>
+          <Navbar />
+          <main className="flex-1 pt-[72px]">{children}</main>
+          <Footer />
         </QueryProvider>
       </body>
     </html>
