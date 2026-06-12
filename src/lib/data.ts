@@ -584,6 +584,7 @@ export const integrations: Integration[] = [
   { id: "c-dpd", name: "DPD", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel delivery network", logo: "/logos/carriers/DPD-LOGO.png" },
   { id: "c-dhl-parcel", name: "DHL Parcel", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "Parcel delivery", logo: "/logos/carriers/dhlparcel_logo.svg" },
   { id: "c-amazon-shipping", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo.png" },
+  { id: "c-apc", name: "APC", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "UK overnight parcel network", logo: "/logos/carriers/apc_logo.png" },
   // ─── Carriers — International ───────────────────────────────────────
   { id: "c-parcel-force", name: "Parcel Force", category: "carrier", type: "carrier", region: "International", featured: true, description: "Tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
   { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
@@ -593,6 +594,7 @@ export const integrations: Integration[] = [
   { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery" },
   { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express" },
   { id: "c-deutsche-post", name: "Deutsche Post", category: "carrier", type: "carrier", region: "International", featured: false, description: "German postal & international mail", logo: "/logos/carriers/deutschepost_logo.avif" },
+  { id: "c-starlinks", name: "Starlinks", category: "carrier", type: "carrier", region: "International", featured: false, description: "Cross-border e-commerce delivery", logo: "/logos/carriers/starlinks_logo.png" },
 ];
 
 // ─── Integration slugs + lookups ───────────────────────────────────────────────
@@ -881,6 +883,8 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   "fedex": { name: "FedEx", logo: "/logos/carriers/fedex_logo.png", href: "/integrations/carriers", kind: "carrier" },
   "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers", kind: "carrier" },
   "sf-express": { name: "SF Express", href: "/integrations/carriers", kind: "carrier" },
+  "apc": { name: "APC", logo: "/logos/carriers/apc_logo.png", href: "/integrations/carriers/apc", kind: "carrier" },
+  "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
 
   // Tech integrations (no per-integration detail pages — route to category)
   "mintsoft": { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png", href: "/integrations/erp-wms", kind: "integration" },
