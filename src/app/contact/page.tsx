@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { motion, AnimatePresence, MotionConfig, type Variants } from "framer-motion";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
 
@@ -35,16 +35,6 @@ const steps = [
     desc: "You get the rates back, with an account manager to talk them through.",
   },
 ];
-
-// Entrance choreography — gated by <MotionConfig reducedMotion="user"> below.
-const panelStagger: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-};
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-};
 
 export default function ContactPage() {
   const [shippingType, setShippingType] = useState("");
@@ -100,27 +90,22 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <MotionConfig reducedMotion="user">
-        <section className="bg-bg-secondary py-24 md:py-32">
-          <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
-            <motion.div initial="hidden" animate="show" variants={panelStagger}>
-              <motion.div
-                variants={fadeUp}
-                className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-success-light"
-              >
-                <span className="text-2xl text-success-dark">&#10003;</span>
-              </motion.div>
-              <motion.h1 variants={fadeUp} className="text-display-lg text-text-primary">
-                We&apos;ve got your details.
-              </motion.h1>
-              <motion.p variants={fadeUp} className="mt-4 text-body-lg text-text-secondary">
-                We&apos;ll run your volumes and lanes against the carrier network, and an
-                account manager will come back with the rates within one business day.
-              </motion.p>
-            </motion.div>
-          </div>
-        </section>
-      </MotionConfig>
+      <section className="bg-bg-secondary py-24 md:py-32">
+        <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-success-light">
+              <span className="text-2xl text-success-dark">&#10003;</span>
+            </div>
+            <h1 className="text-display-lg text-text-primary">
+              We&apos;ve got your details.
+            </h1>
+            <p className="mt-4 text-body-lg text-text-secondary">
+              We&apos;ll run your volumes and lanes against the carrier network, and an
+              account manager will come back with the rates within one business day.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
     );
   }
 
@@ -129,50 +114,40 @@ export default function ContactPage() {
   const labelClass = "block text-sm font-medium text-text-primary mb-1.5";
 
   return (
-    <MotionConfig reducedMotion="user">
-      <section className="bg-bg-secondary py-10 md:py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid overflow-hidden rounded-3xl border border-border bg-white shadow-sm lg:grid-cols-2">
-            {/* ── Left: dark branded panel ── */}
-            <div className="relative overflow-hidden bg-bg-dark px-6 py-12 sm:px-10 md:py-16">
-              <div
-                aria-hidden
-                className="bg-noise pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -top-24 left-1/2 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl"
-              />
-              <motion.div
-                initial="hidden"
-                animate="show"
-                variants={panelStagger}
-                className="relative"
-              >
-                <motion.span
-                  variants={fadeUp}
-                  className="mb-5 inline-block rounded-full bg-white/10 px-3 py-1 text-eyebrow tracking-wider text-white/80"
-                >
+    <section className="bg-bg-secondary py-10 md:py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid overflow-hidden rounded-3xl border border-border bg-white shadow-sm lg:grid-cols-2">
+          {/* ── Left: dark branded panel ── */}
+          <div className="relative overflow-hidden bg-bg-dark px-6 py-12 sm:px-10 md:py-16">
+            <div
+              aria-hidden
+              className="bg-noise pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 left-1/2 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl"
+            />
+            <div className="relative">
+              <ScrollReveal>
+                <span className="mb-5 inline-block rounded-full bg-white/10 px-3 py-1 text-eyebrow tracking-wider text-white/80">
                   Contact Sales
-                </motion.span>
-                <motion.h1 variants={fadeUp} className="text-display-lg text-white">
+                </span>
+                <h1 className="text-display-lg text-white">
                   Tell us what you ship. We&apos;ll tell you what it should cost.
-                </motion.h1>
-                <motion.p variants={fadeUp} className="mt-5 max-w-md text-body-lg text-white/70">
+                </h1>
+                <p className="mt-5 max-w-md text-body-lg text-white/70">
                   Send your volumes and lanes, and your account manager comes back with
                   what our carrier network can do on price.
-                </motion.p>
+                </p>
+              </ScrollReveal>
 
-                {/* What happens next */}
-                <motion.ol variants={fadeUp} className="mt-10 space-y-8">
-                  {steps.map((s, i) => {
-                    const isLast = i === steps.length - 1;
-                    return (
-                      <motion.li
-                        key={s.num}
-                        variants={fadeUp}
-                        className="relative flex gap-5"
-                      >
+              {/* What happens next */}
+              <div className="mt-10 space-y-8">
+                {steps.map((s, i) => {
+                  const isLast = i === steps.length - 1;
+                  return (
+                    <ScrollReveal key={s.num} delay={0.1 + i * 0.1}>
+                      <div className="relative flex gap-5">
                         <div className="relative w-10 flex-shrink-0">
                           <span
                             aria-hidden
@@ -183,7 +158,7 @@ export default function ContactPage() {
                           {!isLast && (
                             <span
                               aria-hidden
-                              className="absolute left-1/2 top-9 -bottom-8 w-px -translate-x-1/2 bg-white/15"
+                              className="absolute left-1/2 top-9 h-8 w-px -translate-x-1/2 bg-white/15"
                             />
                           )}
                         </div>
@@ -191,20 +166,17 @@ export default function ContactPage() {
                           <h2 className="text-heading-md text-white">{s.title}</h2>
                           <p className="mt-1 text-body-sm text-white/65">{s.desc}</p>
                         </div>
-                      </motion.li>
-                    );
-                  })}
-                </motion.ol>
-              </motion.div>
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
+              </div>
             </div>
+          </div>
 
-            {/* ── Right: enquiry form ── */}
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="px-6 py-12 sm:px-10 md:py-16"
-            >
+          {/* ── Right: enquiry form ── */}
+          <div className="px-6 py-12 sm:px-10 md:py-16">
+            <ScrollReveal delay={0.15}>
               <p className="mb-6 text-body-md text-text-secondary">
                 Give us the shape of what you ship and we&apos;ll do the digging.
               </p>
@@ -237,25 +209,15 @@ export default function ContactPage() {
                 </fieldset>
 
                 {/* Main Lanes — conditional */}
-                <AnimatePresence initial={false}>
-                  {showMainLanes && (
-                    <motion.div
-                      key="main-lanes"
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                    >
-                      <MultiSelect
-                        label={`Main Lanes (${shippingType === "Export" ? "destination" : "origin"} countries) *`}
-                        options={countryOptions}
-                        selected={mainLanes}
-                        onChange={setMainLanes}
-                        placeholder="Search and select countries..."
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {showMainLanes && (
+                  <MultiSelect
+                    label={`Main Lanes (${shippingType === "Export" ? "destination" : "origin"} countries) *`}
+                    options={countryOptions}
+                    selected={mainLanes}
+                    onChange={setMainLanes}
+                    placeholder="Search and select countries..."
+                  />
+                )}
 
                 {/* Weekly Volume */}
                 <div>
@@ -383,20 +345,19 @@ export default function ContactPage() {
                 )}
 
                 {/* Submit */}
-                <motion.button
+                <button
                   type="submit"
-                  whileTap={{ scale: 0.99 }}
                   disabled={submitting || !shippingType || !weeklyVolume}
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-bg-dark px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-bg-dark-card disabled:cursor-not-allowed disabled:opacity-70"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-bg-dark px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-bg-dark-card active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
                   <span>{submitting ? "Submitting…" : "Submit Enquiry"}</span>
-                </motion.button>
+                </button>
               </form>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
-      </section>
-    </MotionConfig>
+      </div>
+    </section>
   );
 }
