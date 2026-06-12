@@ -6,12 +6,13 @@ interface IntegrationLogoProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   /**
    * How the image is fitted inside the box.
-   * - "cover" (default) → fills the rounded box edge-to-edge. Best for brand-tile
-   *   logos that have their own coloured background (Tatti pink, WHU shield,
-   *   Sainsbury's orange, square carrier wordmarks like DPD/Evri/FedEx).
-   * - "contain" → preserves aspect, may leave whitespace. Use for the carrier
-   *   hero where the container is intentionally rectangular and the wordmark
-   *   needs to render at its natural shape.
+   * - "contain" (default) → preserves the logo's natural aspect ratio, never
+   *   crops. For square sources in square containers this renders identically
+   *   to cover, so square brand tiles (DPD, Evri, FedEx, DHL) are unaffected —
+   *   while wide wordmarks (Royal Mail 1.6:1, eBay 2.5:1, Veeqo 2:1, most
+   *   customer logos) render whole instead of as cropped slivers.
+   * - "cover" → fills the box edge-to-edge, cropping overflow. Only for
+   *   genuinely full-bleed tile artwork; no current call site needs it.
    */
   fit?: "cover" | "contain";
   className?: string;
@@ -29,7 +30,7 @@ export default function IntegrationLogo({
   name,
   logo,
   size = "sm",
-  fit = "cover",
+  fit = "contain",
   className = "",
 }: IntegrationLogoProps) {
   const s = sizes[size];
@@ -45,6 +46,7 @@ export default function IntegrationLogo({
           alt={`${name} logo`}
           width={s.image}
           height={s.image}
+          quality={90}
           className={`${objectFit} w-full h-full`}
         />
       </div>
