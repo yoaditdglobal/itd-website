@@ -8,7 +8,7 @@ const cards: HeroShippingCardData[] = [
   {
     iconNode: <Truck className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
     title: "UK domestic parcel delivery",
-    body: "One screen for every UK carrier. Royal Mail, DPD, Evri, Yodel, Amazon Shipping, and Parcel Force — every postcode, including Highlands, Islands, and NI.",
+    body: "One screen for every UK carrier. Royal Mail, DPD, Evri, InPost, Amazon Shipping, and Parcel Force — every postcode, including Highlands, Islands, and NI.",
     audiences: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "SMEs"],
     href: "/shipping/domestic",
     image: {

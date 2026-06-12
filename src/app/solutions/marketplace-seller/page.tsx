@@ -91,7 +91,7 @@ export default function MarketplaceSellerPage() {
         },
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24 and Tracked 48 are Amazon Valid Tracking Rate compliant.",
           href: "/integrations/carriers/royal-mail",
         },

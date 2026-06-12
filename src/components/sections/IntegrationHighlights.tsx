@@ -21,13 +21,13 @@ const techLogos = [
 
 const carrierLogos = [
   { name: "DHL", region: "International", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", region: "International", logo: "/logos/carriers/fedex_logo.png" },
+  { name: "FedEx", region: "International", logo: "/logos/carriers/fedex-icon.png" },
   { name: "UPS", region: "International", logo: "/logos/carriers/ups_logo.png" },
-  { name: "Royal Mail", region: "Domestic", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { name: "Royal Mail", region: "Domestic", logo: "/logos/carriers/royal-mail-icon.png" },
   { name: "DPD", region: "Domestic", logo: "/logos/carriers/DPD-LOGO.png" },
   { name: "Evri", region: "Domestic", logo: "/logos/carriers/evri_logo.png" },
   { name: "Amazon Shipping", region: "Domestic", logo: "/logos/carriers/amazonshipping_logo.png" },
-  { name: "InPost", region: "Domestic", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+  { name: "InPost", region: "Domestic", logo: "/logos/carriers/inpost-icon.png" },
   { name: "DHL Parcel", region: "Domestic", logo: "/logos/carriers/dhlparcel_logo.svg" },
   { name: "Parcel Force", region: "International", logo: "/logos/carriers/parcel-force.svg" },
 ];
