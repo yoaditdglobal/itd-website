@@ -1,9 +1,10 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
-interface Brand {
+export interface Brand {
   name: string;
-  logo: string;
+  /** Logo path. When missing, IconChip renders a letter-badge fallback. */
+  logo?: string;
 }
 
 /* Innermost orbit — WMS / ERP / eCommerce platforms (closest to Connexx). */
@@ -41,7 +42,7 @@ const CARRIERS_MOBILE_HIDE = new Set(["Parcelforce", "Amazon Shipping"]);
 const MARKETPLACES_MOBILE_HIDE = new Set(["Etsy", "Temu"]);
 
 /** Position a child on a circle of `radiusPct` from the centre. 0° = top. */
-function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
+export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
   return {
     position: "absolute",
@@ -51,19 +52,25 @@ function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
   };
 }
 
-function IconChip({ brand }: { brand: Brand }) {
+export function IconChip({ brand }: { brand: Brand }) {
   return (
     <span
       title={brand.name}
       className="inline-flex items-center justify-center rounded-full bg-white shadow-lg border border-white/10 w-9 h-9 md:w-10 md:h-10"
     >
-      <Image
-        src={brand.logo}
-        width={28}
-        height={28}
-        alt=""
-        className="object-contain w-6 h-6 md:w-7 md:h-7"
-      />
+      {brand.logo ? (
+        <Image
+          src={brand.logo}
+          width={28}
+          height={28}
+          alt=""
+          className="object-contain w-6 h-6 md:w-7 md:h-7"
+        />
+      ) : (
+        <span aria-hidden className="text-xs font-bold text-accent">
+          {brand.name[0]}
+        </span>
+      )}
     </span>
   );
 }
@@ -78,7 +85,7 @@ interface OrbitLayerProps {
   mobileHide: Set<string>;
 }
 
-function OrbitLayer({
+export function OrbitLayer({
   brands,
   radiusPct,
   durationS,
