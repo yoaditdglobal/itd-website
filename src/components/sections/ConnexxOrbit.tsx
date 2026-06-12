@@ -18,12 +18,12 @@ const WMS: Brand[] = [
 
 /* Middle orbit — UK + global carriers. */
 const CARRIERS: Brand[] = [
-  { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
   { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
   { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
   { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
   { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", logo: "/logos/carriers/fedex_logo.png" },
+  { name: "FedEx", logo: "/logos/carriers/fedex-icon.png" },
   { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
   { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
 ];

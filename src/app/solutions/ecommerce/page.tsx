@@ -69,7 +69,7 @@ export default function EcommercePage() {
         {
           icon: LayoutDashboard,
           title: "One dashboard for every dispatch.",
-          desc: "Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, Yodel, and DX all run from a single screen. Label generation, manifesting, tracking, and exception handling are unified. No tab-switching, no copy-paste between portals.",
+          desc: "Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, InPost, and DX all run from a single screen. Label generation, manifesting, tracking, and exception handling are unified. No tab-switching, no copy-paste between portals.",
         },
         {
           icon: RefreshCw,
@@ -107,7 +107,7 @@ export default function EcommercePage() {
         },
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24, Tracked 48, Signed, First Class, Second Class.",
           href: "/integrations/carriers/royal-mail",
         },

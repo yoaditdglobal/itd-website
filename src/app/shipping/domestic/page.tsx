@@ -18,7 +18,7 @@ import {
 export const metadata = buildMetadata({
   title: "UK domestic parcel shipping across every carrier",
   description:
-    "Compare Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping on every UK order. One dashboard, every postcode, including Highlands and Islands.",
+    "Compare Royal Mail, DPD, Evri, InPost, DX, Parcelforce, and Amazon Shipping on every UK order. One dashboard, every postcode, including Highlands and Islands.",
   path: "/shipping/domestic",
 });
 
@@ -49,7 +49,7 @@ export default function ShippingDomesticPage() {
         serviceSchema({
           name: "UK Domestic Parcel Shipping",
           description:
-            "Multi-carrier UK domestic parcel shipping platform. Connexx routes orders across Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping. Covers Mainland UK, Highlands & Islands, Channel Islands, Northern Ireland, and BFPO.",
+            "Multi-carrier UK domestic parcel shipping platform. Connexx routes orders across Royal Mail, DPD, Evri, InPost, DX, Parcelforce, and Amazon Shipping. Covers Mainland UK, Highlands & Islands, Channel Islands, Northern Ireland, and BFPO.",
           path: "/shipping/domestic",
           serviceType: "UK Domestic Parcel Shipping",
           areaServed: [
@@ -179,7 +179,7 @@ export default function ShippingDomesticPage() {
         rows: [
           {
             carrier: "Royal Mail",
-            logo: "/logos/carriers/Royal-Mail-Logo.png",
+            logo: "/logos/carriers/royal-mail-icon.png",
             descriptor: "UK national postal — universal coverage",
             speeds: [
               { label: "Special Delivery", tier: "special" },
@@ -232,8 +232,8 @@ export default function ShippingDomesticPage() {
             bestFor: ["eCommerce", "Small Business", "Returns"],
           },
           {
-            carrier: "Yodel",
-            logo: "/logos/carriers/yodel_logo.avif",
+            carrier: "InPost",
+            logo: "/logos/carriers/inpost-icon.png",
             descriptor: "Residential focus — weekend cover",
             speeds: [
               { label: "Next Day", tier: "express" },
@@ -310,7 +310,7 @@ export default function ShippingDomesticPage() {
         {
           icon: Zap,
           title: "Live rate comparison across all seven major UK carriers.",
-          desc: "On every parcel, Connexx checks Royal Mail, DPD, Evri, Yodel, DX, Parcelforce, and Amazon Shipping in milliseconds. The cheapest compliant carrier is selected against your rules for speed, weight, and service tier. Manual overrides are always one click away.",
+          desc: "On every parcel, Connexx checks Royal Mail, DPD, Evri, InPost, DX, Parcelforce, and Amazon Shipping in milliseconds. The cheapest compliant carrier is selected against your rules for speed, weight, and service tier. Manual overrides are always one click away.",
         },
         {
           icon: LayoutDashboard,
@@ -326,7 +326,7 @@ export default function ShippingDomesticPage() {
       integrations={[
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description:
             "Universal UK coverage including Highlands, Islands, and BFPO. Tracked 24, Tracked 48, Signed, First and Second Class.",
           href: "/integrations/carriers/royal-mail",
@@ -346,10 +346,10 @@ export default function ShippingDomesticPage() {
           href: "/integrations/carriers/evri",
         },
         {
-          name: "Yodel",
-          logo: "/logos/carriers/yodel_logo.avif",
+          name: "InPost",
+          logo: "/logos/carriers/inpost-icon.png",
           description:
-            "UK residential strength including Sunday delivery. Next Day and 48-hour services.",
+            "UK parcel locker and to-door network, with locker drop-off and collection.",
           href: "/integrations/carriers",
         },
         {
@@ -393,7 +393,7 @@ export default function ShippingDomesticPage() {
         {
           question: "Which UK carriers can I ship with through ITD?",
           answer:
-            "Royal Mail, DPD, Evri, Yodel, DX, Parcelforce and Amazon Shipping, with more added over time. They all run from one account, so you can compare services and switch carrier per order without opening another portal.",
+            "Royal Mail, DPD, Evri, InPost, DX, Parcelforce and Amazon Shipping, with more added over time. They all run from one account, so you can compare services and switch carrier per order without opening another portal.",
         },
         {
           question: "Can I keep my own Royal Mail account?",
