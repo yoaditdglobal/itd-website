@@ -30,11 +30,8 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
     // the layoutId spring + tile stagger now lives here.
     <MotionConfig reducedMotion="user">
     <div>
-      {/* carriers-only orbit (pillar design) */}
-      <CarrierNetworkOrbit groups={groups} active={active} />
-
       {/* segmented switch */}
-      <div className="mt-8 flex justify-center">
+      <div className="mb-8 flex justify-center">
         <div
           role="tablist"
           aria-label="Carrier region"
@@ -71,6 +68,9 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
           })}
         </div>
       </div>
+
+      {/* carriers-only orbit (pillar design) */}
+      <CarrierNetworkOrbit groups={groups} active={active} />
 
       {/* reveal tiles */}
       <AnimatePresence mode="wait">
