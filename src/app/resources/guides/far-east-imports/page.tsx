@@ -324,7 +324,7 @@ export default function FarEastImportsGuidePage() {
                 Second, anti-dumping duties hit certain product categories from certain origins. Solar panels from China, ceramic tableware from China, e-bikes from China, and a long list of steel products all carry additional duties on top of the standard UKGT rate. The UKGT tool flags these. Miss one and you will be invoiced retrospectively by HMRC, often six to twelve months after the import.
               </p>
               <p>
-                Third, the commodity code stays with the SKU. Build it into your product master in your ERP (SAP, NetSuite, Dynamics 365, Sage X3, or whatever you run) so that every shipment of that SKU uses the same code automatically. Spreadsheet-based classification is where errors come from.
+                Third, the commodity code stays with the SKU. Build it into your product master in your ERP (NetSuite, or whatever you run) so that every shipment of that SKU uses the same code automatically. Spreadsheet-based classification is where errors come from.
               </p>
             </div>
           </section>

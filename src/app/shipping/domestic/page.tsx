@@ -320,7 +320,7 @@ export default function ShippingDomesticPage() {
         {
           icon: RefreshCw,
           title: "ERP and order-management write-back.",
-          desc: "Connexx connects to Linnworks, Mintsoft, Veeqo, ShipStation, Shopify, SAP, Sage, and Microsoft Dynamics. Tracking numbers, booking confirmations, and PODs flow back into the order record. No CSV imports. No re-keyed data.",
+          desc: "Connexx connects to Linnworks, Mintsoft, Veeqo, ShipStation, and Shopify. Tracking numbers, booking confirmations, and PODs flow back into the order record. No CSV imports. No re-keyed data.",
         },
       ]}
       integrations={[

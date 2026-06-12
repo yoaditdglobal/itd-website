@@ -98,7 +98,7 @@ const modules: ModuleDeepDive[] = [
       "Per-carrier cost breakdowns by lane, by service, by week.",
       "SLA breach rate by carrier, with the underlying shipment IDs.",
       "Surcharge tracking (fuel, residential, out-of-area, Highlands and Islands) so the finance team sees true landed cost.",
-      "Exportable to CSV and direct write-back to NetSuite, SAP, and Microsoft Dynamics for consolidated finance reporting.",
+      "Exportable to CSV and direct write-back to NetSuite for consolidated finance reporting.",
     ],
     stat: "Atlas Industrial saved 20 hours per week of manual data entry by writing Connexx shipment data straight back into the ERP. Redelivery costs dropped to near zero across 500 weekly pallet shipments.",
   },
@@ -107,7 +107,7 @@ const modules: ModuleDeepDive[] = [
     name: "Integrations & API",
     lead: "Native integrations to every major ERP, WMS, eCommerce platform, and marketplace. REST API for everything else.",
     bullets: [
-      "ERP and WMS: SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, Cin7.",
+      "ERP and WMS: Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero.",
       "eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce, BigCommerce.",
       "Marketplaces: Amazon Seller Central, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu.",
       "REST API with webhook events for shipment created, shipment dispatched, tracking update, exception, delivered, returned.",
@@ -126,7 +126,7 @@ const integrationBreakdown = [
     category: "ERP and WMS",
     count: "11",
     examples:
-      "SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, Cin7",
+      "Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero",
   },
   {
     category: "Marketplaces",
@@ -162,12 +162,12 @@ const faqItems = [
   {
     question: "How long does it take to set up Connexx?",
     answer:
-      "Shopify and WooCommerce connect in under 10 minutes through the official app and the WordPress plugin. Marketplace stacks (Amazon, eBay, Etsy via Linnworks or Mintsoft) take a few hours. ERP integrations (SAP, NetSuite, Microsoft Dynamics) typically run six to eight weeks for a multi-country enterprise rollout. SwiftLog Fulfilment onboards new 3PL brand clients on Connexx in two days, down from two weeks on their previous stack.",
+      "Shopify and WooCommerce connect in under 10 minutes through the official app and the WordPress plugin. Marketplace stacks (Amazon, eBay, Etsy via Linnworks or Mintsoft) take a few hours. ERP integrations (such as NetSuite) typically run six to eight weeks for a multi-country enterprise rollout. SwiftLog Fulfilment onboards new 3PL brand clients on Connexx in two days, down from two weeks on their previous stack.",
   },
   {
     question: "Does Connexx work with my ERP?",
     answer:
-      "Likely yes. Connexx has native integrations to SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, and Cin7. Shipment write-back into the ERP is included on every native integration. If your ERP is not on the native list, the REST API supports any system that can call HTTPS and receive webhooks. Request a demo and bring your ERP version number, we will tell you on the call.",
+      "Likely yes. Connexx has native integrations to Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, and ShipHero. Shipment write-back into the ERP is included on every native integration. If your ERP is not on the native list, the REST API supports any system that can call HTTPS and receive webhooks. Request a demo and bring your ERP version number, we will tell you on the call.",
   },
   {
     question: "Does Connexx replace my customs broker?",
@@ -229,7 +229,7 @@ export default function ConnexxPage() {
                 Global. Live rate comparison across every connected carrier,
                 one-click label generation, customs documentation, branded
                 tracking, returns, and analytics. Connect Connexx to Shopify,
-                SAP, NetSuite, Linnworks, or your own systems through the API.
+                NetSuite, Linnworks, or your own systems through the API.
                 Dispatch every parcel from one screen.
               </p>
               <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
