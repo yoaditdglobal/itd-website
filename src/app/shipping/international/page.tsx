@@ -187,7 +187,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "FedEx",
-            logo: "/logos/carriers/fedex_logo.png",
+            logo: "/logos/carriers/fedex-icon.png",
             cells: [
               "220+ countries",
               "International Priority (1–3 days), Economy (2–5 days), International Connect Plus",
@@ -226,7 +226,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "Royal Mail International",
-            logo: "/logos/carriers/Royal-Mail-Logo.png",
+            logo: "/logos/carriers/royal-mail-icon.png",
             cells: [
               "230+ countries",
               "International Tracked & Signed, International Tracked, International Signed, International Standard, International Business",
@@ -280,7 +280,7 @@ export default function ShippingInternationalPage() {
         },
         {
           name: "FedEx",
-          logo: "/logos/carriers/fedex_logo.png",
+          logo: "/logos/carriers/fedex-icon.png",
           description:
             "International Priority and Economy services to 220+ countries. US-strong customs brokerage.",
           href: "/integrations/carriers",
@@ -307,7 +307,7 @@ export default function ShippingInternationalPage() {
         },
         {
           name: "Royal Mail International",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description:
             "International Tracked & Signed, Tracked, Signed, Standard, Business. 230+ countries.",
           href: "/integrations/carriers/royal-mail",

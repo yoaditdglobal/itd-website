@@ -42,7 +42,7 @@ export default function ErpWmsPage() {
           headline: "Linnworks plus seven UK carriers",
           description:
             "A multi-channel seller on Linnworks. One connection brings seven UK carriers and their rates into the dispatch screen, so each order goes on the best-priced one. The label prints and tracking writes back, with no per-carrier integration to maintain.",
-          namedIntegrations: ["Linnworks", "Royal Mail", "DPD", "Evri", "Yodel", "Parcel Force", "Amazon Shipping", "DHL Express"],
+          namedIntegrations: ["Linnworks", "Royal Mail", "DPD", "Evri", "InPost", "Parcel Force", "Amazon Shipping", "DHL Express"],
         },
         {
           headline: "Mintsoft plus 3PL brand routing",

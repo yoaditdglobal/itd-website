@@ -37,9 +37,9 @@ const integrationsMenu = {
   ],
   carriers: [
     { name: "Evri", desc: "UK parcel delivery", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo.png" },
-    { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+    { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon.png" },
     { name: "DPD", desc: "European parcel delivery", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
-    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
     { name: "Parcel Force", desc: "UK tracked parcel delivery", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
     { name: "Amazon Shipping", desc: "Amazon logistics network", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
     { name: "DHL", desc: "Global express & freight", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },

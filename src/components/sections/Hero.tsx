@@ -98,14 +98,14 @@ function DashboardMockup() {
     {
       id: "SHP-4820",
       carrier: "FedEx",
-      logo: "/logos/carriers/fedex_logo.png",
+      logo: "/logos/carriers/fedex-icon.png",
       status: "Delivered",
       dest: "New York",
     },
     {
       id: "SHP-4819",
       carrier: "Royal Mail",
-      logo: "/logos/carriers/Royal-Mail-Logo.png",
+      logo: "/logos/carriers/royal-mail-icon.png",
       status: "Processing",
       dest: "London",
     },
