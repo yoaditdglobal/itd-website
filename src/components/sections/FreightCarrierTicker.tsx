@@ -57,6 +57,7 @@ export default function FreightCarrierTicker() {
                     alt={logo.name}
                     width={logo.w}
                     height={logo.h}
+                    quality={90}
                     style={{ maxHeight: "48px" }}
                     className="max-w-[130px] w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   />
