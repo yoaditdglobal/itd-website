@@ -3,7 +3,7 @@ import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Royal Mail Integration — ITD Global",
+  title: "Royal Mail + ITD Global",
   description: "Connect Royal Mail to Connexx for automated shipping, tracking, and international delivery across the UK and worldwide.",
 };
 
@@ -11,7 +11,9 @@ export default function RoyalMailPage() {
   return (
     <CarrierPage
       name="Royal Mail"
-      logo="/logos/carriers/Royal-Mail-Logo.png"
+      heroTitle="Royal Mail x ITD Global"
+      logo="/logos/carriers/ROYAL MAIL LOGO SVG NEW.svg"
+      logoBg="#ffffff"
       tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."
       description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through Connexx, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
       region="Domestic"

@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import CarrierOrbit from "@/components/sections/CarrierOrbit"; // client component
 import { Truck, Globe, Clock, ShieldCheck, Zap, BarChart3 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -16,6 +16,8 @@ export interface CarrierFeature {
 export interface CarrierPageProps {
   name: string;
   logo?: string;
+  logoBg?: string;
+  heroTitle?: string;
   tagline: string;
   description: string;
   region: string;
@@ -27,6 +29,8 @@ export interface CarrierPageProps {
 export default function CarrierPage({
   name,
   logo,
+  logoBg,
+  heroTitle,
   tagline,
   description,
   region,
@@ -51,8 +55,8 @@ export default function CarrierPage({
                   ← All carriers
                 </Link>
                 <span className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 block">Integration</span>
-                <h1 className="text-display-xl text-white">
-                  {name} + Connexx
+                <h1 className="text-display-xl text-white whitespace-nowrap">
+                  {heroTitle ?? `${name} + Connexx`}
                 </h1>
                 <p className="mt-4 text-lg text-white/70 font-medium">{tagline}</p>
                 <p className="mt-4 text-white/50 leading-relaxed">{description}</p>
@@ -64,14 +68,12 @@ export default function CarrierPage({
 
               {/* Right — mini orbit */}
               <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
-                <CarrierOrbit name={name} logo={logo} />
+                <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
               </div>
             </div>
           </ScrollReveal>
         </div>
       </section>
-
-
 
       {/* How Connexx enhances */}
       <section className="bg-white py-16 md:py-24">
@@ -105,60 +107,5 @@ export default function CarrierPage({
         subtitle="Connect your account in minutes. No migration, no downtime."
       />
     </>
-  );
-}
-
-function CarrierOrbit({ name, logo }: { name: string; logo?: string }) {
-  const rad = ((0 - 90) * Math.PI) / 180;
-  const orbitPct = 38;
-  return (
-    <div className="relative w-72 h-72 md:w-80 md:h-80">
-      {/* Dashed orbit ring */}
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/25"
-        style={{ width: `${orbitPct * 2}%`, height: `${orbitPct * 2}%` }}
-      />
-
-      {/* Orbiting carrier logo */}
-      <div
-        className="connexx-anim absolute inset-0"
-        style={{ animation: "connexx-orbit-cw 8s linear infinite" }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            left: `${50 + Math.cos(rad) * orbitPct}%`,
-            top: `${50 + Math.sin(rad) * orbitPct}%`,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <div
-            className="connexx-anim"
-            style={{ animation: "connexx-counter-cw 8s linear infinite" }}
-          >
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-lg border border-white/10 p-1.5">
-              {logo ? (
-                <Image src={logo} alt={name} width={44} height={44} className="object-contain w-full h-full" />
-              ) : (
-                <span className="text-xs font-bold text-accent">{name[0]}</span>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Centre — Connexx icon */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Image
-          src="/logos/connexx/connexx-icon.svg"
-          alt="Connexx"
-          width={96}
-          height={96}
-          className="connexx-anim w-20 h-20 md:w-24 md:h-24"
-          style={{ animation: "connexx-spin 20s linear infinite" }}
-        />
-      </div>
-    </div>
   );
 }
