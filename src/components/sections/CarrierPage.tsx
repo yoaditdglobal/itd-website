@@ -17,6 +17,7 @@ export interface CarrierPageProps {
   name: string;
   logo?: string;
   logoBg?: string;
+  heroBg?: string;
   heroTitle?: string;
   tagline: string;
   description: string;
@@ -30,6 +31,7 @@ export default function CarrierPage({
   name,
   logo,
   logoBg,
+  heroBg,
   heroTitle,
   tagline,
   description,
@@ -41,7 +43,10 @@ export default function CarrierPage({
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg-dark py-16 md:py-24 overflow-hidden relative">
+      <section
+        className={`${heroBg ? "" : "bg-bg-dark"} py-16 md:py-24 overflow-hidden relative`}
+        style={heroBg ? { backgroundColor: heroBg } : undefined}
+      >
         {/* Subtle radial glow */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
