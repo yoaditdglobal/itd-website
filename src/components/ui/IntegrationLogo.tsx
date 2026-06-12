@@ -3,7 +3,7 @@ import Image from "next/image";
 interface IntegrationLogoProps {
   name: string;
   logo?: string | null;
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   /**
    * How the image is fitted inside the box.
    * - "cover" (default) → fills the rounded box edge-to-edge. Best for brand-tile
@@ -22,6 +22,7 @@ const sizes = {
   sm: { container: "w-10 h-10", image: 40, text: "text-sm", radius: "rounded-md" },
   md: { container: "w-16 h-12", image: 64, text: "text-lg", radius: "rounded-lg" },
   lg: { container: "w-14 h-14 md:w-16 md:h-16", image: 80, text: "text-xl", radius: "rounded-xl" },
+  xl: { container: "w-16 h-16 md:w-20 md:h-20", image: 96, text: "text-2xl", radius: "rounded-xl" },
 };
 
 export default function IntegrationLogo({
