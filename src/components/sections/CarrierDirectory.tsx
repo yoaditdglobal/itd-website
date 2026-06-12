@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { MapPin, Globe, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
-import CarrierNetworkMap from "@/components/sections/CarrierNetworkMap";
+import CarrierNetworkOrbit from "@/components/sections/CarrierNetworkOrbit";
 import { getIntegrationSlug, type Integration } from "@/lib/data";
 
 type Region = "Domestic" | "International";
@@ -30,8 +30,8 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
     // the layoutId spring + tile stagger now lives here.
     <MotionConfig reducedMotion="user">
     <div>
-      {/* motion-led geographic visual */}
-      <CarrierNetworkMap region={active} />
+      {/* carriers-only orbit (pillar design) */}
+      <CarrierNetworkOrbit groups={groups} active={active} />
 
       {/* segmented switch */}
       <div className="mt-8 flex justify-center">

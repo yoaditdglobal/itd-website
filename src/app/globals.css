@@ -300,17 +300,6 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   }
 }
 
-/* Carrier network map (globe / UK) — arc flow, sphere rotation, node pulse */
-@keyframes net-flow { to { stroke-dashoffset: -120; } }
-@keyframes net-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes net-pulse { 0%, 100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
-.net-flow { stroke-dasharray: 4 8; animation: net-flow 2.4s linear infinite; }
-.net-spin { animation: net-spin 70s linear infinite; transform-origin: center; }
-.net-pulse { animation: net-pulse 2.6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-@media (prefers-reduced-motion: reduce) {
-  .net-flow, .net-spin, .net-pulse { animation: none; }
-}
-
 /* Subtle pulse for stat dots */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -353,24 +342,6 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   .connexx-anim {
     animation: none !important;
   }
-}
-
-/* ─── Carrier network map — globe / UK motion primitives ───
-   net-flow  : travelling dash along a lane (stroke-dashoffset)
-   net-spin  : slow continuous rotation (rings)
-   net-pulse : node breathing (opacity + scale, fill-box origin)
-   net-sweep : radar sweep rotation
-   All gated by prefers-reduced-motion at the foot of this block. */
-@keyframes net-flow  { to { stroke-dashoffset: -120; } }
-@keyframes net-spin  { to { transform: rotate(360deg); } }
-@keyframes net-pulse { 0%, 100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.4); } }
-@keyframes net-sweep { to { transform: rotate(360deg); } }
-.net-flow  { animation: net-flow 2.4s linear infinite; }
-.net-spin  { animation: net-spin 70s linear infinite; transform-origin: center; transform-box: fill-box; }
-.net-pulse { animation: net-pulse 2.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-.net-sweep { animation: net-sweep 9s linear infinite; transform-origin: center; transform-box: fill-box; }
-@media (prefers-reduced-motion: reduce) {
-  .net-flow, .net-spin, .net-pulse, .net-sweep { animation: none; }
 }
 
 ::view-transition-old(root) {
