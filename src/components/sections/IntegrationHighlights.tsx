@@ -9,13 +9,13 @@ import IntegrationLogo from "@/components/ui/IntegrationLogo";
 const techLogos = [
   { name: "Shopify", cat: "eComm", logo: "/logos/ecommerce/shopify_logo.png" },
   { name: "WooCommerce", cat: "eComm", logo: "/logos/erp-wms/woocommerce_logo.svg" },
-  { name: "Amazon", cat: "Mktpl", logo: "/logos/marketplaces/amazon_logo.png" },
-  { name: "eBay", cat: "Mktpl", logo: "/logos/marketplaces/ebay_logo.png" },
+  { name: "Amazon", cat: "Mktpl", logo: "/logos/marketplaces/amazon-icon.webp" },
+  { name: "eBay", cat: "Mktpl", logo: "/logos/marketplaces/ebay-icon.png" },
   { name: "ShipStation", cat: "Logistics", logo: "/logos/erp-wms/shipstation_logo.png" },
   { name: "Linnworks", cat: "ERP", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { name: "Etsy", cat: "Mktpl", logo: "/logos/marketplaces/etsy_logo.png" },
+  { name: "Etsy", cat: "Mktpl", logo: "/logos/marketplaces/etsy-icon.png" },
   { name: "Veeqo", cat: "ERP", logo: "/logos/erp-wms/veeqo_logo.png" },
-  { name: "TikTok Shop", cat: "Mktpl", logo: "/logos/marketplaces/tiktok_logo.png" },
+  { name: "TikTok Shop", cat: "Mktpl", logo: "/logos/marketplaces/tiktok-tile.png" },
   { name: "Mintsoft", cat: "ERP", logo: "/logos/erp-wms/mintsoft_logo.png" },
 ];
 
@@ -89,7 +89,11 @@ export default function IntegrationHighlights() {
         </ScrollReveal>
 
         <div className="mt-8 text-center">
-          <Link href="/integrations/carriers" className="link-underline text-sm text-accent font-medium">
+          {/* Destination follows the active toggle: tech hub vs carriers directory. */}
+          <Link
+            href={tab === "tech" ? "/integrations/tech" : "/integrations/carriers"}
+            className="link-underline text-sm text-accent font-medium"
+          >
             Browse integrations →
           </Link>
         </div>
