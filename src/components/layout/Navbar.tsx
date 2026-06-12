@@ -245,11 +245,12 @@ export default function Navbar() {
         onClick={() => setOpenDropdown(null)}
       />
     )}
+    {/* Constant height — shrinking the bar on scroll exposed a strip of the
+        beige body background between the nav and the page's pt-[72px] offset.
+        The scrolled state changes surface treatment only. */}
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-bg-dark/95 backdrop-blur-md py-2 shadow-lg"
-          : "bg-bg-dark py-4"
+      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
+        scrolled ? "bg-bg-dark/95 backdrop-blur-md shadow-lg" : "bg-bg-dark"
       }`}
     >
       <nav ref={navRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
