@@ -202,7 +202,7 @@ export default function ConnexxOrbit() {
             brands={CARRIERS}
             radiusPct={40}
             durationS={50}
-            direction="ccw"
+            direction="cw"
             mobileHide={CARRIERS_MOBILE_HIDE}
           />
 

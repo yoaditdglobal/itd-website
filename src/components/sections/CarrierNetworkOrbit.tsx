@@ -99,7 +99,7 @@ export default function CarrierNetworkOrbit({
                 brands={outer}
                 radiusPct={46}
                 durationS={55}
-                direction="ccw"
+                direction="cw"
                 mobileHide={hide}
               />
               <OrbitLayer
