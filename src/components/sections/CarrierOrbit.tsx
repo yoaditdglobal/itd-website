@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function CarrierOrbit({ name, logo, logoBg, logoSize = "w-14 h-14", imageSize = 44 }: { name: string; logo?: string; logoBg?: string; logoSize?: string; imageSize?: number }) {
+export default function CarrierOrbit({ name, logo, logoBg, logoSize = "w-14 h-14", imageSize = 44, logoPadding = "p-0.5" }: { name: string; logo?: string; logoBg?: string; logoSize?: string; imageSize?: number; logoPadding?: string }) {
   const rad = ((0 - 90) * Math.PI) / 180;
   const orbitPct = 38;
   return (
@@ -27,7 +27,7 @@ export default function CarrierOrbit({ name, logo, logoBg, logoSize = "w-14 h-14
             className="connexx-anim"
             style={{ animation: "connexx-counter-cw 8s linear infinite" }}
           >
-            <div className={`flex items-center justify-center ${logoSize} rounded-2xl shadow-lg border border-white/10 p-0.5`} style={{ backgroundColor: logoBg ?? "#ffffff" }}>
+            <div className={`flex items-center justify-center ${logoSize} rounded-2xl shadow-lg border border-white/10 ${logoPadding}`} style={{ backgroundColor: logoBg ?? "#ffffff" }}>
               {logo ? (
                 <Image src={logo} alt={name} width={imageSize} height={imageSize} className="object-contain w-full h-full" />
               ) : (

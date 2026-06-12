@@ -19,6 +19,7 @@ export interface CarrierPageProps {
   logoBg?: string;
   logoSize?: string;
   imageSize?: number;
+  logoPadding?: string;
   heroBg?: string;
   heroTitle?: string;
   tagline: string;
@@ -35,6 +36,7 @@ export default function CarrierPage({
   logoBg,
   logoSize,
   imageSize,
+  logoPadding,
   heroBg,
   heroTitle,
   tagline,
@@ -77,7 +79,7 @@ export default function CarrierPage({
 
               {/* Right — mini orbit */}
               <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
-                <CarrierOrbit name={name} logo={logo} logoBg={logoBg} logoSize={logoSize} imageSize={imageSize} />
+                <CarrierOrbit name={name} logo={logo} logoBg={logoBg} logoSize={logoSize} imageSize={imageSize} logoPadding={logoPadding} />
               </div>
             </div>
           </ScrollReveal>
