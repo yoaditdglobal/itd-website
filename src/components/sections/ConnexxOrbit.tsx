@@ -52,7 +52,26 @@ export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProper
   };
 }
 
-export function IconChip({ brand }: { brand: Brand }) {
+export function IconChip({ brand, tile = false }: { brand: Brand; tile?: boolean }) {
+  // Square, rounded, edge-to-edge brand tile (carriers — square assets, no white frame).
+  if (tile && brand.logo) {
+    return (
+      <span
+        title={brand.name}
+        className="inline-flex items-center justify-center overflow-hidden rounded-xl shadow-lg w-9 h-9 md:w-10 md:h-10"
+      >
+        <Image
+          src={brand.logo}
+          width={44}
+          height={44}
+          quality={90}
+          alt=""
+          className="h-full w-full object-cover"
+        />
+      </span>
+    );
+  }
+  // Contained white chip — mixed (tech/marketplace wordmark) orbit + letter fallback.
   return (
     <span
       title={brand.name}
@@ -84,6 +103,8 @@ interface OrbitLayerProps {
   /** "cw" → wrapper rotates clockwise; child counter-rotates ccw. */
   direction: "cw" | "ccw";
   mobileHide: Set<string>;
+  /** Render chips as edge-to-edge square tiles (carriers) instead of contained white chips. */
+  tile?: boolean;
 }
 
 export function OrbitLayer({
@@ -92,6 +113,7 @@ export function OrbitLayer({
   durationS,
   direction,
   mobileHide,
+  tile = false,
 }: OrbitLayerProps) {
   const wrapperAnim =
     direction === "cw"
@@ -110,7 +132,7 @@ export function OrbitLayer({
         return (
           <div key={brand.name} className={hide} style={orbitStyle(angle, radiusPct)}>
             <div className="connexx-anim" style={{ animation: counterAnim }}>
-              <IconChip brand={brand} />
+              <IconChip brand={brand} tile={tile} />
             </div>
           </div>
         );

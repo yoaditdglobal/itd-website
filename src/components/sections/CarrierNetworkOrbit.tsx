@@ -101,6 +101,7 @@ export default function CarrierNetworkOrbit({
                 durationS={55}
                 direction="ccw"
                 mobileHide={hide}
+                tile
               />
               <OrbitLayer
                 brands={inner}
@@ -108,6 +109,7 @@ export default function CarrierNetworkOrbit({
                 durationS={35}
                 direction="cw"
                 mobileHide={hide}
+                tile
               />
             </div>
           );
