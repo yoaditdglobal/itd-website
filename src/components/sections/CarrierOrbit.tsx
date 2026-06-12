@@ -27,7 +27,7 @@ export default function CarrierOrbit({ name, logo, logoBg }: { name: string; log
             className="connexx-anim"
             style={{ animation: "connexx-counter-cw 8s linear infinite" }}
           >
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg border border-white/10 p-1.5" style={{ backgroundColor: logoBg ?? "#ffffff" }}>
+            <div className="flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg border border-white/10 p-0.5" style={{ backgroundColor: logoBg ?? "#ffffff" }}>
               {logo ? (
                 <Image src={logo} alt={name} width={44} height={44} className="object-contain w-full h-full" />
               ) : (
