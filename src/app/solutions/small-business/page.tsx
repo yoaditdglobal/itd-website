@@ -37,7 +37,7 @@ export default function SmallBusinessPage() {
         serviceSchema({
           name: "SME shipping software",
           description:
-            "Multi-carrier shipping platform for UK SMEs. Compares Royal Mail, Evri, DPD, Parcelforce, Yodel and Amazon Shipping on every order with no monthly minimum and no contract. Connects to Shopify, WooCommerce and Etsy in under 10 minutes.",
+            "Multi-carrier shipping platform for UK SMEs. Compares Royal Mail, Evri, DPD, Parcelforce, InPost and Amazon Shipping on every order with no monthly minimum and no contract. Connects to Shopify, WooCommerce and Etsy in under 10 minutes.",
           path: "/solutions/small-business",
           serviceType: "SME Multi-Carrier Shipping Software",
           areaServed: ["United Kingdom"],
@@ -79,7 +79,7 @@ export default function SmallBusinessPage() {
         {
           icon: CreditCard,
           title: "No monthly minimum, no contract, no sales call.",
-          desc: "Sign up online and ship the same day. Pay per label at Connexx's negotiated Royal Mail, Evri, DPD, Parcelforce, and Yodel rates, which are usually lower than the rates you'd get opening accounts directly. Cancel any time.",
+          desc: "Sign up online and ship the same day. Pay per label at Connexx's negotiated Royal Mail, Evri, DPD, Parcelforce, and InPost rates, which are usually lower than the rates you'd get opening accounts directly. Cancel any time.",
         },
       ]}
       integrations={[
@@ -97,7 +97,7 @@ export default function SmallBusinessPage() {
         },
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24, Tracked 48, Signed, First Class, Second Class on Connexx negotiated rates.",
           href: "/integrations/carriers/royal-mail",
         },
@@ -114,8 +114,8 @@ export default function SmallBusinessPage() {
           href: "/integrations/carriers/dpd",
         },
         {
-          name: "Yodel",
-          logo: "/logos/carriers/yodel_logo.avif",
+          name: "InPost",
+          logo: "/logos/carriers/inpost-icon.png",
           description: "B2C 48 hour delivery across Mainland UK.",
           href: "/integrations/carriers",
         },

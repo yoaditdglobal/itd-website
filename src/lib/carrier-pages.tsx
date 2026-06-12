@@ -40,7 +40,46 @@ const DEFAULT_SERVICES = [
 
 /** Per-carrier overrides, keyed by slug. Fill these in with real content. */
 export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
-  // e.g. fedex: { tagline: "...", services: [...], stats: [...] },
+  apc: {
+    tagline: "APC Overnight — the UK next-day parcel network, connected to ITD.",
+    description:
+      "APC Overnight runs next-day delivery through a network of local UK depots, with real strength in fragile, liquid and hard-to-ship goods. Through ITD, eligible orders route to APC alongside your other carriers with automated labels, tracking and cost optimisation.",
+    region: "United Kingdom",
+    services: [
+      "Next-day by 9am / 10am / 12pm",
+      "Standard next-day delivery",
+      "Liquids & fragiles handling",
+      "Lightweight & mail-pouch services",
+      "Saturday delivery",
+      "Returns service",
+    ],
+    stats: [
+      { label: "ITD integration", value: "Live" },
+      { label: "Coverage", value: "UK" },
+      { label: "Network", value: "100+ local depots" },
+      { label: "Specialism", value: "Next-day & fragile" },
+    ],
+  },
+  starlinks: {
+    tagline: "Starlinks — cross-border e-commerce delivery, connected to ITD.",
+    description:
+      "Starlinks moves e-commerce parcels across borders, with last-mile strength in the Middle East and growing international coverage. Through ITD, eligible orders route to Starlinks alongside your other carriers with automated labels, tracking and cost optimisation.",
+    region: "International",
+    services: [
+      "Cross-border parcel delivery",
+      "International tracked services",
+      "Middle East last-mile network",
+      "Customs clearance support",
+      "Delivered duty paid options",
+      "Returns service",
+    ],
+    stats: [
+      { label: "ITD integration", value: "Live" },
+      { label: "Coverage", value: "International" },
+      { label: "Focus", value: "Cross-border e-commerce" },
+      { label: "Strength", value: "Middle East last mile" },
+    ],
+  },
 };
 
 export function getCarrierPageContent(carrier: Integration): CarrierPageProps {

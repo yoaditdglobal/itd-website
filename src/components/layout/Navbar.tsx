@@ -37,9 +37,9 @@ const integrationsMenu = {
   ],
   carriers: [
     { name: "Evri", desc: "UK parcel delivery", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo.png" },
-    { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+    { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon.png" },
     { name: "DPD", desc: "European parcel delivery", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
-    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/InPost_Logo_yellow.png" },
+    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
     { name: "Parcel Force", desc: "UK tracked parcel delivery", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
     { name: "Amazon Shipping", desc: "Amazon logistics network", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
     { name: "DHL", desc: "Global express & freight", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },
@@ -47,7 +47,14 @@ const integrationsMenu = {
 };
 
 const resourcesMenu = {
-  customerStories: ["eCommerce", "Marketplace", "3PL", "Export", "Import"],
+  // Only populated library shelves — empty solutions (Marketplace, B2B) must
+  // not appear until a story exists for them. Hash links jump to the shelf.
+  customerStories: [
+    { name: "eCommerce", href: "/resources/case-studies#ecommerce" },
+    { name: "3PL", href: "/resources/case-studies#3pl" },
+    { name: "Import", href: "/resources/case-studies#import" },
+    { name: "Export", href: "/resources/case-studies#export" },
+  ],
   knowledge: [
     { name: "Guides", href: "/resources/guides" },
     { name: "Glossary", href: "/resources/glossary" },
@@ -230,6 +237,14 @@ export default function Navbar() {
 
   return (
     <>
+    {/* Invisible backdrop — closes open dropdown on click anywhere outside the nav */}
+    {openDropdown && (
+      <div
+        className="fixed inset-0 z-40"
+        aria-hidden
+        onClick={() => setOpenDropdown(null)}
+      />
+    )}
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
@@ -342,8 +357,8 @@ export default function Navbar() {
           >
             <div>
               <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
-              {resourcesMenu.customerStories.map((ind) => (
-                <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1 text-sm text-text-secondary hover:text-accent">{ind}</Link>
+              {resourcesMenu.customerStories.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
               ))}
               <Link href="/resources/case-studies" className="link-underline text-xs text-accent mt-2">See all →</Link>
             </div>
@@ -480,8 +495,8 @@ export default function Navbar() {
             {mobileAccordion === "resources" && (
               <div className="pl-4 pb-3 space-y-2">
                 <div className="text-xs font-semibold uppercase text-white/40 mt-2">Customer Stories</div>
-                {resourcesMenu.customerStories.map((ind) => (
-                  <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{ind}</Link>
+                {resourcesMenu.customerStories.map((item) => (
+                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
                 ))}
                 <Link href="/resources/case-studies" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
                 <div className="text-xs font-semibold uppercase text-white/40 mt-3">Knowledge</div>

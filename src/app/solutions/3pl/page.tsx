@@ -55,7 +55,7 @@ export default function ThreePLPage() {
         chips={[
           { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
           { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
-          { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
           { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
           { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
         ]}
@@ -199,7 +199,7 @@ export default function ThreePLPage() {
         },
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24, Tracked 48, Signed, First/Second Class per child account.",
           href: "/integrations/carriers/royal-mail",
         },

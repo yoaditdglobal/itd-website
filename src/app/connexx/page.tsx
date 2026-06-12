@@ -59,7 +59,7 @@ const modules: ModuleDeepDive[] = [
     name: "Multi-Carrier Dispatch",
     lead: "One screen for every carrier, every label format, every manifest.",
     bullets: [
-      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, Yodel, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, GLS, and PostNL.",
+      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, GLS, and PostNL.",
       "One-click label generation. Batch processing for peak.",
       "Manifest generation by carrier, by date, by depot.",
       "Exception routing rebooks failed dispatches to the next-best carrier automatically.",
@@ -137,7 +137,7 @@ const integrationBreakdown = [
     category: "Carriers (UK)",
     count: "8",
     examples:
-      "Royal Mail, DPD, Evri, Parcelforce, Yodel, DX, InPost, Amazon Shipping",
+      "Royal Mail, DPD, Evri, Parcelforce, DX, InPost, Amazon Shipping",
   },
   {
     category: "Carriers (international)",
@@ -177,7 +177,7 @@ const faqItems = [
   {
     question: "What carriers does Connexx support in the UK?",
     answer:
-      "Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery, First Class, Second Class, International), DPD (Next Day, Predict, Two Day, Saturday, DPD Local), Evri (Standard, Next Day, ParcelShop), Parcelforce (Express24, Express48, Global Express, Global Priority, Global Value), Yodel, DX, InPost, and Amazon Shipping. Every UK postcode is covered, including Highlands and Islands, Channel Islands, Northern Ireland, and BFPO.",
+      "Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery, First Class, Second Class, International), DPD (Next Day, Predict, Two Day, Saturday, DPD Local), Evri (Standard, Next Day, ParcelShop), Parcelforce (Express24, Express48, Global Express, Global Priority, Global Value), DX, InPost, and Amazon Shipping. Every UK postcode is covered, including Highlands and Islands, Channel Islands, Northern Ireland, and BFPO.",
   },
   {
     question: "How does Connexx pricing work?",
