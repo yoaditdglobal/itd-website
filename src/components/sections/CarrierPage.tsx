@@ -18,7 +18,6 @@ export interface CarrierPageProps {
   logo?: string;
   logoBg?: string;
   heroBg?: string;
-  heroTitle?: string;
   tagline: string;
   description: string;
   region: string;
@@ -32,7 +31,6 @@ export default function CarrierPage({
   logo,
   logoBg,
   heroBg,
-  heroTitle,
   tagline,
   description,
   region,
@@ -60,14 +58,13 @@ export default function CarrierPage({
                   ← All carriers
                 </Link>
                 <span className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 block">Integration</span>
-                <h1 className="text-display-xl text-white whitespace-nowrap">
-                  {heroTitle ?? `${name} + Connexx`}
+                <h1 className="text-display-xl text-white">
+                  {`${name} + ITD`}
                 </h1>
                 <p className="mt-4 text-lg text-white/70 font-medium">{tagline}</p>
                 <p className="mt-4 text-white/50 leading-relaxed">{description}</p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Button href={`/contact?enquiry=${name.toLowerCase().replace(/\s+/g, "-")}`}>Connect {name} to Connexx</Button>
-                  <Button href="/contact" variant="secondary">Contact Sales</Button>
+                  <Button href="#features">Explore</Button>
                 </div>
               </div>
 
@@ -80,15 +77,15 @@ export default function CarrierPage({
         </div>
       </section>
 
-      {/* How Connexx enhances */}
-      <section className="bg-white py-16 md:py-24">
+      {/* Features — the hero "Explore" CTA anchors here */}
+      <section id="features" className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-2xl text-display-lg text-text-primary mb-3">
               Features built for your workflow
             </h2>
             <p className="text-text-secondary mb-10 max-w-2xl">
-              Everything you get from {name}, enhanced with Connexx&apos;s automation, analytics, and multi-carrier intelligence.
+              Everything you get from {name}, enhanced with ITD&apos;s automation, analytics, and multi-carrier intelligence.
             </p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
