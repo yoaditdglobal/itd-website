@@ -349,7 +349,7 @@ export default function ShippingDomesticPage() {
           name: "InPost",
           logo: "/logos/carriers/inpost-icon.png",
           description:
-            "UK parcel locker and to-door network, with locker drop-off and collection.",
+            "UK residential strength including Sunday delivery. Next Day and 48-hour services.",
           href: "/integrations/carriers",
         },
         {
