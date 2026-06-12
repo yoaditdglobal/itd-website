@@ -12,7 +12,8 @@ export default function AmazonShippingPage() {
     <CarrierPage
       name="Amazon Shipping"
       heroTitle="Amazon Shipping x ITD"
-      logo="/logos/carriers/amazonshipping_logo.png"
+      logo="/logos/carriers/AMAZON SHIPPING LOGO CARRIER INTEGRATION.png"
+      logoBg="#1B2533"
       tagline="Access Amazon's logistics network for competitive parcel rates, now connected to Connexx."
       description="Amazon Shipping brings Amazon's world-class logistics infrastructure to third-party sellers and businesses. Through Connexx, you can compare Amazon Shipping rates against your other carriers, generate labels automatically, and track every delivery with Amazon's precision tracking — all from one dashboard."
       region="Domestic"
