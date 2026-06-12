@@ -11,6 +11,7 @@ export default function DhlPage() {
   return (
     <CarrierPage
       name="DHL"
+      heroTitle="DHL x ITD"
       logo="/logos/carriers/dhl_logo.webp"
       tagline="The world's leading international express carrier, fully integrated with Connexx."
       description="DHL Express connects you to 220+ countries with time-definite international delivery. Through Connexx, you get automated customs documentation, real-time global tracking, and intelligent rate comparison across all DHL services — from Express Worldwide to Economy Select."

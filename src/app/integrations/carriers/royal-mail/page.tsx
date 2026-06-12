@@ -11,7 +11,7 @@ export default function RoyalMailPage() {
   return (
     <CarrierPage
       name="Royal Mail"
-      heroTitle="Royal Mail x ITD Global"
+      heroTitle="Royal Mail x ITD"
       logo="/logos/carriers/ROYAL MAIL LOGO SVG NEW.svg"
       logoBg="#ffffff"
       tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."

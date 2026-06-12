@@ -11,7 +11,7 @@ export default function DpdPage() {
   return (
     <CarrierPage
       name="DPD"
-      heroTitle="DPD x ITD Global"
+      heroTitle="DPD x ITD"
       logo="/logos/carriers/DPD logo svg carrier integration page.svg"
       logoBg="#ffffff"
       tagline="Europe's leading parcel delivery network with one-hour delivery windows, connected to Connexx."

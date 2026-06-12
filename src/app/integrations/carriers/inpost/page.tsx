@@ -11,7 +11,7 @@ export default function InPostPage() {
   return (
     <CarrierPage
       name="InPost"
-      heroTitle="InPost x ITD Global"
+      heroTitle="InPost x ITD"
       logo="/logos/carriers/InPost logo svg integration carrier.svg"
       logoBg="#ffffff"
       tagline="Europe's fastest-growing locker network, connected to Connexx for seamless last-mile delivery."
