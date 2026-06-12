@@ -11,7 +11,6 @@ export default function DpdPage() {
   return (
     <CarrierPage
       name="DPD"
-      heroTitle="DPD x ITD Global"
       logo="/logos/carriers/DPD logo svg carrier integration page.svg"
       logoBg="#ffffff"
       tagline="Europe's leading parcel delivery network with one-hour delivery windows, connected to Connexx."
@@ -39,7 +38,7 @@ export default function DpdPage() {
         { label: "European countries", value: "30+" },
         { label: "Pickup shops", value: "70,000+" },
         { label: "Parcels per day", value: "8.4M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

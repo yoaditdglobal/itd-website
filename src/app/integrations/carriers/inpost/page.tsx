@@ -11,7 +11,6 @@ export default function InPostPage() {
   return (
     <CarrierPage
       name="InPost"
-      heroTitle="InPost x ITD Global"
       logo="/logos/carriers/InPost logo svg integration carrier.svg"
       logoBg="#ffffff"
       tagline="Europe's fastest-growing locker network, connected to Connexx for seamless last-mile delivery."
@@ -37,7 +36,7 @@ export default function InPostPage() {
         { label: "Parcel lockers", value: "25,000+" },
         { label: "Countries", value: "12+" },
         { label: "Parcels per year", value: "750M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

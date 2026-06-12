@@ -11,7 +11,6 @@ export default function EvriPage() {
   return (
     <CarrierPage
       name="Evri"
-      heroTitle="EvRi x ITD Global"
       logo="/logos/carriers/evri logo carrier integration page.png"
       tagline="UK's largest dedicated parcel delivery network, fully integrated with Connexx."
       description="Evri delivers to over 30 million UK addresses. Through Connexx, you get automated label generation, real-time tracking, and seamless returns processing — all without leaving your dashboard. Ideal for eCommerce businesses with high UK domestic volumes."
@@ -33,7 +32,7 @@ export default function EvriPage() {
         { label: "UK addresses covered", value: "30M+" },
         { label: "ParcelShops", value: "7,000+" },
         { label: "Daily parcels", value: "3.5M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );
