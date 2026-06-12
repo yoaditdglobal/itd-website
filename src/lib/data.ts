@@ -572,11 +572,11 @@ export const integrations: Integration[] = [
   { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "eCommerce platform", logo: "/logos/ecommerce/shopify_logo.png" },
   { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/erp-wms/mintsoft_logo.png" },
   // ─── Tech — Marketplace ────────────────────────────────────────────
-  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon_logo.png" },
-  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok_logo.png" },
-  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy_logo.png" },
-  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay_logo.png" },
-  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu_logo.webp" },
+  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon-icon.webp" },
+  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok-tile.png" },
+  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy-icon.png" },
+  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay-icon.png" },
+  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu-icon.png" },
   // ─── Carriers — Domestic ───────────────────────────────────────────
   { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
   { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/inpost-icon.png" },
