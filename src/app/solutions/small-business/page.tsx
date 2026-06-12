@@ -116,7 +116,7 @@ export default function SmallBusinessPage() {
         {
           name: "InPost",
           logo: "/logos/carriers/inpost-icon.png",
-          description: "Parcel locker and to-door delivery across Mainland UK.",
+          description: "B2C 48 hour delivery across Mainland UK.",
           href: "/integrations/carriers",
         },
         {
