@@ -237,6 +237,14 @@ export default function Navbar() {
 
   return (
     <>
+    {/* Invisible backdrop — closes open dropdown on click anywhere outside the nav */}
+    {openDropdown && (
+      <div
+        className="fixed inset-0 z-40"
+        aria-hidden
+        onClick={() => setOpenDropdown(null)}
+      />
+    )}
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
