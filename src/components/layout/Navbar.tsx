@@ -47,7 +47,14 @@ const integrationsMenu = {
 };
 
 const resourcesMenu = {
-  customerStories: ["eCommerce", "Marketplace", "3PL", "Export", "Import"],
+  // Only populated library shelves — empty solutions (Marketplace, B2B) must
+  // not appear until a story exists for them. Hash links jump to the shelf.
+  customerStories: [
+    { name: "eCommerce", href: "/resources/case-studies#ecommerce" },
+    { name: "3PL", href: "/resources/case-studies#3pl" },
+    { name: "Import", href: "/resources/case-studies#import" },
+    { name: "Export", href: "/resources/case-studies#export" },
+  ],
   knowledge: [
     { name: "Guides", href: "/resources/guides" },
     { name: "Glossary", href: "/resources/glossary" },
@@ -342,8 +349,8 @@ export default function Navbar() {
           >
             <div>
               <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
-              {resourcesMenu.customerStories.map((ind) => (
-                <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1 text-sm text-text-secondary hover:text-accent">{ind}</Link>
+              {resourcesMenu.customerStories.map((item) => (
+                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
               ))}
               <Link href="/resources/case-studies" className="link-underline text-xs text-accent mt-2">See all →</Link>
             </div>
@@ -480,8 +487,8 @@ export default function Navbar() {
             {mobileAccordion === "resources" && (
               <div className="pl-4 pb-3 space-y-2">
                 <div className="text-xs font-semibold uppercase text-white/40 mt-2">Customer Stories</div>
-                {resourcesMenu.customerStories.map((ind) => (
-                  <Link key={ind} href={`/resources/case-studies?industry=${encodeURIComponent(ind)}`} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{ind}</Link>
+                {resourcesMenu.customerStories.map((item) => (
+                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
                 ))}
                 <Link href="/resources/case-studies" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
                 <div className="text-xs font-semibold uppercase text-white/40 mt-3">Knowledge</div>

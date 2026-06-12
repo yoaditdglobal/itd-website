@@ -10,7 +10,8 @@ interface ClosingCTAProps {
   headline?: string;
   subtitle?: string;
   primaryCta?: CtaButton;
-  secondaryCta?: CtaButton;
+  /** Pass `null` to render a single-button CTA (undefined keeps the default). */
+  secondaryCta?: CtaButton | null;
   /** Optional micro-note shown under the buttons. Used to set async expectations, e.g. "We reply within 1 business day." */
   asyncNote?: string;
 }
@@ -23,7 +24,8 @@ export default function ClosingCTA({
   asyncNote,
 }: ClosingCTAProps) {
   const primary = primaryCta ?? { label: "Get Quote", href: "/shipping/domestic#estimator" };
-  const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
+  const secondary =
+    secondaryCta === null ? null : secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
     <section className="bg-bg-dark py-16 md:py-24">
@@ -34,7 +36,9 @@ export default function ClosingCTA({
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Button href={primary.href} variant="primary" surface="dark">{primary.label}</Button>
-            <Button href={secondary.href} variant="secondary" surface="dark">{secondary.label}</Button>
+            {secondary && (
+              <Button href={secondary.href} variant="secondary" surface="dark">{secondary.label}</Button>
+            )}
           </div>
           {asyncNote && (
             <p className="mt-4 text-sm text-white/60">{asyncNote}</p>
