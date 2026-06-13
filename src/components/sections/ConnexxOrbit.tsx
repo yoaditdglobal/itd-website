@@ -30,11 +30,11 @@ const CARRIERS: Brand[] = [
 
 /* Outer orbit — marketplaces. */
 const MARKETPLACES: Brand[] = [
-  { name: "Amazon", logo: "/logos/marketplaces/amazon-tile.png" },
-  { name: "eBay", logo: "/logos/marketplaces/ebay-tile.png" },
-  { name: "Etsy", logo: "/logos/marketplaces/etsy-tile.png" },
+  { name: "Amazon", logo: "/logos/marketplaces/amazon-icon.webp" },
+  { name: "eBay", logo: "/logos/marketplaces/ebay-icon.png" },
+  { name: "Etsy", logo: "/logos/marketplaces/etsy-icon.png" },
   { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok-tile.png" },
-  { name: "Temu", logo: "/logos/marketplaces/temu-tile.png" },
+  { name: "Temu", logo: "/logos/marketplaces/temu-icon.png" },
 ];
 
 const WMS_MOBILE_HIDE = new Set(["ShipStation", "Veeqo"]);
