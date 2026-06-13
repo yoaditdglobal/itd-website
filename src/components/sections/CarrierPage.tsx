@@ -13,6 +13,15 @@ export interface CarrierFeature {
   desc: string;
 }
 
+export interface CarrierVideo {
+  /** Path under /public, e.g. "/media/evri-brand-film.mp4". */
+  src: string;
+  /** Section heading. Defaults to "About {name}". */
+  heading?: string;
+  /** One-line lead under the heading. */
+  caption?: string;
+}
+
 export interface CarrierPageProps {
   name: string;
   logo?: string;
@@ -24,6 +33,11 @@ export interface CarrierPageProps {
   services: string[];
   features: CarrierFeature[];
   stats: { label: string; value: string }[];
+  /** Optional brand-film section rendered after Features. No autoplay — the
+   *  film carries audio; controls + preload="metadata" keep page weight ~0
+   *  until play. Display width is capped (max-w-xl) so low-res sources stay
+   *  acceptable. */
+  video?: CarrierVideo;
 }
 
 export default function CarrierPage({
@@ -37,6 +51,7 @@ export default function CarrierPage({
   services,
   features,
   stats,
+  video,
 }: CarrierPageProps) {
   return (
     <>
@@ -103,6 +118,39 @@ export default function CarrierPage({
           </div>
         </div>
       </section>
+
+      {/* Brand film — optional, after Features. Player-with-controls, never
+          autoplay (audio); preload="metadata" so the page pays nothing until
+          the user presses play. max-w-xl caps upscaling of low-res sources. */}
+      {video && (
+        <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <h2 className="text-2xl text-display-lg text-text-primary mb-3">
+                {video.heading ?? `About ${name}`}
+              </h2>
+              {video.caption && (
+                <p className="text-text-secondary mb-10 max-w-2xl">{video.caption}</p>
+              )}
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <div className="max-w-xl mx-auto">
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <video
+                  src={video.src}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full aspect-video rounded-2xl border border-border shadow-md bg-bg-dark"
+                >
+                  Your browser can&apos;t play this video.{" "}
+                  <a href={video.src} className="underline">Download it instead.</a>
+                </video>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
 
       <ClosingCTA
         headline={`Start shipping with ${name}`}
