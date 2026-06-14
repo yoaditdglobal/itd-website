@@ -83,7 +83,7 @@ Six modules cover the full shipment lifecycle. Each module works on its own. Tog
 **Lead (1 line):** One screen for every carrier, every label format, every manifest.
 
 **Bullets:**
-- 16 active carrier integrations including Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery), DPD (Next Day, Predict, Two Day), Evri, Parcelforce (Express24, Express48, Global), DHL Express, FedEx, UPS, Amazon Shipping, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, GLS, PostNL, Australia Post.
+- 16 active carrier integrations including Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery), DPD (Next Day, Predict, Two Day), Evri, Parcelforce (Express24, Express48, Global), DHL Express, FedEx, UPS, Amazon Shipping, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Australia Post.
 - One-click label generation. Batch processing for peak.
 - Manifest generation by carrier, by date, by depot.
 - Exception routing rebooks failed dispatches to the next-best carrier automatically.
@@ -240,7 +240,7 @@ Connexx slots into your existing stack. eCommerce platforms send orders in. ERPs
 | ERP & WMS | 11 | SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, Cin7 |
 | Marketplaces | 7 | Amazon, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu |
 | Carriers (UK) | 8 | Royal Mail, DPD, Evri, Parcelforce, Yodel, DX, InPost, Amazon Shipping |
-| Carriers (international) | 8 | DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT, Aramex, GLS, PostNL, Australia Post |
+| Carriers (international) | 8 | DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT, Australia Post |
 
 (The international row lists 10 because the carrier counts in `src/lib/data.ts` include all of them; if the design needs exactly 8, prune the table to match. The integration counts here match the data file as of the last review.)
 

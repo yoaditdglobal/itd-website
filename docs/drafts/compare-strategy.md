@@ -49,7 +49,7 @@ We will build five P0 comparisons in Phase 5.1, four P1 in Phase 5.2, and two ad
   - Marketplace seller workflow (Amazon SFP/VTR/LSR/OTDR routing, eBay Late Shipment Rate workflows).
   - B2B and pallet network routing.
 - **Where they win**:
-  - EU carrier breadth (PostNL, Deutsche Post, DHL Parcel EU, GLS) is genuinely deep.
+ - EU carrier breadth (Deutsche Post, DHL Parcel EU) is genuinely deep.
   - EU returns portal UX has more mileage in the market.
   - Pre-Brexit footprint in the EU 27.
 - **Search volume estimate**:

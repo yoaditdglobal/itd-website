@@ -61,7 +61,7 @@ Craft seller on Etsy shipping small parcels across the UK and internationally. C
 Brand selling DTC on Shopify and as a Marketplace seller on Walmart. Connexx pulls both order streams into one queue. Walmart's "On Time Delivery" SLA is enforced for Walmart orders. Shopify orders run on the standard rate comparison. The dispatch team works one queue, not two. Named integrations: Walmart, Shopify, FedEx, UPS.
 
 ### Zalando plus European returns network
-Fashion brand selling on Zalando across Germany, France, and the Netherlands. Connexx handles the dispatch via DPD and DHL Parcel. Returns route through the Connexx returns portal with pre-paid labels generated against Zalando's customer experience requirements. Returns logs into the brand's order management system. Named integrations: Zalando, DPD, DHL Parcel, PostNL.
+Fashion brand selling on Zalando across Germany, France and the Netherlands. Connexx handles the dispatch via DPD and DHL Parcel. Returns route through the Connexx returns portal with pre-paid labels generated against Zalando's customer experience requirements. Returns logs into the brand's order management system. Named integrations: Zalando, DPD, DHL Parcel.
 
 ---
 

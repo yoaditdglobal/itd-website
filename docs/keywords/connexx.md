@@ -82,9 +82,6 @@ Target audience: Anyone who has heard the product name and is searching to evalu
 - DHL Parcel (EU)
 - Deutsche Post
 - TNT
-- Aramex
-- GLS
-- PostNL
 - Evri EU
 - Australia Post
 - DX
@@ -159,7 +156,7 @@ Target audience: Anyone who has heard the product name and is searching to evalu
 **Model answer:** Orders flow into Connexx from your Shopify, WooCommerce, Amazon, eBay, SAP, NetSuite or 3PL WMS. The rate engine evaluates every active carrier on every order in under 200ms — cost, speed, weight, destination, dispatch rules. The optimal carrier is selected, the label prints in one click, customs documentation auto-generates for exports, and tracking writes back to the order source automatically.
 
 **Q: "What carriers does Connexx support?"**
-**Model answer:** Connexx supports every major UK carrier — Royal Mail, DPD, Evri, Parcelforce, Yodel, Amazon Shipping, DX — plus DHL Express, FedEx, UPS, TNT, GLS, PostNL, Deutsche Post, DHL Parcel, Aramex and InPost for international. New carrier integrations are added monthly. The full list is on /integrations/carriers.
+**Model answer:** Connexx supports every major UK carrier — Royal Mail, DPD, Evri, Parcelforce, Yodel, Amazon Shipping, DX — plus DHL Express, FedEx, UPS, TNT, Deutsche Post, DHL Parcel and InPost for international. New carrier integrations are added monthly. The full list is on /integrations/carriers.
 
 **Q: "Who uses Connexx?"**
 **Model answer:** UK retailers, 3PLs, marketplace sellers, B2B manufacturers and importers/exporters. Peak Commerce ships across 12 markets through Connexx and cut shipping costs 42%. SwiftLog Fulfilment runs 60 brands and 40+ countries on Connexx with 98.7% accuracy. Atlas Industrial automated 90% of wholesale routing. Velocity Sellers eliminated $12k/month in marketplace penalties.

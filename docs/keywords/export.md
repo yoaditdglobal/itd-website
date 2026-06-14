@@ -72,7 +72,6 @@ Target buyer: Export Manager, Customs Compliance Lead, or Operations Director at
 - TNT
 - Parcelforce Worldwide (Global Express, Global Priority, Global Value)
 - Royal Mail International (Tracked, Signed, Economy)
-- Aramex
 - Deutsche Post International
 - DPD (cross-border DPD EU)
 - DHL Parcel (EU)

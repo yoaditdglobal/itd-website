@@ -40,7 +40,7 @@ ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooComm
 - [Evri](https://itdglobal.com/integrations/carriers/evri): UK parcel and ParcelShop network.
 - [DHL Express](https://itdglobal.com/integrations/carriers/dhl): international express delivery to 220+ countries.
 - [Amazon Shipping](https://itdglobal.com/integrations/carriers/amazon-shipping): Amazon's UK logistics network.
-- Also integrated: UPS, FedEx, Parcel Force, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, PostNL, GLS, Australia Post.
+- Also integrated: UPS, FedEx, Parcel Force, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Australia Post.
 
 ## Customer stories
 

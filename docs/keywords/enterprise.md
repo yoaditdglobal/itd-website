@@ -75,8 +75,6 @@ Target buyer: Head of Supply Chain, Logistics Director, or CIO at a UK/EU retail
 - Evri (Standard, Next Day)
 - Amazon Shipping
 - TNT
-- GLS
-- PostNL
 - Deutsche Post
 - DHL Parcel (EU)
 - InPost (lockers)
