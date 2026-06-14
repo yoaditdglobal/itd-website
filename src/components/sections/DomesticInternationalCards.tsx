@@ -36,6 +36,8 @@ const cards: HeroShippingCardData[] = [
     audiences: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
     href: "/shipping/freight",
     image: {
+      src: "/shipping/freight-hero.webp",
+      alt: "HGV and palletised freight at an ITD distribution hub",
       gradient: "from-accent-light via-white to-accent/15",
     },
   },

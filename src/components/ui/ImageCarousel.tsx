@@ -85,6 +85,18 @@ export default function ImageCarousel({
     return () => clearInterval(id);
   }, [autoAdvanceMs, paused, inView, pageVisible, images.length]);
 
+  // Decode-ahead: warm the next + previous slide so the crossfade reveals an
+  // already-decoded frame instead of popping a half-loaded image.
+  useEffect(() => {
+    if (typeof window === "undefined" || images.length <= 1) return;
+    const warm = (i: number) => {
+      const img = new window.Image();
+      img.src = images[(i + images.length) % images.length].src;
+    };
+    warm(index + 1);
+    warm(index - 1);
+  }, [index, images]);
+
   if (images.length === 0) return null;
 
   return (
@@ -103,7 +115,7 @@ export default function ImageCarousel({
       {images.map((img, i) => (
         <div
           key={img.src}
-          className="absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none"
+          className="absolute inset-0 transition-opacity duration-700 ease-in-out will-change-[opacity] motion-reduce:transition-none"
           style={{ opacity: i === index ? 1 : 0 }}
           aria-hidden={i !== index}
         >
