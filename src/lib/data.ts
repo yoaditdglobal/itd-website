@@ -556,7 +556,7 @@ export const integrations: Integration[] = [
   { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP", logo: "/logos/erp-wms/netsuite-icon.png" },
   { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS", logo: "/logos/erp-wms/orderwise-icon.webp" },
   { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
-  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro-icon.png" },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro-mark.png" },
   { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management", logo: "/logos/erp-wms/tradepeg-icon.png" },
   { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports", logo: "/logos/erp-wms/jonassports-icon.png" },
   { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform", logo: "/logos/erp-wms/brightpearl-icon.png" },
