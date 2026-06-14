@@ -59,7 +59,7 @@ const modules: ModuleDeepDive[] = [
     name: "Multi-Carrier Dispatch",
     lead: "One screen for every carrier, every label format, every manifest.",
     bullets: [
-      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, and GLS.",
+      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, InPost, DHL Parcel, Deutsche Post, and TNT.",
       "One-click label generation. Batch processing for peak.",
       "Manifest generation by carrier, by date, by depot.",
       "Exception routing rebooks failed dispatches to the next-best carrier automatically.",
@@ -143,7 +143,7 @@ const integrationBreakdown = [
     category: "Carriers (international)",
     count: "8",
     examples:
-      "DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT, Aramex, GLS",
+      "DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT",
   },
 ];
 
