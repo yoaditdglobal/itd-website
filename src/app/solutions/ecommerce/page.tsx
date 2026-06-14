@@ -97,12 +97,8 @@ export default function EcommercePage() {
         },
         {
           name: "Magento",
+          logo: "/logos/erp-wms/magento-icon.webp",
           description: "Adobe Commerce / Magento 2 integration with multi-carrier routing rules.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "BigCommerce",
-          description: "SaaS storefronts route every order through Connexx for rate comparison.",
           href: "/integrations/ecommerce",
         },
         {
@@ -135,7 +131,7 @@ export default function EcommercePage() {
         {
           question: "Does ITD integrate with my eCommerce platform?",
           answer:
-            "Yes. We connect to Shopify, WooCommerce, Magento and BigCommerce. Orders flow in and labels print from the setup you already use.",
+            "Yes. We connect to Shopify, WooCommerce and Magento. Orders flow in and labels print from the setup you already use.",
         },
         {
           question: "Can shoppers choose their delivery at checkout?",

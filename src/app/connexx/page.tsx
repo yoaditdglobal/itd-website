@@ -108,8 +108,8 @@ const modules: ModuleDeepDive[] = [
     lead: "Native integrations to every major ERP, WMS, eCommerce platform, and marketplace. REST API for everything else.",
     bullets: [
       "ERP and WMS: Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero.",
-      "eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce, BigCommerce.",
-      "Marketplaces: Amazon Seller Central, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu.",
+      "eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce.",
+      "Marketplaces: Amazon Seller Central, eBay, Etsy, TikTok Shop, Temu.",
       "REST API with webhook events for shipment created, shipment dispatched, tracking update, exception, delivered, returned.",
     ],
     stat: "26 live tech integrations and 16 carrier integrations as of the last platform update. New integrations are added monthly against published roadmap.",
@@ -119,8 +119,8 @@ const modules: ModuleDeepDive[] = [
 const integrationBreakdown = [
   {
     category: "eCommerce",
-    count: "4",
-    examples: "Shopify, WooCommerce, Magento / Adobe Commerce, BigCommerce",
+    count: "3",
+    examples: "Shopify, WooCommerce, Magento / Adobe Commerce",
   },
   {
     category: "ERP and WMS",
@@ -130,8 +130,8 @@ const integrationBreakdown = [
   },
   {
     category: "Marketplaces",
-    count: "7",
-    examples: "Amazon, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu",
+    count: "5",
+    examples: "Amazon, eBay, Etsy, TikTok Shop, Temu",
   },
   {
     category: "Carriers (UK)",

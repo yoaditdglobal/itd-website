@@ -112,7 +112,7 @@ export default function ShippingInternationalPage() {
           anchor: "ecommerce",
           headline: "Built for eCommerce",
           summary:
-            "Connect your Shopify, WooCommerce or BigCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
+            "Connect your Shopify or WooCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
           solutionTag: "eCommerce",
           category: "By business model",
           image: {

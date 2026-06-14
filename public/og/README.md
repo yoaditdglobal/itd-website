@@ -50,7 +50,7 @@ The site has 28 pages registered in `src/lib/site-config.ts`. Each needs an OG i
 | `/solutions/small-business` | `og/solutions-small-business.png` | "Every UK carrier in one platform" | Subhead: "No contracts. No minimums." |
 | `/shipping/domestic` | `og/shipping-domestic.png` | "UK domestic shipping across every postcode" | |
 | `/shipping/international` | `og/shipping-international.png` | "International shipping with automated customs" | |
-| `/integrations` | `og/integrations.png` | "Works with what you already run" | Logo grid background (Shopify, NetSuite, SAP, Amazon, etc.) |
+| `/integrations` | `og/integrations.png` | "Works with what you already run" | Logo grid background (Shopify, NetSuite, Amazon, etc.) |
 
 ### Priority 2 — ship soon (10 files)
 

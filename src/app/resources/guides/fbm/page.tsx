@@ -52,7 +52,7 @@ const faqs = [
   {
     question: "Can I use my own carrier for FBM orders?",
     answer:
-      "Yes. FBM allows any carrier you choose, as long as the carrier delivers on time and provides a valid tracking number Amazon can verify. The practical constraint is Valid Tracking Rate. Smaller regional couriers often lack the Amazon scan-event integration, which means tracking will fail VTR even with a valid number. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, Yodel, and Amazon Shipping all integrate.",
+      "Yes. FBM allows any carrier you choose, as long as the carrier delivers on time and provides a valid tracking number Amazon can verify. The practical constraint is Valid Tracking Rate. Smaller regional couriers often lack the Amazon scan-event integration, which means tracking will fail VTR even with a valid number. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, and Amazon Shipping all integrate.",
   },
   {
     question: "What is Seller Fulfilled Prime and how do I qualify?",
@@ -67,7 +67,7 @@ const faqs = [
   {
     question: "What carriers count for Amazon Valid Tracking Rate in the UK?",
     answer:
-      "Royal Mail Tracked 24, Royal Mail Tracked 48, Royal Mail Signed, DPD Next Day and Standard, Evri Standard and Next Day, Parcelforce Express24 and Express48, DHL Parcel UK, Yodel B2C 24 and B2C 48, and Amazon Shipping all push valid tracking events back to Amazon. Untracked services cannot meet VTR. Smaller regional couriers may have valid tracking numbers but lack the Amazon scan-event integration.",
+      "Royal Mail Tracked 24, Royal Mail Tracked 48, Royal Mail Signed, DPD Next Day and Standard, Evri Standard and Next Day, Parcelforce Express24 and Express48, DHL Parcel UK, and Amazon Shipping all push valid tracking events back to Amazon. Untracked services cannot meet VTR. Smaller regional couriers may have valid tracking numbers but lack the Amazon scan-event integration.",
   },
   {
     question: "How do I keep my Amazon On-Time Delivery Rate above 97%?",
@@ -456,7 +456,7 @@ export default function FbmGuidePage() {
                 <strong className="text-text-primary">Carrier selection in Seller Central.</strong> When you mark an order as shipped outside Buy Shipping, you select a carrier from the drop-down. That carrier has to match the tracking number format. Marking an order as &ldquo;Royal Mail&rdquo; while uploading a DPD tracking number is one of the most common causes of VTR failures.
               </p>
               <p>
-                <strong className="text-text-primary">Scan events.</strong> Valid tracking requires the carrier to push scan events back to Amazon. Major UK carriers do this through approved EDI feeds. If you use a smaller carrier that does not have an Amazon integration, the tracking number may be technically valid but the scan events will not flow back, and VTR drops accordingly. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, Yodel, and Amazon Shipping all integrate. Smaller regional couriers often do not.
+                <strong className="text-text-primary">Scan events.</strong> Valid tracking requires the carrier to push scan events back to Amazon. Major UK carriers do this through approved EDI feeds. If you use a smaller carrier that does not have an Amazon integration, the tracking number may be technically valid but the scan events will not flow back, and VTR drops accordingly. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, and Amazon Shipping all integrate. Smaller regional couriers often do not.
               </p>
               <p>
                 <strong className="text-text-primary">Label format requirements.</strong> Some Amazon programmes (notably Seller Fulfilled Prime) require specific label formats with the Prime branding. Standard FBM does not require Prime-branded labels but the address block has to be legible, the tracking barcode has to scan, and the carrier-specific information block has to be present and correct. Carrier label PDFs printed at the wrong size (A4 instead of 4x6, or 4x6 instead of 4x4) cause carrier rejections at the depot.
