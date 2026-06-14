@@ -6,7 +6,11 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
 
-const shippingTypes = ["Domestic UK", "Export", "Import"] as const;
+const shippingTypes = ["Domestic UK", "Export", "Import", "Freight"] as const;
+
+const freightTypes = ["Parcel", "Box", "Pallet"] as const;
+
+const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10MB
 
 const volumeOptions = [
   "50-150",
@@ -40,6 +44,14 @@ export default function ContactPage() {
   const [shippingType, setShippingType] = useState("");
   const [mainLanes, setMainLanes] = useState<string[]>([]);
   const [weeklyVolume, setWeeklyVolume] = useState("");
+  const [freightType, setFreightType] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [weight, setWeight] = useState("");
+  const [dimL, setDimL] = useState("");
+  const [dimW, setDimW] = useState("");
+  const [dimH, setDimH] = useState("");
+  const [supplierInvoiceFile, setSupplierInvoiceFile] = useState<File | null>(null);
+  const [freightPhotoFile, setFreightPhotoFile] = useState<File | null>(null);
   const [collectionPostcode, setCollectionPostcode] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -51,10 +63,63 @@ export default function ContactPage() {
   const [error, setError] = useState("");
 
   const showMainLanes = shippingType === "Export" || shippingType === "Import";
+  const isFreight = shippingType === "Freight";
+  const showWeightDims =
+    shippingType === "Export" || shippingType === "Import" || isFreight;
+
+  // Switch shipping type and clear fields that don't apply to the new type.
+  const selectShippingType = (type: string) => {
+    setShippingType(type);
+    setError("");
+    if (type !== "Export" && type !== "Import") setMainLanes([]);
+    if (type === "Freight") setWeeklyVolume("");
+    if (type === "Domestic UK") {
+      setWeight("");
+      setDimL("");
+      setDimW("");
+      setDimH("");
+    }
+    if (type !== "Freight") {
+      setFreightType("");
+      setQuantity("");
+      setSupplierInvoiceFile(null);
+      setFreightPhotoFile(null);
+    }
+  };
+
+  // Optional uploads: cap size, keep metadata only (bytes not sent — backend is a stub).
+  const handleFile = (
+    file: File | undefined,
+    setter: (f: File | null) => void,
+  ) => {
+    if (!file) {
+      setter(null);
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setError(`"${file.name}" is over 10MB. Please choose a smaller file.`);
+      return;
+    }
+    setError("");
+    setter(file);
+  };
+
+  const fileMeta = (file: File | null) =>
+    file ? { name: file.name, size: file.size, type: file.type } : undefined;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!shippingType) {
+      setError("Please select a shipping type.");
+      return;
+    }
+    if (isFreight && !freightType) {
+      setError("Please select a freight type (Parcel, Box, or Pallet).");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -64,7 +129,15 @@ export default function ContactPage() {
         body: JSON.stringify({
           shippingType,
           mainLanes: showMainLanes ? mainLanes : undefined,
-          weeklyVolume,
+          weeklyVolume: isFreight ? undefined : weeklyVolume,
+          freightType: isFreight ? freightType : undefined,
+          quantity: isFreight ? quantity : undefined,
+          weight: showWeightDims ? weight : undefined,
+          dimensions: showWeightDims
+            ? { length: dimL, width: dimW, height: dimH }
+            : undefined,
+          supplierInvoice: isFreight ? fileMeta(supplierInvoiceFile) : undefined,
+          freightPhoto: isFreight ? fileMeta(freightPhotoFile) : undefined,
           collectionPostcode,
           company: companyName,
           firstName,
@@ -192,10 +265,7 @@ export default function ContactPage() {
                       <button
                         key={type}
                         type="button"
-                        onClick={() => {
-                          setShippingType(type);
-                          if (type === "Domestic UK") setMainLanes([]);
-                        }}
+                        onClick={() => selectShippingType(type)}
                         className={`min-h-[44px] rounded-lg border px-5 py-2.5 text-sm font-medium transition-all ${
                           shippingType === type
                             ? "border-bg-dark bg-bg-dark text-white"
@@ -219,28 +289,202 @@ export default function ContactPage() {
                   />
                 )}
 
-                {/* Weekly Volume */}
-                <div>
-                  <label htmlFor="volume" className={labelClass}>
-                    Weekly Volume <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="volume"
-                    value={weeklyVolume}
-                    onChange={(e) => setWeeklyVolume(e.target.value)}
-                    required
-                    className={`${fieldClass} appearance-none`}
-                  >
-                    <option value="" disabled>
-                      Select weekly volume...
-                    </option>
-                    {volumeOptions.map((vol) => (
-                      <option key={vol} value={vol}>
-                        {vol} shipments
+                {/* Freight type — conditional */}
+                {isFreight && (
+                  <fieldset>
+                    <legend className="mb-2 block text-sm font-medium text-text-primary">
+                      Freight Type <span className="text-red-500">*</span>
+                    </legend>
+                    <div className="flex flex-wrap gap-2">
+                      {freightTypes.map((type) => (
+                        <button
+                          key={type}
+                          type="button"
+                          onClick={() => setFreightType(type)}
+                          className={`min-h-[44px] rounded-lg border px-5 py-2.5 text-sm font-medium transition-all ${
+                            freightType === type
+                              ? "border-bg-dark bg-bg-dark text-white"
+                              : "border-border bg-white text-text-secondary hover:border-border-strong"
+                          }`}
+                        >
+                          {type}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+
+                {/* Quantity (Freight) — replaces Weekly Volume */}
+                {isFreight && (
+                  <div>
+                    <label htmlFor="quantity" className={labelClass}>
+                      Quantity <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="quantity"
+                      type="number"
+                      min="1"
+                      step="1"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      required
+                      placeholder="Number of items"
+                      className={fieldClass}
+                    />
+                  </div>
+                )}
+
+                {/* Weekly Volume — hidden for Freight */}
+                {!isFreight && (
+                  <div>
+                    <label htmlFor="volume" className={labelClass}>
+                      Weekly Volume <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="volume"
+                      value={weeklyVolume}
+                      onChange={(e) => setWeeklyVolume(e.target.value)}
+                      required
+                      className={`${fieldClass} appearance-none`}
+                    >
+                      <option value="" disabled>
+                        Select weekly volume...
                       </option>
-                    ))}
-                  </select>
-                </div>
+                      {volumeOptions.map((vol) => (
+                        <option key={vol} value={vol}>
+                          {vol} shipments
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Weight + Dimensions — Export / Import / Freight */}
+                {showWeightDims && (
+                  <>
+                    <div>
+                      <label htmlFor="weight" className={labelClass}>
+                        Weight (kg) <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        id="weight"
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={weight}
+                        onChange={(e) => setWeight(e.target.value)}
+                        required
+                        placeholder="e.g. 12.5"
+                        className={fieldClass}
+                      />
+                    </div>
+                    <div>
+                      <span className={labelClass}>
+                        Box dimensions (L &times; W &times; H, cm){" "}
+                        <span className="text-red-500">*</span>
+                      </span>
+                      <div className="grid grid-cols-3 gap-4">
+                        <input
+                          aria-label="Length in cm"
+                          type="number"
+                          min="0"
+                          step="any"
+                          value={dimL}
+                          onChange={(e) => setDimL(e.target.value)}
+                          required
+                          placeholder="L"
+                          className={fieldClass}
+                        />
+                        <input
+                          aria-label="Width in cm"
+                          type="number"
+                          min="0"
+                          step="any"
+                          value={dimW}
+                          onChange={(e) => setDimW(e.target.value)}
+                          required
+                          placeholder="W"
+                          className={fieldClass}
+                        />
+                        <input
+                          aria-label="Height in cm"
+                          type="number"
+                          min="0"
+                          step="any"
+                          value={dimH}
+                          onChange={(e) => setDimH(e.target.value)}
+                          required
+                          placeholder="H"
+                          className={fieldClass}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Freight uploads — optional */}
+                {isFreight && (
+                  <>
+                    <div>
+                      <label htmlFor="supplier-invoice" className={labelClass}>
+                        Supplier invoice{" "}
+                        <span className="font-normal text-text-tertiary">
+                          (for customs &mdash; optional)
+                        </span>
+                      </label>
+                      <input
+                        id="supplier-invoice"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx,.xls"
+                        onChange={(e) =>
+                          handleFile(e.target.files?.[0], setSupplierInvoiceFile)
+                        }
+                        className="w-full text-sm text-text-secondary file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-white file:text-text-primary file:text-sm file:font-medium file:cursor-pointer hover:file:bg-bg-secondary"
+                      />
+                      {supplierInvoiceFile && (
+                        <p className="mt-1.5 flex items-center gap-2 text-xs text-text-secondary">
+                          <span className="truncate">{supplierInvoiceFile.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => setSupplierInvoiceFile(null)}
+                            className="text-accent hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <label htmlFor="freight-photo" className={labelClass}>
+                        Photo of the freight{" "}
+                        <span className="font-normal text-text-tertiary">
+                          (optional)
+                        </span>
+                      </label>
+                      <input
+                        id="freight-photo"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleFile(e.target.files?.[0], setFreightPhotoFile)
+                        }
+                        className="w-full text-sm text-text-secondary file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-white file:text-text-primary file:text-sm file:font-medium file:cursor-pointer hover:file:bg-bg-secondary"
+                      />
+                      {freightPhotoFile && (
+                        <p className="mt-1.5 flex items-center gap-2 text-xs text-text-secondary">
+                          <span className="truncate">{freightPhotoFile.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => setFreightPhotoFile(null)}
+                            className="text-accent hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </p>
+                      )}
+                    </div>
+                  </>
+                )}
 
                 {/* Collection Postcode */}
                 <div>
