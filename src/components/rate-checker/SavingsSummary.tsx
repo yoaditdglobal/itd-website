@@ -30,14 +30,14 @@ export function SavingsSummary({ savingsPercent, profileType, onGetQuote }: Savi
   return (
     <div className="text-center space-y-8 py-6 animate-fade-in-up">
       <div className="space-y-2">
-        <h2 className="text-lg font-medium text-slate-400">{headline}</h2>
+        <h2 className="text-heading-md text-slate-400">{headline}</h2>
         <div className="flex items-center justify-center gap-3">
           <TrendingDown className="h-8 w-8 text-[hsl(182,96%,33%)]" />
-          <p className="text-4xl md:text-5xl font-bold text-slate-100 tabular-nums">
+          <p className="text-stat-2xl text-slate-100">
             up to <span className="text-[hsl(182,96%,33%)]">{savingsPercent}%</span>
           </p>
         </div>
-        <p className="text-base text-slate-400">per week with ITD</p>
+        <p className="text-body-md text-slate-400">per week with ITD</p>
       </div>
 
       <div className="max-w-sm mx-auto space-y-3">

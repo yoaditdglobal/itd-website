@@ -89,7 +89,7 @@ export function InvoiceAnalysisSummary({
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
             <Check className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-text-primary">Analysis Complete</h3>
+          <h3 className="text-heading-md text-text-primary">Analysis Complete</h3>
         </div>
         <Badge variant="outline" className={confidenceColor[confidence]}>
           {confidence.charAt(0).toUpperCase() + confidence.slice(1)} confidence
@@ -101,7 +101,7 @@ export function InvoiceAnalysisSummary({
           <div className="flex items-start gap-2">
             <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm text-text-primary">
+              <p className="text-body-sm text-text-primary">
                 {filtering.excludedCount > 0 && <>
                     <span className="font-medium">{filtering.excludedCount} {filtering.excludedType} shipment{filtering.excludedCount > 1 ? 's' : ''}</span>
                     {' '}excluded from analysis.
@@ -124,7 +124,7 @@ export function InvoiceAnalysisSummary({
           <div className="flex items-start gap-2">
             <Info className="w-5 h-5 text-text-secondary mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm text-text-primary">
+              <p className="text-body-sm text-text-primary">
                 We found <span className="font-medium">1 shipment</span> to {lanes[0].destination} in your invoice.
               </p>
               <p className="text-caption text-text-tertiary mt-0.5">

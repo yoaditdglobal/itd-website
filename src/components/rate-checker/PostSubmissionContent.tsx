@@ -14,7 +14,7 @@ export default function PostSubmissionContent({ onStartOver }: PostSubmissionCon
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
       </div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-3">We've received your details</h2>
+      <h2 className="text-display-md text-gray-900 mb-3">We've received your details</h2>
       <p className="text-gray-500 mb-8 max-w-sm mx-auto">
         Our team will review your shipping profile and reach out with a tailored proposal within one business day.
       </p>

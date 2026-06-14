@@ -252,7 +252,7 @@ export function InvoiceSavingsPreview({
               <p className="text-label text-text-secondary">Potential Savings</p>
               <Sparkles className="h-3.5 w-3.5 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-primary mt-1">
+            <p className="text-stat-lg text-primary mt-1">
               {result.savingsPercent}%
             </p>
             <p className="text-caption text-text-tertiary mt-1">

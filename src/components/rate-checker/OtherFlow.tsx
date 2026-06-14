@@ -22,8 +22,8 @@ export function OtherFlow({ data, onChange, onSubmit, onBack }: OtherFlowProps) 
   return (
     <div className="space-y-6 animate-fade-in-up">
       <div className="text-center space-y-2">
-        <h2 className="text-xl font-semibold text-slate-100">Tell us a bit more about your operation</h2>
-        <p className="text-sm text-slate-400">We'll have a specialist get in touch</p>
+        <h2 className="text-heading-lg text-slate-100">Tell us a bit more about your operation</h2>
+        <p className="text-body-sm text-slate-400">We'll have a specialist get in touch</p>
       </div>
       <div className="max-w-md mx-auto space-y-4">
         <Textarea

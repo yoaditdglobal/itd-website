@@ -356,7 +356,7 @@ export function ResultsSection({ formData, onGetQuote }: ResultsSectionProps) {
           </div>
           <div className="text-center">
             <Fuel className="w-6 h-6 text-amber-600 mx-auto mb-2" />
-            <p className="text-lg font-bold text-text-primary">£{cost?.toFixed(2)}/parcel</p>
+            <p className="text-heading-md text-text-primary">£{cost?.toFixed(2)}/parcel</p>
             <p className="text-body-sm text-text-secondary mt-1">Above market rate — we highly recommend talking to us.</p>
           </div>
         </div>
@@ -372,7 +372,7 @@ export function ResultsSection({ formData, onGetQuote }: ResultsSectionProps) {
           </div>
           <div className="text-center">
             <PartyPopper className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
-            <p className="text-lg font-bold text-text-primary">£{cost?.toFixed(2)}/parcel</p>
+            <p className="text-heading-md text-text-primary">£{cost?.toFixed(2)}/parcel</p>
             <p className="text-body-sm text-text-secondary mt-1">Impressive rate! You're a master negotiator.</p>
           </div>
         </div>
@@ -388,7 +388,7 @@ export function ResultsSection({ formData, onGetQuote }: ResultsSectionProps) {
           {svcName && <span className="text-caption text-text-tertiary">({svcName})</span>}
         </div>
         <div className="text-center">
-          <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+          <div className="text-stat-xl text-primary mb-1">
             {carrierResult.savingsPercent}%
           </div>
           <div className="text-sm text-text-primary font-medium">potential savings</div>
@@ -405,7 +405,7 @@ export function ResultsSection({ formData, onGetQuote }: ResultsSectionProps) {
     return (
       <div className="space-y-6 md:space-y-10 py-2 animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
         <div className="text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-text-primary mb-2">
+          <h2 className="text-display-lg text-text-primary mb-2">
             Your Savings with ITD
           </h2>
         </div>
@@ -619,14 +619,14 @@ export function ResultsSection({ formData, onGetQuote }: ResultsSectionProps) {
   // Success state with savings percentage from rules
   return <div className="space-y-6 md:space-y-10 py-2 animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
       <div className="text-center">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-text-primary mb-2">
+        <h2 className="text-display-lg text-text-primary mb-2">
           Your potential parcel cost savings
         </h2>
       </div>
 
       <div className={`bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl p-5 md:p-8 border border-primary/20 ${isExciting ? 'card-glow-pulse' : ''}`}>
         <div className="text-center mb-4 md:mb-6">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-2 tabular-nums">
+          <div className="text-stat-3xl text-primary mb-2">
             {isExciting ? displayPercent : result.savingsPercent}%
           </div>
           <div className="text-base md:text-lg text-text-primary font-medium">

@@ -281,8 +281,14 @@ Every text element on the site uses one of these utility classes (defined in `sr
 | `.text-micro` | Status pills, badges, micro labels |
 | `.text-stat-xl` | Hero dashboard metric, case study big number |
 | `.text-stat-lg` | Card stat |
+| `.text-stat-2xl` | App-scale figure (rate-checker savings total) |
+| `.text-stat-3xl` | Largest app-scale figure (rate-checker headline result) |
+
+**Card titles are sized by visual prominence, not tag.** `.text-display-md` is reserved for true subsection headings — a card title never exceeds `.text-heading-lg`. Large/modal title → `.text-heading-lg`; medium card → `.text-heading-md`; small card / FAQ / list-item → `.text-heading-sm`.
 
 **Never set `text-xs` / `text-sm` / `text-base` / `font-bold` etc. directly outside one of these utilities.** If a new use case can't fit one of the tokens above, extend the system in `globals.css` first.
+
+**Exceptions (not marketing prose, left on raw utilities by design):** shadcn `ui/*` primitives, the dashboard-mockup chrome (the fake Connexx UI in heroes), and button / link / nav / form-control text. The **rate-checker** uses the type tokens above but keeps its own colour system (`text-slate-*`, `text-primary`, `text-gray-*`) — colour harmonisation there is a separate follow-up.
 
 Example:
 

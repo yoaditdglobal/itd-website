@@ -307,7 +307,7 @@ export function LeadCaptureModal({ open, onOpenChange, rateCheckerData, onSubmit
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-text-primary">
+          <DialogTitle className="text-heading-lg text-text-primary">
             Get your ITD quote
           </DialogTitle>
           <DialogDescription className="text-text-secondary">

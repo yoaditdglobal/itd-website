@@ -31,13 +31,13 @@ export function ProfileSelectionStep({ selected, onSelect }: ProfileSelectionSte
     <div className="py-8 px-2 sm:px-4 space-y-8">
       <div className="text-center space-y-2">
         <h2
-          className="text-xl sm:text-2xl font-semibold text-slate-100 leading-tight"
+          className="text-display-md text-slate-100 leading-tight"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}
         >
           Tell us what best describes your profile
         </h2>
         <p
-          className="text-sm text-slate-400"
+          className="text-body-sm text-slate-400"
           style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
         >
           Select the option below that most closely matches your operation

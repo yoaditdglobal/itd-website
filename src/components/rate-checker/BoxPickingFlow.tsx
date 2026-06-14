@@ -104,7 +104,7 @@ export function BoxPickingFlow({ data, onChange, onComplete, onBack }: BoxPickin
 
       {stage === 1 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">How many boxes do you process per day?</h2>
+          <h2 className="text-heading-lg text-slate-100">How many boxes do you process per day?</h2>
           <div className="max-w-xs mx-auto">
             <Input
               type="number"
@@ -120,8 +120,8 @@ export function BoxPickingFlow({ data, onChange, onComplete, onBack }: BoxPickin
 
       {stage === 2 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">What are the typical dimensions and weight?</h2>
-          <p className="text-sm text-slate-400">Average box profile</p>
+          <h2 className="text-heading-lg text-slate-100">What are the typical dimensions and weight?</h2>
+          <p className="text-body-sm text-slate-400">Average box profile</p>
           <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
             <Input placeholder="Length (cm)" value={data.length} onChange={(e) => update({ length: e.target.value })} inputMode="decimal" className="bg-slate-900/50 border-slate-700 text-slate-100 placeholder:text-slate-500" />
             <Input placeholder="Width (cm)" value={data.width} onChange={(e) => update({ width: e.target.value })} inputMode="decimal" className="bg-slate-900/50 border-slate-700 text-slate-100 placeholder:text-slate-500" />
@@ -133,7 +133,7 @@ export function BoxPickingFlow({ data, onChange, onComplete, onBack }: BoxPickin
 
       {stage === 3 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">Where are your collections based?</h2>
+          <h2 className="text-heading-lg text-slate-100">Where are your collections based?</h2>
           <div className="max-w-xs mx-auto">
             <Input
               placeholder="Collection postcode"
@@ -147,7 +147,7 @@ export function BoxPickingFlow({ data, onChange, onComplete, onBack }: BoxPickin
 
       {stage === 4 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">Which carrier do you currently use?</h2>
+          <h2 className="text-heading-lg text-slate-100">Which carrier do you currently use?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-md mx-auto">
             {CARRIERS.map((c) => (
               <button
@@ -176,8 +176,8 @@ export function BoxPickingFlow({ data, onChange, onComplete, onBack }: BoxPickin
         const selectedCarrier = CARRIERS.find(c => c.id === data.carrier);
         return (
           <div className="space-y-4 text-center">
-            <h2 className="text-xl font-semibold text-slate-100">What is your current rate?</h2>
-            <p className="text-sm text-slate-400">Enter the average rate you pay per parcel</p>
+            <h2 className="text-heading-lg text-slate-100">What is your current rate?</h2>
+            <p className="text-body-sm text-slate-400">Enter the average rate you pay per parcel</p>
             <div className="max-w-sm mx-auto">
               {selectedCarrier && (
                 <div className="flex items-center gap-3 p-3 rounded-lg border border-slate-700/60 bg-slate-900/70 backdrop-blur-md">

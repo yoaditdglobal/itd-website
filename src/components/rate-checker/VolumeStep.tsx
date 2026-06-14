@@ -106,7 +106,7 @@ function VolumeInput({
         </div>
       </div>
       {error && (
-        <p className="text-sm text-destructive mt-2 text-center">{error}</p>
+        <p className="text-body-sm text-destructive mt-2 text-center">{error}</p>
       )}
     </div>
   );
