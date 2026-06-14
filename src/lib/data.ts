@@ -443,7 +443,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global placed their own team on the ground in China and took ownership of the compliance process end-to-end. We reviewed factory paperwork, identified the gaps, and created a standardised documentation template built for a multi-brand environment — giving each factory a clear process for identifying which shipment belonged to which brand. We also introduced FedEx International Priority as a more commercially competitive option, giving Sainsbury's and Argos genuine courier flexibility backed by a single logistics partner managing everything from China to the UK.",
     result: "Customs compliance owned and solved at origin — the standardised factory template removed the ambiguity that had been causing customs holds. Multi-brand clarity built into the process so shipments moved through the right channels every time. Movement away from a single DHL Express contract unlocked more commercially appropriate FedEx International Priority rates. And one accountable logistics partner now manages everything across both brands and both offices.",
     heroImage: "/case-studies/sainsburys-argos/hero.webp",
-    logo: "/case-studies/sainsburys-argos/logo.png",
+    logo: "/case-studies/sainsburys-argos/logo-icon.png",
     stats: [
       { value: "At origin", label: "Compliance solved", sub: "standardised factory documentation", featured: true },
       { value: "DHL → FedEx", label: "Courier flexibility unlocked", sub: "no more single-contract pricing" },
