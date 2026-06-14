@@ -949,7 +949,7 @@ function LeadCard({
 
   const heading =
     mode === "qualified" && routing
-      ? `Great — leave your details and we'll line up your ${routing.ctaLabel.toLowerCase()}.`
+      ? `${routing.ctaLabel} — add your details and the right specialist will follow up.`
       : "Leave your details and the ITD Global team will be in touch.";
 
   return (
