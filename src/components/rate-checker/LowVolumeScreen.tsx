@@ -149,7 +149,7 @@ export function LowVolumeScreen({ weeklyVolume, onBack }: LowVolumeScreenProps) 
             <MessageCircle className="w-7 h-7 text-primary" />
           </div>
         </div>
-        <h2 className="text-xl md:text-2xl font-semibold text-text-primary">
+        <h2 className="text-display-md text-text-primary">
           Let's see if we can still help
         </h2>
         <p className="text-text-secondary max-w-lg mx-auto">

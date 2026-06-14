@@ -76,7 +76,7 @@ export function ThreePLWizard() {
         <div className="relative overflow-hidden rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl wizard-ambient-bg">
           <ParticleNetwork />
           <div className="relative z-10 p-6 md:p-10 text-center space-y-4">
-            <h2 className="text-2xl font-bold text-slate-100">We've received your details</h2>
+            <h2 className="text-display-md text-slate-100">We've received your details</h2>
             <p className="text-slate-400">Our team will review your operation and reach out with a tailored proposal.</p>
             <button onClick={handleReset} className="text-sm text-[hsl(182,96%,33%)] underline hover:no-underline">Start again</button>
           </div>

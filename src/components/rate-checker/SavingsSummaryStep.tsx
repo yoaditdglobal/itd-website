@@ -395,11 +395,11 @@ export function SavingsSummaryStep({
             <div className="grid grid-cols-2 gap-4 text-center">
               <div className="p-4 rounded-lg bg-muted/50">
                 <p className="text-body-sm text-text-secondary">Shipments</p>
-                <p className="text-2xl font-bold text-text-primary">{lanes.length || 1}</p>
+                <p className="text-stat-lg text-text-primary">{lanes.length || 1}</p>
               </div>
               <div className="p-4 rounded-lg bg-muted/50">
                 <p className="text-body-sm text-text-secondary">Total Cost</p>
-                <p className="text-2xl font-bold text-text-primary">{formatCurrency(totalCost)}</p>
+                <p className="text-stat-lg text-text-primary">{formatCurrency(totalCost)}</p>
               </div>
             </div>
           </CardContent>
@@ -700,7 +700,7 @@ export function SavingsSummaryStep({
         <CardContent className="pt-6">
           <div className="text-center">
             <p className="text-body-sm text-text-secondary mb-1">Potential Savings</p>
-            <p className="text-3xl font-bold text-primary tabular-nums">
+            <p className="text-stat-xl text-primary">
               {isExciting ? displayPercent : result.savingsPercent}%
             </p>
             <p className="text-body-sm text-text-secondary mt-1">

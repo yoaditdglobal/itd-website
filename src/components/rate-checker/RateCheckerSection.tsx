@@ -18,7 +18,7 @@ export default function RateCheckerSection({ type }: RateCheckerSectionProps) {
             <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-eyebrow mb-4">
               Free 3PL Assessment
             </span>
-            <h2 className="text-white text-3xl font-bold mb-3">Find out how much you could save</h2>
+            <h2 className="text-display-lg text-white mb-3">Find out how much you could save</h2>
             <p className="text-white/70">Answer a few questions about your operation. Takes 2 minutes.</p>
           </div>
           <ThreePLWizard />
@@ -43,7 +43,7 @@ export default function RateCheckerSection({ type }: RateCheckerSectionProps) {
           <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-eyebrow mb-4">
             {label}
           </span>
-          <h2 className="text-white text-3xl font-bold mb-3">{heading}</h2>
+          <h2 className="text-display-lg text-white mb-3">{heading}</h2>
           <p className="text-white/70">{subheading}</p>
         </div>
         <EmbeddedRateChecker

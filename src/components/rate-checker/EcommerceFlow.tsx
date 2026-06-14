@@ -135,8 +135,8 @@ export function EcommerceFlow({ data, onChange, onComplete, onBack }: EcommerceF
 
       {stage === 1 && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-slate-100 text-center">What parcel types do you handle?</h2>
-          <p className="text-sm text-slate-400 text-center">Select all that apply</p>
+          <h2 className="text-heading-lg text-slate-100 text-center">What parcel types do you handle?</h2>
+          <p className="text-body-sm text-slate-400 text-center">Select all that apply</p>
           <div className="space-y-3 max-w-md mx-auto">
             {PARCEL_TYPES.map((pt) => (
               <label key={pt.id} className={checkboxLabelClass(data.parcelTypes.includes(pt.id))}>
@@ -153,8 +153,8 @@ export function EcommerceFlow({ data, onChange, onComplete, onBack }: EcommerceF
 
       {stage === 2 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">How many parcels do you ship per day?</h2>
-          <p className="text-sm text-slate-400">By parcel type</p>
+          <h2 className="text-heading-lg text-slate-100">How many parcels do you ship per day?</h2>
+          <p className="text-body-sm text-slate-400">By parcel type</p>
           <div className="space-y-3 max-w-sm mx-auto">
             {data.parcelTypes.map((pt) => {
               const label = PARCEL_TYPES.find((p) => p.id === pt)?.label ?? pt;
@@ -179,8 +179,8 @@ export function EcommerceFlow({ data, onChange, onComplete, onBack }: EcommerceF
 
       {stage === 3 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">Which carriers do you currently use?</h2>
-          <p className="text-sm text-slate-400">Select all that apply</p>
+          <h2 className="text-heading-lg text-slate-100">Which carriers do you currently use?</h2>
+          <p className="text-body-sm text-slate-400">Select all that apply</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-md mx-auto">
             {CARRIERS.map((c) => (
               <button
@@ -207,8 +207,8 @@ export function EcommerceFlow({ data, onChange, onComplete, onBack }: EcommerceF
 
       {stage === 4 && (
         <div className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">What is your current average shipping rate?</h2>
-          <p className="text-sm text-slate-400">Per carrier — an approximate average is fine</p>
+          <h2 className="text-heading-lg text-slate-100">What is your current average shipping rate?</h2>
+          <p className="text-body-sm text-slate-400">Per carrier — an approximate average is fine</p>
           <div className="space-y-3 max-w-sm mx-auto">
             {data.carriers.map((carrierId) => {
               const carrier = CARRIERS.find((c) => c.id === carrierId);

@@ -14,10 +14,10 @@ export function PalletDisqualification({ onContact, onBack }: PalletDisqualifica
         <AlertTriangle className="h-8 w-8 text-slate-400" />
       </div>
       <div className="space-y-3 max-w-md mx-auto">
-        <h2 className="text-xl font-semibold text-slate-100">
+        <h2 className="text-heading-lg text-slate-100">
           Unfortunately, this is not a service area we currently support through this tool.
         </h2>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-body-sm text-slate-400">
           We currently focus on parcel, box-based and eCommerce fulfilment operations. If your requirements are broader, our team may still be able to advise.
         </p>
       </div>
