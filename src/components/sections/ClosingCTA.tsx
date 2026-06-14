@@ -32,7 +32,7 @@ export default function ClosingCTA({
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal>
           <h2 className="text-display-lg text-white">{headline}</h2>
-          <p className="mt-4 text-base md:text-lg text-white/60">{subtitle}</p>
+          <p className="mt-4 text-body-lg text-white/60">{subtitle}</p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Button href={primary.href} variant="primary" surface="dark">{primary.label}</Button>
@@ -41,7 +41,7 @@ export default function ClosingCTA({
             )}
           </div>
           {asyncNote && (
-            <p className="mt-4 text-sm text-white/60">{asyncNote}</p>
+            <p className="mt-4 text-body-sm text-white/60">{asyncNote}</p>
           )}
         </ScrollReveal>
       </div>

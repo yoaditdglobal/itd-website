@@ -156,7 +156,11 @@ body {
 .text-caption    { font-size: 0.75rem; line-height: 1.5; }
 .text-micro      { font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.04em; line-height: 1.3; }
 
-/* Stats / display numerals — Cabinet Grotesk for character at large sizes */
+/* Stats / display numerals — Cabinet Grotesk for character at large sizes.
+   stat-2xl / stat-3xl are fluid, for the app-scale figures in the rate checker
+   (savings totals) that outgrow the static marketing stats. */
+.text-stat-3xl   { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em;  line-height: 1; font-variant-numeric: tabular-nums; font-size: clamp(3rem, 6vw, 4.5rem); }
+.text-stat-2xl   { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1; font-variant-numeric: tabular-nums; font-size: clamp(2.5rem, 5vw, 3.5rem); }
 .text-stat-xl    { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1;   font-size: 1.875rem; }
 .text-stat-lg    { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.022em; line-height: 1.1; font-size: 1.5rem; }
 
