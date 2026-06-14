@@ -97,6 +97,7 @@ export default function EcommercePage() {
         },
         {
           name: "Magento",
+          logo: "/logos/erp-wms/magento-icon.webp",
           description: "Adobe Commerce / Magento 2 integration with multi-carrier routing rules.",
           href: "/integrations/ecommerce",
         },
