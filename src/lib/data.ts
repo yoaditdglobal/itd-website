@@ -118,7 +118,12 @@ export interface CaseStudy {
   datePublished?: string;
 }
 
-export type LibrarySegment = "eCommerce" | "3PL" | "Import" | "Export";
+export type LibrarySegment =
+  | "eCommerce"
+  | "3PL"
+  | "Import"
+  | "Export"
+  | "Freight";
 export type LibraryOutcome =
   | "Save money"
   | "Go international"
@@ -131,6 +136,7 @@ export const LIBRARY_SEGMENT_ORDER: LibrarySegment[] = [
   "3PL",
   "Import",
   "Export",
+  "Freight",
 ];
 
 export const LIBRARY_OUTCOMES: LibraryOutcome[] = [
@@ -151,6 +157,7 @@ export const SOLUTION_SLUGS: Record<LibrarySegment, string> = {
   "3PL": "3pl",
   Import: "import",
   Export: "export",
+  Freight: "freight",
 };
 
 /** Resolve a `?solution=` slug back to its LibrarySegment, or null if unknown/empty. */
@@ -593,6 +600,11 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "10",
     slug: "oddballs",
+    primarySegment: "Freight",
+    segments: ["Freight"],
+    headlineResult: "Air, rail & sea — one shipment",
+    oneLiner:
+      "A large China→UK consignment split across three modes, with each tranche matched to the right delivery window at the lowest blended freight cost.",
     brandName: "OddBalls",
     industry: "Freight",
     headline:
