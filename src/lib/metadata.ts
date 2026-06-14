@@ -23,6 +23,8 @@ type BuildMetadataInput = {
   keywords?: string[];
   /** Set true for pages that should not be indexed (e.g. internal/preview). */
   noindex?: boolean;
+  /** OpenGraph type. Defaults to "website"; use "article" for case studies / blog posts. */
+  ogType?: "website" | "article";
 };
 
 /**
@@ -36,6 +38,7 @@ export function buildMetadata({
   image,
   keywords,
   noindex,
+  ogType = "website",
 }: BuildMetadataInput): Metadata {
   const url = `${SITE_URL}${path}`;
   const fullTitle = `${title} | ${SITE_NAME}`;
@@ -48,7 +51,10 @@ export function buildMetadata({
   const twitterImageBlock = image ? { images: [image] } : {};
 
   return {
-    title: fullTitle,
+    // `absolute` stops the root layout's title.template ("%s | ITD Global")
+    // from re-appending the site name — fullTitle already includes it. Without
+    // this, every page title doubles to "… | ITD Global | ITD Global".
+    title: { absolute: fullTitle },
     description,
     keywords,
     metadataBase: new URL(SITE_URL),
@@ -59,7 +65,7 @@ export function buildMetadata({
       url,
       siteName: SITE_NAME,
       locale: OG_LOCALE,
-      type: "website",
+      type: ogType,
       ...imageBlock,
     },
     twitter: {

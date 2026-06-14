@@ -1,13 +1,31 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import CaseStudyStats from "@/components/sections/CaseStudyStats";
 import CaseStudyStack from "@/components/sections/CaseStudyStack";
+import QuoteBlock from "@/components/sections/QuoteBlock";
+import RelatedStories from "@/components/sections/RelatedStories";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
-import { caseStudies, getCaseStudyBySlug } from "@/lib/data";
-import { ArrowLeft } from "lucide-react";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  articleSchema,
+  reviewSchema,
+} from "@/components/seo/JsonLd";
+import { buildMetadata } from "@/lib/metadata";
+import {
+  caseStudies,
+  getCaseStudyBySlug,
+  getRelatedStories,
+  type CaseStudy,
+  type CaseStudyQuote,
+} from "@/lib/data";
+
+const CS_BASE = "/resources/case-studies";
+/** Fallback publish date for Article JSON-LD when a story carries none. */
+const DEFAULT_PUBLISHED = "2026-01-01";
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -20,11 +38,34 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const cs = getCaseStudyBySlug(slug);
-  if (!cs) return { title: "Case Study Not Found" };
-  return {
-    title: `${cs.brandName} — ${cs.metric} | ITD Global`,
+  if (!cs) return { title: "Case study not found" };
+  return buildMetadata({
+    title: `${cs.brandName} — ${cs.metric}`,
     description: cs.summary,
-  };
+    path: `${CS_BASE}/${cs.slug}`,
+    image: cs.heroImage,
+    ogType: "article",
+  });
+}
+
+/**
+ * Unify the legacy single-quote fields and the new `quotes` array into one
+ * list. A story with the array uses it verbatim; otherwise the legacy
+ * `quote`/`quoteAuthor`/`quoteAuthorPhoto` becomes a single feature quote.
+ */
+function resolveQuotes(cs: CaseStudy): CaseStudyQuote[] {
+  if (cs.quotes && cs.quotes.length > 0) return cs.quotes;
+  if (cs.quote) {
+    return [
+      {
+        quote: cs.quote,
+        name: cs.quoteAuthor ?? "",
+        photo: cs.quoteAuthorPhoto,
+        placement: "feature",
+      },
+    ];
+  }
+  return [];
 }
 
 export default async function CaseStudyPage({
@@ -34,23 +75,51 @@ export default async function CaseStudyPage({
 }) {
   const { slug } = await params;
   const cs = getCaseStudyBySlug(slug);
-
   if (!cs) notFound();
+
+  const path = `${CS_BASE}/${cs.slug}`;
+  const quotes = resolveQuotes(cs);
+  const inlineQuotes = quotes.filter((q) => q.placement === "inline");
+  const featureQuotes = quotes.filter((q) => q.placement !== "inline");
+  const related = getRelatedStories(cs);
+
+  const ld: Record<string, unknown>[] = [
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Customer stories", path: CS_BASE },
+      { name: cs.brandName, path },
+    ]),
+    articleSchema({
+      headline: cs.headline,
+      description: cs.summary,
+      path,
+      datePublished: cs.datePublished ?? DEFAULT_PUBLISHED,
+    }),
+  ];
+  const lead = quotes[0];
+  if (lead?.name) {
+    ld.push(
+      reviewSchema({ reviewBody: lead.quote, author: lead.name, path }),
+    );
+  }
 
   return (
     <>
-      {/* Hero — brand identity row + H1 + lead + hero image */}
+      <JsonLd data={ld} />
+
+      {/* Hero — breadcrumb + brand row + H1 + lead + hero image */}
       <section className="bg-white py-12 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <Link
-              href="/resources/case-studies"
-              className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-8 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back to case studies
-            </Link>
+          <Breadcrumb
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Customer stories", href: CS_BASE },
+              { name: cs.brandName },
+            ]}
+          />
 
-            <div className="flex items-center gap-4 mb-6">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mt-8 mb-6">
               <IntegrationLogo name={cs.brandName} logo={cs.logo} size="lg" />
               <div>
                 <p className="text-heading-md text-text-primary leading-tight">
@@ -83,13 +152,13 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      {/* Interactive stats + at-a-glance summary */}
+      {/* Hero stat trio + at-a-glance */}
       <CaseStudyStats stats={cs.stats} atGlance={cs.atGlance} />
 
       {/* The stack behind this story — click-through to carriers/integrations/shipping */}
       <CaseStudyStack cs={cs} />
 
-      {/* Challenge / Solution / Result */}
+      {/* Challenge / Solution / Result (+ optional inline pull quote) */}
       <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -106,6 +175,9 @@ export default async function CaseStudyPage({
                   {cs.solution}
                 </p>
               </div>
+              {inlineQuotes.map((q, i) => (
+                <QuoteBlock key={`inline-${i}`} {...q} placement="inline" />
+              ))}
               <div>
                 <h3 className="text-eyebrow text-accent mb-3">The Result</h3>
                 <p className="text-text-secondary leading-relaxed">
@@ -117,38 +189,21 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      {/* Quote */}
-      {cs.quote && (
+      {/* Feature quote(s) — proof, lifted ahead of the related/CTA tail */}
+      {featureQuotes.length > 0 && (
         <section className="bg-white py-16 md:py-24">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <blockquote className="border-l-4 border-accent pl-6">
-                <p className="text-display-md text-text-primary leading-relaxed italic">
-                  &ldquo;{cs.quote}&rdquo;
-                </p>
-                {cs.quoteAuthor && (
-                  <footer className="mt-5 flex items-center gap-3 not-italic">
-                    {cs.quoteAuthorPhoto && (
-                      <div className="relative flex-shrink-0 w-12 h-12 rounded-full overflow-hidden border border-border">
-                        <Image
-                          src={cs.quoteAuthorPhoto}
-                          alt={cs.quoteAuthor}
-                          fill
-                          sizes="48px"
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <span className="text-sm font-medium text-text-secondary">
-                      {cs.quoteAuthor}
-                    </span>
-                  </footer>
-                )}
-              </blockquote>
-            </ScrollReveal>
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            {featureQuotes.map((q, i) => (
+              <ScrollReveal key={`feature-${i}`}>
+                <QuoteBlock {...q} placement="feature" />
+              </ScrollReveal>
+            ))}
           </div>
         </section>
       )}
+
+      {/* More stories — never a dead end */}
+      <RelatedStories stories={related} />
 
       <ClosingCTA
         headline="Get similar results"
@@ -157,4 +212,3 @@ export default async function CaseStudyPage({
     </>
   );
 }
-

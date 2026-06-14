@@ -41,6 +41,19 @@ export interface CaseStudyAtGlance {
   value: string;
 }
 
+export interface CaseStudyQuote {
+  /** Quote text, without surrounding quotation marks. */
+  quote: string;
+  /** Attribution name, e.g. "Mark Baker". */
+  name: string;
+  /** Optional role/company line, e.g. "Head of Retail Operations, West Ham United". */
+  title?: string;
+  /** Optional author headshot. Relative to /public. */
+  photo?: string;
+  /** "feature" = large emphasised block; "inline" = lighter mid-body interjection. Defaults to "feature". */
+  placement?: "feature" | "inline";
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -93,6 +106,16 @@ export interface CaseStudy {
   oneLiner?: string;
   /** True → rendered as the spotlight above the index (and still shelved). */
   featured?: boolean;
+
+  // ─── Detail page (/resources/case-studies/[slug]) ───
+  /** Distributed pull quotes (1–3). When present, supersedes the legacy single
+   *  `quote`/`quoteAuthor` fields. Each renders inline (mid-body) or as a feature block. */
+  quotes?: CaseStudyQuote[];
+  /** Manual related-story slugs for the "More stories" module. Omit to auto-select
+   *  by shared primarySegment (see getRelatedStories). */
+  relatedStories?: string[];
+  /** ISO 8601 publish date for Article JSON-LD. Falls back to a site default. */
+  datePublished?: string;
 }
 
 export type LibrarySegment = "eCommerce" | "3PL" | "Import" | "Export";
@@ -152,6 +175,43 @@ export function getStoriesBySegment(seg: LibrarySegment): CaseStudy[] {
   return getLibraryStories().filter((s) =>
     (s.segments ?? (s.primarySegment ? [s.primarySegment] : [])).includes(seg),
   );
+}
+
+/**
+ * Related stories for the "More stories" module on a detail page (max `limit`).
+ * Selection order (BRIEF §5):
+ *   1. Manual `relatedStories` overrides, in order.
+ *   2. Stories sharing the current story's primarySegment, excluding self.
+ *   3. Backfill with the remaining library stories (array order = most recent first).
+ * Only library stories (those with a primarySegment) are ever returned, so
+ * unpublished/placeholder entries never leak. De-duplicated; self always excluded.
+ */
+export function getRelatedStories(cs: CaseStudy, limit = 3): CaseStudy[] {
+  const library = getLibraryStories();
+  const picks: CaseStudy[] = [];
+  const seen = new Set<string>([cs.slug]);
+
+  const add = (story: CaseStudy | undefined) => {
+    if (!story || seen.has(story.slug)) return;
+    seen.add(story.slug);
+    picks.push(story);
+  };
+
+  // 1. Manual overrides (must resolve to a library story).
+  for (const slug of cs.relatedStories ?? []) {
+    add(library.find((s) => s.slug === slug));
+  }
+  // 2. Same primary segment.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    if (s.primarySegment && s.primarySegment === cs.primarySegment) add(s);
+  }
+  // 3. Backfill with most-recent library stories.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    add(s);
+  }
+  return picks.slice(0, limit);
 }
 
 export interface Integration {
@@ -511,6 +571,8 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Freedom Fire is a UK online retailer of fire safety, security, and PPE equipment. As volume grew, the parcel operation hadn't kept pace. Without clear data, the team had no reliable way to see what was being shipped, where, how it was performing, or what it was costing them. Decisions were made without insight. Issues were discovered late. And with no dedicated point of contact at their existing reseller, there was nobody to turn to when things needed investigating. For a business shipping Dangerous Goods volumes, the absence of shipment tracking and reporting was a real operational liability.",
     solution: "ITD Global connected Freedom Fire's Linnworks platform to ITD's multi-carrier network via Connexx — a single integrated eCommerce shipping workflow and, for the first time, real visibility of parcel data through Shipment Reports. Alongside the integration: Dangerous Goods approvals handled with InPost, competitive rates across InPost (DG Approved), Evri, and Royal Mail, and a dedicated account manager to keep everything running smoothly.",
     result: "Full DG compliance and management through InPost (something previous resellers couldn't provide). A single dedicated account manager who knows the operation inside out. Commercially competitive rates that weren't available going direct. And complete, real-time visibility through Shipment Reports — performance tracking, SLA monitoring, and a single source of truth for every parcel.",
+    heroImage: "/case-studies/freedom-fire/hero.jpeg",
+    logo: "/case-studies/freedom-fire/logo.jpeg",
     stats: [
       { value: "Real-time", label: "Shipment data via Connexx", sub: "performance, SLAs, single source of truth", featured: true },
       { value: "DG approved", label: "Dangerous Goods compliance", sub: "managed through InPost" },
