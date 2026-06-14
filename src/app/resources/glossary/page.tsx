@@ -1227,7 +1227,7 @@ export default function GlossaryPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="font-semibold text-text-primary mb-3">
+                      <h3 className="text-heading-md text-text-primary mb-3">
                         <a
                           href={`#${entry.slug}`}
                           className="hover:text-accent"
@@ -1235,11 +1235,11 @@ export default function GlossaryPage() {
                           {entry.name}
                         </a>
                       </h3>
-                      <p className="text-sm text-text-primary leading-relaxed mb-3">
+                      <p className="text-body-sm text-text-primary mb-3">
                         <span className="font-medium">Definition. </span>
                         {entry.definition}
                       </p>
-                      <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                      <p className="text-body-sm text-text-secondary mb-4">
                         {entry.context}
                       </p>
                       {entry.related.length > 0 && (
@@ -1291,7 +1291,7 @@ export default function GlossaryPage() {
             <h2 className="text-display-lg text-white mb-3">
               The vocabulary, applied to your dispatch.
             </h2>
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-body-lg">
               Connexx handles every term in this glossary inside one platform. From WISMO to PVA, from VTR to landed cost. Talk to us about the ones that hurt right now.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

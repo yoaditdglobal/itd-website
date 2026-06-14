@@ -212,7 +212,7 @@ export default function HelpCentrePage() {
             <h1 className="text-display-xl text-text-primary">
               Help Centre
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-3xl mx-auto">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-3xl mx-auto">
               Documentation, walkthroughs, and answers for Connexx and every
               supported integration. Browse the categories below or search for
               the article you need.
@@ -254,10 +254,10 @@ export default function HelpCentrePage() {
                     <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                       <Icon className="w-5 h-5 text-accent" />
                     </div>
-                    <p className="text-base font-semibold text-text-primary group-hover:text-accent transition-colors">
+                    <p className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
                       {cat.name}
                     </p>
-                    <p className="text-sm text-text-secondary mt-1.5 leading-relaxed flex-1">
+                    <p className="text-body-sm text-text-secondary mt-1.5 flex-1">
                       {cat.description}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
@@ -302,7 +302,7 @@ export default function HelpCentrePage() {
                       <span className="text-eyebrow text-accent">
                         {article.category}
                       </span>
-                      <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors mt-1">
+                      <p className="text-heading-sm text-text-primary group-hover:text-accent transition-colors mt-1">
                         {article.title}
                       </p>
                       <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">

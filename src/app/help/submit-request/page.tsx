@@ -100,7 +100,7 @@ export default function SubmitRequestPage() {
             <h1 className="text-display-xl text-text-primary">
               Submit a request
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-3xl">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-3xl">
               Tell us what&apos;s happening and we respond within 1 business
               day. Platform-down issues are responded to within 1 hour, around
               the clock. Confirmation arrives by email within 5 minutes of
@@ -140,7 +140,7 @@ export default function SubmitRequestPage() {
                         key={tier.priority}
                         className="border-l-2 border-accent/40 pl-3"
                       >
-                        <p className="text-sm font-semibold text-text-primary">
+                        <p className="text-heading-sm text-text-primary">
                           {tier.priority}{" "}
                           <span className="font-normal text-text-secondary">
                             ({tier.description})
@@ -159,7 +159,7 @@ export default function SubmitRequestPage() {
                   <div className="border-t border-border pt-5">
                     <div className="flex items-center gap-2 mb-2">
                       <AlertTriangle className="w-4 h-4 text-text-secondary" />
-                      <p className="text-sm font-semibold text-text-primary">
+                      <p className="text-heading-sm text-text-primary">
                         What &quot;platform-down&quot; means
                       </p>
                     </div>
@@ -174,7 +174,7 @@ export default function SubmitRequestPage() {
                   <div className="border-t border-border pt-5 mt-5">
                     <div className="flex items-center gap-2 mb-2">
                       <FileSearch className="w-4 h-4 text-text-secondary" />
-                      <p className="text-sm font-semibold text-text-primary">
+                      <p className="text-heading-sm text-text-primary">
                         Before you submit
                       </p>
                     </div>

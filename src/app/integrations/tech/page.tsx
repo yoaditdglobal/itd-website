@@ -54,7 +54,7 @@ export default function TechIntegrationsPage() {
                     className="bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/20 transition-all text-center"
                   >
                     <IntegrationLogo name={t.name} logo={t.logo} size="sm" className="mx-auto mb-3" />
-                    <p className="text-sm font-medium text-text-primary">{t.name}</p>
+                    <p className="text-label text-text-primary">{t.name}</p>
                     {t.description && (
                       <p className="text-xs text-text-tertiary mt-1">{t.description}</p>
                     )}

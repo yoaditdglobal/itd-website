@@ -32,8 +32,8 @@ export default function HelpCard({
       <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-5">
         <Icon className="w-6 h-6 text-accent" />
       </div>
-      <h3 className="text-text-primary font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-text-secondary leading-relaxed flex-1">
+      <h3 className="text-heading-md text-text-primary mb-2">{title}</h3>
+      <p className="text-body-sm text-text-secondary flex-1">
         {description}
       </p>
       <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:gap-2.5 transition-all">

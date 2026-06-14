@@ -27,12 +27,12 @@ function StoryCard({ story }: { story: CaseStudy }) {
       <div className="flex items-center gap-3 mb-4">
         <IntegrationLogo name={story.brandName} logo={story.logo} size="sm" />
         <div className="min-w-0">
-          <p className="text-sm font-medium text-text-primary">{story.brandName}</p>
+          <p className="text-label text-text-primary">{story.brandName}</p>
           <div className="mt-1 flex flex-wrap gap-1.5">
             {(story.segments ?? []).map((seg) => (
               <span
                 key={seg}
-                className="inline-flex items-center text-[11px] font-medium uppercase tracking-wider text-accent bg-accent-light/60 px-2 py-0.5 rounded-full"
+                className="inline-flex items-center text-eyebrow text-accent bg-accent-light/60 px-2 py-0.5 rounded-full"
               >
                 {seg}
               </span>
@@ -40,8 +40,8 @@ function StoryCard({ story }: { story: CaseStudy }) {
           </div>
         </div>
       </div>
-      <p className="text-2xl font-bold text-accent mb-2">{story.headlineResult}</p>
-      <p className="text-sm text-text-secondary leading-relaxed mb-4">{story.oneLiner}</p>
+      <p className="text-stat-lg text-accent mb-2">{story.headlineResult}</p>
+      <p className="text-body-sm text-text-secondary mb-4">{story.oneLiner}</p>
       <span className="inline-flex items-center gap-1 text-sm text-accent font-medium">
         Read the story{" "}
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform motion-reduce:group-hover:translate-x-0" />
@@ -156,7 +156,7 @@ export default function StoriesLibrary({ stories }: { stories: CaseStudy[] }) {
         {/* ─── Filtered grid (outcome chips active) ─── */}
         {filtering ? (
           <div className="mt-12">
-            <p className="text-sm text-text-tertiary mb-6">
+            <p className="text-body-sm text-text-tertiary mb-6">
               {filtered.length} {filtered.length === 1 ? "story" : "stories"}
             </p>
             {filtered.length > 0 ? (

@@ -326,7 +326,7 @@ export default function ConnexxPage() {
             <h2 className="text-display-lg text-text-primary mb-6">
               What Connexx actually does.
             </h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
+            <p className="text-body-lg text-text-secondary">
               Connexx is a UK-built multi-carrier shipping platform from ITD
               Global. It connects your eCommerce platform, marketplaces, and ERP
               to every major UK and international carrier. Royal Mail, DPD,
@@ -334,7 +334,7 @@ export default function ConnexxPage() {
               more in the live carrier list. Rate shopping, label generation,
               customs documentation, and tracking all happen from one dashboard.
             </p>
-            <p className="mt-5 text-base text-text-secondary leading-relaxed">
+            <p className="mt-5 text-body-md text-text-secondary">
               Connexx is not a horizontal SaaS with a UK skin. The rate engine
               runs a live API call to each carrier on every shipment. Customs
               documentation is generated against HMRC, EU CDS, and
@@ -368,10 +368,10 @@ export default function ConnexxPage() {
               <ScrollReveal key={mod.name} delay={i * 0.05}>
                 <div className="bg-white rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/20 transition-all h-full">
                   <mod.icon className="w-8 h-8 text-accent mb-3" />
-                  <p className="text-base font-semibold text-text-primary">
+                  <p className="text-heading-md text-text-primary">
                     {mod.name}
                   </p>
-                  <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">
+                  <p className="mt-1.5 text-body-sm text-text-secondary">
                     {mod.lead}
                   </p>
                 </div>
@@ -398,7 +398,7 @@ export default function ConnexxPage() {
                   <h2 className="text-display-lg text-text-primary">
                     {mod.name}.
                   </h2>
-                  <p className="mt-3 text-base text-text-secondary leading-relaxed">
+                  <p className="mt-3 text-body-md text-text-secondary">
                     {mod.lead}
                   </p>
                   <ul className="mt-6 space-y-3">
@@ -413,7 +413,7 @@ export default function ConnexxPage() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 text-sm text-text-primary bg-accent-light/40 border border-accent/15 rounded-lg p-4 leading-relaxed">
+                  <p className="mt-6 text-body-sm text-text-primary bg-accent-light/40 border border-accent/15 rounded-lg p-4">
                     {mod.stat}
                   </p>
                 </div>
@@ -423,7 +423,7 @@ export default function ConnexxPage() {
                 <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
                   <div className="text-center">
                     <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
-                    <p className="text-sm text-text-tertiary">
+                    <p className="text-body-sm text-text-tertiary">
                       {mod.name} — UI preview
                     </p>
                   </div>
@@ -449,11 +449,11 @@ export default function ConnexxPage() {
               <p className="text-eyebrow text-accent mb-3">
                 Featured case study — SwiftLog Fulfilment
               </p>
-              <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
+              <h3 className="text-display-md text-white leading-snug">
                 98.7% accuracy across 40+ destination countries. Client
                 onboarding from two weeks to two days.
               </h3>
-              <p className="mt-5 text-base text-white/70 leading-relaxed">
+              <p className="mt-5 text-body-md text-white/70">
                 SwiftLog Fulfilment runs 60 brands across 40+ countries on
                 Connexx. Before Connexx, their shipment accuracy was 93%.
                 Customs documentation was prepared manually, and a 7% error rate
@@ -500,7 +500,7 @@ export default function ConnexxPage() {
                 <h2 className="text-display-lg text-text-primary">
                   Built for developers. Live in minutes.
                 </h2>
-                <p className="mt-4 text-base text-text-secondary leading-relaxed">
+                <p className="mt-4 text-body-md text-text-secondary">
                   Connexx exposes every platform function through a versioned
                   REST API. Create a shipment, fetch a rate, generate a label,
                   pull tracking, manage carriers, handle returns. Authentication
@@ -508,7 +508,7 @@ export default function ConnexxPage() {
                   event. The full reference, with code samples in cURL, Node,
                   Python, and PHP, is in the developer documentation.
                 </p>
-                <p className="mt-4 text-base text-text-secondary leading-relaxed">
+                <p className="mt-4 text-body-md text-text-secondary">
                   The response returns the selected carrier, the service code,
                   the rate, the label as a base64 PDF or PNG, the tracking
                   number, and a webhook subscription URL for status updates.
@@ -582,10 +582,10 @@ export default function ConnexxPage() {
               <ScrollReveal key={row.category} delay={i * 0.05}>
                 <div className="bg-white rounded-xl border border-border p-5 h-full">
                   <div className="flex items-baseline justify-between mb-2">
-                    <p className="text-sm font-semibold text-text-primary">
+                    <p className="text-heading-sm text-text-primary">
                       {row.category}
                     </p>
-                    <span className="text-2xl font-bold text-accent">
+                    <span className="text-stat-lg text-accent">
                       {row.count}
                     </span>
                   </div>

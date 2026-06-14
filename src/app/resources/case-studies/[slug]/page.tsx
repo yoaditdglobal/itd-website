@@ -123,7 +123,7 @@ export default async function CaseStudyPage({
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <blockquote className="border-l-4 border-accent pl-6">
-                <p className="text-xl md:text-2xl text-text-primary leading-relaxed italic">
+                <p className="text-display-md text-text-primary leading-relaxed italic">
                   &ldquo;{cs.quote}&rdquo;
                 </p>
                 {cs.quoteAuthor && (

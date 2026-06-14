@@ -32,7 +32,7 @@ export default function CaseStudiesPage() {
             <h1 className="text-display-xl text-text-primary max-w-4xl mx-auto">
               The businesses that stopped leaving money on shipping.
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Real UK businesses, from fast-growing brands to 3PLs, shipping
               better at home and abroad through ITD.
             </p>
@@ -62,7 +62,7 @@ export default function CaseStudiesPage() {
                     &ldquo;Before ITD, we made nothing on shipping. Now
                     it&rsquo;s one of our strongest revenue streams.&rdquo;
                   </blockquote>
-                  <p className="mt-5 text-sm text-white/60">
+                  <p className="mt-5 text-body-sm text-white/60">
                     Rob Osgood, Managing Director, RIOZ Global
                   </p>
                   <Link

@@ -72,7 +72,7 @@ export default function GuidesIndexPage() {
               Resources
             </span>
             <h1 className="text-display-xl text-text-primary">Guides</h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Operator guides for UK shippers, importers, and marketplace sellers. Plain definitions, working examples, and the trade-offs the textbooks skip.
             </p>
           </ScrollReveal>
@@ -97,10 +97,10 @@ export default function GuidesIndexPage() {
                       <Clock className="w-3 h-3" /> {guide.readingTime}
                     </span>
                   </div>
-                  <p className="text-xl font-semibold text-text-primary mb-3 group-hover:text-accent transition-colors">
+                  <p className="text-heading-lg text-text-primary mb-3 group-hover:text-accent transition-colors">
                     {guide.title}
                   </p>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-4">{guide.summary}</p>
+                  <p className="text-body-sm text-text-secondary mb-4">{guide.summary}</p>
                   <div className="flex items-center justify-between pt-4 border-t border-border">
                     <span className="text-xs text-text-tertiary">Updated {guide.updated}</span>
                     <span className="inline-flex items-center gap-1 text-sm text-accent font-medium">

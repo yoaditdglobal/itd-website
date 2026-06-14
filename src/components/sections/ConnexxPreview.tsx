@@ -16,7 +16,7 @@ export default function ConnexxPreview() {
               <h2 className="text-display-lg text-text-primary">
                 One platform. Every shipment.
               </h2>
-              <p className="mt-6 text-base md:text-lg text-text-secondary leading-relaxed">
+              <p className="mt-6 text-body-lg text-text-secondary">
                 Connexx is the multi-carrier shipping platform behind ITD Global.
                 It compares live rates across every connected carrier, generates
                 the right label, tracks the parcel from collection to delivery,
