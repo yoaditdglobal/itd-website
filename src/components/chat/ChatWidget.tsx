@@ -1,8 +1,37 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Send, Sparkles, Volume2, VolumeX, Loader2 } from "lucide-react";
+import Image from "next/image";
+import { MessageCircle, X, Send, Volume2, VolumeX, Loader2 } from "lucide-react";
 import { PROACTIVE_GREETING, WELCOME_MESSAGE } from "@/lib/chat/knowledge";
+
+// Chat avatar — the ITD Global mark. Drop a square (~1:1) logo here; until the
+// file exists the Avatar falls back to an "ITD" monogram (so it never looks
+// broken). The repo's itd-global-logo.webp is a wide lockup that's illegible at
+// avatar size, so this uses a dedicated square mark.
+const AVATAR_SRC = "/logos/itd/itd-chat-avatar.png";
+
+function Avatar({ className = "" }: { className?: string }) {
+  const [ok, setOk] = useState(true);
+  return (
+    <span
+      className={`flex items-center justify-center overflow-hidden rounded-full border border-border bg-white ${className}`}
+    >
+      {ok ? (
+        <Image
+          src={AVATAR_SRC}
+          alt="ITD Global"
+          width={40}
+          height={40}
+          onError={() => setOk(false)}
+          className="h-full w-full object-contain p-0.5"
+        />
+      ) : (
+        <span className="text-[11px] font-extrabold tracking-tight text-bg-dark">ITD</span>
+      )}
+    </span>
+  );
+}
 
 // ── Connexx Assistant: Intercom-style AI chat concierge ──────────────────────
 // Floating launcher (bottom-right) → slide-up panel. Proactively shows a teaser
@@ -250,9 +279,7 @@ export default function ChatWidget() {
             onClick={openPanel}
             className="group flex items-start gap-3 rounded-2xl border border-border bg-white p-4 text-left shadow-lg transition-shadow hover:shadow-xl"
           >
-            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-accent text-white">
-              <Sparkles className="h-4 w-4" aria-hidden />
-            </span>
+            <Avatar className="h-9 w-9 flex-shrink-0" />
             <span className="text-sm leading-snug text-text-primary">{PROACTIVE_GREETING}</span>
           </button>
           <button
@@ -278,11 +305,9 @@ export default function ChatWidget() {
           {/* Header */}
           <div className="relative flex items-center gap-3 overflow-hidden rounded-t-2xl bg-bg-dark px-4 py-4 text-white">
             <div className="bg-noise pointer-events-none absolute inset-0 opacity-30 mix-blend-soft-light" aria-hidden />
-            <span className="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent">
-              <Sparkles className="h-5 w-5" aria-hidden />
-            </span>
+            <Avatar className="relative h-10 w-10 flex-shrink-0" />
             <div className="relative flex-1">
-              <p className="text-sm font-semibold leading-tight">Connexx Assistant</p>
+              <p className="text-sm font-semibold leading-tight">ITD Global</p>
               <p className="flex items-center gap-1.5 text-xs text-white/70">
                 <span className="inline-block h-2 w-2 rounded-full bg-green-400" />
                 Typically replies in a few minutes
@@ -338,7 +363,7 @@ export default function ChatWidget() {
                       id: newId(),
                       role: "assistant",
                       content:
-                        "Brilliant — thank you! Your account manager will be in touch shortly. Anything else I can help with in the meantime?",
+                        "Brilliant — thank you! Someone from the ITD Global team will reach out shortly to talk through how we can help. Anything else I can answer in the meantime?",
                     },
                   ]);
                 }}
@@ -497,7 +522,7 @@ function LeadCard({
   return (
     <form onSubmit={submit} className="rounded-2xl border border-accent/30 bg-accent-light/40 p-3.5">
       <p className="mb-3 text-sm font-medium text-text-primary">
-        Leave your details and an account manager will follow up.
+        Leave your details and the ITD Global team will be in touch.
       </p>
       <div className="space-y-2">
         <input
