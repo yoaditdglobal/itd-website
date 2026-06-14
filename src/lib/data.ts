@@ -174,7 +174,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global introduced Evri alongside DPD via Connexx, giving Tatti Lashes a genuine multi-carrier setup with both 24hr and 48hr service options. Customers could now choose their delivery at checkout. The Mintsoft integration via Connexx was plug-and-play. Dedicated vans were allocated quickly, and the brand was live before peak trading season.",
     result: "60% of Tatti Lashes' volume transferred to Evri — a figure that surprised the team. Evri now handles the majority of their domestic parcel volume, with DPD retained for customers selecting the premium next-day service. Per-order shipping costs dropped significantly across the cheaper service, margins came back under control, and the brand entered peak with capacity already proven.",
     heroImage: "/case-studies/tatti-lashes/hero.jpg",
-    logo: "/case-studies/tatti-lashes/logo.png",
+    logo: "/case-studies/tatti-lashes/logo.jpeg",
     stats: [
       { value: 60, suffix: "%", label: "Volume shifted to Evri", sub: "from a single-carrier DPD-only setup", featured: true },
       { value: "2", suffix: "×", label: "Active carriers", sub: "DPD next-day + Evri 24hr & 48hr" },
@@ -215,7 +215,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Mark Baker, Head of Retail Operations at West Ham United",
     quoteAuthorPhoto: "/case-studies/west-ham-united/author.jpg",
     heroImage: "/case-studies/west-ham-united/hero.webp",
-    logo: "/case-studies/west-ham-united/logo.webp",
+    logo: "/case-studies/west-ham-united/logo.png",
     stats: [
       { value: "Match-ready", label: "Collection reliability", sub: "stable across standard and peak trading", featured: true },
       { value: "DHL · FedEx · UPS", label: "Consolidated buying power", sub: "international lane rate alignment" },
@@ -328,7 +328,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global replaced the fragmented process with a single, structured weekly parcel consolidation service built around Home Bargains' buying cycle. ITD's China team collects samples via SF Express from any factory across China, Monday to Thursday, into ITD's warehouse — then consolidates into one weekly air freight shipment to the UK. One logistics partner. One process. One weekly delivery.",
     result: "30 to 35% reduction in annual shipping costs by grouping individual express shipments into one weekly consolidated consignment. Guaranteed Tuesday delivery for every buyer, every week — replacing chaos with a predictable rhythm the team could plan around. Full visibility across all 60 buyers and 200 factories, and one accountable point of contact instead of hundreds of fragmented relationships.",
     heroImage: "/case-studies/home-bargains/hero.webp",
-    logo: "/case-studies/home-bargains/logo.png",
+    logo: "/case-studies/home-bargains/logo.jpeg",
     stats: [
       { value: 30, prefix: "", suffix: "–35%", label: "Annual cost reduction", sub: "vs individual express shipments", featured: true },
       { value: "Tuesday", label: "Guaranteed delivery day", sub: "every week, every buyer" },
@@ -406,7 +406,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Steve Seymor, Director at PB Fulfilment",
     quoteAuthorPhoto: "/case-studies/pb-fulfilment/author.webp",
     heroImage: "/case-studies/pb-fulfilment/hero.webp",
-    logo: "/case-studies/pb-fulfilment/logo.png",
+    logo: "/case-studies/pb-fulfilment/logo.jpeg",
     stats: [
       { value: "Daily", label: "FedEx collections", sub: "stabilised outbound workflow", featured: true },
       { value: "US lanes", label: "Stabilised performance", sub: "subscription churn reduced" },
@@ -443,7 +443,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global placed their own team on the ground in China and took ownership of the compliance process end-to-end. We reviewed factory paperwork, identified the gaps, and created a standardised documentation template built for a multi-brand environment — giving each factory a clear process for identifying which shipment belonged to which brand. We also introduced FedEx International Priority as a more commercially competitive option, giving Sainsbury's and Argos genuine courier flexibility backed by a single logistics partner managing everything from China to the UK.",
     result: "Customs compliance owned and solved at origin — the standardised factory template removed the ambiguity that had been causing customs holds. Multi-brand clarity built into the process so shipments moved through the right channels every time. Movement away from a single DHL Express contract unlocked more commercially appropriate FedEx International Priority rates. And one accountable logistics partner now manages everything across both brands and both offices.",
     heroImage: "/case-studies/sainsburys-argos/hero.webp",
-    logo: "/case-studies/sainsburys-argos/logo.png",
+    logo: "/case-studies/sainsburys-argos/logo-icon.png",
     stats: [
       { value: "At origin", label: "Compliance solved", sub: "standardised factory documentation", featured: true },
       { value: "DHL → FedEx", label: "Courier flexibility unlocked", sub: "no more single-contract pricing" },
