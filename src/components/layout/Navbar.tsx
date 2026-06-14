@@ -55,6 +55,7 @@ const resourcesMenu = {
     { name: "3PL", href: "/resources/case-studies?solution=3pl" },
     { name: "Import", href: "/resources/case-studies?solution=import" },
     { name: "Export", href: "/resources/case-studies?solution=export" },
+    { name: "Freight", href: "/resources/case-studies?solution=freight" },
   ],
   knowledge: [
     { name: "Guides", href: "/resources/guides" },
