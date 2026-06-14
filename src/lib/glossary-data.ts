@@ -117,7 +117,7 @@ export const GLOSSARY_ENTRIES: GlossaryEntry[] = [
     name: "Out-of-area",
     category: "Carrier",
     definition: "A postcode outside a carrier's standard delivery zone, where the carrier applies a surcharge or refuses the shipment.",
-    context: "Every UK carrier publishes an out-of-area postcode list. Highlands, Islands, Channel Islands, and Northern Ireland are the common ones. DPD, Evri, and Yodel each have slightly different lists, which is why an automated routing rule beats a manual choice. A wrong out-of-area decision costs a redelivery charge or a returned parcel.",
+    context: "Every UK carrier publishes an out-of-area postcode list. Highlands, Islands, Channel Islands, and Northern Ireland are the common ones. DPD and Evri each have slightly different lists, which is why an automated routing rule beats a manual choice. A wrong out-of-area decision costs a redelivery charge or a returned parcel.",
     related: "[Highlands & Islands](#highlands--islands), [Surcharge zone](#surcharge-zone), [Mainland UK](#mainland-uk)",
   },
   {

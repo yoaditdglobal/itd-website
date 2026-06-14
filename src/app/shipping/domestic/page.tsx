@@ -84,7 +84,7 @@ export default function ShippingDomesticPage() {
           anchor: "ecommerce",
           headline: "Built for eCommerce",
           summary:
-            "Courier rates climb year on year, and the carrier that saves you most shifts from one order to the next. Connect your Shopify, WooCommerce or BigCommerce store and each order routes to the best-value carrier the moment it's placed, with labels and returns handled in one click.",
+            "Courier rates climb year on year, and the carrier that saves you most shifts from one order to the next. Connect your Shopify or WooCommerce store and each order routes to the best-value carrier the moment it's placed, with labels and returns handled in one click.",
           solutionTag: "eCommerce",
           category: "By business model",
           image: {

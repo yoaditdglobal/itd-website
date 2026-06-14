@@ -6,7 +6,7 @@ import { itemListSchema } from "@/components/seo/JsonLd";
 export const metadata = buildMetadata({
   title: "Marketplace integrations",
   description:
-    "We connect to Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet its delivery window.",
+    "We connect to Amazon, eBay, Etsy, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet its delivery window.",
   path: "/integrations/marketplaces",
 });
 
@@ -16,11 +16,11 @@ export default function MarketplacesPage() {
   return (
     <IntegrationCategoryPage
       title="Marketplace integrations for multi-channel sellers."
-      subtitle="We connect to Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
+      subtitle="We connect to Amazon, eBay, Etsy, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
       integrations={integrations}
       heroLabel="Marketplaces"
       heroH1="Marketplace integrations for multi-channel sellers."
-      heroSubhead="We connect to Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
+      heroSubhead="We connect to Amazon, eBay, Etsy, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
       heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=marketplaces" }}
       heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
       useCasesHeading="How teams use it"
@@ -39,16 +39,16 @@ export default function MarketplacesPage() {
           namedIntegrations: ["Etsy", "Royal Mail", "Evri"],
         },
         {
-          headline: "Walmart and Shopify in the same queue",
+          headline: "Amazon and Shopify in the same queue",
           description:
-            "A brand selling DTC on Shopify and on Walmart Marketplace. We pull both order streams into one queue, holding Walmart's On Time Delivery window on its orders and routing the Shopify ones on our rates. The dispatch team runs a single queue.",
-          namedIntegrations: ["Walmart", "Shopify"],
+            "A brand selling DTC on Shopify and on Amazon Seller Central. We pull both order streams into one queue, holding Amazon's delivery promise on its orders and routing the Shopify ones on our rates. The dispatch team runs a single queue.",
+          namedIntegrations: ["Amazon", "Shopify"],
         },
         {
-          headline: "Zalando plus a European returns network",
+          headline: "A European returns network across marketplaces",
           description:
-            "A fashion brand on Zalando across Germany, France and the Netherlands. Dispatch goes via DPD and DHL Parcel, and returns route through our returns portal with pre-paid labels set to Zalando's requirements. Each return logs back into the brand's order system.",
-          namedIntegrations: ["Zalando", "DPD", "DHL Parcel"],
+            "A fashion brand selling across Germany, France and the Netherlands. Dispatch goes via DPD and DHL Parcel, and returns route through our returns portal with pre-paid labels set to each marketplace's requirements. Each return logs back into the brand's order system.",
+          namedIntegrations: ["DPD", "DHL Parcel"],
         },
       ]}
       howItWorksHeading="How it works"
@@ -58,7 +58,7 @@ export default function MarketplacesPage() {
           step: 1,
           title: "Pull orders with their SLA",
           description:
-            "Each integration brings the order and its SLA: Amazon's promised delivery date, eBay's estimated range, Walmart's On Time Delivery threshold. That SLA becomes a routing constraint.",
+            "Each integration brings the order and its SLA: Amazon's promised delivery date, eBay's estimated range, TikTok Shop's dispatch window. That SLA becomes a routing constraint.",
         },
         {
           step: 2,
@@ -77,7 +77,7 @@ export default function MarketplacesPage() {
         {
           question: "Which marketplaces do you integrate with?",
           answer:
-            "Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop, with more added over time.",
+            "Amazon, eBay, Etsy, Temu and TikTok Shop, with more added over time.",
         },
         {
           question: "Does ITD integrate with Amazon Seller Central?",
@@ -125,8 +125,6 @@ export default function MarketplacesPage() {
             { name: "Amazon", url: "/integrations/marketplaces#amazon", description: "Seller Central and FBM order pull with the delivery promise attached, routed to a carrier that can meet it. Tracking confirms back via Amazon's API." },
             { name: "eBay", url: "/integrations/marketplaces#ebay", description: "UK and international eBay seller orders pull with their estimated delivery range feeding the routing. Tracking confirms back to eBay." },
             { name: "Etsy", url: "/integrations/marketplaces#etsy", description: "Etsy orders default to Royal Mail Tracked 24 (UK) and Royal Mail International Tracked (export), with Evri ParcelShop as fallback. Tracking pushes back to Etsy." },
-            { name: "Walmart", url: "/integrations/marketplaces#walmart", description: "Walmart Marketplace orders land in the same queue, with the On Time Delivery window held on each order." },
-            { name: "Zalando", url: "/integrations/marketplaces#zalando", description: "European fashion marketplace with a returns workflow — pre-paid labels set to Zalando's requirements, logged back to the order system." },
             { name: "Temu", url: "/integrations/marketplaces#temu", description: "Temu marketplace order pull, routed to a carrier that can meet the lane's delivery window." },
             { name: "TikTok Shop", url: "/integrations/marketplaces#tiktok-shop", description: "TikTok Shop orders into one dispatch queue, routed to meet the fulfilment window. Tracking confirms back via the logistics API." },
           ],

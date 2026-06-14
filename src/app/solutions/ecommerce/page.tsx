@@ -101,11 +101,6 @@ export default function EcommercePage() {
           href: "/integrations/ecommerce",
         },
         {
-          name: "BigCommerce",
-          description: "SaaS storefronts route every order through Connexx for rate comparison.",
-          href: "/integrations/ecommerce",
-        },
-        {
           name: "Royal Mail",
           logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24, Tracked 48, Signed, First Class, Second Class.",
@@ -135,7 +130,7 @@ export default function EcommercePage() {
         {
           question: "Does ITD integrate with my eCommerce platform?",
           answer:
-            "Yes. We connect to Shopify, WooCommerce, Magento and BigCommerce. Orders flow in and labels print from the setup you already use.",
+            "Yes. We connect to Shopify, WooCommerce and Magento. Orders flow in and labels print from the setup you already use.",
         },
         {
           question: "Can shoppers choose their delivery at checkout?",
