@@ -138,12 +138,12 @@ export default function ContactPage() {
             : undefined,
           supplierInvoice: isFreight ? fileMeta(supplierInvoiceFile) : undefined,
           freightPhoto: isFreight ? fileMeta(freightPhotoFile) : undefined,
-          collectionPostcode,
+          collectionPostcode: isFreight ? undefined : collectionPostcode,
           company: companyName,
           firstName,
           lastName,
           email,
-          phone: phone || undefined,
+          phone,
           source: "contact-page",
         }),
       });
@@ -486,21 +486,23 @@ export default function ContactPage() {
                   </>
                 )}
 
-                {/* Collection Postcode */}
-                <div>
-                  <label htmlFor="postcode" className={labelClass}>
-                    Collection Postcode <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="postcode"
-                    type="text"
-                    value={collectionPostcode}
-                    onChange={(e) => setCollectionPostcode(e.target.value.toUpperCase())}
-                    required
-                    placeholder="e.g. SW1A 1AA"
-                    className={fieldClass}
-                  />
-                </div>
+                {/* Collection Postcode — hidden for Freight (collection arranged directly) */}
+                {!isFreight && (
+                  <div>
+                    <label htmlFor="postcode" className={labelClass}>
+                      Collection Postcode <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="postcode"
+                      type="text"
+                      value={collectionPostcode}
+                      onChange={(e) => setCollectionPostcode(e.target.value.toUpperCase())}
+                      required
+                      placeholder="e.g. SW1A 1AA"
+                      className={fieldClass}
+                    />
+                  </div>
+                )}
 
                 {/* Company Name */}
                 <div>
@@ -566,16 +568,17 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Phone */}
+                {/* Phone — required for all */}
                 <div>
                   <label htmlFor="phone" className={labelClass}>
-                    Phone
+                    Phone <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="phone"
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    required
                     placeholder="+44 7XXX XXXXXX"
                     className={fieldClass}
                   />
