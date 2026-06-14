@@ -53,7 +53,7 @@ export default function ThreePLPage() {
           objectPosition: "72% 60%",
         }}
         chips={[
-          { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
+          { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png" },
           { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
           { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
           { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
@@ -126,10 +126,10 @@ export default function ThreePLPage() {
           heading="Sits over the WMS you already run."
           subtext="We're the shipping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders pull in with each brand's rules, we apply the carrier and rate, and the tracking and cost write back. Nothing gets re-keyed."
           logos={[
-            { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
+            { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png" },
             { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
             { name: "ShipHero", logo: "/logos/erp-wms/shiphero_logo.png" },
-            { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png" },
+            { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp" },
           ]}
           browseHref="/integrations/erp-wms"
         />
@@ -175,7 +175,7 @@ export default function ThreePLPage() {
       integrations={[
         {
           name: "Mintsoft",
-          logo: "/logos/erp-wms/mintsoft_logo.png",
+          logo: "/logos/ecommerce/mintsoft-icon.png",
           description: "WMS most common in UK mid-market 3PLs. Connexx adds the carrier layer.",
           href: "/integrations/erp-wms",
         },
@@ -187,7 +187,7 @@ export default function ThreePLPage() {
         },
         {
           name: "Veeqo",
-          logo: "/logos/erp-wms/veeqo_logo.png",
+          logo: "/logos/ecommerce/veeqo-icon.webp",
           description: "Inventory and shipping platform with multi-client support.",
           href: "/integrations/erp-wms",
         },
