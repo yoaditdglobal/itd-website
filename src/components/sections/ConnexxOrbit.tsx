@@ -115,7 +115,14 @@ export function OrbitLayer({
     <div className="connexx-anim absolute inset-0" style={{ animation: wrapperAnim }}>
       {brands.map((brand, i) => {
         const angle = (360 / brands.length) * i;
-        const hide = mobileHide.has(brand.name) ? "hidden md:flex" : "flex";
+        // Hide mobile-only tiles with `visibility`, never `display:none` —
+        // display:none cancels the counter-rotation animation, so on a
+        // mobile→desktop resize the revealed tile restarts at 0° out of phase
+        // with its still-spinning ring and renders rotated. visibility keeps
+        // the element mounted and animating, so it stays upright.
+        const hide = mobileHide.has(brand.name)
+          ? "flex invisible md:visible"
+          : "flex";
         return (
           <div key={brand.name} className={hide} style={orbitStyle(angle, radiusPct)}>
             <div className="connexx-anim" style={{ animation: counterAnim }}>
