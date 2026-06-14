@@ -40,8 +40,8 @@ export default function SolutionRealities({
                 key={item.title}
                 className="h-full bg-bg-secondary rounded-2xl border border-border p-6"
               >
-                <h3 className="text-lg font-semibold text-text-primary">{item.title}</h3>
-                <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+                <h3 className="text-heading-md text-text-primary">{item.title}</h3>
+                <p className="mt-2 text-body-sm text-text-secondary">
                   {item.description}
                 </p>
               </div>

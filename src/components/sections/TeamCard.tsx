@@ -55,7 +55,7 @@ export default function TeamCard({ member }: TeamCardProps) {
             <p className="text-white font-semibold leading-tight truncate">
               {member.name}
             </p>
-            <p className="text-white/75 text-sm leading-snug">{member.role}</p>
+            <p className="text-body-sm text-white/75 leading-snug">{member.role}</p>
           </div>
           {member.linkedin && (
             <a

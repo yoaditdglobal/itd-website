@@ -94,7 +94,7 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
                 className="group relative flex h-full min-h-[164px] flex-col items-center justify-start rounded-xl border border-border bg-white p-5 text-center transition-all hover:border-accent/30 hover:shadow-md focus-visible:border-accent/40 focus-visible:shadow-md focus-visible:outline-none"
               >
                 <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="mb-3" />
-                <p className="text-sm font-medium text-text-primary">{c.name}</p>
+                <p className="text-label text-text-primary">{c.name}</p>
                 <div className="mt-2 flex flex-col items-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
                   {c.description && (
                     <p className="text-xs text-text-tertiary">{c.description}</p>

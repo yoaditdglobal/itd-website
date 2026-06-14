@@ -74,7 +74,7 @@ export default function MultiSelect({
       >
         <div className="flex-1 flex flex-wrap gap-1 min-w-0">
           {selected.length === 0 ? (
-            <span className="text-sm text-text-tertiary">{placeholder}</span>
+            <span className="text-body-sm text-text-tertiary">{placeholder}</span>
           ) : selected.length <= 3 ? (
             selectedLabels.map((label) => (
               <span

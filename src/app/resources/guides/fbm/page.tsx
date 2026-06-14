@@ -121,7 +121,7 @@ export default function FbmGuidePage() {
             <h1 className="text-display-xl text-text-primary">
               Fulfilled by Merchant on Amazon: the UK seller&apos;s guide.
             </h1>
-            <p className="mt-5 text-lg text-text-secondary leading-relaxed">
+            <p className="mt-5 text-body-lg text-text-secondary">
               A working guide for UK Amazon sellers running their own dispatch instead of FBA. The metrics that get you suspended, the carriers that keep you compliant, the workflow that scales past 1,000 orders a day, and how Seller Fulfilled Prime actually works in 2026.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-text-tertiary">
@@ -312,20 +312,20 @@ export default function FbmGuidePage() {
               </p>
               <div className="mt-4 space-y-3">
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">LSR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">LSR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Confirmed shipped through Buy Shipping by the deadline = not a late shipment, regardless of carrier delay.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">VTR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">VTR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Tracking numbers from Buy Shipping are valid by definition. The tracking event feed is wired into Seller Central automatically.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">OTDR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">OTDR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Buy Shipping bookings carry an Amazon estimated delivery date that aligns with the carrier&apos;s published transit time. OTDR is calculated against that date, so a carrier delay does not automatically penalise you.
                   </p>
                 </div>
@@ -619,9 +619,9 @@ export default function FbmGuidePage() {
               <ScrollReveal key={item.question} delay={i * 0.04}>
                 <details className="group bg-white rounded-xl border border-border p-5">
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
-                    <h3 className="text-base font-semibold text-text-primary">{item.question}</h3>
+                    <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-sm text-text-secondary leading-relaxed">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
                 </details>
               </ScrollReveal>
             ))}
@@ -691,7 +691,7 @@ export default function FbmGuidePage() {
             <h2 className="text-display-lg text-white mb-3">
               Running FBM on Amazon at volume?
             </h2>
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-body-lg">
               Connexx covers the orders Buy Shipping does not, routes across every marketplace from one queue, and writes tracking back to Amazon, eBay, Etsy, and TikTok Shop automatically. Velocity Sellers eliminated £12,000 a month in penalty fees on the same setup.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

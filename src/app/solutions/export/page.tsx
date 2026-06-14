@@ -118,7 +118,7 @@ export default function ExportPage() {
                 <h2 className="text-display-lg text-text-primary">
                   Compare rates. Book carriers. Track every shipment.
                 </h2>
-                <p className="mt-6 text-base md:text-lg text-text-secondary leading-relaxed">
+                <p className="mt-6 text-body-lg text-text-secondary">
                   Connexx is ITD Global's multi-courier shipping platform built for international export. Compare live rates across DHL Express, FedEx, UPS, DPD, and Evri, automate carrier selection per shipment, generate labels and customs documents, and track every consignment from collection to delivery. All from one login.
                 </p>
                 <div className="mt-8">
@@ -173,7 +173,7 @@ export default function ExportPage() {
                   <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5 text-accent" />
                   </div>
-                  <p className="text-sm font-medium text-text-primary leading-snug">{text}</p>
+                  <p className="text-label text-text-primary leading-snug">{text}</p>
                 </div>
               </ScrollReveal>
             ))}

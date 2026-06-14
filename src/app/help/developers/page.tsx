@@ -179,7 +179,7 @@ export default function DevelopersPage() {
             <h1 className="text-display-xl text-text-primary">
               Developer resources
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-3xl">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-3xl">
               The Connexx REST API covers shipment creation, rate comparison,
               label generation, tracking, carrier management, and customs.
               Authentication is bearer-token, the API is documented in OpenAPI
@@ -252,10 +252,10 @@ export default function DevelopersPage() {
                     <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                       <Icon className="w-5 h-5 text-accent" />
                     </div>
-                    <p className="text-base font-semibold text-text-primary group-hover:text-accent transition-colors">
+                    <p className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
                       {res.title}
                     </p>
-                    <p className="text-sm text-text-secondary mt-1.5 leading-relaxed flex-1">
+                    <p className="text-body-sm text-text-secondary mt-1.5 flex-1">
                       {res.description}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent">

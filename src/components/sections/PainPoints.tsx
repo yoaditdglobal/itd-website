@@ -26,14 +26,14 @@ export default function PainPoints() {
           {pains.map((pain, i) => (
             <ScrollReveal key={pain.num} delay={i * 0.1}>
               <div className="flex gap-4">
-                <span className="text-3xl md:text-4xl font-bold text-accent/20 leading-none flex-shrink-0">
+                <span className="text-stat-xl text-accent/20 leading-none flex-shrink-0">
                   {pain.num}
                 </span>
                 <div>
-                  <h3 className="text-base font-semibold text-text-primary mb-1">
+                  <h3 className="text-heading-sm text-text-primary mb-1">
                     {pain.title}
                   </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">
+                  <p className="text-body-sm text-text-secondary">
                     {pain.desc}
                   </p>
                 </div>
