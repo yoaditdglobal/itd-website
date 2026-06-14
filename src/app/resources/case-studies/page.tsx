@@ -1,11 +1,16 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import StoriesLibrary from "@/components/sections/StoriesLibrary";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
-import { getLibraryStories } from "@/lib/data";
+import {
+  getLibraryStories,
+  getStoriesBySegment,
+  getSegmentBySolutionSlug,
+  SOLUTION_SLUGS,
+  LIBRARY_SEGMENT_ORDER,
+} from "@/lib/data";
 
 export const metadata = buildMetadata({
   title: "Customer stories",
@@ -15,13 +20,35 @@ export const metadata = buildMetadata({
 });
 
 /**
- * Customer Stories library: hero → featured spotlight → index + shelves
- * (StoriesLibrary, client) → closing CTA. Copy is verbatim from the
- * Customer Stories build brief — proof-led, no platform claims.
+ * Customer Stories library: hero → featured spotlight → single-select solution
+ * filter + flat card grid (StoriesLibrary) → closing CTA. Filtering is driven by
+ * the `?solution=` query param and resolved server-side, so filtered views are
+ * shareable and SSR-rendered. Copy is verbatim from the build brief.
  */
-export default function CaseStudiesPage() {
-  const stories = getLibraryStories();
-  const featured = stories.find((s) => s.featured);
+export default async function CaseStudiesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const all = getLibraryStories();
+  const featured = all.find((s) => s.featured);
+
+  // Active solution facet from ?solution= (unknown/legacy values → no filter).
+  const sp = await searchParams;
+  const solutionParam = Array.isArray(sp.solution)
+    ? sp.solution[0]
+    : sp.solution;
+  const active = getSegmentBySolutionSlug(solutionParam);
+  const stories = active ? getStoriesBySegment(active) : all;
+
+  // Only facets with at least one story (Marketplace/B2B never appear).
+  const facets = LIBRARY_SEGMENT_ORDER.filter(
+    (seg) => getStoriesBySegment(seg).length > 0,
+  ).map((seg) => ({
+    segment: seg,
+    slug: SOLUTION_SLUGS[seg],
+    count: getStoriesBySegment(seg).length,
+  }));
 
   return (
     <>
@@ -79,10 +106,13 @@ export default function CaseStudiesPage() {
         </section>
       )}
 
-      {/* Index + shelves (client: outcome filtering, legacy ?industry= jumps) */}
-      <Suspense>
-        <StoriesLibrary stories={stories} />
-      </Suspense>
+      {/* Solution filter + flat card grid (server-rendered per ?solution=). */}
+      <StoriesLibrary
+        stories={stories}
+        active={active}
+        facets={facets}
+        total={all.length}
+      />
 
       <ClosingCTA
         headline="Become the next story."
