@@ -887,10 +887,10 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
 
   // Tech integrations (no per-integration detail pages — route to category)
-  "mintsoft": { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png", href: "/integrations/erp-wms", kind: "integration" },
+  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/erp-wms", kind: "integration" },
   "linnworks": { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/erp-wms", kind: "integration" },
   "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/ecommerce", kind: "integration" },
-  "veeqo": { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png", href: "/integrations/erp-wms", kind: "integration" },
+  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/erp-wms", kind: "integration" },
   "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/logistics", kind: "integration" },
 
   // Platform (ITD itself)

@@ -16,9 +16,9 @@ const techLogos = [
   { name: "ShipStation", cat: "Logistics", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/tech/shipstation" },
   { name: "Linnworks", cat: "ERP", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/tech/linnworks" },
   { name: "Etsy", cat: "Mktpl", logo: "/logos/marketplaces/etsy-icon.png", href: "/integrations/tech/etsy" },
-  { name: "Veeqo", cat: "ERP", logo: "/logos/erp-wms/veeqo_logo.png", href: "/integrations/tech/veeqo" },
+  { name: "Veeqo", cat: "ERP", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/tech/veeqo" },
   { name: "TikTok Shop", cat: "Mktpl", logo: "/logos/marketplaces/tiktok-tile.png", href: "/integrations/tech/tiktok-shop" },
-  { name: "Mintsoft", cat: "ERP", logo: "/logos/erp-wms/mintsoft_logo.png", href: "/integrations/tech/mintsoft" },
+  { name: "Mintsoft", cat: "ERP", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/tech/mintsoft" },
 ];
 
 const carrierLogos = [
