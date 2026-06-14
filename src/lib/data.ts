@@ -145,6 +145,38 @@ export function getLibraryStories(): CaseStudy[] {
   return caseStudies.filter((cs) => cs.primarySegment);
 }
 
+/** URL slug for each solution facet — the `?solution=` value on the library page. */
+export const SOLUTION_SLUGS: Record<LibrarySegment, string> = {
+  eCommerce: "ecommerce",
+  "3PL": "3pl",
+  Import: "import",
+  Export: "export",
+};
+
+/** Resolve a `?solution=` slug back to its LibrarySegment, or null if unknown/empty. */
+export function getSegmentBySolutionSlug(
+  slug?: string | null,
+): LibrarySegment | null {
+  if (!slug) return null;
+  const s = slug.toLowerCase();
+  return (
+    (Object.keys(SOLUTION_SLUGS) as LibrarySegment[]).find(
+      (seg) => SOLUTION_SLUGS[seg] === s,
+    ) ?? null
+  );
+}
+
+/**
+ * Library stories in a given segment. Matches against `segments[]` (so a
+ * multi-segment story like PB Fulfilment appears under both 3PL and Import),
+ * falling back to `primarySegment` for any story without an explicit array.
+ */
+export function getStoriesBySegment(seg: LibrarySegment): CaseStudy[] {
+  return getLibraryStories().filter((s) =>
+    (s.segments ?? (s.primarySegment ? [s.primarySegment] : [])).includes(seg),
+  );
+}
+
 /**
  * Related stories for the "More stories" module on a detail page (max `limit`).
  * Selection order (BRIEF §5):
