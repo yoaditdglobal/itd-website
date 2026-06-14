@@ -556,7 +556,7 @@ export const integrations: Integration[] = [
   { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP", logo: "/logos/erp-wms/netsuite-icon.png" },
   { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS", logo: "/logos/erp-wms/orderwise-icon.webp" },
   { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
-  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro_logo.png" },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro-icon.png" },
   { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management", logo: "/logos/erp-wms/tradepeg-icon.png" },
   { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports", logo: "/logos/erp-wms/jonassports-icon.png" },
   { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform", logo: "/logos/erp-wms/brightpearl-icon.png" },
@@ -568,7 +568,7 @@ export const integrations: Integration[] = [
   { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipping automation", logo: "/logos/erp-wms/shipstation_logo.png" },
   { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WordPress commerce", logo: "/logos/erp-wms/woocommerce_logo.svg" },
   { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel listing & orders", logo: "/logos/erp-wms/storefeeder_logo.png" },
-  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/erp-wms/veeqo_logo.png" },
+  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/ecommerce/veeqo-icon.webp" },
   { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "eCommerce platform", logo: "/logos/ecommerce/shopify_logo.png" },
   { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/ecommerce/mintsoft-icon.png" },
   // ─── Tech — Marketplace ────────────────────────────────────────────
