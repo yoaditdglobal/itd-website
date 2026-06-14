@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { MessageCircle, X, Send, Volume2, VolumeX, Loader2 } from "lucide-react";
 import { PROACTIVE_GREETING, WELCOME_MESSAGE } from "@/lib/chat/knowledge";
 
@@ -18,7 +17,8 @@ function Avatar({ className = "" }: { className?: string }) {
       className={`flex items-center justify-center overflow-hidden rounded-full border border-border bg-white ${className}`}
     >
       {ok ? (
-        <Image
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           src={AVATAR_SRC}
           alt="ITD Global"
           width={40}
