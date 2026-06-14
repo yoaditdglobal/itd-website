@@ -41,6 +41,19 @@ export interface CaseStudyAtGlance {
   value: string;
 }
 
+export interface CaseStudyQuote {
+  /** Quote text, without surrounding quotation marks. */
+  quote: string;
+  /** Attribution name, e.g. "Mark Baker". */
+  name: string;
+  /** Optional role/company line, e.g. "Head of Retail Operations, West Ham United". */
+  title?: string;
+  /** Optional author headshot. Relative to /public. */
+  photo?: string;
+  /** "feature" = large emphasised block; "inline" = lighter mid-body interjection. Defaults to "feature". */
+  placement?: "feature" | "inline";
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -93,6 +106,16 @@ export interface CaseStudy {
   oneLiner?: string;
   /** True → rendered as the spotlight above the index (and still shelved). */
   featured?: boolean;
+
+  // ─── Detail page (/resources/case-studies/[slug]) ───
+  /** Distributed pull quotes (1–3). When present, supersedes the legacy single
+   *  `quote`/`quoteAuthor` fields. Each renders inline (mid-body) or as a feature block. */
+  quotes?: CaseStudyQuote[];
+  /** Manual related-story slugs for the "More stories" module. Omit to auto-select
+   *  by shared primarySegment (see getRelatedStories). */
+  relatedStories?: string[];
+  /** ISO 8601 publish date for Article JSON-LD. Falls back to a site default. */
+  datePublished?: string;
 }
 
 export type LibrarySegment = "eCommerce" | "3PL" | "Import" | "Export";
@@ -120,6 +143,43 @@ export const LIBRARY_OUTCOMES: LibraryOutcome[] = [
 /** Stories that belong to the Customer Stories library (have a shelf). */
 export function getLibraryStories(): CaseStudy[] {
   return caseStudies.filter((cs) => cs.primarySegment);
+}
+
+/**
+ * Related stories for the "More stories" module on a detail page (max `limit`).
+ * Selection order (BRIEF §5):
+ *   1. Manual `relatedStories` overrides, in order.
+ *   2. Stories sharing the current story's primarySegment, excluding self.
+ *   3. Backfill with the remaining library stories (array order = most recent first).
+ * Only library stories (those with a primarySegment) are ever returned, so
+ * unpublished/placeholder entries never leak. De-duplicated; self always excluded.
+ */
+export function getRelatedStories(cs: CaseStudy, limit = 3): CaseStudy[] {
+  const library = getLibraryStories();
+  const picks: CaseStudy[] = [];
+  const seen = new Set<string>([cs.slug]);
+
+  const add = (story: CaseStudy | undefined) => {
+    if (!story || seen.has(story.slug)) return;
+    seen.add(story.slug);
+    picks.push(story);
+  };
+
+  // 1. Manual overrides (must resolve to a library story).
+  for (const slug of cs.relatedStories ?? []) {
+    add(library.find((s) => s.slug === slug));
+  }
+  // 2. Same primary segment.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    if (s.primarySegment && s.primarySegment === cs.primarySegment) add(s);
+  }
+  // 3. Backfill with most-recent library stories.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    add(s);
+  }
+  return picks.slice(0, limit);
 }
 
 export interface Integration {

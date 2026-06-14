@@ -171,6 +171,27 @@ export function articleSchema(input: {
   };
 }
 
+/** Review schema for a named customer quote on a case study. */
+export function reviewSchema(input: {
+  reviewBody: string;
+  author: string;
+  path: string;
+  itemReviewed?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "@id": `${SITE_URL}${input.path}#review`,
+    reviewBody: input.reviewBody,
+    author: { "@type": "Person", name: input.author },
+    itemReviewed: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
+      name: input.itemReviewed ?? SITE_NAME,
+    },
+  };
+}
+
 /**
  * DefinedTermSet + DefinedTerm schemas for the glossary page.
  *
