@@ -8,13 +8,13 @@ import { PROACTIVE_GREETING, WELCOME_MESSAGE } from "@/lib/chat/knowledge";
 // file exists the Avatar falls back to an "ITD" monogram (so it never looks
 // broken). The repo's itd-global-logo.webp is a wide lockup that's illegible at
 // avatar size, so this uses a dedicated square mark.
-const AVATAR_SRC = "/logos/itd/itd-chat-avatar.png";
+const AVATAR_SRC = "/logos/itd/favicon-chat.png";
 
 function Avatar({ className = "" }: { className?: string }) {
   const [ok, setOk] = useState(true);
   return (
     <span
-      className={`flex items-center justify-center overflow-hidden rounded-full border border-border bg-white ${className}`}
+      className={`flex items-center justify-center overflow-hidden rounded-full border border-white/15 bg-gradient-to-br from-bg-dark via-bg-dark-card to-bg-dark ${className}`}
     >
       {ok ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -24,10 +24,10 @@ function Avatar({ className = "" }: { className?: string }) {
           width={40}
           height={40}
           onError={() => setOk(false)}
-          className="h-full w-full object-contain p-0.5"
+          className="h-3/5 w-3/5 object-contain"
         />
       ) : (
-        <span className="text-[11px] font-extrabold tracking-tight text-bg-dark">ITD</span>
+        <span className="text-[11px] font-extrabold tracking-tight text-white">ITD</span>
       )}
     </span>
   );
