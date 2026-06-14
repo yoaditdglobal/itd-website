@@ -324,8 +324,8 @@ export default function VerticalPage({
                             <f.icon className={`w-5 h-5 ${tint.fg}`} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-semibold text-text-primary mb-1">{f.title}</h3>
-                            <p className="text-sm text-text-secondary leading-relaxed">{f.desc}</p>
+                            <h3 className="text-heading-sm text-text-primary mb-1">{f.title}</h3>
+                            <p className="text-body-sm text-text-secondary">{f.desc}</p>
                           </div>
                         </div>
                       </ScrollReveal>
@@ -403,7 +403,7 @@ export default function VerticalPage({
       <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h3 className="text-lg font-semibold text-text-primary mb-6">Key integrations</h3>
+            <h3 className="text-heading-md text-text-primary mb-6">Key integrations</h3>
             <IntegrationCarousel integrations={integrations} />
           </ScrollReveal>
         </div>
@@ -435,14 +435,14 @@ export default function VerticalPage({
                   {caseStudy.brandName}
                 </p>
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-4">
+              <div className="text-stat-xl text-accent mb-4">
                 {caseStudy.metric}
               </div>
-              <p className="text-text-secondary leading-relaxed mb-6">
+              <p className="text-body-md text-text-secondary mb-6">
                 {caseStudy.summary}
               </p>
               {caseStudy.quote && (
-                <blockquote className="border-l-3 border-accent pl-4 italic text-text-secondary mb-6">
+                <blockquote className="border-l-3 border-accent pl-4 italic text-body-md text-text-secondary mb-6">
                   &ldquo;{caseStudy.quote}&rdquo;
                   {caseStudy.quoteAuthor && (
                     <footer className="mt-3 flex items-center gap-2.5 not-italic">
@@ -457,7 +457,7 @@ export default function VerticalPage({
                           />
                         </div>
                       )}
-                      <span className="text-sm font-medium text-text-primary">
+                      <span className="text-label text-text-primary">
                         {caseStudy.quoteAuthor}
                       </span>
                     </footer>
@@ -514,7 +514,7 @@ export default function VerticalPage({
                 )}
               </div>
               {closingCta.asyncNote && (
-                <p className="mt-4 text-sm text-white/60">{closingCta.asyncNote}</p>
+                <p className="mt-4 text-body-sm text-white/60">{closingCta.asyncNote}</p>
               )}
             </ScrollReveal>
           </div>

@@ -72,12 +72,12 @@ export default function CarrierPage({
                 <Link href="/integrations/carriers" className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 mb-6 transition-colors">
                   ← All carriers
                 </Link>
-                <span className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 block">Integration</span>
+                <span className="text-eyebrow text-accent mb-4 block">Integration</span>
                 <h1 className="text-display-xl text-white">
                   {`${name} + ITD`}
                 </h1>
-                <p className="mt-4 text-lg text-white/70 font-medium">{tagline}</p>
-                <p className="mt-4 text-white/50 leading-relaxed">{description}</p>
+                <p className="mt-4 text-body-lg text-white/70 font-medium">{tagline}</p>
+                <p className="mt-4 text-body-md text-white/50">{description}</p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Button href="#features">Explore</Button>
                 </div>
@@ -96,10 +96,10 @@ export default function CarrierPage({
       <section id="features" className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="text-2xl text-display-lg text-text-primary mb-3">
+            <h2 className="text-display-lg text-text-primary mb-3">
               Features built for your workflow
             </h2>
-            <p className="text-text-secondary mb-10 max-w-2xl">
+            <p className="text-body-md text-text-secondary mb-10 max-w-2xl">
               Everything you get from {name}, enhanced with ITD&apos;s automation, analytics, and multi-carrier intelligence.
             </p>
           </ScrollReveal>
@@ -110,8 +110,8 @@ export default function CarrierPage({
                   <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4">
                     <f.icon className="w-5 h-5 text-accent" />
                   </div>
-                  <h3 className="text-base font-semibold text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed">{f.desc}</p>
+                  <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
+                  <p className="mt-2 text-body-sm text-text-secondary">{f.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -126,11 +126,11 @@ export default function CarrierPage({
         <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-2xl text-display-lg text-text-primary mb-3">
+              <h2 className="text-display-lg text-text-primary mb-3">
                 {video.heading ?? `About ${name}`}
               </h2>
               {video.caption && (
-                <p className="text-text-secondary mb-10 max-w-2xl">{video.caption}</p>
+                <p className="text-body-md text-text-secondary mb-10 max-w-2xl">{video.caption}</p>
               )}
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
