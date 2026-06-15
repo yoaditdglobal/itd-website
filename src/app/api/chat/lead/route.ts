@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { routeLead, type FunnelAnswers } from "@/lib/chat/funnel";
+import Anthropic from "@anthropic-ai/sdk";
 
 /**
  * POST /api/chat/lead — capture + route a lead from the ITD Global chat widget.
@@ -26,6 +27,7 @@ import { routeLead, type FunnelAnswers } from "@/lib/chat/funnel";
  *     company text,
  *     phone text,
  *     postcode text,
+ *     current_carrier text,
  *     pain text,
  *     transcript jsonb,
  *     product_type text,
@@ -45,6 +47,7 @@ import { routeLead, type FunnelAnswers } from "@/lib/chat/funnel";
  *   -- If upgrading an existing table:
  *   -- alter table chat_leads add column if not exists phone text,
  *   --   add column if not exists postcode text,
+ *   --   add column if not exists current_carrier text,
  *   --   add column if not exists product_type text,
  *   --   add column if not exists direction text,
  *   --   add column if not exists trade_direction text,
@@ -81,6 +84,7 @@ const leadSchema = z.object({
   segment: z
     .enum(["ecommerce", "marketplace", "3pl", "retail-b2b", "manufacturer", "other"])
     .optional(),
+  currentCarrier: z.string().max(200).optional().or(z.literal("")),
   requestedHuman: z.boolean().optional(),
   consent: z.literal(true, { message: "Consent is required." }),
   // Honeypot — must stay empty.
@@ -107,6 +111,58 @@ async function routeToZoho(
   }
 }
 
+// Free-text / callback leads carry no guided answers. Extract qualification from
+// the chat transcript so the sales record still has volume / carrier / segment to
+// route on (BRIEF: "save the chat as a lead with the commercial data"). Best-effort:
+// returns {} when the AI key is absent or the response isn't usable.
+const extractionSchema = z.object({
+  productType: z.enum(["parcels", "freight", "both"]).optional(),
+  direction: z.enum(["domestic", "international", "both"]).optional(),
+  tradeDirection: z.enum(["export", "import", "both"]).optional(),
+  volumeBand: z.enum(["u150", "150-500", "500-1000", "1000-5000", "5000+"]).optional(),
+  segment: z
+    .enum(["ecommerce", "marketplace", "3pl", "retail-b2b", "manufacturer", "other"])
+    .optional(),
+  currentCarrier: z.string().max(200).optional(),
+});
+type Extraction = z.infer<typeof extractionSchema>;
+
+async function extractFromTranscript(
+  transcript: { role: "user" | "assistant"; content: string }[],
+): Promise<Extraction> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) return {};
+  try {
+    const client = new Anthropic({ apiKey });
+    const convo = transcript
+      .map((m) => `${m.role}: ${m.content}`)
+      .join("\n")
+      .slice(0, 6000);
+    const msg = await client.messages.create({
+      model: "claude-haiku-4-5",
+      max_tokens: 250,
+      system:
+        "You extract shipping-lead qualification from a sales chat. Reply with STRICT JSON only " +
+        "(no prose, no code fences). Include only keys you can determine; omit the rest. Keys: " +
+        'productType ("parcels"|"freight"|"both"); direction ("domestic"|"international"|"both"); ' +
+        'tradeDirection ("export"|"import"|"both"); volumeBand (WEEKLY band, one of ' +
+        '"u150"|"150-500"|"500-1000"|"1000-5000"|"5000+" — convert monthly figures to weekly); ' +
+        'segment ("ecommerce"|"marketplace"|"3pl"|"retail-b2b"|"manufacturer"|"other"); ' +
+        "currentCarrier (free text of carriers or platform they use today). Return {} if unclear.",
+      messages: [{ role: "user", content: convo }],
+    });
+    const block = msg.content[0];
+    const text = block && block.type === "text" ? block.text : "{}";
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if (start === -1 || end === -1) return {};
+    const parsed = extractionSchema.safeParse(JSON.parse(text.slice(start, end + 1)));
+    return parsed.success ? parsed.data : {};
+  } catch {
+    return {};
+  }
+}
+
 export async function POST(request: Request) {
   let json: unknown;
   try {
@@ -125,7 +181,7 @@ export async function POST(request: Request) {
 
   const d = parsed.data;
 
-  // Recompute routing from the raw answers — never trust a client-stamped journey.
+  // Guided answers when present; otherwise enrich a free-text lead from the transcript.
   const answers: FunnelAnswers = {
     productType: d.productType,
     direction: d.direction,
@@ -134,7 +190,21 @@ export async function POST(request: Request) {
     volumeBand: d.volumeBand,
     segment: d.segment,
   };
-  const qualified = Boolean(d.productType || d.direction || d.volumeBand || d.segment);
+  let currentCarrier = d.currentCarrier || null;
+  let qualified = Boolean(d.productType || d.direction || d.volumeBand || d.segment);
+  if (!qualified && d.transcript && d.transcript.length > 0) {
+    const ex = await extractFromTranscript(d.transcript);
+    answers.productType = answers.productType ?? ex.productType;
+    answers.direction = answers.direction ?? ex.direction;
+    answers.tradeDirection = answers.tradeDirection ?? ex.tradeDirection;
+    answers.volumeBand = answers.volumeBand ?? ex.volumeBand;
+    answers.segment = answers.segment ?? ex.segment;
+    if (!currentCarrier && ex.currentCarrier) currentCarrier = ex.currentCarrier;
+    qualified = Boolean(
+      answers.productType || answers.direction || answers.volumeBand || answers.segment,
+    );
+  }
+  // Recompute routing from the resolved answers — never trust a client-stamped journey.
   const routing = qualified ? routeLead(answers) : null;
 
   const row = {
@@ -144,14 +214,15 @@ export async function POST(request: Request) {
     company: d.company || null,
     phone: d.phone || null,
     postcode: d.postcode || null,
+    current_carrier: currentCarrier,
     pain: d.pain || null,
     transcript: d.transcript ?? null,
-    product_type: d.productType ?? null,
-    direction: d.direction ?? null,
-    trade_direction: d.tradeDirection ?? null,
-    lanes: d.lanes ?? null,
-    volume_band: d.volumeBand ?? null,
-    segment: d.segment ?? null,
+    product_type: answers.productType ?? null,
+    direction: answers.direction ?? null,
+    trade_direction: answers.tradeDirection ?? null,
+    lanes: answers.lanes ?? null,
+    volume_band: answers.volumeBand ?? null,
+    segment: answers.segment ?? null,
     icp_journey: routing?.icpJourney ?? null,
     journey_name: routing?.journeyName ?? null,
     route_to: routing?.routeTo ?? null,
