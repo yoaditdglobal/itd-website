@@ -27,30 +27,21 @@ interface HeroShippingCardProps {
 }
 
 /**
- * Image-led homepage shipping card with motion-rich interactions.
- *
- * - Entrance: 0.92 scale + 24px slide-up + fade, 700ms, IntersectionObserver-triggered.
- * - One-shot diagonal shine sweep across the hero image on entry.
- * - Parallax: image translates ±8% vertical as the card moves through the viewport.
- * - Hover: card lift, image zoom, headline accent, button fill, arrow slide.
- * - Active: 0.99 press feedback.
- *
- * All motion respects `prefers-reduced-motion` — when set, the card renders fully
- * visible and skips parallax / shine / scale transforms.
+ * Big WIDE landscape shipping card for the "Built for" horizontal carousel.
+ * Image panel left (~45%) + content right on sm+; stacked on mobile. Whole card
+ * is one link. Entrance reveal + hover lift/zoom + one-shot shine, all gated by
+ * `prefers-reduced-motion`. Sized `shrink-0 snap-start` so ~1.5 cards show with
+ * a peek inside BuiltForCarousel.
  */
 export default function HeroShippingCard({
   card,
   delay = 0,
 }: HeroShippingCardProps) {
   const ref = useRef<HTMLAnchorElement | null>(null);
-  const imageRef = useRef<HTMLDivElement | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
-
-  // Tracks an instant (entrance-skipped) reveal so the shine sweep is also
-  // skipped — set before the reveal render commits.
   const skippedEntrance = useRef(false);
 
   // Hydrate + detect reduced motion.
@@ -58,9 +49,6 @@ export default function HeroShippingCard({
     setHydrated(true);
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
-    // Client-side navigation (past the initial load window) with the card
-    // already on screen: reveal instantly — batched with setHydrated so the
-    // card never paints hidden, and route changes don't re-fade content.
     const el = ref.current;
     if (el && performance.now() > 4000) {
       const rect = el.getBoundingClientRect();
@@ -99,50 +87,16 @@ export default function HeroShippingCard({
     return () => io.disconnect();
   }, [hydrated, reduced]);
 
-  // Parallax — translate the inner image as the card moves through the viewport.
-  useEffect(() => {
-    if (!hydrated || reduced) return;
-    const el = ref.current;
-    const img = imageRef.current;
-    if (!el || !img) return;
-    let rafId = 0;
-    const update = () => {
-      rafId = 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      // Progress 0 → 1 as the card crosses the viewport top to bottom.
-      const progress = Math.min(
-        1,
-        Math.max(0, (vh - rect.top) / (vh + rect.height)),
-      );
-      // Map to ±8%.
-      const offset = (progress - 0.5) * 16; // -8% → +8%
-      img.style.transform = `translate3d(0, ${offset}%, 0)`;
-    };
-    const onScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [hydrated, reduced]);
-
-  const gradient = card.image.gradient ?? "from-accent-light via-white to-accent/15";
+  const gradient =
+    card.image.gradient ?? "from-accent-light via-white to-accent/15";
   const ctaLabel = card.ctaLabel ?? "Explore";
   const altText = card.image.alt ?? `${card.title} illustration`;
 
-  // Pre-hydration / reduced-motion → show fully visible.
   const startHidden = hydrated && !reduced && !visible;
   const entranceStyle: React.CSSProperties = {
     opacity: startHidden ? 0 : 1,
     transform: startHidden
-      ? "translate3d(0,24px,0) scale(0.92)"
+      ? "translate3d(0,24px,0) scale(0.97)"
       : "translate3d(0,0,0) scale(1)",
     transition:
       "opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)",
@@ -155,21 +109,18 @@ export default function HeroShippingCard({
       href={card.href}
       aria-label={`${ctaLabel} ${card.title}`}
       style={entranceStyle}
-      className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color,background-color] duration-250 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-accent/40 active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      className="group relative flex h-full w-[clamp(300px,85vw,820px)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-accent/40 active:scale-[0.995] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:flex-row sm:items-stretch"
     >
-      {/* Hero image / gradient placeholder */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
-        <div
-          ref={imageRef}
-          className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:group-hover:scale-100 will-change-transform"
-        >
+      {/* Image panel — full-width on mobile, left ~45% on sm+. */}
+      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%] sm:self-stretch">
+        <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:group-hover:scale-100 will-change-transform">
           {card.image.src && !showFallback ? (
             <Image
               src={card.image.src}
               alt={altText}
               fill
               unoptimized
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 640px) 100vw, 380px"
               className="object-cover"
               onError={() => setShowFallback(true)}
             />
@@ -183,7 +134,7 @@ export default function HeroShippingCard({
           )}
         </div>
 
-        {/* One-shot shine sweep — fires on entry (skipped on instant reveals). */}
+        {/* One-shot shine sweep on entry. */}
         {visible && !reduced && !skippedEntrance.current && (
           <div
             aria-hidden
@@ -202,8 +153,8 @@ export default function HeroShippingCard({
         )}
       </div>
 
-      {/* Body */}
-      <div className="p-6 md:p-8">
+      {/* Content — right half on sm+. */}
+      <div className="flex flex-1 flex-col p-6 md:p-8 sm:justify-center">
         <h3 className="text-display-md text-text-primary group-hover:text-accent transition-colors">
           {card.title}
         </h3>
@@ -225,7 +176,7 @@ export default function HeroShippingCard({
         {/* "Explore" — visually a primary button; the whole card is the link. */}
         <span
           aria-hidden
-          className="mt-7 inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent text-white px-5 py-2.5 text-sm font-semibold group-hover:bg-accent-dark transition-colors"
+          className="mt-7 inline-flex w-fit items-center justify-center gap-1.5 rounded-lg bg-accent text-white px-5 py-2.5 text-sm font-semibold group-hover:bg-accent-dark transition-colors"
         >
           {ctaLabel}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform motion-reduce:group-hover:translate-x-0" />
