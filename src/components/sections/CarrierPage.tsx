@@ -134,7 +134,7 @@ export default function CarrierPage({
               )}
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
-              <div className="max-w-xl mx-auto">
+              <div className="max-w-xl">
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                 <video
                   src={video.src}
