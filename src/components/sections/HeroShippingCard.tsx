@@ -109,7 +109,7 @@ export default function HeroShippingCard({
       href={card.href}
       aria-label={`${ctaLabel} ${card.title}`}
       style={entranceStyle}
-      className="group relative flex h-full w-[clamp(300px,85vw,820px)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-accent/40 active:scale-[0.995] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:flex-row sm:items-stretch"
+      className="group relative flex h-full w-[clamp(300px,86vw,900px)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:border-accent/40 active:scale-[0.995] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:flex-row sm:items-stretch"
     >
       {/* Image panel — full-width on mobile, left ~45% on sm+. */}
       <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%] sm:self-stretch">

@@ -54,12 +54,15 @@ export default function DomesticInternationalCards() {
         <h2 id="shipping-solutions-heading" className="sr-only">
           Shipping solutions
         </h2>
-        <BuiltForCarousel>
-          {cards.map((card, i) => (
-            <HeroShippingCard key={card.title} card={card} delay={i * 120} />
-          ))}
-        </BuiltForCarousel>
       </div>
+      {/* Full-bleed: the carousel sits OUTSIDE the max-w box so the track runs
+          edge-to-edge; it re-aligns to the content gutter internally via
+          .carousel-gutter (padding + scroll-padding). */}
+      <BuiltForCarousel>
+        {cards.map((card, i) => (
+          <HeroShippingCard key={card.title} card={card} delay={i * 120} />
+        ))}
+      </BuiltForCarousel>
     </section>
   );
 }

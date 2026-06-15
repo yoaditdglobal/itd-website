@@ -113,7 +113,7 @@ export default function BuiltForCarousel({ children }: { children: ReactNode }) 
     >
       <div
         ref={trackRef}
-        className={`flex gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-proximity lg:cursor-grab lg:active:cursor-grabbing ${
+        className={`carousel-gutter flex gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-proximity lg:cursor-grab lg:active:cursor-grabbing ${
           reduceMotion.current ? "" : "scroll-smooth"
         }`}
         onPointerDown={onPointerDown}
@@ -126,8 +126,9 @@ export default function BuiltForCarousel({ children }: { children: ReactNode }) 
         <span aria-hidden className="shrink-0 w-px" />
       </div>
 
-      {/* Desktop controls: progress bar + arrows (Appinio-style, bottom). */}
-      <div className="mt-6 hidden items-center justify-between gap-4 lg:flex">
+      {/* Desktop controls: progress bar + arrows (Appinio-style, bottom).
+          Same gutter as the track so they align to the page content edge. */}
+      <div className="carousel-gutter mt-6 hidden items-center justify-between gap-4 lg:flex">
           <div className="h-1 flex-1 max-w-[160px] rounded-full bg-border overflow-hidden">
             <div
               className="h-full rounded-full bg-accent transition-[width] duration-150"
