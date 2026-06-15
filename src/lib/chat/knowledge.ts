@@ -137,3 +137,6 @@ export const PROACTIVE_GREETING =
 /** First message shown when the panel is opened manually. */
 export const WELCOME_MESSAGE =
   "Hi! I'm the ITD Global assistant. Tell me what you ship and where, or ask me anything about our multi-carrier platform — rates, customs, integrations, returns. How can I help?";
+
+/** Short greeting on the chat home/menu (Messenger-style). */
+export const MENU_GREETING = "Hi! How can we help you today?";
