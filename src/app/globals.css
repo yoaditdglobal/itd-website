@@ -139,6 +139,35 @@ html {
   scroll-margin-top: 88px;
 }
 
+/* Full-bleed carousel gutter — mirrors `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`.
+   On a full-width (edge-to-edge) scroll track, `padding-inline` aligns the first
+   and last card to the page content edge, while `scroll-padding-inline` aligns
+   each snapped card to that same gutter — so the active card sits on the content
+   line and its neighbours bleed past the viewport edges (the asymmetric peek).
+   80rem = max-w-7xl; ≥1280px the content edge is (100vw − 80rem)/2 + px-8. */
+.carousel-gutter {
+  padding-inline: 1rem;
+  scroll-padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .carousel-gutter {
+    padding-inline: 1.5rem;
+    scroll-padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .carousel-gutter {
+    padding-inline: 2rem;
+    scroll-padding-inline: 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .carousel-gutter {
+    padding-inline: calc((100vw - 80rem) / 2 + 2rem);
+    scroll-padding-inline: calc((100vw - 80rem) / 2 + 2rem);
+  }
+}
+
 body {
   background: var(--color-background);
   color: var(--color-foreground);
