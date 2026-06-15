@@ -46,16 +46,18 @@ export default function CaseStudyHoverCard({ cs }: { cs: CaseStudyPreview }) {
       </div>
 
       {stats.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-col gap-2">
           {stats.map((s) => (
             <span
               key={s.label}
-              className="inline-flex items-baseline gap-1.5 rounded-lg bg-accent-light/60 px-2.5 py-1"
+              className="flex w-full items-center gap-1.5 overflow-hidden rounded-lg bg-accent-light/60 px-3 py-2"
             >
-              <span className="text-sm font-semibold text-accent">
+              <span className="shrink-0 whitespace-nowrap text-sm font-semibold text-accent">
                 {statText(s)}
               </span>
-              <span className="text-caption text-text-secondary">{s.label}</span>
+              <span className="min-w-0 flex-1 truncate text-caption text-text-secondary">
+                {s.label}
+              </span>
             </span>
           ))}
         </div>
