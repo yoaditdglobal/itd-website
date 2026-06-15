@@ -1,4 +1,5 @@
 import IntegrationCategoryPage from "@/components/sections/IntegrationCategoryPage";
+import MarketplaceOrbit from "@/components/sections/MarketplaceOrbit";
 import { getIntegrations } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/components/seo/JsonLd";
@@ -23,6 +24,8 @@ export default function MarketplacesPage() {
       heroSubhead="We connect to Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
       heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=marketplaces" }}
       heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
+      heroVisual={<MarketplaceOrbit />}
+      hideGrid
       useCasesHeading="How teams use it"
       useCasesIntro="A few of the ways multi-channel sellers run these integrations. Each pulls the order and its SLA, then pushes tracking back to the right marketplace account."
       useCases={[
