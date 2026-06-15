@@ -28,7 +28,7 @@ export default function ShippingDomesticPage() {
       label="Domestic Shipping"
       title="Run all your carriers from one screen."
       subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
-      primaryCta={{ label: "Get Quote", href: "#estimator" }}
+      primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
       heroImage={{
         src: "/shipping/domestic-hero-v2.webp",
         alt: "Warehouse loading bays branded with UK carrier logos — Evri, InPost, DPD, Amazon Shipping",
@@ -383,7 +383,6 @@ export default function ShippingDomesticPage() {
       ]}
       caseStudy={getCaseStudiesByShippingType("Domestic")[0] ?? caseStudies[0]}
       caseStudies={getCaseStudiesByShippingType("Domestic")}
-      rateChecker="domestic"
       faq={[
         {
           question: "Does ITD cover the Highlands & Islands and the Channel Islands?",
@@ -420,7 +419,7 @@ export default function ShippingDomesticPage() {
         headline: "Unlock the margin hiding in your shipping",
         subhead:
           "The Parcel Rate Checker compares live carriers on the postcodes you ship from and shows you where the margin's leaking. Put your current dims, weight and rate in and the gaps show up straight away.",
-        primary: { label: "Check your rates", href: "#estimator" },
+        primary: { label: "Check your rates", href: "/rate-checker/domestic" },
         secondary: { label: "Request a tailored review", href: "/contact?enquiry=domestic" },
       }}
     />

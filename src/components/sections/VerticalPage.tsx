@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { RateCheckerLoader } from "@/components/rate-checker/RateCheckerLoader";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -110,9 +109,8 @@ interface VerticalPageProps {
    *  Use the taxonomy helpers (getCaseStudiesByShippingType / BySolution / etc.) to
    *  populate. Falls back to `caseStudy` when undefined or empty. */
   caseStudies?: CaseStudy[];
-  rateChecker?: 'domestic' | 'international' | '3pl' | 'export' | 'import';
 
-  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → "/shipping/domestic#estimator", secondary="Contact Us" → "/contact". */
+  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → "/rate-checker/domestic", secondary="Contact Us" → "/contact". */
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 
@@ -164,7 +162,6 @@ export default function VerticalPage({
   integrations,
   caseStudy,
   caseStudies,
-  rateChecker,
   primaryCta,
   secondaryCta,
   heroImage,
@@ -184,7 +181,7 @@ export default function VerticalPage({
   if (breadcrumbs && breadcrumbs.length > 0) ldData.push(breadcrumbSchema(breadcrumbs));
   if (faq && faq.length > 0) ldData.push(faqSchema(faq));
 
-  const heroPrimary = primaryCta ?? { label: "Get Quote", href: "/shipping/domestic#estimator" };
+  const heroPrimary = primaryCta ?? { label: "Get Quote", href: "/rate-checker/domestic" };
   const heroSecondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
@@ -471,12 +468,6 @@ export default function VerticalPage({
           </ScrollReveal>
         </div>
       </section>
-      )}
-
-      {rateChecker && (
-        <div id="estimator">
-          <RateCheckerLoader type={rateChecker} />
-        </div>
       )}
 
       {/* FAQ — optional, GEO-friendly */}

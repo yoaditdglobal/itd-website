@@ -39,7 +39,7 @@ const PAINS = [
 const HERO_TITLE = "Even at your scale, your carriers have more to give.";
 const HERO_SUBTITLE =
   "Your volume is strong. Our carrier network makes it stronger, with rates and capacity your own contracts can't reach. A dedicated team runs it alongside yours.";
-const PRIMARY = { label: "Get Quote", href: "/shipping/domestic#estimator" };
+const PRIMARY = { label: "Get Quote", href: "/rate-checker/domestic" };
 const SECONDARY = { label: "Explore", href: "/resources/case-studies" };
 
 export default function EnterprisePage() {

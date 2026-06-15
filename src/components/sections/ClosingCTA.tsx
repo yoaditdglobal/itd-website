@@ -23,7 +23,7 @@ export default function ClosingCTA({
   secondaryCta,
   asyncNote,
 }: ClosingCTAProps) {
-  const primary = primaryCta ?? { label: "Get Quote", href: "/shipping/domestic#estimator" };
+  const primary = primaryCta ?? { label: "Get Quote", href: "/rate-checker/domestic" };
   const secondary =
     secondaryCta === null ? null : secondaryCta ?? { label: "Contact Us", href: "/contact" };
 

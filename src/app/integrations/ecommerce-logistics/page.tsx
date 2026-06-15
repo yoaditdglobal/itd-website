@@ -20,12 +20,12 @@ export default function EcommerceLogisticsPage() {
       heroLabel="eCommerce & Logistics"
       heroH1="eCommerce and logistics integrations for multi-carrier shipping."
       heroSubhead="We connect to the eCommerce platforms and logistics tools you already run. Orders flow in and ship on our carrier rates, with tracking back in your store."
-      heroPrimaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+      heroPrimaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
       heroSecondaryCta={{ label: "Browse all tech integrations", href: "/integrations/tech" }}
       closingCta={{
         headline: "Connect your store or system.",
         subhead: "One connection puts your orders on the carriers in your account, and the tracking lands back where you work.",
-        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
+        primary: { label: "Get Quote", href: "/rate-checker/domestic" },
         secondary: { label: "Browse integrations", href: "/integrations/tech" },
       }}
       breadcrumbs={[

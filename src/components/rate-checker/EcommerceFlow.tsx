@@ -7,20 +7,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, ArrowLeft, Package, PoundSterling } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 
-const CARRIER_LOGOS: Record<string, string> = {
-  'royal-mail': '/logos/rate-checker/carriers/royal-mail.png',
-  dpd: '/logos/rate-checker/carriers/dpd.png',
-  dhl: '/logos/rate-checker/carriers/dhl.png',
-  'dhl-parcel': '/logos/rate-checker/carriers/dhl-parcel.png',
-  ups: '/logos/rate-checker/carriers/ups.png',
-  fedex: '/logos/rate-checker/carriers/fedex.png',
-  evri: '/logos/rate-checker/carriers/evri.png',
-  yodel: '/logos/rate-checker/carriers/yodel.png',
-  'amazon-shipping': '/logos/rate-checker/carriers/amazon-shipping.png',
-  apc: '/logos/rate-checker/carriers/apc.jpg',
-  dx: '/logos/rate-checker/carriers/dx.png',
-  'parcel-force': '/logos/rate-checker/carriers/parcel-force-domestic.png',
-};
+import { CARRIER_LOGOS } from "./carrierLogos";
 
 
 const CARRIERS = [
@@ -31,7 +18,7 @@ const CARRIERS = [
   { id: "ups", label: "UPS", logo: CARRIER_LOGOS.ups },
   { id: "fedex", label: "FedEx", logo: CARRIER_LOGOS.fedex },
   { id: "evri", label: "Evri", logo: CARRIER_LOGOS.evri },
-  { id: "yodel", label: "Yodel", logo: CARRIER_LOGOS.yodel },
+  { id: "yodel", label: "InPost", logo: CARRIER_LOGOS.yodel },
   { id: "amazon-shipping", label: "Amazon Shipping", logo: CARRIER_LOGOS['amazon-shipping'] },
   { id: "apc", label: "APC", logo: CARRIER_LOGOS.apc },
   { id: "dx", label: "DX", logo: CARRIER_LOGOS.dx },

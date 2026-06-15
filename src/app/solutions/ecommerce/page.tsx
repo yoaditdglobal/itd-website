@@ -17,7 +17,7 @@ export default function EcommercePage() {
       label="eCommerce"
       title="Give shoppers more delivery choice while you grow your margins."
       subtitle="Our multi-carrier solution fits into your workflow. We integrate with your eCommerce platform, giving you more delivery options to offer shoppers and lower rates to ship orders."
-      primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+      primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
       secondaryCta={{
         label: "Explore",
         href: "/resources/case-studies/freedom-fire",
@@ -162,7 +162,7 @@ export default function EcommercePage() {
       closingCta={{
         headline: "See the rate your orders should ship at.",
         subhead: "Let us show you what the same orders would cost on our rates.",
-        primary: { label: "Get Quote", href: "/shipping/domestic#estimator" },
+        primary: { label: "Get Quote", href: "/rate-checker/domestic" },
         secondary: {
           label: "Explore",
           href: "/resources/case-studies/freedom-fire",

@@ -125,11 +125,10 @@ export default function ImportPage() {
         title="Importing from the Far East or worldwide? We've got it covered."
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=import" }}
-        secondaryCta={{ label: "Request a Quote", href: "#estimator" }}
+        secondaryCta={{ label: "Request a Quote", href: "/rate-checker/import" }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}
         caseStudies={getCaseStudiesBySolution("Import")}
-        rateChecker="import"
         faq={[
           {
             question: "Does ITD Global handle customs clearance for imports?",
@@ -167,7 +166,7 @@ export default function ImportPage() {
           subhead:
             "One conversation. We'll show you the rates, the route, and what a single point of contact actually looks like in practice.",
           primary: { label: "Get in Touch", href: "/contact?enquiry=import" },
-          secondary: { label: "Request a Quote", href: "#estimator" },
+          secondary: { label: "Request a Quote", href: "/rate-checker/import" },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },

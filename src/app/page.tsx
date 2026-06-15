@@ -26,7 +26,7 @@ export default function Home() {
           </>
         }
         subtitle="ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters. Connexx compares every active carrier on every parcel, picks the cheapest compliant option, and prints the label in one click. Domestic, international, returns, and customs all run from a single dashboard."
-        primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+        primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
       <SocialProof />
@@ -39,7 +39,7 @@ export default function Home() {
       <ClosingCTA
         headline="Two minutes. No commitment. See what you'd save."
         subtitle="The savings estimator compares your current carrier mix against the live Connexx rate engine. No card, no call, no obligation."
-        primaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+        primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
     </>

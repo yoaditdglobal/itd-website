@@ -305,7 +305,7 @@ export const SHIPPING_LANES: { value: ShippingLane; label: string }[] = [
 
 export const DOMESTIC_COURIERS: { value: DomesticCourier; label: string }[] = [
   { value: 'evri', label: 'Evri' },
-  { value: 'yodel', label: 'Yodel' },
+  { value: 'yodel', label: 'InPost' }, // value kept for DB compatibility; Yodel→InPost rebrand
   { value: 'amazon-shipping', label: 'Amazon Shipping' },
   { value: 'royal-mail', label: 'Royal Mail' },
   { value: 'dhl', label: 'DHL' },
