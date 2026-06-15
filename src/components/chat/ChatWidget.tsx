@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Send, Volume2, VolumeX, Loader2, ArrowRight, Sparkles } from "lucide-react";
+import { MessageCircle, X, Send, Volume2, VolumeX, Loader2, ArrowRight, Sparkles, CalendarClock } from "lucide-react";
 import { PROACTIVE_GREETING, WELCOME_MESSAGE } from "@/lib/chat/knowledge";
 import {
   STEPS,
@@ -15,6 +15,7 @@ import {
   type Lane,
   type RoutingResult,
 } from "@/lib/chat/funnel";
+import IntegrationLogo from "@/components/ui/IntegrationLogo";
 
 // Chat avatar — the ITD Global mark. Drop a square (~1:1) logo here; until the
 // file exists the Avatar falls back to an "ITD" monogram (so it never looks
@@ -54,7 +55,7 @@ function Avatar({ className = "" }: { className?: string }) {
 // renders server-side (mounted client component), so no SSR blank-page risk.
 
 type Role = "user" | "assistant";
-type CardKind = "entry" | "choices" | "outcome" | "capture" | "callback";
+type CardKind = "entry" | "choices" | "outcome" | "capture" | "callback" | "booking";
 interface Card {
   kind: CardKind;
   stepId?: StepId;
@@ -124,6 +125,10 @@ export default function ChatWidget() {
   messagesRef.current = messages;
   const answersRef = useRef<FunnelAnswers>({});
   answersRef.current = answers;
+  const flowRef = useRef<Flow>(flow);
+  flowRef.current = flow;
+  const leadDoneRef = useRef(leadDone);
+  leadDoneRef.current = leadDone;
 
   // ── Restore persisted state ──
   useEffect(() => {
@@ -356,6 +361,24 @@ export default function ChatWidget() {
     [append],
   );
 
+  const addBookingCard = useCallback(
+    (withUserBubble: boolean) => {
+      if (messagesRef.current.some((m) => m.card?.kind === "booking")) return;
+      const msgs: Msg[] = [];
+      if (withUserBubble)
+        msgs.push({ id: newId(), role: "user", content: "I'd like to book a call" });
+      msgs.push({
+        id: newId(),
+        role: "assistant",
+        content: "Great — grab a slot that suits you and we'll be ready for you.",
+        card: { kind: "booking" },
+      });
+      append(...msgs);
+      track("chat_booking_open");
+    },
+    [append],
+  );
+
   const openPanel = useCallback(() => {
     setOpen(true);
     setTeaser(false);
@@ -393,6 +416,13 @@ export default function ChatWidget() {
     async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || streaming) return;
+      const lc = trimmed.toLowerCase();
+      const meetingIntent =
+        /\b(book|meeting|demo|schedule|appointment|call me|speak to|talk to)\b/.test(lc);
+      const commercialSignal =
+        /\b(quote|pricing|price|cost|saving|switch|tender|rfp|royal\s?mail|evri|dpd|parcelforce|hermes|fedex|ups|dhl|shopify|magento|amazon|ebay|linnworks|netsuite)\b/.test(
+          lc,
+        ) || /\d{2,}/.test(lc);
       const userMsg: Msg = { id: newId(), role: "user", content: trimmed };
       const assistantId = newId();
       setInput("");
@@ -445,8 +475,23 @@ export default function ChatWidget() {
       } finally {
         setStreaming(false);
       }
+
+      // Smart next step: turn shared meeting/commercial intent into a booking or a captured lead.
+      if (
+        flowRef.current === "idle" &&
+        !leadDoneRef.current &&
+        !messagesRef.current.some(
+          (m) =>
+            m.card?.kind === "capture" ||
+            m.card?.kind === "callback" ||
+            m.card?.kind === "booking",
+        )
+      ) {
+        if (meetingIntent) addBookingCard(false);
+        else if (commercialSignal) addCallbackCard(false);
+      }
     },
-    [streaming],
+    [streaming, addBookingCard, addCallbackCard],
   );
 
   // ── After a few free-text turns with no lead in motion, offer a callback ──
@@ -576,6 +621,21 @@ export default function ChatWidget() {
                 );
               }
 
+              if (kind === "booking") {
+                return (
+                  <div key={m.id} className="space-y-2.5">
+                    {m.content && (
+                      <div className="flex justify-start">
+                        <div className="max-w-[85%] rounded-2xl rounded-bl-sm border border-border bg-white px-3.5 py-2.5 text-sm leading-relaxed text-text-primary">
+                          {m.content}
+                        </div>
+                      </div>
+                    )}
+                    <BookingCard />
+                  </div>
+                );
+              }
+
               // Text bubble (plain text, the step question, or the outcome line)
               return (
                 <div key={m.id} className="space-y-2.5">
@@ -602,8 +662,17 @@ export default function ChatWidget() {
                     />
                   )}
 
-                  {kind === "outcome" && m.card?.outcome?.proof && (
-                    <ProofBox proof={m.card.outcome.proof} />
+                  {kind === "outcome" && (
+                    <>
+                      {m.card?.outcome?.proof && <ProofBox proof={m.card.outcome.proof} />}
+                      <button
+                        type="button"
+                        onClick={() => addBookingCard(true)}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-3 py-2 text-xs font-medium text-text-primary transition-colors hover:border-accent/40 hover:text-accent"
+                      >
+                        <CalendarClock className="h-3.5 w-3.5" aria-hidden /> Or book a call now
+                      </button>
+                    </>
                   )}
                 </div>
               );
@@ -858,8 +927,11 @@ function ProofBox({ proof }: { proof: NonNullable<RoutingResult["proof"]> }) {
       href={proof.href}
       className="group flex items-start gap-2.5 rounded-2xl border border-border bg-white p-3 transition-colors hover:border-accent/40"
     >
-      <span className="mt-0.5 inline-flex h-6 flex-shrink-0 items-center rounded-full bg-accent-light px-2 text-[10px] font-semibold uppercase tracking-wide text-accent">
-        Proof
+      <span className="flex flex-shrink-0 flex-col items-center gap-1.5">
+        <span className="inline-flex h-5 items-center rounded-full bg-accent-light px-2 text-[10px] font-semibold uppercase tracking-wide text-accent">
+          Proof
+        </span>
+        <IntegrationLogo name={proof.client} logo={proof.logo} size="sm" />
       </span>
       <span className="flex-1 text-xs leading-snug text-text-secondary">
         <span className="font-semibold text-text-primary">{proof.client}</span> {proof.line}.{" "}
@@ -868,6 +940,42 @@ function ProofBox({ proof }: { proof: NonNullable<RoutingResult["proof"]> }) {
         </span>
       </span>
     </a>
+  );
+}
+
+// ── In-chat booking — embeds the configured scheduler (Calendly / Cal.com /
+//    Zoho Bookings via NEXT_PUBLIC_BOOKING_URL); falls back to a contact prompt
+//    until the URL is set. ──
+function BookingCard() {
+  const url = process.env.NEXT_PUBLIC_BOOKING_URL;
+  if (url) {
+    return (
+      <div className="overflow-hidden rounded-2xl border border-border bg-white">
+        <iframe
+          src={url}
+          title="Book a meeting with ITD Global"
+          loading="lazy"
+          className="h-[460px] w-full"
+        />
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-2xl border border-accent/30 bg-accent-light/40 p-3.5">
+      <p className="flex items-center gap-1.5 text-sm font-medium text-text-primary">
+        <CalendarClock className="h-4 w-4 text-accent" aria-hidden /> Let&apos;s get a call in the
+        diary.
+      </p>
+      <p className="mt-1 text-xs text-text-secondary">
+        Tell us a time that suits and we&apos;ll send a calendar invite to confirm.
+      </p>
+      <a
+        href="/contact?enquiry=meeting"
+        className="mt-3 inline-flex items-center gap-1 rounded-lg bg-bg-dark px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-bg-dark-card"
+      >
+        Request a time <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+      </a>
+    </div>
   );
 }
 

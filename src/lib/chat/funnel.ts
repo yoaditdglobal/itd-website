@@ -157,7 +157,7 @@ export interface RoutingResult {
   /** Label for the capture CTA, matched to the journey's first action (SPEC §1). */
   ctaLabel: string;
   /** A real, matched ITD case study to show as proof before capture. */
-  proof?: { client: string; line: string; href: string };
+  proof?: { client: string; line: string; href: string; logo?: string };
 }
 
 // Real case studies (live detail pages) used as matched proof. Capability-framed,
@@ -167,26 +167,31 @@ const PROOF = {
     client: "Tatti Lashes",
     line: "added delivery choice at checkout and won margin back on every order after putting Evri alongside DPD",
     href: "/resources/case-studies/tatti-lashes",
+    logo: "/case-studies/tatti-lashes/logo.jpeg",
   },
   midmarket: {
     client: "West Ham United",
     line: "moved to one managed multi-carrier framework with a clear view of UK and international spend",
     href: "/resources/case-studies/west-ham-united",
+    logo: "/case-studies/west-ham-united/logo.png",
   },
   partner: {
     client: "RIOZ Global",
     line: "turned competitive carrier rates into a revenue stream — five new clients in six months",
     href: "/resources/case-studies/rioz-global",
+    logo: "/case-studies/rioz-global/logo.png",
   },
   export: {
     client: "Arlo Fulfilment",
     line: "unlocked international with the right express lane, turning a gap in their offering into an advantage",
     href: "/resources/case-studies/arlo-fulfilment",
+    logo: "/case-studies/arlo-fulfilment/logo.png",
   },
   import: {
     client: "Home Bargains",
     line: "consolidated 60 buyers' scattered sample shipments into one weekly air freight from China",
     href: "/resources/case-studies/home-bargains",
+    logo: "/case-studies/home-bargains/logo.jpeg",
   },
 } as const;
 

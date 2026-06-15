@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MODEL = "claude-haiku-4-5";
-const MAX_TOKENS = 1024;
+const MAX_TOKENS = 340; // keep chat replies short (2–3 sentences); long answers get skimmed
 const MAX_MESSAGES = 24; // cap conversation length sent upstream
 const MAX_CHARS = 4000; // per-message cap
 
