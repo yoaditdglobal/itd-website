@@ -126,7 +126,7 @@ ${KNOWLEDGE}
 
 /** A short opening line the proactive bubble shows. */
 export const PROACTIVE_GREETING =
-  "👋 Quick question — what are you shipping, and where to? I can tell you how Connexx would handle it.";
+  "👋 Hi there! How can we help? If you tell us what you're shipping and where to, we'll be able to tell you how much it should really cost you. (Clue: take what you pay now and knock off 20%.)";
 
 /** First message shown when the panel is opened manually. */
 export const WELCOME_MESSAGE =
