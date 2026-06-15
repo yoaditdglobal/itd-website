@@ -274,12 +274,15 @@ export default function VerticalPage({
                 Each audience uses the same platform differently. Jump to the section that fits you.
               </p>
             </ScrollReveal>
-            <BuiltForCarousel>
-              {audienceAnchors.map((a) => (
-                <BuiltForCard key={a.anchor} anchor={a} />
-              ))}
-            </BuiltForCarousel>
           </div>
+          {/* Full-bleed: carousel sits OUTSIDE the max-w box (same as the
+              homepage). Its own .carousel-gutter re-aligns the first card to the
+              content gutter, so neighbours bleed past both viewport edges. */}
+          <BuiltForCarousel>
+            {audienceAnchors.map((a) => (
+              <BuiltForCard key={a.anchor} anchor={a} />
+            ))}
+          </BuiltForCarousel>
         </section>
       )}
 
