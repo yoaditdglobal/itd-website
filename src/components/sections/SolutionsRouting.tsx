@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import UsedByChip from "./UsedByChip";
 import { getCaseStudiesBySolution, type SolutionTag } from "@/lib/data";
 import {
   Building2,
@@ -114,10 +114,15 @@ function IcpCard({ icp }: { icp: Icp }) {
   const Icon = icp.icon;
 
   return (
-    <Link
-      href={icp.href}
-      className="group flex h-full flex-col rounded-2xl border border-border bg-white p-5 md:p-6 transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-    >
+    <div className="group relative flex h-full flex-col rounded-2xl border border-border bg-white p-5 md:p-6 transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30">
+      {/* Whole-card link to the solution page (stretched overlay). The "Used by"
+          logos sit above it (z-[2]) as their own links to the case study. */}
+      <Link
+        href={icp.href}
+        aria-label={icp.name}
+        className="absolute inset-0 z-[1] rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      />
+
       <div className="flex items-start justify-between mb-4">
         <span
           aria-hidden
@@ -140,21 +145,30 @@ function IcpCard({ icp }: { icp: Icp }) {
       <div className="mt-auto pt-4 border-t border-border">
         <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
+          {/* z-[2] lifts the logos above the stretched solution link so each is
+              its own hover/click target; "+ N more" stays under it. */}
+          <div className="relative z-[2] flex items-center gap-1.5">
             {visible.length > 0 ? (
-              visible.map((cs) => (
-                <span
-                  key={cs.id}
-                  className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1"
-                  title={cs.brandName}
-                >
-                  <IntegrationLogo
-                    name={cs.brandName}
-                    logo={cs.logo}
-                    size="xs"
+              visible.map((cs) => {
+                const q = cs.quotes?.[0];
+                return (
+                  <UsedByChip
+                    key={cs.id}
+                    cs={{
+                      slug: cs.slug,
+                      brandName: cs.brandName,
+                      logo: cs.logo,
+                      stats: cs.stats,
+                      quoteAuthor: q
+                        ? [q.name, q.title].filter(Boolean).join(", ")
+                        : cs.quoteAuthor,
+                      quoteAuthorPhoto: q?.photo ?? cs.quoteAuthorPhoto,
+                      oneLiner: cs.oneLiner,
+                      headline: cs.headline,
+                    }}
                   />
-                </span>
-              ))
+                );
+              })
             ) : (
               // Placeholder tiles — swap for real customer logos when case
               // studies exist for this solution tag.
@@ -174,6 +188,6 @@ function IcpCard({ icp }: { icp: Icp }) {
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
