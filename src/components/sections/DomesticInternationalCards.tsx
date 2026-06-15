@@ -1,6 +1,7 @@
 import { Truck, Globe2, PackageOpen } from "lucide-react";
 import HeroShippingCard from "@/components/sections/HeroShippingCard";
 import type { HeroShippingCardData } from "@/components/sections/HeroShippingCard";
+import BuiltForCarousel from "@/components/sections/BuiltForCarousel";
 
 const PLACEHOLDER_ICON_CLASS = "w-1/4 h-1/4 text-accent/30";
 
@@ -53,15 +54,11 @@ export default function DomesticInternationalCards() {
         <h2 id="shipping-solutions-heading" className="sr-only">
           Shipping solutions
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <BuiltForCarousel>
           {cards.map((card, i) => (
-            <HeroShippingCard
-              key={card.title}
-              card={card}
-              delay={i * 120}
-            />
+            <HeroShippingCard key={card.title} card={card} delay={i * 120} />
           ))}
-        </div>
+        </BuiltForCarousel>
       </div>
     </section>
   );
