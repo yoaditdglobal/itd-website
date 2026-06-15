@@ -6,30 +6,32 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 
+// `href` points each card at its dedicated detail page. Explicit (not runtime
+// slugify) so it can't drift from the real slug/overrides in data.ts.
 const techLogos = [
-  { name: "Shopify", cat: "eComm", logo: "/logos/ecommerce/shopify_logo.png" },
-  { name: "WooCommerce", cat: "eComm", logo: "/logos/erp-wms/woocommerce_logo.svg" },
-  { name: "Amazon", cat: "Mktpl", logo: "/logos/marketplaces/amazon_logo.png" },
-  { name: "eBay", cat: "Mktpl", logo: "/logos/marketplaces/ebay_logo.png" },
-  { name: "ShipStation", cat: "Logistics", logo: "/logos/erp-wms/shipstation_logo.png" },
-  { name: "Linnworks", cat: "ERP", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { name: "Etsy", cat: "Mktpl", logo: "/logos/marketplaces/etsy_logo.png" },
-  { name: "Veeqo", cat: "ERP", logo: "/logos/erp-wms/veeqo_logo.png" },
-  { name: "TikTok Shop", cat: "Mktpl", logo: "/logos/marketplaces/tiktok_logo.png" },
-  { name: "Mintsoft", cat: "ERP", logo: "/logos/erp-wms/mintsoft_logo.png" },
+  { name: "Shopify", cat: "eComm", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/tech/shopify" },
+  { name: "WooCommerce", cat: "eComm", logo: "/logos/erp-wms/woocommerce_logo.svg", href: "/integrations/tech/woocommerce" },
+  { name: "Amazon", cat: "Mktpl", logo: "/logos/marketplaces/amazon-icon.webp", href: "/integrations/tech/amazon" },
+  { name: "eBay", cat: "Mktpl", logo: "/logos/marketplaces/ebay-icon.png", href: "/integrations/tech/ebay" },
+  { name: "ShipStation", cat: "Logistics", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/tech/shipstation" },
+  { name: "Linnworks", cat: "ERP", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/tech/linnworks" },
+  { name: "Etsy", cat: "Mktpl", logo: "/logos/marketplaces/etsy-icon.png", href: "/integrations/tech/etsy" },
+  { name: "Veeqo", cat: "ERP", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/tech/veeqo" },
+  { name: "TikTok Shop", cat: "Mktpl", logo: "/logos/marketplaces/tiktok-tile.png", href: "/integrations/tech/tiktok-shop" },
+  { name: "Mintsoft", cat: "ERP", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/tech/mintsoft" },
 ];
 
 const carrierLogos = [
-  { name: "DHL", region: "International", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", region: "International", logo: "/logos/carriers/fedex_logo.png" },
-  { name: "UPS", region: "International", logo: "/logos/carriers/ups_logo.png" },
-  { name: "Royal Mail", region: "Domestic", logo: "/logos/carriers/Royal-Mail-Logo.png" },
-  { name: "DPD", region: "Domestic", logo: "/logos/carriers/DPD-LOGO.png" },
-  { name: "Evri", region: "Domestic", logo: "/logos/carriers/evri_logo.png" },
-  { name: "Amazon Shipping", region: "Domestic", logo: "/logos/carriers/amazonshipping_logo.png" },
-  { name: "InPost", region: "Domestic", logo: "/logos/carriers/InPost_Logo_yellow.png" },
-  { name: "DHL Parcel", region: "Domestic", logo: "/logos/carriers/dhlparcel_logo.svg" },
-  { name: "Parcel Force", region: "International", logo: "/logos/carriers/parcel-force.svg" },
+  { name: "DHL", region: "International", logo: "/logos/carriers/dhl_logo.webp", href: "/integrations/carriers/dhl" },
+  { name: "FedEx", region: "International", logo: "/logos/carriers/fedex-icon.png", href: "/integrations/carriers/fedex" },
+  { name: "UPS", region: "International", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers/ups" },
+  { name: "Royal Mail", region: "Domestic", logo: "/logos/carriers/royal-mail-icon.png", href: "/integrations/carriers/royal-mail" },
+  { name: "DPD", region: "Domestic", logo: "/logos/carriers/DPD-LOGO.png", href: "/integrations/carriers/dpd" },
+  { name: "Evri", region: "Domestic", logo: "/logos/carriers/evri_logo.png", href: "/integrations/carriers/evri" },
+  { name: "Amazon Shipping", region: "Domestic", logo: "/logos/carriers/amazonshipping_logo.png", href: "/integrations/carriers/amazon-shipping" },
+  { name: "InPost", region: "Domestic", logo: "/logos/carriers/inpost-icon.png", href: "/integrations/carriers/inpost" },
+  { name: "DHL Parcel", region: "Domestic", logo: "/logos/carriers/dhlparcel_logo.svg", href: "/integrations/carriers/dhl-parcel" },
+  { name: "Parcel Force", region: "International", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcel-force" },
 ];
 
 export default function IntegrationHighlights() {
@@ -74,22 +76,27 @@ export default function IntegrationHighlights() {
         <ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {(tab === "tech" ? techLogos : carrierLogos).map((logo) => (
-              <div
+              <Link
                 key={logo.name}
-                className="card-hover flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary"
+                href={logo.href}
+                className="group card-hover flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
               >
                 <IntegrationLogo name={logo.name} logo={logo.logo} size="sm" className="mb-3" />
-                <span className="text-sm font-medium text-text-primary text-center">{logo.name}</span>
+                <span className="text-sm font-medium text-text-primary text-center group-hover:text-accent transition-colors">{logo.name}</span>
                 <span className="text-[10px] text-text-tertiary">
                   {"region" in logo ? logo.region : logo.cat}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         </ScrollReveal>
 
         <div className="mt-8 text-center">
-          <Link href="/integrations/carriers" className="link-underline text-sm text-accent font-medium">
+          {/* Destination follows the active toggle: tech hub vs carriers directory. */}
+          <Link
+            href={tab === "tech" ? "/integrations/tech" : "/integrations/carriers"}
+            className="link-underline text-sm text-accent font-medium"
+          >
             Browse integrations →
           </Link>
         </div>

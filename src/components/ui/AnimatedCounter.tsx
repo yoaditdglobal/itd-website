@@ -61,12 +61,12 @@ export default function AnimatedCounter({
     surface === "light" ? "text-text-tertiary" : "text-white/60";
   return (
     <div ref={ref} className="text-center">
-      <div className={`text-3xl md:text-4xl font-bold ${numberClass}`}>
+      <div className={`text-stat-xl ${numberClass}`}>
         {prefix}
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className={`mt-1 text-sm ${labelClass}`}>{label}</div>
+      <div className={`mt-1 text-body-sm ${labelClass}`}>{label}</div>
     </div>
   );
 }

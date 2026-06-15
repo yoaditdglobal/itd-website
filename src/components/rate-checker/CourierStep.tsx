@@ -180,7 +180,7 @@ export function CourierStep({
               </SelectContent>
             </Select>
           ) : (
-            <p className="text-center text-text-secondary text-sm">
+            <p className="text-center text-body-sm text-text-secondary">
               No services configured for this courier yet. Contact admin to add services.
             </p>
           )}
@@ -205,7 +205,7 @@ export function CourierStep({
       {showSecondCarrier && onCourier2Change && onCourierService2Change && (
         <div className="space-y-6 pt-4 border-t border-border">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-text-primary">
+            <h2 className="text-heading-md text-text-primary">
               Choose another courier
             </h2>
             <button
@@ -271,7 +271,7 @@ export function CourierStep({
           {/* Second carrier service dropdown */}
           {courier2 && (
             <div className="space-y-3">
-              <h3 className="text-base font-medium text-text-primary text-center">
+              <h3 className="text-heading-sm text-text-primary text-center">
                 Which service for the second carrier?
               </h3>
               {services2Loading ? (
@@ -299,7 +299,7 @@ export function CourierStep({
                   </SelectContent>
                 </Select>
               ) : (
-                <p className="text-center text-text-secondary text-sm">
+                <p className="text-center text-body-sm text-text-secondary">
                   No services configured for this courier yet.
                 </p>
               )}

@@ -204,9 +204,9 @@ export default function IntegrationCategoryPage({
                     className="group block card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center h-full scroll-mt-24 transition-all"
                   >
                     <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
-                    <p className="text-sm font-semibold text-text-primary">{integration.name}</p>
+                    <p className="text-heading-sm text-text-primary">{integration.name}</p>
                     {integration.description && (
-                      <p className="text-xs text-text-tertiary mt-1">{integration.description}</p>
+                      <p className="text-caption text-text-tertiary mt-1">{integration.description}</p>
                     )}
                   </Link>
                 ))}
@@ -236,8 +236,8 @@ export default function IntegrationCategoryPage({
               {useCases.map((uc, i) => (
                 <ScrollReveal key={uc.headline} delay={i * 0.05}>
                   <div className="bg-bg-secondary rounded-2xl border border-border p-6 h-full flex flex-col">
-                    <h3 className="text-lg font-semibold text-text-primary mb-3">{uc.headline}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-1">{uc.description}</p>
+                    <h3 className="text-heading-md text-text-primary mb-3">{uc.headline}</h3>
+                    <p className="text-body-sm text-text-secondary mb-5 flex-1">{uc.description}</p>
                     {uc.namedIntegrations.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {uc.namedIntegrations.map((name) => (
@@ -272,11 +272,11 @@ export default function IntegrationCategoryPage({
               {howItWorks.map((s, i) => (
                 <ScrollReveal key={s.step} delay={i * 0.05}>
                   <div className="bg-white rounded-2xl border border-border p-6 h-full">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent-light text-accent text-base font-bold mb-4">
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent-light text-accent text-heading-sm mb-4">
                       {s.step}
                     </span>
-                    <h3 className="text-base font-semibold text-text-primary mb-2">{s.title}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{s.description}</p>
+                    <h3 className="text-heading-sm text-text-primary mb-2">{s.title}</h3>
+                    <p className="text-body-sm text-text-secondary whitespace-pre-line">{s.description}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -294,7 +294,7 @@ export default function IntegrationCategoryPage({
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-white mb-3">{closingCta.headline}</h2>
-              <p className="text-white/80 mb-8 text-lg">{closingCta.subhead}</p>
+              <p className="text-body-lg text-white/80 mb-8">{closingCta.subhead}</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button href={closingCta.primary.href} surface="dark">{closingCta.primary.label}</Button>
                 {closingCta.secondary && (
@@ -304,7 +304,7 @@ export default function IntegrationCategoryPage({
                 )}
               </div>
               {closingCta.asyncNote && (
-                <p className="mt-4 text-sm text-white/60">{closingCta.asyncNote}</p>
+                <p className="mt-4 text-body-sm text-white/60">{closingCta.asyncNote}</p>
               )}
             </ScrollReveal>
           </div>

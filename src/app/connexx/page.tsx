@@ -59,7 +59,7 @@ const modules: ModuleDeepDive[] = [
     name: "Multi-Carrier Dispatch",
     lead: "One screen for every carrier, every label format, every manifest.",
     bullets: [
-      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, Yodel, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, GLS, and PostNL.",
+      "16 active carrier integrations including Royal Mail, DPD, Evri, Parcelforce, DHL Express, FedEx, UPS, Amazon Shipping, InPost, DHL Parcel, Deutsche Post, and TNT.",
       "One-click label generation. Batch processing for peak.",
       "Manifest generation by carrier, by date, by depot.",
       "Exception routing rebooks failed dispatches to the next-best carrier automatically.",
@@ -98,7 +98,7 @@ const modules: ModuleDeepDive[] = [
       "Per-carrier cost breakdowns by lane, by service, by week.",
       "SLA breach rate by carrier, with the underlying shipment IDs.",
       "Surcharge tracking (fuel, residential, out-of-area, Highlands and Islands) so the finance team sees true landed cost.",
-      "Exportable to CSV and direct write-back to NetSuite, SAP, and Microsoft Dynamics for consolidated finance reporting.",
+      "Exportable to CSV and direct write-back to NetSuite for consolidated finance reporting.",
     ],
     stat: "Atlas Industrial saved 20 hours per week of manual data entry by writing Connexx shipment data straight back into the ERP. Redelivery costs dropped to near zero across 500 weekly pallet shipments.",
   },
@@ -107,9 +107,9 @@ const modules: ModuleDeepDive[] = [
     name: "Integrations & API",
     lead: "Native integrations to every major ERP, WMS, eCommerce platform, and marketplace. REST API for everything else.",
     bullets: [
-      "ERP and WMS: SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, Cin7.",
-      "eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce, BigCommerce.",
-      "Marketplaces: Amazon Seller Central, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu.",
+      "ERP and WMS: Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero.",
+      "eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce.",
+      "Marketplaces: Amazon Seller Central, eBay, Etsy, TikTok Shop, Temu.",
       "REST API with webhook events for shipment created, shipment dispatched, tracking update, exception, delivered, returned.",
     ],
     stat: "26 live tech integrations and 16 carrier integrations as of the last platform update. New integrations are added monthly against published roadmap.",
@@ -119,31 +119,31 @@ const modules: ModuleDeepDive[] = [
 const integrationBreakdown = [
   {
     category: "eCommerce",
-    count: "4",
-    examples: "Shopify, WooCommerce, Magento / Adobe Commerce, BigCommerce",
+    count: "3",
+    examples: "Shopify, WooCommerce, Magento / Adobe Commerce",
   },
   {
     category: "ERP and WMS",
     count: "11",
     examples:
-      "SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, Cin7",
+      "Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero",
   },
   {
     category: "Marketplaces",
-    count: "7",
-    examples: "Amazon, eBay, Etsy, Walmart, Zalando, TikTok Shop, Temu",
+    count: "5",
+    examples: "Amazon, eBay, Etsy, TikTok Shop, Temu",
   },
   {
     category: "Carriers (UK)",
     count: "8",
     examples:
-      "Royal Mail, DPD, Evri, Parcelforce, Yodel, DX, InPost, Amazon Shipping",
+      "Royal Mail, DPD, Evri, Parcelforce, DX, InPost, Amazon Shipping",
   },
   {
     category: "Carriers (international)",
     count: "8",
     examples:
-      "DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT, Aramex, GLS",
+      "DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT",
   },
 ];
 
@@ -162,12 +162,12 @@ const faqItems = [
   {
     question: "How long does it take to set up Connexx?",
     answer:
-      "Shopify and WooCommerce connect in under 10 minutes through the official app and the WordPress plugin. Marketplace stacks (Amazon, eBay, Etsy via Linnworks or Mintsoft) take a few hours. ERP integrations (SAP, NetSuite, Microsoft Dynamics) typically run six to eight weeks for a multi-country enterprise rollout. SwiftLog Fulfilment onboards new 3PL brand clients on Connexx in two days, down from two weeks on their previous stack.",
+      "Shopify and WooCommerce connect in under 10 minutes through the official app and the WordPress plugin. Marketplace stacks (Amazon, eBay, Etsy via Linnworks or Mintsoft) take a few hours. ERP integrations (such as NetSuite) typically run six to eight weeks for a multi-country enterprise rollout. SwiftLog Fulfilment onboards new 3PL brand clients on Connexx in two days, down from two weeks on their previous stack.",
   },
   {
     question: "Does Connexx work with my ERP?",
     answer:
-      "Likely yes. Connexx has native integrations to SAP, Oracle NetSuite, Microsoft Dynamics 365, Sage, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero, and Cin7. Shipment write-back into the ERP is included on every native integration. If your ERP is not on the native list, the REST API supports any system that can call HTTPS and receive webhooks. Request a demo and bring your ERP version number, we will tell you on the call.",
+      "Likely yes. Connexx has native integrations to Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, and ShipHero. Shipment write-back into the ERP is included on every native integration. If your ERP is not on the native list, the REST API supports any system that can call HTTPS and receive webhooks. Request a demo and bring your ERP version number, we will tell you on the call.",
   },
   {
     question: "Does Connexx replace my customs broker?",
@@ -177,7 +177,7 @@ const faqItems = [
   {
     question: "What carriers does Connexx support in the UK?",
     answer:
-      "Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery, First Class, Second Class, International), DPD (Next Day, Predict, Two Day, Saturday, DPD Local), Evri (Standard, Next Day, ParcelShop), Parcelforce (Express24, Express48, Global Express, Global Priority, Global Value), Yodel, DX, InPost, and Amazon Shipping. Every UK postcode is covered, including Highlands and Islands, Channel Islands, Northern Ireland, and BFPO.",
+      "Royal Mail (Tracked 24, Tracked 48, Signed, Special Delivery, First Class, Second Class, International), DPD (Next Day, Predict, Two Day, Saturday, DPD Local), Evri (Standard, Next Day, ParcelShop), Parcelforce (Express24, Express48, Global Express, Global Priority, Global Value), DX, InPost, and Amazon Shipping. Every UK postcode is covered, including Highlands and Islands, Channel Islands, Northern Ireland, and BFPO.",
   },
   {
     question: "How does Connexx pricing work?",
@@ -229,7 +229,7 @@ export default function ConnexxPage() {
                 Global. Live rate comparison across every connected carrier,
                 one-click label generation, customs documentation, branded
                 tracking, returns, and analytics. Connect Connexx to Shopify,
-                SAP, NetSuite, Linnworks, or your own systems through the API.
+                NetSuite, Linnworks, or your own systems through the API.
                 Dispatch every parcel from one screen.
               </p>
               <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
@@ -326,7 +326,7 @@ export default function ConnexxPage() {
             <h2 className="text-display-lg text-text-primary mb-6">
               What Connexx actually does.
             </h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
+            <p className="text-body-lg text-text-secondary">
               Connexx is a UK-built multi-carrier shipping platform from ITD
               Global. It connects your eCommerce platform, marketplaces, and ERP
               to every major UK and international carrier. Royal Mail, DPD,
@@ -334,7 +334,7 @@ export default function ConnexxPage() {
               more in the live carrier list. Rate shopping, label generation,
               customs documentation, and tracking all happen from one dashboard.
             </p>
-            <p className="mt-5 text-base text-text-secondary leading-relaxed">
+            <p className="mt-5 text-body-md text-text-secondary">
               Connexx is not a horizontal SaaS with a UK skin. The rate engine
               runs a live API call to each carrier on every shipment. Customs
               documentation is generated against HMRC, EU CDS, and
@@ -368,10 +368,10 @@ export default function ConnexxPage() {
               <ScrollReveal key={mod.name} delay={i * 0.05}>
                 <div className="bg-white rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/20 transition-all h-full">
                   <mod.icon className="w-8 h-8 text-accent mb-3" />
-                  <p className="text-base font-semibold text-text-primary">
+                  <p className="text-heading-md text-text-primary">
                     {mod.name}
                   </p>
-                  <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">
+                  <p className="mt-1.5 text-body-sm text-text-secondary">
                     {mod.lead}
                   </p>
                 </div>
@@ -398,7 +398,7 @@ export default function ConnexxPage() {
                   <h2 className="text-display-lg text-text-primary">
                     {mod.name}.
                   </h2>
-                  <p className="mt-3 text-base text-text-secondary leading-relaxed">
+                  <p className="mt-3 text-body-md text-text-secondary">
                     {mod.lead}
                   </p>
                   <ul className="mt-6 space-y-3">
@@ -413,7 +413,7 @@ export default function ConnexxPage() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 text-sm text-text-primary bg-accent-light/40 border border-accent/15 rounded-lg p-4 leading-relaxed">
+                  <p className="mt-6 text-body-sm text-text-primary bg-accent-light/40 border border-accent/15 rounded-lg p-4">
                     {mod.stat}
                   </p>
                 </div>
@@ -423,7 +423,7 @@ export default function ConnexxPage() {
                 <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
                   <div className="text-center">
                     <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
-                    <p className="text-sm text-text-tertiary">
+                    <p className="text-body-sm text-text-tertiary">
                       {mod.name} — UI preview
                     </p>
                   </div>
@@ -449,11 +449,11 @@ export default function ConnexxPage() {
               <p className="text-eyebrow text-accent mb-3">
                 Featured case study — SwiftLog Fulfilment
               </p>
-              <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
+              <h3 className="text-display-md text-white leading-snug">
                 98.7% accuracy across 40+ destination countries. Client
                 onboarding from two weeks to two days.
               </h3>
-              <p className="mt-5 text-base text-white/70 leading-relaxed">
+              <p className="mt-5 text-body-md text-white/70">
                 SwiftLog Fulfilment runs 60 brands across 40+ countries on
                 Connexx. Before Connexx, their shipment accuracy was 93%.
                 Customs documentation was prepared manually, and a 7% error rate
@@ -500,7 +500,7 @@ export default function ConnexxPage() {
                 <h2 className="text-display-lg text-text-primary">
                   Built for developers. Live in minutes.
                 </h2>
-                <p className="mt-4 text-base text-text-secondary leading-relaxed">
+                <p className="mt-4 text-body-md text-text-secondary">
                   Connexx exposes every platform function through a versioned
                   REST API. Create a shipment, fetch a rate, generate a label,
                   pull tracking, manage carriers, handle returns. Authentication
@@ -508,7 +508,7 @@ export default function ConnexxPage() {
                   event. The full reference, with code samples in cURL, Node,
                   Python, and PHP, is in the developer documentation.
                 </p>
-                <p className="mt-4 text-base text-text-secondary leading-relaxed">
+                <p className="mt-4 text-body-md text-text-secondary">
                   The response returns the selected carrier, the service code,
                   the rate, the label as a base64 PDF or PNG, the tracking
                   number, and a webhook subscription URL for status updates.
@@ -582,10 +582,10 @@ export default function ConnexxPage() {
               <ScrollReveal key={row.category} delay={i * 0.05}>
                 <div className="bg-white rounded-xl border border-border p-5 h-full">
                   <div className="flex items-baseline justify-between mb-2">
-                    <p className="text-sm font-semibold text-text-primary">
+                    <p className="text-heading-sm text-text-primary">
                       {row.category}
                     </p>
-                    <span className="text-2xl font-bold text-accent">
+                    <span className="text-stat-lg text-accent">
                       {row.count}
                     </span>
                   </div>

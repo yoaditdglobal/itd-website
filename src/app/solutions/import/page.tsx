@@ -110,7 +110,7 @@ export default function ImportPage() {
                   <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5 text-accent" />
                   </div>
-                  <p className="text-sm font-medium text-text-primary leading-snug">{text}</p>
+                  <p className="text-label text-text-primary leading-snug">{text}</p>
                 </div>
               </ScrollReveal>
             ))}

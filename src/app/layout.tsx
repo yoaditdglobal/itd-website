@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import ScrollToTop from "@/components/util/ScrollToTop";
+import ChatWidget from "@/components/chat/ChatWidget";
 import { rootMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -68,6 +69,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1 pt-[72px]">{children}</main>
           <Footer />
+          <ChatWidget />
         </QueryProvider>
       </body>
     </html>

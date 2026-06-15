@@ -52,9 +52,9 @@ export default function CaseStudyCards({
                     {cs.industry}
                   </span>
                 </div>
-                <div className="text-2xl md:text-3xl font-bold text-accent mb-1">{cs.metric}</div>
-                <p className="text-sm font-semibold text-text-primary mb-2">{cs.brandName}</p>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4">{cs.summary}</p>
+                <div className="text-stat-lg text-accent mb-1">{cs.metric}</div>
+                <p className="text-heading-sm text-text-primary mb-2">{cs.brandName}</p>
+                <p className="text-body-sm text-text-secondary mb-4">{cs.summary}</p>
                 <div className="flex items-center gap-1 text-sm text-accent font-medium">
                   Read case study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>

@@ -16,8 +16,8 @@ export default function TechPage({ name, stats, whatConnects, features }: TechPa
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
-                <div className="mt-1 text-sm text-white/60">{stat.label}</div>
+                <div className="text-stat-lg text-white">{stat.value}</div>
+                <div className="mt-1 text-body-sm text-white/60">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -38,7 +38,7 @@ export default function TechPage({ name, stats, whatConnects, features }: TechPa
                   className="bg-white rounded-xl border border-border p-5 flex items-start gap-3"
                 >
                   <RefreshCw className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm font-medium text-text-primary">{item}</span>
+                  <span className="text-label text-text-primary">{item}</span>
                 </div>
               ))}
             </div>
@@ -53,7 +53,7 @@ export default function TechPage({ name, stats, whatConnects, features }: TechPa
             <h2 className="text-display-lg text-text-primary mb-3">
               {name} + Connexx
             </h2>
-            <p className="text-text-secondary mb-10 max-w-2xl">
+            <p className="text-body-md text-text-secondary mb-10 max-w-2xl">
               Everything you get from {name}, enhanced with Connexx&apos;s automation,
               rate intelligence, and multi-carrier network.
             </p>
@@ -65,8 +65,8 @@ export default function TechPage({ name, stats, whatConnects, features }: TechPa
                   <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4">
                     <f.icon className="w-5 h-5 text-accent" />
                   </div>
-                  <h3 className="text-base font-semibold text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed">{f.desc}</p>
+                  <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
+                  <p className="mt-2 text-body-sm text-text-secondary">{f.desc}</p>
                 </div>
               </ScrollReveal>
             ))}

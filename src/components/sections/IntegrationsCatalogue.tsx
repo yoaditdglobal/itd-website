@@ -96,7 +96,7 @@ export default function IntegrationsCatalogue({
                   className="bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/20 transition-all text-center scroll-mt-24"
                 >
                   <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
-                  <p className="text-sm font-semibold text-text-primary">{integration.name}</p>
+                  <p className="text-heading-sm text-text-primary">{integration.name}</p>
                   {integration.description && (
                     <p className="text-xs text-text-tertiary mt-1">{integration.description}</p>
                   )}
@@ -124,7 +124,7 @@ export default function IntegrationsCatalogue({
                 const content = (
                   <div className={`bg-bg-secondary rounded-xl border border-border p-5 hover:shadow-md transition-all text-center h-full scroll-mt-24 ${href ? "hover:border-accent/20 cursor-pointer" : ""}`}>
                     <IntegrationLogo name={carrier.name} logo={carrier.logo} size="sm" className="mx-auto mb-3" />
-                    <p className="text-sm font-semibold text-text-primary">{carrier.name}</p>
+                    <p className="text-heading-sm text-text-primary">{carrier.name}</p>
                     {carrier.region && (
                       <span className="inline-block mt-1 text-eyebrow text-text-tertiary bg-white px-2 py-0.5 rounded-full border border-border">
                         {carrier.region}

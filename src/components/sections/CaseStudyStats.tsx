@@ -105,7 +105,7 @@ function StatCard({ stat }: { stat: CaseStudyStat }) {
             {stat.suffix && <span>{stat.suffix}</span>}
           </span>
         ) : (
-          <span className="text-display-md font-semibold tracking-tight leading-tight">
+          <span className="text-stat-xl leading-none">
             {stat.prefix && <span>{stat.prefix}</span>}
             {stat.value}
             {stat.suffix && <span>{stat.suffix}</span>}

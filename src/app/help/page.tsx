@@ -136,7 +136,7 @@ export default function HelpHubPage() {
             <h1 className="text-display-xl text-text-primary">
               How can we help?
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-3xl mx-auto">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-3xl mx-auto">
               Browse the Help Centre for documentation and walkthroughs, submit
               a request if you need a direct answer from the support team, or
               open the developer resources for API documentation and the
@@ -192,7 +192,7 @@ export default function HelpHubPage() {
                   <span className="text-eyebrow text-accent mb-2">
                     {article.category}
                   </span>
-                  <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors">
+                  <p className="text-heading-sm text-text-primary group-hover:text-accent transition-colors">
                     {article.title}
                   </p>
                   <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">

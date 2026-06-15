@@ -11,9 +11,7 @@ export default function InPostPage() {
   return (
     <CarrierPage
       name="InPost"
-      heroTitle="InPost x ITD"
-      logo="/logos/carriers/InPost logo svg integration carrier.svg"
-      logoBg="#ffffff"
+      logo="/logos/carriers/inpost-icon.png"
       tagline="Europe's fastest-growing locker network, connected to Connexx for seamless last-mile delivery."
       description="InPost operates one of Europe's largest automated parcel locker networks, giving your customers flexible, contact-free collection at thousands of convenient locations. Through Connexx, you get full access to InPost's locker and courier services, with automated label generation, real-time tracking, and smart delivery routing."
       region="Domestic"
@@ -37,7 +35,7 @@ export default function InPostPage() {
         { label: "Parcel lockers", value: "25,000+" },
         { label: "Countries", value: "12+" },
         { label: "Parcels per year", value: "750M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

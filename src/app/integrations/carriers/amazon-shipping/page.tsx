@@ -4,18 +4,16 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Amazon Shipping Integration — ITD Global",
-  description: "Connect Amazon Shipping to Connexx. Access Amazon's logistics network for competitive rates and fast delivery.",
+  description: "Connect Amazon Shipping to ITD. Access Amazon's logistics network for competitive rates and fast delivery.",
 };
 
 export default function AmazonShippingPage() {
   return (
     <CarrierPage
       name="Amazon Shipping"
-      heroTitle="Amazon Shipping x ITD"
-      logo="/logos/carriers/AMAZON SHIPPING LOGO CARRIER INTEGRATION.png"
-      logoBg="#1B2533"
-      tagline="Access Amazon's logistics network for competitive parcel rates, now connected to Connexx."
-      description="Amazon Shipping brings Amazon's world-class logistics infrastructure to third-party sellers and businesses. Through Connexx, you can compare Amazon Shipping rates against your other carriers, generate labels automatically, and track every delivery with Amazon's precision tracking — all from one dashboard."
+      logo="/logos/carriers/amazonshipping_logo.png"
+      tagline="Access Amazon's logistics network for competitive parcel rates, now connected to ITD."
+      description="Amazon Shipping brings Amazon's world-class logistics infrastructure to third-party sellers and businesses. Through ITD, you can compare Amazon Shipping rates against your other carriers, generate labels automatically, and track every delivery with Amazon's precision tracking — all from one dashboard."
       region="Domestic"
       services={[
         "Amazon Standard Delivery",
@@ -31,13 +29,13 @@ export default function AmazonShippingPage() {
         { icon: Package, title: "Multi-channel fulfilment", desc: "Use Amazon Shipping for non-Amazon orders to access volume-driven pricing." },
         { icon: Clock, title: "Flexible delivery windows", desc: "Offer same-day, next-day, and evening delivery options at checkout." },
         { icon: BarChart3, title: "Cost analytics", desc: "Track Amazon Shipping spend and compare unit economics against other carriers." },
-        { icon: ShieldCheck, title: "Claims management", desc: "File and track delivery claims directly through the Connexx platform." },
+        { icon: ShieldCheck, title: "Claims management", desc: "File and track delivery claims directly through the ITD platform." },
       ]}
       stats={[
         { label: "UK coverage", value: "95%+" },
         { label: "Delivery options", value: "6" },
         { label: "Avg delivery time", value: "1-2 days" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

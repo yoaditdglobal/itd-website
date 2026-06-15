@@ -41,6 +41,19 @@ export interface CaseStudyAtGlance {
   value: string;
 }
 
+export interface CaseStudyQuote {
+  /** Quote text, without surrounding quotation marks. */
+  quote: string;
+  /** Attribution name, e.g. "Mark Baker". */
+  name: string;
+  /** Optional role/company line, e.g. "Head of Retail Operations, West Ham United". */
+  title?: string;
+  /** Optional author headshot. Relative to /public. */
+  photo?: string;
+  /** "feature" = large emphasised block; "inline" = lighter mid-body interjection. Defaults to "feature". */
+  placement?: "feature" | "inline";
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -76,6 +89,136 @@ export interface CaseStudy {
   integrations?: string[];
   /** Solution category tags. A business can sit in multiple. */
   solutions?: SolutionTag[];
+
+  // ─── Customer Stories library (/resources/case-studies) ───
+  // Stories WITHOUT a primarySegment are excluded from the library page
+  // (their detail pages still exist). Copy comes verbatim from the
+  // Customer Stories build brief.
+  /** Shelf placement on the library page: eCommerce | 3PL | Import | Export. */
+  primarySegment?: LibrarySegment;
+  /** All solution tags (a story can carry more than its shelf, e.g. PB = 3PL + Import). */
+  segments?: LibrarySegment[];
+  /** Outcome tags driving the "Browse by outcome" filter chips. */
+  outcomes?: LibraryOutcome[];
+  /** Bold metric/result line on the story card. */
+  headlineResult?: string;
+  /** Single-sentence summary on the story card. */
+  oneLiner?: string;
+  /** True → rendered as the spotlight above the index (and still shelved). */
+  featured?: boolean;
+
+  // ─── Detail page (/resources/case-studies/[slug]) ───
+  /** Distributed pull quotes (1–3). When present, supersedes the legacy single
+   *  `quote`/`quoteAuthor` fields. Each renders inline (mid-body) or as a feature block. */
+  quotes?: CaseStudyQuote[];
+  /** Manual related-story slugs for the "More stories" module. Omit to auto-select
+   *  by shared primarySegment (see getRelatedStories). */
+  relatedStories?: string[];
+  /** ISO 8601 publish date for Article JSON-LD. Falls back to a site default. */
+  datePublished?: string;
+}
+
+export type LibrarySegment =
+  | "eCommerce"
+  | "3PL"
+  | "Import"
+  | "Export"
+  | "Freight";
+export type LibraryOutcome =
+  | "Save money"
+  | "Go international"
+  | "Get control"
+  | "Win new business";
+
+/** Shelf order on the Customer Stories library page. */
+export const LIBRARY_SEGMENT_ORDER: LibrarySegment[] = [
+  "eCommerce",
+  "3PL",
+  "Import",
+  "Export",
+  "Freight",
+];
+
+export const LIBRARY_OUTCOMES: LibraryOutcome[] = [
+  "Save money",
+  "Go international",
+  "Get control",
+  "Win new business",
+];
+
+/** Stories that belong to the Customer Stories library (have a shelf). */
+export function getLibraryStories(): CaseStudy[] {
+  return caseStudies.filter((cs) => cs.primarySegment);
+}
+
+/** URL slug for each solution facet — the `?solution=` value on the library page. */
+export const SOLUTION_SLUGS: Record<LibrarySegment, string> = {
+  eCommerce: "ecommerce",
+  "3PL": "3pl",
+  Import: "import",
+  Export: "export",
+  Freight: "freight",
+};
+
+/** Resolve a `?solution=` slug back to its LibrarySegment, or null if unknown/empty. */
+export function getSegmentBySolutionSlug(
+  slug?: string | null,
+): LibrarySegment | null {
+  if (!slug) return null;
+  const s = slug.toLowerCase();
+  return (
+    (Object.keys(SOLUTION_SLUGS) as LibrarySegment[]).find(
+      (seg) => SOLUTION_SLUGS[seg] === s,
+    ) ?? null
+  );
+}
+
+/**
+ * Library stories in a given segment. Matches against `segments[]` (so a
+ * multi-segment story like PB Fulfilment appears under both 3PL and Import),
+ * falling back to `primarySegment` for any story without an explicit array.
+ */
+export function getStoriesBySegment(seg: LibrarySegment): CaseStudy[] {
+  return getLibraryStories().filter((s) =>
+    (s.segments ?? (s.primarySegment ? [s.primarySegment] : [])).includes(seg),
+  );
+}
+
+/**
+ * Related stories for the "More stories" module on a detail page (max `limit`).
+ * Selection order (BRIEF §5):
+ *   1. Manual `relatedStories` overrides, in order.
+ *   2. Stories sharing the current story's primarySegment, excluding self.
+ *   3. Backfill with the remaining library stories (array order = most recent first).
+ * Only library stories (those with a primarySegment) are ever returned, so
+ * unpublished/placeholder entries never leak. De-duplicated; self always excluded.
+ */
+export function getRelatedStories(cs: CaseStudy, limit = 3): CaseStudy[] {
+  const library = getLibraryStories();
+  const picks: CaseStudy[] = [];
+  const seen = new Set<string>([cs.slug]);
+
+  const add = (story: CaseStudy | undefined) => {
+    if (!story || seen.has(story.slug)) return;
+    seen.add(story.slug);
+    picks.push(story);
+  };
+
+  // 1. Manual overrides (must resolve to a library story).
+  for (const slug of cs.relatedStories ?? []) {
+    add(library.find((s) => s.slug === slug));
+  }
+  // 2. Same primary segment.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    if (s.primarySegment && s.primarySegment === cs.primarySegment) add(s);
+  }
+  // 3. Backfill with most-recent library stories.
+  for (const s of library) {
+    if (picks.length >= limit) break;
+    add(s);
+  }
+  return picks.slice(0, limit);
 }
 
 export interface Integration {
@@ -114,6 +257,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "1",
     slug: "tatti-lashes",
+    primarySegment: "eCommerce",
+    segments: ["eCommerce"],
+    outcomes: ["Save money"],
+    headlineResult: "60% volume shift",
+    oneLiner:
+      "Delivery choice at checkout and margin back on each order, after adding Evri alongside DPD.",
+    featured: false,
     brandName: "Tatti Lashes",
     industry: "eCommerce",
     headline: "Tatti Lashes shifted 60% of volume to a cheaper carrier without losing the next-day option",
@@ -123,7 +273,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global introduced Evri alongside DPD via Connexx, giving Tatti Lashes a genuine multi-carrier setup with both 24hr and 48hr service options. Customers could now choose their delivery at checkout. The Mintsoft integration via Connexx was plug-and-play. Dedicated vans were allocated quickly, and the brand was live before peak trading season.",
     result: "60% of Tatti Lashes' volume transferred to Evri — a figure that surprised the team. Evri now handles the majority of their domestic parcel volume, with DPD retained for customers selecting the premium next-day service. Per-order shipping costs dropped significantly across the cheaper service, margins came back under control, and the brand entered peak with capacity already proven.",
     heroImage: "/case-studies/tatti-lashes/hero.jpg",
-    logo: "/case-studies/tatti-lashes/logo.png",
+    logo: "/case-studies/tatti-lashes/logo.jpeg",
     stats: [
       { value: 60, suffix: "%", label: "Volume shifted to Evri", sub: "from a single-carrier DPD-only setup", featured: true },
       { value: "2", suffix: "×", label: "Active carriers", sub: "DPD next-day + Evri 24hr & 48hr" },
@@ -145,6 +295,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "2",
     slug: "west-ham-united",
+    primarySegment: "eCommerce",
+    segments: ["eCommerce"],
+    outcomes: ["Get control"],
+    headlineResult: "One multi-carrier framework",
+    oneLiner:
+      "Steadier collections and a clear view of UK and international spend.",
+    featured: false,
     brandName: "West Ham United FC",
     industry: "eCommerce",
     headline: "West Ham United stabilised collection reliability and gained multi-carrier control",
@@ -157,7 +314,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Mark Baker, Head of Retail Operations at West Ham United",
     quoteAuthorPhoto: "/case-studies/west-ham-united/author.jpg",
     heroImage: "/case-studies/west-ham-united/hero.webp",
-    logo: "/case-studies/west-ham-united/logo.webp",
+    logo: "/case-studies/west-ham-united/logo.png",
     stats: [
       { value: "Match-ready", label: "Collection reliability", sub: "stable across standard and peak trading", featured: true },
       { value: "DHL · FedEx · UPS", label: "Consolidated buying power", sub: "international lane rate alignment" },
@@ -178,6 +335,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "3",
     slug: "delta-fulfilment",
+    primarySegment: "3PL",
+    segments: ["3PL"],
+    outcomes: ["Save money", "Get control"],
+    headlineResult: "Immediate margin uplift",
+    oneLiner:
+      "A better-fit carrier for their health and wellness client, with real SLAs and full MI.",
+    featured: false,
     brandName: "Delta Fulfilment",
     industry: "3PL",
     headline: "Delta Fulfilment improved SLAs, MI reporting, and client profitability by switching to Evri",
@@ -210,6 +374,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "4",
     slug: "arlo-fulfilment",
+    primarySegment: "Export",
+    segments: ["Export"],
+    outcomes: ["Go international", "Win new business"],
+    headlineResult: "International, unlocked",
+    oneLiner:
+      "FedEx International Priority turned a gap in their offering into a competitive advantage.",
+    featured: false,
     brandName: "Arlo Fulfilment",
     industry: "Export",
     headline: "Arlo Fulfilment unlocked international shipping for their clients without building it themselves",
@@ -240,6 +411,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "5",
     slug: "home-bargains",
+    primarySegment: "Import",
+    segments: ["Import"],
+    outcomes: ["Save money"],
+    headlineResult: "30–35% cost reduction",
+    oneLiner:
+      "60 buyers' scattered sample shipments replaced with one weekly consolidated air freight from China.",
+    featured: false,
     brandName: "Home Bargains",
     industry: "Import",
     headline: "Home Bargains reduced sample shipping costs by 30–35% with weekly China consolidation",
@@ -249,7 +427,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global replaced the fragmented process with a single, structured weekly parcel consolidation service built around Home Bargains' buying cycle. ITD's China team collects samples via SF Express from any factory across China, Monday to Thursday, into ITD's warehouse — then consolidates into one weekly air freight shipment to the UK. One logistics partner. One process. One weekly delivery.",
     result: "30 to 35% reduction in annual shipping costs by grouping individual express shipments into one weekly consolidated consignment. Guaranteed Tuesday delivery for every buyer, every week — replacing chaos with a predictable rhythm the team could plan around. Full visibility across all 60 buyers and 200 factories, and one accountable point of contact instead of hundreds of fragmented relationships.",
     heroImage: "/case-studies/home-bargains/hero.webp",
-    logo: "/case-studies/home-bargains/logo.png",
+    logo: "/case-studies/home-bargains/logo.jpeg",
     stats: [
       { value: 30, prefix: "", suffix: "–35%", label: "Annual cost reduction", sub: "vs individual express shipments", featured: true },
       { value: "Tuesday", label: "Guaranteed delivery day", sub: "every week, every buyer" },
@@ -270,6 +448,12 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "6",
     slug: "rioz-global",
+    primarySegment: "3PL",
+    segments: ["3PL"],
+    outcomes: ["Win new business", "Save money"],
+    headlineResult: "5 new clients in 6 months",
+    oneLiner: "Competitive rates turned shipping into a revenue stream.",
+    featured: true,
     brandName: "RIOZ Global",
     industry: "3PL",
     headline: "RIOZ Global turned shipping into a profit centre and onboarded 5 new clients in 6 months",
@@ -302,6 +486,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "7",
     slug: "pb-fulfilment",
+    primarySegment: "3PL",
+    segments: ["3PL", "Import"],
+    outcomes: ["Go international"],
+    headlineResult: "Daily collections to the US",
+    oneLiner:
+      "Stable US delivery and the customs support their subscription brands rely on.",
+    featured: false,
     brandName: "PB Fulfilment",
     industry: "3PL",
     headline: "PB Fulfilment secured reliable, scalable international delivery for high-volume subscription brands",
@@ -314,7 +505,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Steve Seymor, Director at PB Fulfilment",
     quoteAuthorPhoto: "/case-studies/pb-fulfilment/author.webp",
     heroImage: "/case-studies/pb-fulfilment/hero.webp",
-    logo: "/case-studies/pb-fulfilment/logo.png",
+    logo: "/case-studies/pb-fulfilment/logo.jpeg",
     stats: [
       { value: "Daily", label: "FedEx collections", sub: "stabilised outbound workflow", featured: true },
       { value: "US lanes", label: "Stabilised performance", sub: "subscription churn reduced" },
@@ -335,6 +526,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "8",
     slug: "sainsburys-argos",
+    primarySegment: "Import",
+    segments: ["Import"],
+    outcomes: ["Get control"],
+    headlineResult: "Compliance at origin",
+    oneLiner:
+      "A team in China standardised factory documentation and ended the customs delays.",
+    featured: false,
     brandName: "Sainsbury's & Argos",
     industry: "Import",
     headline: "Sainsbury's & Argos solved customs compliance and reduced carrier dependency across China",
@@ -344,7 +542,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global placed their own team on the ground in China and took ownership of the compliance process end-to-end. We reviewed factory paperwork, identified the gaps, and created a standardised documentation template built for a multi-brand environment — giving each factory a clear process for identifying which shipment belonged to which brand. We also introduced FedEx International Priority as a more commercially competitive option, giving Sainsbury's and Argos genuine courier flexibility backed by a single logistics partner managing everything from China to the UK.",
     result: "Customs compliance owned and solved at origin — the standardised factory template removed the ambiguity that had been causing customs holds. Multi-brand clarity built into the process so shipments moved through the right channels every time. Movement away from a single DHL Express contract unlocked more commercially appropriate FedEx International Priority rates. And one accountable logistics partner now manages everything across both brands and both offices.",
     heroImage: "/case-studies/sainsburys-argos/hero.webp",
-    logo: "/case-studies/sainsburys-argos/logo.png",
+    logo: "/case-studies/sainsburys-argos/logo-icon.png",
     stats: [
       { value: "At origin", label: "Compliance solved", sub: "standardised factory documentation", featured: true },
       { value: "DHL → FedEx", label: "Courier flexibility unlocked", sub: "no more single-contract pricing" },
@@ -365,6 +563,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "9",
     slug: "freedom-fire",
+    primarySegment: "eCommerce",
+    segments: ["eCommerce"],
+    outcomes: ["Get control"],
+    headlineResult: "Real visibility at last",
+    oneLiner:
+      "Linnworks connected to a multi-carrier network, with DG-approved carriers and real parcel data.",
+    featured: false,
     brandName: "Freedom Fire",
     industry: "eCommerce",
     headline: "Freedom Fire unlocked full shipping visibility with Connexx Shipment Reports",
@@ -373,6 +578,8 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Freedom Fire is a UK online retailer of fire safety, security, and PPE equipment. As volume grew, the parcel operation hadn't kept pace. Without clear data, the team had no reliable way to see what was being shipped, where, how it was performing, or what it was costing them. Decisions were made without insight. Issues were discovered late. And with no dedicated point of contact at their existing reseller, there was nobody to turn to when things needed investigating. For a business shipping Dangerous Goods volumes, the absence of shipment tracking and reporting was a real operational liability.",
     solution: "ITD Global connected Freedom Fire's Linnworks platform to ITD's multi-carrier network via Connexx — a single integrated eCommerce shipping workflow and, for the first time, real visibility of parcel data through Shipment Reports. Alongside the integration: Dangerous Goods approvals handled with InPost, competitive rates across InPost (DG Approved), Evri, and Royal Mail, and a dedicated account manager to keep everything running smoothly.",
     result: "Full DG compliance and management through InPost (something previous resellers couldn't provide). A single dedicated account manager who knows the operation inside out. Commercially competitive rates that weren't available going direct. And complete, real-time visibility through Shipment Reports — performance tracking, SLA monitoring, and a single source of truth for every parcel.",
+    heroImage: "/case-studies/freedom-fire/hero.jpeg",
+    logo: "/case-studies/freedom-fire/logo.jpeg",
     stats: [
       { value: "Real-time", label: "Shipment data via Connexx", sub: "performance, SLAs, single source of truth", featured: true },
       { value: "DG approved", label: "Dangerous Goods compliance", sub: "managed through InPost" },
@@ -393,6 +600,11 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "10",
     slug: "oddballs",
+    primarySegment: "Freight",
+    segments: ["Freight"],
+    headlineResult: "Air, rail & sea — one shipment",
+    oneLiner:
+      "A large China→UK consignment split across three modes, with each tranche matched to the right delivery window at the lowest blended freight cost.",
     brandName: "OddBalls",
     industry: "Freight",
     headline:
@@ -446,47 +658,49 @@ export const caseStudies: CaseStudy[] = [
 export const integrations: Integration[] = [
   // ─── Tech — ERP / WMS ──────────────────────────────────────────────
   { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "Adobe Commerce platform" },
-  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP" },
-  { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS" },
-  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management" },
-  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro_logo.png" },
-  { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management" },
-  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports" },
-  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform" },
+  { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "Adobe Commerce platform", logo: "/logos/erp-wms/magento-icon.webp" },
+  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP", logo: "/logos/erp-wms/netsuite-icon.png" },
+  { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS", logo: "/logos/erp-wms/orderwise-icon.webp" },
+  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro-mark.png" },
+  { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management", logo: "/logos/erp-wms/tradepeg-icon.png" },
+  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports", logo: "/logos/erp-wms/jonassports-icon.png" },
+  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform", logo: "/logos/erp-wms/brightpearl-icon.png" },
   // ─── Tech — eCommerce & Logistics ──────────────────────────────────
-  { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Commerce platform" },
+  { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Commerce platform", logo: "/logos/ecommerce/base-icon.png" },
   { id: "t-aimco", name: "Aimco", category: "ecommerce_logistics", type: "tech", featured: false, description: "Order & inventory management" },
-  { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel commerce" },
-  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "Order management system" },
+  { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel commerce", logo: "/logos/ecommerce/channeladvisor-icon.png" },
+  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "Order management system", logo: "/logos/ecommerce/cloudcommerce-icon.png" },
   { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipping automation", logo: "/logos/erp-wms/shipstation_logo.png" },
   { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WordPress commerce", logo: "/logos/erp-wms/woocommerce_logo.svg" },
   { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-channel listing & orders", logo: "/logos/erp-wms/storefeeder_logo.png" },
-  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/erp-wms/veeqo_logo.png" },
+  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Inventory & shipping platform", logo: "/logos/ecommerce/veeqo-icon.webp" },
   { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "eCommerce platform", logo: "/logos/ecommerce/shopify_logo.png" },
-  { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/erp-wms/mintsoft_logo.png" },
+  { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Warehouse management system", logo: "/logos/ecommerce/mintsoft-icon.png" },
   // ─── Tech — Marketplace ────────────────────────────────────────────
-  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon_logo.png" },
-  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok_logo.png" },
-  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy_logo.png" },
-  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay_logo.png" },
-  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu_logo.webp" },
+  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon Seller Central", logo: "/logos/marketplaces/amazon-icon.webp" },
+  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "Social commerce marketplace", logo: "/logos/marketplaces/tiktok-tile.png" },
+  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy shop connector", logo: "/logos/marketplaces/etsy-icon.png" },
+  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay seller integration", logo: "/logos/marketplaces/ebay-icon.png" },
+  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Global online marketplace", logo: "/logos/marketplaces/temu-icon.png" },
   // ─── Carriers — Domestic ───────────────────────────────────────────
   { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
-  { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/InPost_Logo_yellow.png" },
-  { id: "c-royal-mail", name: "Royal Mail", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK postal service", logo: "/logos/carriers/Royal-Mail-Logo.png" },
+  { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/inpost-icon.png" },
+  { id: "c-royal-mail", name: "Royal Mail", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK postal service", logo: "/logos/carriers/royal-mail-icon.png" },
   { id: "c-dpd", name: "DPD", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel delivery network", logo: "/logos/carriers/DPD-LOGO.png" },
   { id: "c-dhl-parcel", name: "DHL Parcel", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "Parcel delivery", logo: "/logos/carriers/dhlparcel_logo.svg" },
   { id: "c-amazon-shipping", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo.png" },
+  { id: "c-apc", name: "APC", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "UK overnight parcel network", logo: "/logos/carriers/apc_logo.png" },
   // ─── Carriers — International ───────────────────────────────────────
   { id: "c-parcel-force", name: "Parcel Force", category: "carrier", type: "carrier", region: "International", featured: true, description: "Tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
   { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
-  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & global parcel and freight", logo: "/logos/carriers/fedex_logo.png" },
+  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & global parcel and freight", logo: "/logos/carriers/fedex-icon.png" },
   { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
   { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
-  { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery" },
-  { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express" },
+  { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery", logo: "/logos/carriers/landmark-icon.svg" },
+  { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express", logo: "/logos/carriers/tnt-icon.png" },
   { id: "c-deutsche-post", name: "Deutsche Post", category: "carrier", type: "carrier", region: "International", featured: false, description: "German postal & international mail", logo: "/logos/carriers/deutschepost_logo.avif" },
+  { id: "c-starlinks", name: "Starlinks", category: "carrier", type: "carrier", region: "International", featured: false, description: "Cross-border e-commerce delivery", logo: "/logos/carriers/starlinks_logo.png" },
 ];
 
 // ─── Integration slugs + lookups ───────────────────────────────────────────────
@@ -767,20 +981,22 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   // Carriers (detail-page where available)
   "dpd": { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png", href: "/integrations/carriers/dpd", kind: "carrier" },
   "evri": { name: "Evri", logo: "/logos/carriers/evri_logo.png", href: "/integrations/carriers/evri", kind: "carrier" },
-  "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
+  "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
   "parcelforce": { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcelforce", kind: "carrier" },
   "amazon-shipping": { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png", href: "/integrations/carriers/amazon-shipping", kind: "carrier" },
-  "inpost": { name: "InPost", logo: "/logos/carriers/InPost_Logo_yellow.png", href: "/integrations/carriers/inpost", kind: "carrier" },
+  "inpost": { name: "InPost", logo: "/logos/carriers/inpost-icon.png", href: "/integrations/carriers/inpost", kind: "carrier" },
   "dhl": { name: "DHL", logo: "/logos/carriers/dhl_logo.webp", href: "/integrations/carriers/dhl", kind: "carrier" },
-  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex_logo.png", href: "/integrations/carriers", kind: "carrier" },
+  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex-icon.png", href: "/integrations/carriers", kind: "carrier" },
   "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers", kind: "carrier" },
   "sf-express": { name: "SF Express", href: "/integrations/carriers", kind: "carrier" },
+  "apc": { name: "APC", logo: "/logos/carriers/apc_logo.png", href: "/integrations/carriers/apc", kind: "carrier" },
+  "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
 
   // Tech integrations (no per-integration detail pages — route to category)
-  "mintsoft": { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png", href: "/integrations/erp-wms", kind: "integration" },
+  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/erp-wms", kind: "integration" },
   "linnworks": { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/erp-wms", kind: "integration" },
   "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/ecommerce", kind: "integration" },
-  "veeqo": { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png", href: "/integrations/erp-wms", kind: "integration" },
+  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/erp-wms", kind: "integration" },
   "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/logistics", kind: "integration" },
 
   // Platform (ITD itself)

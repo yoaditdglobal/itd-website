@@ -241,7 +241,7 @@ const entries: Entry[] = [
     definition:
       "A postcode outside a carrier's standard delivery zone, where the carrier applies a surcharge or refuses the shipment.",
     context:
-      "Every UK carrier publishes an out-of-area postcode list. Highlands, Islands, Channel Islands, and Northern Ireland are the common ones. DPD, Evri, and Yodel each have slightly different lists, which is why an automated routing rule beats a manual choice. A wrong out-of-area decision costs a redelivery charge or a returned parcel.",
+      "Every UK carrier publishes an out-of-area postcode list. Highlands, Islands, Channel Islands, and Northern Ireland are the common ones. DPD and Evri each have slightly different lists, which is why an automated routing rule beats a manual choice. A wrong out-of-area decision costs a redelivery charge or a returned parcel.",
     related: [
       { label: "Highlands & Islands", href: "#highlands--islands" },
       { label: "Surcharge zone", href: "#surcharge-zone" },
@@ -368,7 +368,7 @@ const entries: Entry[] = [
     definition:
       "The unique identifier the carrier assigns to a parcel or consignment, used to look up its status at any point in the journey.",
     context:
-      "Royal Mail uses a 13-character reference. DPD uses a 14-digit number. UPS uses 1Z followed by 16 characters. Each carrier's format is different. Connexx normalises tracking numbers into a single field per order and writes them back to Shopify, Amazon, eBay, SAP, or your ERP automatically.",
+      "Royal Mail uses a 13-character reference. DPD uses a 14-digit number. UPS uses 1Z followed by 16 characters. Each carrier's format is different. Connexx normalises tracking numbers into a single field per order and writes them back to Shopify, Amazon, eBay, or your ERP automatically.",
     related: [
       { label: "POD", href: "#pod-proof-of-delivery" },
       { label: "WISMO", href: "#wismo-where-is-my-order" },
@@ -955,7 +955,7 @@ const entries: Entry[] = [
     name: "API (Application Programming Interface)",
     category: "Technical",
     definition:
-      "A set of endpoints that lets one software system talk to another, used in shipping to connect order systems (Shopify, SAP, NetSuite) to carriers and platforms (Royal Mail, DPD, Connexx).",
+      "A set of endpoints that lets one software system talk to another, used in shipping to connect order systems (Shopify, NetSuite) to carriers and platforms (Royal Mail, DPD, Connexx).",
     context:
       "Every modern carrier publishes an API. Every modern platform consumes them. A platform with native API connections beats one that uses CSV uploads, because the data flows in real time and writes back automatically. Connexx exposes its own REST API to customers who want to build custom workflows.",
     related: [
@@ -971,7 +971,7 @@ const entries: Entry[] = [
     definition:
       "The process by which a shipping platform writes shipment data (tracking numbers, dispatch dates, costs, POD) back into the source ERP, so the order record is updated automatically.",
     context:
-      "Without write-back, dispatch teams re-key tracking numbers into the ERP by hand. With write-back, the data flows. SAP, NetSuite, Dynamics 365, and Sage all support write-back through API or middleware. Connexx supports two-way sync with every major ERP.",
+      "Without write-back, dispatch teams re-key tracking numbers into the ERP by hand. With write-back, the data flows. NetSuite and other major ERPs support write-back through API or middleware. Connexx supports two-way sync with every major ERP.",
     related: [
       { label: "API", href: "#api-application-programming-interface" },
       { label: "Webhook", href: "#webhook" },
@@ -1227,7 +1227,7 @@ export default function GlossaryPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="font-semibold text-text-primary mb-3">
+                      <h3 className="text-heading-md text-text-primary mb-3">
                         <a
                           href={`#${entry.slug}`}
                           className="hover:text-accent"
@@ -1235,11 +1235,11 @@ export default function GlossaryPage() {
                           {entry.name}
                         </a>
                       </h3>
-                      <p className="text-sm text-text-primary leading-relaxed mb-3">
+                      <p className="text-body-sm text-text-primary mb-3">
                         <span className="font-medium">Definition. </span>
                         {entry.definition}
                       </p>
-                      <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                      <p className="text-body-sm text-text-secondary mb-4">
                         {entry.context}
                       </p>
                       {entry.related.length > 0 && (
@@ -1291,7 +1291,7 @@ export default function GlossaryPage() {
             <h2 className="text-display-lg text-white mb-3">
               The vocabulary, applied to your dispatch.
             </h2>
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-body-lg">
               Connexx handles every term in this glossary inside one platform. From WISMO to PVA, from VTR to landed cost. Talk to us about the ones that hurt right now.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

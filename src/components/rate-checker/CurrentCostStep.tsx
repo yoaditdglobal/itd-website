@@ -66,7 +66,7 @@ export function CurrentCostStep({ value, onChange }: CurrentCostStepProps) {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChange={(e) => validateAndUpdate(e.target.value)}
-            className={`pl-12 pr-4 py-6 text-3xl font-bold bg-card border-2 border-primary/30 text-center focus:border-primary ${
+            className={`pl-12 pr-4 py-6 text-stat-xl bg-card border-2 border-primary/30 text-center focus:border-primary ${
               error ? 'border-destructive focus-visible:ring-destructive' : ''
             }`}
           />
@@ -75,7 +75,7 @@ export function CurrentCostStep({ value, onChange }: CurrentCostStepProps) {
           per parcel
         </p>
         {error && (
-          <p className="text-sm text-destructive mt-2 text-center">
+          <p className="text-body-sm text-destructive mt-2 text-center">
             {error}
           </p>
         )}

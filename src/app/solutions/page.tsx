@@ -55,7 +55,7 @@ export default function SolutionsPage() {
             <h1 className="text-display-xl text-text-primary">
               Solutions built for how you ship.
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Every business ships differently. Select your stage or business model to see how ITD Global fits your operations.
             </p>
           </ScrollReveal>
@@ -67,7 +67,7 @@ export default function SolutionsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-2">By Stage</p>
-            <h2 className="text-2xl font-bold text-text-primary mb-8">Where is your business today?</h2>
+            <h2 className="text-display-lg text-text-primary mb-8">Where is your business today?</h2>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -75,11 +75,11 @@ export default function SolutionsPage() {
               <ScrollReveal key={stage.id} delay={i * 0.1}>
                 <div id={stage.id} className="bg-white rounded-xl border border-border p-8 h-full">
                   <stage.icon className="w-10 h-10 text-accent mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary">{stage.name}</h3>
-                  <p className="mt-2 text-text-secondary">{stage.desc}</p>
+                  <h3 className="text-heading-lg text-text-primary">{stage.name}</h3>
+                  <p className="mt-2 text-body-md text-text-secondary">{stage.desc}</p>
                   <ul className="mt-4 space-y-2">
                     {stage.details.map((d) => (
-                      <li key={d} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <li key={d} className="flex items-start gap-2 text-body-sm text-text-secondary">
                         <span className="text-accent mt-0.5">&#10003;</span> {d}
                       </li>
                     ))}
@@ -96,7 +96,7 @@ export default function SolutionsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-2">By Business Model</p>
-            <h2 className="text-2xl font-bold text-text-primary mb-8">What does your business do?</h2>
+            <h2 className="text-display-lg text-text-primary mb-8">What does your business do?</h2>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -108,9 +108,9 @@ export default function SolutionsPage() {
                     className="group block bg-accent-light/30 border border-accent/20 rounded-xl p-6 hover:shadow-lg hover:border-accent/40 transition-all h-full"
                   >
                     <model.icon className="w-8 h-8 text-accent mb-3" />
-                    <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors">{model.name}</h3>
-                    <p className="mt-1 text-xs text-accent/70">{model.pain}</p>
-                    <p className="mt-2 text-sm text-text-secondary">{model.value}</p>
+                    <h3 className="text-heading-md text-text-primary group-hover:text-accent transition-colors">{model.name}</h3>
+                    <p className="mt-1 text-caption text-accent/70">{model.pain}</p>
+                    <p className="mt-2 text-body-sm text-text-secondary">{model.value}</p>
                     <div className="mt-4 flex items-center gap-1 text-sm text-accent font-medium">
                       View full page <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -118,9 +118,9 @@ export default function SolutionsPage() {
                 ) : (
                   <div id={model.href.replace("#", "")} className="bg-white border border-border rounded-xl p-6 h-full">
                     <model.icon className="w-8 h-8 text-accent mb-3" />
-                    <h3 className="text-lg font-semibold text-text-primary">{model.name}</h3>
-                    <p className="mt-1 text-xs text-text-tertiary">{model.pain}</p>
-                    <p className="mt-2 text-sm text-text-secondary">{model.value}</p>
+                    <h3 className="text-heading-md text-text-primary">{model.name}</h3>
+                    <p className="mt-1 text-caption text-text-tertiary">{model.pain}</p>
+                    <p className="mt-2 text-body-sm text-text-secondary">{model.value}</p>
                     {"capabilities" in model && model.capabilities && (
                       <ul className="mt-3 space-y-1">
                         {model.capabilities.map((c) => (

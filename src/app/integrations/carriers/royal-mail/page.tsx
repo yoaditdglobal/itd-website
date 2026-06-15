@@ -11,9 +11,7 @@ export default function RoyalMailPage() {
   return (
     <CarrierPage
       name="Royal Mail"
-      heroTitle="Royal Mail x ITD"
-      logo="/logos/carriers/ROYAL MAIL LOGO SVG NEW.svg"
-      logoBg="#ffffff"
+      logo="/logos/carriers/royal-mail-icon.png"
       tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."
       description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through Connexx, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
       region="Domestic"
@@ -39,7 +37,7 @@ export default function RoyalMailPage() {
         { label: "UK delivery coverage", value: "100%" },
         { label: "Countries reached", value: "230+" },
         { label: "Daily deliveries", value: "24M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

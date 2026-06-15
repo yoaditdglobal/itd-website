@@ -28,10 +28,10 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const carrier = getIntegrationBySlug(slug, "carrier");
-  if (!carrier) return buildMetadata({ title: "Carrier integration", description: "Connexx carrier integration.", path: `/integrations/carriers/${slug}` });
+  if (!carrier) return buildMetadata({ title: "Carrier integration", description: "ITD carrier integration.", path: `/integrations/carriers/${slug}` });
   return buildMetadata({
-    title: `${carrier.name} integration — Connexx multi-carrier shipping`,
-    description: `Connect ${carrier.name} to Connexx for rate comparison, one-click labels, and tracking on every order. ${carrier.description ?? ""}`.trim(),
+    title: `${carrier.name} integration — ITD multi-carrier shipping`,
+    description: `Connect ${carrier.name} to ITD for rate comparison, one-click labels, and tracking on every order. ${carrier.description ?? ""}`.trim(),
     path: `/integrations/carriers/${slug}`,
   });
 }

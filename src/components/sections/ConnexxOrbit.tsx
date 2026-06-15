@@ -1,39 +1,40 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
-interface Brand {
+export interface Brand {
   name: string;
-  logo: string;
+  /** Logo path. When missing, IconChip renders a letter-badge fallback. */
+  logo?: string;
 }
 
 /* Innermost orbit — WMS / ERP / eCommerce platforms (closest to Connexx). */
 const WMS: Brand[] = [
-  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft_logo.png" },
-  { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { name: "Veeqo", logo: "/logos/erp-wms/veeqo_logo.png" },
+  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft-tile.png" },
+  { name: "Linnworks", logo: "/logos/erp-wms/linnworks-tile.png" },
+  { name: "Veeqo", logo: "/logos/erp-wms/veeqo-tile.png" },
   { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png" },
-  { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png" },
+  { name: "Shopify", logo: "/logos/ecommerce/shopify-tile.png" },
 ];
 
 /* Middle orbit — UK + global carriers. */
 const CARRIERS: Brand[] = [
-  { name: "Royal Mail", logo: "/logos/carriers/Royal-Mail-Logo.png" },
-  { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+  { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
+  { name: "DPD", logo: "/logos/carriers/dpd-tile.png" },
   { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
   { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
   { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", logo: "/logos/carriers/fedex_logo.png" },
+  { name: "FedEx", logo: "/logos/carriers/fedex-icon.png" },
   { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
   { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
 ];
 
 /* Outer orbit — marketplaces. */
 const MARKETPLACES: Brand[] = [
-  { name: "Amazon", logo: "/logos/marketplaces/amazon_logo.png" },
-  { name: "eBay", logo: "/logos/marketplaces/ebay_logo.png" },
-  { name: "Etsy", logo: "/logos/marketplaces/etsy_logo.png" },
-  { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok_logo.png" },
-  { name: "Temu", logo: "/logos/marketplaces/temu_logo.webp" },
+  { name: "Amazon", logo: "/logos/marketplaces/amazon-icon.webp" },
+  { name: "eBay", logo: "/logos/marketplaces/ebay-icon.png" },
+  { name: "Etsy", logo: "/logos/marketplaces/etsy-icon.png" },
+  { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok-tile.png" },
+  { name: "Temu", logo: "/logos/marketplaces/temu-icon.png" },
 ];
 
 const WMS_MOBILE_HIDE = new Set(["ShipStation", "Veeqo"]);
@@ -41,7 +42,7 @@ const CARRIERS_MOBILE_HIDE = new Set(["Parcelforce", "Amazon Shipping"]);
 const MARKETPLACES_MOBILE_HIDE = new Set(["Etsy", "Temu"]);
 
 /** Position a child on a circle of `radiusPct` from the centre. 0° = top. */
-function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
+export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
   return {
     position: "absolute",
@@ -51,19 +52,35 @@ function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
   };
 }
 
-function IconChip({ brand }: { brand: Brand }) {
+export function IconChip({ brand }: { brand: Brand }) {
+  // Edge-to-edge square rounded brand tile — every orbit asset is a full-bleed
+  // 512x512 tile (see scripts/gen-orbit-tiles.py). No white chip, no padding.
+  if (brand.logo) {
+    return (
+      <span
+        title={brand.name}
+        className="inline-flex items-center justify-center overflow-hidden rounded-xl shadow-lg w-9 h-9 md:w-10 md:h-10"
+      >
+        <Image
+          src={brand.logo}
+          width={44}
+          height={44}
+          quality={90}
+          alt=""
+          className="h-full w-full object-cover"
+        />
+      </span>
+    );
+  }
+  // Letter fallback — rounded square, matching IntegrationLogo's fallback.
   return (
     <span
       title={brand.name}
-      className="inline-flex items-center justify-center rounded-full bg-white shadow-lg border border-white/10 w-9 h-9 md:w-10 md:h-10"
+      className="inline-flex items-center justify-center rounded-xl bg-accent-light shadow-lg w-9 h-9 md:w-10 md:h-10"
     >
-      <Image
-        src={brand.logo}
-        width={28}
-        height={28}
-        alt=""
-        className="object-contain w-6 h-6 md:w-7 md:h-7"
-      />
+      <span aria-hidden className="text-xs font-bold text-accent">
+        {brand.name[0]}
+      </span>
     </span>
   );
 }
@@ -78,7 +95,7 @@ interface OrbitLayerProps {
   mobileHide: Set<string>;
 }
 
-function OrbitLayer({
+export function OrbitLayer({
   brands,
   radiusPct,
   durationS,
@@ -98,7 +115,14 @@ function OrbitLayer({
     <div className="connexx-anim absolute inset-0" style={{ animation: wrapperAnim }}>
       {brands.map((brand, i) => {
         const angle = (360 / brands.length) * i;
-        const hide = mobileHide.has(brand.name) ? "hidden md:flex" : "flex";
+        // Hide mobile-only tiles with `visibility`, never `display:none` —
+        // display:none cancels the counter-rotation animation, so on a
+        // mobile→desktop resize the revealed tile restarts at 0° out of phase
+        // with its still-spinning ring and renders rotated. visibility keeps
+        // the element mounted and animating, so it stays upright.
+        const hide = mobileHide.has(brand.name)
+          ? "flex invisible md:visible"
+          : "flex";
         return (
           <div key={brand.name} className={hide} style={orbitStyle(angle, radiusPct)}>
             <div className="connexx-anim" style={{ animation: counterAnim }}>
@@ -185,7 +209,7 @@ export default function ConnexxOrbit() {
             brands={CARRIERS}
             radiusPct={40}
             durationS={50}
-            direction="ccw"
+            direction="cw"
             mobileHide={CARRIERS_MOBILE_HIDE}
           />
 

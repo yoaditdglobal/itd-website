@@ -17,9 +17,9 @@ export default function SectionLabel({
 
   return (
     <div className={`${alignment} mb-8 md:mb-12`}>
-      <h2 className={`font-bold tracking-tight ${textColor}`}>{title}</h2>
+      <h2 className={`text-display-lg ${textColor}`}>{title}</h2>
       {subtitle && (
-        <p className={`mt-3 text-base md:text-lg max-w-2xl ${subColor} ${align === "center" ? "mx-auto" : ""}`}>
+        <p className={`mt-3 text-body-lg max-w-2xl ${subColor} ${align === "center" ? "mx-auto" : ""}`}>
           {subtitle}
         </p>
       )}

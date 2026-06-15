@@ -67,31 +67,31 @@ export default function MarketplaceSellerPage() {
       integrations={[
         {
           name: "Amazon",
-          logo: "/logos/marketplaces/amazon_logo.png",
+          logo: "/logos/marketplaces/amazon-icon.webp",
           description: "Amazon Seller Central UK, DE, FR, IT, ES, and NL with Buy Shipping support.",
           href: "/integrations/marketplaces",
         },
         {
           name: "eBay",
-          logo: "/logos/marketplaces/ebay_logo.png",
+          logo: "/logos/marketplaces/ebay-icon.png",
           description: "eBay UK and DE with Late Shipment Rate-compliant carrier routing.",
           href: "/integrations/marketplaces",
         },
         {
           name: "Etsy",
-          logo: "/logos/marketplaces/etsy_logo.png",
+          logo: "/logos/marketplaces/etsy-icon.png",
           description: "Etsy shop integration with branded tracking for the marketplace's reach.",
           href: "/integrations/marketplaces",
         },
         {
           name: "TikTok Shop",
-          logo: "/logos/marketplaces/tiktok_logo.png",
+          logo: "/logos/marketplaces/tiktok-tile.png",
           description: "TikTok Shop UK fulfilment with same multi-carrier routing as the rest of the stack.",
           href: "/integrations/marketplaces",
         },
         {
           name: "Royal Mail",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description: "Tracked 24 and Tracked 48 are Amazon Valid Tracking Rate compliant.",
           href: "/integrations/carriers/royal-mail",
         },

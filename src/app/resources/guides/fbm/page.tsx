@@ -52,7 +52,7 @@ const faqs = [
   {
     question: "Can I use my own carrier for FBM orders?",
     answer:
-      "Yes. FBM allows any carrier you choose, as long as the carrier delivers on time and provides a valid tracking number Amazon can verify. The practical constraint is Valid Tracking Rate. Smaller regional couriers often lack the Amazon scan-event integration, which means tracking will fail VTR even with a valid number. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, Yodel, and Amazon Shipping all integrate.",
+      "Yes. FBM allows any carrier you choose, as long as the carrier delivers on time and provides a valid tracking number Amazon can verify. The practical constraint is Valid Tracking Rate. Smaller regional couriers often lack the Amazon scan-event integration, which means tracking will fail VTR even with a valid number. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, and Amazon Shipping all integrate.",
   },
   {
     question: "What is Seller Fulfilled Prime and how do I qualify?",
@@ -67,7 +67,7 @@ const faqs = [
   {
     question: "What carriers count for Amazon Valid Tracking Rate in the UK?",
     answer:
-      "Royal Mail Tracked 24, Royal Mail Tracked 48, Royal Mail Signed, DPD Next Day and Standard, Evri Standard and Next Day, Parcelforce Express24 and Express48, DHL Parcel UK, Yodel B2C 24 and B2C 48, and Amazon Shipping all push valid tracking events back to Amazon. Untracked services cannot meet VTR. Smaller regional couriers may have valid tracking numbers but lack the Amazon scan-event integration.",
+      "Royal Mail Tracked 24, Royal Mail Tracked 48, Royal Mail Signed, DPD Next Day and Standard, Evri Standard and Next Day, Parcelforce Express24 and Express48, DHL Parcel UK, and Amazon Shipping all push valid tracking events back to Amazon. Untracked services cannot meet VTR. Smaller regional couriers may have valid tracking numbers but lack the Amazon scan-event integration.",
   },
   {
     question: "How do I keep my Amazon On-Time Delivery Rate above 97%?",
@@ -121,7 +121,7 @@ export default function FbmGuidePage() {
             <h1 className="text-display-xl text-text-primary">
               Fulfilled by Merchant on Amazon: the UK seller&apos;s guide.
             </h1>
-            <p className="mt-5 text-lg text-text-secondary leading-relaxed">
+            <p className="mt-5 text-body-lg text-text-secondary">
               A working guide for UK Amazon sellers running their own dispatch instead of FBA. The metrics that get you suspended, the carriers that keep you compliant, the workflow that scales past 1,000 orders a day, and how Seller Fulfilled Prime actually works in 2026.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-text-tertiary">
@@ -312,20 +312,20 @@ export default function FbmGuidePage() {
               </p>
               <div className="mt-4 space-y-3">
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">LSR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">LSR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Confirmed shipped through Buy Shipping by the deadline = not a late shipment, regardless of carrier delay.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">VTR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">VTR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Tracking numbers from Buy Shipping are valid by definition. The tracking event feed is wired into Seller Central automatically.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-sm font-semibold text-text-primary mb-1">OTDR protection.</p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-heading-sm text-text-primary mb-1">OTDR protection.</p>
+                  <p className="text-body-sm text-text-secondary">
                     Buy Shipping bookings carry an Amazon estimated delivery date that aligns with the carrier&apos;s published transit time. OTDR is calculated against that date, so a carrier delay does not automatically penalise you.
                   </p>
                 </div>
@@ -456,7 +456,7 @@ export default function FbmGuidePage() {
                 <strong className="text-text-primary">Carrier selection in Seller Central.</strong> When you mark an order as shipped outside Buy Shipping, you select a carrier from the drop-down. That carrier has to match the tracking number format. Marking an order as &ldquo;Royal Mail&rdquo; while uploading a DPD tracking number is one of the most common causes of VTR failures.
               </p>
               <p>
-                <strong className="text-text-primary">Scan events.</strong> Valid tracking requires the carrier to push scan events back to Amazon. Major UK carriers do this through approved EDI feeds. If you use a smaller carrier that does not have an Amazon integration, the tracking number may be technically valid but the scan events will not flow back, and VTR drops accordingly. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, Yodel, and Amazon Shipping all integrate. Smaller regional couriers often do not.
+                <strong className="text-text-primary">Scan events.</strong> Valid tracking requires the carrier to push scan events back to Amazon. Major UK carriers do this through approved EDI feeds. If you use a smaller carrier that does not have an Amazon integration, the tracking number may be technically valid but the scan events will not flow back, and VTR drops accordingly. Royal Mail, DPD, Evri, Parcelforce, DHL Parcel UK, and Amazon Shipping all integrate. Smaller regional couriers often do not.
               </p>
               <p>
                 <strong className="text-text-primary">Label format requirements.</strong> Some Amazon programmes (notably Seller Fulfilled Prime) require specific label formats with the Prime branding. Standard FBM does not require Prime-branded labels but the address block has to be legible, the tracking barcode has to scan, and the carrier-specific information block has to be present and correct. Carrier label PDFs printed at the wrong size (A4 instead of 4x6, or 4x6 instead of 4x4) cause carrier rejections at the depot.
@@ -619,9 +619,9 @@ export default function FbmGuidePage() {
               <ScrollReveal key={item.question} delay={i * 0.04}>
                 <details className="group bg-white rounded-xl border border-border p-5">
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
-                    <h3 className="text-base font-semibold text-text-primary">{item.question}</h3>
+                    <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-sm text-text-secondary leading-relaxed">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
                 </details>
               </ScrollReveal>
             ))}
@@ -691,7 +691,7 @@ export default function FbmGuidePage() {
             <h2 className="text-display-lg text-white mb-3">
               Running FBM on Amazon at volume?
             </h2>
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-body-lg">
               Connexx covers the orders Buy Shipping does not, routes across every marketplace from one queue, and writes tracking back to Amazon, eBay, Etsy, and TikTok Shop automatically. Velocity Sellers eliminated £12,000 a month in penalty fees on the same setup.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

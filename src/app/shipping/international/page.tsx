@@ -48,7 +48,7 @@ export default function ShippingInternationalPage() {
         serviceSchema({
           name: "International Parcel Shipping",
           description:
-            "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East, and rest of world via DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International.",
+            "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East, and rest of world via DHL Express, FedEx, UPS, DPD, Royal Mail International, and Parcelforce International.",
           path: "/shipping/international",
           serviceType: "International Parcel Shipping and Customs Automation",
           areaServed: [
@@ -112,7 +112,7 @@ export default function ShippingInternationalPage() {
           anchor: "ecommerce",
           headline: "Built for eCommerce",
           summary:
-            "Connect your Shopify, WooCommerce or BigCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
+            "Connect your Shopify or WooCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
           solutionTag: "eCommerce",
           category: "By business model",
           image: {
@@ -172,7 +172,7 @@ export default function ShippingInternationalPage() {
       carrierComparison={{
         title: "International carrier comparison",
         intro:
-          "International parcels require different carriers for different jobs. Express to North America is a different problem from postal to Australia. Connexx compares all seven major international carriers on every cross-border order.",
+          "International parcels require different carriers for different jobs. Express to North America is a different problem from postal to Australia. Connexx compares all six major international carriers on every cross-border order.",
         columns: ["Country reach", "Speed tiers", "Customs handling", "Best for"],
         rows: [
           {
@@ -187,7 +187,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "FedEx",
-            logo: "/logos/carriers/fedex_logo.png",
+            logo: "/logos/carriers/fedex-icon.png",
             cells: [
               "220+ countries",
               "International Priority (1–3 days), Economy (2–5 days), International Connect Plus",
@@ -216,17 +216,8 @@ export default function ShippingInternationalPage() {
             ],
           },
           {
-            carrier: "PostNL",
-            cells: [
-              "220+ countries via postal network",
-              "International Standard, Priority, Tracked",
-              "EU postal customs handling, IOSS supported",
-              "EU B2C eCommerce parcels under €150",
-            ],
-          },
-          {
             carrier: "Royal Mail International",
-            logo: "/logos/carriers/Royal-Mail-Logo.png",
+            logo: "/logos/carriers/royal-mail-icon.png",
             cells: [
               "230+ countries",
               "International Tracked & Signed, International Tracked, International Signed, International Standard, International Business",
@@ -246,7 +237,7 @@ export default function ShippingInternationalPage() {
           },
         ],
         footnote:
-          "Connexx integrates with all seven. The rate engine compares them in real time against your routing rules. The cheapest compliant carrier for the destination, weight, and service tier wins the shipment automatically.",
+          "Connexx integrates with all six. The rate engine compares them in real time against your routing rules. The cheapest compliant carrier for the destination, weight, and service tier wins the shipment automatically.",
       }}
       features={[
         {
@@ -261,8 +252,8 @@ export default function ShippingInternationalPage() {
         },
         {
           icon: Zap,
-          title: "Live rate comparison across seven international carriers.",
-          desc: "DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.",
+          title: "Live rate comparison across six international carriers.",
+          desc: "DHL Express, FedEx, UPS, DPD, Royal Mail International, and Parcelforce International run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.",
         },
         {
           icon: Calculator,
@@ -280,7 +271,7 @@ export default function ShippingInternationalPage() {
         },
         {
           name: "FedEx",
-          logo: "/logos/carriers/fedex_logo.png",
+          logo: "/logos/carriers/fedex-icon.png",
           description:
             "International Priority and Economy services to 220+ countries. US-strong customs brokerage.",
           href: "/integrations/carriers",
@@ -300,14 +291,8 @@ export default function ShippingInternationalPage() {
           href: "/integrations/carriers/dpd",
         },
         {
-          name: "PostNL",
-          description:
-            "EU and worldwide postal delivery for B2C consignments. IOSS supported.",
-          href: "/integrations/carriers",
-        },
-        {
           name: "Royal Mail International",
-          logo: "/logos/carriers/Royal-Mail-Logo.png",
+          logo: "/logos/carriers/royal-mail-icon.png",
           description:
             "International Tracked & Signed, Tracked, Signed, Standard, Business. 230+ countries.",
           href: "/integrations/carriers/royal-mail",
@@ -347,7 +332,7 @@ export default function ShippingInternationalPage() {
         {
           question: "Which international carriers can I ship with through ITD?",
           answer:
-            "The major global and postal carriers: DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International and Parcelforce International. We compare them on each order and route to the best-value one for the destination.",
+            "The major global and postal carriers: DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International. We compare them on each order and route to the best-value one for the destination.",
         },
         {
           question: "Will my customers get charged surprise duties or taxes?",

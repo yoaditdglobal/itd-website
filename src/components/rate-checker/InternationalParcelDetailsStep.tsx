@@ -472,7 +472,7 @@ export function InternationalParcelDetailsStep({
   if (flowMismatchError && invoiceFile) {
     return <div className="space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-xl md:text-2xl font-semibold text-text-primary">
+          <h2 className="text-display-md text-text-primary">
             Parcel Details
           </h2>
           <p className="text-text-secondary">
@@ -490,7 +490,7 @@ export function InternationalParcelDetailsStep({
               <p className="text-body-sm text-text-secondary mt-1">
                 {flowMismatchError.message}
               </p>
-              <p className="text-sm text-warning mt-2">
+              <p className="text-body-sm text-warning mt-2">
                 {flowMismatchError.suggestion}
               </p>
             </div>
@@ -516,7 +516,7 @@ export function InternationalParcelDetailsStep({
   if (invoiceAnalysis && invoiceFile) {
     return <div className="space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-xl md:text-2xl font-semibold text-text-primary">
+          <h2 className="text-display-md text-text-primary">
             Invoice Analysis
           </h2>
           <p className="text-text-secondary">
@@ -543,7 +543,7 @@ export function InternationalParcelDetailsStep({
   return <div>
     {/* DARK HEADER BAND */}
     <div className="bg-[hsl(222,47%,8%)] px-5 md:px-10 pt-7 pb-6">
-      <h2 className="text-[24px] font-extrabold text-white tracking-[-0.02em]">
+      <h2 className="text-display-md text-white">
         Your typical parcel
       </h2>
       <p className="text-[14px] font-normal text-[hsl(215,16%,47%)] mt-1.5">
@@ -625,7 +625,7 @@ export function InternationalParcelDetailsStep({
           <div className="flex items-start gap-2">
             <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
             <div className="space-y-1">
-              <p className="font-medium text-text-primary text-sm">Parcel exceeds service limits</p>
+              <p className="text-label text-text-primary">Parcel exceeds service limits</p>
               {parcelValidation.warnings.map((warning, idx) => <p key={idx} className="text-body-sm text-text-secondary">• {warning}</p>)}
             </div>
           </div>

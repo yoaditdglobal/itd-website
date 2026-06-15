@@ -281,7 +281,7 @@ function renderLegacyBestForPills(text: string) {
     .map((p) => p.trim())
     .filter(Boolean);
   if (parts.length === 0)
-    return <span className="text-sm text-text-secondary">{text}</span>;
+    return <span className="text-body-sm text-text-secondary">{text}</span>;
   return <BestForPills items={parts} />;
 }
 
@@ -300,7 +300,7 @@ function legacySpeedIndicator(text: string) {
   return (
     <span className="inline-flex items-center gap-2">
       <span className={`w-1.5 h-1.5 rounded-full ${dot}`} aria-hidden />
-      <span className="text-sm text-text-secondary">{text}</span>
+      <span className="text-body-sm text-text-secondary">{text}</span>
     </span>
   );
 }
@@ -573,7 +573,7 @@ function LegacyDesktopTable({
                   <td className="px-5 py-4 align-middle">
                     <div className="flex items-center gap-3">
                       <IntegrationLogo name={row.carrier} logo={row.logo} size="sm" />
-                      <span className="text-sm font-semibold text-text-primary">
+                      <span className="text-heading-sm text-text-primary">
                         {row.carrier}
                       </span>
                     </div>
@@ -587,7 +587,7 @@ function LegacyDesktopTable({
                     return (
                       <td
                         key={i}
-                        className="px-5 py-4 align-middle text-sm text-text-secondary leading-relaxed"
+                        className="px-5 py-4 align-middle text-body-sm text-text-secondary"
                       >
                         {isBestFor
                           ? renderLegacyBestForPills(cell)
@@ -705,7 +705,7 @@ function LegacyMobileCard({
       <div className="bg-white rounded-xl border border-border p-5 shadow-sm">
         <div className="flex items-center gap-3 mb-4 pb-3 border-b border-border">
           <IntegrationLogo name={row.carrier} logo={row.logo} size="sm" />
-          <p className="text-base font-semibold text-text-primary">{row.carrier}</p>
+          <p className="text-heading-sm text-text-primary">{row.carrier}</p>
         </div>
         <dl className="space-y-3">
           {row.cells.map((cell, j) => {
@@ -719,7 +719,7 @@ function LegacyMobileCard({
                 <dt className="text-eyebrow text-text-tertiary mb-1.5">
                   {columns[j]}
                 </dt>
-                <dd className="text-sm text-text-secondary leading-relaxed">
+                <dd className="text-body-sm text-text-secondary">
                   {isBestFor
                     ? renderLegacyBestForPills(cell)
                     : isSpeed

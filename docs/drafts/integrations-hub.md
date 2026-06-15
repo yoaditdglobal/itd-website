@@ -105,9 +105,6 @@ Full marketplaces page: `/integrations/marketplaces`.
 | FedEx | Global | Global parcel and freight services. | Native |
 | UPS | Global | Worldwide parcel and freight delivery. | Native |
 | TNT | EU | European express, integrated post-acquisition by FedEx. | Native |
-| Aramex | Global | Middle East and global parcel network. | Native |
-| PostNL | EU | Netherlands and EU postal services. | Native |
-| GLS | EU | European parcel network. | Native |
 | Australia Post | Global | Australian domestic and international post. | Native |
 | DHL Parcel | EU | European parcel delivery for B2C volume. | Native |
 | Deutsche Post | EU | German postal and Warenpost services. | Native |
@@ -151,7 +148,7 @@ Orders flow in. Labels print out. Tracking syncs back. Exceptions surface in one
 
 **What does Connexx integrate with?**
 
-Connexx connects to 26 ERP, WMS, eCommerce, and marketplace tools and 18 carriers. The full list includes SAP, Oracle NetSuite, Microsoft Dynamics, Sage, Cin7, Linnworks, Mintsoft, Selro, ShipHero, StoreFeeder, Veeqo, Shopify, WooCommerce, Magento, BigCommerce, Amazon, eBay, Etsy, Walmart, Zalando, Temu, TikTok Shop, ShipStation, Shippo, Freightview, and Project44. The carrier list includes Royal Mail, DPD, Evri, Parcel Force, Yodel, Amazon Shipping, DHL Express, FedEx, UPS, TNT, Aramex, PostNL, GLS, Australia Post, DHL Parcel, Deutsche Post, Evri EU, and InPost.
+Connexx connects to 26 ERP, WMS, eCommerce and marketplace tools and 18 carriers. The full list includes SAP, Oracle NetSuite, Microsoft Dynamics, Sage, Cin7, Linnworks, Mintsoft, Selro, ShipHero, StoreFeeder, Veeqo, Shopify, WooCommerce, Magento, BigCommerce, Amazon, eBay, Etsy, Walmart, Zalando, Temu, TikTok Shop, ShipStation, Shippo, Freightview and Project44. The carrier list includes Royal Mail, DPD, Evri, Parcel Force, Yodel, Amazon Shipping, DHL Express, FedEx, UPS, TNT, Australia Post, DHL Parcel, Deutsche Post, Evri EU and InPost.
 
 **Does Connexx have a public API?**
 

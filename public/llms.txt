@@ -1,8 +1,8 @@
 # ITD Global
 
-> ITD Global is the multi-carrier shipping platform for UK retailers, eCommerce brands, marketplace sellers, 3PLs, exporters, and B2B manufacturers. The product is called Connexx. It routes every parcel through the cheapest compliant carrier, automates customs documentation, and gives one dashboard for every dispatch across Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, Yodel, DX, InPost, and more.
+> ITD Global is the multi-carrier shipping platform for UK retailers, eCommerce brands, marketplace sellers, 3PLs, exporters, and B2B manufacturers. The product is called Connexx. It routes every parcel through the cheapest compliant carrier, automates customs documentation, and gives one dashboard for every dispatch across Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, DX, InPost, and more.
 
-ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooCommerce, Magento, BigCommerce, Amazon, eBay, Etsy, SAP, Oracle NetSuite, Microsoft Dynamics, Linnworks, Mintsoft, Veeqo, ShipStation, and other commerce and operations platforms.
+ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooCommerce, Magento, Amazon, eBay, Etsy, Oracle NetSuite, Linnworks, Mintsoft, Veeqo, ShipStation, and other commerce and operations platforms.
 
 ## Product
 
@@ -28,10 +28,10 @@ ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooComm
 ## Integrations
 
 - [Integrations hub](https://itdglobal.com/integrations): full directory of all platform connections.
-- [ERP & WMS](https://itdglobal.com/integrations/erp-wms): SAP, NetSuite, Microsoft Dynamics, Sage, Linnworks, Mintsoft, Veeqo, Selro, StoreFeeder, ShipHero, Cin7.
-- [eCommerce](https://itdglobal.com/integrations/ecommerce): Shopify, WooCommerce, Magento, BigCommerce.
-- [Marketplaces](https://itdglobal.com/integrations/marketplaces): Amazon, eBay, Etsy, Walmart, Zalando, Temu, TikTok Shop.
-- [Logistics](https://itdglobal.com/integrations/logistics): ShipStation, Shippo, Freightview, Project44.
+- [ERP & WMS](https://itdglobal.com/integrations/erp-wms): NetSuite, Linnworks, Mintsoft, Veeqo, Selro, StoreFeeder, ShipHero.
+- [eCommerce](https://itdglobal.com/integrations/ecommerce): Shopify, WooCommerce, Magento.
+- [Marketplaces](https://itdglobal.com/integrations/marketplaces): Amazon, eBay, Etsy, Temu, TikTok Shop.
+- [Logistics](https://itdglobal.com/integrations/logistics): ShipStation.
 
 ## Carriers
 
@@ -40,7 +40,7 @@ ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooComm
 - [Evri](https://itdglobal.com/integrations/carriers/evri): UK parcel and ParcelShop network.
 - [DHL Express](https://itdglobal.com/integrations/carriers/dhl): international express delivery to 220+ countries.
 - [Amazon Shipping](https://itdglobal.com/integrations/carriers/amazon-shipping): Amazon's UK logistics network.
-- Also integrated: UPS, FedEx, Parcel Force, Yodel, DX, InPost, DHL Parcel, Deutsche Post, TNT, Aramex, PostNL, GLS, Australia Post.
+- Also integrated: UPS, FedEx, Parcel Force, DX, InPost, DHL Parcel, Deutsche Post, TNT.
 
 ## Customer stories
 

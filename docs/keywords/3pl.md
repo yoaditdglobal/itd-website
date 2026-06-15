@@ -79,8 +79,6 @@ Target buyer: Operations Director or Founder of a UK 3PL fulfilling 100k–1M pa
 - TNT
 - DX
 - InPost (UK + EU)
-- GLS
-- PostNL
 - Deutsche Post
 
 ### Regulations / standards

@@ -26,7 +26,7 @@
 International shipping with customs documentation done before dispatch.
 
 **Sub-headline (56 words):**
-EU, North America, APAC, the Middle East. Connexx generates the HS codes, the EORI declarations, the IOSS filings, and the country-specific paperwork before the carrier scans the label. DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International compete in real time on every cross-border order. Customs holds drop. Margins hold steady.
+EU, North America, APAC, the Middle East. Connexx generates the HS codes, the EORI declarations, the IOSS filings and the country-specific paperwork before the carrier scans the label. DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International compete in real time on every cross-border order. Customs holds drop. Margins hold steady.
 
 **Primary CTA:** `Get my international rate review` → /contact?enquiry=international
 **Secondary CTA:** `See the Meridian Trade Co case study` → /resources/case-studies/meridian-exports
@@ -52,7 +52,7 @@ The complete country list runs to 220+ destinations through DHL Express alone. C
 
 ## Carrier comparison table
 
-International parcels require different carriers for different jobs. Express to North America is a different problem from postal to Australia. Connexx compares all seven major international carriers on every cross-border order.
+International parcels require different carriers for different jobs. Express to North America is a different problem from postal to Australia. Connexx compares all six major international carriers on every cross-border order.
 
 | Carrier | Country reach | Speed tiers | Customs handling | Best for |
 |---|---|---|---|---|
@@ -60,7 +60,6 @@ International parcels require different carriers for different jobs. Express to 
 | FedEx | 220+ countries | International Priority (1–3 days), Economy (2–5 days), International Connect Plus | Pre-clearance, US-strong customs brokerage | North America, time-critical APAC |
 | UPS | 220+ countries | Express Plus, Worldwide Express, Worldwide Expedited, Worldwide Saver | Full customs brokerage, strong in US and EU | US-bound parcels, EU lanes, regulated commodities |
 | DPD | EU strong, growing worldwide | Classic (2–5 days), Express (1–2 days for EU) | Automated customs declarations for EU, IOSS supported | EU eCommerce shipping at cost-effective rates |
-| PostNL | 220+ countries via postal network | International Standard, Priority, Tracked | EU postal customs handling, IOSS supported | EU B2C eCommerce parcels under €150 |
 | Royal Mail International | 230+ countries | International Tracked & Signed, International Tracked, International Signed, International Standard, International Business | CN22 / CN23 automated, IOSS supported | Small parcels and letters worldwide, low-value shipments |
 | Parcelforce International | 240+ countries | Globalexpress, Globalpriority, Globalvalue, EuroPriority | Customs declarations included, IOSS supported | Heavier international parcels at postal pricing |
 
@@ -120,7 +119,7 @@ HS codes pulled from the product catalogue. EORI applied to UK exporters automat
 When a destination country changes its import requirements, the document template changes in Connexx. UK exporters do not chase regulatory emails. The Saudi SABER update, the post-Brexit EU rules change, the IOSS threshold adjustment all flow into the documentation engine before they hit your next shipment.
 
 **Live rate comparison across seven international carriers.**
-DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.
+DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight and speed requirement wins. Manual overrides remain available for known-difficult lanes.
 
 **Landed cost calculation at checkout.**
 Duty, VAT, carrier surcharges, and broker fees calculated from the actual tariff schedule, not from last quarter's spreadsheet estimate. Show the buyer the all-in cost before they pay. Conversion rises, returns from surprise charges fall, finance gets accurate numbers for pricing decisions.
@@ -135,7 +134,6 @@ Duty, VAT, carrier surcharges, and broker fees calculated from the actual tariff
 | FedEx | fedex | International Priority and Economy services to 220+ countries. US-strong customs brokerage. |
 | UPS | ups | Worldwide Express, Expedited, and Saver services. Customs handling across EU and North America. |
 | DPD | dpd | EU eCommerce shipping with automated customs declarations and IOSS support. |
-| PostNL | postnl | EU and worldwide postal delivery for B2C consignments. IOSS supported. |
 | Royal Mail International | royal-mail | International Tracked & Signed, Tracked, Signed, Standard, Business. 230+ countries. |
 | Parcelforce International | parcelforce | Globalexpress, Globalpriority, Globalvalue, EuroPriority. 240+ countries. |
 | Shopify | shopify | Cross-border Shopify orders flow into Connexx for automated customs paperwork and carrier selection. |
@@ -170,7 +168,7 @@ EORI numbers are applied to UK exporter declarations automatically. IOSS is appl
 
 **Which international carriers does ITD integrate with?**
 
-Seven major international carriers: DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International. Each holds different strengths by region (DHL strong worldwide, DPD strong EU, PostNL strong EU postal, Royal Mail strong low-value postal). Connexx compares all seven on every cross-border order. Additional regional carriers can be added on request.
+Six major international carriers: DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International. Each holds different strengths by region (DHL strong worldwide, DPD strong EU, Royal Mail strong low-value postal). Connexx compares all six on every cross-border order. Additional regional carriers can be added on request.
 
 **Can Connexx handle imports as well as exports?**
 
@@ -199,7 +197,7 @@ import { JsonLd, serviceSchema, faqSchema, breadcrumbSchema } from "@/components
 <JsonLd data={[
   serviceSchema({
     name: "International Parcel Shipping",
-    description: "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East, and rest of world via DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International.",
+ description: "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East and rest of world via DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International.",
     path: "/shipping/international",
     serviceType: "International Parcel Shipping",
     areaServed: ["United Kingdom", "European Union", "United States", "Canada", "Worldwide"],
@@ -213,7 +211,7 @@ import { JsonLd, serviceSchema, faqSchema, breadcrumbSchema } from "@/components
     { question: "How many countries can I ship to with Connexx?", answer: "Over 220 countries through the integrated carrier network. DHL Express, FedEx, and UPS each cover 220+ destinations. Royal Mail International covers 230+ countries and Parcelforce International covers 240+. The Connexx rate engine selects the carrier with the best combination of price, speed, and clearance capability for each destination." },
     { question: "Does Connexx handle customs documentation automatically?", answer: "Yes. Commercial invoices, packing lists, CN22, CN23, certificates of origin, EUR.1 movement certificates, and country-specific declarations are generated from the product data and HS codes already in your system. The rules engine applies the right document pack to each destination automatically." },
     { question: "How does Connexx handle EORI, IOSS, and HS codes?", answer: "EORI numbers are applied to UK exporter declarations automatically. IOSS is applied to EU B2C consignments under €150 for VAT collection at checkout. HS codes are pulled from your product catalogue, classified to the right level for each destination country, and applied to the customs declaration without manual entry." },
-    { question: "Which international carriers does ITD integrate with?", answer: "Seven major international carriers: DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International. Each holds different strengths by region. Connexx compares all seven on every cross-border order. Additional regional carriers can be added on request." },
+ { question: "Which international carriers does ITD integrate with?", answer: "Six major international carriers: DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International. Each holds different strengths by region. Connexx compares all six on every cross-border order. Additional regional carriers can be added on request." },
     { question: "Can Connexx handle imports as well as exports?", answer: "Yes. Inbound shipments from supplier countries get the same automated treatment as outbound. Pre-clearance documentation is generated from the PO data and HS codes before the goods leave the origin country. Duty calculation runs from the actual tariff schedule, not a spreadsheet estimate." },
     { question: "How does post-Brexit EU-UK shipping work with Connexx?", answer: "EU-UK shipments are treated as third-country movements with full customs documentation on every parcel. Connexx applies the EORI number to UK exporter declarations, generates the commercial invoice and CN23 for postal services, and handles rules of origin under the Trade and Cooperation Agreement. Northern Ireland shipments are routed under the Windsor Framework." },
   ]),
@@ -233,7 +231,6 @@ Outbound from this page:
 - `/integrations/carriers/fedex` — first mention of FedEx
 - `/integrations/carriers/ups` — first mention of UPS
 - `/integrations/carriers/dpd` — first mention of DPD
-- `/integrations/carriers/postnl` — first mention of PostNL
 - `/integrations/carriers/royal-mail` — first mention of Royal Mail International
 - `/integrations/carriers/parcelforce` — first mention of Parcelforce International
 - `/resources/case-studies/meridian-exports` — from the featured case study
@@ -265,7 +262,7 @@ Inbound to this page (from other site pages):
 
 ## Reviewer questions
 
-1. The hero subhead lists "DHL Express, FedEx, UPS, DPD, PostNL, Royal Mail International, and Parcelforce International" as the integrated international carriers. The current `src/lib/data.ts` does not include FedEx or UPS as featured carriers and lists PostNL as non-featured. Confirm Connexx integrates with all seven and update the integrations data accordingly.
+1. The hero subhead lists "DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International" as the integrated international carriers. The current `src/lib/data.ts` does not include FedEx or UPS as featured carriers and lists as non-featured. Confirm Connexx integrates with all seven and update the integrations data accordingly.
 2. The country counts in the FAQ (220+, 230+, 240+) are carrier-published. Confirm with the integrations team that these match current carrier rate cards and update if any carrier has restricted coverage in the past 12 months.
 3. The geography table includes Northern Ireland under Windsor Framework rules. Confirm Connexx routes NI shipments with the green-lane/red-lane decision automatically, or whether this requires user input today.
 4. The Meridian Trade Co figures (4 hours to 1 hour, 90% customs hold drop, 40% volume increase) are quoted verbatim. Confirm with product/sales these can continue to be used on this page.

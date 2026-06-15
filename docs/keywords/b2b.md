@@ -80,7 +80,6 @@ Target buyer: Supply Chain Director, Dispatch Manager, or Operations Director at
 - XDP
 - Yodel B2B
 - Royal Mail Business Parcels
-- GLS (B2B EU)
 
 ### Regulations / standards
 - HMRC

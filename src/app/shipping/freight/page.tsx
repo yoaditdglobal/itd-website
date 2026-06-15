@@ -87,7 +87,7 @@ export default function ShippingFreightPage() {
           serviceSchema({
             name: "Freight & Pallet Shipping",
             description:
-              "Multi-network freight and pallet shipping platform. Connexx routes UK pallet networks (Pall-Ex, Palletline, Palletways), LTL, parcel carriers, and worldwide air and sea freight from one workflow. Connected to SAP, Sage, NetSuite, and Microsoft Dynamics.",
+              "Multi-network freight and pallet shipping platform. Connexx routes UK pallet networks (Pall-Ex, Palletline, Palletways), LTL, parcel carriers, and worldwide air and sea freight from one workflow. Connected to NetSuite and your existing systems.",
             path: "/shipping/freight",
             serviceType: "UK and International Freight & Pallet Shipping",
             areaServed: ["United Kingdom", "European Union", "Worldwide"],

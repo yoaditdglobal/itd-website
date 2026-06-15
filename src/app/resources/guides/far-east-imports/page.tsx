@@ -123,7 +123,7 @@ export default function FarEastImportsGuidePage() {
             <h1 className="text-display-xl text-text-primary">
               Importing from China and the Far East into the UK.
             </h1>
-            <p className="mt-5 text-lg text-text-secondary leading-relaxed">
+            <p className="mt-5 text-body-lg text-text-secondary">
               A working guide for UK importers bringing goods in from China, Vietnam, India, Bangladesh, and Turkey. CDS declarations, UK Global Tariff duty, Incoterms, sea versus air freight, Postponed VAT Accounting, and the holds that catch new importers. Built for the import manager, not the textbook reader.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-text-tertiary">
@@ -324,7 +324,7 @@ export default function FarEastImportsGuidePage() {
                 Second, anti-dumping duties hit certain product categories from certain origins. Solar panels from China, ceramic tableware from China, e-bikes from China, and a long list of steel products all carry additional duties on top of the standard UKGT rate. The UKGT tool flags these. Miss one and you will be invoiced retrospectively by HMRC, often six to twelve months after the import.
               </p>
               <p>
-                Third, the commodity code stays with the SKU. Build it into your product master in your ERP (SAP, NetSuite, Dynamics 365, Sage X3, or whatever you run) so that every shipment of that SKU uses the same code automatically. Spreadsheet-based classification is where errors come from.
+                Third, the commodity code stays with the SKU. Build it into your product master in your ERP (NetSuite, or whatever you run) so that every shipment of that SKU uses the same code automatically. Spreadsheet-based classification is where errors come from.
               </p>
             </div>
           </section>
@@ -553,9 +553,9 @@ export default function FarEastImportsGuidePage() {
               <ScrollReveal key={item.question} delay={i * 0.04}>
                 <details className="group bg-white rounded-xl border border-border p-5">
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
-                    <h3 className="text-base font-semibold text-text-primary">{item.question}</h3>
+                    <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-sm text-text-secondary leading-relaxed">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
                 </details>
               </ScrollReveal>
             ))}
@@ -625,7 +625,7 @@ export default function FarEastImportsGuidePage() {
             <h2 className="text-display-lg text-white mb-3">
               Importing from the Far East at volume?
             </h2>
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-body-lg">
               Connexx calculates landed cost per SKU, files CDS declarations alongside your broker, and tracks every shipment from supplier to UK warehouse. Northgate Imports cut clearance delays 60% with the same setup.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

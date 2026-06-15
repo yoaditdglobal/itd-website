@@ -11,9 +11,7 @@ export default function DpdPage() {
   return (
     <CarrierPage
       name="DPD"
-      heroTitle="DPD x ITD"
-      logo="/logos/carriers/DPD logo svg carrier integration page.svg"
-      logoBg="#ffffff"
+      logo="/logos/carriers/dpd-tile.png"
       tagline="Europe's leading parcel delivery network with one-hour delivery windows, connected to Connexx."
       description="DPD is known for its Predict service — one-hour delivery windows with real-time driver tracking. Through Connexx, you get full access to DPD's domestic and European network, with automated label generation, proactive notifications, and cost optimisation across all DPD services."
       region="Domestic"
@@ -39,7 +37,7 @@ export default function DpdPage() {
         { label: "European countries", value: "30+" },
         { label: "Pickup shops", value: "70,000+" },
         { label: "Parcels per day", value: "8.4M+" },
-        { label: "Connexx integration", value: "Live" },
+        { label: "ITD integration", value: "Live" },
       ]}
     />
   );

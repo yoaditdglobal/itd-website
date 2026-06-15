@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { MapPin, Globe, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
-import CarrierNetworkMap from "@/components/sections/CarrierNetworkMap";
+import CarrierNetworkOrbit from "@/components/sections/CarrierNetworkOrbit";
 import { getIntegrationSlug, type Integration } from "@/lib/data";
 
 type Region = "Domestic" | "International";
@@ -30,11 +30,8 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
     // the layoutId spring + tile stagger now lives here.
     <MotionConfig reducedMotion="user">
     <div>
-      {/* motion-led geographic visual */}
-      <CarrierNetworkMap region={active} />
-
       {/* segmented switch */}
-      <div className="mt-8 flex justify-center">
+      <div className="mb-8 flex justify-center">
         <div
           role="tablist"
           aria-label="Carrier region"
@@ -72,6 +69,9 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
         </div>
       </div>
 
+      {/* carriers-only orbit (pillar design) */}
+      <CarrierNetworkOrbit groups={groups} active={active} />
+
       {/* reveal tiles */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -94,7 +94,7 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
                 className="group relative flex h-full min-h-[164px] flex-col items-center justify-start rounded-xl border border-border bg-white p-5 text-center transition-all hover:border-accent/30 hover:shadow-md focus-visible:border-accent/40 focus-visible:shadow-md focus-visible:outline-none"
               >
                 <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="mb-3" />
-                <p className="text-sm font-medium text-text-primary">{c.name}</p>
+                <p className="text-label text-text-primary">{c.name}</p>
                 <div className="mt-2 flex flex-col items-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
                   {c.description && (
                     <p className="text-xs text-text-tertiary">{c.description}</p>

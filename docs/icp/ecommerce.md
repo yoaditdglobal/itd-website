@@ -17,7 +17,7 @@ They are running a direct-to-consumer brand shipping 300 to 3,000 orders a day a
 
 ## Top 3 jobs-to-be-done
 1. **When a CS agent receives a WISMO query, I want them to see the current tracking status without leaving their helpdesk tool, so each query takes 30 seconds to resolve rather than four minutes.**
-2. **When I am dispatching an order to an EU destination, I want the rate engine to compare DHL, DPD, and PostNL on that specific weight and postcode, so I stop defaulting to one carrier and start saving on every cross-border shipment.**
+2. **When I am dispatching an order to an EU destination, I want the rate engine to compare DHL and DPD on that specific weight and postcode, so I stop defaulting to one carrier and start saving on every cross-border shipment.**
 3. **When I review monthly shipping costs, I want a breakdown by carrier, lane, and service tier, so I can identify which routes are overpriced and renegotiate with evidence.**
 
 ## Conversion triggers (what makes them book a call)
@@ -28,7 +28,7 @@ They are running a direct-to-consumer brand shipping 300 to 3,000 orders a day a
 ## Disqualifiers (what makes them bounce)
 1. No Shopify or Magento integration listed. If their storefront is not on the integration page they assume the product does not fit.
 2. The rate comparison is not real-time. If rates are pulled on a delay or cached, the Ops Manager will not trust the outputs.
-3. EU carrier coverage is thin. If DPD EU, PostNL, and Deutsche Post are not available, the platform does not solve the cross-border problem.
+3. EU carrier coverage is thin. If DPD EU and Deutsche Post are not available, the platform does not solve the cross-border problem.
 4. Onboarding is measured in months. They need it live before the next peak, not after.
 
 ## Words they use vs. words they reject

@@ -115,9 +115,9 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
               <IntegrationLogo key={selected.name} name={selected.name} logo={selected.logo} size="md" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-base font-semibold text-text-primary">{selected.name}</p>
+              <p className="text-heading-md text-text-primary">{selected.name}</p>
               {selected.description && (
-                <p className="text-sm text-text-secondary mt-1 leading-relaxed">{selected.description}</p>
+                <p className="text-body-sm text-text-secondary mt-1">{selected.description}</p>
               )}
               {selected.href && (
                 <div className="mt-4">
