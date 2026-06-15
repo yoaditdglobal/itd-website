@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
@@ -46,6 +47,8 @@ interface IntegrationCategoryPageProps {
   /** Default subheading paragraph. Used when `heroSubhead` is not provided. */
   subtitle: string;
   integrations: Integration[];
+  /** Hide the integration grid section entirely. */
+  hideGrid?: boolean;
 
   /** Optional eyebrow label above the H1. */
   heroLabel?: string;
@@ -84,6 +87,12 @@ interface IntegrationCategoryPageProps {
   /** Optional additional JSON-LD schemas (ItemList, Service, etc.). FAQ + breadcrumb are added automatically. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonLd?: Record<string, any>[];
+
+  /**
+   * Optional visual rendered on the right side of the hero. When provided the
+   * hero switches to a two-column layout (text left, visual right).
+   */
+  heroVisual?: ReactNode;
 }
 
 /**
@@ -113,6 +122,8 @@ export default function IntegrationCategoryPage({
   closingCta,
   breadcrumbs,
   jsonLd,
+  heroVisual,
+  hideGrid,
 }: IntegrationCategoryPageProps) {
   const headline = heroH1 ?? title;
   const subhead = heroSubhead ?? subtitle;
@@ -128,35 +139,50 @@ export default function IntegrationCategoryPage({
       {ldData.length > 0 && <JsonLd data={ldData} />}
 
       {/* Hero */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className={`${heroVisual ? "bg-bg-dark" : "bg-bg-secondary border-b border-border"} py-16 md:py-24 overflow-hidden relative`}>
+        {heroVisual && (
+          <div className="absolute inset-0 pointer-events-none" aria-hidden>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
+          </div>
+        )}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="max-w-3xl">
-              <div className="mb-8">
-                <Link
-                  href="/integrations/tech"
-                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-accent transition-colors"
-                >
-                  <span aria-hidden>←</span> Tech integrations
-                </Link>
-              </div>
-              {heroLabel && (
-                <div className="mb-5">
-                  <span className="inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow">
-                    {heroLabel}
-                  </span>
+            <div className={`flex ${heroVisual ? "flex-col lg:flex-row lg:items-center lg:justify-between gap-12" : "flex-col"}`}>
+              {/* Text */}
+              <div className="max-w-2xl">
+                <div className="mb-8">
+                  <Link
+                    href="/integrations/tech"
+                    className={`inline-flex items-center gap-1.5 text-sm transition-colors ${heroVisual ? "text-white/50 hover:text-white/80" : "text-text-secondary hover:text-accent"}`}
+                  >
+                    <span aria-hidden>←</span> Tech integrations
+                  </Link>
                 </div>
-              )}
-              <h1 className="text-display-xl text-text-primary">{headline}</h1>
-              <p className="mt-4 text-body-lg text-text-secondary">{subhead}</p>
-              {(heroPrimaryCta || heroSecondaryCta) && (
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  {heroPrimaryCta && (
-                    <Button href={heroPrimaryCta.href}>{heroPrimaryCta.label}</Button>
-                  )}
-                  {heroSecondaryCta && (
-                    <Button href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</Button>
-                  )}
+                {heroLabel && (
+                  <div className="mb-5">
+                    <span className={`text-xs font-semibold uppercase tracking-widest ${heroVisual ? "text-accent" : "inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow"}`}>
+                      {heroLabel}
+                    </span>
+                  </div>
+                )}
+                <h1 className={`text-display-xl ${heroVisual ? "text-white" : "text-text-primary"}`}>{headline}</h1>
+                <p className={`mt-4 text-lg ${heroVisual ? "text-white/70 font-medium" : "text-text-secondary"}`}>{subhead}</p>
+                {(heroPrimaryCta || heroSecondaryCta) && (
+                  <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                    {heroPrimaryCta && (
+                      <Button href={heroPrimaryCta.href}>{heroPrimaryCta.label}</Button>
+                    )}
+                    {heroSecondaryCta && (
+                      <Button href={heroSecondaryCta.href} variant="secondary" surface={heroVisual ? "dark" : undefined}>{heroSecondaryCta.label}</Button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Optional visual (e.g. orbit) */}
+              {heroVisual && (
+                <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
+                  {heroVisual}
                 </div>
               )}
             </div>
@@ -165,34 +191,36 @@ export default function IntegrationCategoryPage({
       </section>
 
       {/* Integration grid */}
-      <section id="catalogue" className="bg-bg-secondary py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-              {integrations.map((integration) => (
-                <Link
-                  key={integration.id}
-                  id={integrationAnchor(integration.name)}
-                  href={`/integrations/tech/${getIntegrationSlug(integration)}`}
-                  className="group block card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center h-full scroll-mt-24 transition-all"
-                >
-                  <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
-                  <p className="text-heading-sm text-text-primary">{integration.name}</p>
-                  {integration.description && (
-                    <p className="text-caption text-text-tertiary mt-1">{integration.description}</p>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </ScrollReveal>
+      {!hideGrid && (
+        <section id="catalogue" className="bg-bg-secondary py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {integrations.map((integration) => (
+                  <Link
+                    key={integration.id}
+                    id={integrationAnchor(integration.name)}
+                    href={`/integrations/tech/${getIntegrationSlug(integration)}`}
+                    className="group block card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center h-full scroll-mt-24 transition-all"
+                  >
+                    <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
+                    <p className="text-heading-sm text-text-primary">{integration.name}</p>
+                    {integration.description && (
+                      <p className="text-caption text-text-tertiary mt-1">{integration.description}</p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </ScrollReveal>
 
-          {integrations.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-text-secondary">No integrations in this category yet. More coming soon.</p>
-            </div>
-          )}
-        </div>
-      </section>
+            {integrations.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-text-secondary">No integrations in this category yet. More coming soon.</p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Common use cases */}
       {useCases && useCases.length > 0 && (
