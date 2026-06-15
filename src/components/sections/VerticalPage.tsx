@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import IntegrationCarousel from "@/components/sections/IntegrationCarousel";
 import type { IntegrationItem } from "@/components/sections/IntegrationCarousel";
+import BuiltForCarousel from "@/components/sections/BuiltForCarousel";
 import CarrierComparisonTable from "@/components/sections/CarrierComparisonTable";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import type {
@@ -273,13 +274,11 @@ export default function VerticalPage({
                 Each audience uses the same platform differently. Jump to the section that fits you.
               </p>
             </ScrollReveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              {audienceAnchors.map((a, i) => (
-                <ScrollReveal key={a.anchor} delay={i * 0.05} className="h-full">
-                  <BuiltForCard anchor={a} />
-                </ScrollReveal>
+            <BuiltForCarousel>
+              {audienceAnchors.map((a) => (
+                <BuiltForCard key={a.anchor} anchor={a} />
               ))}
-            </div>
+            </BuiltForCarousel>
           </div>
         </section>
       )}
@@ -533,10 +532,10 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
     <Link
       id={anchor.anchor}
       href={anchor.href}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-200 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      className="group relative flex h-full w-[clamp(300px,85vw,820px)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-white transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:shadow-xl hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:flex-row sm:items-stretch"
     >
-      {/* Image / gradient placeholder — no overlay, photo is clean */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
+      {/* Image / gradient placeholder — left panel on sm+ */}
+      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%] sm:self-stretch">
         {anchor.image.src ? (
           <Image
             src={anchor.image.src}
@@ -597,12 +596,12 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
               <div className="flex items-center gap-2">
                 {visible.length > 0 ? (
                   <>
-                    <div className="flex -space-x-1.5">
+                    <div className="flex items-center gap-1.5">
                       {visible.map((cs) => (
                         <span
                           key={cs.id}
-                          className="ring-2 ring-white rounded-md inline-block"
                           title={cs.brandName}
+                          className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1"
                         >
                           <IntegrationLogo
                             name={cs.brandName}
@@ -620,15 +619,13 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
                   </>
                 ) : (
                   <>
-                    <div className="flex -space-x-1.5">
+                    <div className="flex items-center gap-1.5">
                       {[0, 1, 2].map((i) => (
                         <span
                           key={i}
                           aria-hidden
-                          className="ring-2 ring-white rounded-md inline-block"
-                        >
-                          <span className="block w-5 h-5 rounded-md border border-dashed border-border bg-bg-secondary" />
-                        </span>
+                          className="inline-block h-7 w-7 rounded-md border border-dashed border-border bg-bg-secondary"
+                        />
                       ))}
                     </div>
                     <span className="text-caption text-text-tertiary ml-1">
