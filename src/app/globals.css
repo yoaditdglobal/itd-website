@@ -48,6 +48,27 @@
   --color-border-strong: rgba(26, 26, 31, 0.20);
   --color-border-accent: rgba(29, 63, 184, 0.22);
 
+  /* shadcn-compat bridge — consumed ONLY by src/components/ui/* and
+     src/components/rate-checker/* (a ported shadcn app). Without these the
+     ported modal/inputs render unstyled (e.g. bg-popover undefined → the
+     lead-capture dialog is transparent). `primary` = rate-checker teal CTA;
+     neutrals map to the warm ivory palette so cards/modals render opaque. */
+  --color-primary: #3a9ea5;               /* rate-checker teal CTA */
+  --color-primary-foreground: #ffffff;
+  --color-card: #ffffff;                  /* opaque card surface */
+  --color-card-foreground: #1a1a1f;
+  --color-popover: #ffffff;               /* opaque modal/dropdown — fixes the transparent dialog */
+  --color-popover-foreground: #1a1a1f;
+  --color-muted: #f4f0e8;                 /* = bg-secondary */
+  --color-muted-foreground: #6b6b75;      /* = text-tertiary (placeholders) */
+  --color-secondary: #eee8dc;             /* = bg-tertiary (tracks/secondary surface) */
+  --color-secondary-foreground: #1a1a1f;
+  --color-destructive: #ef4444;           /* = danger */
+  --color-destructive-foreground: #ffffff;
+  --color-accent-foreground: #ffffff;     /* white text on cobalt bg-accent hover */
+  --color-ring: #1d3fb8;                  /* = accent (cobalt) focus ring */
+  --color-input: rgba(26, 26, 31, 0.20);  /* = border-strong (visible control border) */
+
   /* Shadows — deeper, warmer, layered ambient + cast */
   --shadow-xs: 0 1px 2px 0 rgba(26, 26, 31, 0.04);
   --shadow-sm: 0 1px 3px 0 rgba(26, 26, 31, 0.06), 0 1px 2px -1px rgba(26, 26, 31, 0.04);
