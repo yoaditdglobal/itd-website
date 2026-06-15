@@ -982,22 +982,25 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   "dpd": { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png", href: "/integrations/carriers/dpd", kind: "carrier" },
   "evri": { name: "Evri", logo: "/logos/carriers/evri_logo.png", href: "/integrations/carriers/evri", kind: "carrier" },
   "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
-  "parcelforce": { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcelforce", kind: "carrier" },
+  "parcelforce": { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcel-force", kind: "carrier" },
   "amazon-shipping": { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png", href: "/integrations/carriers/amazon-shipping", kind: "carrier" },
   "inpost": { name: "InPost", logo: "/logos/carriers/inpost-icon.png", href: "/integrations/carriers/inpost", kind: "carrier" },
   "dhl": { name: "DHL", logo: "/logos/carriers/dhl_logo.webp", href: "/integrations/carriers/dhl", kind: "carrier" },
-  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex-icon.png", href: "/integrations/carriers", kind: "carrier" },
-  "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers", kind: "carrier" },
+  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex-icon.png", href: "/integrations/carriers/fedex", kind: "carrier" },
+  "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers/ups", kind: "carrier" },
+  // SF Express has no detail page yet — fall back to the carriers index.
   "sf-express": { name: "SF Express", href: "/integrations/carriers", kind: "carrier" },
   "apc": { name: "APC", logo: "/logos/carriers/apc_logo.png", href: "/integrations/carriers/apc", kind: "carrier" },
   "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
 
-  // Tech integrations (no per-integration detail pages — route to category)
-  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/erp-wms", kind: "integration" },
-  "linnworks": { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/erp-wms", kind: "integration" },
-  "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/ecommerce", kind: "integration" },
-  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/erp-wms", kind: "integration" },
-  "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/logistics", kind: "integration" },
+  // Tech integrations — link to the entity's own detail page (/integrations/tech/{slug},
+  // rendered by the dynamic [slug] route), NOT a category landing.
+  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/tech/mintsoft", kind: "integration" },
+  "linnworks": { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/tech/linnworks", kind: "integration" },
+  "netsuite": { name: "NetSuite", logo: "/logos/erp-wms/netsuite-icon.png", href: "/integrations/tech/netsuite", kind: "integration" },
+  "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/tech/shopify", kind: "integration" },
+  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/tech/veeqo", kind: "integration" },
+  "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/tech/shipstation", kind: "integration" },
 
   // Platform (ITD itself)
   "connexx": { name: "Connexx", href: "/connexx", kind: "platform" },
