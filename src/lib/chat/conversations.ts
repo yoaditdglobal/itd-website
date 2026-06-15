@@ -173,3 +173,11 @@ export function save(store: ChatStore): void {
     /* ignore quota / serialization errors */
   }
 }
+
+/** Remove a conversation by id; clears activeId if it was the deleted thread. */
+export function deleteConversation(store: ChatStore, id: string): ChatStore {
+  return {
+    conversations: store.conversations.filter((c) => c.id !== id),
+    activeId: store.activeId === id ? null : store.activeId,
+  };
+}

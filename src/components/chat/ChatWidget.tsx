@@ -17,6 +17,7 @@ import {
   Minus,
   LifeBuoy,
   Clock,
+  Trash2,
 } from "lucide-react";
 import { PROACTIVE_GREETING, WELCOME_MESSAGE, MENU_GREETING } from "@/lib/chat/knowledge";
 import {
@@ -34,6 +35,7 @@ import {
 import {
   load as loadStore,
   save as saveStore,
+  deleteConversation,
   uid,
   titleFor,
   relativeTime,
@@ -504,6 +506,17 @@ export default function ChatWidget() {
     [hydrate],
   );
 
+  // ── Delete a conversation from the recent list (store effect persists it) ──
+  const deleteConv = useCallback((id: string) => {
+    const next = deleteConversation(
+      { conversations: conversationsRef.current, activeId: activeIdRef.current },
+      id,
+    );
+    setConversations(next.conversations);
+    setActiveId(next.activeId);
+    track("chat_delete_conversation");
+  }, []);
+
   const openPanel = useCallback(() => {
     setOpen(true);
     setMinimised(false);
@@ -746,6 +759,7 @@ export default function ChatWidget() {
               onTalk={menuTalk}
               onTrack={menuTrack}
               onResume={resume}
+              onDelete={deleteConv}
             />
           ) : (
             <>
@@ -988,6 +1002,7 @@ function MenuView({
   onTalk,
   onTrack,
   onResume,
+  onDelete,
 }: {
   conversations: Conversation[];
   muted: boolean;
@@ -997,6 +1012,7 @@ function MenuView({
   onTalk: () => void;
   onTrack: () => void;
   onResume: (id: string) => void;
+  onDelete: (id: string) => void;
 }) {
   const recent = [...conversations].sort((a, b) => b.updatedAt - a.updatedAt);
   return (
@@ -1042,33 +1058,46 @@ function MenuView({
             </p>
             <div className="mt-2 flex flex-col gap-1.5">
               {recent.map((c) => (
-                <button
+                <div
                   key={c.id}
-                  onClick={() => onResume(c.id)}
-                  className="group flex items-center gap-2.5 rounded-xl border border-border bg-white px-3 py-2.5 text-left transition-colors hover:border-accent/40"
+                  className="group relative flex items-center gap-1 rounded-xl border border-border bg-white py-2.5 pl-3 pr-2 transition-colors hover:border-accent/40"
                 >
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-bg-secondary text-text-tertiary">
-                    <MessageCircle className="h-3.5 w-3.5" aria-hidden />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-medium text-text-primary">
-                      {titleFor(c)}
+                  <button
+                    onClick={() => onResume(c.id)}
+                    className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  >
+                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-bg-secondary text-text-tertiary">
+                      <MessageCircle className="h-3.5 w-3.5" aria-hidden />
                     </span>
-                    <span className="flex items-center gap-1 text-[11px] text-text-tertiary">
-                      <Clock className="h-3 w-3" aria-hidden /> {relativeTime(c.updatedAt)}
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-medium text-text-primary">
+                        {titleFor(c)}
+                      </span>
+                      <span className="flex items-center gap-1 text-[11px] text-text-tertiary">
+                        <Clock className="h-3 w-3" aria-hidden /> {relativeTime(c.updatedAt)}
+                      </span>
                     </span>
-                  </span>
-                  <ArrowRight className="h-4 w-4 flex-shrink-0 text-text-tertiary transition-transform group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden />
-                </button>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDelete(c.id);
+                    }}
+                    aria-label={`Delete conversation: ${titleFor(c)}`}
+                    className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-text-tertiary opacity-100 transition-all hover:bg-red-50 hover:text-red-600 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/40 motion-reduce:transition-none sm:opacity-0 sm:group-hover:opacity-100"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" aria-hidden />
+                  </button>
+                </div>
               ))}
             </div>
           </div>
         )}
       </div>
 
-      {/* Menu footer — mute toggle + device note */}
-      <div className="flex items-center justify-between border-t border-border bg-white px-4 py-2.5">
-        <span className="text-[11px] text-text-tertiary">Saved on this device</span>
+      {/* Menu footer — mute toggle */}
+      <div className="flex items-center justify-end border-t border-border bg-white px-4 py-2.5">
         <button
           onClick={onToggleMute}
           aria-label={muted ? "Unmute notification sound" : "Mute notification sound"}

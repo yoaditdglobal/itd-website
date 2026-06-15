@@ -84,6 +84,8 @@ interface NavDropdownProps {
   setTriggerRef: (el: HTMLButtonElement | null) => void;
   /** Width/layout classes for the panel — visual classes only. */
   panelClassName: string;
+  /** Whether this section matches the current route (active-nav indicator). */
+  active?: boolean;
   children: ReactNode;
 }
 
@@ -104,6 +106,7 @@ function NavDropdown({
   onLinkClick,
   setTriggerRef,
   panelClassName,
+  active,
   children,
 }: NavDropdownProps) {
   return (
@@ -121,13 +124,19 @@ function NavDropdown({
         type="button"
         aria-expanded={open}
         aria-controls={`nav-dropdown-${id}`}
+        aria-current={active ? "page" : undefined}
         onClick={onToggle}
-        className="flex items-center gap-1 px-3 py-2 text-sm text-white/70 hover:text-white transition-colors"
+        className={`relative flex items-center gap-1 px-3 py-2 text-sm transition-colors ${
+          active ? "text-white" : "text-white/70 hover:text-white"
+        }`}
       >
         {label}
         <ChevronDown
           className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`}
         />
+        {active && (
+          <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
+        )}
       </button>
       <div
         id={`nav-dropdown-${id}`}
@@ -147,6 +156,14 @@ function NavDropdown({
 
 export default function Navbar() {
   const pathname = usePathname();
+  // Active top-level section, for nav highlighting.
+  const SECTION_BASE: Record<string, string> = {
+    shipping: "/shipping",
+    solutions: "/solutions",
+    integrations: "/integrations",
+    resources: "/resources",
+  };
+  const isActive = (base: string) => pathname === base || pathname.startsWith(`${base}/`);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -211,6 +228,7 @@ export default function Navbar() {
 
   const dropdownProps = (id: string) => ({
     id,
+    active: SECTION_BASE[id] ? isActive(SECTION_BASE[id]) : false,
     open: openDropdown === id,
     onToggle: () => {
       // Side effects stay outside the state updater — React double-invokes
@@ -313,8 +331,17 @@ export default function Navbar() {
           </NavDropdown>
 
           {/* Platform (Connexx) — direct link */}
-          <Link href="/connexx" className="px-3 py-2 text-sm text-white/70 hover:text-white transition-colors">
+          <Link
+            href="/connexx"
+            aria-current={isActive("/connexx") ? "page" : undefined}
+            className={`relative px-3 py-2 text-sm transition-colors ${
+              isActive("/connexx") ? "text-white" : "text-white/70 hover:text-white"
+            }`}
+          >
             Platform
+            {isActive("/connexx") && (
+              <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
+            )}
           </Link>
 
           {/* Integrations */}
@@ -418,7 +445,7 @@ export default function Navbar() {
           <div className="px-4 py-6 flex flex-col gap-1">
             {/* Shipping accordion */}
             <button
-              className="flex items-center justify-between w-full py-3 text-white text-base font-medium border-b border-white/10"
+              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/shipping") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("shipping")}
             >
               Shipping
@@ -434,7 +461,7 @@ export default function Navbar() {
 
             {/* Solutions accordion */}
             <button
-              className="flex items-center justify-between w-full py-3 text-white text-base font-medium border-b border-white/10"
+              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/solutions") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("solutions")}
             >
               Solutions
@@ -456,7 +483,8 @@ export default function Navbar() {
             {/* Platform (Connexx) direct */}
             <Link
               href="/connexx"
-              className="py-3 text-white text-base font-medium border-b border-white/10"
+              aria-current={isActive("/connexx") ? "page" : undefined}
+              className={`py-3 text-base font-medium border-b border-white/10 ${isActive("/connexx") ? "text-accent" : "text-white"}`}
               onClick={() => setMobileOpen(false)}
             >
               Platform
@@ -464,7 +492,7 @@ export default function Navbar() {
 
             {/* Integrations accordion */}
             <button
-              className="flex items-center justify-between w-full py-3 text-white text-base font-medium border-b border-white/10"
+              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/integrations") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("integrations")}
             >
               Integrations
@@ -489,7 +517,7 @@ export default function Navbar() {
 
             {/* Resources accordion */}
             <button
-              className="flex items-center justify-between w-full py-3 text-white text-base font-medium border-b border-white/10"
+              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/resources") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("resources")}
             >
               Resources
