@@ -45,7 +45,7 @@ export default function ThreePLPage() {
         label="3PL"
         title="Undercut your rivals without undercutting yourself."
         subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
-        primary={{ label: "Get Quote", href: "#estimator" }}
+        primary={{ label: "Get Quote", href: "/rate-checker/3pl" }}
         secondary={{ label: "Explore", href: "/resources/case-studies/delta-fulfilment" }}
         image={{
           src: "/solutions/3pl-hero-v2.webp",
@@ -115,7 +115,7 @@ export default function ThreePLPage() {
       subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
       primaryCta={{
         label: "Get Quote",
-        href: "#estimator",
+        href: "/rate-checker/3pl",
       }}
       secondaryCta={{
         label: "Explore",
@@ -224,7 +224,6 @@ export default function ThreePLPage() {
       ]}
       caseStudy={getCaseStudiesBySolution("3PL")[0] ?? caseStudies[2]}
       caseStudies={getCaseStudiesBySolution("3PL")}
-      rateChecker="3pl"
       faq={[
         {
           question: "Do I need to commit volume to unlock your rates?",
@@ -263,7 +262,7 @@ export default function ThreePLPage() {
           "A bespoke review of your carrier setup shows the rates you could put in front of clients and the margin left for you.",
         primary: {
           label: "Get Quote",
-          href: "#estimator",
+          href: "/rate-checker/3pl",
         },
         secondary: {
           label: "Explore",

@@ -29,7 +29,7 @@ export default function ShippingInternationalPage() {
       subtitle="Wherever you're shipping, there are choices to make: express or economy, duties up front or at the door. We lay out the options and tell you which we'd pick."
       primaryCta={{
         label: "Get Quote",
-        href: "#estimator",
+        href: "/rate-checker/international",
       }}
       heroImage={{
         gradient: "from-bg-secondary via-accent-light to-accent/10",
@@ -317,7 +317,6 @@ export default function ShippingInternationalPage() {
         ...getCaseStudiesByShippingType("International Export"),
         ...getCaseStudiesByShippingType("International Import"),
       ]}
-      rateChecker="international"
       faq={[
         {
           question: "How do I know which service fits each market?",
@@ -366,7 +365,7 @@ export default function ShippingInternationalPage() {
           "A bespoke review covers your top lanes, the service that fits each one, and where the rules are heading next. The saving sits alongside.",
         primary: {
           label: "Get Quote",
-          href: "#estimator",
+          href: "/rate-checker/international",
         },
         secondary: {
           label: "Explore",

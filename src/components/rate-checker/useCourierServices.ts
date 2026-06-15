@@ -13,7 +13,7 @@ const FALLBACK_COURIERS: Record<'domestic' | 'international', CourierOption[]> =
     { value: 'parcel-force-domestic', label: 'Parcel Force' },
     { value: 'royal-mail', label: 'Royal Mail' },
     { value: 'ups', label: 'UPS' },
-    { value: 'yodel', label: 'Yodel' },
+    { value: 'yodel', label: 'InPost' },
   ],
   international: [
     { value: 'dhl', label: 'DHL Express' },

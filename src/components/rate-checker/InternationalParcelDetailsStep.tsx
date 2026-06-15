@@ -12,19 +12,7 @@ import { ParcelLimits, validateParcelLimits } from "@/components/rate-checker/us
 
 // Import carrier logos for dual cost display
 
-const CARRIER_LOGOS: Record<string, string> = {
-  'amazon-shipping': '/logos/rate-checker/carriers/amazon-shipping.png',
-  'royal-mail': '/logos/rate-checker/carriers/royal-mail.png',
-  'apc-domestic': '/logos/rate-checker/carriers/apc-domestic.png',
-  'dhl-parcel': '/logos/rate-checker/carriers/dhl-parcel.png',
-  'dx': '/logos/rate-checker/carriers/dx.png',
-  'fedex-domestic': '/logos/rate-checker/carriers/fedex.png',
-  'parcel-force-domestic': '/logos/rate-checker/carriers/parcel-force-domestic.png',
-  'evri-eu': '/logos/rate-checker/carriers/evri-eu.png',
-  'royal-mail-international': '/logos/rate-checker/carriers/royal-mail.png',
-  'parcel-force': '/logos/rate-checker/carriers/parcel-force.png',
-  'spring-global': '/logos/rate-checker/carriers/spring-global.png',
-};;
+import { CARRIER_LOGOS } from "./carrierLogos";
 interface FlowMismatchError {
   message: string;
   suggestion: string;

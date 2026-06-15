@@ -7,28 +7,7 @@ import { TrendingDown, Package, Truck, ArrowRight, Sparkles, PartyPopper, Fuel }
 import { supabase } from "@/lib/supabase";
 import { WhatWeDoSection, CaseStudiesSection } from "./MarketingContent";
 
-const CARRIER_LOGOS: Record<string, string> = {
-  evri: '/logos/rate-checker/carriers/evri.png',
-  yodel: '/logos/rate-checker/carriers/yodel.png',
-  'amazon-shipping': '/logos/rate-checker/carriers/amazon-shipping.png',
-  'royal-mail': '/logos/rate-checker/carriers/royal-mail.png',
-  dhl: '/logos/rate-checker/carriers/dhl.png',
-  dpd: '/logos/rate-checker/carriers/dpd.png',
-  fedex: '/logos/rate-checker/carriers/fedex.png',
-  ups: '/logos/rate-checker/carriers/ups.png',
-  'apc-domestic': '/logos/rate-checker/carriers/apc-domestic.png',
-  'dhl-parcel': '/logos/rate-checker/carriers/dhl-parcel.png',
-  dx: '/logos/rate-checker/carriers/dx.png',
-  'fedex-domestic': '/logos/rate-checker/carriers/fedex.png',
-  'parcel-force-domestic': '/logos/rate-checker/carriers/parcel-force-domestic.png',
-  'evri-eu': '/logos/rate-checker/carriers/evri-eu.png',
-  'royal-mail-international': '/logos/rate-checker/carriers/royal-mail.png',
-  'parcel-force': '/logos/rate-checker/carriers/parcel-force.png',
-  apc: '/logos/rate-checker/carriers/apc.jpg',
-  landmark: '/logos/rate-checker/carriers/landmark.png',
-  'spring-global': '/logos/rate-checker/carriers/spring-global.png',
-  starlinks: '/logos/rate-checker/carriers/starlinks.png',
-};
+import { CARRIER_LOGOS } from "./carrierLogos";
 
 // Fetch alternative carrier rules from the database
 // Deterministic hash for stable savings percentage

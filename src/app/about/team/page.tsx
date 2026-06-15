@@ -92,7 +92,7 @@ export default function TeamPage() {
         headline="Work with a team that knows your lanes."
         subtitle="Talk to an operator who manages shipping like yours every day."
         primaryCta={{ label: "Contact Us", href: "/contact" }}
-        secondaryCta={{ label: "Get Quote", href: "/shipping/domestic#estimator" }}
+        secondaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
       />
     </>
   );

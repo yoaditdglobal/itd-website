@@ -188,11 +188,10 @@ export default function ExportPage() {
         title="Ship internationally with the rates, reach, and support to do it properly."
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=export" }}
-        secondaryCta={{ label: "Request a Quote", href: "#estimator" }}
+        secondaryCta={{ label: "Request a Quote", href: "/rate-checker/export" }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
         caseStudies={getCaseStudiesBySolution("Export")}
-        rateChecker="export"
         faq={[
           {
             question: "Which couriers does ITD work with for international shipping?",
@@ -235,7 +234,7 @@ export default function ExportPage() {
           subhead:
             "One conversation. We'll show you the rates, the courier network, and what a single point of contact actually looks like in practice.",
           primary: { label: "Get in Touch", href: "/contact?enquiry=export" },
-          secondary: { label: "Request a Quote", href: "#estimator" },
+          secondary: { label: "Request a Quote", href: "/rate-checker/export" },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },
