@@ -1043,7 +1043,10 @@ export default function ParcelUnboxHero() {
         const range = rect.height - window.innerHeight;
         target = range > 0 ? clamp(-rect.top / range) : 0;
       }
-      const onScroll = () => readScroll();
+      const onScroll = () => {
+        readScroll();
+        if (!settling) scheduleSettle();
+      };
       function resize() {
         const w = canvasEl.clientWidth || window.innerWidth;
         const h = canvasEl.clientHeight || window.innerHeight;
@@ -1067,8 +1070,56 @@ export default function ParcelUnboxHero() {
         readScroll();
         resize();
       };
+      /* ── Magnetic settle: glide onto the nearest scene when scrolling stops ── */
+      // Scene landings (progress) = the centres of the per-act hold plateaus.
+      const LANDINGS = [0, 0.4, 0.67, 0.95];
+      const SETTLE_MS = 600;
+      let settling = false;
+      let idleTimer: ReturnType<typeof setTimeout> | undefined;
+      function startSettle() {
+        if (reduceMotion) return;
+        const rect = trackEl.getBoundingClientRect();
+        const range = rect.height - window.innerHeight;
+        if (range <= 0) return;
+        const trackTopAbs = window.scrollY + rect.top;
+        const p = clamp(-rect.top / range);
+        // Don't trap the exit: past the last scene, let native scroll into the page.
+        if (p > LANDINGS[LANDINGS.length - 1] + 0.01) return;
+        let nearest = LANDINGS[0];
+        for (const L of LANDINGS)
+          if (Math.abs(L - p) < Math.abs(nearest - p)) nearest = L;
+        const fromY = window.scrollY;
+        const toY = Math.round(trackTopAbs + nearest * range);
+        if (Math.abs(toY - fromY) < 2) return;
+        settling = true;
+        let startTs = 0;
+        const step = (ts: number) => {
+          if (!settling) return; // aborted by user input
+          if (!startTs) startTs = ts;
+          const t = clamp((ts - startTs) / SETTLE_MS);
+          window.scrollTo(0, fromY + (toY - fromY) * easeStd(t));
+          if (t < 1) requestAnimationFrame(step);
+          else settling = false;
+        };
+        requestAnimationFrame(step);
+      }
+      function scheduleSettle() {
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(startSettle, 140);
+      }
+      const cancelSettle = () => {
+        settling = false;
+        if (idleTimer) {
+          clearTimeout(idleTimer);
+          idleTimer = undefined;
+        }
+      };
+
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", onResize);
+      window.addEventListener("wheel", cancelSettle, { passive: true });
+      window.addEventListener("touchstart", cancelSettle, { passive: true });
+      window.addEventListener("keydown", cancelSettle);
       readScroll();
       resize();
 
@@ -1279,8 +1330,12 @@ export default function ParcelUnboxHero() {
 
       cleanup = () => {
         cancelAnimationFrame(raf);
+        cancelSettle();
         window.removeEventListener("scroll", onScroll);
         window.removeEventListener("resize", onResize);
+        window.removeEventListener("wheel", cancelSettle);
+        window.removeEventListener("touchstart", cancelSettle);
+        window.removeEventListener("keydown", cancelSettle);
         scene.traverse((o) => {
           const m = o as THREE.Mesh;
           if (m.geometry) m.geometry.dispose();
