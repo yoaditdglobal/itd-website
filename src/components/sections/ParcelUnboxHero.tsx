@@ -1073,6 +1073,8 @@ export default function ParcelUnboxHero() {
       let cooldownUntil = 0;
       let locked = false;
       let exitGuard = false; // suppress re-lock right after exiting forward
+      let lastWheel = 0; // distinguishes a fresh push from the inertia stream
+      let queuedDir = 0; // intent captured during a chapter, fired when it ends
 
       const lockScroll = () => {
         if (locked) return;
@@ -1110,14 +1112,27 @@ export default function ParcelUnboxHero() {
         if (dir < 0 && sceneIndex === 0) return; // nothing above the hero
         goToScene(dir);
       }
+      // Fire now if idle, otherwise remember the intent for when the chapter ends.
+      function request(dir: number) {
+        if (!dir) return;
+        if (animating || Date.now() < cooldownUntil) {
+          queuedDir = dir;
+          return;
+        }
+        step(dir);
+      }
 
       const onWheel = (e: WheelEvent) => {
         if (!locked) return;
-        // One scroll = one chapter, direction only. `step` is gated by the
-        // in-flight chapter (3s) + a brief cooldown, so the very first wheel of
-        // an idle moment fires immediately while inertia mid-chapter is ignored.
         const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
-        if (dir) step(dir);
+        if (!dir) return;
+        // One discrete push = one chapter: the first wheel after a quiet gap is a
+        // fresh push; the continuous inertia stream that follows is ignored (so it
+        // never chains). A fresh push mid-chapter is queued, not dropped.
+        const now = Date.now();
+        const fresh = now - lastWheel > 130;
+        lastWheel = now;
+        if (fresh) request(dir);
       };
       let touchY = 0;
       const onTouchStart = (e: TouchEvent) => {
@@ -1130,7 +1145,7 @@ export default function ParcelUnboxHero() {
         if (!locked) return;
         const dy = touchY - (e.changedTouches[0]?.clientY ?? touchY);
         if (Math.abs(dy) < 28) return;
-        step(dy > 0 ? 1 : -1);
+        request(dy > 0 ? 1 : -1);
       };
       const onKey = (e: KeyboardEvent) => {
         if (!locked || e.repeat) return; // one keypress = one chapter
@@ -1145,7 +1160,7 @@ export default function ParcelUnboxHero() {
         }
         if (dir < 0 && sceneIndex === 0) return;
         e.preventDefault();
-        step(dir);
+        request(dir);
       };
       // Re-lock when the user returns to the top (after exiting into the page).
       const onScroll = () => {
@@ -1369,7 +1384,14 @@ export default function ParcelUnboxHero() {
             current = tween.to;
             tween = null;
             animating = false;
-            cooldownUntil = Date.now() + COOLDOWN_MS; // absorb the inertia tail
+            if (queuedDir) {
+              // A push arrived mid-chapter — flow straight into the next one.
+              const d = queuedDir;
+              queuedDir = 0;
+              step(d);
+            } else {
+              cooldownUntil = Date.now() + COOLDOWN_MS; // absorb the inertia tail
+            }
           }
         }
         renderAt(current);
