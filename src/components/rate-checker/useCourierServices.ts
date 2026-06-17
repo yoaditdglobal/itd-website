@@ -185,30 +185,52 @@ export function useCourierServicesWithLimits(flowType: 'domestic' | 'internation
         return [];
       }
 
-      const { data, error } = await supabase
-        .from('savings_display_rules')
-        .select('service_type, service_label, max_weight_kg, max_length_cm, max_width_cm, max_height_cm, max_combined_cm')
-        .eq('flow_type', flowType)
-        .eq('courier', courier)
-        .eq('is_active', true)
-        .order('service_label');
+      // Graceful fallback when Supabase isn't configured (e.g. local dev with no
+      // NEXT_PUBLIC_SUPABASE_URL) or the query fails — mirrors useCourierServices.
+      // Static services carry no limits, so validation is simply skipped.
+      const fallback = (): CourierServiceWithLimits[] =>
+        (FALLBACK_SERVICES[courier] ?? []).map((s) => ({
+          ...s,
+          limits: {
+            maxWeightKg: null,
+            maxLengthCm: null,
+            maxWidthCm: null,
+            maxHeightCm: null,
+            maxCombinedCm: null,
+          },
+        }));
 
-      if (error) {
-        console.error('Error fetching courier services with limits:', error);
-        return [];
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+        return fallback();
       }
 
-      return (data as SavingsRule[] || []).map(rule => ({
-        value: rule.service_type,
-        label: rule.service_label,
-        limits: {
-          maxWeightKg: rule.max_weight_kg,
-          maxLengthCm: rule.max_length_cm,
-          maxWidthCm: rule.max_width_cm,
-          maxHeightCm: rule.max_height_cm,
-          maxCombinedCm: rule.max_combined_cm,
-        },
-      }));
+      try {
+        const { data, error } = await supabase
+          .from('savings_display_rules')
+          .select('service_type, service_label, max_weight_kg, max_length_cm, max_width_cm, max_height_cm, max_combined_cm')
+          .eq('flow_type', flowType)
+          .eq('courier', courier)
+          .eq('is_active', true)
+          .order('service_label');
+
+        if (error || !data?.length) {
+          return fallback();
+        }
+
+        return (data as SavingsRule[]).map((rule) => ({
+          value: rule.service_type,
+          label: rule.service_label,
+          limits: {
+            maxWeightKg: rule.max_weight_kg,
+            maxLengthCm: rule.max_length_cm,
+            maxWidthCm: rule.max_width_cm,
+            maxHeightCm: rule.max_height_cm,
+            maxCombinedCm: rule.max_combined_cm,
+          },
+        }));
+      } catch {
+        return fallback();
+      }
     },
     enabled: !!courier && courier !== 'other',
     refetchOnMount: 'always',
@@ -232,27 +254,36 @@ export function useServiceLimits(
         return null;
       }
 
-      const { data, error } = await supabase
-        .from('savings_display_rules')
-        .select('max_weight_kg, max_length_cm, max_width_cm, max_height_cm, max_combined_cm')
-        .eq('flow_type', flowType)
-        .eq('courier', courier)
-        .eq('service_type', serviceType)
-        .eq('is_active', true)
-        .maybeSingle();
-
-      if (error || !data) {
+      // No-op when Supabase isn't configured (e.g. local dev); no limits → no validation.
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
         return null;
       }
 
-      const typedData = data as SavingsRule;
-      return {
-        maxWeightKg: typedData.max_weight_kg,
-        maxLengthCm: typedData.max_length_cm,
-        maxWidthCm: typedData.max_width_cm,
-        maxHeightCm: typedData.max_height_cm,
-        maxCombinedCm: typedData.max_combined_cm,
-      };
+      try {
+        const { data, error } = await supabase
+          .from('savings_display_rules')
+          .select('max_weight_kg, max_length_cm, max_width_cm, max_height_cm, max_combined_cm')
+          .eq('flow_type', flowType)
+          .eq('courier', courier)
+          .eq('service_type', serviceType)
+          .eq('is_active', true)
+          .maybeSingle();
+
+        if (error || !data) {
+          return null;
+        }
+
+        const typedData = data as SavingsRule;
+        return {
+          maxWeightKg: typedData.max_weight_kg,
+          maxLengthCm: typedData.max_length_cm,
+          maxWidthCm: typedData.max_width_cm,
+          maxHeightCm: typedData.max_height_cm,
+          maxCombinedCm: typedData.max_combined_cm,
+        };
+      } catch {
+        return null;
+      }
     },
     enabled: !!courier && !!serviceType && courier !== 'other',
     refetchOnMount: 'always',
@@ -279,45 +310,51 @@ export function useSavingsRule(
   return useQuery({
     queryKey: ['savings-rule', flowType, courier, serviceType],
     queryFn: async (): Promise<SavingsRuleResult> => {
+      const empty: SavingsRuleResult = {
+        exists: false,
+        minSavingsPercent: 0,
+        maxSavingsPercent: 0,
+        minRealisticPrice: 0,
+      };
+
       if (!courier || !serviceType || courier === 'other') {
-        return {
-          exists: false,
-          minSavingsPercent: 0,
-          maxSavingsPercent: 0,
-          minRealisticPrice: 0,
-        };
+        return empty;
       }
 
-      const { data, error } = await supabase
-        .from('savings_display_rules')
-        .select('min_savings_percent, max_savings_percent, min_realistic_price')
-        .eq('flow_type', flowType)
-        .eq('courier', courier)
-        .eq('service_type', serviceType)
-        .eq('is_active', true)
-        .maybeSingle();
-
-      if (error || !data) {
-        return {
-          exists: false,
-          minSavingsPercent: 0,
-          maxSavingsPercent: 0,
-          minRealisticPrice: 0,
-        };
+      // No-op when Supabase isn't configured (e.g. local dev): treat as "no rule".
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+        return empty;
       }
 
-      const typedData = data as { 
-        min_savings_percent: number; 
-        max_savings_percent: number; 
-        min_realistic_price: number; 
-      };
+      try {
+        const { data, error } = await supabase
+          .from('savings_display_rules')
+          .select('min_savings_percent, max_savings_percent, min_realistic_price')
+          .eq('flow_type', flowType)
+          .eq('courier', courier)
+          .eq('service_type', serviceType)
+          .eq('is_active', true)
+          .maybeSingle();
 
-      return {
-        exists: true,
-        minSavingsPercent: typedData.min_savings_percent,
-        maxSavingsPercent: typedData.max_savings_percent,
-        minRealisticPrice: typedData.min_realistic_price,
-      };
+        if (error || !data) {
+          return empty;
+        }
+
+        const typedData = data as {
+          min_savings_percent: number;
+          max_savings_percent: number;
+          min_realistic_price: number;
+        };
+
+        return {
+          exists: true,
+          minSavingsPercent: typedData.min_savings_percent,
+          maxSavingsPercent: typedData.max_savings_percent,
+          minRealisticPrice: typedData.min_realistic_price,
+        };
+      } catch {
+        return empty;
+      }
     },
     enabled: !!courier && !!serviceType && courier !== 'other',
     refetchOnMount: 'always',
