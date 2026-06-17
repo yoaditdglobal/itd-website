@@ -280,12 +280,14 @@ export default function SolutionsRouting({
         className="relative"
         style={{ height: `${ICPS.length * 62}vh` }}
       >
-        <div className="sticky top-[72px] flex h-[calc(100vh-72px)] items-center overflow-hidden">
+        <div className="sticky top-[72px] flex h-[calc(100vh-72px)] items-start overflow-hidden">
           <div
             ref={stageRef}
-            className="mx-auto grid w-full max-w-7xl origin-center grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:px-8"
+            className="mx-auto grid w-full max-w-7xl origin-top grid-cols-1 items-start gap-10 px-4 pt-2 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:px-8"
           >
-            {/* Left — audience list + active detail */}
+            {/* Left — audience list. The active audience expands inline with its
+                "Used by" case-study logos + explore link directly beneath its
+                headline. Active state is driven by SCROLL ONLY (no hover). */}
             <div>
               <p className="text-eyebrow text-text-tertiary">For how you ship</p>
               <h2 className="mt-2 max-w-md text-display-sm text-text-primary">
@@ -297,47 +299,33 @@ export default function SolutionsRouting({
                   <li key={icp.name}>
                     <Link
                       href={icp.href}
-                      onMouseEnter={() => setActive(i)}
                       className={`block origin-left py-1 text-3xl font-semibold tracking-tight transition-[color,transform] duration-300 ease-out focus-visible:text-accent focus-visible:outline-none ${
                         i === active
-                          ? "scale-[1.08] text-text-primary"
-                          : "scale-100 text-text-tertiary/35 hover:text-text-tertiary"
+                          ? "scale-[1.06] text-text-primary"
+                          : "scale-100 text-text-tertiary/35"
                       }`}
                     >
                       {icp.name}
                     </Link>
+                    {i === active && (
+                      <div className="mb-2 mt-3 max-w-md">
+                        <UsedByCluster tag={icp.solutionTag} />
+                        <Link
+                          href={icp.href}
+                          className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all hover:gap-2.5"
+                        >
+                          Explore {icp.name}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
-
-              {/* Active detail — case-study logos + explore link (reserved
-                  height to avoid list jank as audiences swap). */}
-              <div className="relative mt-7 min-h-[120px] max-w-md">
-                {ICPS.map((icp, i) => (
-                  <div
-                    key={icp.name}
-                    aria-hidden={i !== active}
-                    className={`transition-opacity duration-300 ${
-                      i === active
-                        ? "opacity-100"
-                        : "pointer-events-none absolute inset-0 opacity-0"
-                    }`}
-                  >
-                    <UsedByCluster tag={icp.solutionTag} />
-                    <Link
-                      href={icp.href}
-                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all hover:gap-2.5"
-                    >
-                      Explore {icp.name}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* Right — zooming media with bottom caption */}
-            <div className="relative h-[78vh] overflow-hidden rounded-3xl border border-border bg-bg-secondary shadow-lg">
+            {/* Right — zooming media; top aligned with the nav, bottom caption */}
+            <div className="relative h-[calc(100vh-72px-2rem)] overflow-hidden rounded-3xl border border-border bg-bg-secondary shadow-lg">
               {ICPS.map((icp, i) => (
                 <div
                   key={icp.name}
