@@ -268,12 +268,15 @@ export default function Navbar() {
     {/* Constant height — shrinking the bar on scroll exposed a strip of the
         beige body background between the nav and the page's pt-[72px] offset.
         The scrolled state changes surface treatment only. */}
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
-        scrolled ? "bg-bg-dark/95 backdrop-blur-md shadow-lg" : "bg-bg-dark"
-      }`}
-    >
-      <nav ref={navRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
+      <nav
+        ref={navRef}
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 backdrop-blur-md transition-shadow duration-300 sm:px-5 ${
+          scrolled
+            ? "bg-bg-dark/95 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.55)]"
+            : "bg-bg-dark/90 shadow-[0_12px_30px_-16px_rgba(0,0,0,0.45)]"
+        }`}
+      >
         {/* Logo */}
         <Link href="/" className="flex-shrink-0" aria-label="ITD Global — home">
           <Image

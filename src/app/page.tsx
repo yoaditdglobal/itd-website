@@ -1,4 +1,4 @@
-import Hero from "@/components/sections/Hero";
+import ParcelUnboxHero from "@/components/sections/ParcelUnboxHero";
 import SocialProof from "@/components/sections/SocialProof";
 import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
@@ -19,16 +19,7 @@ export const metadata = buildMetadata({
 export default function Home() {
   return (
     <>
-      <Hero
-        title={
-          <>
-            Smarter Shipping for a Simpler Tomorrow.
-          </>
-        }
-        subtitle="ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters. Connexx compares every active carrier on every parcel, picks the cheapest compliant option, and prints the label in one click. Domestic, international, returns, and customs all run from a single dashboard."
-        primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
-        secondaryCta={{ label: "Contact Us", href: "/contact" }}
-      />
+      <ParcelUnboxHero />
       <SocialProof />
       <DomesticInternationalCards />
       <SolutionsRouting />
