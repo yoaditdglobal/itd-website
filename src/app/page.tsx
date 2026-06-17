@@ -7,6 +7,7 @@ import ConnexxPreview from "@/components/sections/ConnexxPreview";
 import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import ScrollForward from "@/components/animations/ScrollForward";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
@@ -20,7 +21,11 @@ export default function Home() {
   return (
     <>
       <ParcelUnboxHero />
-      <SocialProof />
+      {/* Hands off from the hero's final (Freight) act: this section surges
+          forward out of depth, then the rest of the page scrolls flat. */}
+      <ScrollForward>
+        <SocialProof />
+      </ScrollForward>
       <DomesticInternationalCards />
       <SolutionsRouting />
       <LogisticsPartnerBand />
