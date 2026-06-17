@@ -126,7 +126,7 @@ function NavDropdown({
         aria-controls={`nav-dropdown-${id}`}
         aria-current={active ? "page" : undefined}
         onClick={onToggle}
-        className={`relative flex items-center gap-1 px-3 py-2 text-sm transition-colors ${
+        className={`font-display relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors ${
           active ? "text-white" : "text-white/70 hover:text-white"
         }`}
       >
@@ -337,7 +337,7 @@ export default function Navbar() {
           <Link
             href="/connexx"
             aria-current={isActive("/connexx") ? "page" : undefined}
-            className={`relative px-3 py-2 text-sm transition-colors ${
+            className={`font-display relative px-3 py-2 text-sm font-medium transition-colors ${
               isActive("/connexx") ? "text-white" : "text-white/70 hover:text-white"
             }`}
           >
