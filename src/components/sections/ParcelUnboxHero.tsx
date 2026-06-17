@@ -1066,13 +1066,11 @@ export default function ParcelUnboxHero() {
       const LAST = LANDINGS.length - 1;
       const CHAPTER_MS = 3000; // pace of a typical chapter (slow, cinematic)
       const TYP_DIST = 0.275; // typical inter-scene progress gap
-      const COOLDOWN_MS = 300; // guard trackpad inertia from double-firing
+      const COOLDOWN_MS = 150; // brief guard after a chapter to absorb the inertia tail
       let sceneIndex = 0;
       let animating = false;
       let tween: { from: number; to: number; start: number; dur: number } | null = null;
       let cooldownUntil = 0;
-      let lastWheelTs = 0; // for collapsing one wheel/inertia burst into one step
-      const GESTURE_GAP = 450; // ms of quiet that marks a NEW gesture
       let locked = false;
       let exitGuard = false; // suppress re-lock right after exiting forward
 
@@ -1110,18 +1108,14 @@ export default function ParcelUnboxHero() {
           return; // exhausted forward → let the page scroll on
         }
         if (dir < 0 && sceneIndex === 0) return; // nothing above the hero
-        if (goToScene(dir)) cooldownUntil = Date.now() + COOLDOWN_MS;
+        goToScene(dir);
       }
 
       const onWheel = (e: WheelEvent) => {
         if (!locked) return;
-        const now = Date.now();
-        const gap = now - lastWheelTs;
-        lastWheelTs = now;
-        // Collapse a wheel/trackpad-inertia burst into ONE step: only a fresh
-        // wheel after a quiet gap counts. This decouples advancement from scroll
-        // amount/velocity so one gesture = one chapter (never races ahead).
-        if (gap < GESTURE_GAP) return;
+        // One scroll = one chapter, direction only. `step` is gated by the
+        // in-flight chapter (3s) + a brief cooldown, so the very first wheel of
+        // an idle moment fires immediately while inertia mid-chapter is ignored.
         const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
         if (dir) step(dir);
       };
@@ -1375,6 +1369,7 @@ export default function ParcelUnboxHero() {
             current = tween.to;
             tween = null;
             animating = false;
+            cooldownUntil = Date.now() + COOLDOWN_MS; // absorb the inertia tail
           }
         }
         renderAt(current);
