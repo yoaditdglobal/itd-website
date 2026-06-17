@@ -57,7 +57,7 @@ export default function CarrierPage({
     <>
       {/* Hero */}
       <section
-        className={`${heroBg ? "" : "bg-bg-dark"} py-16 md:py-24 overflow-hidden relative`}
+        className={`bleed-nav ${heroBg ? "" : "bg-bg-dark"} py-16 md:py-24 overflow-hidden relative`}
         style={heroBg ? { backgroundColor: heroBg } : undefined}
       >
         {/* Subtle radial glow */}
