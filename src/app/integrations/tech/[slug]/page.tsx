@@ -11,8 +11,13 @@ import { getTechPageContent } from "@/lib/tech-pages";
 
 export const dynamicParams = false;
 
+// Tech integrations with a bespoke, hand-written page in their own folder.
+const EXISTING_STATIC = new Set(["linnworks"]);
+
 export function generateStaticParams() {
-  return getIntegrationsByType("tech").map((t) => ({ slug: getIntegrationSlug(t) }));
+  return getIntegrationsByType("tech")
+    .map((t) => ({ slug: getIntegrationSlug(t) }))
+    .filter(({ slug }) => !EXISTING_STATIC.has(slug));
 }
 
 export async function generateMetadata({
