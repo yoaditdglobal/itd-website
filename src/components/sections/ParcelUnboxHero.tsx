@@ -1064,7 +1064,7 @@ export default function ParcelUnboxHero() {
          the sequence is exhausted, then native scroll continues into the page. */
       const LANDINGS = [0, 0.4, 0.67, 0.95]; // sealed → van → plane → ship
       const LAST = LANDINGS.length - 1;
-      const CHAPTER_MS = 3000; // pace of a typical chapter (slow, cinematic)
+      const CHAPTER_MS = 4200; // pace of a typical chapter — moderate, coherent (beats read)
       const TYP_DIST = 0.275; // typical inter-scene progress gap
       const COOLDOWN_MS = 150; // brief guard after a chapter to absorb the inertia tail
       let sceneIndex = 0;
