@@ -1543,100 +1543,39 @@ function ActOverlay({
   );
 }
 
-/* ─────────────────────  Realistic shipping label (static fallback)  ───────────────────── */
-
-function ParcelLabel() {
-  return (
-    <div className="absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 rotate-[-1.2deg] rounded-md bg-[#fcfbf7] p-3 shadow-[0_6px_14px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
-      <div
-        aria-hidden
-        className="absolute -right-1 -top-1 h-5 w-5 rotate-45 bg-[#efeae0] shadow-[-2px_2px_3px_rgba(0,0,0,0.2)]"
-      />
-      <div className="flex items-center justify-between border-b border-dashed border-black/25 pb-1.5">
-        <span className="text-[9px] font-extrabold tracking-[0.18em] text-[#15192b]">
-          ITD GLOBAL
-        </span>
-        <span className="text-[7px] font-semibold uppercase tracking-widest text-black/50">
-          Multi-carrier · Tracked
-        </span>
-      </div>
-
-      <div className="mt-1.5 flex items-start justify-between gap-2">
-        <div className="text-left">
-          <p className="text-[6px] uppercase tracking-wider text-black/40">Ship to</p>
-          <p className="text-[8px] font-semibold leading-tight text-[#15192b]">
-            Your Customer
-            <br />
-            Anywhere, UK & Worldwide
-          </p>
-        </div>
-        <div
-          aria-hidden
-          className="h-7 w-[44%] self-end"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, #15192b 0 1px, transparent 1px 2px, #15192b 2px 4px, transparent 4px 7px, #15192b 7px 8px, transparent 8px 11px)",
-          }}
-        />
-      </div>
-
-      <div className="mt-2 grid grid-cols-7 items-center gap-1 rounded-sm bg-white/70 px-1 py-1 ring-1 ring-black/5">
-        {CARRIERS.map((c) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={c.name}
-            src={c.src}
-            alt={c.name}
-            className="h-3.5 w-full object-contain opacity-90"
-            loading="eager"
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* ───────────────────────  Static fallback hero  ─────────────────────── */
 
+/**
+ * SSR + reduced-motion fallback. Mirrors the enhanced hero's resting Act-1
+ * frame exactly — same container (`h-screen`), same centered copy block at the
+ * same position — so when `enhanced` flips after hydration the headline and
+ * CTAs do not move; the WebGL canvas simply mounts behind them. A divergent
+ * fallback layout (the old left/right parcel-card split) caused a flash of the
+ * "previous design" on every hard reload.
+ */
 function StaticHero() {
   return (
-    <section className="relative hero-bg flex min-h-[calc(100vh-72px)] items-center overflow-hidden">
-      <div className="hero-bg-blob" aria-hidden />
+    <div className="hero-bg relative h-screen overflow-hidden">
       <div
-        className="bg-noise pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-multiply"
+        className="bg-noise pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
         aria-hidden
       />
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          <div>
-            <h1 className="hero-entrance-h1 text-display-xl text-text-primary">
-              {HEADING}
-            </h1>
-            <p className="hero-entrance-sub mt-6 max-w-xl text-body-lg text-text-secondary">
-              {SUB}
-            </p>
-            <div className="hero-entrance-cta mt-8 flex flex-col gap-3 sm:flex-row">
-              <MagneticButton>
-                <Button href={PRIMARY.href} variant="primary">
-                  {PRIMARY.label}
-                </Button>
-              </MagneticButton>
-              <Button href={SECONDARY.href} variant="secondary">
-                {SECONDARY.label}
-              </Button>
-            </div>
-          </div>
-          <div className="hero-entrance-aside hidden justify-center lg:flex">
-            <div className="relative w-[300px] rounded-2xl border border-[rgba(120,85,45,0.45)] bg-[linear-gradient(135deg,#d9b380,#b9884e)] p-6 shadow-xl">
-              <div
-                className="absolute inset-x-0 top-0 mx-auto h-3 w-[70%] rounded-b bg-[#c9a878] shadow"
-                aria-hidden
-              />
-              <ParcelLabel />
-            </div>
-          </div>
+      <div className="absolute inset-x-0 top-[10%] z-20 mx-auto max-w-3xl px-6 text-center">
+        <h1 className="text-display-xl text-text-primary">{HEADING}</h1>
+        <p className="mx-auto mt-5 max-w-xl text-body-lg text-text-secondary">
+          {SUB}
+        </p>
+        <div className="mt-7 flex justify-center gap-3">
+          <MagneticButton>
+            <Button href={PRIMARY.href} variant="primary">
+              {PRIMARY.label}
+            </Button>
+          </MagneticButton>
+          <Button href={SECONDARY.href} variant="secondary">
+            {SECONDARY.label}
+          </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
