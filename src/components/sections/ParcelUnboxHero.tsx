@@ -306,53 +306,47 @@ export default function ParcelUnboxHero() {
         x.lineWidth = 2;
         rr(70, 70, 884, 520, 22);
         x.stroke();
+        // ITD logo on a navy badge (the logo's pale script reads on dark) — composited async below
         x.fillStyle = "#15192b";
-        x.font = "800 40px Inter, sans-serif";
-        x.textBaseline = "alphabetic";
-        x.fillText("ITD GLOBAL", 108, 150);
-        x.fillStyle = "#6b6b75";
-        x.font = "600 18px Inter, sans-serif";
-        x.fillText("MULTI-CARRIER LOGISTICS", 110, 174);
-        x.fillStyle = "#1d3fb8";
-        rr(686, 94, 228, 52, 26);
+        rr(100, 92, 300, 80, 16);
         x.fill();
-        x.fillStyle = "#fff";
-        x.font = "700 21px Inter, sans-serif";
-        x.textBaseline = "middle";
-        x.textAlign = "center";
-        x.fillText("CONNEXX · PRIORITY", 800, 121);
-        x.textAlign = "left";
+        x.fillStyle = "#8a8a93";
+        x.font = "600 17px Inter, sans-serif";
         x.textBaseline = "alphabetic";
-        x.strokeStyle = "rgba(26,26,31,0.10)";
-        x.lineWidth = 2;
-        x.beginPath();
-        x.moveTo(108, 196);
-        x.lineTo(916, 196);
-        x.stroke();
-        x.fillStyle = "#6b6b75";
-        x.font = "600 22px Inter, sans-serif";
-        x.fillText("SHIP TO", 108, 246);
-        x.fillStyle = "#1a1a1f";
-        x.font = "700 33px Inter, sans-serif";
-        x.fillText("Connexx Operations Ltd", 108, 288);
-        x.fillStyle = "#4a4a55";
-        x.font = "400 24px Inter, sans-serif";
-        x.fillText("Unit 4, Trafford Park · Manchester · M17 1AB", 108, 324);
+        x.fillText("MULTI-CARRIER LOGISTICS", 102, 200);
+        // TRACKED 24 service stamp (top-right) — sits fully inside the label
         x.save();
-        x.translate(826, 262);
+        x.translate(805, 128);
         x.rotate(-0.12);
         x.strokeStyle = "#c8743d";
-        x.lineWidth = 5;
-        rr(-92, -36, 184, 72, 12);
+        x.lineWidth = 4;
+        rr(-86, -30, 172, 60, 12);
         x.stroke();
         x.fillStyle = "#c8743d";
-        x.font = "800 32px Inter, sans-serif";
+        x.font = "800 26px Inter, sans-serif";
         x.textAlign = "center";
         x.textBaseline = "middle";
         x.fillText("TRACKED 24", 0, 0);
         x.restore();
         x.textAlign = "left";
         x.textBaseline = "alphabetic";
+        // divider
+        x.strokeStyle = "rgba(26,26,31,0.10)";
+        x.lineWidth = 2;
+        x.beginPath();
+        x.moveTo(108, 214);
+        x.lineTo(916, 214);
+        x.stroke();
+        // address block
+        x.fillStyle = "#6b6b75";
+        x.font = "600 22px Inter, sans-serif";
+        x.fillText("SHIP TO", 108, 256);
+        x.fillStyle = "#1a1a1f";
+        x.font = "700 33px Inter, sans-serif";
+        x.fillText("Interdelta Ltd", 108, 298);
+        x.fillStyle = "#4a4a55";
+        x.font = "400 24px Inter, sans-serif";
+        x.fillText("Unit A, Birch Business Park · Heywood · OL10 2SX", 108, 334);
         x.fillStyle = "#6b6b75";
         x.font = "600 20px Inter, sans-serif";
         x.fillText("SHIPS VIA ANY CARRIER", 108, 374);
@@ -372,6 +366,10 @@ export default function ParcelUnboxHero() {
         t.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
         (async () => {
+          // ITD logo on the navy badge (top-left)
+          const itd = await loadImg("/logos/itd/itd-global-logo.webp");
+          fitInto(x, itd, 118, 104, 264, 56, "left");
+          // carrier logos
           const imgs = await Promise.all(CARRIERS.map((cr) => loadImg(cr.src)));
           const startX = 108;
           const endX = 916;
@@ -1089,13 +1087,14 @@ export default function ParcelUnboxHero() {
         setCopy(act4, 0);
 
         if (p <= B1) {
-          // ===== ACT 1 — unbox =====
+          // ===== ACT 1 — unbox, then hold on the open parcel =====
           const a = clamp(p / B1);
-          const e = easeStd(a);
+          const aw = clamp(a / 0.8); // open completes by 80%, then holds
+          const e = easeStd(aw);
           box.scale.setScalar(lerp(0.62, 1.32, e));
           box.rotation.set(lerp(0.04, -0.02, e), lerp(-0.62, 0.22, e), 0);
           box.position.set(0, lerp(-0.15, 0.02, e), 0);
-          const openRaw = smooth(0.46, 1.0, a);
+          const openRaw = smooth(0.46, 1.0, aw);
           flaps.forEach((g) => {
             const d = g.userData as FlapData;
             const local = clamp((openRaw - d.delay) / (1 - d.delay));
@@ -1103,7 +1102,7 @@ export default function ParcelUnboxHero() {
             if (d.axis === "x") g.rotation.x = ang;
             else g.rotation.z = ang;
           });
-          const op = smooth(0.62, 1.0, a);
+          const op = smooth(0.62, 1.0, aw);
           const cm = core.material as THREE.MeshStandardMaterial;
           cm.opacity = op;
           cm.emissiveIntensity = op * 0.9;
@@ -1119,42 +1118,44 @@ export default function ParcelUnboxHero() {
         } else if (p <= B2) {
           // ===== ACT 2 — re-seal, turn the van, load it =====
           const q = clamp((p - B1) / (B2 - B1));
-          const reseal = smooth(0, 0.14, q);
+          const qw = clamp(q / 0.8); // full flow by 80%, then hold / land
+          const exit = 1 - smooth(0.96, 1.0, q); // brief clear before Act 3
+          const reseal = smooth(0, 0.14, qw);
           flaps.forEach((g) => {
             const d = g.userData as FlapData;
             const ang = d.max * (1 - reseal);
             if (d.axis === "x") g.rotation.x = ang;
             else g.rotation.z = ang;
           });
-          const cop = 1 - smooth(0, 0.1, q);
+          const cop = 1 - smooth(0, 0.1, qw);
           const cm = core.material as THREE.MeshStandardMaterial;
           cm.opacity = cop;
           cm.emissiveIntensity = cop * 0.9;
           (coreEdge.material as THREE.LineBasicMaterial).opacity = cop;
           coreLight.intensity = cop * 3.2;
           core.position.y = H * 0.9;
-          const shrink = easeStd(clamp(q / 0.22));
+          const shrink = easeStd(clamp(qw / 0.22));
           box.scale.setScalar(lerp(1.32, 0.46, shrink));
           box.rotation.x = 0;
-          box.rotation.y = lerp(0.22, 0.0, clamp(q / 0.4));
-          const rise = easeStd(clamp(q / 0.2));
-          const descend = easeStd(clamp((q - 0.52) / 0.4));
-          const bob = q > 0.88 ? Math.sin(((q - 0.88) / 0.12) * Math.PI) * 0.05 : 0;
-          const y = q < 0.52 ? lerp(0.02, 4.8, rise) : lerp(4.8, 0.34, descend);
-          const z = q < 0.52 ? 2.3 * rise : lerp(2.3, 0.7, descend);
+          box.rotation.y = lerp(0.22, 0.0, clamp(qw / 0.4));
+          const rise = easeStd(clamp(qw / 0.2));
+          const descend = easeStd(clamp((qw - 0.52) / 0.4));
+          const bob = qw > 0.88 ? Math.sin(((qw - 0.88) / 0.12) * Math.PI) * 0.05 : 0;
+          const y = qw < 0.52 ? lerp(0.02, 4.8, rise) : lerp(4.8, 0.34, descend);
+          const z = qw < 0.52 ? 2.3 * rise : lerp(2.3, 0.7, descend);
           box.position.set(0, y - bob, z);
-          showVan(smooth(0.04, 0.14, q));
+          showVan(smooth(0.04, 0.14, qw));
           hidePlane();
           hideShip();
           setBackdrop(0, 0);
-          const turn = easeStd(smooth(0.18, 0.46, q));
+          const turn = easeStd(smooth(0.18, 0.46, qw));
           van.rotation.y = lerp(Math.PI, 0, turn);
-          const doorOpen = easeStd(smooth(0.48, 0.72, q)) * 2.0;
+          const doorOpen = easeStd(smooth(0.48, 0.72, qw)) * 2.0;
           leftDoor.rotation.y = doorOpen;
           rightDoor.rotation.y = -doorOpen;
-          vanLight.intensity = smooth(0.45, 0.95, q) * 2.6;
-          const backF = smooth(0, 0.3, q);
-          const peer = smooth(0.8, 1.0, q);
+          vanLight.intensity = smooth(0.45, 0.95, qw) * 2.6;
+          const backF = smooth(0, 0.3, qw);
+          const peer = smooth(0.8, 1.0, qw);
           setCam(
             0,
             lerp(3.0, 2.7, backF) - peer * 0.5,
@@ -1163,10 +1164,12 @@ export default function ParcelUnboxHero() {
             lerp(1.34, 1.3, backF) - peer * 0.2,
             -1.0 * backF + peer * 1.2,
           );
-          setCopy(act2, smooth(0.7, 0.84, q));
+          setCopy(act2, smooth(0.62, 0.82, qw) * exit);
         } else if (p <= B3) {
           // ===== ACT 3 — inside the lorry, then load the plane =====
           const q = clamp((p - B2) / (B3 - B2));
+          const qw = clamp(q / 0.8); // full flow by 80%, then hold / land
+          const exit = 1 - smooth(0.96, 1.0, q); // brief clear before Act 4
           flaps.forEach((g) => {
             const d = g.userData as FlapData;
             if (d.axis === "x") g.rotation.x = 0;
@@ -1175,16 +1178,16 @@ export default function ParcelUnboxHero() {
           van.rotation.y = 0;
           leftDoor.rotation.y = 2.0;
           rightDoor.rotation.y = -2.0;
-          const vanFade = 1 - smooth(0.32, 0.46, q);
+          const vanFade = 1 - smooth(0.32, 0.46, qw);
           showVan(vanFade);
           vanLight.intensity = vanFade * 2.6;
-          showPlane(smooth(0.4, 0.5, q));
+          showPlane(smooth(0.4, 0.5, qw));
           hideShip();
-          planeLight.intensity = smooth(0.56, 0.74, q) * 2.4;
-          cargoDoor.rotation.x = -easeStd(smooth(0.5, 0.7, q)) * 1.5 * (1 - smooth(0.9, 1.0, q));
+          planeLight.intensity = smooth(0.56, 0.74, qw) * 2.4;
+          cargoDoor.rotation.x = -easeStd(smooth(0.5, 0.7, qw)) * 1.5 * (1 - smooth(0.9, 1.0, qw));
           box.scale.setScalar(0.46);
           box.rotation.set(0, 0, 0);
-          const travel = easeStd(clamp((q - 0.4) / 0.5));
+          const travel = easeStd(clamp((qw - 0.4) / 0.5));
           const inT = clamp((travel - 0.82) / 0.18);
           let bx = lerp(0, 1.5, travel);
           let by = lerp(0.34, 2.4, travel);
@@ -1194,8 +1197,8 @@ export default function ParcelUnboxHero() {
           bz = lerp(bz, 0.0, inT);
           box.position.set(bx, by, bz);
           box.scale.setScalar(0.46 * (1 - inT * 0.6));
-          const inP = smooth(0.02, 0.16, q);
-          const outP = smooth(0.32, 0.52, q);
+          const inP = smooth(0.02, 0.16, qw);
+          const outP = smooth(0.32, 0.52, qw);
           let cp = [0, 2.2, 9.2];
           let ct = [0, 1.1, 0.2];
           cp = mix3(cp, [0, 1.4, 1.0], inP);
@@ -1203,24 +1206,25 @@ export default function ParcelUnboxHero() {
           cp = mix3(cp, [1.0, 3.0, 14.0], outP);
           ct = mix3(ct, [0.4, 2.1, 0], outP);
           setCam(cp[0], cp[1], cp[2], ct[0], ct[1], ct[2]);
-          setBackdrop(smooth(0.4, 0.58, q), 0);
-          setCopy(act3, smooth(0.64, 0.8, q) * (1 - smooth(0.95, 1.0, q)));
+          setBackdrop(smooth(0.4, 0.58, qw), 0);
+          setCopy(act3, smooth(0.6, 0.8, qw) * exit);
         } else {
           // ===== ACT 4 — to the ship, inside a container =====
           const q = clamp((p - B3) / (1 - B3));
+          const qw = clamp(q / 0.8); // full flow by 80%, then hold / land
           hideVan();
-          const planeFade = 1 - smooth(0.0, 0.16, q);
+          const planeFade = 1 - smooth(0.0, 0.16, qw);
           showPlane(planeFade);
           cargoDoor.rotation.x = 0;
           planeLight.intensity = 0;
-          showShip(smooth(0.1, 0.22, q));
-          shipLight.intensity = smooth(0.2, 0.4, q) * 1.4;
-          const cont = easeStd(smooth(0.16, 0.4, q)) * (1 - smooth(0.74, 0.92, q));
+          showShip(smooth(0.1, 0.22, qw));
+          shipLight.intensity = smooth(0.2, 0.4, qw) * 1.4;
+          const cont = easeStd(smooth(0.16, 0.4, qw)) * (1 - smooth(0.74, 0.92, qw));
           containerDoorL.rotation.y = cont * 1.7;
           containerDoorR.rotation.y = -cont * 1.7;
           box.scale.setScalar(0.46);
           box.rotation.set(0, 0, 0);
-          const travel = easeStd(clamp((q - 0.2) / 0.56));
+          const travel = easeStd(clamp((qw - 0.2) / 0.56));
           const inT = clamp((travel - 0.8) / 0.2);
           let bx = lerp(0.0, CONT_X + 1.4, travel);
           const by = lerp(4.4, CONT_Y, travel);
@@ -1228,13 +1232,13 @@ export default function ParcelUnboxHero() {
           bx = lerp(bx, CONT_X, inT);
           box.position.set(bx, by, bz);
           box.scale.setScalar(0.46 * (1 - inT * 0.65));
-          ship.position.x = -smooth(0.9, 1.0, q) * 2.0;
-          const toShip = smooth(0.0, 0.22, q);
+          ship.position.x = -smooth(0.9, 1.0, qw) * 2.0;
+          const toShip = smooth(0.0, 0.22, qw);
           const cp = mix3([1.0, 3.0, 14.0], [1.0, 4.2, 17.0], toShip);
           const ct = mix3([0.4, 2.1, 0], [0, 1.7, 0], toShip);
           setCam(cp[0], cp[1], cp[2], ct[0], ct[1], ct[2]);
-          setBackdrop(1 - smooth(0.1, 0.34, q), smooth(0.12, 0.34, q));
-          setCopy(act4, smooth(0.46, 0.62, q));
+          setBackdrop(1 - smooth(0.1, 0.34, qw), smooth(0.12, 0.34, qw));
+          setCopy(act4, smooth(0.46, 0.62, qw));
         }
 
         // hero copy + scroll cue (over full p)
@@ -1254,7 +1258,7 @@ export default function ParcelUnboxHero() {
         renderer.render(scene, camera);
       }
       function tick() {
-        current = reduceMotion ? target : lerp(current, target, 0.1);
+        current = reduceMotion ? target : lerp(current, target, 0.075);
         if (Math.abs(current - target) < 0.0002) current = target;
         renderAt(current);
         raf = requestAnimationFrame(tick);
@@ -1302,7 +1306,7 @@ export default function ParcelUnboxHero() {
   if (!enhanced) return <StaticHero />;
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: "1000vh" }}>
+    <div ref={trackRef} className="relative" style={{ height: "1400vh" }}>
       <div className="hero-bg sticky top-0 h-screen overflow-hidden">
         {/* Sky / sea backdrops (fade in for air / sea acts) */}
         <div
