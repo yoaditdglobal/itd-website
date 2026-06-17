@@ -20,8 +20,10 @@ import MagneticButton from "@/components/ui/MagneticButton";
  *
  * Three.js is dynamically imported inside the effect so it is fully code-split
  * and never touches the shared bundle (framer-motion is banned; three is lazy +
- * client-only). SSR-safe: renders the plain hero (copy + CTAs) on the server and
- * for mobile / reduced-motion / pre-hydration — a pure progressive enhancement.
+ * client-only). Runs on every viewport (mobile included) where motion is allowed;
+ * the camera widens its FOV on narrow/portrait screens so the set-pieces stay
+ * framed. SSR-safe: renders the plain hero (copy + CTAs) on the server and for
+ * reduced-motion / pre-hydration — a pure progressive enhancement.
  */
 
 const CARRIERS = [
@@ -78,16 +80,14 @@ export default function ParcelUnboxHero() {
   const act3Ref = useRef<HTMLDivElement>(null);
   const act4Ref = useRef<HTMLDivElement>(null);
 
-  // Decide whether to enhance: desktop + motion allowed (re-evaluates on change).
+  // Decide whether to enhance: any viewport, motion allowed (re-evaluates on change).
+  // The cinematic hero runs on mobile too; only reduced-motion falls back to StaticHero.
   useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1024px)");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const decide = () => setEnhanced(wide.matches && !reduce.matches);
+    const decide = () => setEnhanced(!reduce.matches);
     decide();
-    wide.addEventListener("change", decide);
     reduce.addEventListener("change", decide);
     return () => {
-      wide.removeEventListener("change", decide);
       reduce.removeEventListener("change", decide);
     };
   }, []);
@@ -151,7 +151,8 @@ export default function ParcelUnboxHero() {
         alpha: true,
         preserveDrawingBuffer: true,
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const isSmall = window.innerWidth < 768; // phones: lighten GPU load
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -170,7 +171,7 @@ export default function ParcelUnboxHero() {
       const key = new THREE.DirectionalLight(0xfff4e2, 2.4);
       key.position.set(4.5, 8, 5.5);
       key.castShadow = true;
-      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.mapSize.set(isSmall ? 1024 : 2048, isSmall ? 1024 : 2048);
       key.shadow.camera.near = 1;
       key.shadow.camera.far = 30;
       key.shadow.camera.left = -5;
@@ -1049,7 +1050,19 @@ export default function ParcelUnboxHero() {
         const w = canvasEl.clientWidth || window.innerWidth;
         const h = canvasEl.clientHeight || window.innerHeight;
         renderer.setSize(w, h, false);
-        camera.aspect = w / h;
+        const aspect = w / h;
+        camera.aspect = aspect;
+        // The set-pieces are wide; on portrait/narrow viewports the horizontal FOV
+        // collapses and crops them. Hold the horizontal FOV roughly constant by
+        // widening the vertical fov below the desktop reference aspect (clamped).
+        const BASE_FOV = 38;
+        const BASE_ASPECT = 16 / 10;
+        if (aspect < BASE_ASPECT) {
+          const hFov = 2 * Math.atan(Math.tan((BASE_FOV * Math.PI) / 360) * BASE_ASPECT);
+          camera.fov = Math.min(92, (2 * Math.atan(Math.tan(hFov / 2) / aspect) * 180) / Math.PI);
+        } else {
+          camera.fov = BASE_FOV;
+        }
         camera.updateProjectionMatrix();
       }
       const onResize = () => {
