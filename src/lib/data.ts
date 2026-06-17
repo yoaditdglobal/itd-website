@@ -658,11 +658,11 @@ export const caseStudies: CaseStudy[] = [
 export const integrations: Integration[] = [
   // ─── Tech — ERP / WMS ──────────────────────────────────────────────
   { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks_logo.png" },
-  { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "Adobe Commerce platform", logo: "/logos/erp-wms/magento-icon.webp" },
-  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "Cloud ERP", logo: "/logos/erp-wms/netsuite-icon.png" },
-  { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "Business management & WMS", logo: "/logos/erp-wms/orderwise-icon.webp" },
-  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "eCommerce warehouse management", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
-  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Multi-channel order management", logo: "/logos/erp-wms/selro-mark.png" },
+  { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "ITD connects directly to your Magento store, so orders move from checkout to carrier without a manual step in between.", logo: "/logos/erp-wms/magento-icon.webp" },
+  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "NetSuite runs your financials, inventory and orders in one system. ITD brings your carrier network into the same workflow.", logo: "/logos/erp-wms/netsuite-icon.png" },
+  { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "OrderWise gives UK product businesses precise control of their warehouse and orders. ITD extends that precision to the carrier side.", logo: "/logos/erp-wms/orderwise-icon.webp" },
+  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "Peoplevox runs your warehouse floor; ITD connects it to a carrier network your team doesn't need to build alone.", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Selro manages your listings and orders across more than 40 channels, and ITD handles the shipping.", logo: "/logos/erp-wms/selro-mark.png" },
   { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "Inventory & order management", logo: "/logos/erp-wms/tradepeg-icon.png" },
   { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "Retail & ERP for sports", logo: "/logos/erp-wms/jonassports-icon.png" },
   { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "Retail operations platform", logo: "/logos/erp-wms/brightpearl-icon.png" },
