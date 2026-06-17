@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { entityHref } from "@/lib/data";
 import type { LucideIcon } from "lucide-react";
 
 export interface SolutionHeroChip {
@@ -130,19 +132,30 @@ export default function SolutionHero({
               className="hero-entrance-aside mt-7 flex flex-wrap items-center gap-2"
               aria-label="Connected carriers and systems"
             >
-              {chips.map((item) => (
-                <span
-                  key={item.name}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-1 text-caption text-white/85"
-                >
-                  <IntegrationLogo
-                    name={item.name}
-                    logo={item.logo}
-                    size="xs"
-                  />
-                  {item.name}
-                </span>
-              ))}
+              {chips.map((item) => {
+                const href = entityHref(item.name);
+                const inner = (
+                  <>
+                    <IntegrationLogo name={item.name} logo={item.logo} size="xs" />
+                    {item.name}
+                  </>
+                );
+                const base =
+                  "inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-1 text-caption text-white/85";
+                return href ? (
+                  <Link
+                    key={item.name}
+                    href={href}
+                    className={`${base} transition-colors hover:bg-white/20 hover:border-white/30 hover:text-white`}
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <span key={item.name} className={base}>
+                    {inner}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>

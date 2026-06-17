@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Check, AlertCircle, Minus, Camera, Signature } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { entityHref } from "@/lib/data";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -316,6 +318,23 @@ function CarrierIdentity({
   logo?: string;
   descriptor?: string;
 }) {
+  const href = entityHref(carrier);
+  const name = href ? (
+    <Link
+      href={href}
+      className="group/carrier inline-flex items-center gap-1 text-heading-sm text-text-primary leading-tight hover:text-accent transition-colors"
+    >
+      {carrier}
+      <span
+        aria-hidden
+        className="text-text-tertiary opacity-0 -translate-x-1 group-hover/carrier:opacity-100 group-hover/carrier:translate-x-0 group-hover/carrier:text-accent transition-all motion-reduce:transition-none motion-reduce:translate-x-0"
+      >
+        →
+      </span>
+    </Link>
+  ) : (
+    <p className="text-heading-sm text-text-primary leading-tight">{carrier}</p>
+  );
   return (
     <div className="flex items-center gap-3.5">
       <IntegrationLogo
@@ -325,7 +344,7 @@ function CarrierIdentity({
         className="flex-shrink-0"
       />
       <div className="min-w-0">
-        <p className="text-heading-sm text-text-primary leading-tight">{carrier}</p>
+        {name}
         {descriptor && (
           <p className="text-caption text-text-tertiary mt-0.5 leading-snug">
             {descriptor}
@@ -571,12 +590,7 @@ function LegacyDesktopTable({
                   }`}
                 >
                   <td className="px-5 py-4 align-middle">
-                    <div className="flex items-center gap-3">
-                      <IntegrationLogo name={row.carrier} logo={row.logo} size="sm" />
-                      <span className="text-heading-sm text-text-primary">
-                        {row.carrier}
-                      </span>
-                    </div>
+                    <CarrierIdentity carrier={row.carrier} logo={row.logo} />
                   </td>
                   {row.cells.map((cell, i) => {
                     const cellType = row.cellTypes?.[i];
@@ -703,9 +717,8 @@ function LegacyMobileCard({
   return (
     <ScrollReveal delay={index * 0.04}>
       <div className="bg-white rounded-xl border border-border p-5 shadow-sm">
-        <div className="flex items-center gap-3 mb-4 pb-3 border-b border-border">
-          <IntegrationLogo name={row.carrier} logo={row.logo} size="sm" />
-          <p className="text-heading-sm text-text-primary">{row.carrier}</p>
+        <div className="mb-4 pb-3 border-b border-border">
+          <CarrierIdentity carrier={row.carrier} logo={row.logo} />
         </div>
         <dl className="space-y-3">
           {row.cells.map((cell, j) => {

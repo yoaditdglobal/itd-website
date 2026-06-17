@@ -1016,6 +1016,36 @@ export function resolveEntity(slug: string): LinkedEntity | null {
   return LINKED_ENTITIES[slug] ?? null;
 }
 
+/**
+ * Map an entity DISPLAY NAME (as shown in chips, comparison rows, carousels) to
+ * its canonical detail-page URL — the single source of truth for click-through
+ * across the site. Returns null when no detail page exists (render plain text).
+ *
+ * A detail page exists iff the entity is in `integrations[]` (the dynamic
+ * /integrations/{tech,carriers}/[slug] routes generate from there). Display
+ * variants that don't match an entry verbatim are normalised via ENTITY_ALIASES.
+ */
+const ENTITY_ALIASES: Record<string, string> = {
+  "dhl express": "DHL",
+  "royal mail international": "Royal Mail",
+  "parcelforce international": "Parcel Force",
+  "parcelforce": "Parcel Force",
+};
+
+export function entityHref(displayName: string): string | null {
+  const raw = displayName.trim();
+  if (raw.toLowerCase() === "connexx") return "/connexx";
+  const canonical = ENTITY_ALIASES[raw.toLowerCase()] ?? raw;
+  const entry = integrations.find(
+    (i) => i.name.toLowerCase() === canonical.toLowerCase(),
+  );
+  if (!entry) return null;
+  const slug = getIntegrationSlug(entry);
+  return entry.type === "carrier"
+    ? `/integrations/carriers/${slug}`
+    : `/integrations/tech/${slug}`;
+}
+
 /** Map a ShippingType enum to its LINKED_ENTITIES slug. */
 export function shippingTypeSlug(t: ShippingType): string {
   switch (t) {
