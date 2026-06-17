@@ -1071,6 +1071,8 @@ export default function ParcelUnboxHero() {
       let animating = false;
       let tween: { from: number; to: number; start: number; dur: number } | null = null;
       let cooldownUntil = 0;
+      let lastWheelTs = 0; // for collapsing one wheel/inertia burst into one step
+      const GESTURE_GAP = 320; // ms of quiet that marks a NEW gesture
       let locked = false;
       let exitGuard = false; // suppress re-lock right after exiting forward
 
@@ -1113,6 +1115,13 @@ export default function ParcelUnboxHero() {
 
       const onWheel = (e: WheelEvent) => {
         if (!locked) return;
+        const now = Date.now();
+        const gap = now - lastWheelTs;
+        lastWheelTs = now;
+        // Collapse a wheel/trackpad-inertia burst into ONE step: only a fresh
+        // wheel after a quiet gap counts. This decouples advancement from scroll
+        // amount/velocity so one gesture = one chapter (never races ahead).
+        if (gap < GESTURE_GAP) return;
         const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
         if (dir) step(dir);
       };
@@ -1130,7 +1139,7 @@ export default function ParcelUnboxHero() {
         step(dy > 0 ? 1 : -1);
       };
       const onKey = (e: KeyboardEvent) => {
-        if (!locked) return;
+        if (!locked || e.repeat) return; // one keypress = one chapter
         let dir = 0;
         if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") dir = 1;
         else if (e.key === "ArrowUp" || e.key === "PageUp") dir = -1;
