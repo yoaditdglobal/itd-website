@@ -246,11 +246,20 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
 .bleed-nav {
   margin-top: calc(-1 * var(--nav-h));
   border-top: var(--nav-h) solid transparent;
+  /* Compute gradient/image backgrounds over the border-box so they continue
+     seamlessly up through the transparent top border (behind the nav). Without
+     this, gradients (e.g. .hero-bg) originate at the padding box and the strip
+     behind the nav shows a flat, untinted slice — a visible seam. No-op for
+     solid background-colour heroes (colour always fills the border-box). */
+  background-origin: border-box;
 }
 
 /* Hero radial blob — for use behind hero headlines */
 .hero-bg {
-  background: var(--gradient-hero);
+  /* Longhand, NOT the `background` shorthand — the shorthand resets
+     background-origin to padding-box, which would re-introduce the seam by
+     overriding .bleed-nav's border-box origin. */
+  background-image: var(--gradient-hero);
 }
 .hero-bg-blob {
   position: absolute;
