@@ -46,7 +46,6 @@ export default function ParcelUnboxHero() {
   const trackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const heroCopyRef = useRef<HTMLDivElement>(null);
-  const revealRef = useRef<HTMLDivElement>(null);
   const cueRef = useRef<HTMLDivElement>(null);
 
   // Decide whether to enhance: desktop + motion allowed (re-evaluates on change).
@@ -493,7 +492,6 @@ export default function ParcelUnboxHero() {
       resize();
 
       const heroCopy = heroCopyRef.current;
-      const revealCopy = revealRef.current;
       const scrollCue = cueRef.current;
 
       function applyState(p: number) {
@@ -533,12 +531,6 @@ export default function ParcelUnboxHero() {
           heroCopy.style.transform = `translateY(${-heroOut * 60}px) scale(${1 - heroOut * 0.04})`;
           heroCopy.style.filter = `blur(${heroOut * 4}px)`;
           heroCopy.style.pointerEvents = heroOut > 0.6 ? "none" : "auto";
-        }
-        if (revealCopy) {
-          const revIn = smooth(0.6, 0.96, p);
-          revealCopy.style.opacity = String(revIn);
-          revealCopy.style.transform = `translateY(${(1 - revIn) * 48}px)`;
-          revealCopy.style.pointerEvents = revIn > 0.5 ? "auto" : "none";
         }
         if (scrollCue) {
           scrollCue.style.opacity = String(1 - smooth(0.0, 0.08, p));
@@ -629,23 +621,6 @@ export default function ParcelUnboxHero() {
           className="absolute inset-x-0 bottom-8 z-20 text-center text-eyebrow text-text-tertiary"
         >
           <span className="animate-pulse-dot">Scroll to unbox ↓</span>
-        </div>
-
-        {/* Payload revealed from inside the box — crossfades in where the headline vacates */}
-        <div
-          ref={revealRef}
-          className="pointer-events-none absolute inset-x-0 top-[12%] z-30 mx-auto max-w-2xl px-6 text-center opacity-0 will-change-[transform,opacity]"
-        >
-          <p className="text-eyebrow text-accent">One platform. Every carrier.</p>
-          <h2 className="mt-2 text-display-lg text-text-primary">
-            Connexx picks the cheapest compliant carrier and prints the label in one
-            click.
-          </h2>
-          <div className="mt-6 inline-flex">
-            <Button href="/connexx" variant="primary">
-              See how Connexx works
-            </Button>
-          </div>
         </div>
       </div>
     </div>
