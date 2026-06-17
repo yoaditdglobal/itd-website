@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { entityHref } from "@/lib/data";
 
 interface GatewayLogo {
   name: string;
@@ -38,15 +39,34 @@ export default function IntegrationsGateway({
           <h2 className="text-display-md text-text-primary mb-3">{heading}</h2>
           <p className="text-body-md text-text-secondary max-w-2xl">{subtext}</p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            {logos.map((l) => (
-              <div
-                key={l.name}
-                className="flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3"
-              >
-                <IntegrationLogo name={l.name} logo={l.logo} size="sm" fit="contain" />
-                <span className="text-sm font-medium text-text-primary">{l.name}</span>
-              </div>
-            ))}
+            {logos.map((l) => {
+              const href = entityHref(l.name);
+              const inner = (
+                <>
+                  <IntegrationLogo name={l.name} logo={l.logo} size="sm" fit="contain" />
+                  <span className="text-sm font-medium text-text-primary">{l.name}</span>
+                </>
+              );
+              const base =
+                "flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3";
+              return href ? (
+                <Link
+                  key={l.name}
+                  href={href}
+                  className={`group/g ${base} transition-colors hover:border-accent/40 hover:text-accent`}
+                >
+                  {inner}
+                  <ArrowRight
+                    className="w-4 h-4 text-text-tertiary opacity-0 -ml-1 group-hover/g:opacity-100 group-hover/g:text-accent transition-all motion-reduce:transition-none"
+                    aria-hidden
+                  />
+                </Link>
+              ) : (
+                <div key={l.name} className={base}>
+                  {inner}
+                </div>
+              );
+            })}
           </div>
           <div className="mt-8">
             <Link

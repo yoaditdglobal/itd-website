@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { entityHref } from "@/lib/data";
 
 export interface IntegrationItem {
   name: string;
@@ -119,10 +120,10 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
               {selected.description && (
                 <p className="text-body-sm text-text-secondary mt-1">{selected.description}</p>
               )}
-              {selected.href && (
+              {(entityHref(selected.name) ?? selected.href) && (
                 <div className="mt-4">
                   <Link
-                    href={selected.href}
+                    href={entityHref(selected.name) ?? selected.href!}
                     className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:underline"
                   >
                     Explore {selected.name} <ArrowRight className="w-3.5 h-3.5" />
