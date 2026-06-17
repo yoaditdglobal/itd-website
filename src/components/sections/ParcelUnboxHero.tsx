@@ -51,24 +51,18 @@ const SECONDARY = { label: "Contact Us", href: "/contact" };
  */
 const ACTS = [
   {
-    eyebrow: "Domestic",
     title: "UK domestic parcel delivery",
     body: "One screen for every UK carrier. Royal Mail, DPD, Evri, InPost, Amazon Shipping, and Parcel Force — every postcode, including Highlands, Islands, and NI.",
-    tags: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "SMEs"],
     href: "/shipping/domestic",
   },
   {
-    eyebrow: "International",
     title: "International parcel delivery",
     body: "Export and import in one workflow. HS codes, EORI, IOSS, and customs paperwork generated before the carrier scans the label.",
-    tags: ["Export", "Import", "Cross-border eCommerce", "Enterprise"],
     href: "/shipping/international",
   },
   {
-    eyebrow: "Freight",
     title: "Freight and pallet shipping",
     body: "UK pallet networks, EU lanes, and worldwide LCL/FCL containers on one platform. Mixed-mode freight planned in minutes, not days.",
-    tags: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
     href: "/shipping/freight",
   },
 ];
@@ -1138,7 +1132,7 @@ export default function ParcelUnboxHero() {
           const y = q < 0.52 ? lerp(0.02, 4.8, rise) : lerp(4.8, 0.34, descend);
           const z = q < 0.52 ? 2.3 * rise : lerp(2.3, 0.7, descend);
           box.position.set(0, y - bob, z);
-          showVan(smooth(0.03, 0.2, q));
+          showVan(smooth(0.04, 0.14, q));
           hidePlane();
           hideShip();
           setBackdrop(0, 0);
@@ -1173,7 +1167,7 @@ export default function ParcelUnboxHero() {
           const vanFade = 1 - smooth(0.32, 0.46, q);
           showVan(vanFade);
           vanLight.intensity = vanFade * 2.6;
-          showPlane(smooth(0.4, 0.56, q));
+          showPlane(smooth(0.4, 0.5, q));
           hideShip();
           planeLight.intensity = smooth(0.56, 0.74, q) * 2.4;
           cargoDoor.rotation.x = -easeStd(smooth(0.5, 0.7, q)) * 1.5 * (1 - smooth(0.9, 1.0, q));
@@ -1208,7 +1202,7 @@ export default function ParcelUnboxHero() {
           showPlane(planeFade);
           cargoDoor.rotation.x = 0;
           planeLight.intensity = 0;
-          showShip(smooth(0.1, 0.3, q));
+          showShip(smooth(0.1, 0.22, q));
           shipLight.intensity = smooth(0.2, 0.4, q) * 1.4;
           const cont = easeStd(smooth(0.16, 0.4, q)) * (1 - smooth(0.74, 0.92, q));
           containerDoorL.rotation.y = cont * 1.7;
@@ -1234,7 +1228,7 @@ export default function ParcelUnboxHero() {
 
         // hero copy + scroll cue (over full p)
         if (heroCopy) {
-          const heroOut = smooth(0.0, 0.3, p);
+          const heroOut = smooth(0.0, 0.12, p);
           heroCopy.style.opacity = String(1 - heroOut);
           heroCopy.style.transform = `translateY(${-heroOut * 60}px) scale(${1 - heroOut * 0.04})`;
           heroCopy.style.filter = `blur(${heroOut * 4}px)`;
@@ -1391,21 +1385,10 @@ function ActOverlay({
         pointerEvents: "none",
       }}
     >
-      <span className="text-eyebrow text-accent">{act.eyebrow}</span>
-      <h2 className="mt-3 text-display-md text-text-primary">{act.title}</h2>
+      <h2 className="text-display-md text-text-primary">{act.title}</h2>
       <p className="mx-auto mt-4 max-w-xl text-body-lg text-text-secondary">
         {act.body}
       </p>
-      <div className="mt-5 flex flex-wrap justify-center gap-2">
-        {act.tags.map((t) => (
-          <span
-            key={t}
-            className="rounded-full border border-border bg-white/85 px-3 py-1 text-xs font-medium text-text-secondary shadow-sm backdrop-blur-sm"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
       <div className="mt-6 inline-flex">
         <Button href={act.href} variant="primary">
           Explore
