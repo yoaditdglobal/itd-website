@@ -72,7 +72,6 @@ export default function ParcelUnboxHero() {
   const trackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const heroCopyRef = useRef<HTMLDivElement>(null);
-  const cueRef = useRef<HTMLDivElement>(null);
   const skyRef = useRef<HTMLDivElement>(null);
   const seaRef = useRef<HTMLDivElement>(null);
   const act2Ref = useRef<HTMLDivElement>(null);
@@ -1032,7 +1031,6 @@ export default function ParcelUnboxHero() {
 
       /* ── Scroll → progress (robust to layout offset) ── */
       const heroCopy = heroCopyRef.current;
-      const scrollCue = cueRef.current;
       const skyEl = skyRef.current;
       const seaEl = seaRef.current;
       const act2 = act2Ref.current;
@@ -1234,7 +1232,6 @@ export default function ParcelUnboxHero() {
           heroCopy.style.filter = `blur(${heroOut * 4}px)`;
           heroCopy.style.pointerEvents = heroOut > 0.5 ? "none" : "auto";
         }
-        if (scrollCue) scrollCue.style.opacity = String(1 - smooth(0.0, 0.08, p));
       }
 
       /* ── Render loop ── */
@@ -1350,14 +1347,6 @@ export default function ParcelUnboxHero() {
         <ActOverlay act={ACTS[0]} forwardRef={act2Ref} />
         <ActOverlay act={ACTS[1]} forwardRef={act3Ref} />
         <ActOverlay act={ACTS[2]} forwardRef={act4Ref} />
-
-        {/* Scroll cue */}
-        <div
-          ref={cueRef}
-          className="absolute inset-x-0 bottom-8 z-20 text-center text-eyebrow text-text-tertiary"
-        >
-          <span className="animate-pulse-dot">Scroll to begin the journey ↓</span>
-        </div>
       </div>
     </div>
   );
@@ -1378,7 +1367,7 @@ function ActOverlay({
       className="absolute z-20 text-center will-change-[transform,opacity]"
       style={{
         left: "50%",
-        top: "8vh",
+        top: "14vh",
         width: "min(820px, 90vw)",
         transform: "translate(-50%, 40px)",
         opacity: 0,
