@@ -1445,7 +1445,18 @@ export default function ParcelUnboxHero() {
   if (!enhanced) return <StaticHero />;
 
   return (
-    <div ref={trackRef} className="hero-bg relative h-screen overflow-hidden">
+    // Bleed up behind the floating nav (cancel <main>'s pt-[72px]) and grow the
+    // height back by the same amount, so the scene's composition *below* the nav
+    // is unchanged — only the top extends up into the strip behind the pill.
+    // Without this, the sky/sea backdrops (absolute inset-0, clipped by the root's
+    // overflow-hidden) stop at y=72 and the strip behind the nav shows the cream
+    // body background instead of the active backdrop — a visible seam once the
+    // sky/sea fades in for the air/sea acts. Every other hero already bleeds to
+    // y=0 (.bleed-nav, or SolutionHero's negative-top image layer); this matches.
+    <div
+      ref={trackRef}
+      className="hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]"
+    >
       <div className="absolute inset-0">
         {/* Sky / sea backdrops (fade in for air / sea acts) */}
         <div
