@@ -191,7 +191,7 @@ export default function VerticalPage({
 
       {/* Hero */}
       {!hideDefaultHero && (
-      <section className="relative hero-bg overflow-hidden py-16 md:py-24">
+      <section className="bleed-nav relative hero-bg overflow-hidden py-16 md:py-24">
         <div className="hero-bg-blob" aria-hidden />
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

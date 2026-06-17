@@ -23,7 +23,7 @@ export default function CarrierIntegrationsPage() {
 
   return (
     <>
-      <section className="bg-bg-secondary border-b border-border">
+      <section className="bleed-nav bg-bg-secondary border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <p className="text-eyebrow text-accent-secondary mb-3">Carrier integrations</p>
           <h1 className="text-display-xl text-text-primary max-w-3xl">

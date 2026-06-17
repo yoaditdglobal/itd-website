@@ -233,6 +233,21 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   background-size: 200px 200px;
 }
 
+/* ── Floating-nav clearance ──────────────────────────────────────────────
+   The navbar is a fixed floating pill; <main> reserves --nav-h of top space.
+   A hero/first-section with `.bleed-nav` pulls itself up under the nav (so its
+   background reaches y=0, behind the pill) and re-adds the clearance as a
+   transparent top border — so content stays exactly where it was, while the
+   section background (colour, gradient, or an inset-0 image) shows through the
+   nav's transparent gutter. Matches the 72px main spacer / 88px scroll offset. */
+:root {
+  --nav-h: 72px;
+}
+.bleed-nav {
+  margin-top: calc(-1 * var(--nav-h));
+  border-top: var(--nav-h) solid transparent;
+}
+
 /* Hero radial blob — for use behind hero headlines */
 .hero-bg {
   background: var(--gradient-hero);

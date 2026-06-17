@@ -87,7 +87,7 @@ export default function SubmitRequestPage() {
       />
 
       {/* Hero */}
-      <section className="bg-white py-14 md:py-20">
+      <section className="bleed-nav bg-white py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <nav aria-label="Breadcrumb" className="mb-4 text-sm text-text-tertiary">

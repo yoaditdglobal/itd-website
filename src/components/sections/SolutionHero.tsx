@@ -65,44 +65,43 @@ export default function SolutionHero({
   const objectFit = image.objectFit ?? "cover";
 
   return (
-    <section className="relative overflow-hidden min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
-      {/* Background photo (or gradient + icon placeholder) */}
-      {image.src ? (
-        <Image
-          src={image.src}
-          alt={altText}
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className={objectFit === "contain" ? "object-contain" : "object-cover"}
-          style={{ objectPosition }}
-        />
-      ) : (
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center`}
-          aria-hidden
-        >
-          {Icon ? (
-            <Icon
-              className="w-1/3 h-1/3 text-white/10"
-              strokeWidth={1.5}
-            />
-          ) : null}
-        </div>
-      )}
+    <section className="bleed-nav relative min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
+      {/* Background layers — extended up over the floating-nav strip so the
+          photo (not the fallback colour) shows through the nav's gutter. The
+          clip lives HERE (not on the section) so the image isn't cut at the nav. */}
+      <div className="absolute inset-x-0 bottom-0 top-[calc(-1*var(--nav-h))] overflow-hidden">
+        {/* Background photo (or gradient + icon placeholder) */}
+        {image.src ? (
+          <Image
+            src={image.src}
+            alt={altText}
+            fill
+            priority
+            quality={90}
+            sizes="100vw"
+            className={objectFit === "contain" ? "object-contain" : "object-cover"}
+            style={{ objectPosition }}
+          />
+        ) : (
+          <div
+            aria-hidden
+            className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center`}
+          >
+            {Icon ? (
+              <Icon
+                className="w-1/3 h-1/3 text-white/10"
+                strokeWidth={1.5}
+              />
+            ) : null}
+          </div>
+        )}
 
-      {/* Left-to-right scrim */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-bg-dark/90 via-bg-dark/55 to-transparent md:from-bg-dark/85 md:via-bg-dark/45"
-      />
+        {/* Left-to-right scrim */}
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-dark/90 via-bg-dark/55 to-transparent md:from-bg-dark/85 md:via-bg-dark/45" />
 
-      {/* Film grain */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-noise opacity-[0.4] mix-blend-soft-light pointer-events-none"
-      />
+        {/* Film grain */}
+        <div className="absolute inset-0 bg-noise opacity-[0.4] mix-blend-soft-light pointer-events-none" />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32 min-h-[inherit] flex items-center">

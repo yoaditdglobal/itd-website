@@ -101,7 +101,7 @@ export default function FbmGuidePage() {
       <ReadingProgress />
 
       {/* Hero */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="bleed-nav bg-white py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <Link
