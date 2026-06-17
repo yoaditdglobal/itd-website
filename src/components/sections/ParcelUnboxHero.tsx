@@ -142,7 +142,6 @@ export default function ParcelUnboxHero() {
         lerp(a[1], b[1], t),
         lerp(a[2], b[2], t),
       ];
-      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       /* ── Renderer / scene / camera ── */
       const renderer = new THREE.WebGLRenderer({
@@ -1036,14 +1035,7 @@ export default function ParcelUnboxHero() {
       const act3 = act3Ref.current;
       const act4 = act4Ref.current;
 
-      let target = 0;
       let current = 0;
-      function readScroll() {
-        const rect = trackEl.getBoundingClientRect();
-        const range = rect.height - window.innerHeight;
-        target = range > 0 ? clamp(-rect.top / range) : 0;
-      }
-      const onScroll = () => readScroll();
       function resize() {
         const w = canvasEl.clientWidth || window.innerWidth;
         const h = canvasEl.clientHeight || window.innerHeight;
@@ -1063,14 +1055,131 @@ export default function ParcelUnboxHero() {
         }
         camera.updateProjectionMatrix();
       }
-      const onResize = () => {
-        readScroll();
-        resize();
+      resize();
+
+      /* ── Direction-triggered timed sequence pager ──
+         Scroll DIRECTION advances one chapter; amount/velocity is irrelevant.
+         Each transition plays a fixed eased tween (premium, coherent) and input
+         is ignored until it finishes. The hero pins (page scroll locked) until
+         the sequence is exhausted, then native scroll continues into the page. */
+      const LANDINGS = [0, 0.4, 0.67, 0.95]; // sealed → van → plane → ship
+      const LAST = LANDINGS.length - 1;
+      const CHAPTER_MS = 3000; // pace of a typical chapter (slow, cinematic)
+      const TYP_DIST = 0.275; // typical inter-scene progress gap
+      const COOLDOWN_MS = 300; // guard trackpad inertia from double-firing
+      let sceneIndex = 0;
+      let animating = false;
+      let tween: { from: number; to: number; start: number; dur: number } | null = null;
+      let cooldownUntil = 0;
+      let lastWheelTs = 0; // for collapsing one wheel/inertia burst into one step
+      const GESTURE_GAP = 450; // ms of quiet that marks a NEW gesture
+      let locked = false;
+      let exitGuard = false; // suppress re-lock right after exiting forward
+
+      const lockScroll = () => {
+        if (locked) return;
+        locked = true;
+        document.documentElement.style.overflow = "hidden";
       };
+      const unlockScroll = () => {
+        if (!locked) return;
+        locked = false;
+        document.documentElement.style.overflow = "";
+      };
+      function goToScene(dir: number) {
+        if (animating) return false;
+        const next = Math.max(0, Math.min(LAST, sceneIndex + dir));
+        if (next === sceneIndex) return false;
+        const from = LANDINGS[sceneIndex];
+        const to = LANDINGS[next];
+        tween = {
+          from,
+          to,
+          start: 0,
+          dur: CHAPTER_MS * Math.max(0.7, Math.abs(to - from) / TYP_DIST),
+        };
+        animating = true;
+        sceneIndex = next;
+        return true;
+      }
+      function step(dir: number) {
+        if (animating || Date.now() < cooldownUntil) return;
+        if (dir > 0 && sceneIndex === LAST) {
+          unlockScroll();
+          exitGuard = true;
+          return; // exhausted forward → let the page scroll on
+        }
+        if (dir < 0 && sceneIndex === 0) return; // nothing above the hero
+        if (goToScene(dir)) cooldownUntil = Date.now() + COOLDOWN_MS;
+      }
+
+      const onWheel = (e: WheelEvent) => {
+        if (!locked) return;
+        const now = Date.now();
+        const gap = now - lastWheelTs;
+        lastWheelTs = now;
+        // Collapse a wheel/trackpad-inertia burst into ONE step: only a fresh
+        // wheel after a quiet gap counts. This decouples advancement from scroll
+        // amount/velocity so one gesture = one chapter (never races ahead).
+        if (gap < GESTURE_GAP) return;
+        const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+        if (dir) step(dir);
+      };
+      let touchY = 0;
+      const onTouchStart = (e: TouchEvent) => {
+        touchY = e.touches[0]?.clientY ?? 0;
+      };
+      const onTouchMove = (e: TouchEvent) => {
+        if (locked) e.preventDefault();
+      };
+      const onTouchEnd = (e: TouchEvent) => {
+        if (!locked) return;
+        const dy = touchY - (e.changedTouches[0]?.clientY ?? touchY);
+        if (Math.abs(dy) < 28) return;
+        step(dy > 0 ? 1 : -1);
+      };
+      const onKey = (e: KeyboardEvent) => {
+        if (!locked || e.repeat) return; // one keypress = one chapter
+        let dir = 0;
+        if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") dir = 1;
+        else if (e.key === "ArrowUp" || e.key === "PageUp") dir = -1;
+        if (!dir) return;
+        if (dir > 0 && sceneIndex === LAST) {
+          unlockScroll();
+          exitGuard = true;
+          return;
+        }
+        if (dir < 0 && sceneIndex === 0) return;
+        e.preventDefault();
+        step(dir);
+      };
+      // Re-lock when the user returns to the top (after exiting into the page).
+      const onScroll = () => {
+        if (exitGuard) {
+          if (window.scrollY > window.innerHeight * 0.5) exitGuard = false;
+          return;
+        }
+        if (!locked && window.scrollY <= 2) lockScroll();
+      };
+      const onResize = () => resize();
+
+      // Engage only if the hero is at the top on mount (don't trap a mid-page load).
+      if (window.scrollY <= 4) {
+        sceneIndex = 0;
+        current = 0;
+        lockScroll();
+      } else {
+        sceneIndex = LAST;
+        current = LANDINGS[LAST];
+      }
+
+      window.addEventListener("wheel", onWheel, { passive: true });
+      window.addEventListener("touchstart", onTouchStart, { passive: true });
+      window.addEventListener("touchmove", onTouchMove, { passive: false });
+      window.addEventListener("touchend", onTouchEnd, { passive: true });
+      window.addEventListener("keydown", onKey);
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", onResize);
-      readScroll();
-      resize();
 
       const B1 = 0.16;
       const B2 = 0.42;
@@ -1251,34 +1360,47 @@ export default function ParcelUnboxHero() {
         }
       }
 
-      /* ── Render loop ── */
+      /* ── Render loop (the timed tween drives `current`) ── */
       let raf = 0;
       function renderAt(p: number) {
         applyState(p);
         renderer.render(scene, camera);
       }
-      function tick() {
-        current = reduceMotion ? target : lerp(current, target, 0.075);
-        if (Math.abs(current - target) < 0.0002) current = target;
+      function tick(ts: number) {
+        if (tween) {
+          if (!tween.start) tween.start = ts;
+          const t = clamp((ts - tween.start) / tween.dur);
+          current = tween.from + (tween.to - tween.from) * easeStd(t);
+          if (t >= 1) {
+            current = tween.to;
+            tween = null;
+            animating = false;
+          }
+        }
         renderAt(current);
         raf = requestAnimationFrame(tick);
       }
-      if (reduceMotion) {
-        current = target = 0;
-        renderAt(0);
-      }
-      tick();
+      renderAt(current);
+      raf = requestAnimationFrame(tick);
 
-      // Debug-only: pin an exact progress state (bypasses scroll + damping).
+      // Debug-only: jump to an exact progress state.
       (window as unknown as { __setProgress?: (p: number) => void }).__setProgress = (
         pv: number,
       ) => {
-        current = target = clamp(pv);
+        tween = null;
+        animating = false;
+        current = clamp(pv);
         renderAt(current);
       };
 
       cleanup = () => {
         cancelAnimationFrame(raf);
+        unlockScroll();
+        window.removeEventListener("wheel", onWheel);
+        window.removeEventListener("touchstart", onTouchStart);
+        window.removeEventListener("touchmove", onTouchMove);
+        window.removeEventListener("touchend", onTouchEnd);
+        window.removeEventListener("keydown", onKey);
         window.removeEventListener("scroll", onScroll);
         window.removeEventListener("resize", onResize);
         scene.traverse((o) => {
@@ -1306,8 +1428,8 @@ export default function ParcelUnboxHero() {
   if (!enhanced) return <StaticHero />;
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: "1400vh" }}>
-      <div className="hero-bg sticky top-0 h-screen overflow-hidden">
+    <div ref={trackRef} className="hero-bg relative h-screen overflow-hidden">
+      <div className="absolute inset-0">
         {/* Sky / sea backdrops (fade in for air / sea acts) */}
         <div
           ref={skyRef}
