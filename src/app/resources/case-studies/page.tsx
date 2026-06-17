@@ -53,7 +53,7 @@ export default async function CaseStudiesPage({
   return (
     <>
       {/* Hero */}
-      <section className="bg-white py-16 md:py-24">
+      <section className="bleed-nav bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary max-w-4xl mx-auto">

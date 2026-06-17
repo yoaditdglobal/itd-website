@@ -25,7 +25,7 @@ export default function IntegrationDetail({
 
   return (
     <>
-      <section className="bg-bg-secondary border-b border-border">
+      <section className="bleed-nav bg-bg-secondary border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-text-tertiary mb-8" aria-label="Breadcrumb">

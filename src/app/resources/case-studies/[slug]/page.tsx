@@ -108,7 +108,7 @@ export default async function CaseStudyPage({
       <JsonLd data={ld} />
 
       {/* Hero — breadcrumb + brand row + H1 + lead + hero image */}
-      <section className="bg-white py-12 md:py-20">
+      <section className="bleed-nav bg-white py-12 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb
             items={[
