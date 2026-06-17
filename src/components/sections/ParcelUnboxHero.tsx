@@ -1,21 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type * as THREE from "three";
 import Button from "@/components/ui/Button";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 /**
  * Cinematic, scroll-driven "parcel unboxing" hero (skeuomorphic revival).
  *
- * Pure CSS 3D (no three.js / framer-motion — framer-motion is banned from the
- * shared bundle). A pinned scroll track scrubs a single eased progress value
- * (cubic-bezier(0.4,0,0.2,1)) into CSS custom properties; the box scales up and
- * its four top flaps fold open to reveal the payload on scroll down, and
- * re-packs on scroll up (progress-driven → reversible for free).
+ * The enhanced (desktop, motion-ok) experience renders a real WebGL parcel with
+ * Three.js — a kraft cardboard box with a photoreal shipping label and four
+ * hinged top flaps. A pinned scroll track scrubs an eased progress value
+ * (cubic-bezier(0.4,0,0.2,1)); the box scales up + turntables and its flaps fold
+ * open to reveal the payload on scroll down, and re-pack on scroll up. Three.js
+ * is dynamically imported inside the effect so it is fully code-split and never
+ * touches the shared bundle (framer-motion is banned; three is lazy + client-only).
  *
- * SSR-safe: renders the plain hero (copy + CTAs, fully visible) on the server
- * and for mobile / reduced-motion / pre-hydration. The 3D pin attaches only for
- * lg+ && hydrated && motion-ok — a pure progressive enhancement.
+ * SSR-safe: renders the plain hero (copy + CTAs, fully visible) on the server and
+ * for mobile / reduced-motion / pre-hydration — a pure progressive enhancement.
  */
 
 const CARRIERS = [
@@ -39,40 +41,13 @@ const SUB =
 const PRIMARY = { label: "Get Quote", href: "/rate-checker/domestic" };
 const SECONDARY = { label: "Contact Us", href: "/contact" };
 
-/** cubic-bezier(0.4, 0, 0.2, 1) solver — Material "standard" easing. */
-function makeBezier(x1: number, y1: number, x2: number, y2: number) {
-  const cx = 3 * x1;
-  const bx = 3 * (x2 - x1) - cx;
-  const ax = 1 - cx - bx;
-  const cy = 3 * y1;
-  const by = 3 * (y2 - y1) - cy;
-  const ay = 1 - cy - by;
-  const fx = (t: number) => ((ax * t + bx) * t + cx) * t;
-  const fy = (t: number) => ((ay * t + by) * t + cy) * t;
-  const dfx = (t: number) => (3 * ax * t + 2 * bx) * t + cx;
-  return (x: number) => {
-    if (x <= 0) return 0;
-    if (x >= 1) return 1;
-    let t = x;
-    for (let i = 0; i < 6; i++) {
-      const d = dfx(t);
-      if (Math.abs(d) < 1e-6) break;
-      t -= (fx(t) - x) / d;
-      t = Math.min(1, Math.max(0, t));
-    }
-    return fy(t);
-  };
-}
-const easeStandard = makeBezier(0.4, 0, 0.2, 1);
-
-/** clamp a sub-range of p to 0..1 */
-const sub = (p: number, a: number, b: number) =>
-  Math.min(1, Math.max(0, (p - a) / (b - a)));
-
 export default function ParcelUnboxHero() {
   const [enhanced, setEnhanced] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const heroCopyRef = useRef<HTMLDivElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
+  const cueRef = useRef<HTMLDivElement>(null);
 
   // Decide whether to enhance: desktop + motion allowed (re-evaluates on change).
   useEffect(() => {
@@ -88,53 +63,549 @@ export default function ParcelUnboxHero() {
     };
   }, []);
 
-  // Scrub: map track scroll → eased progress → CSS vars on the stage.
+  // Build the Three.js scene once enhanced; drive it from scroll progress.
   useEffect(() => {
     if (!enhanced) return;
+    const canvas = canvasRef.current;
     const track = trackRef.current;
-    const stage = stageRef.current;
-    if (!track || !stage) return;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const rect = track.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
-      const p = easeStandard(total > 0 ? scrolled / total : 0);
-      stage.style.setProperty("--scale", String(0.82 + 0.7 * p));
-      stage.style.setProperty("--flap", String(sub(p, 0.06, 0.62)));
-      stage.style.setProperty("--reveal", String(sub(p, 0.46, 0.9)));
-      stage.style.setProperty("--copy", String(1 - sub(p, 0.04, 0.34)));
-      stage.style.setProperty("--lift", String(sub(p, 0.2, 0.95)));
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    if (!canvas || !track) return;
+
+    let disposed = false;
+    let cleanup: (() => void) | null = null;
+
+    (async () => {
+      const THREE = await import("three");
+      if (disposed || !canvas || !track) return;
+      const canvasEl: HTMLCanvasElement = canvas;
+      const trackEl: HTMLElement = track;
+
+      /* ── Easing & helpers ── */
+      const cubicBezier = (p1x: number, p1y: number, p2x: number, p2y: number) => {
+        const A = (a: number, b: number) => 1 - 3 * b + 3 * a;
+        const B = (a: number, b: number) => 3 * b - 6 * a;
+        const C = (a: number) => 3 * a;
+        const calc = (t: number, a: number, b: number) =>
+          ((A(a, b) * t + B(a, b)) * t + C(a)) * t;
+        const slope = (t: number, a: number, b: number) =>
+          3 * A(a, b) * t * t + 2 * B(a, b) * t + C(a);
+        const tForX = (x: number) => {
+          let t = x;
+          for (let i = 0; i < 6; i++) {
+            const e = calc(t, p1x, p2x) - x;
+            const d = slope(t, p1x, p2x);
+            if (Math.abs(d) < 1e-6) break;
+            t -= e / d;
+          }
+          return t;
+        };
+        return (x: number) =>
+          x <= 0 ? 0 : x >= 1 ? 1 : calc(tForX(x), p1y, p2y);
+      };
+      const easeStd = cubicBezier(0.4, 0, 0.2, 1); // the requested premium curve
+      const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+      const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+      const smooth = (e0: number, e1: number, x: number) => {
+        const t = clamp((x - e0) / (e1 - e0));
+        return t * t * (3 - 2 * t);
+      };
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* ── Renderer / scene / camera ── */
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasEl,
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true,
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+      camera.position.set(0, 2.75, 6.2);
+      camera.lookAt(0, 1.04, 0);
+
+      /* ── Lighting — soft, premium ── */
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xcdbfa6, 0.55));
+      scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+      const key = new THREE.DirectionalLight(0xfff4e2, 2.4);
+      key.position.set(4.5, 8, 5.5);
+      key.castShadow = true;
+      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.camera.near = 1;
+      key.shadow.camera.far = 30;
+      key.shadow.camera.left = -5;
+      key.shadow.camera.right = 5;
+      key.shadow.camera.top = 5;
+      key.shadow.camera.bottom = -5;
+      key.shadow.bias = -0.0004;
+      key.shadow.radius = 6;
+      scene.add(key);
+
+      const fill = new THREE.DirectionalLight(0xdfe7ff, 0.6);
+      fill.position.set(-5, 2.5, 3);
+      scene.add(fill);
+      const rim = new THREE.DirectionalLight(0xffffff, 0.7);
+      rim.position.set(-2, 4, -6);
+      scene.add(rim);
+
+      // cobalt glow that lives inside the box
+      const coreLight = new THREE.PointLight(0x3a63e8, 0, 6, 2);
+      coreLight.position.set(0, 0.7, 0);
+      scene.add(coreLight);
+
+      /* ── Contact shadow (keeps CSS backdrop visible) ── */
+      const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(40, 40),
+        new THREE.ShadowMaterial({ opacity: 0.22 }),
+      );
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = 0;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      /* ── Procedural kraft cardboard texture ── */
+      function kraftTexture(repeat = 1) {
+        const c = document.createElement("canvas");
+        c.width = c.height = 512;
+        const x = c.getContext("2d")!;
+        const g = x.createLinearGradient(0, 0, 512, 512);
+        g.addColorStop(0, "#dcbd8c");
+        g.addColorStop(0.5, "#cda472");
+        g.addColorStop(1, "#c0945f");
+        x.fillStyle = g;
+        x.fillRect(0, 0, 512, 512);
+        // paper fibre speckle (seeded-ish; randomness only affects texture grain)
+        for (let i = 0; i < 14000; i++) {
+          const r = (120 + Math.random() * 70) | 0;
+          const gg = (92 + Math.random() * 48) | 0;
+          const b = (52 + Math.random() * 36) | 0;
+          x.fillStyle = `rgba(${r},${gg},${b},${Math.random() * 0.09})`;
+          x.fillRect(Math.random() * 512, Math.random() * 512, 1.6, 1.6);
+        }
+        // faint corrugation banding
+        x.globalAlpha = 0.05;
+        for (let y = 0; y < 512; y += 4) {
+          x.fillStyle = (y / 4) % 2 ? "#7c5a30" : "#f0d8ac";
+          x.fillRect(0, y, 512, 2);
+        }
+        x.globalAlpha = 1;
+        const t = new THREE.CanvasTexture(c);
+        t.colorSpace = THREE.SRGBColorSpace;
+        t.wrapS = t.wrapT = THREE.RepeatWrapping;
+        t.repeat.set(repeat, repeat);
+        t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        return t;
+      }
+      const kraft = kraftTexture(1);
+
+      function kraftMat() {
+        return new THREE.MeshStandardMaterial({
+          map: kraft.clone(),
+          roughness: 0.93,
+          metalness: 0.0,
+        });
+      }
+      const interiorMat = new THREE.MeshStandardMaterial({
+        color: 0xa9824f,
+        roughness: 0.97,
+      });
+
+      /* ── Shipping-label decal texture ── */
+      const loadImg = (src: string): Promise<HTMLImageElement | null> =>
+        new Promise((res) => {
+          const im = new Image();
+          im.onload = () => res(im);
+          im.onerror = () => res(null);
+          im.src = src;
+        });
+      // fit an image inside a box, preserving aspect ratio
+      function fitInto(
+        ctx: CanvasRenderingContext2D,
+        img: HTMLImageElement | null,
+        bx: number,
+        by: number,
+        bw: number,
+        bh: number,
+        halign: "center" | "left" | "right" = "center",
+      ) {
+        if (!img || !img.naturalWidth) return;
+        const ar = img.naturalWidth / img.naturalHeight;
+        let w = bw;
+        let h = w / ar;
+        if (h > bh) {
+          h = bh;
+          w = h * ar;
+        }
+        const dx =
+          bx + (halign === "left" ? 0 : halign === "right" ? bw - w : (bw - w) / 2);
+        const dy = by + (bh - h) / 2;
+        ctx.drawImage(img, dx, dy, w, h);
+      }
+
+      function labelTexture() {
+        const c = document.createElement("canvas");
+        c.width = 1024;
+        c.height = 660;
+        const x = c.getContext("2d")!;
+        x.clearRect(0, 0, 1024, 660);
+        const rr = (px: number, py: number, w: number, h: number, r: number) => {
+          x.beginPath();
+          x.moveTo(px + r, py);
+          x.arcTo(px + w, py, px + w, py + h, r);
+          x.arcTo(px + w, py + h, px, py + h, r);
+          x.arcTo(px, py + h, px, py, r);
+          x.arcTo(px, py, px + w, py, r);
+          x.closePath();
+        };
+        // paper
+        x.shadowColor = "rgba(0,0,0,0.18)";
+        x.shadowBlur = 22;
+        x.shadowOffsetY = 8;
+        x.fillStyle = "#fbfaf7";
+        rr(70, 70, 884, 520, 22);
+        x.fill();
+        x.shadowColor = "transparent";
+        x.strokeStyle = "rgba(26,26,31,0.12)";
+        x.lineWidth = 2;
+        rr(70, 70, 884, 520, 22);
+        x.stroke();
+        // ITD GLOBAL wordmark (top-left) — drawn dark for legibility on white paper
+        x.fillStyle = "#15192b";
+        x.font = "800 40px Inter, sans-serif";
+        x.textBaseline = "alphabetic";
+        x.fillText("ITD GLOBAL", 108, 150);
+        x.fillStyle = "#6b6b75";
+        x.font = "600 18px Inter, sans-serif";
+        x.fillText("MULTI-CARRIER LOGISTICS", 110, 174);
+        // CONNEXX · PRIORITY pill (top-right)
+        x.fillStyle = "#1d3fb8";
+        rr(686, 94, 228, 52, 26);
+        x.fill();
+        x.fillStyle = "#fff";
+        x.font = "700 21px Inter, sans-serif";
+        x.textBaseline = "middle";
+        x.textAlign = "center";
+        x.fillText("CONNEXX · PRIORITY", 800, 121);
+        x.textAlign = "left";
+        x.textBaseline = "alphabetic";
+        // divider
+        x.strokeStyle = "rgba(26,26,31,0.10)";
+        x.lineWidth = 2;
+        x.beginPath();
+        x.moveTo(108, 196);
+        x.lineTo(916, 196);
+        x.stroke();
+        // address block
+        x.fillStyle = "#6b6b75";
+        x.font = "600 22px Inter, sans-serif";
+        x.fillText("SHIP TO", 108, 246);
+        x.fillStyle = "#1a1a1f";
+        x.font = "700 33px Inter, sans-serif";
+        x.fillText("Connexx Operations Ltd", 108, 288);
+        x.fillStyle = "#4a4a55";
+        x.font = "400 24px Inter, sans-serif";
+        x.fillText("Unit 4, Trafford Park · Manchester · M17 1AB", 108, 324);
+        // service stamp
+        x.save();
+        x.translate(826, 262);
+        x.rotate(-0.12);
+        x.strokeStyle = "#c8743d";
+        x.lineWidth = 5;
+        rr(-92, -36, 184, 72, 12);
+        x.stroke();
+        x.fillStyle = "#c8743d";
+        x.font = "800 32px Inter, sans-serif";
+        x.textAlign = "center";
+        x.textBaseline = "middle";
+        x.fillText("TRACKED 24", 0, 0);
+        x.restore();
+        x.textAlign = "left";
+        x.textBaseline = "alphabetic";
+        // ships-via label (carrier logos composited async below)
+        x.fillStyle = "#6b6b75";
+        x.font = "600 20px Inter, sans-serif";
+        x.fillText("SHIPS VIA ANY CARRIER", 108, 374);
+        // barcode
+        let bx = 108;
+        x.fillStyle = "#1a1a1f";
+        while (bx < 916) {
+          const w = 2 + Math.random() * 7;
+          x.fillRect(bx, 468, w, 78);
+          bx += w + (2 + Math.random() * 7);
+        }
+        x.fillStyle = "#6b6b75";
+        x.font = "500 22px monospace";
+        x.fillText("ITD 4821 0917 4420 · GB", 108, 578);
+
+        const t = new THREE.CanvasTexture(c);
+        t.colorSpace = THREE.SRGBColorSpace;
+        t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+        // composite the real carrier logos once they load, then refresh
+        (async () => {
+          const imgs = await Promise.all(CARRIERS.map((cr) => loadImg(cr.src)));
+          const startX = 108;
+          const endX = 916;
+          const cell = (endX - startX) / imgs.length;
+          imgs.forEach((im, i) =>
+            fitInto(x, im, startX + i * cell + 6, 388, cell - 12, 46, "center"),
+          );
+          t.needsUpdate = true;
+        })();
+        return t;
+      }
+
+      /* ── Build the parcel ── */
+      const W = 2.4;
+      const D = 1.9;
+      const H = 1.35;
+      const T = 0.07; // outer dims
+      const box = new THREE.Group();
+      scene.add(box);
+
+      function panel(w: number, h: number, d: number, mat: THREE.Material) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+        m.castShadow = true;
+        m.receiveShadow = true;
+        return m;
+      }
+      // bottom
+      const bottom = panel(W, T, D, kraftMat());
+      bottom.position.y = T / 2;
+      box.add(bottom);
+      // four walls
+      const front = panel(W, H, T, kraftMat());
+      front.position.set(0, H / 2, D / 2 - T / 2);
+      box.add(front);
+      const back = panel(W, H, T, kraftMat());
+      back.position.set(0, H / 2, -(D / 2 - T / 2));
+      box.add(back);
+      const leftW = panel(T, H, D, kraftMat());
+      leftW.position.set(-(W / 2 - T / 2), H / 2, 0);
+      box.add(leftW);
+      const rightW = panel(T, H, D, kraftMat());
+      rightW.position.set(W / 2 - T / 2, H / 2, 0);
+      box.add(rightW);
+      // interior liners (darker, so inside reads as cardboard)
+      function liner(w: number, h: number, d: number, px: number, py: number, pz: number) {
+        const m = panel(w, h, d, interiorMat);
+        m.position.set(px, py, pz);
+        box.add(m);
+      }
+      liner(W - 2 * T, H - T, 0.012, 0, H / 2, D / 2 - T - 0.01);
+      liner(W - 2 * T, H - T, 0.012, 0, H / 2, -(D / 2 - T - 0.01));
+      liner(0.012, H - T, D - 2 * T, -(W / 2 - T - 0.01), H / 2, 0);
+      liner(0.012, H - T, D - 2 * T, W / 2 - T - 0.01, H / 2, 0);
+      liner(W - 2 * T, 0.012, D - 2 * T, 0, T + 0.01, 0); // inner floor
+
+      // shipping label decal on front
+      const label = new THREE.Mesh(
+        new THREE.PlaneGeometry(W * 0.62, W * 0.62 * 0.66),
+        new THREE.MeshStandardMaterial({
+          map: labelTexture(),
+          transparent: true,
+          roughness: 0.85,
+        }),
+      );
+      label.position.set(0, H * 0.52, D / 2 + 0.012);
+      box.add(label);
+
+      /* ── Hinged top flaps — pivot groups at the wall tops ── */
+      type FlapData = { axis: "x" | "z"; sign: number; max: number; delay: number };
+      const flaps: THREE.Group[] = [];
+      function makeFlap(kind: "front" | "back" | "left" | "right") {
+        const g = new THREE.Group();
+        let mesh: THREE.Mesh;
+        if (kind === "front" || kind === "back") {
+          mesh = panel(W - 2 * T - 0.03, T, D / 2 - 0.04, kraftMat());
+          const sign = kind === "front" ? 1 : -1;
+          g.position.set(0, H, sign * (D / 2 - T / 2));
+          mesh.position.set(0, 0, -sign * (D / 4 - 0.02));
+          (g.userData as FlapData) = { axis: "x", sign, max: 2.05 * sign, delay: 0.06 };
+        } else {
+          mesh = panel(W / 2 - 0.04, T, D - 2 * T - 0.03, kraftMat());
+          const sign = kind === "left" ? -1 : 1; // left wall on -x
+          g.position.set(sign * (W / 2 - T / 2), H, 0);
+          mesh.position.set(-sign * (W / 4 - 0.02), 0, 0);
+          (g.userData as FlapData) = { axis: "z", sign, max: 1.62 * sign, delay: 0.0 };
+        }
+        g.add(mesh);
+        box.add(g);
+        flaps.push(g);
+      }
+      makeFlap("left");
+      makeFlap("right"); // inner flaps fold first
+      makeFlap("front");
+      makeFlap("back"); // outer flaps open last / widest
+
+      /* ── Cobalt "platform core" that rises out when open ── */
+      const core = new THREE.Mesh(
+        new THREE.BoxGeometry(W * 0.5, H * 0.46, D * 0.5),
+        new THREE.MeshStandardMaterial({
+          color: 0x1d3fb8,
+          emissive: 0x2a52d8,
+          emissiveIntensity: 0.0,
+          roughness: 0.32,
+          metalness: 0.2,
+          transparent: true,
+          opacity: 0,
+        }),
+      );
+      core.castShadow = true;
+      core.position.y = H * 0.5;
+      box.add(core);
+      const coreEdge = new THREE.LineSegments(
+        new THREE.EdgesGeometry(core.geometry),
+        new THREE.LineBasicMaterial({ color: 0x9fb6ff, transparent: true, opacity: 0 }),
+      );
+      core.add(coreEdge);
+
+      /* ── Scroll → progress (robust to layout offset) ── */
+      let target = 0;
+      let current = 0;
+      function readScroll() {
+        const rect = trackEl.getBoundingClientRect();
+        const range = rect.height - window.innerHeight;
+        target = range > 0 ? clamp(-rect.top / range) : 0;
+      }
+      const onScroll = () => readScroll();
+
+      function resize() {
+        const w = canvasEl.clientWidth || window.innerWidth;
+        const h = canvasEl.clientHeight || window.innerHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      const onResize = () => {
+        readScroll();
+        resize();
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize);
+      readScroll();
+      resize();
+
+      const heroCopy = heroCopyRef.current;
+      const revealCopy = revealRef.current;
+      const scrollCue = cueRef.current;
+
+      function applyState(p: number) {
+        const e = easeStd(p);
+
+        // scale + turntable
+        const s = lerp(0.6, 1.12, e);
+        box.scale.setScalar(s);
+        box.rotation.y = lerp(-0.62, 0.22, e);
+        box.rotation.x = lerp(0.04, -0.02, e);
+        box.position.y = lerp(-0.32, -0.12, e);
+
+        // flaps open in the back half of the scroll
+        const openRaw = smooth(0.42, 1.0, p);
+        flaps.forEach((g) => {
+          const d = g.userData as FlapData;
+          const local = clamp((openRaw - d.delay) / (1 - d.delay));
+          const a = easeStd(local) * d.max;
+          if (d.axis === "x") g.rotation.x = a;
+          else g.rotation.z = a;
+        });
+
+        // core glow rises & lights up with the opening
+        const op = smooth(0.55, 0.98, p);
+        const coreMat = core.material as THREE.MeshStandardMaterial;
+        coreMat.opacity = op;
+        coreMat.emissiveIntensity = op * 0.9;
+        (coreEdge.material as THREE.LineBasicMaterial).opacity = op;
+        core.position.y = lerp(H * 0.42, H * 0.9, op);
+        core.rotation.y = lerp(-0.3, 0.4, op);
+        coreLight.intensity = op * 3.2;
+
+        // ── DOM overlays ──
+        if (heroCopy) {
+          const heroOut = smooth(0.0, 0.32, p);
+          heroCopy.style.opacity = String(1 - heroOut);
+          heroCopy.style.transform = `translateY(${-heroOut * 60}px) scale(${1 - heroOut * 0.04})`;
+          heroCopy.style.filter = `blur(${heroOut * 4}px)`;
+          heroCopy.style.pointerEvents = heroOut > 0.6 ? "none" : "auto";
+        }
+        if (revealCopy) {
+          const revIn = smooth(0.6, 0.96, p);
+          revealCopy.style.opacity = String(revIn);
+          revealCopy.style.transform = `translateY(${(1 - revIn) * 48}px)`;
+          revealCopy.style.pointerEvents = revIn > 0.5 ? "auto" : "none";
+        }
+        if (scrollCue) {
+          scrollCue.style.opacity = String(1 - smooth(0.0, 0.08, p));
+        }
+      }
+
+      /* ── Render loop ── */
+      let raf = 0;
+      function renderAt(p: number) {
+        applyState(p);
+        renderer.render(scene, camera);
+      }
+      function tick() {
+        // critically-damped follow for a buttery 60fps feel
+        current = reduceMotion ? target : lerp(current, target, 0.1);
+        if (Math.abs(current - target) < 0.0002) current = target;
+        renderAt(current);
+        raf = requestAnimationFrame(tick);
+      }
+      if (reduceMotion) {
+        current = target = 1;
+        renderAt(1);
+      }
+      tick();
+
+      cleanup = () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onResize);
+        scene.traverse((o) => {
+          const m = o as THREE.Mesh;
+          if (m.geometry) m.geometry.dispose();
+          const mat = (m as THREE.Mesh).material;
+          if (Array.isArray(mat)) mat.forEach((x) => x.dispose());
+          else if (mat) (mat as THREE.Material).dispose();
+        });
+        renderer.dispose();
+      };
+    })();
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
+      disposed = true;
+      if (cleanup) cleanup();
     };
   }, [enhanced]);
 
   if (!enhanced) return <StaticHero />;
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: "280vh" }}>
-      <div
-        ref={stageRef}
-        className="hero-bg sticky top-[72px] h-[calc(100vh-72px)] overflow-hidden"
-        style={{ perspective: "1500px", "--scale": 0.82 } as React.CSSProperties}
-      >
-        <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-multiply" aria-hidden />
-
-        {/* Headline + CTAs — fade out as the unbox begins (var --copy) */}
+    <div ref={trackRef} className="relative" style={{ height: "320vh" }}>
+      <div className="hero-bg sticky top-0 h-screen overflow-hidden">
         <div
-          className="absolute inset-x-0 top-[8%] z-20 mx-auto max-w-3xl px-6 text-center"
-          style={{ opacity: "var(--copy,1)" } as React.CSSProperties}
+          className="bg-noise pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
+          aria-hidden
+        />
+
+        {/* WebGL parcel canvas */}
+        <canvas
+          ref={canvasRef}
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          aria-hidden
+        />
+
+        {/* Headline + CTAs — fade out as the unbox begins */}
+        <div
+          ref={heroCopyRef}
+          className="absolute inset-x-0 top-[10%] z-20 mx-auto max-w-3xl px-6 text-center will-change-[transform,opacity]"
         >
           <h1 className="text-display-xl text-text-primary">{HEADING}</h1>
           <p className="mx-auto mt-5 max-w-xl text-body-lg text-text-secondary">
@@ -150,32 +621,27 @@ export default function ParcelUnboxHero() {
               {SECONDARY.label}
             </Button>
           </div>
-          <p className="mt-8 text-eyebrow text-text-tertiary animate-pulse-dot">
-            Scroll to unbox ↓
-          </p>
         </div>
 
-        {/* 3D stage — the parcel sits centred, lower third */}
-        <div className="absolute inset-0 flex items-center justify-center pt-[18vh]">
-          <Parcel />
-        </div>
-
-        {/* Payload revealed from inside the box */}
+        {/* Scroll cue */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-1/2 z-30 mx-auto max-w-2xl -translate-y-1/2 px-6 text-center"
-          style={
-            {
-              opacity: "var(--reveal,0)",
-              transform:
-                "translateY(calc(-50% + (1 - var(--reveal,0)) * 40px)) scale(calc(0.92 + 0.08 * var(--reveal,0)))",
-            } as React.CSSProperties
-          }
+          ref={cueRef}
+          className="absolute inset-x-0 bottom-8 z-20 text-center text-eyebrow text-text-tertiary"
+        >
+          <span className="animate-pulse-dot">Scroll to unbox ↓</span>
+        </div>
+
+        {/* Payload revealed from inside the box — crossfades in where the headline vacates */}
+        <div
+          ref={revealRef}
+          className="pointer-events-none absolute inset-x-0 top-[12%] z-30 mx-auto max-w-2xl px-6 text-center opacity-0 will-change-[transform,opacity]"
         >
           <p className="text-eyebrow text-accent">One platform. Every carrier.</p>
           <h2 className="mt-2 text-display-lg text-text-primary">
-            Connexx picks the cheapest compliant carrier and prints the label in one click.
+            Connexx picks the cheapest compliant carrier and prints the label in one
+            click.
           </h2>
-          <div className="pointer-events-auto mt-6 inline-flex">
+          <div className="mt-6 inline-flex">
             <Button href="/connexx" variant="primary">
               See how Connexx works
             </Button>
@@ -186,128 +652,14 @@ export default function ParcelUnboxHero() {
   );
 }
 
-/* ─────────────────────────  3D parcel  ───────────────────────── */
-
-function Parcel() {
-  // Box dimensions (px, pre-scale). W across, H tall, D deep.
-  const W = 340;
-  const H = 230;
-  const D = 300;
-  // Centered-face technique: every face is centred on the box origin
-  // (translate(-50%,-50%)) then rotated + pushed out by the right half-extent —
-  // correct for a rectangular box (W≠D).
-  const centered = "absolute left-1/2 top-1/2";
-
-  return (
-    <div
-      className="relative will-change-transform"
-      style={{
-        width: W,
-        height: H,
-        transformStyle: "preserve-3d",
-        transform: "rotateX(16deg) rotateY(-24deg) scale(var(--scale, 0.82))",
-      }}
-    >
-      {/* Contact shadow on the floor */}
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-full h-12 w-[130%] rounded-[50%] bg-black/30 blur-2xl"
-        style={{ transform: "translate3d(-50%,30px,0) rotateX(80deg) scale(var(--scale,0.82))" }}
-      />
-
-      {/* ── Box body ── */}
-      {/* front (carries the label) */}
-      <div
-        className={`${centered} parcel-kraft`}
-        style={{ width: W, height: H, transform: `translate(-50%,-50%) translateZ(${D / 2}px)` }}
-      >
-        <ParcelLabel />
-      </div>
-      {/* back */}
-      <div
-        className={`${centered} parcel-kraft parcel-side`}
-        style={{ width: W, height: H, transform: `translate(-50%,-50%) rotateY(180deg) translateZ(${D / 2}px)` }}
-      />
-      {/* left */}
-      <div
-        className={`${centered} parcel-kraft parcel-side`}
-        style={{ width: D, height: H, transform: `translate(-50%,-50%) rotateY(-90deg) translateZ(${W / 2}px)` }}
-      />
-      {/* right */}
-      <div
-        className={`${centered} parcel-kraft parcel-side`}
-        style={{ width: D, height: H, transform: `translate(-50%,-50%) rotateY(90deg) translateZ(${W / 2}px)` }}
-      />
-      {/* bottom */}
-      <div
-        className={`${centered} parcel-kraft`}
-        style={{ width: W, height: D, transform: `translate(-50%,-50%) rotateX(-90deg) translateZ(${H / 2}px)` }}
-      />
-      {/* inner bottom (darker) so the open box reads as hollow */}
-      <div
-        className={`${centered} parcel-inner`}
-        style={{ width: W - 14, height: D - 14, transform: `translate(-50%,-50%) rotateX(-90deg) translateZ(${H / 2 - 10}px)` }}
-      />
-
-      {/* ── Top flaps — lie flat on the top plane (rotateX 90°) when closed,
-            then hinge open around their outer edge as --flap → 1 ── */}
-      {/* back flap (back half of the opening) */}
-      <div
-        className="parcel-flap parcel-kraft"
-        style={{
-          width: W,
-          height: D / 2,
-          transformOrigin: "50% 0%",
-          transform: `translate(-50%,-50%) translateY(${-H / 2}px) translateZ(${-D / 4}px) rotateX(90deg) rotateX(calc(var(--flap,0) * -112deg))`,
-        }}
-      />
-      {/* front flap (front half) */}
-      <div
-        className="parcel-flap parcel-kraft"
-        style={{
-          width: W,
-          height: D / 2,
-          transformOrigin: "50% 100%",
-          transform: `translate(-50%,-50%) translateY(${-H / 2}px) translateZ(${D / 4}px) rotateX(90deg) rotateX(calc(var(--flap,0) * 112deg))`,
-        }}
-      />
-
-      <style jsx>{`
-        .parcel-kraft {
-          background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.12)),
-            linear-gradient(135deg, #d9b380 0%, #c79a63 45%, #b9884e 100%);
-          border: 1px solid rgba(120, 85, 45, 0.45);
-          box-shadow: inset 0 0 40px rgba(120, 80, 40, 0.25);
-        }
-        .parcel-side {
-          filter: brightness(0.9);
-        }
-        .parcel-inner {
-          background: linear-gradient(180deg, #a87a44, #6f4f2c 100%);
-          box-shadow: inset 0 12px 30px rgba(0, 0, 0, 0.45);
-        }
-        .parcel-flap {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          will-change: transform;
-          backface-visibility: visible;
-        }
-      `}</style>
-    </div>
-  );
-}
-
-/* ─────────────────────  Realistic shipping label  ───────────────────── */
+/* ─────────────────────  Realistic shipping label (static fallback)  ───────────────────── */
 
 function ParcelLabel() {
   return (
     <div className="absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 rotate-[-1.2deg] rounded-md bg-[#fcfbf7] p-3 shadow-[0_6px_14px_rgba(0,0,0,0.35)] ring-1 ring-black/10">
-      {/* peeled corner */}
       <div
         aria-hidden
-        className="absolute -right-1 -top-1 h-5 w-5 rotate-45 bg-[#efeae0] shadow-[ -2px_2px_3px_rgba(0,0,0,0.2)]"
+        className="absolute -right-1 -top-1 h-5 w-5 rotate-45 bg-[#efeae0] shadow-[-2px_2px_3px_rgba(0,0,0,0.2)]"
       />
       <div className="flex items-center justify-between border-b border-dashed border-black/25 pb-1.5">
         <span className="text-[9px] font-extrabold tracking-[0.18em] text-[#15192b]">
@@ -327,7 +679,6 @@ function ParcelLabel() {
             Anywhere, UK & Worldwide
           </p>
         </div>
-        {/* CSS barcode */}
         <div
           aria-hidden
           className="h-7 w-[44%] self-end"
@@ -338,7 +689,6 @@ function ParcelLabel() {
         />
       </div>
 
-      {/* carrier logo strip */}
       <div className="mt-2 grid grid-cols-7 items-center gap-1 rounded-sm bg-white/70 px-1 py-1 ring-1 ring-black/5">
         {CARRIERS.map((c) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -361,7 +711,10 @@ function StaticHero() {
   return (
     <section className="relative hero-bg flex min-h-[calc(100vh-72px)] items-center overflow-hidden">
       <div className="hero-bg-blob" aria-hidden />
-      <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-multiply" aria-hidden />
+      <div
+        className="bg-noise pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-multiply"
+        aria-hidden
+      />
       <div className="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div>
@@ -382,10 +735,12 @@ function StaticHero() {
               </Button>
             </div>
           </div>
-          {/* Static parcel + carrier label as the supporting visual */}
           <div className="hero-entrance-aside hidden justify-center lg:flex">
             <div className="relative w-[300px] rounded-2xl border border-[rgba(120,85,45,0.45)] bg-[linear-gradient(135deg,#d9b380,#b9884e)] p-6 shadow-xl">
-              <div className="absolute inset-x-0 top-0 mx-auto h-3 w-[70%] rounded-b bg-[#c9a878] shadow" aria-hidden />
+              <div
+                className="absolute inset-x-0 top-0 mx-auto h-3 w-[70%] rounded-b bg-[#c9a878] shadow"
+                aria-hidden
+              />
               <ParcelLabel />
             </div>
           </div>
