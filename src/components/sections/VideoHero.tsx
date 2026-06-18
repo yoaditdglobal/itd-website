@@ -15,8 +15,8 @@ import MagneticButton from "@/components/ui/MagneticButton";
  * those exist, the video sources 404 gracefully and the poster below shows.
  */
 
-// Temporary poster — swap to "/hero/hero-poster.jpg" once the real assets land.
-const POSTER = "/shipping/freight-hero.webp";
+// First frame of the hero video — instant paint + reduced-motion fallback.
+const POSTER = "/hero/hero-poster.jpg";
 
 const HEADING = (
   <>
@@ -54,7 +54,6 @@ export default function VideoHero() {
           poster={POSTER}
           aria-hidden
         >
-          <source src="/hero/hero.webm" type="video/webm" />
           <source src="/hero/hero.mp4" type="video/mp4" />
         </video>
       ) : (
