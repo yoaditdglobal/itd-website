@@ -1066,11 +1066,9 @@ export default function ParcelUnboxHero() {
       const LAST = LANDINGS.length - 1;
       const CHAPTER_MS = 4200; // pace of a typical chapter — moderate, coherent (beats read)
       const TYP_DIST = 0.275; // typical inter-scene progress gap
-      const COOLDOWN_MS = 150; // brief guard after a chapter to absorb the inertia tail
       let sceneIndex = 0;
       let animating = false;
       let tween: { from: number; to: number; start: number; dur: number } | null = null;
-      let cooldownUntil = 0;
       let locked = false;
       let exitGuard = false; // suppress re-lock right after exiting forward
       let lastWheel = 0; // distinguishes a fresh push from the inertia stream
@@ -1103,7 +1101,7 @@ export default function ParcelUnboxHero() {
         return true;
       }
       function step(dir: number) {
-        if (animating || Date.now() < cooldownUntil) return;
+        if (animating) return;
         if (dir > 0 && sceneIndex === LAST) {
           unlockScroll();
           exitGuard = true;
@@ -1115,8 +1113,8 @@ export default function ParcelUnboxHero() {
       // Fire now if idle, otherwise remember the intent for when the chapter ends.
       function request(dir: number) {
         if (!dir) return;
-        if (animating || Date.now() < cooldownUntil) {
-          queuedDir = dir;
+        if (animating) {
+          queuedDir = dir; // capture intent during a chapter; fired when it ends
           return;
         }
         step(dir);
@@ -1389,8 +1387,6 @@ export default function ParcelUnboxHero() {
               const d = queuedDir;
               queuedDir = 0;
               step(d);
-            } else {
-              cooldownUntil = Date.now() + COOLDOWN_MS; // absorb the inertia tail
             }
           }
         }
