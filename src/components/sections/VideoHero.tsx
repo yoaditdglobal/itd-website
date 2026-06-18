@@ -82,11 +82,16 @@ export default function VideoHero() {
             <p className="mt-6 max-w-xl text-body-lg text-white/85">{SUB}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <MagneticButton>
-                <Button href={PRIMARY.href} variant="primary">
+                <Button href={PRIMARY.href} variant="primary" surface="dark">
                   {PRIMARY.label}
                 </Button>
               </MagneticButton>
-              <Button href={SECONDARY.href} variant="secondary">
+              <Button
+                href={SECONDARY.href}
+                variant="secondary"
+                surface="dark"
+                className="border-white/60 bg-white/10 backdrop-blur-sm hover:bg-white/20"
+              >
                 {SECONDARY.label}
               </Button>
             </div>
