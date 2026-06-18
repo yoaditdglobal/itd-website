@@ -69,7 +69,11 @@ const ACTS = [
   },
 ];
 
-export default function ParcelUnboxHero() {
+export default function ParcelUnboxHero({
+  bleedNav = true,
+}: {
+  bleedNav?: boolean;
+} = {}) {
   const [enhanced, setEnhanced] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -1451,7 +1455,11 @@ export default function ParcelUnboxHero() {
     // y=0 (.bleed-nav, or SolutionHero's negative-top image layer); this matches.
     <div
       ref={trackRef}
-      className="hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]"
+      className={
+        bleedNav
+          ? "hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]"
+          : "hero-bg relative h-screen overflow-hidden"
+      }
     >
       <div className="absolute inset-0">
         {/* Sky / sea backdrops (fade in for air / sea acts) */}

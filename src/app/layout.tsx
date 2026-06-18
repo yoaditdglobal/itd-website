@@ -1,10 +1,8 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import SiteChrome from "@/components/layout/SiteChrome";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import ScrollToTop from "@/components/util/ScrollToTop";
-import ChatWidget from "@/components/chat/ChatWidget";
 import { rootMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -66,10 +64,7 @@ export default function RootLayout({
         <ScrollToTop />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <QueryProvider>
-          <Navbar />
-          <main className="flex-1 pt-[72px]">{children}</main>
-          <Footer />
-          <ChatWidget />
+          <SiteChrome>{children}</SiteChrome>
         </QueryProvider>
       </body>
     </html>

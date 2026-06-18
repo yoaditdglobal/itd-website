@@ -1,4 +1,4 @@
-import ParcelUnboxHero from "@/components/sections/ParcelUnboxHero";
+import VideoHero from "@/components/sections/VideoHero";
 import SocialProof from "@/components/sections/SocialProof";
 import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
@@ -20,9 +20,8 @@ export const metadata = buildMetadata({
 export default function Home() {
   return (
     <>
-      <ParcelUnboxHero />
-      {/* Hands off from the hero's final (Freight) act: this section surges
-          forward out of depth, then the rest of the page scrolls flat. */}
+      <VideoHero />
+      {/* Reveal the first section as it scrolls up into view. */}
       <ScrollForward>
         <SocialProof />
       </ScrollForward>
