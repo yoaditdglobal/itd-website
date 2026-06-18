@@ -283,7 +283,7 @@ export default function SolutionsRouting({
         <div className="sticky top-[72px] flex h-[calc(100vh-72px)] items-start overflow-hidden">
           <div
             ref={stageRef}
-            className="mx-auto grid w-full max-w-7xl origin-top grid-cols-1 items-start gap-10 px-4 pt-2 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:px-8"
+            className="mx-auto grid w-full max-w-7xl origin-top grid-cols-1 items-start gap-10 px-4 pt-12 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:px-8"
           >
             {/* Left — audience list. The active audience expands inline with its
                 "Used by" case-study logos + explore link directly beneath its
@@ -325,7 +325,7 @@ export default function SolutionsRouting({
             </div>
 
             {/* Right — zooming media; top aligned with the nav, bottom caption */}
-            <div className="relative h-[calc(100vh-72px-2rem)] overflow-hidden rounded-3xl border border-border bg-bg-secondary shadow-lg">
+            <div className="relative h-[calc(100vh-72px-5rem)] overflow-hidden rounded-3xl border border-border bg-bg-secondary shadow-lg">
               {ICPS.map((icp, i) => (
                 <div
                   key={icp.name}
