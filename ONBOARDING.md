@@ -89,6 +89,8 @@ You don't read code. On the Pull Request, click the **Netlify Deploy Preview** l
 - Pages: `src/app/...` (e.g. `src/app/solutions/enterprise/page.tsx`).
 - Reusable sections/components: `src/components/sections`, `src/components/ui`.
 - Images: `public/...` (we use `.webp`, and version filenames like `import-hero-v2.webp` to bust caches).
+- **Homepage hero is a background video** at `public/hero/hero.mp4` (with a still `hero-poster.jpg`). To change it, swap those files — but keep the video **small** (under ~4MB, no audio); just ask Claude to compress and wire in a new clip.
+- **`/rc` is the standalone cinematic landing page** (the animated parcel → van → plane → ship journey) for marketing/campaigns — share `…/rc` as its own link. It has no nav/footer on purpose.
 - Project conventions & gotchas are documented for Claude in `AGENTS.md` and the website-builder skill — you don't need to read these; Claude follows them.
 
 ---
