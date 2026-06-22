@@ -274,7 +274,7 @@ export default function Navbar() {
         className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 backdrop-blur-md transition-shadow duration-300 sm:px-5 ${
           scrolled
             ? "bg-bg-dark/95 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.55)]"
-            : "bg-bg-dark/90 shadow-[0_12px_30px_-16px_rgba(0,0,0,0.45)]"
+            : "bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10 shadow-[0_12px_30px_-16px_rgba(0,0,0,0.45)]"
         }`}
       >
         {/* Logo */}
