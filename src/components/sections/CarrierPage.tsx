@@ -33,6 +33,9 @@ export interface CarrierPageProps {
   services: string[];
   features: CarrierFeature[];
   stats: { label: string; value: string }[];
+  /** Optional "About {name}" narrative prose, rendered between the hero and the
+   *  Features grid. Each string is a paragraph. */
+  about?: string[];
   /** Optional brand-film section rendered after Features. No autoplay — the
    *  film carries audio; controls + preload="metadata" keep page weight ~0
    *  until play. Display width is capped (max-w-xl) so low-res sources stay
@@ -51,6 +54,7 @@ export default function CarrierPage({
   services,
   features,
   stats,
+  about,
   video,
 }: CarrierPageProps) {
   return (
@@ -91,6 +95,24 @@ export default function CarrierPage({
           </ScrollReveal>
         </div>
       </section>
+
+      {/* About {name} — narrative prose (optional) */}
+      {about && about.length > 0 && (
+        <section className="bg-bg-secondary py-16 md:py-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <h2 className="text-display-lg text-text-primary mb-6">About {name}</h2>
+              <div className="space-y-4">
+                {about.map((para, i) => (
+                  <p key={i} className="text-body-md text-text-secondary leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
 
       {/* Features — the hero "Explore" CTA anchors here */}
       <section id="features" className="bg-white py-16 md:py-24">

@@ -1,10 +1,11 @@
 import CarrierPage from "@/components/sections/CarrierPage";
-import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
+import { RATES_FEATURE } from "@/lib/carrier-pages";
+import { Zap, Clock, Globe } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Parcelforce Integration — ITD Global",
-  description: "Connect Parcelforce to ITD for reliable UK and international parcel delivery, real-time tracking, and automated label generation.",
+  title: "Parcelforce integration — ITD Global",
+  description: "Guaranteed timed delivery across the UK, with international services through the Royal Mail Group network. Access Parcelforce through ITD on rates managed at network scale.",
 };
 
 export default function ParcelforcePage() {
@@ -13,29 +14,30 @@ export default function ParcelforcePage() {
       name="Parcelforce"
       logo="/logos/carriers/parcel-force.svg"
       logoBg="#ed2929"
-      tagline="One of the UK's most trusted parcel carriers, connected to ITD for fast, reliable domestic and international delivery."
-      description="Parcelforce Worldwide is the express parcel division of Royal Mail Group, delivering millions of parcels across the UK and to over 240 countries and territories. Through ITD, you get seamless access to Parcelforce's full service range, with automated label generation, real-time tracking, and collection management built into your existing workflow."
-      region="Domestic"
+      tagline="Guaranteed timed delivery across the UK, with international services through the Royal Mail Group network."
+      description="Parcelforce Worldwide is the express parcel division of Royal Mail Group, specialising in guaranteed timed domestic delivery and a broad range of international services. Its network handles larger and heavier parcels that standard tracked services may not accommodate, with time-critical options ranging from before 9am through to next-day and two-day guarantees. Through ITD, you access Parcelforce's full-service range on rates managed at network scale."
+      region="International"
+      about={[
+        "Parcelforce Worldwide operates as the express parcel division of Royal Mail Group, with a dedicated network of depots and drivers separate from Royal Mail's standard postal operation. It focuses on larger parcels, heavier consignments, and time-critical shipments — serving businesses that need guaranteed delivery windows rather than estimated ones. Internationally, it uses Royal Mail Group's global postal partnerships to reach over 240 countries and territories.",
+        "Parcelforce is the carrier of choice for businesses shipping heavier items — typically above 2kg — where a guaranteed time window is required. Its compensation and insurance cover also makes it well-suited to higher-value shipments. For businesses managing a mixed parcel profile, Parcelforce sits alongside lighter-weight tracked services to cover the part of the consignment mix that needs certainty over speed and protection.",
+      ]}
       services={[
-        "Parcelforce express24",
-        "Parcelforce express48",
-        "Parcelforce expressAM",
-        "Parcelforce express9",
-        "Parcelforce globalvalue",
-        "Parcelforce globalexpress",
+        "Express24",
+        "Express48",
+        "Express9 / Express10",
+        "GlobalValue / GlobalExpress",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Generate Parcelforce labels with correct service codes and barcodes auto-applied." },
-        { icon: Eye, title: "Real-time tracking", desc: "Live parcel tracking visible in your ITD dashboard with customer notifications." },
-        { icon: Globe, title: "International reach", desc: "Access Parcelforce's global network covering 240+ countries and territories." },
-        { icon: Clock, title: "Collection booking", desc: "Schedule Parcelforce collections and manage pickup windows directly in ITD." },
-        { icon: BarChart3, title: "Service optimisation", desc: "Auto-select the best Parcelforce service based on your cost, weight, and speed rules." },
-        { icon: ShieldCheck, title: "Proof of delivery", desc: "Access digital signatures and proof of delivery records from the ITD dashboard." },
+        { icon: Clock, title: "Express24", desc: "Guaranteed next working day delivery by 5.30pm. Tracked throughout with signature on delivery available." },
+        { icon: Clock, title: "Express48", desc: "Guaranteed 2-day delivery by 5.30pm. Full tracking included. Suited to less urgent shipments where cost is a factor and a delivery guarantee is still required." },
+        { icon: Zap, title: "Express9 / Express10", desc: "Timed guaranteed delivery by 9am or 10am the next working day. For time-critical business shipments where the delivery window is a hard requirement." },
+        { icon: Globe, title: "GlobalValue / GlobalExpress", desc: "International services covering 240+ countries. GlobalValue provides cost-effective international delivery from 4 working days; GlobalExpress provides faster time-definite international delivery via the Royal Mail Group network." },
+        RATES_FEATURE,
       ]}
       stats={[
-        { label: "Countries served", value: "240+" },
-        { label: "UK depots", value: "54+" },
-        { label: "Parcels per year", value: "100M+" },
+        { label: "Coverage", value: "240+ countries" },
+        { label: "Best for", value: "Heavier & timed" },
+        { label: "Network", value: "Royal Mail Group" },
         { label: "ITD integration", value: "Live" },
       ]}
     />

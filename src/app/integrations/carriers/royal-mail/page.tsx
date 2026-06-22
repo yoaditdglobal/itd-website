@@ -1,10 +1,11 @@
 import CarrierPage from "@/components/sections/CarrierPage";
-import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
+import { RATES_FEATURE } from "@/lib/carrier-pages";
+import { Zap, Clock, Truck, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Royal Mail + ITD Global",
-  description: "Connect Royal Mail to Connexx for automated shipping, tracking, and international delivery across the UK and worldwide.",
+  title: "Royal Mail integration — ITD Global",
+  description: "The UK's national postal network, reaching every address in the country. Access Royal Mail's full business service range through ITD on rates managed at network scale.",
 };
 
 export default function RoyalMailPage() {
@@ -12,31 +13,30 @@ export default function RoyalMailPage() {
     <CarrierPage
       name="Royal Mail"
       logo="/logos/carriers/royal-mail-icon.png"
-      tagline="The UK's trusted postal service, fully connected to your Connexx dashboard."
-      description="Royal Mail delivers to every UK address, six days a week, with international reach to 230+ countries. Through Connexx, you can automate label generation, compare Royal Mail services against other carriers, and track every item in real time."
+      tagline="The UK's national postal network, reaching every address in the country."
+      description="Royal Mail delivers to every residential and business address in the UK — something no other carrier matches. For eCommerce businesses, it remains the go-to for lighter parcels, large-letter formats, and services requiring a signature or guaranteed delivery time. Through ITD, you access Royal Mail's full business service range on rates managed at network scale, with the carrier relationship handled on your behalf."
       region="Domestic"
+      about={[
+        "Royal Mail is the UK's designated universal service provider, operating one of the world's most comprehensive postal networks. It serves every UK address six days a week, covering both parcels and letters. For eCommerce businesses, Royal Mail's tracked parcel services — alongside its guaranteed and signed-for options — make it a core part of most carrier mixes, particularly for lighter shipments and subscription or clothing businesses.",
+        "Royal Mail rates for business are volume dependent. Access to Tracked 24 and Tracked 48 requires a minimum annual volume threshold, and the rates on a direct account reflect the volume that account alone carries. For businesses whose Royal Mail volume is growing, or who want to consolidate carrier management under one relationship, accessing Royal Mail through ITD removes those barriers.",
+      ]}
       services={[
-        "Royal Mail Tracked 24",
-        "Royal Mail Tracked 48",
+        "Tracked 48",
+        "Tracked 24",
         "Special Delivery Guaranteed",
-        "1st & 2nd Class Letters",
-        "International Standard",
-        "International Tracked & Signed",
-        "Parcelforce Worldwide",
-        "Returns Service",
+        "Signed For (1st and 2nd Class)",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Batch-generate Royal Mail labels from Connexx with correct service tier auto-selected." },
-        { icon: Eye, title: "Unified tracking", desc: "Royal Mail and Parcelforce tracking data in one view alongside all your other carriers." },
-        { icon: Globe, title: "International shipping", desc: "Automatic customs documentation for Royal Mail international services." },
-        { icon: BarChart3, title: "Service comparison", desc: "Compare Tracked 24 vs Tracked 48 vs Special Delivery costs for every shipment." },
-        { icon: ShieldCheck, title: "Compensation tracking", desc: "Monitor compensation limits and automate claims for lost or damaged items." },
-        { icon: Clock, title: "Collection scheduling", desc: "Book Royal Mail collections directly through Connexx at your preferred time slots." },
+        { icon: Truck, title: "Tracked 48", desc: "2-3 day tracked delivery with end-to-end tracking as standard. The most widely used Royal Mail service for standard eCommerce parcels." },
+        { icon: Clock, title: "Tracked 24", desc: "Next working day tracked delivery. Full tracking included and suitable for time-sensitive orders where Special Delivery is not required." },
+        { icon: ShieldCheck, title: "Special Delivery Guaranteed", desc: "Guaranteed delivery by 1pm the next working day with signature on delivery. Includes compensation cover — the recommended service for high-value items." },
+        { icon: Zap, title: "Signed For (1st and 2nd Class)", desc: "1st Class with 1–2-day delivery or 2nd Class with 2-3 day delivery, both with signature confirmation. Suitable for lower-weight items where proof of delivery is required." },
+        RATES_FEATURE,
       ]}
       stats={[
-        { label: "UK delivery coverage", value: "100%" },
-        { label: "Countries reached", value: "230+" },
-        { label: "Daily deliveries", value: "24M+" },
+        { label: "Coverage", value: "Every UK address" },
+        { label: "Frequency", value: "6 days a week" },
+        { label: "Best for", value: "Lighter parcels" },
         { label: "ITD integration", value: "Live" },
       ]}
     />
