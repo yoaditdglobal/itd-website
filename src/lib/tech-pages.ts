@@ -283,6 +283,160 @@ export const TECH_PAGE_OVERRIDES: Record<
       { icon: Globe, title: "One carrier network across all Shopify channels", desc: "Whether you sell through your online store, Shopify POS, or social channels, all orders dispatch through ITD's network on consistent, managed rates." },
     ],
   },
+
+  // ── Marketplace integrations ──────────────────────────────────────────────
+  amazon: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Amazon gives sellers access to one of the world's largest buyer bases. For sellers fulfilling their own orders, the carrier side of that operation is down to them — which service, which rate, which label. Those accounts are typically opened early and rarely revisited as volumes grow. With ITD in place, each FBM order goes through our carrier network on rates that reflect what the business ships, with tracking returned to the order record.",
+      "Amazon is the world's largest online marketplace, giving third-party sellers access to hundreds of millions of active buyers globally. Sellers can fulfil orders through Amazon's own fulfilment network (FBA) or manage despatch themselves (FBM) — and many operate both in parallel depending on the product, season, or margin requirements of each SKU.",
+      "For sellers fulfilling their own Amazon orders, carrier cost is often the biggest variable in unit economics. The carrier accounts most FBM sellers hold were set up when the business was at a different scale — or chosen because they were available, not because they were the best fit for current volumes. As output grows, the gap between what sellers pay and what that volume justifies tends to widen, with no automatic prompt to revisit it.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from Amazon Seller Central", desc: "FBM orders from your Amazon store are picked up by ITD in real time, ready for despatch with no manual step in between." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier, service, and weight for each order. ITD manages the carrier side; your Amazon seller operation continues as normal." },
+      { icon: Eye, title: "Tracking returned to Amazon", desc: "Carrier events feed back to the Amazon order record, keeping your account metrics current and buyers informed without a separate carrier login." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Network carrier access for FBM sellers", desc: "FBM sellers typically hold a small number of individually negotiated carrier accounts. ITD replaces that with managed rate access across a full UK carrier network — more services, better rates, one managed relationship." },
+    ],
+  },
+  etsy: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Etsy sellers manage their own despatch — choosing the carrier, printing the label, tracking the shipment. For shops that have grown, the carrier setup that worked for early orders often becomes the part that takes the most time and delivers the least value. ITD connects at the carrier level, so each Etsy order goes through our network on rates that reflect the volume the shop is actually shipping, with tracking returned to the order record.",
+      "Etsy is the global marketplace for handmade, vintage, and creative goods, used by millions of independent sellers to reach buyers who are looking for something distinctive. Sellers manage their own listings, fulfilment, and shipping — and are responsible for the carrier arrangements behind each order they despatch.",
+      "Etsy sellers who have scaled their shop reach a point where the carrier side stops being simple. Growing order volumes across different product sizes, weights, and destinations mean a single tracked service or a Royal Mail price list no longer covers the job cleanly. Managing rates, services, and returns as the range of destinations and order types widens is where the complexity builds — and where ITD simplifies things considerably.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from Etsy", desc: "Each Etsy order is picked up by ITD in real time, ready for despatch with no manual export required." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the right carrier and service for each order type, weight, and destination. ITD manages the carrier side; your Etsy shop runs as it does today." },
+      { icon: Eye, title: "Tracking back to Etsy", desc: "Carrier events return to the Etsy order record, keeping buyers informed and protecting your shop's review score." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Carrier access that grows with your shop", desc: "As Etsy order volume increases, individually managed carrier accounts become harder to keep competitive. ITD provides managed rate access across a full UK carrier network — so the pricing and services available to your shop reflect what you are shipping." },
+    ],
+  },
+  temu: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Sellers on Temu manage their own despatch for the orders they fulfil. As the platform grows and order volumes follow, the carrier setup behind those despatches needs to keep pace. ITD connects at the carrier level, giving Temu sellers managed rate access across a full UK carrier network — so each order goes out on the right service at rates that reflect real shipping volume.",
+      "Temu is a fast-growing global marketplace connecting sellers with buyers across a wide range of product categories. It has grown rapidly in the UK market, giving sellers access to a large and expanding buyer base. Sellers who fulfil their own orders are responsible for the carrier arrangements behind each despatch.",
+      "Sellers on Temu typically come to the platform with carrier accounts already in place — whatever was set up before they began selling there. As volume on the platform builds, those accounts rarely keep pace with what the business is now shipping. The time spent managing rates and bookings across individual carriers adds up, and the pricing those accounts carry often no longer reflects the volume going through them. ITD provides a single managed carrier relationship with rate access across a full network, so the carrier side scales without the overhead growing in parallel.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from Temu", desc: "Each Temu order you fulfil is picked up by ITD in real time, ready for despatch with no manual step required." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier, service, and weight for each order. ITD manages the carrier side; your Temu operation continues as normal." },
+      { icon: Eye, title: "Tracking back to Temu", desc: "Carrier events return to the order record, keeping your buyers informed and your seller standing on the platform current." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Network carrier access for Temu sellers", desc: "Temu sellers often hold a small number of individually managed carrier accounts. ITD provides managed rate access across a full UK carrier network — more services available, better pricing, one relationship to manage." },
+    ],
+  },
+  "tiktok-shop": {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "TikTok Shop sellers fulfil their own orders and arrange their own carrier access. As content drives volume, the carrier setup behind those despatches needs to keep pace — individual accounts and manually managed rates that worked at lower volumes quickly become the limiting factor at scale. ITD connects at the carrier level, so TikTok Shop orders go out through our carrier network on rates that reflect current volume, with tracking returned to each order.",
+      "TikTok Shop is the eCommerce arm of TikTok, enabling creators, brands, and merchants to sell products directly through the platform. Sellers can list products, manage orders, and run promotions from within TikTok — and are responsible for the fulfilment and carrier arrangements behind each order they despatch.",
+      "TikTok Shop sellers often see order volumes move fast. A video performs, a product picks up reach, and the despatch queue looks very different in a short space of time. The carrier setup behind that is typically whatever was in place before the volume arrived — a single tracked service, individually booked collections, rates that were never structured for scale. ITD is built for exactly that situation: managed rate access and carrier network coverage that absorbs volume without the operational overhead growing alongside it.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from TikTok Shop", desc: "Each TikTok Shop order is picked up by ITD in real time, ready for despatch with no manual step in between." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier, service, and weight for each order. ITD manages the carrier side; your TikTok Shop operation continues as normal." },
+      { icon: Eye, title: "Tracking returned to TikTok Shop", desc: "Carrier events feed back to the TikTok Shop order record, keeping buyers informed and your seller metrics current." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Carrier network built for volume spikes", desc: "TikTok Shop volumes can move quickly and without much notice. ITD's carrier network and managed rate access are in place ahead of the spike — so when orders come in at scale, the despatch side keeps up without additional carrier setup." },
+    ],
+  },
+  ebay: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "eBay sellers are responsible for their own shipping — carrier accounts, label generation, rate management. For sellers who have grown their volume, the carrier accounts set up early in the business rarely reflect what current volumes are worth. With ITD, each eBay order despatches through our carrier network on rates that reflect buying power at scale, with tracking returned to the eBay order record.",
+      "eBay is one of the UK's largest online selling platforms, used by private sellers, small businesses, and established retailers across a wide range of product categories. Sellers list and manage their inventory directly, fulfil their own orders, and are responsible for the carrier arrangements behind each despatch.",
+      "eBay sellers tend to have a practical carrier setup — a Royal Mail Click & Drop account for smaller parcels, perhaps a DPD or Evri connection for heavier tracked services. What changes less often is whether those accounts still reflect current volume, or whether the mix of carriers and services is the right one for the product types and destinations the business ships to today. That review is what ITD makes possible.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from eBay", desc: "Each eBay order is picked up by ITD in real time, ready for despatch with no manual step required." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the right carrier, service, and weight for each order. ITD manages the carrier side; your eBay store continues as it is." },
+      { icon: Eye, title: "Tracking back to eBay", desc: "Carrier events return to the eBay order record, keeping your seller metrics and buyer experience on track without logging in to separate carrier portals." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Carrier access across the full network", desc: "eBay sellers typically hold a small number of carrier accounts, each negotiated individually. ITD replaces that with managed rate access across a full UK carrier network — more carrier options, better pricing, one managed relationship." },
+    ],
+  },
+
+  // ── eCommerce & Logistics integrations ────────────────────────────────────
+  aimco: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Aimco gives retailers precise stock and order control across their business. The carrier side of each despatch — which service, which rate, which label — depends on the accounts connected to the setup. For businesses that have grown, those accounts often reflect negotiations from an earlier stage of the operation. ITD connects at the carrier level and manages rate access across a full network, so the Aimco workflow continues as it is, with pricing that reflects current buying power.",
+      "Aimco is a retail management system used by independent retailers and multi-site businesses in the UK. It handles stock control, orders, purchasing, and EPOS — giving retail operations a single system to manage product and sales data across the business.",
+      "Independent retailers using Aimco tend to have a practical carrier setup in place — a Royal Mail account, perhaps a DPD or Evri connection for tracked parcels. What is rarely revisited is whether those accounts reflect the volume going through them, or whether better services and rates are available across a wider network. That is the review ITD makes possible, without changing how Aimco operates.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Orders from Aimco to carrier", desc: "Orders processed in Aimco pass to ITD's carrier network at despatch. The Aimco workflow continues as normal; ITD handles the carrier side." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier, service level, and weight for each order. ITD manages the carrier network and rate access behind each shipment." },
+      { icon: Eye, title: "Tracking back to Aimco", desc: "Carrier events return to the Aimco order record, so your team sees live status in the system they work from." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Carrier access beyond direct accounts", desc: "Rather than relying on rates negotiated directly with each carrier, ITD's network sits behind each Aimco despatch — giving your operation access to services and pricing that reflect group buying power." },
+    ],
+  },
+  base: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Base gives eCommerce businesses the tools to manage orders, products, and customers in one place. The carrier side of that operation — which service, which rate, which label — is something each business manages separately. With ITD connected, orders from Base go out through our carrier network, the right carrier selected and labelled, with tracking returned to the order record.",
+      "Base is an eCommerce platform used by online retailers to manage their store, orders, and customer data. It gives businesses a central place to run the commercial side of their operation, with connections to the tools and services they use across the business.",
+      "For Base users, the carrier setup tends to be built up over time — individual accounts opened as the business grew, rates that reflected earlier volumes. What is rarely revisited is whether those accounts still make sense for the volume going through them today, or whether better services and pricing are available across a wider carrier network. That is the gap ITD closes.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Order pickup from Base", desc: "Each order processed in Base is picked up by ITD in real time, ready for despatch with no manual step in between." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier, service, and weight for each order. ITD manages the carrier relationship; your Base operation continues as normal." },
+      { icon: Eye, title: "Tracking returned to Base", desc: "Carrier events feed back to the Base order record, so your team and customers stay informed without logging in to separate carrier portals." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Network carrier access alongside your Base setup", desc: "Base handles your orders and products; ITD provides managed rate access across a full UK carrier network — so each shipment goes on the right service at rates that reflect real volume." },
+    ],
+  },
+  channeladvisor: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "ChannelAdvisor brings orders from Amazon, eBay, Google Shopping, and other channels into one place. The rates behind those shipments depend on what carrier accounts you have connected — and across multi-channel volume, a patchwork of individually negotiated accounts often costs more than it should. ITD connects at the carrier level, providing rate access across a full network so multi-channel orders ship on pricing that reflects combined volume.",
+      "ChannelAdvisor, now part of CommerceHub, is a multi-channel commerce platform used by retailers to manage product listings, inventory, and orders across Amazon, eBay, Google Shopping, and other major selling channels. It handles order routing across those channels and gives retailers a single view of their multi-channel operation.",
+      "Multi-channel retailers on ChannelAdvisor are typically running significant volume across platforms. The carrier setup behind that tends to be a mixture of accounts built up over time — often tied to whichever channel was dominant when the business first established them. The result is that orders from different channels may ship at different rates for the same service, with no consolidated view of what the carrier side actually costs across the operation.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Multi-channel orders to carrier", desc: "Orders managed in ChannelAdvisor — across Amazon, eBay, Google, and other channels — pass to ITD's carrier network at despatch." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are generated with the right carrier and service applied for each order. ITD manages the carrier network; ChannelAdvisor continues routing orders as it does now." },
+      { icon: Eye, title: "Tracking returned to each channel", desc: "Carrier events feed back to the ChannelAdvisor record, with tracking visible to customers on each selling channel." },
+      RATES_FEATURE,
+      { icon: Globe, title: "One carrier network across all your channels", desc: "Amazon, eBay, Google Shopping, and the rest all despatch through ITD. Consistent rates and tracking across every channel, regardless of where the order originated." },
+    ],
+  },
+  cloudcommercepro: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "CloudCommercePro gives UK multi-channel sellers one place to manage orders, inventory, and listings. What determines the rates on each shipment is the carrier accounts connected to that operation — and for multi-channel businesses, those accounts rarely reflect the full volume going through. ITD connects at the carrier level, so the CloudCommercePro operation continues as it is, with carrier rates that reflect what combined volume is actually worth.",
+      "CloudCommercePro is a UK-based multi-channel eCommerce management platform. It handles orders, inventory, and product listings across channels including Amazon, eBay, Shopify, and WooCommerce — giving merchants a single system to manage the multi-channel operation without logging in and out of each platform separately.",
+      "CloudCommercePro users typically have the listing and order side well under control — stock synced, orders routed, channels consolidated. The carrier setup is often the part that has received least attention, configured once and not revisited since. That is where ITD adds the most: rate access and carrier network coverage that reflects the volume the business is actually shipping.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Orders from CloudCommercePro to despatch", desc: "Orders processed in CloudCommercePro pass to ITD's carrier network at despatch. The platform workflow does not change." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the right carrier, service, and weight for each order. ITD manages the carrier network and rate access behind each shipment." },
+      RATES_FEATURE,
+      { icon: Eye, title: "Tracking back across your channels", desc: "Carrier tracking returns to CloudCommercePro's order record and feeds back to each connected selling channel." },
+      { icon: Globe, title: "Rate access across the full carrier network", desc: "CloudCommercePro manages your orders and stock. ITD manages the carrier rate access — so all your channels ship on rates that reflect the total volume going through the network." },
+    ],
+  },
+  storefeeder: {
+    featuresHeading: "Features built for your workflow",
+    about: [
+      "Storefeeder gives UK multi-channel sellers one system for orders, stock, and listings across their channels. The rates behind each despatch depend on the carrier accounts connected to the setup — and across multi-channel volumes, separate per-carrier accounts rarely give you the rates your total volume justifies. ITD connects at the carrier level, so orders go out on rates that reflect what shipping at network scale is worth.",
+      "Storefeeder is a UK multi-channel retail management platform used by eCommerce sellers managing orders, stock, and listings across Amazon, eBay, Shopify, WooCommerce, and other channels. It brings the channel operation into one system and handles order routing, stock synchronisation, and pick-pack lists for the business.",
+      "Storefeeder sellers tend to have the multi-channel operation running efficiently — listings kept in sync, stock updated across channels, orders consolidated. What rarely gets revisited is whether the rates behind those carrier connections reflect what the total volume going through the business is worth. That is the question ITD answers.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Orders from Storefeeder to carrier", desc: "Orders managed in Storefeeder pass to ITD's carrier network at despatch. The Storefeeder workflow stays in place." },
+      { icon: Zap, title: "Carrier label generation", desc: "Labels are produced with the correct carrier and service applied for each order. ITD manages the carrier network and rate access behind each shipment." },
+      { icon: Eye, title: "Tracking back to Storefeeder", desc: "Carrier tracking returns to the Storefeeder order record, keeping your team updated in the system they already use." },
+      RATES_FEATURE,
+      { icon: Globe, title: "Multi-channel orders through one carrier network", desc: "Storefeeder manages your listings and stock across Amazon, eBay, Shopify, and your other channels. ITD provides the carrier network so all those orders despatch on consistent, managed rates." },
+    ],
+  },
 };
 
 export function getTechPageContent(tool: Integration): TechPageProps {
