@@ -1,10 +1,11 @@
 import CarrierPage from "@/components/sections/CarrierPage";
-import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
+import { RATES_FEATURE } from "@/lib/carrier-pages";
+import { Zap, Clock, Globe, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "UPS Integration — ITD Global",
-  description: "Connect UPS to ITD for domestic and international shipping, real-time tracking, and intelligent rate comparison across all UPS services.",
+  title: "UPS integration — ITD Global",
+  description: "Global express and standard delivery across 220 countries, with a trusted business parcel network in the UK. Access UPS through ITD on rates managed at network scale.",
 };
 
 export default function UPSPage() {
@@ -13,31 +14,30 @@ export default function UPSPage() {
       name="UPS"
       logo="/logos/carriers/ups_logo.png"
       logoBg="#351C15"
-      tagline="One of the world's largest package delivery companies, fully integrated with ITD."
-      description="UPS delivers to 220+ countries and territories with a comprehensive portfolio of domestic and international services. Through ITD, you get automated label generation, real-time tracking, and intelligent rate comparison across the full UPS portfolio — from UPS Express to Standard Ground."
+      tagline="Global express and standard delivery across 220 countries, with a trusted business parcel network in the UK."
+      description="UPS operates one of the world's largest parcel and freight networks, with strong domestic coverage in the UK and express international services reaching over 220 countries. Its range spans from guaranteed next-day air express through to scheduled road services and Access Point collection and drop-off. Through ITD, you access UPS services on rates managed at network scale, with the carrier relationship handled on your behalf."
       region="International"
+      about={[
+        "UPS is one of the world's largest package delivery companies, operating in over 220 countries and territories with a combined air and ground network. In the UK, it provides domestic parcel delivery alongside a full range of international express and standard services. Its Access Point network — comprising thousands of drop-off and collection locations — gives businesses and their customers a flexible alternative to home delivery.",
+        "UPS is predominantly used by businesses with regular international shipping requirements, particularly into the US, Canada, and continental Europe, where its air express network performs strongly. It is also well-regarded for business-to-business deliveries, heavier consignments, and shipments requiring insurance or specialised handling. For businesses where the destination mix extends beyond the UK, UPS is typically a core part of the carrier strategy.",
+      ]}
       services={[
         "UPS Express",
         "UPS Express Saver",
-        "UPS Worldwide Express",
-        "UPS Worldwide Expedited",
         "UPS Standard",
-        "UPS Ground",
         "UPS Access Point",
-        "Returns Service",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Commercial invoices, air waybills, and customs forms generated automatically at booking." },
-        { icon: Eye, title: "Real-time tracking", desc: "End-to-end shipment visibility across 220+ countries direct in your ITD dashboard." },
-        { icon: Globe, title: "Landed cost calculator", desc: "Pre-calculate duties, taxes, and surcharges before shipping to avoid surprises." },
-        { icon: Clock, title: "Service optimisation", desc: "Auto-select Express vs Standard based on your delivery SLA and cost targets." },
-        { icon: BarChart3, title: "Surcharge visibility", desc: "Fuel surcharges, remote area fees, and peak season charges surfaced before booking." },
-        { icon: ShieldCheck, title: "Compliance engine", desc: "Denied party screening and restricted goods checks built into the booking flow." },
+        { icon: Zap, title: "UPS Express", desc: "Time-definite air delivery. Domestic next working day; international delivery in 1-3 working days depending on destination. For time-critical shipments where certainty of arrival matters." },
+        { icon: Clock, title: "UPS Express Saver", desc: "End-of-day air delivery at a reduced rate compared to Express. 1-2 days domestic; 1-5 days international. The most widely used UPS air service for regular cross-border volume." },
+        { icon: Globe, title: "UPS Standard", desc: "Scheduled road-based delivery for domestic and European shipments. Cost-effective for non-urgent consignments where a defined delivery window is required." },
+        { icon: ShieldCheck, title: "UPS Access Point", desc: "Delivery to or collection from thousands of Access Point locations across the UK. Convenient for recipients who are unavailable for home delivery, or for businesses using drop-off despatch." },
+        RATES_FEATURE,
       ]}
       stats={[
-        { label: "Countries & territories", value: "220+" },
-        { label: "Daily shipments", value: "21M+" },
-        { label: "Team members worldwide", value: "500,000+" },
+        { label: "Coverage", value: "220+ countries" },
+        { label: "Network", value: "Air & ground" },
+        { label: "Best for", value: "International express" },
         { label: "ITD integration", value: "Live" },
       ]}
     />

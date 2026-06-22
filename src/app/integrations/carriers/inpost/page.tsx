@@ -1,10 +1,11 @@
 import CarrierPage from "@/components/sections/CarrierPage";
-import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
+import { RATES_FEATURE } from "@/lib/carrier-pages";
+import { Clock, Truck, ShieldCheck, RefreshCw } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "InPost Integration — ITD Global",
-  description: "Connect InPost to Connexx for locker-based delivery, real-time tracking, and cost-effective parcel solutions.",
+  title: "InPost integration — ITD Global",
+  description: "The UK's largest parcel locker network, with 15,000 locations accessible 24 hours a day. Access InPost through ITD on rates managed at scale.",
 };
 
 export default function InPostPage() {
@@ -12,29 +13,30 @@ export default function InPostPage() {
     <CarrierPage
       name="InPost"
       logo="/logos/carriers/inpost-icon.png"
-      tagline="Europe's fastest-growing locker network, connected to Connexx for seamless last-mile delivery."
-      description="InPost operates one of Europe's largest automated parcel locker networks, giving your customers flexible, contact-free collection at thousands of convenient locations. Through Connexx, you get full access to InPost's locker and courier services, with automated label generation, real-time tracking, and smart delivery routing."
+      tagline="The UK's largest parcel locker network, with 15,000 locations accessible 24 hours a day."
+      description="InPost gives eCommerce businesses an out-of-home delivery option that removes the problem of failed home deliveries. Customers choose their nearest locker or shop at checkout, collect at any time, and return the same way. Through ITD, you access InPost's network and services with rates managed at scale and the carrier relationship handled on your behalf."
       region="Domestic"
+      about={[
+        "InPost is Europe's leading out-of-home parcel network, operating across 12 countries with over 50,000 locker locations. In the UK, the network has reached 15,000 automated parcel machines — located in supermarkets, retail parks, transport hubs, and residential areas — making it the largest parcel locker network in the country. Lockers are open 24 hours a day, 7 days a week.",
+        "InPost has moved from a niche alternative to a mainstream delivery option for UK eCommerce. According to InPost, 49% of shoppers say they would use out-of-home delivery more often if it were available at checkout, and in their own retailer deployments, up to 21% of orders have shifted from home delivery to lockers when the option is presented. For businesses with high return rates — particularly in fashion, health, and consumer electronics — InPost's returns service adds further value by removing friction from the customer returns journey.",
+      ]}
       services={[
-        "InPost Locker Delivery",
-        "InPost Courier",
-        "InPost Returns",
-        "InPost Next Day",
-        "InPost Saturday Delivery",
-        "InPost International",
+        "Locker Delivery",
+        "Door to Locker",
+        "Home Delivery",
+        "Returns",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Generate InPost labels with correct service and locker assignments auto-applied." },
-        { icon: Eye, title: "Real-time tracking", desc: "Live parcel tracking and locker status visible in your Connexx dashboard." },
-        { icon: Globe, title: "Locker network", desc: "Access thousands of InPost lockers across the UK and Europe for flexible customer collection." },
-        { icon: Clock, title: "Collection booking", desc: "Schedule InPost courier collections and manage pickup windows directly in Connexx." },
-        { icon: BarChart3, title: "Service optimisation", desc: "Auto-select locker vs courier delivery based on your cost and speed rules." },
-        { icon: ShieldCheck, title: "Proof of delivery", desc: "Access digital confirmation and photo proof of delivery from the Connexx dashboard." },
+        { icon: ShieldCheck, title: "Locker Delivery", desc: "Parcel delivered to the customer's chosen InPost locker or shop. Delivery within 3 working days. Customer collects at any time — no missed deliveries, no redelivery attempts." },
+        { icon: Truck, title: "Door to Locker", desc: "Collected from the sender's address and delivered to the recipient's chosen locker. Suitable for businesses despatching at volume without requiring customers to initiate collection from a drop-off point." },
+        { icon: Clock, title: "Home Delivery", desc: "Parcel dropped at any InPost locker by the sender and delivered to the recipient's home address. Standard delivery within 2 working days." },
+        { icon: RefreshCw, title: "Returns", desc: "Customer drops their return at any InPost locker or shop. Tracked back through the network, with confirmation on receipt. No printer required for the customer — label generated via QR code." },
+        RATES_FEATURE,
       ]}
       stats={[
-        { label: "Parcel lockers", value: "25,000+" },
-        { label: "Countries", value: "12+" },
-        { label: "Parcels per year", value: "750M+" },
+        { label: "Network", value: "15,000 UK lockers" },
+        { label: "Access", value: "24/7" },
+        { label: "Best for", value: "Out-of-home & returns" },
         { label: "ITD integration", value: "Live" },
       ]}
     />

@@ -1,10 +1,11 @@
 import CarrierPage from "@/components/sections/CarrierPage";
-import { Zap, Eye, Clock, BarChart3, ShieldCheck, Globe } from "lucide-react";
+import { RATES_FEATURE } from "@/lib/carrier-pages";
+import { Zap, Clock, Globe, Truck } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FedEx Integration — ITD Global",
-  description: "Connect FedEx to ITD for express and freight shipping, real-time tracking, and intelligent rate comparison across all FedEx services.",
+  title: "FedEx integration — ITD Global",
+  description: "Time-definite international delivery across 220 countries, with priority and economy options for every shipment type. Access FedEx through ITD on rates managed at network scale.",
 };
 
 export default function FedExPage() {
@@ -13,31 +14,30 @@ export default function FedExPage() {
       name="FedEx"
       logo="/logos/carriers/fedex-icon.png"
       logoBg="#4D148C"
-      tagline="The world's most recognised express carrier, fully integrated with ITD."
-      description="FedEx connects you to 220+ countries and territories with time-definite express, ground, and freight services. Through ITD, you get automated label generation, real-time tracking, and intelligent rate comparison across the full FedEx portfolio — from International Priority to Economy."
+      tagline="Time-definite international delivery across 220 countries, with priority and economy options for every shipment type."
+      description="FedEx is one of the world's largest express carriers, with an international network spanning over 220 countries and territories. Its services cover everything from next-day priority delivery to economy air-and-ground options, alongside freight services for heavier consignments. Through ITD, you access FedEx's full-service range on rates managed at network scale, with the carrier relationship handled on your behalf."
       region="International"
+      about={[
+        "FedEx operates one of the world's largest dedicated cargo air fleets, with a global network underpinned by owned infrastructure across North America, Europe, and Asia Pacific. In the UK, FedEx is primarily used for international express shipments — particularly to North America, where its network is exceptionally well-established — and for businesses requiring customs expertise, freight handling, or time-critical delivery across long-haul routes.",
+        "FedEx performs particularly strongly for UK businesses with a significant US or Canadian customer base. Its International Priority service offers next business day delivery by noon to over 75,000 postcodes across Europe, and next working day by 10:30am across major North American postcodes — transit times that are consistently difficult to match through alternative carriers on those lanes. For businesses where the Americas represent a meaningful share of international volume, FedEx is typically the right carrier for that portion of the mix.",
+      ]}
       services={[
         "FedEx International Priority",
+        "FedEx International Priority Express",
         "FedEx International Economy",
-        "FedEx International First",
-        "FedEx Express Saver",
-        "FedEx Ground",
-        "FedEx Freight",
-        "FedEx Home Delivery",
-        "Returns Service",
+        "FedEx International Priority Freight",
       ]}
       features={[
-        { icon: Zap, title: "Automated label generation", desc: "Commercial invoices, air waybills, and customs forms generated automatically at booking." },
-        { icon: Eye, title: "Real-time tracking", desc: "End-to-end shipment visibility across 220+ countries direct in your ITD dashboard." },
-        { icon: Globe, title: "Landed cost calculator", desc: "Pre-calculate duties, taxes, and surcharges before shipping to avoid surprises." },
-        { icon: Clock, title: "Service optimisation", desc: "Auto-select Priority vs Economy vs Ground based on your delivery SLA and cost targets." },
-        { icon: BarChart3, title: "Surcharge visibility", desc: "Fuel surcharges, remote area fees, and peak season charges surfaced before booking." },
-        { icon: ShieldCheck, title: "Compliance engine", desc: "Denied party screening and restricted goods checks built into the booking flow." },
+        { icon: Clock, title: "FedEx International Priority", desc: "Next business day delivery by noon to 75,000+ European postcodes, and by 10:30am to major US and Canadian postcodes. For time-critical international shipments up to 68kg per package." },
+        { icon: Zap, title: "FedEx International Priority Express", desc: "Premium door-to-door express with customs clearance included. The fastest FedEx international option for urgent shipments across all weight categories." },
+        { icon: Globe, title: "FedEx International Economy", desc: "Cost-effective international delivery in 2-5 business days, using a combination of air and ground transport. Suited to regular international volume where cost per shipment outweighs speed." },
+        { icon: Truck, title: "FedEx International Priority Freight", desc: "For heavy consignments from 68kg. Midday next business day delivery. Combines FedEx's express transit times with freight-grade capacity." },
+        RATES_FEATURE,
       ]}
       stats={[
-        { label: "Countries & territories", value: "220+" },
-        { label: "Daily shipments", value: "16M+" },
-        { label: "Team members worldwide", value: "500,000+" },
+        { label: "Coverage", value: "220+ countries" },
+        { label: "Strength", value: "North America" },
+        { label: "Best for", value: "International express" },
         { label: "ITD integration", value: "Live" },
       ]}
     />
