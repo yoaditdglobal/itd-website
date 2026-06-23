@@ -64,7 +64,7 @@ const resourcesMenu = {
   support: [
     { name: "Help & Support", href: "/help" },
     { name: "Help Centre", href: "/help/centre" },
-    { name: "Submit a request", href: "/help/submit-request" },
+    { name: "Submit a request", href: "https://support.itdglobal.com/hc/en-gb/requests/new" },
   ],
   developers: [
     { name: "Developer resources", href: "/help/developers" },
