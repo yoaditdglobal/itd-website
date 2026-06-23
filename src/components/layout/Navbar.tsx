@@ -8,6 +8,14 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 
+// Connexx login (Auth0). NOTE: this is a captured Universal Login URL whose
+// `?state=` value is a one-time Auth0 transaction token that expires within
+// minutes — it will eventually fail with an "invalid state" error. Replace it
+// with the Connexx app login URL (the app mints a fresh state on each visit) or
+// an Auth0 `/authorize?client_id=s0kxkIGBPCRAvm1Y9kBENuuU8b3fhb6Y&...` link.
+const LOGIN_URL =
+  "https://connexx-itd.eu.auth0.com/u/login?state=hKFo2SBxT2lSaUI3S25PbWNTUGtyaGtqMzlKOGQ0ZkdCNTkxLaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIEd2MlpxQVVXbC1hMXFxSmM2OFUzbVZPN1h5Vlp0WjREo2NpZNkgczBreGtJR0JQQ1JBdm0xWTlrQkVOdXVVOGIzZmhiNlk";
+
 const shippingMenu = [
   { name: "Domestic", desc: "UK & local parcel delivery", href: "/shipping/domestic" },
   { name: "International", desc: "Cross-border shipping & compliance", href: "/shipping/international" },
@@ -417,7 +425,7 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-          <Button href="#" variant="secondary" surface="dark" className="text-xs px-4 py-2">
+          <Button href={LOGIN_URL} variant="secondary" surface="dark" className="text-xs px-4 py-2">
             Log in
           </Button>
           <Button href="/contact" variant="primary" surface="dark" className="text-xs px-4 py-2">
@@ -549,7 +557,7 @@ export default function Navbar() {
 
             {/* Mobile CTAs */}
             <div className="mt-6 flex flex-col gap-3">
-              <Button href="#" variant="secondary" surface="dark" className="w-full justify-center">
+              <Button href={LOGIN_URL} variant="secondary" surface="dark" className="w-full justify-center">
                 Log in
               </Button>
               <Button href="/contact" variant="primary" surface="dark" className="w-full justify-center">
