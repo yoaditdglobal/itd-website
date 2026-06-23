@@ -202,13 +202,6 @@ export default function HelpCentrePage() {
       <section className="bleed-nav bg-white py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="mb-4 text-sm text-text-tertiary">
-              <Link href="/help" className="hover:text-accent">
-                Help
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-text-secondary">Help Centre</span>
-            </nav>
             <h1 className="text-display-xl text-text-primary">
               Help Centre
             </h1>
