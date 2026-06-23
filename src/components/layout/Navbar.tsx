@@ -165,6 +165,7 @@ export default function Navbar() {
   };
   const isActive = (base: string) => pathname === base || pathname.startsWith(`${base}/`);
   const [scrolled, setScrolled] = useState(false);
+  const [hasLightHero, setHasLightHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
@@ -180,6 +181,16 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Over a bright hero at the very top of the page, the nav drops its dark pill
+  // and goes transparent with dark text — so it reads as one continuous surface
+  // with the hero (no veil, no seam line) instead of a dark bar floating on top.
+  // Bright heroes opt in by putting [data-nav-light] on their root section.
+  // Once scrolled, the dark pill returns for legibility over arbitrary content.
+  useEffect(() => {
+    setHasLightHero(!!document.querySelector("[data-nav-light]"));
+  }, [pathname]);
+  const light = hasLightHero && !scrolled;
 
   useEffect(() => {
     if (mobileOpen) {
@@ -271,10 +282,13 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
       <nav
         ref={navRef}
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 backdrop-blur-md transition-shadow duration-300 sm:px-5 ${
-          scrolled
-            ? "bg-bg-dark/95"
-            : "bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10"
+        data-nav-theme={light ? "light" : "dark"}
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
+          light
+            ? "border border-transparent"
+            : scrolled
+              ? "border border-white/10 backdrop-blur-md bg-bg-dark/95"
+              : "border border-white/10 backdrop-blur-md bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10"
         }`}
       >
         {/* Logo */}
@@ -418,17 +432,17 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-          <Button href="#" variant="secondary" surface="dark" className="text-xs px-4 py-2">
+          <Button href="#" variant="secondary" surface={light ? "light" : "dark"} className="text-xs px-4 py-2">
             Log in
           </Button>
-          <Button href="/contact" variant="primary" surface="dark" className="text-xs px-4 py-2">
+          <Button href="/contact" variant="primary" surface={light ? "light" : "dark"} className="text-xs px-4 py-2">
             Contact Sales
           </Button>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className={`lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center ${light ? "text-text-primary" : "text-white"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
