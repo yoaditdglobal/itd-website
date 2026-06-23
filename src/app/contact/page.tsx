@@ -163,7 +163,7 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <section className="bleed-nav bg-bg-secondary py-24 md:py-32">
+      <section data-hero-tone="light" className="bleed-nav bg-bg-secondary py-24 md:py-32">
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-success-light">
@@ -187,7 +187,7 @@ export default function ContactPage() {
   const labelClass = "block text-sm font-medium text-text-primary mb-1.5";
 
   return (
-    <section className="bleed-nav bg-bg-secondary py-10 md:py-16">
+    <section data-hero-tone="light" className="bleed-nav bg-bg-secondary py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid overflow-hidden rounded-3xl border border-border bg-white shadow-sm lg:grid-cols-2">
           {/* ── Left: dark branded panel ── */}

@@ -47,7 +47,7 @@ export default function Hero({
   const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
-    <section className="bleed-nav relative hero-bg overflow-hidden min-h-[100svh] flex items-center">
+    <section data-hero-tone="light" className="bleed-nav relative hero-bg overflow-hidden min-h-[100svh] flex items-center">
       {/* Soft radial accent blobs */}
       <div className="hero-bg-blob" aria-hidden />
       {/* Subtle grain overlay — organic texture, kept very low opacity */}

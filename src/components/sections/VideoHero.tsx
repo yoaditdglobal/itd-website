@@ -41,7 +41,7 @@ export default function VideoHero() {
   }, []);
 
   return (
-    <section className="hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]">
+    <section data-hero-tone="dark" className="hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]">
       {/* Background: video when motion is allowed, poster otherwise */}
       {motionOk ? (
         <video
