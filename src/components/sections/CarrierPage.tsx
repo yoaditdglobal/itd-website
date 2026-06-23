@@ -61,6 +61,7 @@ export default function CarrierPage({
     <>
       {/* Hero */}
       <section
+        data-hero-tone="dark"
         className={`bleed-nav ${heroBg ? "" : "bg-bg-dark"} py-16 md:py-24 overflow-hidden relative`}
         style={heroBg ? { backgroundColor: heroBg } : undefined}
       >

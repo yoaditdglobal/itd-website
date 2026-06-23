@@ -172,6 +172,7 @@ export default function Navbar() {
   };
   const isActive = (base: string) => pathname === base || pathname.startsWith(`${base}/`);
   const [scrolled, setScrolled] = useState(false);
+  const [heroTone, setHeroTone] = useState<"light" | "dark" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
@@ -187,6 +188,21 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // At the very top of a page the nav goes transparent so the page's hero shows
+  // through behind it — the hero "stretches to the top", no separate dark band.
+  // The hero is the first section and is the only element tagged [data-hero-tone]
+  // ahead of content, so querySelector returns IT (not a dark section lower on
+  // the page — that was the bug in the earlier attempt). Tone drives the text
+  // colour: dark ink over light heroes, white over dark heroes. Unmarked pages
+  // (heroTone null) keep the solid dark pill. Scrolling restores the pill too.
+  useEffect(() => {
+    const tone = document.querySelector("[data-hero-tone]")?.getAttribute("data-hero-tone");
+    setHeroTone(tone === "light" || tone === "dark" ? tone : null);
+  }, [pathname]);
+
+  const transparent = !scrolled && heroTone !== null;
+  const darkInk = transparent && heroTone === "light"; // dark text/logo on a light hero
 
   useEffect(() => {
     if (mobileOpen) {
@@ -278,10 +294,13 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
       <nav
         ref={navRef}
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
-          scrolled
-            ? "bg-bg-dark/95"
-            : "bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10"
+        data-nav-theme={darkInk ? "light" : "dark"}
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
+          transparent
+            ? "border border-transparent"
+            : scrolled
+              ? "border border-white/10 bg-bg-dark/95"
+              : "border border-white/10 bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10"
         }`}
       >
         {/* Logo */}
@@ -425,17 +444,17 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-          <Button href={LOGIN_URL} variant="secondary" surface="dark" className="text-xs px-4 py-2">
+          <Button href={LOGIN_URL} variant="secondary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Log in
           </Button>
-          <Button href="/contact" variant="primary" surface="dark" className="text-xs px-4 py-2">
+          <Button href="/contact" variant="primary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Contact Sales
           </Button>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className={`lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center ${darkInk ? "text-text-primary" : "text-white"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}

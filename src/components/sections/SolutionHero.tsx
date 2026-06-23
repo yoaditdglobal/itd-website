@@ -65,7 +65,7 @@ export default function SolutionHero({
   const objectFit = image.objectFit ?? "cover";
 
   return (
-    <section className="bleed-nav relative min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
+    <section data-hero-tone="dark" className="bleed-nav relative min-h-[640px] md:min-h-[700px] lg:min-h-[760px] bg-bg-dark">
       {/* Background layers — extended up over the floating-nav strip so the
           photo (not the fallback colour) shows through the nav's gutter. The
           clip lives HERE (not on the section) so the image isn't cut at the nav. */}
