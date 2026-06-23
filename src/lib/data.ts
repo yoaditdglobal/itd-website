@@ -992,6 +992,7 @@ const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   "sf-express": { name: "SF Express", href: "/integrations/carriers", kind: "carrier" },
   "apc": { name: "APC", logo: "/logos/carriers/apc_logo.png", href: "/integrations/carriers/apc", kind: "carrier" },
   "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
+  "landmark": { name: "Landmark", logo: "/logos/carriers/landmark-icon.svg", href: "/integrations/carriers/landmark", kind: "carrier" },
 
   // Tech integrations — link to the entity's own detail page (/integrations/tech/{slug},
   // rendered by the dynamic [slug] route), NOT a category landing.
