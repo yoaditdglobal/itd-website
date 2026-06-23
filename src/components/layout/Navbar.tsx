@@ -278,7 +278,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
       <nav
         ref={navRef}
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 backdrop-blur-md transition-shadow duration-300 sm:px-5 ${
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/10 px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
           scrolled
             ? "bg-bg-dark/95"
             : "bg-gradient-to-b from-bg-dark/85 via-bg-dark/45 to-bg-dark/10"

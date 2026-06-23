@@ -291,6 +291,14 @@ h3:not([class*="text-"]) { font-family: var(--font-display); font-size: clamp(1.
   filter: blur(90px);
   border-radius: 50%;
 }
+/* Full-bleed decorative layers (gradient blobs, grain) that are direct children
+   of a .bleed-nav hero must extend up behind the nav too, so the hero's blue
+   reaches the strip behind the floating nav (otherwise it clips at the nav line
+   and the top reads as a separate, paler band). */
+.bleed-nav > .hero-bg-blob,
+.bleed-nav > .bg-noise {
+  top: calc(-1 * var(--nav-h));
+}
 
 /* Card hover lift utility */
 .card-hover {
