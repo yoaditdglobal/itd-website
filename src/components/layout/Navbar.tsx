@@ -196,18 +196,20 @@ export default function Navbar() {
 
   // At the very top of a page the nav goes transparent so the page's hero shows
   // through behind it — the hero "stretches to the top", no separate dark band.
-  // The hero is the first section and is the only element tagged [data-hero-tone]
-  // ahead of content, so querySelector returns IT (not a dark section lower on
-  // the page — that was the bug in the earlier attempt). Tone drives the text
-  // colour: dark ink over light heroes, white over dark heroes. Unmarked pages
-  // (heroTone null) keep the solid dark pill. Scrolling restores the pill too.
+  // ONLY light heroes go transparent (that was the bug): the nav over a light
+  // hero painted a dark pill that read as a separate header band. Dark/image
+  // heroes (data-hero-tone="dark") and unmarked pages KEEP the solid dark pill,
+  // which already blends with them — the user confirmed those look right, and a
+  // transparent nav over a photo whose top is bright would wash out the links.
+  // The hero is the first section, so querySelector returns IT, not a dark
+  // section lower on the page (the prior detection bug). Scrolling → pill too.
   useIsoLayoutEffect(() => {
     const tone = document.querySelector("[data-hero-tone]")?.getAttribute("data-hero-tone");
     setHeroTone(tone === "light" || tone === "dark" ? tone : null);
   }, [pathname]);
 
-  const transparent = !scrolled && heroTone !== null;
-  const darkInk = transparent && heroTone === "light"; // dark text/logo on a light hero
+  const transparent = !scrolled && heroTone === "light"; // only light heroes
+  const darkInk = transparent; // transparent ⟺ light hero ⇒ dark ink/logo
 
   useEffect(() => {
     if (mobileOpen) {
