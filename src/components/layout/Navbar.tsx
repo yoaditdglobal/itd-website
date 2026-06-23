@@ -385,7 +385,7 @@ export default function Navbar() {
           <NavDropdown
             {...dropdownProps("resources")}
             label="Resources"
-            panelClassName="absolute top-full right-0 mt-1 w-[680px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-4 gap-5"
+            panelClassName="absolute top-full -right-8 mt-1 w-[680px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-4 gap-5"
           >
             <div>
               <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
