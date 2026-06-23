@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, useEffect, useRef, type ReactNode } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+
+// Run the hero-tone read BEFORE the browser paints so the transparent nav never
+// flashes the dark pill first. useLayoutEffect on the client; useEffect on the
+// server (SSR) to avoid React's "useLayoutEffect does nothing on the server".
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 // Connexx login (Auth0). NOTE: this is a captured Universal Login URL whose
 // `?state=` value is a one-time Auth0 transaction token that expires within
@@ -196,7 +201,7 @@ export default function Navbar() {
   // the page — that was the bug in the earlier attempt). Tone drives the text
   // colour: dark ink over light heroes, white over dark heroes. Unmarked pages
   // (heroTone null) keep the solid dark pill. Scrolling restores the pill too.
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const tone = document.querySelector("[data-hero-tone]")?.getAttribute("data-hero-tone");
     setHeroTone(tone === "light" || tone === "dark" ? tone : null);
   }, [pathname]);
