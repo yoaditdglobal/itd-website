@@ -139,7 +139,7 @@ export default function IntegrationCategoryPage({
       {ldData.length > 0 && <JsonLd data={ldData} />}
 
       {/* Hero */}
-      <section className={`bleed-nav ${heroVisual ? "bg-bg-dark" : "bg-bg-secondary border-b border-border"} py-16 md:py-24 overflow-hidden relative`}>
+      <section data-nav-dark={heroVisual ? "" : undefined} className={`bleed-nav ${heroVisual ? "bg-bg-dark" : "bg-bg-secondary border-b border-border"} py-16 md:py-24 overflow-hidden relative`}>
         {heroVisual && (
           <div className="absolute inset-0 pointer-events-none" aria-hidden>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />

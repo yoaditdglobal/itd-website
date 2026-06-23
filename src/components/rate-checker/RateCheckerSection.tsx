@@ -12,7 +12,7 @@ interface RateCheckerSectionProps {
 export default function RateCheckerSection({ type }: RateCheckerSectionProps) {
   if (type === '3pl') {
     return (
-      <section className="bleed-nav py-16 md:py-20 bg-slate-950">
+      <section data-nav-dark className="bleed-nav py-16 md:py-20 bg-slate-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-eyebrow mb-4">
@@ -37,7 +37,7 @@ export default function RateCheckerSection({ type }: RateCheckerSectionProps) {
   const { initialType, lockType, availableTypes, label, heading, subheading } = config[type];
 
   return (
-    <section className="bleed-nav py-16 md:py-20 bg-[#0f1929]">
+    <section data-nav-dark className="bleed-nav py-16 md:py-20 bg-[#0f1929]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white text-eyebrow mb-4">
