@@ -451,7 +451,7 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-          <Button href={LOGIN_URL} variant="secondary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
+          <Button href={LOGIN_URL} target="_self" variant="secondary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Log in
           </Button>
           <Button href="/contact" variant="primary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
@@ -583,7 +583,7 @@ export default function Navbar() {
 
             {/* Mobile CTAs */}
             <div className="mt-6 flex flex-col gap-3">
-              <Button href={LOGIN_URL} variant="secondary" surface="dark" className="w-full justify-center">
+              <Button href={LOGIN_URL} target="_self" variant="secondary" surface="dark" className="w-full justify-center">
                 Log in
               </Button>
               <Button href="/contact" variant="primary" surface="dark" className="w-full justify-center">

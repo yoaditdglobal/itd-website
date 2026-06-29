@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import CountUp from "@/components/ui/CountUp";
@@ -42,7 +43,7 @@ export default function Hero({
     "ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters. Connexx compares every active carrier on every parcel, picks the cheapest compliant option, and prints the label in one click. Domestic, international, returns, and customs all run from a single dashboard.";
   const primary = primaryCta ?? {
     label: "Get Quote",
-    href: "/rate-checker/domestic",
+    href: RATE_CHECKER_URL,
   };
   const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 

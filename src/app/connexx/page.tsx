@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
@@ -620,7 +621,7 @@ export default function ConnexxPage() {
         headline="Stop running shipping in browser tabs."
         subtitle="Request a 30-minute demo scoped to your carrier mix and ERP. We will run a live rate comparison on a real shipment you define."
         primaryCta={{ label: "Contact Us", href: "/contact?enquiry=connexx-demo" }}
-        secondaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+        secondaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       />
     </>
   );

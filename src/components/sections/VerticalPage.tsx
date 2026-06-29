@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
@@ -111,7 +112,7 @@ interface VerticalPageProps {
    *  populate. Falls back to `caseStudy` when undefined or empty. */
   caseStudies?: CaseStudy[];
 
-  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → "/rate-checker/domestic", secondary="Contact Us" → "/contact". */
+  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → RATE_CHECKER_URL, secondary="Contact Us" → "/contact". */
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 
@@ -182,7 +183,7 @@ export default function VerticalPage({
   if (breadcrumbs && breadcrumbs.length > 0) ldData.push(breadcrumbSchema(breadcrumbs));
   if (faq && faq.length > 0) ldData.push(faqSchema(faq));
 
-  const heroPrimary = primaryCta ?? { label: "Get Quote", href: "/rate-checker/domestic" };
+  const heroPrimary = primaryCta ?? { label: "Get Quote", href: RATE_CHECKER_URL };
   const heroSecondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (

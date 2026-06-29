@@ -1,4 +1,5 @@
 import VideoHero from "@/components/sections/VideoHero";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SocialProof from "@/components/sections/SocialProof";
 import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
@@ -34,7 +35,7 @@ export default function Home() {
       <ClosingCTA
         headline="Two minutes. No commitment. See what you'd save."
         subtitle="The savings estimator compares your current carrier mix against the live Connexx rate engine. No card, no call, no obligation."
-        primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
     </>

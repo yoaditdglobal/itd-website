@@ -48,12 +48,11 @@
   --color-border-strong: rgba(26, 26, 31, 0.20);
   --color-border-accent: rgba(29, 63, 184, 0.22);
 
-  /* shadcn-compat bridge — consumed ONLY by src/components/ui/* and
-     src/components/rate-checker/* (a ported shadcn app). Without these the
-     ported modal/inputs render unstyled (e.g. bg-popover undefined → the
-     lead-capture dialog is transparent). `primary` = rate-checker teal CTA;
-     neutrals map to the warm ivory palette so cards/modals render opaque. */
-  --color-primary: #3a9ea5;               /* rate-checker teal CTA */
+  /* shadcn-compat bridge — consumed by src/components/ui/* (ported shadcn
+     primitives). Without these the ported modal/inputs render unstyled (e.g.
+     bg-popover undefined → dialogs go transparent). Neutrals map to the warm
+     ivory palette so cards/modals render opaque. */
+  --color-primary: #3a9ea5;               /* teal CTA accent */
   --color-primary-foreground: #ffffff;
   --color-card: #ffffff;                  /* opaque card surface */
   --color-card-foreground: #1a1a1f;
