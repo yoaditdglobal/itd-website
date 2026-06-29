@@ -45,8 +45,11 @@ export default function GlossaryIndex({
     if (!pendingScroll) return;
     const el = document.getElementById(pendingScroll);
     if (el) {
+      // "instant" (not "auto", which inherits scroll-behavior: smooth) — a
+      // smooth animation here gets cancelled by hydration/layout settling and
+      // never reaches the target.
       requestAnimationFrame(() =>
-        el.scrollIntoView({ behavior: "auto", block: "start" }),
+        el.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" }),
       );
     }
     setPendingScroll(null);
