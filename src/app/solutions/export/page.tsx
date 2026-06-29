@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -188,7 +189,7 @@ export default function ExportPage() {
         title="Ship internationally with the rates, reach, and support to do it properly."
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=export" }}
-        secondaryCta={{ label: "Request a Quote", href: "/rate-checker/export" }}
+        secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
         caseStudies={getCaseStudiesBySolution("Export")}
@@ -234,7 +235,7 @@ export default function ExportPage() {
           subhead:
             "One conversation. We'll show you the rates, the courier network, and what a single point of contact actually looks like in practice.",
           primary: { label: "Get in Touch", href: "/contact?enquiry=export" },
-          secondary: { label: "Request a Quote", href: "/rate-checker/export" },
+          secondary: { label: "Request a Quote", href: RATE_CHECKER_URL },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },

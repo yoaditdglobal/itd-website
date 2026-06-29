@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Button from "@/components/ui/Button";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -26,7 +27,7 @@ const HEADING = (
 );
 const SUB =
   "ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters — every active carrier on every parcel, one dashboard.";
-const PRIMARY = { label: "Get Quote", href: "/rate-checker/domestic" };
+const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
 const SECONDARY = { label: "Contact Us", href: "/contact" };
 
 export default function VideoHero() {

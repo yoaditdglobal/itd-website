@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
@@ -29,7 +30,7 @@ export default function ShippingInternationalPage() {
       subtitle="Wherever you're shipping, there are choices to make: express or economy, duties up front or at the door. We lay out the options and tell you which we'd pick."
       primaryCta={{
         label: "Get Quote",
-        href: "/rate-checker/international",
+        href: RATE_CHECKER_URL,
       }}
       heroImage={{
         gradient: "from-bg-secondary via-accent-light to-accent/10",
@@ -365,7 +366,7 @@ export default function ShippingInternationalPage() {
           "A bespoke review covers your top lanes, the service that fits each one, and where the rules are heading next. The saving sits alongside.",
         primary: {
           label: "Get Quote",
-          href: "/rate-checker/international",
+          href: RATE_CHECKER_URL,
         },
         secondary: {
           label: "Explore",

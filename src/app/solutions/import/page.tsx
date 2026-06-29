@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -125,7 +126,7 @@ export default function ImportPage() {
         title="Importing from the Far East or worldwide? We've got it covered."
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=import" }}
-        secondaryCta={{ label: "Request a Quote", href: "/rate-checker/import" }}
+        secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}
         caseStudies={getCaseStudiesBySolution("Import")}
@@ -166,7 +167,7 @@ export default function ImportPage() {
           subhead:
             "One conversation. We'll show you the rates, the route, and what a single point of contact actually looks like in practice.",
           primary: { label: "Get in Touch", href: "/contact?enquiry=import" },
-          secondary: { label: "Request a Quote", href: "/rate-checker/import" },
+          secondary: { label: "Request a Quote", href: RATE_CHECKER_URL },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },

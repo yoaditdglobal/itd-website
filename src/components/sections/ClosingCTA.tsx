@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
 interface CtaButton {
@@ -23,7 +24,7 @@ export default function ClosingCTA({
   secondaryCta,
   asyncNote,
 }: ClosingCTAProps) {
-  const primary = primaryCta ?? { label: "Get Quote", href: "/rate-checker/domestic" };
+  const primary = primaryCta ?? { label: "Get Quote", href: RATE_CHECKER_URL };
   const secondary =
     secondaryCta === null ? null : secondaryCta ?? { label: "Contact Us", href: "/contact" };
 

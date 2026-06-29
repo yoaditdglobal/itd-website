@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
@@ -17,7 +18,7 @@ export default function MarketplaceSellerPage() {
       label="Marketplace Seller"
       title="Protect your marketplace SLAs and your margin."
       subtitle="When a carrier misses the promise, the penalty lands on you. A refund off your margin and a late mark on your account. We match each order to a Prime-ready carrier, with the rates and support to grow your channel."
-      primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+      primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{ label: "Explore", href: "/resources/case-studies/west-ham-united" }}
       heroImage={{
         src: "/solutions/marketplace-seller-hero.webp",
@@ -151,7 +152,7 @@ export default function MarketplaceSellerPage() {
         headline: "Protect your ratings before the next peak.",
         subhead:
           "Share with us your carrier mix or a recent invoice. We'll show you where your metrics slip and what the same orders would cost on our rates.",
-        primary: { label: "Get Quote", href: "/rate-checker/domestic" },
+        primary: { label: "Get Quote", href: RATE_CHECKER_URL },
         secondary: { label: "Explore", href: "/resources/case-studies/west-ham-united" },
       }}
       breadcrumbs={[

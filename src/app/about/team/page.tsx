@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Button from "@/components/ui/Button";
 import TeamCard from "@/components/sections/TeamCard";
 import ClosingCTA from "@/components/sections/ClosingCTA";
@@ -92,7 +93,7 @@ export default function TeamPage() {
         headline="Work with a team that knows your lanes."
         subtitle="Talk to an operator who manages shipping like yours every day."
         primaryCta={{ label: "Contact Us", href: "/contact" }}
-        secondaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+        secondaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       />
     </>
   );

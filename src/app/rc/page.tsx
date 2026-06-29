@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import ParcelUnboxHero from "@/components/sections/ParcelUnboxHero";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
@@ -36,7 +37,7 @@ export default function RcLandingPage() {
       <ClosingCTA
         headline="Every carrier. Every mode. One platform."
         subtitle="See what you'd save with Connexx — compare your current carrier mix against the live rate engine. No card, no call, no obligation."
-        primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
     </>

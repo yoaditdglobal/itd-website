@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
@@ -28,7 +29,7 @@ export default function ShippingDomesticPage() {
       label="Domestic Shipping"
       title="Run all your carriers from one screen."
       subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
-      primaryCta={{ label: "Get Quote", href: "/rate-checker/domestic" }}
+      primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       heroImage={{
         src: "/shipping/domestic-hero-v2.webp",
         alt: "Warehouse loading bays branded with UK carrier logos — Evri, InPost, DPD, Amazon Shipping",
@@ -419,7 +420,7 @@ export default function ShippingDomesticPage() {
         headline: "Unlock the margin hiding in your shipping",
         subhead:
           "The Parcel Rate Checker compares live carriers on the postcodes you ship from and shows you where the margin's leaking. Put your current dims, weight and rate in and the gaps show up straight away.",
-        primary: { label: "Check your rates", href: "/rate-checker/domestic" },
+        primary: { label: "Check your rates", href: RATE_CHECKER_URL },
         secondary: { label: "Request a tailored review", href: "/contact?enquiry=domestic" },
       }}
     />

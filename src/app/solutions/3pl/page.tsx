@@ -1,4 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import SolutionRealities from "@/components/sections/SolutionRealities";
@@ -45,7 +46,7 @@ export default function ThreePLPage() {
         label="3PL"
         title="Undercut your rivals without undercutting yourself."
         subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
-        primary={{ label: "Get Quote", href: "/rate-checker/3pl" }}
+        primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondary={{ label: "Explore", href: "/resources/case-studies/delta-fulfilment" }}
         image={{
           src: "/solutions/3pl-hero-v2.webp",
@@ -115,7 +116,7 @@ export default function ThreePLPage() {
       subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
       primaryCta={{
         label: "Get Quote",
-        href: "/rate-checker/3pl",
+        href: RATE_CHECKER_URL,
       }}
       secondaryCta={{
         label: "Explore",
@@ -262,7 +263,7 @@ export default function ThreePLPage() {
           "A bespoke review of your carrier setup shows the rates you could put in front of clients and the margin left for you.",
         primary: {
           label: "Get Quote",
-          href: "/rate-checker/3pl",
+          href: RATE_CHECKER_URL,
         },
         secondary: {
           label: "Explore",

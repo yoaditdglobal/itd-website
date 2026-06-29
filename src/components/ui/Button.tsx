@@ -82,14 +82,30 @@ export interface ButtonProps
     ButtonVariantProps {
   asChild?: boolean;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, surface, asChild = false, href, ...props }, ref) => {
+  ({ className, variant, size, surface, asChild = false, href, target, rel, ...props }, ref) => {
     const classes = cn(buttonVariants({ variant, size, surface, className }));
     if (href) {
+      // External hrefs (http/https) render a plain <a>; default to opening in a
+      // new tab unless the caller pins target explicitly (e.g. the nav Log in
+      // link stays same-tab). Internal hrefs keep Next's <Link>.
+      const isExternal = /^https?:\/\//.test(href);
+      if (isExternal) {
+        const resolvedTarget = target ?? "_blank";
+        const resolvedRel =
+          rel ?? (resolvedTarget === "_blank" ? "noopener noreferrer" : undefined);
+        return (
+          <a href={href} target={resolvedTarget} rel={resolvedRel} className={classes}>
+            {props.children}
+          </a>
+        );
+      }
       return (
-        <Link href={href} className={classes}>
+        <Link href={href} target={target} rel={rel} className={classes}>
           {props.children}
         </Link>
       );
