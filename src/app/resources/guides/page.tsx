@@ -23,6 +23,15 @@ type Guide = {
 
 const guides: Guide[] = [
   {
+    slug: "freight-services",
+    title: "Freight Services: a working guide for UK clients",
+    summary:
+      "Moving goods internationally by air or sea: choosing your mode, FCL vs LCL, consolidation and CFS cut-offs, EORI numbers, HS codes and the UK Global Tariff, CDS clearance, Incoterms, and the customs holds that catch new importers.",
+    category: "Freight",
+    readingTime: "12 min read",
+    updated: "23 June 2026",
+  },
+  {
     slug: "far-east-imports",
     title: "Importing from China and the Far East into the UK",
     summary:
