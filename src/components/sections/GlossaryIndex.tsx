@@ -43,16 +43,27 @@ export default function GlossaryIndex({
   // smooth animation racing the layout.
   useEffect(() => {
     if (!pendingScroll) return;
-    const el = document.getElementById(pendingScroll);
-    if (el) {
-      // "instant" (not "auto", which inherits scroll-behavior: smooth) — a
-      // smooth animation here gets cancelled by hydration/layout settling and
-      // never reaches the target.
-      requestAnimationFrame(() =>
-        el.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" }),
-      );
-    }
-    setPendingScroll(null);
+    const id = pendingScroll;
+    // Re-assert the jump across the page-enter animation (240ms) + Next's own
+    // post-navigation scroll handling, which otherwise race this and reset to
+    // top. "instant" (not "auto", which inherits scroll-behavior: smooth) so a
+    // smooth animation isn't cancelled mid-flight. pendingScroll is cleared only
+    // on the last pass so this effect's cleanup doesn't cancel its own timers.
+    const jump = () =>
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" });
+    const raf = requestAnimationFrame(jump);
+    const t1 = setTimeout(jump, 140);
+    const t2 = setTimeout(() => {
+      jump();
+      setPendingScroll(null);
+    }, 360);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [pendingScroll]);
 
   const filtered = useMemo(() => {
