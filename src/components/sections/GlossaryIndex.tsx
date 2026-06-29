@@ -49,10 +49,16 @@ export default function GlossaryIndex({
     // top. "instant" (not "auto", which inherits scroll-behavior: smooth) so a
     // smooth animation isn't cancelled mid-flight. pendingScroll is cleared only
     // on the last pass so this effect's cleanup doesn't cancel its own timers.
-    const jump = () =>
-      document
-        .getElementById(id)
-        ?.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" });
+    const jump = () => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      // Offset by the fixed nav (72px) + the sticky toolbar's real height, so
+      // the term heading lands below the toolbar rather than behind it.
+      const toolbar = document.getElementById("glossary-toolbar");
+      const offset = 72 + (toolbar?.offsetHeight ?? 0) + 16;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+    };
     const raf = requestAnimationFrame(jump);
     const t1 = setTimeout(jump, 140);
     const t2 = setTimeout(() => {
@@ -85,7 +91,10 @@ export default function GlossaryIndex({
   return (
     <>
       {/* Search + category filter toolbar */}
-      <section className="bg-white py-6 sticky top-[72px] z-30 border-b border-border">
+      <section
+        id="glossary-toolbar"
+        className="bg-white py-6 sticky top-[72px] z-30 border-b border-border"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
