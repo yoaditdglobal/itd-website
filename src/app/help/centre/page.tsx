@@ -67,7 +67,7 @@ const categories = [
     name: "Account & admin",
     description:
       "Users, permissions, child accounts, single sign-on, audit logs, and account security.",
-    href: "/help/centre",
+    href: "/help/centre/account",
     slug: "account",
   },
   {
@@ -80,7 +80,19 @@ const categories = [
   },
 ];
 
-const featuredArticles = [
+const featuredArticles: {
+  title: string;
+  summary: string;
+  category: string;
+  href?: string;
+}[] = [
+  {
+    title: "Claims policies by carrier",
+    summary:
+      "Loss and damage claim windows, value limits, and exactly what to send — for every carrier ITD works with.",
+    category: "Account & admin",
+    href: "/help/centre/account/claims",
+  },
   {
     title: "Connecting Shopify to Connexx",
     summary:
@@ -274,7 +286,7 @@ export default function HelpCentrePage() {
                 Featured articles
               </h2>
               <p className="mt-2 text-text-secondary">
-                The ten most-read articles across the Help Centre.
+                Popular articles across the Help Centre.
               </p>
             </div>
           </ScrollReveal>
@@ -284,8 +296,7 @@ export default function HelpCentrePage() {
               {featuredArticles.map((article, i) => (
                 <li key={article.title}>
                   <Link
-                    // TODO: dynamic article routing arrives in Phase 5b.
-                    href="/help/centre"
+                    href={article.href ?? "/help/centre"}
                     className="group bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/30 transition-all flex gap-4 h-full"
                   >
                     <span className="flex-shrink-0 w-8 h-8 rounded-md bg-accent/10 text-accent text-sm font-semibold flex items-center justify-center">
