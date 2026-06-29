@@ -18,26 +18,39 @@ export default function GlossaryIndex({
 }) {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<Filter>("All");
+  // Slug to scroll to once the (re-rendered, unfiltered) list has committed.
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   // Deep-link + cross-link robustness: when the URL points at a specific term
-  // (#slug), clear any active filter so the target is rendered, then scroll to
-  // it. Runs on mount and whenever the hash changes (e.g. a Related chip click).
+  // (#slug), clear any active filter so the target is rendered, then queue a
+  // scroll to it. Runs on mount and on every hash change (e.g. a Related chip).
   useEffect(() => {
     const revealHash = () => {
       const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
-      if (!id) return;
-      if (!entries.some((e) => e.slug === id)) return;
+      if (!id || !entries.some((e) => e.slug === id)) return;
       setQuery("");
       setActiveCategory("All");
-      // Wait for the unfiltered list to paint before scrolling.
-      requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+      setPendingScroll(id);
     };
     revealHash();
     window.addEventListener("hashchange", revealHash);
     return () => window.removeEventListener("hashchange", revealHash);
   }, [entries]);
+
+  // Scroll after the filter reset has committed to the DOM, so the target is
+  // present and laid out (a bare rAF in the handler fires before React commits
+  // the re-rendered list and lands on a stale position). Instant, to avoid a
+  // smooth animation racing the layout.
+  useEffect(() => {
+    if (!pendingScroll) return;
+    const el = document.getElementById(pendingScroll);
+    if (el) {
+      requestAnimationFrame(() =>
+        el.scrollIntoView({ behavior: "auto", block: "start" }),
+      );
+    }
+    setPendingScroll(null);
+  }, [pendingScroll]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -138,7 +151,7 @@ export default function GlossaryIndex({
                       <article
                         key={entry.slug}
                         id={entry.slug}
-                        className="card-hover scroll-mt-32 bg-bg-secondary rounded-xl border border-border p-6"
+                        className="card-hover scroll-mt-[240px] bg-bg-secondary rounded-xl border border-border p-6"
                       >
                         <div className="flex items-center gap-2 mb-3">
                           <span className="inline-block px-2 py-0.5 rounded-full bg-white border border-border text-eyebrow text-text-secondary">
