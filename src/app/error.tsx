@@ -17,8 +17,11 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Surface to monitoring / the console for diagnosis.
-    console.error(error);
+    // Surface to the console for diagnosis in dev only; in production, forward
+    // to a monitoring service here instead of logging raw error objects.
+    if (process.env.NODE_ENV !== "production") {
+      console.error(error);
+    }
   }, [error]);
 
   return (
