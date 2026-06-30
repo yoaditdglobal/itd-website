@@ -121,6 +121,7 @@ export interface CaseStudy {
 export type LibrarySegment =
   | "eCommerce"
   | "3PL"
+  | "B2B"
   | "Import"
   | "Export"
   | "Freight";
@@ -134,6 +135,7 @@ export type LibraryOutcome =
 export const LIBRARY_SEGMENT_ORDER: LibrarySegment[] = [
   "eCommerce",
   "3PL",
+  "B2B",
   "Import",
   "Export",
   "Freight",
@@ -155,6 +157,7 @@ export function getLibraryStories(): CaseStudy[] {
 export const SOLUTION_SLUGS: Record<LibrarySegment, string> = {
   eCommerce: "ecommerce",
   "3PL": "3pl",
+  B2B: "b2b",
   Import: "import",
   Export: "export",
   Freight: "freight",
@@ -652,6 +655,400 @@ export const caseStudies: CaseStudy[] = [
     carriers: [],
     integrations: [],
     solutions: ["eCommerce"],
+  },
+
+  // ─── Live customer stories (re-indexed from itdglobal.com) ──────────
+  {
+    id: "11",
+    slug: "saime-trading",
+    primarySegment: "eCommerce",
+    segments: ["eCommerce"],
+    outcomes: ["Save money", "Get control"],
+    headlineResult: "Drop-offs gone",
+    oneLiner:
+      "Swapped daily parcel-shop drop-offs for a bespoke daily collection and better multi-carrier rates.",
+    featured: false,
+    brandName: "Saime Trading",
+    industry: "eCommerce",
+    headline:
+      "Saime Trading swapped daily drop-offs for a collection service and lower rates",
+    metric: "Daily collections",
+    summary:
+      "A small UK online seller moved off self-service parcel-shop drop-offs onto ITD's rule-based booking portal and a bespoke daily collection, with multi-carrier rates that beat what they were paying.",
+    challenge:
+      "Before partnering with ITD Global, Saime Trading faced significant challenges in their shipping process. The main issues were large shipping charges and the inconvenience of personally dropping shipments off at parcel shops — time-consuming and inefficient.",
+    solution:
+      "ITD set Saime Trading up on its rule-based booking portal, which integrates with shopping carts and modern marketplaces, and introduced a bespoke daily collection service so the team no longer had to drop parcels off themselves. ITD's buying power across multiple carriers brought rates down versus their previous setup, while an in-house customer service team and dedicated account management kept day-to-day shipping running smoothly.",
+    result:
+      "The streamlined process delivered real time and cost savings and freed Saime Trading to focus on the core business instead of logistics. Collections replaced daily drop-offs, rates improved, and queries were resolved quickly through one account team.",
+    stats: [
+      { value: "Lower", label: "Shipping rates", sub: "multi-carrier buying power vs their previous setup", featured: true },
+      { value: "Daily", label: "Collections", sub: "bespoke pickup replaced parcel-shop drop-offs" },
+      { value: "1", label: "Account team", sub: "in-house service + dedicated account management" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Homeware" },
+      { label: "ICP", value: "Retail / eCommerce (SME)" },
+      { label: "Market", value: "UK Domestic" },
+      { label: "Carriers", value: "Evri (collection)" },
+      { label: "Service", value: "Daily collection + rule-based booking portal" },
+      { label: "Key Feature", value: "Multi-carrier rates without daily drop-offs" },
+    ],
+    shippingTypes: ["Domestic"],
+    carriers: ["evri"],
+    integrations: ["connexx"],
+    solutions: ["eCommerce", "Small Business"],
+    quotes: [
+      {
+        quote:
+          "Reasons for switching to ITD Global are many — time savings, as ITD does the collection, and better rates than I was paying. The feedback I'd had about working with ITD from other suppliers was another reason.",
+        name: "Hassan",
+        title: "Saime Trading",
+        placement: "inline",
+      },
+      {
+        quote:
+          "ITD has surpassed my expectations in a very short period of time. The communication from the account management and IT team stands out — they're always on hand and resolve any queries quickly. I had heard great things about ITD Global; now I vouch for the same.",
+        name: "Hassan",
+        title: "Saime Trading",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "12",
+    slug: "junction-18-shruti-designs",
+    primarySegment: "Import",
+    segments: ["Import", "B2B"],
+    outcomes: ["Save money", "Go international"],
+    headlineResult: "45% courier saving",
+    oneLiner:
+      "Cut Express Courier spend 45% on Far East sample imports, with a dedicated account manager.",
+    featured: false,
+    brandName: "Junction 18 / Shruti Designs",
+    industry: "Import",
+    headline:
+      "Junction 18 cut Express Courier costs by 45% on Far East sample imports",
+    metric: "45% courier saving",
+    summary:
+      "One of the UK's largest design-led giftware manufacturers moved its urgent Far East sample shipping to ITD's Express Courier accounts, saving 45% a year without losing service — backed by a dedicated account manager and ITD's China office.",
+    challenge:
+      "Shruti Designs had hit communication failures and uncompetitive pricing with their existing Express Courier provider, feeling like just another account number. Service and responsiveness were slow.",
+    solution:
+      "ITD offered more competitive Express Courier pricing and a dedicated account manager to handle the urgent transit of samples from Far East Asia. Working closely with the J18 team, ITD also managed the supply chain on larger imports, routing each shipment by express courier, economy courier or air freight depending on size and weight, and used the ITD China office to support the brand with its Chinese suppliers.",
+    result:
+      "Junction 18 saved 45% of their annual courier spend using ITD's Express Courier services, without compromising on service levels — and gained local support at origin through ITD's China office.",
+    stats: [
+      { value: 45, suffix: "%", label: "Annual courier saving", sub: "vs their previous Express Courier provider", featured: true },
+      { value: "Far East", label: "Sample lanes managed", sub: "express, economy courier or air freight by size" },
+      { value: "China", label: "Origin support", sub: "ITD China office working with J18 suppliers" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Homeware / Giftware" },
+      { label: "ICP", value: "B2B / Import" },
+      { label: "Market", value: "Far East → UK" },
+      { label: "Service", value: "Express Courier + air freight" },
+      { label: "Key Feature", value: "Mode selection by size/weight + dedicated AM" },
+    ],
+    shippingTypes: ["International Import"],
+    carriers: [],
+    integrations: ["connexx"],
+    solutions: ["Import", "B2B"],
+    quotes: [
+      {
+        quote:
+          "We have been using ITD's services for several years. They are extremely competitive price-wise and offer excellent service. They've made our lives so much easier and let us concentrate on our main business without having to worry about the logistics of air freight. I would thoroughly recommend them to anyone.",
+        name: "Karen",
+        title: "Imports Manager, Junction 18",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "13",
+    slug: "sifcon-international",
+    primarySegment: "Import",
+    segments: ["Import", "B2B"],
+    outcomes: ["Save money", "Go international"],
+    headlineResult: "Up to 35% saved",
+    oneLiner:
+      "Sample consolidation from China and better courier rates, saving up to 35% a year.",
+    featured: false,
+    brandName: "Sifcon International",
+    industry: "Import",
+    headline:
+      "Sifcon cut courier costs up to 35% with sample consolidation from China",
+    metric: "Up to 35% annual saving",
+    summary:
+      "A leading supplier of gifts and interior accessories to major retailers moved its Express Courier and China sample flow to ITD, combining a bi-weekly consolidation service with more competitive rates for annual savings of up to 35%.",
+    challenge:
+      "Sifcon came to ITD with existing service and pricing issues on their Express Courier, so ITD stepped in with industry expertise and cost-effective solutions.",
+    solution:
+      "Understanding Sifcon's volumes and profile, ITD took a two-pronged approach to importing their samples. For UK and European trade fairs, ITD worked closely with the team on a sample consolidation service so they could plan and coordinate better. Year-round, ITD supplied and managed Express Courier rates more competitive than working directly with the carrier, with better communication throughout.",
+    result:
+      "Better courier communication and a bi-weekly sample consolidation service from China delivered annual savings of upwards of 35%.",
+    stats: [
+      { value: 35, prefix: "Up to ", suffix: "%", label: "Annual saving", sub: "vs working directly with the carrier", featured: true },
+      { value: "Bi-weekly", label: "China consolidation", sub: "sample shipments combined from China" },
+      { value: "2-prong", label: "Import approach", sub: "trade-fair consolidation + year-round courier" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Homeware / Giftware" },
+      { label: "ICP", value: "B2B / Import" },
+      { label: "Market", value: "China → UK & Europe" },
+      { label: "Service", value: "Express Courier + sample consolidation" },
+      { label: "Key Feature", value: "Bi-weekly China sample consolidation" },
+    ],
+    shippingTypes: ["International Import"],
+    carriers: [],
+    integrations: ["connexx"],
+    solutions: ["Import", "B2B"],
+    quotes: [
+      {
+        quote:
+          "Our experience with ITD has been positive and we have no problems continuing our business relationship. Quotations come back to us quickly and confirmation of collection is prompt. We have no problem recommending ITD to other businesses.",
+        name: "Scott",
+        title: "Buying Director, Sifcon International",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "14",
+    slug: "cummins",
+    primarySegment: "Import",
+    segments: ["Import"],
+    outcomes: ["Go international", "Get control"],
+    headlineResult: "No line stops",
+    oneLiner:
+      "China-to-Europe rail freight that kept a global manufacturer's plants running through disruption.",
+    featured: false,
+    brandName: "Cummins",
+    industry: "Import",
+    headline:
+      "ITD kept Cummins' plants running with China-to-Europe rail freight",
+    metric: "Zero line stops",
+    summary:
+      "When the pandemic and the Suez Canal blockage hit Cummins' European supply chain, ITD moved automotive material from China to Europe by rail — block trains and daily departures from 13 terminals, with daily reporting that kept plants off 'Line Stop'.",
+    challenge:
+      "During Covid-19, Cummins faced major supply chain issues across its European warehouses, compounded by the Ever Given blocking the Suez Canal in 2021. With no solutions at hand, they needed a partner who could step in quickly to support UK and European facilities.",
+    solution:
+      "ITD supported Cummins on service and communication across all their European facilities, arranging and managing containers from mainland China into the UK and Europe by rail freight. A combination of block trains and daily departures from 13 terminals in China kept Cummins' plants off 'Line Stop'. ITD prepared and distributed daily reports of every live movement and ran daily Zoom calls with each plant to ensure transit from start to finish.",
+    result:
+      "Cummins maintained continuity of capacity and service through a period of severe global disruption, with accurate, timely transit and invoicing and no line stops across its plants.",
+    stats: [
+      { value: 13, label: "China rail terminals", sub: "block trains + daily departures", featured: true },
+      { value: "Daily", label: "Live movement reports", sub: "plus daily plant Zoom calls" },
+      { value: "Zero", label: "Line stops", sub: "continuity held across European plants" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Automotive / Manufacturing" },
+      { label: "ICP", value: "Enterprise / Import" },
+      { label: "Market", value: "China → UK & Europe" },
+      { label: "Service", value: "Rail freight (China–Europe)" },
+      { label: "Key Feature", value: "Block trains + daily movement reporting" },
+    ],
+    shippingTypes: ["Freight"],
+    carriers: [],
+    integrations: [],
+    solutions: ["Import", "Enterprise"],
+    quotes: [
+      {
+        quote:
+          "ITD Global transported automotive material from China to Europe by rail during this difficult period in global transportation, and always ensured continuity of capacity and service. The team provide accurate and timely transit and invoicing, and gave excellent service throughout.",
+        name: "Cummins",
+        title: "Global power technology manufacturer",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "15",
+    slug: "regatta",
+    primarySegment: "Import",
+    segments: ["Import"],
+    outcomes: ["Go international", "Get control"],
+    headlineResult: "Supply kept moving",
+    oneLiner:
+      "Charter, rail, air and sea-air from the Far East kept Regatta's supply chain moving when ocean freight seized up.",
+    featured: false,
+    brandName: "Regatta",
+    industry: "Import",
+    headline:
+      "ITD kept Regatta's supply chain moving with multi-modal Far East freight",
+    metric: "Supply kept moving",
+    summary:
+      "When Covid and the Suez Canal blockage disrupted global shipping, ITD responded with charter vessels, rail freight from 13 China terminals, air freight and sea-air from Myanmar — keeping one of the UK's best-known outdoor brands stocked into its UK and Polish DCs.",
+    challenge:
+      "During the pandemic Regatta faced major supply chain issues and rising global shipping challenges, worsened by the Ever Given wedging across the Suez Canal and disrupting worldwide trade.",
+    solution:
+      "ITD responded quickly with a variety of services at competitive pricing across Regatta's supply chain: charter vessels from mainland China into the UK, rail freight from 13 terminals across China, and air freight for urgent POs from across Far East Asia. ITD also ran sea-air services from Myanmar into both Regatta's UK and Polish DCs. Throughout, ITD worked closely with the Regatta operations teams and gave them visibility through its live Freight Management Software, acting as one point of regular, transparent contact.",
+    result:
+      "Regatta kept a challenging supply chain moving through peak season and the pandemic using innovative, nimble solutions, with all shipment fulfilment needs met.",
+    stats: [
+      { value: 4, label: "Freight modes used", sub: "charter, rail, air & sea-air", featured: true },
+      { value: 13, label: "China rail terminals", sub: "rail freight origins across China" },
+      { value: 2, label: "Destination DCs served", sub: "UK + Poland, incl. sea-air from Myanmar" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Fashion / Outdoor" },
+      { label: "ICP", value: "Enterprise / Import" },
+      { label: "Market", value: "Far East → UK & Poland" },
+      { label: "Service", value: "Charter, rail, air & sea-air" },
+      { label: "Key Feature", value: "Live Freight Management Software visibility" },
+    ],
+    shippingTypes: ["Freight"],
+    carriers: [],
+    integrations: [],
+    solutions: ["Import", "Enterprise"],
+    quotes: [
+      {
+        quote:
+          "We have found ITD Global to be a professional and well-connected organisation. The service operation is excellent and we are kept well informed throughout. We've kept our challenging supply chain moving through peak season and the Covid pandemic using innovative, nimble solutions suggested by ITD. We'd highly recommend them to anyone who needs a partner who cares and offers solutions to real-time obstacles.",
+        name: "Regatta",
+        title: "Outdoor & fashion brand",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "16",
+    slug: "lifetime-brands",
+    primarySegment: "B2B",
+    segments: ["B2B", "eCommerce"],
+    outcomes: ["Get control"],
+    headlineResult: "Live in days",
+    oneLiner:
+      "Picked up B2B collections within days of a carrier cyber outage, then launched their eCommerce arm.",
+    featured: false,
+    brandName: "Lifetime Brands (KitchenCraft)",
+    industry: "B2B",
+    headline:
+      "ITD covered Lifetime Brands within days of a carrier cyber outage",
+    metric: "Live in days",
+    summary:
+      "When a cyber incident at FedEx/TNT cut off Lifetime Brands' parcel collections, ITD stepped in on its local fleet within days to keep their B2B customers covered — then helped launch their new eCommerce arm on Evri with ZigZag returns.",
+    challenge:
+      "Lifetime Brands runs a B2B wholesale division and a newer eCommerce business. After a cyber incident with FedEx/TNT, they missed several days of parcel collections, with FedEx unable to collect.",
+    solution:
+      "ITD acted fast, starting collections on its local fleet to get Lifetime Brands' B2B customers covered while the trailer collection was set up. ITD then helped with the new eCommerce business, putting it on Evri and — though volumes were low to begin with — setting them up on the ZigZag returns portal so returns could run.",
+    result:
+      "A fast response kept B2B customers covered through the outage, and a strong working relationship helped ITD retain and grow the account as the eCommerce arm scaled. They know they can rely on ITD to react when they need it.",
+    stats: [
+      { value: "Days", label: "To restore collections", sub: "local fleet covered the FedEx/TNT outage", featured: true },
+      { value: 2, label: "Business arms served", sub: "B2B wholesale + new eCommerce" },
+      { value: "ZigZag", label: "Returns live", sub: "returns portal set up for eCommerce" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Kitchenware / Homeware" },
+      { label: "ICP", value: "B2B + eCommerce" },
+      { label: "Market", value: "UK Domestic" },
+      { label: "Carriers", value: "Evri (eCommerce)" },
+      { label: "Service", value: "B2B collections + eCommerce parcel & returns" },
+      { label: "Key Feature", value: "Rapid carrier-outage cover + ZigZag returns" },
+    ],
+    shippingTypes: ["Domestic"],
+    carriers: ["evri"],
+    integrations: ["connexx"],
+    solutions: ["B2B", "eCommerce"],
+  },
+  {
+    id: "17",
+    slug: "wenrit-global",
+    primarySegment: "3PL",
+    segments: ["3PL"],
+    outcomes: ["Win new business", "Get control"],
+    headlineResult: "~2,000 parcels/day",
+    oneLiner:
+      "A large-parcel solution for flatpack furniture where the incumbent couldn't cope — around 2,000 parcels a day.",
+    featured: false,
+    brandName: "Wenrit Global",
+    industry: "3PL",
+    headline:
+      "ITD solved large-parcel fulfilment for Wenrit where others couldn't",
+    metric: "~2,000 parcels/day",
+    summary:
+      "When Wenrit Global's carrier couldn't handle larger parcels for flatpack furniture and household items, ITD stepped in with a large-parcel solution — supporting £750k+ of annual spend across roughly 2,000 parcels a day.",
+    challenge:
+      "Wenrit Global is a fulfilment company serving a wide range of Chinese clients who ship goods from China and sell on Amazon, distributing flatpack furniture and household items from UK warehouses. Their existing supplier couldn't meet their requirements for larger parcels.",
+    solution:
+      "ITD stepped in with a large-parcel solution built for flatpack furniture and bulky household items, scaling to the operation's volume. With an annual spend of £750k+, Wenrit fills two to four trailers on an average day — around 2,000 parcels — and ITD's account management helps direct the business and grow sales.",
+    result:
+      "ITD solved the large-parcel problem the incumbent couldn't, and a close, multi-year relationship built on a 'can do' attitude — where no obstacle is too big — has led to referrals to numerous new clients.",
+    stats: [
+      { value: "2,000", label: "Parcels per day", sub: "two to four trailers on an average day", featured: true },
+      { value: 750, prefix: "£", suffix: "k+", label: "Annual spend supported", sub: "large-parcel furniture & household goods" },
+      { value: "6+", suffix: " yrs", label: "Partnership", sub: "relationship built over many years" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Furniture / Homeware" },
+      { label: "ICP", value: "3PL / Marketplace seller" },
+      { label: "Market", value: "China → UK (Amazon sellers)" },
+      { label: "Service", value: "Large-parcel delivery at scale" },
+      { label: "Key Feature", value: "Bulky flatpack capacity others couldn't match" },
+    ],
+    shippingTypes: ["Domestic"],
+    carriers: [],
+    integrations: ["connexx"],
+    solutions: ["3PL", "Marketplace"],
+    quotes: [
+      {
+        quote:
+          "I have worked closely with ITD Global for many years and the support and expertise from my account manager has been excellent. His knowledge of the logistics industry helps direct our business in the right direction and grow sales.",
+        name: "Wenrit Global",
+        title: "Fulfilment partner",
+        placement: "feature",
+      },
+    ],
+  },
+  {
+    id: "18",
+    slug: "red-label",
+    primarySegment: "eCommerce",
+    segments: ["eCommerce"],
+    outcomes: ["Save money", "Get control"],
+    headlineResult: "3,000 shipments/week",
+    oneLiner:
+      "One multi-carrier account streamlining 3,000 weekly beauty shipments under a single point of contact.",
+    featured: false,
+    brandName: "Red Label",
+    industry: "eCommerce",
+    headline:
+      "Red Label streamlined 3,000 weekly shipments under one multi-carrier account",
+    metric: "3,000 weekly shipments",
+    summary:
+      "A high-volume discount perfume and beauty retailer wanted first-rate carriers under one umbrella. ITD became their single point of contact, matching them to a multi-carrier solution that consistently streamlines 3,000 shipments a week.",
+    challenge:
+      "As a large, successful business with high demand, Red Label — known for discounted perfume and beauty — needed experienced logistics professionals to manage their shipments fast and efficiently, with a no-fuss solution for all their fulfilment needs.",
+    solution:
+      "ITD stepped in as a single point of contact for all of Red Label's shipping. They wanted a multitude of first-rate carriers under one umbrella, so ITD matched them to the best multi-carrier solution from its expansive network, with direct collections and competitive rates.",
+    result:
+      "ITD consistently streamlines 3,000 weekly shipments for Red Label, making things easier across the business with direct collections, a multi-carrier solution and very competitive rates.",
+    stats: [
+      { value: "3,000", label: "Weekly shipments", sub: "consistently streamlined", featured: true },
+      { value: 1, label: "Point of contact", sub: "multiple first-rate carriers under one account" },
+      { value: "Direct", label: "Collections", sub: "competitive multi-carrier rates" },
+    ],
+    atGlance: [
+      { label: "Industry", value: "Health & Beauty" },
+      { label: "ICP", value: "Enterprise / eCommerce" },
+      { label: "Market", value: "UK Domestic" },
+      { label: "Service", value: "Multi-carrier under one account" },
+      { label: "Key Feature", value: "Single point of contact across carriers" },
+    ],
+    shippingTypes: ["Domestic"],
+    carriers: [],
+    integrations: ["connexx"],
+    solutions: ["eCommerce", "Enterprise"],
+    quotes: [
+      {
+        quote:
+          "I'm very happy with the service ITD provide — direct collections, multi-carrier solutions and much more. They've streamlined and made things a lot easier for us as a business and provide very competitive rates.",
+        name: "Red Label",
+        title: "Discount beauty retailer",
+        placement: "feature",
+      },
+    ],
   },
 ];
 
