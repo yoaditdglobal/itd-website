@@ -7,8 +7,8 @@
 
 [build.environment]
   # Pin the Node version so local machines and Netlify build the same way.
-  # Matches .nvmrc. Next.js 16 requires Node >= 20.
-  NODE_VERSION = "20"
+  # Matches .nvmrc. Node 20 reached EOL on 30 Apr 2026; targeting Node 22 LTS.
+  NODE_VERSION = "22"
 
 # Production = the `main` branch (Netlify deploys this to the live site).
 # Deploy Previews are generated automatically for every pull request opened
