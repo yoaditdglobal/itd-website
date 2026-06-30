@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/chat/knowledge";
+import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 
 // Connexx Assistant streaming endpoint. Streams Claude Haiku 4.5 token-by-token
 // over a ReadableStream of plain UTF-8 text. Degrades gracefully when the API key
@@ -19,19 +20,6 @@ interface InboundMessage {
   content: string;
 }
 
-// ── Tiny in-memory per-IP rate limiter (best-effort; resets on redeploy) ──
-const WINDOW_MS = 60_000;
-const MAX_PER_WINDOW = 20;
-const hits = new Map<string, number[]>();
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > MAX_PER_WINDOW;
-}
-
 function textStream(text: string): Response {
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -46,12 +34,9 @@ function textStream(text: string): Response {
 }
 
 export async function POST(req: Request) {
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown";
+  const ip = clientIp(req);
 
-  if (rateLimited(ip)) {
+  if (rateLimit(ip, { windowMs: 60_000, max: 20, bucket: "chat" })) {
     return textStream(
       "You're sending messages a little fast — give me a moment and try again.",
     );
