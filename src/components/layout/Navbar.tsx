@@ -60,12 +60,13 @@ const integrationsMenu = {
 };
 
 const resourcesMenu = {
-  // Only populated solution facets — empty solutions (Marketplace, B2B) must
-  // not appear until a story exists for them. Links deep-link the library's
+  // Only populated solution facets — empty solutions (Marketplace) must not
+  // appear until a story exists for them. Links deep-link the library's
   // ?solution= filter (server-rendered, shareable).
   customerStories: [
     { name: "eCommerce", href: "/resources/case-studies?solution=ecommerce" },
     { name: "3PL", href: "/resources/case-studies?solution=3pl" },
+    { name: "B2B", href: "/resources/case-studies?solution=b2b" },
     { name: "Import", href: "/resources/case-studies?solution=import" },
     { name: "Export", href: "/resources/case-studies?solution=export" },
     { name: "Freight", href: "/resources/case-studies?solution=freight" },
