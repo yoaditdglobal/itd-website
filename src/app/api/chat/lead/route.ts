@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { routeLead, type FunnelAnswers } from "@/lib/chat/funnel";
 import Anthropic from "@anthropic-ai/sdk";
+import { createLead, findRecentLeadByEmail, isZohoConfigured } from "@/lib/server/zoho";
+import { getNotifyEmails } from "@/lib/server/env";
+import { splitName, emailTeam } from "@/lib/server/leads";
 
 /**
  * POST /api/chat/lead — capture + route a lead from the ITD Global chat widget.
@@ -13,52 +15,12 @@ import Anthropic from "@anthropic-ai/sdk";
  *     server-side via routeLead() so routing never trusts a client-stamped value.
  *   • Callback / free-text — name + email + consent only (requestedHuman=true).
  *
- * Persists to the Supabase `chat_leads` table with the service-role key
- * (server-only). When Supabase isn't configured (local dev) it logs and returns
- * success so the widget flow still completes end-to-end. De-dupes on email
- * within 24h. Zoho routing is stubbed (see routeToZoho) until the CRM is wired.
- *
- * Table (run in Supabase SQL editor):
- *   create table if not exists chat_leads (
- *     id uuid primary key default gen_random_uuid(),
- *     session_id text,
- *     name text not null,
- *     email text not null,
- *     company text,
- *     phone text,
- *     postcode text,
- *     current_carrier text,
- *     pain text,
- *     transcript jsonb,
- *     product_type text,
- *     direction text,
- *     trade_direction text,
- *     lanes jsonb,
- *     volume_band text,
- *     segment text,
- *     icp_journey int,
- *     journey_name text,
- *     route_to text,
- *     intent_grade text,
- *     requested_human boolean default false,
- *     source text default 'website-chat',
- *     created_at timestamptz default now()
- *   );
- *   -- If upgrading an existing table:
- *   -- alter table chat_leads add column if not exists phone text,
- *   --   add column if not exists postcode text,
- *   --   add column if not exists current_carrier text,
- *   --   add column if not exists product_type text,
- *   --   add column if not exists direction text,
- *   --   add column if not exists trade_direction text,
- *   --   add column if not exists lanes jsonb,
- *   --   add column if not exists volume_band text,
- *   --   add column if not exists segment text,
- *   --   add column if not exists icp_journey int,
- *   --   add column if not exists journey_name text,
- *   --   add column if not exists route_to text,
- *   --   add column if not exists intent_grade text,
- *   --   add column if not exists requested_human boolean default false;
+ * Persists to Zoho CRM as a Lead (Lead_Source "Chat"). The funnel's ICP fields
+ * have no dedicated Zoho columns, so they're packed into the Qualification field
+ * (+ Current_Carrier). De-dupes on email within 24h via COQL (the Leads Email
+ * field has no built-in dup-check). A "hot" / requested-human lead emails sales
+ * immediately. Degrades gracefully when Zoho isn't configured (logs + emails the
+ * team) so the widget flow always completes.
  */
 
 export const runtime = "nodejs";
@@ -91,30 +53,9 @@ const leadSchema = z.object({
   website: z.string().max(0).optional(),
 });
 
-/**
- * Push a qualified lead into Zoho CRM (lead create → ICP journey field →
- * BDM/queue routing → notify on `hot`). Stubbed until the Zoho app is wired:
- * needs ZOHO_* env (client id/secret/refresh token, org id) and the field map
- * from SPEC §9. No-op (and never throws) so lead capture is never blocked.
- */
-async function routeToZoho(
-  row: Record<string, unknown>,
-): Promise<{ routed: boolean }> {
-  if (!process.env.ZOHO_REFRESH_TOKEN) return { routed: false };
-  try {
-    // TODO: exchange refresh token → access token, POST /crm/v3/Leads with the
-    // mapped fields, set Layout/Owner per row.route_to, trigger a hot alert.
-    void row;
-    return { routed: false };
-  } catch {
-    return { routed: false };
-  }
-}
-
 // Free-text / callback leads carry no guided answers. Extract qualification from
 // the chat transcript so the sales record still has volume / carrier / segment to
-// route on (BRIEF: "save the chat as a lead with the commercial data"). Best-effort:
-// returns {} when the AI key is absent or the response isn't usable.
+// route on. Best-effort: returns {} when the AI key is absent or unusable.
 const extractionSchema = z.object({
   productType: z.enum(["parcels", "freight", "both"]).optional(),
   direction: z.enum(["domestic", "international", "both"]).optional(),
@@ -178,8 +119,12 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
-
   const d = parsed.data;
+
+  // Honeypot triggered — pretend success.
+  if (d.website && d.website.length > 0) {
+    return NextResponse.json({ success: true }, { status: 200 });
+  }
 
   // Guided answers when present; otherwise enrich a free-text lead from the transcript.
   const answers: FunnelAnswers = {
@@ -206,77 +151,85 @@ export async function POST(request: Request) {
   }
   // Recompute routing from the resolved answers — never trust a client-stamped journey.
   const routing = qualified ? routeLead(answers) : null;
+  const intentGrade = routing?.intentGrade ?? (d.requestedHuman ? "hot" : null);
 
-  const row = {
-    session_id: d.sessionId || null,
-    name: d.name,
-    email: d.email,
-    company: d.company || null,
-    phone: d.phone || null,
-    postcode: d.postcode || null,
-    current_carrier: currentCarrier,
-    pain: d.pain || null,
-    transcript: d.transcript ?? null,
-    product_type: answers.productType ?? null,
-    direction: answers.direction ?? null,
-    trade_direction: answers.tradeDirection ?? null,
-    lanes: answers.lanes ?? null,
-    volume_band: answers.volumeBand ?? null,
-    segment: answers.segment ?? null,
-    icp_journey: routing?.icpJourney ?? null,
-    journey_name: routing?.journeyName ?? null,
-    route_to: routing?.routeTo ?? null,
-    intent_grade: routing?.intentGrade ?? (d.requestedHuman ? "hot" : null),
-    requested_human: d.requestedHuman ?? false,
-    source: "website-chat",
+  // The funnel's ICP data has no dedicated Zoho fields — summarise into Qualification.
+  const qualification = [
+    routing && `ICP journey ${routing.icpJourney}: ${routing.journeyName}`,
+    routing && `Route to: ${routing.routeTo}`,
+    intentGrade && `Intent: ${intentGrade}`,
+    answers.productType && `Product: ${answers.productType}`,
+    answers.direction && `Direction: ${answers.direction}`,
+    answers.tradeDirection && `Trade direction: ${answers.tradeDirection}`,
+    answers.lanes?.length && `Lanes: ${answers.lanes.join(", ")}`,
+    answers.volumeBand && `Weekly volume band: ${answers.volumeBand}`,
+    answers.segment && `Segment: ${answers.segment}`,
+    d.requestedHuman && "Requested a human",
+    d.postcode && `Postcode: ${d.postcode}`,
+    d.pain && `Pain: ${d.pain}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const { first, last } = splitName(d.name);
+  const leadFields: Record<string, unknown> = {
+    Last_Name: last,
+    First_Name: first || undefined,
+    Company: d.company || "(not provided)",
+    Email: d.email,
+    Phone: d.phone || undefined,
+    Lead_Source: "Chat",
+    Current_Carrier: currentCarrier || undefined,
+    Qualification: qualification || undefined,
   };
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const notify = getNotifyEmails();
+  const isHot = intentGrade === "hot" || d.requestedHuman === true;
 
-  if (!url || !serviceKey || url.includes("placeholder")) {
-    // Not configured yet — don't lose the lead silently; log it for now.
-    console.warn("[/api/chat/lead] Supabase not configured; lead not persisted:", {
+  // Not configured (local dev / before Phase-0 secrets) — never lose the lead.
+  if (!isZohoConfigured()) {
+    console.warn("[/api/chat/lead] Zoho not configured; lead not persisted:", {
       name: d.name,
       email: d.email,
       company: d.company,
       journey: routing?.journeyName ?? "(unqualified)",
-      intent: row.intent_grade,
+      intent: intentGrade,
       routeTo: routing?.routeTo,
+    });
+    await emailTeam({
+      to: notify.leads,
+      subject: `${isHot ? "🔥 Hot " : "New "}chat lead — ${d.company || d.email}`,
+      rows: { ...d, qualification },
     });
     return NextResponse.json({ success: true, persisted: false, routing });
   }
 
   try {
-    const supabase = createClient(url, serviceKey, {
-      auth: { persistSession: false },
-    });
-
-    // De-dupe: skip a repeat insert from the same email within 24h.
-    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-    const { data: existing } = await supabase
-      .from("chat_leads")
-      .select("id")
-      .eq("email", d.email)
-      .gte("created_at", since)
-      .limit(1);
-    if (existing && existing.length > 0) {
+    if (await findRecentLeadByEmail(d.email, 24)) {
       return NextResponse.json({ success: true, persisted: false, deduped: true, routing });
     }
-
-    const { error } = await supabase.from("chat_leads").insert(row);
-    if (error) {
-      console.error("[/api/chat/lead] insert error:", error.message);
-      return NextResponse.json({ error: "Could not save your details" }, { status: 500 });
+    const { id } = await createLead(leadFields);
+    if (isHot) {
+      await emailTeam({
+        to: notify.leads,
+        subject: `🔥 Hot chat lead — ${d.company || d.email}`,
+        intro: `Route to: ${routing?.routeTo ?? "sales"}. Zoho lead ${id}.`,
+        rows: { name: d.name, email: d.email, company: d.company, phone: d.phone, qualification },
+      });
     }
-
-    // Fire-and-forget CRM routing (no-op until Zoho is wired). Never blocks the user.
-    await routeToZoho(row);
-
     return NextResponse.json({ success: true, persisted: true, routing });
   } catch (err) {
-    console.error("[/api/chat/lead] unexpected error:", err);
-    return NextResponse.json({ error: "Could not save your details" }, { status: 500 });
+    console.error(
+      "[/api/chat/lead] Zoho createLead failed:",
+      err instanceof Error ? err.message : err,
+    );
+    const emailed = await emailTeam({
+      to: notify.leads,
+      subject: `⚠ Chat lead (CRM write failed) — ${d.company || d.email}`,
+      intro: "Zoho lead create failed — captured here as a fallback.",
+      rows: { ...d, qualification },
+    });
+    // Soft success to the user; lead preserved via email.
+    return NextResponse.json({ success: true, persisted: false, fallbackEmailed: emailed, routing });
   }
 }
