@@ -841,6 +841,7 @@ export const caseStudies: CaseStudy[] = [
       "By securing consistent rail freight capacity from China throughout the disruption, ITD Global ensured Cummins' production lines never stopped for lack of parts. Multiple routes and departure schedules gave Cummins the freight resilience to absorb shocks elsewhere in the global supply chain, daily shipment reports and site-level Zoom calls gave every plant clear, current information on what was moving and when, and transit times and invoicing remained accurate and on schedule throughout 2021 — even as the wider industry struggled with delay and disruption.",
     heroImage: "/case-studies/cummins/hero.jpg",
     heroImageAlt: "Cummins power unit on a rail-served production line",
+    logo: "/case-studies/cummins/logo.png",
     stats: [
       { value: "Zero", label: "Line Stops", sub: "across European plants throughout the disruption", featured: true },
       { value: 13, label: "China rail terminals", sub: "block trains + daily departures" },
