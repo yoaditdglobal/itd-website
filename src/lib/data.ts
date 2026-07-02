@@ -777,27 +777,30 @@ export const caseStudies: CaseStudy[] = [
     brandName: "Sifcon International",
     industry: "Import",
     headline:
-      "Sifcon cut courier costs up to 35% with sample consolidation from China",
-    metric: "Up to 35% annual saving",
+      "How Sifcon International saved up to 35% a year with sample consolidation from China",
+    metric: "Up to 35% annual savings",
     summary:
-      "A leading supplier of gifts and interior accessories to major retailers moved its Express Courier and China sample flow to ITD, combining a bi-weekly consolidation service with more competitive rates for annual savings of up to 35%.",
+      "Sifcon International PLC is a leading supplier of gifts and interior accessories, supplying almost every department from home and garden to kitchen, bathroom, baby, pets and arts and crafts. Their core range and bespoke options sit on the shelves of all major retailers, DIY and garden chains and supermarkets — and with product development running constantly across multiple departments, the flow of samples in and out of China is a daily reality of the business.",
     challenge:
-      "Sifcon came to ITD with existing service and pricing issues on their Express Courier, so ITD stepped in with industry expertise and cost-effective solutions.",
+      "Sifcon came to ITD Global with existing service and pricing issues on their Express Courier. Rates were uncompetitive and the relationship lacked the logistics expertise the business needed to plan effectively around UK and European trade fairs.",
     solution:
-      "Understanding Sifcon's volumes and profile, ITD took a two-pronged approach to importing their samples. For UK and European trade fairs, ITD worked closely with the team on a sample consolidation service so they could plan and coordinate better. Year-round, ITD supplied and managed Express Courier rates more competitive than working directly with the carrier, with better communication throughout.",
+      "ITD Global took the time to understand Sifcon's volumes and shipping profile, then built a two-pronged approach. For trade fairs and SMS deadlines, ITD Global introduced a sample consolidation service from China, helping the team plan and coordinate with far more confidence. Throughout the rest of the year, ITD Global supplied and managed more competitive Express Courier rates than Sifcon could access going direct to the carrier.",
     result:
-      "Better courier communication and a bi-weekly sample consolidation service from China delivered annual savings of upwards of 35%.",
+      "Combining managed Express Courier rates with the sample consolidation service delivered savings of up to 35% a year on Sifcon's international shipping. A structured bi-weekly consolidation service from China gave the team a predictable rhythm for trade fair samples, replacing ad hoc shipments with proper planning, while moving Express Courier management to ITD Global improved both communication with the carrier and the commercial terms. Quotations and collection confirmations came back promptly, giving Sifcon's buying team the responsiveness they needed to keep product moving.",
+    heroImage: "/case-studies/sifcon-international/hero.jpg",
+    heroImageAlt: "Sifcon International home fragrance gift sets",
+    logo: "/case-studies/sifcon-international/logo.png",
     stats: [
-      { value: 35, prefix: "Up to ", suffix: "%", label: "Annual saving", sub: "vs working directly with the carrier", featured: true },
-      { value: "Bi-weekly", label: "China consolidation", sub: "sample shipments combined from China" },
-      { value: "2-prong", label: "Import approach", sub: "trade-fair consolidation + year-round courier" },
+      { value: 35, prefix: "Up to ", suffix: "%", label: "Annual savings", sub: "on Express Courier and sample shipping", featured: true },
+      { value: "Bi-weekly", label: "Sample consolidation", sub: "a predictable rhythm for trade fair samples" },
+      { value: "Prompt", label: "Quotes & collections", sub: "the responsiveness to keep product moving" },
     ],
     atGlance: [
-      { label: "Industry", value: "Homeware / Giftware" },
-      { label: "ICP", value: "B2B / Import" },
-      { label: "Market", value: "China → UK & Europe" },
-      { label: "Service", value: "Express Courier + sample consolidation" },
-      { label: "Key Feature", value: "Bi-weekly China sample consolidation" },
+      { label: "Industry", value: "Gifts & Interior Accessories" },
+      { label: "ICP", value: "International Import" },
+      { label: "Market", value: "China to UK and Europe" },
+      { label: "Key Feature", value: "Bi-weekly sample consolidation from China" },
+      { label: "Result", value: "Up to 35% annual savings on Express Courier and sample shipping" },
     ],
     shippingTypes: ["International Import"],
     carriers: [],
@@ -806,9 +809,9 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "Our experience with ITD has been positive and we have no problems continuing our business relationship. Quotations come back to us quickly and confirmation of collection is prompt. We have no problem recommending ITD to other businesses.",
+          "Our experience with ITD has been positive and we have no problems with continuing our business relationship. Emailed quotations come back to us quickly and confirmation of collection is prompt. We have no problems in recommending ITD to other businesses.",
         name: "Scott",
-        title: "Buying Director, Sifcon International",
+        title: "Buying Director, Sifcon International PLC",
         placement: "feature",
       },
     ],
@@ -826,27 +829,30 @@ export const caseStudies: CaseStudy[] = [
     brandName: "Cummins",
     industry: "Import",
     headline:
-      "ITD kept Cummins' plants running with China-to-Europe rail freight",
-    metric: "Zero line stops",
+      "How Cummins kept European plants running with rail freight from China during global disruption",
+    metric: "Zero Line Stop",
     summary:
-      "When the pandemic and the Suez Canal blockage hit Cummins' European supply chain, ITD moved automotive material from China to Europe by rail — block trains and daily departures from 13 terminals, with daily reporting that kept plants off 'Line Stop'.",
+      "Cummins is a global power technology leader, designing, engineering, manufacturing and distributing engines and related technologies through more than 7,000 locations worldwide. With over 60,000 people across 190 countries and sales above $23.5 billion, the scale of the operation means any disruption to incoming parts has an immediate impact on production.",
     challenge:
-      "During Covid-19, Cummins faced major supply chain issues across its European warehouses, compounded by the Ever Given blocking the Suez Canal in 2021. With no solutions at hand, they needed a partner who could step in quickly to support UK and European facilities.",
+      "Like much of global manufacturing, Cummins faced major supply chain disruption during the Covid-19 pandemic, compounded further when the Ever Given blockage closed the Suez Canal in 2021. With container capacity disrupted across the board, Cummins needed a freight partner who could move quickly with no existing solution in place.",
     solution:
-      "ITD supported Cummins on service and communication across all their European facilities, arranging and managing containers from mainland China into the UK and Europe by rail freight. A combination of block trains and daily departures from 13 terminals in China kept Cummins' plants off 'Line Stop'. ITD prepared and distributed daily reports of every live movement and ran daily Zoom calls with each plant to ensure transit from start to finish.",
+      "ITD Global stepped in to support Cummins' UK and European facilities on both service and communication, arranging and managing containers from mainland China into the UK and Europe via rail freight — combining block trains and daily departures from 13 terminals across China to keep capacity flowing. Daily reports of live movements were distributed across every Cummins plant, backed by daily Zoom meetings with individual sites to keep the transit running from start to finish.",
     result:
-      "Cummins maintained continuity of capacity and service through a period of severe global disruption, with accurate, timely transit and invoicing and no line stops across its plants.",
+      "By securing consistent rail freight capacity from China throughout the disruption, ITD Global ensured Cummins' production lines never stopped for lack of parts. Multiple routes and departure schedules gave Cummins the freight resilience to absorb shocks elsewhere in the global supply chain, daily shipment reports and site-level Zoom calls gave every plant clear, current information on what was moving and when, and transit times and invoicing remained accurate and on schedule throughout 2021 — even as the wider industry struggled with delay and disruption.",
+    heroImage: "/case-studies/cummins/hero.jpg",
+    heroImageAlt: "Cummins power unit on a rail-served production line",
+    logo: "/case-studies/cummins/logo.png",
     stats: [
-      { value: 13, label: "China rail terminals", sub: "block trains + daily departures", featured: true },
-      { value: "Daily", label: "Live movement reports", sub: "plus daily plant Zoom calls" },
-      { value: "Zero", label: "Line stops", sub: "continuity held across European plants" },
+      { value: "Zero", label: "Line Stops", sub: "across European plants throughout the disruption", featured: true },
+      { value: 13, label: "China rail terminals", sub: "block trains + daily departures" },
+      { value: "Daily", label: "Live reporting", sub: "shipment reports + site-level Zoom calls" },
     ],
     atGlance: [
-      { label: "Industry", value: "Automotive / Manufacturing" },
-      { label: "ICP", value: "Enterprise / Import" },
-      { label: "Market", value: "China → UK & Europe" },
-      { label: "Service", value: "Rail freight (China–Europe)" },
-      { label: "Key Feature", value: "Block trains + daily movement reporting" },
+      { label: "Industry", value: "Automotive & Power Technology" },
+      { label: "ICP", value: "International Freight" },
+      { label: "Market", value: "China to UK and Europe" },
+      { label: "Key Feature", value: "Rail freight from 13 China terminals, daily live shipment reporting" },
+      { label: "Result", value: "Zero Line Stop across European plants during global supply chain disruption" },
     ],
     shippingTypes: ["Freight"],
     carriers: [],
@@ -855,7 +861,7 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "ITD Global transported automotive material from China to Europe by rail during this difficult period in global transportation, and always ensured continuity of capacity and service. The team provide accurate and timely transit and invoicing, and gave excellent service throughout.",
+          "ITD Global transported automotive material from China to Europe by rail during this difficult period in global transportation; they have always ensured continuity of capacity and service. The team always provide accurate and timely transit and invoicing, and have provided excellent service during 2021.",
         name: "Cummins",
         title: "Global power technology manufacturer",
         placement: "feature",
@@ -875,27 +881,29 @@ export const caseStudies: CaseStudy[] = [
     brandName: "Regatta",
     industry: "Import",
     headline:
-      "ITD kept Regatta's supply chain moving with multi-modal Far East freight",
+      "How Regatta kept their supply chain moving through Covid-19 and the Suez Canal crisis",
     metric: "Supply kept moving",
     summary:
-      "When Covid and the Suez Canal blockage disrupted global shipping, ITD responded with charter vessels, rail freight from 13 China terminals, air freight and sea-air from Myanmar — keeping one of the UK's best-known outdoor brands stocked into its UK and Polish DCs.",
+      "Regatta is one of the best known outdoor and fashion brands in the UK, known for great, affordable products that let outdoor enthusiasts keep exploring without worrying about cost. The business started as a team of 12 and has since grown into an operation employing thousands.",
     challenge:
-      "During the pandemic Regatta faced major supply chain issues and rising global shipping challenges, worsened by the Ever Given wedging across the Suez Canal and disrupting worldwide trade.",
+      "During the Covid-19 pandemic, Regatta faced major supply chain disruption alongside the rest of the industry. The Ever Given vessel becoming wedged across the Suez Canal compounded the problem further, blocking hundreds of ships and disrupting trade worldwide. Regatta needed a freight partner who could respond fast, with real solutions rather than excuses.",
     solution:
-      "ITD responded quickly with a variety of services at competitive pricing across Regatta's supply chain: charter vessels from mainland China into the UK, rail freight from 13 terminals across China, and air freight for urgent POs from across Far East Asia. ITD also ran sea-air services from Myanmar into both Regatta's UK and Polish DCs. Throughout, ITD worked closely with the Regatta operations teams and gave them visibility through its live Freight Management Software, acting as one point of regular, transparent contact.",
+      "ITD Global responded quickly with a combination of services across Regatta's supply chain: charter vessels from mainland China into the UK, rail freight from 13 terminals across China, and air freight for urgent purchase orders from Far East Asia. ITD Global also provided sea-air services from Myanmar into both Regatta's UK and Polish distribution centres. Throughout, ITD Global worked closely with Regatta's operations team, with visibility provided through live Freight Management Software and regular, transparent communication.",
     result:
-      "Regatta kept a challenging supply chain moving through peak season and the pandemic using innovative, nimble solutions, with all shipment fulfilment needs met.",
+      "Despite the pandemic and the Suez Canal blockage, Regatta's supply chain continued operating without major interruption. Charter vessels, rail freight and air freight combined to give Regatta the flexibility to move stock by whichever route worked depending on urgency, while the sea-air solution from Myanmar kept both UK and Polish distribution centres supplied during a period when conventional routes were under pressure. Real-time tracking through live Freight Management Software and one point of regular, transparent contact kept Regatta's customers and internal teams informed and reassured throughout.",
+    heroImage: "/case-studies/regatta/hero.jpg",
+    logo: "/case-studies/regatta/logo.png",
     stats: [
-      { value: 4, label: "Freight modes used", sub: "charter, rail, air & sea-air", featured: true },
+      { value: 4, label: "Freight modes combined", sub: "charter vessel, rail, air & sea-air", featured: true },
       { value: 13, label: "China rail terminals", sub: "rail freight origins across China" },
-      { value: 2, label: "Destination DCs served", sub: "UK + Poland, incl. sea-air from Myanmar" },
+      { value: "Live", label: "Freight visibility", sub: "real-time Freight Management Software" },
     ],
     atGlance: [
-      { label: "Industry", value: "Fashion / Outdoor" },
-      { label: "ICP", value: "Enterprise / Import" },
-      { label: "Market", value: "Far East → UK & Poland" },
-      { label: "Service", value: "Charter, rail, air & sea-air" },
-      { label: "Key Feature", value: "Live Freight Management Software visibility" },
+      { label: "Industry", value: "Outdoor & Fashion Retail" },
+      { label: "ICP", value: "International Freight" },
+      { label: "Market", value: "China, Far East Asia and Myanmar to UK and Poland" },
+      { label: "Key Feature", value: "Combined charter vessel, rail and air freight, live Freight Management Software" },
+      { label: "Result", value: "Continued supply chain throughout Covid-19 and the Suez Canal blockage" },
     ],
     shippingTypes: ["Freight"],
     carriers: [],
@@ -904,7 +912,7 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "We have found ITD Global to be a professional and well-connected organisation. The service operation is excellent and we are kept well informed throughout. We've kept our challenging supply chain moving through peak season and the Covid pandemic using innovative, nimble solutions suggested by ITD. We'd highly recommend them to anyone who needs a partner who cares and offers solutions to real-time obstacles.",
+          "We have been working with ITD Global who we have found to be a professional and well-connected organisation. The service operation is excellent and we are kept well informed throughout the process. We have been able to keep our challenging supply chain moving throughout peak season and the Covid pandemic using innovative and nimble solutions suggested to us by ITD. We would highly recommend ITD Global to others who require a partner who cares and offers solutions to real-time obstacles.",
         name: "Regatta",
         title: "Outdoor & fashion brand",
         placement: "feature",
