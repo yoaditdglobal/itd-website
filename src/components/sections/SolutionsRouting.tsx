@@ -7,7 +7,12 @@ import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 import UsedByChip from "./UsedByChip";
-import { getCaseStudiesBySolution, type SolutionTag } from "@/lib/data";
+import {
+  getCaseStudiesBySolution,
+  SOLUTION_SLUGS,
+  type LibrarySegment,
+  type SolutionTag,
+} from "@/lib/data";
 
 interface Icp {
   name: string;
@@ -104,6 +109,13 @@ function UsedByCluster({ tag }: { tag: SolutionTag }) {
   if (studies.length === 0) return null;
   const visible = studies.slice(0, 3);
   const overflow = studies.length - visible.length;
+  // "+ N more" deep-links the filtered library when the tag is also a library
+  // facet (eCommerce/3PL/B2B/Import/Export/Freight); otherwise the full library.
+  const librarySlug =
+    tag in SOLUTION_SLUGS ? SOLUTION_SLUGS[tag as LibrarySegment] : undefined;
+  const moreHref = librarySlug
+    ? `/resources/case-studies?solution=${librarySlug}`
+    : "/resources/case-studies";
 
   return (
     <div>
@@ -132,7 +144,13 @@ function UsedByCluster({ tag }: { tag: SolutionTag }) {
           })}
         </div>
         {overflow > 0 && (
-          <span className="text-caption text-text-tertiary">+ {overflow} more</span>
+          <Link
+            href={moreHref}
+            className="text-caption text-text-tertiary underline-offset-2 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-sm"
+            aria-label={`See ${overflow} more customer stories`}
+          >
+            + {overflow} more
+          </Link>
         )}
       </div>
     </div>
