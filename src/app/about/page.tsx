@@ -44,13 +44,40 @@ const TIMELINE = [
   { year: "2022", title: "£15m BGF investment", body: "Secured a £15m investment from BGF to fuel the next phase of growth." },
 ];
 
-const OFFICES = [
+interface OfficeLocation {
+  city: string;
+  note: string;
+  address: string;
+  /** Display phone number; `telHref` is the tel: URI (E.164, no spaces). */
+  tel?: string;
+  telHref?: string;
+}
+
+const OFFICES: { region: string; locations: OfficeLocation[] }[] = [
   {
     region: "United Kingdom",
     locations: [
-      { city: "Manchester", note: "HQ", address: "Unit A, Birch Business Park, Heywood, OL10 2SX" },
-      { city: "London", note: "Depot", address: "Stonefield Close, Ruislip, HA4 0XT" },
-      { city: "Birmingham", note: "Depot", address: "Unit 6, Marple Business Park, Walter Street, Aston, B7 5ET" },
+      {
+        city: "Manchester",
+        note: "HQ",
+        address: "Unit A, Birch Business Park, Heywood, OL10 2SX",
+        tel: "0333 320 9993",
+        telHref: "tel:+443333209993",
+      },
+      {
+        city: "London",
+        note: "Depot",
+        address: "Stonefield Close, Ruislip, HA4 0XT",
+        tel: "+44 (0) 203 873 2897",
+        telHref: "tel:+442038732897",
+      },
+      {
+        city: "Birmingham",
+        note: "Depot",
+        address: "Unit 6, Marple Business Park, Walter Street, Aston, B7 5ET",
+        tel: "+44 (0) 121 359 6677",
+        telHref: "tel:+441213596677",
+      },
       { city: "Glasgow", note: "Depot", address: "Block 23, Unit 3, Motherwell Park, Bellshill, ML4 3NP" },
       { city: "Leeds", note: "Depot", address: "Unit 4, Latchmore Road, Elland, LS12 6DN" },
     ],
@@ -58,9 +85,9 @@ const OFFICES = [
   {
     region: "Asia Pacific",
     locations: [
-      { city: "Xiamen", note: "China office", address: "" },
-      { city: "Quanzhou", note: "China office", address: "" },
-      { city: "Shenzhen", note: "China office", address: "" },
+      { city: "Xiamen", note: "China office", address: "RM609, No. 61 Jinbei Garden, Jinchang Road, Huli District, Xiamen, Fujian" },
+      { city: "Quanzhou", note: "China office", address: "C-609, Dongfangmingzhu, Fengze District, Quanzhou, Fujian" },
+      { city: "Shenzhen", note: "China office", address: "No. 2, 1st Floor, Building 2, No. 2 Hehualing Road, Pinghu Street, Longgang District, Shenzhen" },
     ],
   },
   {
@@ -210,8 +237,12 @@ export default function AboutPage() {
       {/* Our people */}
       <MeetTheTeamGateway />
 
-      {/* Global presence */}
-      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+      {/* Global presence / office locations — deep-linked from the footer
+          ("Locations" → /about#locations). scroll-mt clears the fixed nav. */}
+      <section
+        id="locations"
+        className="scroll-mt-24 bg-bg-secondary py-16 md:py-24 border-t border-border"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-display-lg text-text-primary mb-4 text-center">
@@ -238,7 +269,20 @@ export default function AboutPage() {
                       {group.locations.map((loc) => (
                         <li key={loc.city} className="flex flex-col border-b border-border pb-3 last:border-0 last:pb-0">
                           <span className="text-heading-sm text-text-primary">{loc.city}, {loc.note}</span>
-                          {loc.address && <span className="text-body-sm text-text-secondary mt-0.5">{loc.address}</span>}
+                          {loc.address && (
+                            <address className="not-italic text-body-sm text-text-secondary mt-0.5">
+                              {loc.address}
+                            </address>
+                          )}
+                          {loc.tel && loc.telHref && (
+                            <a
+                              href={loc.telHref}
+                              className="mt-1 inline-flex w-fit text-body-sm font-medium text-accent hover:underline underline-offset-2"
+                              aria-label={`Call the ${loc.city} office on ${loc.tel}`}
+                            >
+                              {loc.tel}
+                            </a>
+                          )}
                         </li>
                       ))}
                     </ul>
