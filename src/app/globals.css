@@ -460,6 +460,36 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .page-enter { animation: none; }
 }
 
+/* Case-study hover card (Radix HoverCard content, src/components/ui/hover-card.tsx).
+   The card always animates FROM its trigger chip: when Radix places it below
+   the chip (data-side="bottom") it enters moving down away from the chip, and
+   when flipped above (data-side="top") it enters moving up. Enter 160ms
+   ease-out; exit a faster 100ms fade. transform/opacity only. */
+@keyframes hover-card-in-below {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes hover-card-in-above {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes hover-card-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.hover-card-content[data-state="open"][data-side="bottom"] {
+  animation: hover-card-in-below 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-card-content[data-state="open"][data-side="top"] {
+  animation: hover-card-in-above 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-card-content[data-state="closed"] {
+  animation: hover-card-out 100ms ease-in;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-card-content { animation: none !important; }
+}
+
 /* Connexx ecosystem orbit — radar-style rotating layers on /connexx.
    The two orbit wrappers spin at slightly different speeds in opposite
    directions; each child pill gets a counter-rotation so the brand text

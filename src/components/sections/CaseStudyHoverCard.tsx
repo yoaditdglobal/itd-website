@@ -37,9 +37,9 @@ export default function CaseStudyHoverCard({ cs }: { cs: CaseStudyPreview }) {
   const initial = cs.quoteAuthor?.trim().charAt(0).toUpperCase() ?? "";
 
   return (
-    <div className="w-72 rounded-xl border border-border bg-white p-4 shadow-xl">
+    <div className="w-80 rounded-xl border border-border bg-white p-4 shadow-xl">
       <div className="flex items-center gap-2.5">
-        <span className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1">
+        <span className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1">
           <IntegrationLogo name={cs.brandName} logo={cs.logo} size="sm" />
         </span>
         <p className="text-label text-text-primary">{cs.brandName}</p>
