@@ -942,6 +942,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD acted fast, starting collections on its local fleet to get Lifetime Brands' B2B customers covered while the trailer collection was set up. ITD then helped with the new eCommerce business, putting it on Evri and — though volumes were low to begin with — setting them up on the ZigZag returns portal so returns could run.",
     result:
       "A fast response kept B2B customers covered through the outage, and a strong working relationship helped ITD retain and grow the account as the eCommerce arm scaled. They know they can rely on ITD to react when they need it.",
+    logo: "/case-studies/lifetime-brands/logo.png",
     stats: [
       { value: "Days", label: "To restore collections", sub: "local fleet covered the FedEx/TNT outage", featured: true },
       { value: 2, label: "Business arms served", sub: "B2B wholesale + new eCommerce" },
