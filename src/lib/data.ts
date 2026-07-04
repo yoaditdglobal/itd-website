@@ -666,34 +666,33 @@ export const caseStudies: CaseStudy[] = [
     outcomes: ["Save money", "Get control"],
     headlineResult: "Drop-offs gone",
     oneLiner:
-      "Swapped daily parcel-shop drop-offs for a bespoke daily collection and better multi-carrier rates.",
+      "Swapped daily parcel-shop drop-offs for a dedicated collection service and lower shipping costs.",
     featured: false,
     brandName: "Saime Trading",
-    industry: "eCommerce",
+    industry: "Wholesale & Retail",
     headline:
-      "Saime Trading swapped daily drop-offs for a collection service and lower rates",
+      "How Saime Trading ditched the daily drop off and cut their shipping costs",
     metric: "Daily collections",
     summary:
-      "A small UK online seller moved off self-service parcel-shop drop-offs onto ITD's rule-based booking portal and a bespoke daily collection, with multi-carrier rates that beat what they were paying.",
+      "Saime Trading is a UK-based wholesale and retail business shipping parcels to customers across the country. Their parcel delivery operation had grown around what was available rather than what actually worked: every day, someone from the team was physically dropping off parcels at a shop counter. ITD Global replaced the daily drop off with a dedicated collection service and a multi-carrier booking portal, cutting their shipping costs against what they had been paying.",
     challenge:
-      "Before partnering with ITD Global, Saime Trading faced significant challenges in their shipping process. The main issues were large shipping charges and the inconvenience of personally dropping shipments off at parcel shops — time-consuming and inefficient.",
+      "Saime Trading were paying high shipping costs and manually dropping off every parcel at a local shop, every single day. There was no courier collection in place, no account management, and no one looking at whether the rates reflected the volume they were sending. For a business trying to grow, the daily drop off routine was a drain on time that should have gone elsewhere.",
     solution:
-      "ITD set Saime Trading up on its rule-based booking portal, which integrates with shopping carts and modern marketplaces, and introduced a bespoke daily collection service so the team no longer had to drop parcels off themselves. ITD's buying power across multiple carriers brought rates down versus their previous setup, while an in-house customer service team and dedicated account management kept day-to-day shipping running smoothly.",
+      "ITD Global replaced the daily drop off with a proper shipment booking portal and a dedicated collection service — Saime Trading no longer needed to leave the building to get a parcel out the door. Using ITD Global's buying power and multi-carrier network, we brought their shipping costs down significantly compared to what they had been paying. A dedicated account manager and in-house customer service team backed the whole thing, so there was always someone to call when something needed sorting.",
     result:
-      "The streamlined process delivered real time and cost savings and freed Saime Trading to focus on the core business instead of logistics. Collections replaced daily drop-offs, rates improved, and queries were resolved quickly through one account team.",
+      "A dedicated collection service replaced the daily trip to the shop counter, giving the team that time back. The online booking portal integrates directly with shopping carts and marketplaces, removing manual admin from the parcel delivery process. Through ITD Global's buying power and access to multiple carriers, Saime Trading secured shipping costs lower than their previous setup without compromising on service — backed by dedicated customer service and account management as a consistent point of contact.",
     logo: "/case-studies/saime-trading/logo.png",
     stats: [
-      { value: "Lower", label: "Shipping rates", sub: "multi-carrier buying power vs their previous setup", featured: true },
-      { value: "Daily", label: "Collections", sub: "bespoke pickup replaced parcel-shop drop-offs" },
-      { value: "1", label: "Account team", sub: "in-house service + dedicated account management" },
+      { value: "Lower", label: "Shipping costs", sub: "multi-carrier buying power vs their previous setup", featured: true },
+      { value: "Daily", label: "Collections", sub: "dedicated collection replaced parcel-shop drop-offs" },
+      { value: "1", label: "Account team", sub: "dedicated account management + in-house customer service" },
     ],
     atGlance: [
-      { label: "Industry", value: "Homeware" },
-      { label: "ICP", value: "Retail / eCommerce (SME)" },
+      { label: "Industry", value: "Wholesale & Retail, eCommerce" },
+      { label: "ICP", value: "Domestic Parcel" },
       { label: "Market", value: "UK Domestic" },
-      { label: "Carriers", value: "Evri (collection)" },
-      { label: "Service", value: "Daily collection + rule-based booking portal" },
-      { label: "Key Feature", value: "Multi-carrier rates without daily drop-offs" },
+      { label: "Key Feature", value: "Daily collection service, multi-carrier booking portal" },
+      { label: "Services", value: "Courier rate access, shipment booking, dedicated account management" },
     ],
     shippingTypes: ["Domestic"],
     carriers: ["evri"],
@@ -702,14 +701,14 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "Reasons for switching to ITD Global are many — time savings, as ITD does the collection, and better rates than I was paying. The feedback I'd had about working with ITD from other suppliers was another reason.",
+          "Though I use Evri, it's not an Evri collection. I use the shop drop-off service; I have to drop off the parcels every day myself. Reasons for switching to ITD Global are many, such as time savings as ITD will do collection service. Better rates are offered compared to what I was paying.",
         name: "Hassan",
         title: "Saime Trading",
         placement: "inline",
       },
       {
         quote:
-          "ITD has surpassed my expectations in a very short period of time. The communication from the account management and IT team stands out — they're always on hand and resolve any queries quickly. I had heard great things about ITD Global; now I vouch for the same.",
+          "ITD has surpassed my expectations in a very short period of time. Key reasons being the communication from the account management and IT team. They are always on hand and make this very apparent from the way they communicate and how quickly they resolve any queries.",
         name: "Hassan",
         title: "Saime Trading",
         placement: "feature",
