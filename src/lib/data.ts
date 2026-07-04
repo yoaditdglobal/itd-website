@@ -681,6 +681,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD set Saime Trading up on its rule-based booking portal, which integrates with shopping carts and modern marketplaces, and introduced a bespoke daily collection service so the team no longer had to drop parcels off themselves. ITD's buying power across multiple carriers brought rates down versus their previous setup, while an in-house customer service team and dedicated account management kept day-to-day shipping running smoothly.",
     result:
       "The streamlined process delivered real time and cost savings and freed Saime Trading to focus on the core business instead of logistics. Collections replaced daily drop-offs, rates improved, and queries were resolved quickly through one account team.",
+    logo: "/case-studies/saime-trading/logo.png",
     stats: [
       { value: "Lower", label: "Shipping rates", sub: "multi-carrier buying power vs their previous setup", featured: true },
       { value: "Daily", label: "Collections", sub: "bespoke pickup replaced parcel-shop drop-offs" },
