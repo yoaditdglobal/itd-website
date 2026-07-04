@@ -53,6 +53,16 @@ export function organizationSchema() {
     description: SITE_DESCRIPTION,
     foundingLocation: { "@type": "Place", name: ORG_FOUNDING_LOCATION },
     areaServed: ORG_AREA_SERVED.map((name) => ({ "@type": "Place", name })),
+    // Head office (Manchester HQ) — the full office list renders on
+    // /about#locations; the org schema carries the registered HQ.
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Unit A, Birch Business Park",
+      addressLocality: "Heywood, Manchester",
+      postalCode: "OL10 2SX",
+      addressCountry: "GB",
+    },
+    telephone: "+44 333 320 9993",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Sales",
