@@ -28,9 +28,9 @@ const HEADING = (
   </>
 );
 const SUB =
-  "ITD Global is the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, and exporters — every active carrier on every parcel, one dashboard.";
-const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
-const SECONDARY = { label: "Contact Us", href: "/contact" };
+  "We are the logistics partner and multi-carrier platform behind UK retailers, marketplace sellers, 3PLs, importers and exporters.";
+const PRIMARY = { label: "Get Quote Now", href: RATE_CHECKER_URL };
+const SECONDARY = { label: "Contact Sales", href: "/contact" };
 
 interface VideoHeroCta {
   label: string;

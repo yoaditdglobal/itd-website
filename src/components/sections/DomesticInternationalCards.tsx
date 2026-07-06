@@ -9,7 +9,7 @@ const cards: HeroShippingCardData[] = [
   {
     iconNode: <Truck className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
     title: "UK domestic parcel delivery",
-    body: "One screen for every UK carrier. Royal Mail, DPD, Evri, InPost, Amazon Shipping, and Parcel Force — every postcode, including Highlands, Islands, and NI.",
+    body: "All the UK carriers in one place, out to the Highlands, the Islands and Northern Ireland.",
     audiences: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "SMEs"],
     href: "/shipping/domestic",
     image: {
@@ -21,7 +21,7 @@ const cards: HeroShippingCardData[] = [
   {
     iconNode: <Globe2 className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
     title: "International parcel delivery",
-    body: "Export and import in one workflow. HS codes, EORI, IOSS, and customs paperwork generated before the carrier scans the label.",
+    body: "Ship in and out of the UK on the right carrier for each lane, with guidance when the rules change.",
     audiences: ["Export", "Import", "Cross-border eCommerce", "Enterprise"],
     href: "/shipping/international",
     image: {
@@ -33,7 +33,7 @@ const cards: HeroShippingCardData[] = [
   {
     iconNode: <PackageOpen className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
     title: "Freight and pallet shipping",
-    body: "UK pallet networks, EU lanes, and worldwide LCL/FCL containers on one platform. Mixed-mode freight planned in minutes, not days.",
+    body: "Pallets and containers, UK and worldwide, planned and booked without the back-and-forth.",
     audiences: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
     href: "/shipping/freight",
     image: {

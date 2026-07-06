@@ -8,6 +8,8 @@ interface AnimatedCounterProps {
   prefix?: string;
   label: string;
   duration?: number;
+  /** Decimal places to animate/display (e.g. 1 → "17.5"). Default 0 = integers. */
+  decimals?: number;
   /** "dark" (default) → white text on dark bg. "light" → dark text on light bg. */
   surface?: "dark" | "light";
 }
@@ -18,6 +20,7 @@ export default function AnimatedCounter({
   prefix = "",
   label,
   duration = 2000,
+  decimals = 0,
   surface = "dark",
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
@@ -38,7 +41,8 @@ export default function AnimatedCounter({
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.round(eased * end));
+            const factor = 10 ** decimals;
+            setCount(Math.round(eased * end * factor) / factor);
 
             if (progress < 1) {
               requestAnimationFrame(animate);
@@ -53,7 +57,7 @@ export default function AnimatedCounter({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [end, duration, hasAnimated]);
+  }, [end, duration, decimals, hasAnimated]);
 
   const numberClass =
     surface === "light" ? "text-text-primary" : "text-white";
@@ -63,7 +67,10 @@ export default function AnimatedCounter({
     <div ref={ref} className="text-center">
       <div className={`text-stat-xl ${numberClass}`}>
         {prefix}
-        {count.toLocaleString()}
+        {count.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })}
         {suffix}
       </div>
       <div className={`mt-1 text-body-sm ${labelClass}`}>{label}</div>

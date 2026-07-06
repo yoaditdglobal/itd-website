@@ -37,7 +37,7 @@ const ICPS: Icp[] = [
   },
   {
     name: "Marketplace Seller",
-    hook: "Penalty fees to zero. One queue across Amazon, eBay, and the rest.",
+    hook: "One queue across Amazon, eBay and the rest.",
     href: "/solutions/marketplace-seller",
     image: "/solutions/marketplace-seller-hero.webp",
     tag: "Amazon · eBay · Etsy · TikTok",
@@ -45,7 +45,7 @@ const ICPS: Icp[] = [
   },
   {
     name: "3PL",
-    hook: "Onboard a new client in two days, not two weeks.",
+    hook: "Onboard a new client in days.",
     href: "/solutions/3pl",
     image: "/solutions/3pl-hero-v2.webp",
     tag: "Multi-client fulfilment",
@@ -95,7 +95,7 @@ const ICPS: Icp[] = [
 
 const TITLE = "Find the page built for your operation.";
 const SUBTITLE =
-  "Pick how you ship — the carriers, integrations, and rates curated for your operation.";
+  "Each route below curates the carriers, integrations and real customer stories that match how you ship.";
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 
