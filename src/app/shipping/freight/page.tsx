@@ -1,5 +1,5 @@
 import VerticalPage from "@/components/sections/VerticalPage";
-import SolutionHero from "@/components/sections/SolutionHero";
+import VideoHero from "@/components/sections/VideoHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import FreightServices from "@/components/sections/FreightServices";
 import FreightAudience from "@/components/sections/FreightAudience";
@@ -37,17 +37,17 @@ const PAINS = [
 export default function ShippingFreightPage() {
   return (
     <>
-      <SolutionHero
+      {/* Autoplay looped muted video hero (air-cargo loading loop). Reuses the
+          homepage VideoHero machinery: reduced-motion → poster, dark scrim,
+          nav-bleed, data-hero-tone="dark". */}
+      <VideoHero
         label="Freight"
-        title="Freight services built around your supply chain."
-        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
+        heading="Freight services built around your supply chain."
+        sub="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
-        image={{
-          src: "/shipping/Freight hero - 1.jpeg",
-          alt: "Container port at sunset with cargo ship and aircraft",
-          objectPosition: "50% 50%",
-        }}
+        videoSrc="/hero/freight.mp4"
+        poster="/hero/freight-poster.jpg"
       />
       <SolutionPains
         pains={PAINS}

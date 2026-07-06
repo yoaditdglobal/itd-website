@@ -16,7 +16,9 @@ import MagneticButton from "@/components/ui/MagneticButton";
  * those exist, the video sources 404 gracefully and the poster below shows.
  */
 
-// First frame of the hero video — instant paint + reduced-motion fallback.
+// Homepage defaults — <VideoHero /> with no props renders the homepage hero
+// exactly as before; other pages (e.g. /shipping/freight) pass their own copy
+// and assets to reuse the same machinery.
 const POSTER = "/hero/hero-poster.jpg";
 
 const HEADING = (
@@ -30,7 +32,32 @@ const SUB =
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
 const SECONDARY = { label: "Contact Us", href: "/contact" };
 
-export default function VideoHero() {
+interface VideoHeroCta {
+  label: string;
+  href: string;
+}
+
+export interface VideoHeroProps {
+  /** Optional eyebrow above the heading (e.g. "Freight"). */
+  label?: string;
+  heading?: React.ReactNode;
+  sub?: string;
+  primary?: VideoHeroCta;
+  secondary?: VideoHeroCta;
+  videoSrc?: string;
+  /** First frame of the video — instant paint + reduced-motion fallback. */
+  poster?: string;
+}
+
+export default function VideoHero({
+  label,
+  heading = HEADING,
+  sub = SUB,
+  primary = PRIMARY,
+  secondary = SECONDARY,
+  videoSrc = "/hero/hero.mp4",
+  poster = POSTER,
+}: VideoHeroProps = {}) {
   const [motionOk, setMotionOk] = useState(false);
 
   useEffect(() => {
@@ -52,15 +79,15 @@ export default function VideoHero() {
           loop
           playsInline
           preload="metadata"
-          poster={POSTER}
+          poster={poster}
           aria-hidden
         >
-          <source src="/hero/hero.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={POSTER}
+          src={poster}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden
@@ -77,23 +104,28 @@ export default function VideoHero() {
       <div className="relative z-10 flex h-full items-center pt-[var(--nav-h)]">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
+            {label && (
+              <p className="mb-4 text-eyebrow text-white/70 [text-shadow:0_1px_12px_rgba(0,0,0,0.4)]">
+                {label}
+              </p>
+            )}
             <h1 className="text-display-xl text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
-              {HEADING}
+              {heading}
             </h1>
-            <p className="mt-6 max-w-xl text-body-lg text-white/85">{SUB}</p>
+            <p className="mt-6 max-w-xl text-body-lg text-white/85">{sub}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <MagneticButton>
-                <Button href={PRIMARY.href} variant="primary" surface="dark">
-                  {PRIMARY.label}
+                <Button href={primary.href} variant="primary" surface="dark">
+                  {primary.label}
                 </Button>
               </MagneticButton>
               <Button
-                href={SECONDARY.href}
+                href={secondary.href}
                 variant="secondary"
                 surface="dark"
                 className="border-white/60 bg-white/10 backdrop-blur-sm hover:bg-white/20"
               >
-                {SECONDARY.label}
+                {secondary.label}
               </Button>
             </div>
           </div>
