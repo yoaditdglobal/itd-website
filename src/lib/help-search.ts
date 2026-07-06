@@ -89,12 +89,52 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     keywords: ["erp", "wms", "integration", "sync", "orders", "labels"],
   },
   {
-    title: "Reading your monthly invoice",
+    title: "Billing & Invoices — how weekly billing works",
     summary:
-      "Line items by carrier, surcharges, fuel costs, and how to reconcile a Connexx invoice against your carrier invoices.",
+      "The Sat–Fri billing week, when your first invoice lands, payment terms, and how to raise an invoice query.",
     categoryLabel: "Billing",
-    href: "/help/centre",
-    keywords: ["invoice", "billing", "surcharge", "fuel", "reconcile", "charges"],
+    href: "/help/centre/billing",
+    keywords: ["invoice", "billing", "billing week", "weekly", "payment", "due date", "bacs", "account reference", "first invoice", "charges", "query"],
+  },
+  {
+    title: "Understanding your weekly billing cycle",
+    summary:
+      "Billing weeks run Saturday to Friday — one weekly invoice covers every carrier you shipped with, issued in arrears.",
+    categoryLabel: "Billing",
+    href: "/help/centre/billing#billing-cycle",
+    keywords: ["billing cycle", "billing week", "weekly", "arrears", "first invoice", "payment terms", "due date", "invoice query"],
+  },
+  {
+    title: "Reading your Ecommerce invoice (six tabs)",
+    summary:
+      "INVOICE, Summary, UK/Intl Consignments and Surcharge tabs — which page you pay from and where each charge lives.",
+    categoryLabel: "Billing",
+    href: "/help/centre/billing#ecommerce-invoice",
+    keywords: ["ecommerce invoice", "invoice tabs", "summary", "consignments", "surcharge", "fuel", "global energy", "fctotal", "relabelling", "underdeclared"],
+  },
+  {
+    title: "Transport Charges invoice explained",
+    summary:
+      "The invoice for express / courier freight (FedEx, UPS, DHL) — INVOICE and Consignments tabs, one row per shipment.",
+    categoryLabel: "Billing",
+    href: "/help/centre/billing#transport-charges",
+    keywords: ["transport charges", "express", "courier freight", "awb", "freight amount", "fuel surcharge", "invoice"],
+  },
+  {
+    title: "Courier Duty & VAT invoice explained",
+    summary:
+      "The customs duty and import VAT due on your imported goods — separate from carriage, with a Details tab per cleared shipment.",
+    categoryLabel: "Billing",
+    href: "/help/centre/billing#duty-vat",
+    keywords: ["duty", "vat", "customs", "import", "duty and vat", "clearance", "admin fee", "invoice"],
+  },
+  {
+    title: "Demo invoice downloads",
+    summary:
+      "Download fictional demo workbooks of each invoice type and explore the tabs in Excel.",
+    categoryLabel: "Billing",
+    href: "/help/centre/billing#demo-downloads",
+    keywords: ["demo invoice", "example invoice", "sample invoice", "download", "xlsx", "workbook"],
   },
   {
     title: "Printing a label",
