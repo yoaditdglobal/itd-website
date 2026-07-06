@@ -46,7 +46,7 @@ const TIMELINE = [
 
 interface OfficeLocation {
   city: string;
-  note: string;
+  note?: string;
   address: string;
   /** Display phone number; `telHref` is the tel: URI (E.164, no spaces). */
   tel?: string;
@@ -66,40 +66,26 @@ const OFFICES: { region: string; locations: OfficeLocation[] }[] = [
       },
       {
         city: "London",
-        note: "Depot",
         address: "Stonefield Close, Ruislip, HA4 0XT",
         tel: "+44 (0) 203 873 2897",
         telHref: "tel:+442038732897",
       },
       {
         city: "Birmingham",
-        note: "Depot",
         address: "Unit 6, Marple Business Park, Walter Street, Aston, B7 5ET",
         tel: "+44 (0) 121 359 6677",
         telHref: "tel:+441213596677",
       },
-      { city: "Glasgow", note: "Depot", address: "Block 23, Unit 3, Motherwell Park, Bellshill, ML4 3NP" },
-      { city: "Leeds", note: "Depot", address: "Unit 4, Latchmore Road, Elland, LS12 6DN" },
+      { city: "Glasgow", address: "Block 23, Unit 3, Motherwell Park, Bellshill, ML4 3NP" },
+      { city: "Leeds", address: "Unit 4, Latchmore Road, Elland, LS12 6DN" },
     ],
   },
   {
     region: "Asia Pacific",
     locations: [
-      { city: "Xiamen", note: "China office", address: "RM609, No. 61 Jinbei Garden, Jinchang Road, Huli District, Xiamen, Fujian" },
-      { city: "Quanzhou", note: "China office", address: "C-609, Dongfangmingzhu, Fengze District, Quanzhou, Fujian" },
-      { city: "Shenzhen", note: "China office", address: "No. 2, 1st Floor, Building 2, No. 2 Hehualing Road, Pinghu Street, Longgang District, Shenzhen" },
-    ],
-  },
-  {
-    region: "United States",
-    locations: [
-      { city: "New Jersey", note: "ITD Global USA Inc", address: "" },
-    ],
-  },
-  {
-    region: "EMEA",
-    locations: [
-      { city: "Netherlands", note: "EMEA office", address: "" },
+      { city: "Xiamen", note: "China", address: "RM609, No. 61 Jinbei Garden, Jinchang Road, Huli District, Xiamen, Fujian" },
+      { city: "Quanzhou", note: "China", address: "C-609, Dongfangmingzhu, Fengze District, Quanzhou, Fujian" },
+      { city: "Shenzhen", note: "China", address: "No. 2, 1st Floor, Building 2, No. 2 Hehualing Road, Pinghu Street, Longgang District, Shenzhen" },
     ],
   },
 ];
@@ -258,7 +244,7 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {OFFICES.map((group, i) => (
               <ScrollReveal key={group.region} delay={i * 0.08}>
                 <div className="bg-white rounded-2xl border border-border h-full flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-lg cursor-default">
@@ -268,7 +254,10 @@ export default function AboutPage() {
                     <ul className="space-y-3 flex-1">
                       {group.locations.map((loc) => (
                         <li key={loc.city} className="flex flex-col border-b border-border pb-3 last:border-0 last:pb-0">
-                          <span className="text-heading-sm text-text-primary">{loc.city}, {loc.note}</span>
+                          <span className="text-heading-sm text-text-primary">
+                            {loc.city}
+                            {loc.note ? `, ${loc.note}` : ""}
+                          </span>
                           {loc.address && (
                             <address className="not-italic text-body-sm text-text-secondary mt-0.5">
                               {loc.address}
