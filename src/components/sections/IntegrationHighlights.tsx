@@ -42,8 +42,8 @@ export default function IntegrationHighlights() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <SectionLabel
-            title="Works with what you already run."
-            subtitle="Connexx connects directly to your storefront, your ERP, your WMS, and every active carrier on your account. No CSV exports. No re-keying tracking numbers."
+            title="Works with your active workflows."
+            subtitle="We integrate directly with your store, your ERP, your WMS, and the active carriers on your account."
             align="center"
           />
         </ScrollReveal>

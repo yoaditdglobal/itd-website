@@ -31,10 +31,12 @@ export default function Home() {
       <LogisticsPartnerBand />
       <ConnexxPreview />
       <IntegrationHighlights />
-      <CaseStudyCards />
+      {/* subtitle="" removes the meta line under the heading (per copy doc)
+          without touching the default other pages rely on. */}
+      <CaseStudyCards subtitle="" />
       <ClosingCTA
-        headline="Two minutes. No commitment. See what you'd save."
-        subtitle="The savings estimator compares your current carrier mix against the live Connexx rate engine. No card, no call, no obligation."
+        headline="Put your carrier costs to the test."
+        subtitle="The rate checker compares your current shipping against ITD's rates and shows the saving. Send a recent invoice and see for yourself."
         primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />

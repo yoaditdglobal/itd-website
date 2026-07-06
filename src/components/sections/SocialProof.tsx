@@ -2,10 +2,10 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import LogoTicker from "@/components/ui/LogoTicker";
 
 const stats = [
-  { end: 16, suffix: "", label: "Carrier integrations", prefix: "" },
-  { end: 20, suffix: "+", label: "Tech integrations", prefix: "" },
-  { end: 42, suffix: "+", label: "Countries covered", prefix: "" },
-  { end: 99, suffix: "%", label: "Platform uptime", prefix: "" },
+  { end: 17.5, suffix: "m", label: "Labels a year", prefix: "", decimals: 1 },
+  { end: 2.7, suffix: "s", label: "Between new labels", prefix: "", decimals: 1 },
+  { end: 152, suffix: "", label: "Countries covered", prefix: "" },
+  { end: 6000, suffix: "+", label: "Trusted businesses", prefix: "" },
 ];
 
 export default function SocialProof() {
@@ -17,6 +17,10 @@ export default function SocialProof() {
             <AnimatedCounter key={stat.label} surface="light" {...stat} />
           ))}
         </div>
+        {/* Trust line sits above the logo marquee (per home-page copy doc). */}
+        <p className="text-center text-body-sm text-text-tertiary mb-6">
+          Connected to the carriers and platforms you already run.
+        </p>
         <LogoTicker />
       </div>
     </section>
