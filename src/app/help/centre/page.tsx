@@ -59,7 +59,7 @@ const categories = [
     name: "Billing",
     description:
       "Invoicing, payment methods, rate cards, billing cycles, and credit notes.",
-    href: "/help/centre",
+    href: "/help/centre/billing",
     slug: "billing",
   },
   {
@@ -130,10 +130,11 @@ const featuredArticles: {
     category: "Account & admin",
   },
   {
-    title: "Reading your monthly invoice",
+    title: "Billing & Invoices — how weekly billing works",
     summary:
-      "Line items by carrier, surcharges, fuel costs, and how to reconcile a Connexx invoice against your carrier invoices.",
+      "The Sat–Fri billing week, when your first invoice lands, and how to read the Ecommerce, Transport Charges, and Duty & VAT invoices tab by tab.",
     category: "Billing",
+    href: "/help/centre/billing",
   },
   {
     title: "Printing a label",
