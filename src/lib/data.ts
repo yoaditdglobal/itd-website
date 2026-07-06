@@ -602,26 +602,26 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: "10",
-    slug: "oddballs",
+    slug: "beauty-bay",
     primarySegment: "Freight",
     segments: ["Freight"],
     headlineResult: "Air, rail & sea — one shipment",
     oneLiner:
       "A large China→UK consignment split across three modes, with each tranche matched to the right delivery window at the lowest blended freight cost.",
-    brandName: "OddBalls",
+    brandName: "Beauty Bay",
     industry: "Freight",
     headline:
-      "OddBalls moved a large China shipment on time and on budget with a mixed-mode freight solution",
+      "How Beauty Bay moved a large China shipment on time and on budget with a mixed-mode freight solution",
     metric: "Air + rail + sea, one managed shipment",
     summary:
-      "ITD Global split a large China→UK consignment across air, rail and sea — matching each tranche of stock to the right mode so every delivery window was met at the lowest blended freight cost.",
+      "Founded in 1999 in Manchester as Fragrance Bay, Beauty Bay grew from a niche fragrance retailer into one of the UK's leading online beauty destinations — over 10,000 products across more than 200 brands, plus their own cruelty-free line By Beauty Bay. With a large product range sourced globally and customers who expect consistent availability, getting goods from origin to UK warehouse on time and on budget is critical — and when a significant volume of stock needed to move quickly from China, Beauty Bay needed a freight partner who could think beyond a single-mode solution.",
     challenge:
-      "OddBalls had a large volume of stock ready to leave China in a short window, but the goods were needed in the UK across several different time frames. Not everything was needed at once, and not everything justified the same freight cost. A single air-freight solution would have been fast but commercially inefficient across the full volume; sea freight alone could not meet the tighter windows on part of the cargo. A one-size approach would either blow the budget or leave the business short of stock.",
+      "Beauty Bay had a large volume of goods ready to leave China within a short window, but the stock was needed in the UK across several different time frames. Not everything was required at the same time, and not everything justified the same freight cost. A single air freight solution would have been fast but commercially inefficient across the full volume; sea freight alone could not meet the tighter delivery windows on part of the cargo. Beauty Bay needed a flexible freight solution that matched each part of the cargo to the right mode of transport, at the right cost, arriving at the right time.",
     solution:
-      "ITD Global designed a mixed-mode freight solution that split the cargo across three modes. The most time-sensitive stock went by air freight to land ahead of the earliest required date. The mid-window tranche was routed via rail freight from China — a cost-effective, reliable alternative to air. The remaining volume, where lead time allowed, shipped by sea to keep costs lowest. Each mode was chosen on commercial logic, not just speed.",
+      "ITD Global designed a mixed-mode freight solution that split the cargo across three modes: air, rail and sea. The most time-sensitive stock was moved by air freight, ensuring it arrived in the UK ahead of the earliest required date. The second tranche was routed via rail freight from China, a cost-effective and reliable alternative for stock needed within the mid-range window. The remaining volume, where lead time allowed, was shipped by sea freight, keeping costs at their lowest. Each mode was selected not just for speed, but for commercial logic — every part of the cargo matched to the most cost-effective option that still met its delivery deadline.",
     result:
-      "Every part of the shipment landed in the UK within its required window — no delays, no shortfalls, no compromise on availability. By routing each tranche through the most commercially appropriate option, ITD Global kept overall freight costs significantly lower than a single air-freight solution would have allowed.",
-    logo: "/case-studies/oddballs/logo.png",
+      "Every part of the shipment landed in the UK within its required window — no delays, no shortfalls, no compromises on availability. By routing each tranche through the most commercially appropriate freight option, ITD Global kept overall freight costs significantly lower than a single air freight solution would have allowed.",
+    logo: "/case-studies/beauty-bay/logo.png",
     stats: [
       {
         value: 3,
@@ -642,13 +642,17 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     atGlance: [
-      { label: "Industry", value: "Fashion & Lifestyle, eCommerce" },
-      { label: "ICP", value: "Freight" },
+      { label: "Industry", value: "Beauty & Cosmetics, eCommerce" },
+      { label: "ICP", value: "International Freight" },
       { label: "Market", value: "China → UK" },
       { label: "Service", value: "Mixed-mode freight (air, rail & sea)" },
       {
         label: "Key Feature",
         value: "Split-mode shipping to meet multiple delivery windows",
+      },
+      {
+        label: "Result",
+        value: "All cargo arrived on time, at the most cost-effective rates",
       },
     ],
     shippingTypes: ["Freight"],

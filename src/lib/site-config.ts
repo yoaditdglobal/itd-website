@@ -77,7 +77,7 @@ export const ROUTES = [
   { path: "/resources/case-studies/pb-fulfilment", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/sainsburys-argos", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/freedom-fire", priority: 0.65, changeFrequency: "monthly" as const },
-  { path: "/resources/case-studies/oddballs", priority: 0.65, changeFrequency: "monthly" as const },
+  { path: "/resources/case-studies/beauty-bay", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/saime-trading", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/junction-18-shruti-designs", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/sifcon-international", priority: 0.65, changeFrequency: "monthly" as const },

@@ -61,6 +61,13 @@ const nextConfig: NextConfig = {
         destination: "https://itdglobal-ratechecker.lovable.app/",
         permanent: true,
       },
+      // The OddBalls case study was misattributed — the story is Beauty Bay's.
+      // The old slug was live + sitemap-indexed, so 301 it to the new one.
+      {
+        source: "/resources/case-studies/oddballs",
+        destination: "/resources/case-studies/beauty-bay",
+        permanent: true,
+      },
     ];
   },
 
