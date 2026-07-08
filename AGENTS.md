@@ -16,5 +16,6 @@ Marketing site for ITD Global (UK multi-carrier logistics) and its platform **Co
 - **Homepage hero = `VideoHero`** (autoplay muted video bg, normal scroll). The Three.js cinematic parcel→van→plane→ship pager (`ParcelUnboxHero`) now lives only on the **immersive `/rc`** landing page; `SiteChrome` (`IMMERSIVE=['/rc']`) strips global nav/footer there.
 - Every hero must **bleed behind the floating nav** (`mt-[calc(-1*var(--nav-h))]` + grown height, or `.bleed-nav`) or a cream seam shows.
 - **`framer-motion` is banned** from the shared bundle (broke hydration). Animate with CSS/IntersectionObserver (`ScrollReveal`); **three.js is fine only via `await import("three")`** (code-split).
+- **`globals.css` heading clamps beat Tailwind text utilities**: fluid `font-size: clamp(...)` on `h1`/`h2`/`h3` wins over classes like `text-sm` — `<h3 className="text-sm">` still renders ~28px. Reserve `h1`–`h3` for real section headings; use `<p>`/`<span>` for card labels, grid-item names, and other non-heading text.
 
 Deeper patterns + hard-won gotchas live in the **`website-builder` skill** (auto-loads for this repo) and Claude's project memory — follow them.
