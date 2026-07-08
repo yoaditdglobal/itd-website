@@ -87,6 +87,7 @@ export const ROUTES = [
   { path: "/resources/case-studies/wenrit-global", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/red-label", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/guides", priority: 0.7, changeFrequency: "weekly" as const },
+  { path: "/resources/guides/3pl-partnership", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/guides/freight-services", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/guides/far-east-imports", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/guides/fbm", priority: 0.65, changeFrequency: "monthly" as const },
