@@ -23,6 +23,15 @@ type Guide = {
 
 const guides: Guide[] = [
   {
+    slug: "3pl-partnership",
+    title: "3PL Partnership: what working with ITD Global looks like",
+    summary:
+      "A practical guide for 3PLs looking to expand their carrier offering, protect client margin, and scale without adding commercial overhead. Multi-carrier access, the Connexx platform, buying power, child ID accounts, billing, and what onboarding looks like.",
+    category: "3PL",
+    readingTime: "9 min read",
+    updated: "6 July 2026",
+  },
+  {
     slug: "freight-services",
     title: "Freight Services: a working guide for UK clients",
     summary:
