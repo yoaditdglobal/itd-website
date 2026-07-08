@@ -928,6 +928,7 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Wenrit Global",
     industry: "3PL",
+    logo: "/case-studies/wenrit-global/logo.png",
     headline:
       "How Wenrit Global solved larger parcel delivery where others couldn't",
     metric: "~2,000 parcels/day",
@@ -977,6 +978,9 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Red Label",
     industry: "eCommerce",
+    logo: "/case-studies/red-label/logo.png",
+    heroImage: "/case-studies/red-label/hero.jpg",
+    heroImageAlt: "Red Label brand imagery",
     headline:
       "How Red Label streamlined 3,000 weekly shipments across a multi-carrier network",
     metric: "3,000 weekly shipments",
