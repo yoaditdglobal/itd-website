@@ -339,7 +339,7 @@ export const caseStudies: CaseStudy[] = [
     id: "3",
     slug: "delta-fulfilment",
     primarySegment: "3PL",
-    segments: ["3PL"],
+    segments: ["3PL", "eCommerce"],
     outcomes: ["Save money", "Get control"],
     headlineResult: "Immediate margin uplift",
     oneLiner:
@@ -378,7 +378,7 @@ export const caseStudies: CaseStudy[] = [
     id: "4",
     slug: "arlo-fulfilment",
     primarySegment: "Export",
-    segments: ["Export"],
+    segments: ["Export", "3PL"],
     outcomes: ["Go international", "Win new business"],
     headlineResult: "International, unlocked",
     oneLiner:
@@ -415,7 +415,7 @@ export const caseStudies: CaseStudy[] = [
     id: "5",
     slug: "home-bargains",
     primarySegment: "Import",
-    segments: ["Import"],
+    segments: ["Import", "Freight"],
     outcomes: ["Save money"],
     headlineResult: "30–35% cost reduction",
     oneLiner:
@@ -775,7 +775,7 @@ export const caseStudies: CaseStudy[] = [
     id: "14",
     slug: "cummins",
     primarySegment: "Import",
-    segments: ["Import"],
+    segments: ["Import", "Freight"],
     outcomes: ["Go international", "Get control"],
     headlineResult: "No line stops",
     oneLiner:
@@ -827,7 +827,7 @@ export const caseStudies: CaseStudy[] = [
     id: "15",
     slug: "regatta",
     primarySegment: "Import",
-    segments: ["Import"],
+    segments: ["Import", "Freight"],
     outcomes: ["Go international", "Get control"],
     headlineResult: "Supply kept moving",
     oneLiner:
