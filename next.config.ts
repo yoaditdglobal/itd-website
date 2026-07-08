@@ -68,6 +68,13 @@ const nextConfig: NextConfig = {
         destination: "/resources/case-studies/beauty-bay",
         permanent: true,
       },
+      // Junction 18 / Shruti Designs case study retired (removed from the
+      // library). The slug was live + sitemap-indexed → send to the library.
+      {
+        source: "/resources/case-studies/junction-18-shruti-designs",
+        destination: "/resources/case-studies",
+        permanent: true,
+      },
     ];
   },
 

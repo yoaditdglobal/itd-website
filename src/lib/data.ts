@@ -720,55 +720,6 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    id: "12",
-    slug: "junction-18-shruti-designs",
-    primarySegment: "Import",
-    segments: ["Import", "B2B"],
-    outcomes: ["Save money", "Go international"],
-    headlineResult: "45% courier saving",
-    oneLiner:
-      "Cut Express Courier spend 45% on Far East sample imports, with a dedicated account manager.",
-    featured: false,
-    brandName: "Junction 18 / Shruti Designs",
-    industry: "Import",
-    headline:
-      "Junction 18 cut Express Courier costs by 45% on Far East sample imports",
-    metric: "45% courier saving",
-    summary:
-      "One of the UK's largest design-led giftware manufacturers moved its urgent Far East sample shipping to ITD's Express Courier accounts, saving 45% a year without losing service — backed by a dedicated account manager and ITD's China office.",
-    challenge:
-      "Shruti Designs had hit communication failures and uncompetitive pricing with their existing Express Courier provider, feeling like just another account number. Service and responsiveness were slow.",
-    solution:
-      "ITD offered more competitive Express Courier pricing and a dedicated account manager to handle the urgent transit of samples from Far East Asia. Working closely with the J18 team, ITD also managed the supply chain on larger imports, routing each shipment by express courier, economy courier or air freight depending on size and weight, and used the ITD China office to support the brand with its Chinese suppliers.",
-    result:
-      "Junction 18 saved 45% of their annual courier spend using ITD's Express Courier services, without compromising on service levels — and gained local support at origin through ITD's China office.",
-    stats: [
-      { value: 45, suffix: "%", label: "Annual courier saving", sub: "vs their previous Express Courier provider", featured: true },
-      { value: "Far East", label: "Sample lanes managed", sub: "express, economy courier or air freight by size" },
-      { value: "China", label: "Origin support", sub: "ITD China office working with J18 suppliers" },
-    ],
-    atGlance: [
-      { label: "Industry", value: "Homeware / Giftware" },
-      { label: "ICP", value: "B2B / Import" },
-      { label: "Market", value: "Far East → UK" },
-      { label: "Service", value: "Express Courier + air freight" },
-      { label: "Key Feature", value: "Mode selection by size/weight + dedicated AM" },
-    ],
-    shippingTypes: ["International Import"],
-    carriers: [],
-    integrations: ["connexx"],
-    solutions: ["Import", "B2B"],
-    quotes: [
-      {
-        quote:
-          "We have been using ITD's services for several years. They are extremely competitive price-wise and offer excellent service. They've made our lives so much easier and let us concentrate on our main business without having to worry about the logistics of air freight. I would thoroughly recommend them to anyone.",
-        name: "Karen",
-        title: "Imports Manager, Junction 18",
-        placement: "feature",
-      },
-    ],
-  },
-  {
     id: "13",
     slug: "sifcon-international",
     primarySegment: "Import",
@@ -978,27 +929,27 @@ export const caseStudies: CaseStudy[] = [
     brandName: "Wenrit Global",
     industry: "3PL",
     headline:
-      "ITD solved large-parcel fulfilment for Wenrit where others couldn't",
+      "How Wenrit Global solved larger parcel delivery where others couldn't",
     metric: "~2,000 parcels/day",
     summary:
-      "When Wenrit Global's carrier couldn't handle larger parcels for flatpack furniture and household items, ITD stepped in with a large-parcel solution — supporting £750k+ of annual spend across roughly 2,000 parcels a day.",
+      "Wenrit Global is a fulfilment company working with a wide range of Chinese clients, distributing flatpack furniture and household items across the UK. Their clients ship goods from China, sell on Amazon, and rely on Wenrit Global to get product to UK customers once it sells.",
     challenge:
-      "Wenrit Global is a fulfilment company serving a wide range of Chinese clients who ship goods from China and sell on Amazon, distributing flatpack furniture and household items from UK warehouses. Their existing supplier couldn't meet their requirements for larger parcels.",
+      "Wenrit Global's previous supplier could not meet their requirements for larger parcels — a problem given how much of their flatpack furniture and household range falls outside standard parcel dimensions. With an annual spend above £750k and 2,000 parcels moving daily across 2 to 4 trailers, they needed a logistics partner who could actually handle the size and scale of what they were shipping.",
     solution:
-      "ITD stepped in with a large-parcel solution built for flatpack furniture and bulky household items, scaling to the operation's volume. With an annual spend of £750k+, Wenrit fills two to four trailers on an average day — around 2,000 parcels — and ITD's account management helps direct the business and grow sales.",
+      "ITD Global stepped in with a courier solution built around larger parcels, using Yodel to move the volume Wenrit Global's flatpack and household items demanded. A dedicated account manager took ownership of the relationship, bringing the logistics expertise and a can-do approach that meant no obstacle was treated as too big to solve.",
     result:
-      "ITD solved the large-parcel problem the incumbent couldn't, and a close, multi-year relationship built on a 'can do' attitude — where no obstacle is too big — has led to referrals to numerous new clients.",
+      "With the right courier solution in place for larger parcels, Wenrit Global's daily volume moves reliably across 2 to 4 trailers without the size limitations they had hit before. Chris Brady has built the relationship over six years of expert account management, and its strength has led to Wenrit Global referring numerous new clients to ITD Global — a sign of how much trust has been built over time.",
     stats: [
       { value: "2,000", label: "Parcels per day", sub: "two to four trailers on an average day", featured: true },
       { value: 750, prefix: "£", suffix: "k+", label: "Annual spend supported", sub: "large-parcel furniture & household goods" },
       { value: "6+", suffix: " yrs", label: "Partnership", sub: "relationship built over many years" },
     ],
     atGlance: [
-      { label: "Industry", value: "Furniture / Homeware" },
-      { label: "ICP", value: "3PL / Marketplace seller" },
-      { label: "Market", value: "China → UK (Amazon sellers)" },
-      { label: "Service", value: "Large-parcel delivery at scale" },
-      { label: "Key Feature", value: "Bulky flatpack capacity others couldn't match" },
+      { label: "Industry", value: "Fulfilment, Flatpack Furniture & Household Goods" },
+      { label: "ICP", value: "3PL" },
+      { label: "Market", value: "China → UK" },
+      { label: "Key Feature", value: "Larger parcel handling for flatpack and household items" },
+      { label: "Result", value: "£750k+ annual spend, 2,000 parcels moved daily" },
     ],
     shippingTypes: ["Domestic"],
     carriers: [],
@@ -1007,7 +958,7 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "I have worked closely with ITD Global for many years and the support and expertise from my account manager has been excellent. His knowledge of the logistics industry helps direct our business in the right direction and grow sales.",
+          "I have worked closely with ITD Global for many years and the support and expertise received from my Account Manager Chris Brady has been excellent. His knowledge of the logistics industry enables him to direct our business in the right direction and grow sales.",
         name: "Wenrit Global",
         title: "Fulfilment partner",
         placement: "feature",
@@ -1027,27 +978,27 @@ export const caseStudies: CaseStudy[] = [
     brandName: "Red Label",
     industry: "eCommerce",
     headline:
-      "Red Label streamlined 3,000 weekly shipments under one multi-carrier account",
+      "How Red Label streamlined 3,000 weekly shipments across a multi-carrier network",
     metric: "3,000 weekly shipments",
     summary:
-      "A high-volume discount perfume and beauty retailer wanted first-rate carriers under one umbrella. ITD became their single point of contact, matching them to a multi-carrier solution that consistently streamlines 3,000 shipments a week.",
+      "As a large and successful business with much demand, Red Label sought experienced logistics professionals to manage their shipment needs in a fast and efficient way. Renowned for selling perfume and beauty products at discounted value, they needed a no-fuss logistics solution that could take care of fulfilment without adding complexity.",
     challenge:
-      "As a large, successful business with high demand, Red Label — known for discounted perfume and beauty — needed experienced logistics professionals to manage their shipments fast and efficiently, with a no-fuss solution for all their fulfilment needs.",
+      "Red Label wanted to work with a multitude of first-rate carriers, but managing those relationships separately would have meant juggling multiple contacts, invoices and service levels. What they needed was one logistics partner who could bring it all together.",
     solution:
-      "ITD stepped in as a single point of contact for all of Red Label's shipping. They wanted a multitude of first-rate carriers under one umbrella, so ITD matched them to the best multi-carrier solution from its expansive network, with direct collections and competitive rates.",
+      "ITD Global became Red Label's single point of contact for all shipping needs, matching them to the best multi-carrier solution for their business through ITD Global's expansive carrier network.",
     result:
-      "ITD consistently streamlines 3,000 weekly shipments for Red Label, making things easier across the business with direct collections, a multi-carrier solution and very competitive rates.",
+      "Red Label's full shipping volume — 3,000 shipments a week — now runs through one managed multi-carrier solution, consistently and without the admin of juggling multiple providers. Direct collection services removed another layer of operational hassle, simplifying day-to-day fulfilment, and working with ITD Global's carrier network gave Red Label access to courier rates that reflect the scale of their business.",
     stats: [
       { value: "3,000", label: "Weekly shipments", sub: "consistently streamlined", featured: true },
       { value: 1, label: "Point of contact", sub: "multiple first-rate carriers under one account" },
       { value: "Direct", label: "Collections", sub: "competitive multi-carrier rates" },
     ],
     atGlance: [
-      { label: "Industry", value: "Health & Beauty" },
-      { label: "ICP", value: "Enterprise / eCommerce" },
+      { label: "Industry", value: "Perfume & Beauty, Discount Retail" },
+      { label: "ICP", value: "Domestic Parcel" },
       { label: "Market", value: "UK Domestic" },
-      { label: "Service", value: "Multi-carrier under one account" },
-      { label: "Key Feature", value: "Single point of contact across carriers" },
+      { label: "Key Feature", value: "Single point of contact across a multi-carrier network, direct collections" },
+      { label: "Result", value: "3,000 weekly shipments streamlined under one partner" },
     ],
     shippingTypes: ["Domestic"],
     carriers: [],
@@ -1056,7 +1007,7 @@ export const caseStudies: CaseStudy[] = [
     quotes: [
       {
         quote:
-          "I'm very happy with the service ITD provide — direct collections, multi-carrier solutions and much more. They've streamlined and made things a lot easier for us as a business and provide very competitive rates.",
+          "I am very happy with the service that ITD provide such as direct collections, multi-carrier solutions and much more. They have streamlined and made things a lot easier for us as a business and provide very competitive rates.",
         name: "Red Label",
         title: "Discount beauty retailer",
         placement: "feature",
