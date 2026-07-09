@@ -50,6 +50,8 @@ export default async function IntegrationGuidePage({
       headline: guide.metaTitle,
       description: guide.metaDescription,
       path,
+      datePublished: "2026-07-09",
+      dateModified: "2026-07-09",
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
