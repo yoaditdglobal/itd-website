@@ -43,7 +43,7 @@ const categories = [
     name: "Integrations",
     description:
       "eCommerce platforms, ERPs, WMS, marketplaces, and accounting tools that connect to Connexx.",
-    href: "/help/centre",
+    href: "/help/centre/integrations",
     slug: "integrations",
   },
   {
@@ -94,10 +94,11 @@ const featuredArticles: {
     href: "/help/centre/account/claims",
   },
   {
-    title: "Connecting Shopify to Connexx",
+    title: "Connecting Shopify to ITD Global",
     summary:
-      "Set up the official Shopify app and route every order through multi-carrier comparison in under 10 minutes.",
+      "Add your store domain, install the ITD Global app, and orders come through in near real-time with tracking synced back to Shopify.",
     category: "Integrations",
+    href: "/help/centre/integrations/shopify",
   },
   {
     title: "Setting up your Royal Mail account",
@@ -122,6 +123,7 @@ const featuredArticles: {
     summary:
       "Order pull, label write-back, and tracking sync for the most common ERPs and WMSs.",
     category: "Integrations",
+    href: "/help/centre/integrations",
   },
   {
     title: "Inviting users and setting permissions",

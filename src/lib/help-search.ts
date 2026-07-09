@@ -7,6 +7,7 @@
 // straight to its section on the Claims hub.
 
 import { CLAIMS_POLICIES } from "@/lib/help-claims";
+import { INTEGRATION_GUIDES } from "@/lib/help-integrations";
 
 export type SearchDoc = {
   title: string;
@@ -49,12 +50,12 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     keywords: ["users", "permissions", "roles", "access", "child account", "sso"],
   },
   {
-    title: "Connecting Shopify to Connexx",
+    title: "Integration setup guides",
     summary:
-      "Set up the official Shopify app and route every order through multi-carrier comparison in under 10 minutes.",
+      "Step-by-step guides for connecting Shopify, eBay, TikTok Shop, Selro, Linnworks, and Veeqo to ITD Global.",
     categoryLabel: "Integrations",
-    href: "/help/centre",
-    keywords: ["shopify", "ecommerce", "integration", "app", "orders"],
+    href: "/help/centre/integrations",
+    keywords: ["integration", "integrations", "connect", "setup", "store", "marketplace", "wms", "oms"],
   },
   {
     title: "Setting up your Royal Mail account",
@@ -85,7 +86,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Order pull, label write-back, and tracking sync for the most common ERPs and WMSs.",
     categoryLabel: "Integrations",
-    href: "/help/centre",
+    href: "/help/centre/integrations",
     keywords: ["erp", "wms", "integration", "sync", "orders", "labels"],
   },
   {
@@ -180,7 +181,28 @@ const CLAIMS_DOCS: SearchDoc[] = CLAIMS_POLICIES.map((p) => ({
   ]),
 }));
 
-export const HELP_INDEX: SearchDoc[] = [...ARTICLE_DOCS, ...CLAIMS_DOCS];
+// One search doc per integration setup guide, derived from the guide data.
+const INTEGRATION_DOCS: SearchDoc[] = INTEGRATION_GUIDES.map((g) => ({
+  title: `Connecting ${g.name} to ITD Global`,
+  summary: g.metaDescription,
+  categoryLabel: "Integrations",
+  href: `/help/centre/integrations/${g.slug}`,
+  keywords: uniqueLower([
+    g.name,
+    g.slug,
+    ...g.name.split(/[^a-z0-9]+/i),
+    ...g.keywords,
+    "integration",
+    "connect",
+    "setup",
+  ]),
+}));
+
+export const HELP_INDEX: SearchDoc[] = [
+  ...ARTICLE_DOCS,
+  ...INTEGRATION_DOCS,
+  ...CLAIMS_DOCS,
+];
 
 /**
  * Rank the index against a free-text query. Whole-query and per-term matches
