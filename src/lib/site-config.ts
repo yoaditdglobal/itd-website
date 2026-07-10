@@ -97,6 +97,13 @@ export const ROUTES = [
   // Help
   { path: "/help", priority: 0.6, changeFrequency: "weekly" as const },
   { path: "/help/centre", priority: 0.55, changeFrequency: "weekly" as const },
+  { path: "/help/centre/integrations", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/shopify", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/ebay", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/tiktok", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/selro", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/linnworks", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/help/centre/integrations/veeqo", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/help/submit-request", priority: 0.5, changeFrequency: "yearly" as const },
   { path: "/help/developers", priority: 0.7, changeFrequency: "weekly" as const },
 ];
