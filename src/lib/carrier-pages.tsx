@@ -176,6 +176,38 @@ export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
       { label: "Customs", value: "Built-in" },
     ],
   },
+  tnt: {
+    tagline:
+      "Express domestic and international delivery, with timed options and a strong European road network.",
+    description:
+      "TNT is a global express carrier now operating as part of FedEx, with a well-established road network across Europe and air services into 200+ countries. In the UK, it offers timed next-day domestic delivery alongside a range of European and international services. Through ITD, you access TNT's service range on rates managed at network scale, with the carrier relationship handled on your behalf.",
+    region: "UK & International",
+    about: [
+      "TNT has operated as an express carrier for over 70 years and is now integrated into the FedEx global network. In the UK, it runs a domestic overnight service with timed delivery options and connects into FedEx's broader international infrastructure for shipments outside the UK. TNT's road network is particularly established across continental Europe, where its day-definite economy services provide reliable transit at a lower cost than air express alternatives.",
+      "TNT is most used by businesses that need timed delivery precision domestically — particularly for B2B shipments where a specific delivery window is a practical requirement — and for businesses with regular European volume where a road-based economy option sits alongside air express services. Its timed domestic service, with options for delivery by 9am, 10am, or 12pm, gives businesses more control over the delivery window than a standard next-day service provides.",
+    ],
+    services: [
+      "TNT Express (next day)",
+      "Timed Express (9am / 10am / 12pm)",
+      "Saturday Express",
+      "Economy Express (international)",
+      "European road network",
+      "Tracked with proof of delivery",
+    ],
+    features: [
+      { icon: Zap, title: "TNT Express (Next Day)", desc: "Next possible working day delivery across the UK, with delivery by end of business day. Full tracking and proof of delivery as standard." },
+      { icon: Clock, title: "Timed Express (9am / 10am / 12pm)", desc: "Guaranteed delivery by a specific time the next working day. Three timed options — before 9am, 10am, or 12pm — for B2B and time-critical shipments." },
+      { icon: ShieldCheck, title: "Saturday Express", desc: "Weekend delivery available across the UK for businesses whose customers require a Saturday option." },
+      { icon: Globe, title: "TNT Economy Express (International)", desc: "Road-based day-definite international delivery across Europe and to global destinations. Cost-effective option for non-urgent international volume where transit date certainty is required." },
+      RATES_FEATURE,
+    ],
+    stats: [
+      { label: "Coverage", value: "200+ countries" },
+      { label: "Parent network", value: "FedEx" },
+      { label: "Timed options", value: "9am / 10am / 12pm" },
+      { label: "Express heritage", value: "70+ years" },
+    ],
+  },
 };
 
 export function getCarrierPageContent(carrier: Integration): CarrierPageProps {

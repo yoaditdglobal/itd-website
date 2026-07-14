@@ -1063,7 +1063,7 @@ export const integrations: Integration[] = [
   { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
   { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
   { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery", logo: "/logos/carriers/landmark-icon.svg" },
-  { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "European & global express", logo: "/logos/carriers/tnt-icon.png" },
+  { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "Timed express & European road network", logo: "/logos/carriers/tnt-icon.png" },
   { id: "c-deutsche-post", name: "Deutsche Post", category: "carrier", type: "carrier", region: "International", featured: false, description: "German postal & international mail", logo: "/logos/carriers/deutschepost_logo.avif" },
   { id: "c-starlinks", name: "Starlinks", category: "carrier", type: "carrier", region: "International", featured: false, description: "Cross-border e-commerce delivery", logo: "/logos/carriers/starlinks_logo.png" },
 ];
