@@ -1,13 +1,12 @@
 import { Truck, Globe2, PackageOpen } from "lucide-react";
-import HeroShippingCard from "@/components/sections/HeroShippingCard";
-import type { HeroShippingCardData } from "@/components/sections/HeroShippingCard";
-import BuiltForCarousel from "@/components/sections/BuiltForCarousel";
+import ShippingShowcase from "@/components/sections/ShippingShowcase";
+import type { ShowcaseCard } from "@/components/sections/ShippingShowcase";
 
-const PLACEHOLDER_ICON_CLASS = "w-1/4 h-1/4 text-accent/30";
+const ICON_CLASS = "w-5 h-5";
 
-const cards: HeroShippingCardData[] = [
+const cards: ShowcaseCard[] = [
   {
-    iconNode: <Truck className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
+    icon: <Truck className={ICON_CLASS} strokeWidth={1.75} />,
     title: "UK domestic parcel delivery",
     body: "All the UK carriers in one place, out to the Highlands, the Islands and Northern Ireland.",
     audiences: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "SMEs"],
@@ -15,11 +14,10 @@ const cards: HeroShippingCardData[] = [
     image: {
       src: "/shipping/domestic.webp",
       alt: "Royal Mail truck reversing into a UK warehouse loading bay",
-      gradient: "from-accent-light via-white to-accent/15",
     },
   },
   {
-    iconNode: <Globe2 className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
+    icon: <Globe2 className={ICON_CLASS} strokeWidth={1.75} />,
     title: "International parcel delivery",
     body: "Ship in and out of the UK on the right carrier for each lane, with guidance when the rules change.",
     audiences: ["Export", "Import", "Cross-border eCommerce", "Enterprise"],
@@ -27,11 +25,10 @@ const cards: HeroShippingCardData[] = [
     image: {
       src: "/shipping/international.jpg",
       alt: "Air freight pallets being loaded onto a wide-body aircraft for international shipping",
-      gradient: "from-bg-secondary via-accent-light to-accent/10",
     },
   },
   {
-    iconNode: <PackageOpen className={PLACEHOLDER_ICON_CLASS} strokeWidth={1.5} />,
+    icon: <PackageOpen className={ICON_CLASS} strokeWidth={1.75} />,
     title: "Freight and pallet shipping",
     body: "Pallets and containers, UK and worldwide, planned and booked without the back-and-forth.",
     audiences: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
@@ -39,7 +36,6 @@ const cards: HeroShippingCardData[] = [
     image: {
       src: "/shipping/freight-hero.webp",
       alt: "HGV and palletised freight at an ITD distribution hub",
-      gradient: "from-accent-light via-white to-accent/15",
     },
   },
 ];
@@ -55,14 +51,7 @@ export default function DomesticInternationalCards() {
           Shipping solutions
         </h2>
       </div>
-      {/* Full-bleed: the carousel sits OUTSIDE the max-w box so the track runs
-          edge-to-edge; it re-aligns to the content gutter internally via
-          .carousel-gutter (padding + scroll-padding). */}
-      <BuiltForCarousel>
-        {cards.map((card, i) => (
-          <HeroShippingCard key={card.title} card={card} delay={i * 120} />
-        ))}
-      </BuiltForCarousel>
+      <ShippingShowcase cards={cards} />
     </section>
   );
 }
