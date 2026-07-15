@@ -58,3 +58,15 @@ export function getGraphEnv(): GraphEnv | null {
 export function getNotifyEmails(): { leads?: string; support?: string } {
   return { leads: read("LEADS_NOTIFY_TO"), support: read("SUPPORT_NOTIFY_TO") };
 }
+
+// ── Lead webhook (Make.com → Zoho CRM) ──────────────────────────────────────
+// The Make scenario behind this URL writes Contact Sales submissions into Zoho.
+// Default is baked in so lead delivery works with zero platform config;
+// LEAD_WEBHOOK_URL overrides it (set to empty is not supported — the read()
+// helper treats blank as unset and the default applies).
+const DEFAULT_LEAD_WEBHOOK_URL =
+  "https://hook.eu2.make.com/ah4bi237fj53huqevp16cj568gj9d3ff";
+
+export function getLeadWebhookUrl(): string {
+  return read("LEAD_WEBHOOK_URL") ?? DEFAULT_LEAD_WEBHOOK_URL;
+}

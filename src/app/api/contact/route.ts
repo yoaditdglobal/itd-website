@@ -4,6 +4,7 @@ import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 import { createLead, isZohoConfigured } from "@/lib/server/zoho";
 import { getNotifyEmails } from "@/lib/server/env";
 import { splitName, emailTeam } from "@/lib/server/leads";
+import { postLeadToWebhook } from "@/lib/server/webhook";
 
 /**
  * POST /api/contact — capture a website enquiry as a Zoho CRM Lead.
@@ -116,20 +117,54 @@ export async function POST(request: Request) {
   const notify = getNotifyEmails();
   const subject = `New website enquiry — ${d.company || d.email}`;
 
-  // Not configured (local dev / before Phase-0 secrets) — never lose the lead.
+  // Primary delivery: the Make.com lead webhook (its scenario writes the lead
+  // into Zoho CRM). Flat keys so the scenario's field mapping stays simple.
+  const webhookDelivered = await postLeadToWebhook({
+    firstName: d.firstName || "",
+    lastName,
+    fullName: [d.firstName, lastName].filter(Boolean).join(" "),
+    company: d.company || "",
+    email: d.email,
+    phone: d.phone || "",
+    shippingType: d.shippingType || "",
+    mainLanes: d.mainLanes?.join(", ") || "",
+    weeklyVolume: d.weeklyVolume || "",
+    freightType: d.freightType || "",
+    quantity: d.quantity || "",
+    weight: d.weight || "",
+    dimensions:
+      dims && (dims.length || dims.width || dims.height)
+        ? `${dims.length ?? "?"} x ${dims.width ?? "?"} x ${dims.height ?? "?"} cm`
+        : "",
+    collectionPostcode: d.collectionPostcode || "",
+    supplierInvoiceFile: d.supplierInvoice?.name || "",
+    freightPhotoFile: d.freightPhoto?.name || "",
+    description,
+    leadSource: "ITD Website",
+    page: "/contact",
+    submittedAt: new Date().toISOString(),
+  });
+
+  // Not configured (local dev / before Phase-0 secrets) — the webhook above is
+  // the delivery path; email remains a best-effort secondary channel.
   if (!isZohoConfigured()) {
-    console.warn("[/api/contact] Zoho not configured; lead not persisted:", {
-      email: d.email,
-      company: d.company,
-    });
+    if (!webhookDelivered) {
+      console.warn("[/api/contact] Zoho not configured; lead not persisted:", {
+        email: d.email,
+        company: d.company,
+      });
+    }
     const emailed = await emailTeam({ to: notify.leads, subject, rows: d });
-    return NextResponse.json({ success: true, persisted: false, fallbackEmailed: emailed }, { status: 201 });
+    return NextResponse.json(
+      { success: true, persisted: webhookDelivered, webhookDelivered, fallbackEmailed: emailed },
+      { status: 201 },
+    );
   }
 
   try {
     const { id } = await createLead(leadFields);
     await emailTeam({ to: notify.leads, subject, rows: { ...d, zohoLeadId: id } });
-    return NextResponse.json({ success: true, id }, { status: 201 });
+    return NextResponse.json({ success: true, id, webhookDelivered }, { status: 201 });
   } catch (err) {
     console.error(
       "[/api/contact] Zoho createLead failed:",
@@ -143,7 +178,7 @@ export async function POST(request: Request) {
       rows: d,
     });
     return NextResponse.json(
-      { success: true, persisted: false, fallbackEmailed: emailed },
+      { success: true, persisted: webhookDelivered, webhookDelivered, fallbackEmailed: emailed },
       { status: 201 },
     );
   }
