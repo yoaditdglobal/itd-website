@@ -14,9 +14,10 @@ import {
   ShieldCheck,
   UserCheck,
   Zap,
-  LayoutDashboard,
   Eye,
-  BarChart3,
+  Sparkles,
+  ArrowLeftRight,
+  AlertTriangle,
   TrendingDown,
   MapPin,
   Truck,
@@ -117,11 +118,16 @@ export default function ExportPage() {
               <div>
                 <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
                 <h2 className="text-display-lg text-text-primary">
-                  Compare rates. Book carriers. Track every shipment.
+                  Compare rates. Generate customs paperwork. Track each shipment.
                 </h2>
-                <p className="mt-6 text-body-lg text-text-secondary">
-                  Connexx is ITD Global's multi-courier shipping platform built for international export. Compare live rates across DHL Express, FedEx, UPS, DPD, and Evri, automate carrier selection per shipment, generate labels and customs documents, and track every consignment from collection to delivery. All from one login.
-                </p>
+                <div className="mt-6 space-y-4">
+                  <p className="text-body-lg text-text-secondary">
+                    Connexx is ITD Global's multi-courier platform for international export. Compare live rates across DHL Express, FedEx, UPS, DPD and Evri, generate labels and customs documents automatically, and follow each consignment from collection to delivery. One login covers the lot.
+                  </p>
+                  <p className="text-body-md text-text-secondary">
+                    Drop in an existing commercial invoice and Connexx's AI reads the line items, turning a PDF or screenshot into structured customs data in seconds. Ship DDP or DDU, switched per shipment or set in bulk, with the right party billed automatically either way. Restricted items are covered too, including dry ice and lithium batteries, captured at the point of booking.
+                  </p>
+                </div>
                 <div className="mt-8">
                   <Button href="/connexx">Explore Connexx</Button>
                 </div>
@@ -139,12 +145,12 @@ export default function ExportPage() {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
-                    { icon: Zap,           name: "Rate Compare" },
-                    { icon: Truck,         name: "Carrier Select" },
-                    { icon: LayoutDashboard, name: "Label Gen" },
-                    { icon: ShieldCheck,   name: "Customs Docs" },
-                    { icon: Eye,           name: "Tracking" },
-                    { icon: BarChart3,     name: "Analytics" },
+                    { icon: Zap,            name: "Rate Compare" },
+                    { icon: Truck,          name: "Carrier Select" },
+                    { icon: Sparkles,       name: "Customs AI" },
+                    { icon: ArrowLeftRight, name: "DDP/DDU" },
+                    { icon: AlertTriangle,  name: "Dangerous Goods" },
+                    { icon: Eye,            name: "Tracking" },
                   ].map((mod) => (
                     <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
                       <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />

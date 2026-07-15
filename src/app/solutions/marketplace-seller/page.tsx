@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { LayoutGrid, Zap, Search, Plug, Store } from "lucide-react";
+import { LayoutGrid, Zap, Search, ClipboardList, Store } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Amazon and eBay shipping software for UK marketplace sellers",
@@ -46,23 +46,23 @@ export default function MarketplaceSellerPage() {
       features={[
         {
           icon: LayoutGrid,
-          title: "One dispatch queue for Amazon, eBay, Etsy, and TikTok Shop",
-          desc: "Every order from every marketplace lands in a single queue with the SLA deadline, the marketplace-specific carrier whitelist, and the recommended carrier already populated. You start printing labels at 8am without opening Seller Central, eBay Seller Hub, or any other platform tab.",
+          title: "One dispatch queue for Amazon, eBay, Etsy, TikTok Shop and Temu.",
+          desc: "Each order lands with its SLA deadline, its marketplace carrier whitelist, and the recommended carrier already populated.",
         },
         {
           icon: Zap,
-          title: "SLA-aware routing for Valid Tracking Rate and Late Shipment Rate",
-          desc: "Connexx knows Amazon's dispatch cut-off is 4pm and routes accordingly. Every Amazon order goes to a Valid Tracking Rate-compliant carrier (Royal Mail Tracked 24, Amazon Shipping, DPD Next Day). Tracking writes back to Seller Central in real time. Your VTR stays above 95% without manual checking.",
+          title: "SLA-aware routing that protects your metrics.",
+          desc: "Connexx knows each platform's cut-off and routes to a Valid Tracking Rate-compliant carrier automatically. Tracking writes back to Seller Central and eBay Seller Hub in real time, with automatic retries if a marketplace API stumbles.",
+        },
+        {
+          icon: ClipboardList,
+          title: "Exceptions drop into a queue, not a missed delivery.",
+          desc: "Anything Connexx can't route with confidence lands in a “To Fix” list for a quick human check, instead of shipping wrong or shipping late.",
         },
         {
           icon: Search,
-          title: "Penalty fee tracing in under two minutes",
-          desc: "Every penalty invoice ties back to a specific shipment, a specific carrier, and a specific SLA breach. The dashboard shows which marketplace, which listing, and which dispatch decision caused each fee. Velocity Sellers cut £12,000 a month in penalty fees to zero using this workflow.",
-        },
-        {
-          icon: Plug,
-          title: "Linnworks, Selro, and StoreFeeder integration",
-          desc: "Connexx sits on top of your listing tool as the shipping layer. Linnworks, Selro, StoreFeeder, and Veeqo all push orders into Connexx for rate shopping and label generation. Tracking and dispatch confirmations write back to the marketplace through the listing tool. No double data entry.",
+          title: "Penalty fee tracing in minutes, not hours.",
+          desc: "Every penalty invoice ties back to a specific shipment, carrier and SLA breach, so the dashboard shows exactly which dispatch decision caused it.",
         },
       ]}
       integrations={[
