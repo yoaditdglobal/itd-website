@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Zap, LayoutDashboard, RefreshCw, ShieldCheck, ShoppingCart } from "lucide-react";
+import { Zap, RefreshCw, RotateCcw, ShieldCheck, ShoppingCart } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "eCommerce shipping software for UK retailers",
@@ -63,24 +63,24 @@ export default function EcommercePage() {
       ]}
       features={[
         {
-          icon: Zap,
-          title: "Automated rate comparison.",
-          desc: "On every order, Connexx checks live rates across every active UK and international carrier. The cheapest compliant option is selected automatically. You set the rules. The platform does the comparison in milliseconds.",
-        },
-        {
-          icon: LayoutDashboard,
-          title: "One dashboard for every dispatch.",
-          desc: "Royal Mail, DPD, Evri, DHL, FedEx, UPS, Amazon Shipping, Parcel Force, InPost, and DX all run from a single screen. Label generation, manifesting, tracking, and exception handling are unified. No tab-switching, no copy-paste between portals.",
-        },
-        {
           icon: RefreshCw,
-          title: "Returns that don't eat the margin.",
-          desc: "Customer-facing returns portal. Pre-paid return labels generated on demand. Carrier rules applied automatically. Returns logistics stops being the afterthought that costs you 8% of revenue.",
+          title: "Orders arrive before you go looking.",
+          desc: "Connexx pulls new Shopify, WooCommerce and BigCommerce orders in around the clock. Cancellations sync too, so a refunded order never gets a label printed against it.",
+        },
+        {
+          icon: Zap,
+          title: "Rate comparison, done in milliseconds.",
+          desc: "On each order, Connexx checks live rates across your active UK and international carriers and applies the best-value compliant option, on the rules you set.",
+        },
+        {
+          icon: RotateCcw,
+          title: "Returns that don't eat your margin.",
+          desc: "A self-service returns portal raises a pre-paid label against your carrier rules automatically. Returns stop being the line that quietly costs 8% of revenue.",
         },
         {
           icon: ShieldCheck,
-          title: "Customs handled before the parcel leaves.",
-          desc: "HS codes pulled from your product catalogue. EORI and IOSS applied to the right shipments automatically. Country-specific paperwork generated on the spot. Customs holds drop because the documentation was right before the carrier scanned the label.",
+          title: "Customs sorted before the parcel leaves.",
+          desc: "HS codes pulled from your product catalogue, EORI and IOSS applied to the right shipments, country paperwork generated on the spot.",
         },
       ]}
       integrations={[

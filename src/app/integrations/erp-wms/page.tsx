@@ -2,6 +2,7 @@ import IntegrationCategoryPage from "@/components/sections/IntegrationCategoryPa
 import { getIntegrations } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/components/seo/JsonLd";
+import { Warehouse, Plug, Printer, Route, RefreshCw, CheckCircle2 } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "ERP and WMS integrations",
@@ -73,6 +74,35 @@ export default function ErpWmsPage() {
             "The carrier, tracking number, dispatch time and freight cost write straight back into your ERP or WMS. Your team sees tracking in the system they already use, with no second login.",
         },
       ]}
+      connexxSolves={{
+        features: [
+          {
+            icon: Warehouse,
+            title: "Nothing changes on the warehouse floor.",
+            desc: "Connexx sits beneath Mintsoft, ShipHero, ShipStation, Veeqo, Selro, Aimco, OrderWise, Magento and WooCommerce. Pickers and packers keep the workflow they know. What changes is which carrier the parcel leaves on.",
+          },
+          {
+            icon: Plug,
+            title: "One connection instead of a dozen.",
+            desc: "Connect Connexx once and the full carrier line-up opens up, domestic and international, with rates, labels and tracking handled centrally rather than built carrier by carrier inside your WMS.",
+          },
+          {
+            icon: Printer,
+            title: "Labels print at line speed.",
+            desc: "Orders flow from your WMS into Connexx and come back ready to print. Tracking writes back automatically. No swivel-chair work between systems, no CSV round-trips.",
+          },
+          {
+            icon: Route,
+            title: "Your routing rules, applied automatically.",
+            desc: "Set your logic once — weight bands, destinations, service levels, client requirements — and Connexx applies it to each order your WMS sends. Anything that needs a human gets flagged before it becomes a mis-shipment. Runs the same way across multiple warehouses and multiple clients, with every shipment traceable back to its source.",
+          },
+        ],
+        statTiles: [
+          { icon: RefreshCw, label: "Order Pull", val: "Live", tint: "text-success", bg: "bg-success-light" },
+          { icon: Printer, label: "Label Print", val: "Line speed", tint: "text-info", bg: "bg-info-light" },
+          { icon: CheckCircle2, label: "Write-back", val: "Automatic", tint: "text-accent", bg: "bg-accent-light" },
+        ],
+      }}
       faq={[
         {
           question: "Does ITD integrate with NetSuite?",

@@ -4,6 +4,8 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import Button from "@/components/ui/Button";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import ConnexxGateway from "@/components/sections/ConnexxGateway";
+import type { GatewayFeature, GatewayStatTile } from "@/components/sections/ConnexxGateway";
 import FaqSection from "@/components/sections/FaqSection";
 import type { FaqItem } from "@/components/sections/FaqSection";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
@@ -75,6 +77,17 @@ interface IntegrationCategoryPageProps {
   /** Optional intro paragraph above the how-it-works steps. */
   howItWorksIntro?: string;
 
+  /**
+   * Optional "How Connexx solves it" platform gateway section, rendered
+   * between how-it-works and the FAQ. `statTiles` customises the mockup's
+   * status tiles (defaults to the standard Rate Compare / Tracking /
+   * Compliance trio).
+   */
+  connexxSolves?: {
+    features: GatewayFeature[];
+    statTiles?: GatewayStatTile[];
+  };
+
   /** Optional FAQ items rendered before the closing CTA. */
   faq?: FaqItem[];
 
@@ -118,6 +131,7 @@ export default function IntegrationCategoryPage({
   howItWorks,
   howItWorksHeading = "How the integration works",
   howItWorksIntro,
+  connexxSolves,
   faq,
   closingCta,
   breadcrumbs,
@@ -283,6 +297,11 @@ export default function IntegrationCategoryPage({
             </div>
           </div>
         </section>
+      )}
+
+      {/* How Connexx solves it — platform gateway */}
+      {connexxSolves && (
+        <ConnexxGateway features={connexxSolves.features} statTiles={connexxSolves.statTiles} />
       )}
 
       {/* FAQ */}
