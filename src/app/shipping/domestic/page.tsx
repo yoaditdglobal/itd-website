@@ -250,23 +250,6 @@ export default function ShippingDomesticPage() {
             bestFor: ["Residential bulk", "Marketplace"],
           },
           {
-            carrier: "Parcelforce",
-            logo: "/logos/carriers/parcel-force.svg",
-            descriptor: "Royal Mail Group express network",
-            speeds: [
-              { label: "Express24", tier: "express" },
-              { label: "Express48", tier: "standard" },
-              { label: "Worldwide", tier: "special" },
-            ],
-            weightCeilingKg: 30,
-            coverage: {
-              tier: "full",
-              zones: ["Mainland UK", "Highlands", "Islands", "NI"],
-            },
-            tracking: { live: "live", pod: "signature" },
-            bestFor: ["B2B", "Heavy parcels", "Universal coverage"],
-          },
-          {
             carrier: "Amazon Shipping",
             logo: "/logos/carriers/amazonshipping_logo.png",
             descriptor: "Amazon's UK logistics network",
