@@ -7,7 +7,6 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import IntegrationCarousel from "@/components/sections/IntegrationCarousel";
 import type { IntegrationItem } from "@/components/sections/IntegrationCarousel";
-import BuiltForCarousel from "@/components/sections/BuiltForCarousel";
 import CarrierComparisonTable from "@/components/sections/CarrierComparisonTable";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import ConnexxGateway from "@/components/sections/ConnexxGateway";
@@ -63,7 +62,7 @@ export interface AudienceAnchor {
   solutionTag: SolutionTag;
   category: AudienceCategory;
   image: AudienceImage;
-  /** Defaults to "Learn more". */
+  /** @deprecated kept for back-compat; the grid card uses an arrow affordance. */
   ctaLabel?: string;
   /** @deprecated kept for back-compat; no longer rendered. Use `headline`. */
   title?: string;
@@ -246,18 +245,21 @@ export default function VerticalPage({
 
       {/* Pain Points */}
       {!hidePainPoints && (
-      <section className="bg-bg-secondary py-12 md:py-16 border-t border-border" aria-labelledby="pain-points-heading">
+      <section className="bg-bg-secondary py-14 md:py-20 border-t border-border" aria-labelledby="pain-points-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="pain-points-heading" className="sr-only">What gets in the way today</h2>
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+          <ScrollReveal>
+            <p className="text-eyebrow text-accent mb-3">The problem</p>
+            <h2 id="pain-points-heading" className="text-display-md text-text-primary mb-8 md:mb-10">
+              What gets in the way today.
+            </h2>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-3 gap-4 items-stretch">
             {pains.map((pain, i) => (
-              <ScrollReveal key={pain.num} delay={i * 0.1}>
-                <div className="flex gap-4">
-                  <span aria-hidden="true" className="text-stat-lg text-accent/30 flex-shrink-0">{pain.num}</span>
-                  <div>
-                    <h3 className="text-heading-sm text-text-primary mb-1">{pain.title}</h3>
-                    <p className="text-body-sm text-text-secondary">{pain.desc}</p>
-                  </div>
+              <ScrollReveal key={pain.num} delay={i * 0.1} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-white p-6 md:p-7 transition-all hover:border-accent/30 hover:shadow-md">
+                  <span aria-hidden="true" className="text-stat-xl text-accent">{pain.num}</span>
+                  <h3 className="text-heading-md text-text-primary mt-4 mb-2">{pain.title}</h3>
+                  <p className="text-body-md text-text-secondary">{pain.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -277,14 +279,18 @@ export default function VerticalPage({
               </p>
             </ScrollReveal>
           </div>
-          {/* Full-bleed: carousel sits OUTSIDE the max-w box (same as the
-              homepage). Its own .carousel-gutter re-aligns the first card to the
-              content gutter, so neighbours bleed past both viewport edges. */}
-          <BuiltForCarousel>
-            {audienceAnchors.map((a) => (
-              <BuiltForCard key={a.anchor} anchor={a} />
-            ))}
-          </BuiltForCarousel>
+          {/* No-scroll overlay grid (replaces the old horizontal carousel):
+              all six audiences visible at once, in the homepage
+              ShippingShowcase visual language. */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {audienceAnchors.map((a) => (
+                  <AudienceGridCard key={a.anchor} anchor={a} />
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
         </section>
       )}
 
@@ -426,33 +432,35 @@ export default function VerticalPage({
   );
 }
 
-/** Image-led ICP card for the "Built for" section on shipping pages. */
-function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
+/** Overlay photo card for the "Built for" grid on shipping pages — echoes
+ *  the homepage ShippingShowcase language (full-bleed photo, dark scrim,
+ *  white overlay copy). The summary reveals on hover/focus on hover-capable
+ *  devices (grid-rows trick, always in the DOM); touch users tap through to
+ *  the destination. `id={anchor.anchor}` keeps existing deep links working. */
+function AudienceGridCard({ anchor }: { anchor: AudienceAnchor }) {
   const studies = getCaseStudiesBySolution(anchor.solutionTag);
   const visible = studies.slice(0, 3);
   const overflow = studies.length - visible.length;
   const Icon = anchor.image.icon;
-  const ctaLabel = anchor.ctaLabel ?? "Learn more";
   const gradient =
     anchor.image.gradient ?? "from-accent-light via-white to-bg-secondary";
-  const altText =
-    anchor.image.alt ?? `${anchor.headline} illustration`;
+  const altText = anchor.image.alt ?? `${anchor.headline} illustration`;
 
   return (
     <Link
       id={anchor.anchor}
       href={anchor.href}
-      className="group relative flex h-full w-[clamp(300px,85vw,820px)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-border bg-white transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:shadow-xl hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:flex-row sm:items-stretch"
+      className="group relative block h-[300px] xl:h-[320px] overflow-hidden rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
     >
-      {/* Image / gradient placeholder — left panel on sm+ */}
-      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%] sm:self-stretch">
+      {/* Photo / gradient fallback */}
+      <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100 will-change-transform">
         {anchor.image.src ? (
           <Image
             src={anchor.image.src}
             alt={altText}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+            className="object-cover"
           />
         ) : (
           <div
@@ -466,114 +474,69 @@ function BuiltForCard({ anchor }: { anchor: AudienceAnchor }) {
         )}
       </div>
 
-      {/* Body — content area (chip / headline / Used by ⇄ summary on hover)
-          sits inside a `flex-1` wrapper so the absolute hover layer is
-          bounded to it. CTA below is a sibling, never overlapped. */}
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        {/* sr-only summary so screen readers always announce it */}
-        <span className="sr-only">{anchor.summary}</span>
+      {/* Scrim for copy legibility */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/40 to-bg-dark/10"
+      />
 
-        {/* Content area — the two states are layered here so the card height
-            stays constant across hover. A `min-h` reserves enough vertical
-            room for a full summary (~6 lines) even on cards that lack a
-            "Used by" strip, so the absolute hover text can never bleed into
-            the CTA below. */}
-        <div className="relative flex-1 min-h-[210px] md:min-h-[200px]">
-          {/* Static layer (default) — fades to 0 on hover/focus (only on
-              hover-capable devices) so the summary layer can take its place. */}
-          <div
-            className="
-              transition-opacity duration-200 ease-out
-              motion-reduce:transition-none
-              [@media(hover:hover)]:group-hover:opacity-0
-              [@media(hover:hover)]:group-focus-within:opacity-0
-            "
-          >
-            <span className="self-start inline-flex items-center rounded-full bg-bg-secondary text-text-tertiary text-eyebrow px-2.5 py-1 mb-3">
-              {anchor.category}
-            </span>
-            <h3 className="text-heading-md text-text-primary group-hover:text-accent transition-colors mt-1">
-              {anchor.headline}
-            </h3>
+      {/* Overlaid content */}
+      <div className="absolute inset-x-0 bottom-0 p-5 xl:p-6">
+        <span className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white backdrop-blur-sm">
+          {anchor.category}
+        </span>
+        <p className="mt-3 text-heading-md text-white">{anchor.headline}</p>
 
-            {/* "Used by" strip — always rendered. Shows real case-study
-                avatars when matches exist, or dashed placeholders + a
-                "Coming soon" caption when this ICP has no published
-                customers yet. Keeps every card's vertical rhythm
-                consistent. */}
-            <div className="mt-4 pt-4 border-t border-border">
-              <p className="text-eyebrow text-text-tertiary mb-2">Used by</p>
-              <div className="flex items-center gap-2">
-                {visible.length > 0 ? (
-                  <>
-                    <div className="flex items-center gap-1.5">
-                      {visible.map((cs) => (
-                        <span
-                          key={cs.id}
-                          title={cs.brandName}
-                          className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1"
-                        >
-                          <IntegrationLogo
-                            name={cs.brandName}
-                            logo={cs.logo}
-                            size="xs"
-                          />
-                        </span>
-                      ))}
-                    </div>
-                    {overflow > 0 && (
-                      <span className="text-caption text-text-tertiary">
-                        + {overflow} more
-                      </span>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-1.5">
-                      {[0, 1, 2].map((i) => (
-                        <span
-                          key={i}
-                          aria-hidden
-                          className="inline-block h-7 w-7 rounded-md border border-dashed border-border bg-bg-secondary"
-                        />
-                      ))}
-                    </div>
-                    <span className="text-caption text-text-tertiary ml-1">
-                      Customers landing soon
-                    </span>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Hover layer — summary text. Absolutely positioned over the static
-              layer (bounded to this content wrapper, so it can never reach
-              the CTA below). Hidden by default on hover-capable devices. */}
-          <div
-            aria-hidden
-            className="
-              pointer-events-none absolute inset-0
-              opacity-0 transition-opacity duration-200 ease-out
-              motion-reduce:transition-none
-              [@media(hover:hover)]:group-hover:opacity-100
-              [@media(hover:hover)]:group-focus-within:opacity-100
-            "
-          >
-            <p className="text-body-sm text-text-secondary leading-relaxed">
-              {anchor.summary}
-            </p>
+        {/* Summary — hover/focus reveal on hover-capable devices; always in
+            the DOM for SEO and screen readers. */}
+        <div
+          className="
+            grid grid-rows-[0fr] opacity-0
+            transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
+            motion-reduce:transition-none
+            [@media(hover:hover)]:group-hover:grid-rows-[1fr]
+            [@media(hover:hover)]:group-hover:opacity-100
+            [@media(hover:hover)]:group-focus-within:grid-rows-[1fr]
+            [@media(hover:hover)]:group-focus-within:opacity-100
+          "
+        >
+          <div className="min-h-0 overflow-hidden">
+            <p className="mt-2 text-body-sm text-white/85">{anchor.summary}</p>
           </div>
         </div>
 
-        {/* CTA — sibling below the content area, never overlapped */}
-        <span
-          aria-hidden
-          className="mt-5 inline-flex items-center justify-center gap-1.5 self-start rounded-lg bg-bg-secondary px-4 py-2 text-sm font-semibold text-text-primary group-hover:bg-accent group-hover:text-white transition-colors"
-        >
-          {ctaLabel}
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform motion-reduce:group-hover:translate-x-0" />
-        </span>
+        {/* Used by + arrow affordance */}
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="text-eyebrow text-white/70">Used by</span>
+            {visible.length > 0 ? (
+              <>
+                <span className="flex items-center gap-1.5">
+                  {visible.map((cs) => (
+                    <span
+                      key={cs.id}
+                      title={cs.brandName}
+                      className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md bg-white p-1"
+                    >
+                      <IntegrationLogo name={cs.brandName} logo={cs.logo} size="xs" />
+                    </span>
+                  ))}
+                </span>
+                {overflow > 0 && (
+                  <span className="text-caption text-white/70">+ {overflow}</span>
+                )}
+              </>
+            ) : (
+              <span className="text-caption text-white/60">Customers landing soon</span>
+            )}
+          </div>
+          <span
+            aria-hidden
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:border-accent group-hover:bg-accent"
+          >
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
+          </span>
+        </div>
       </div>
     </Link>
   );
