@@ -16,8 +16,9 @@ import type {
 } from "@/components/sections/CarrierComparisonTable";
 import FaqAccordion from "@/components/sections/FaqAccordion";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
-import type { CaseStudy, SolutionTag } from "@/lib/data";
-import { getCaseStudiesBySolution } from "@/lib/data";
+import type { CaseStudy, SolutionTag, LibrarySegment } from "@/lib/data";
+import { getCaseStudiesBySolution, SOLUTION_SLUGS } from "@/lib/data";
+import UsedByChip from "@/components/sections/UsedByChip";
 import { ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
@@ -445,12 +446,19 @@ function AudienceGridCard({ anchor }: { anchor: AudienceAnchor }) {
   const gradient =
     anchor.image.gradient ?? "from-accent-light via-white to-bg-secondary";
   const altText = anchor.image.alt ?? `${anchor.headline} illustration`;
+  // "+ N" deep-links the filtered library when the tag is a library facet.
+  const librarySlug =
+    anchor.solutionTag in SOLUTION_SLUGS
+      ? SOLUTION_SLUGS[anchor.solutionTag as LibrarySegment]
+      : undefined;
+  const moreHref = librarySlug
+    ? `/resources/case-studies?solution=${librarySlug}`
+    : "/resources/case-studies";
 
   return (
-    <Link
+    <div
       id={anchor.anchor}
-      href={anchor.href}
-      className="group relative block h-[300px] xl:h-[320px] overflow-hidden rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      className="group relative h-[300px] overflow-hidden rounded-3xl xl:h-[320px]"
     >
       {/* Photo / gradient fallback */}
       <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100 will-change-transform">
@@ -505,39 +513,75 @@ function AudienceGridCard({ anchor }: { anchor: AudienceAnchor }) {
           </div>
         </div>
 
-        {/* Used by + arrow affordance */}
+        {/* Used by + expanding Explore affordance */}
         <div className="mt-4 flex items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-2">
+          {/* Chips sit ABOVE the stretched card link (z-20) so they stay
+              independently hoverable/clickable — each opens the same
+              case-study preview HoverCard as the homepage pager. */}
+          <div className="relative z-20 flex min-w-0 items-center gap-2">
             <span className="text-eyebrow text-white/70">Used by</span>
             {visible.length > 0 ? (
               <>
                 <span className="flex items-center gap-1.5">
-                  {visible.map((cs) => (
-                    <span
-                      key={cs.id}
-                      title={cs.brandName}
-                      className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md bg-white p-1"
-                    >
-                      <IntegrationLogo name={cs.brandName} logo={cs.logo} size="xs" />
-                    </span>
-                  ))}
+                  {visible.map((cs) => {
+                    const q = cs.quotes?.[0];
+                    return (
+                      <UsedByChip
+                        key={cs.id}
+                        cs={{
+                          slug: cs.slug,
+                          brandName: cs.brandName,
+                          logo: cs.logo,
+                          stats: cs.stats,
+                          quoteAuthor: q
+                            ? [q.name, q.title].filter(Boolean).join(", ")
+                            : cs.quoteAuthor,
+                          quoteAuthorPhoto: q?.photo ?? cs.quoteAuthorPhoto,
+                          oneLiner: cs.oneLiner,
+                          headline: cs.headline,
+                        }}
+                      />
+                    );
+                  })}
                 </span>
                 {overflow > 0 && (
-                  <span className="text-caption text-white/70">+ {overflow}</span>
+                  <Link
+                    href={moreHref}
+                    aria-label={`See ${overflow} more customer stories`}
+                    className="rounded-sm text-caption text-white/70 underline-offset-2 transition-colors hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  >
+                    + {overflow}
+                  </Link>
                 )}
               </>
             ) : (
               <span className="text-caption text-white/60">Customers landing soon</span>
             )}
           </div>
+          {/* Decorative (below the stretched link, so clicks pass through to
+              the card link): blooms from a round arrow into "Explore →" on
+              card hover/focus. */}
           <span
             aria-hidden
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:border-accent group-hover:bg-accent"
+            className="inline-flex h-9 min-w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/25 bg-white/10 px-2.5 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-focus-within:border-accent group-focus-within:bg-accent"
           >
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
+            <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-[max-width,opacity,margin] duration-300 ease-out group-hover:mr-1.5 group-hover:max-w-20 group-hover:opacity-100 group-focus-within:mr-1.5 group-focus-within:max-w-20 group-focus-within:opacity-100 motion-reduce:transition-none">
+              Explore
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
           </span>
         </div>
       </div>
-    </Link>
+
+      {/* Stretched card link — sits over everything except the chip row
+          (z-20 &gt; z-10), so the whole card navigates while the chips keep
+          their own hover/click behaviour. */}
+      <Link
+        href={anchor.href}
+        className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      >
+        <span className="sr-only">{anchor.headline}</span>
+      </Link>
+    </div>
   );
 }
