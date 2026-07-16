@@ -18,7 +18,7 @@ import {
 export const metadata = buildMetadata({
   title: "International shipping with automated customs documentation",
   description:
-    "Ship to EU and worldwide destinations with HS codes, EORI, IOSS, and customs paperwork generated automatically. DHL, FedEx, UPS, and DPD on one platform.",
+    "Ship to EU and worldwide destinations with HS codes, EORI, IOSS, and customs paperwork generated automatically. DHL Express, FedEx, UPS, Evri EU, Deutsche Post, and Starlinks on one platform.",
   path: "/shipping/international",
 });
 
@@ -49,7 +49,7 @@ export default function ShippingInternationalPage() {
         serviceSchema({
           name: "International Parcel Shipping",
           description:
-            "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East, and rest of world via DHL Express, FedEx, UPS, DPD, Royal Mail International, and Parcelforce International.",
+            "Multi-carrier international parcel shipping platform with automated customs documentation. Connexx covers EU, North America, APAC, Middle East, and rest of world via DHL Express, FedEx, UPS, Evri EU, Deutsche Post, and Starlinks.",
           path: "/shipping/international",
           serviceType: "International Parcel Shipping and Customs Automation",
           areaServed: [
@@ -207,33 +207,33 @@ export default function ShippingInternationalPage() {
             ],
           },
           {
-            carrier: "DPD",
-            logo: "/logos/carriers/DPD-LOGO.png",
+            carrier: "Evri EU",
+            logo: "/logos/carriers/evrieu_logo.png",
             cells: [
-              "EU strong, growing worldwide",
-              "Classic (2–5 days), Express (1–2 days for EU)",
-              "Automated customs declarations for EU, IOSS supported",
-              "EU eCommerce shipping at cost-effective rates",
+              "Europe + 200+ countries",
+              "European Tracked (3–7 days), International Tracked (3–7 days)",
+              "Cleared via established postal partners in destination countries; parcels up to 15kg",
+              "Cost-effective lighter consumer parcels into Europe, drop-off despatch",
             ],
           },
           {
-            carrier: "Royal Mail International",
-            logo: "/logos/carriers/royal-mail-icon.png",
+            carrier: "Deutsche Post",
+            logo: "/logos/carriers/deutschepost_logo.avif",
             cells: [
-              "230+ countries",
-              "International Tracked & Signed, International Tracked, International Signed, International Standard, International Business",
-              "CN22 / CN23 automated, IOSS supported",
-              "Small parcels and letters worldwide, low-value shipments",
+              "220+ countries",
+              "Packet Tracked, Warenpost International — Europe 2–6 days, Rest of World 3–9 days",
+              "Postal-network clearance via local partners, electronic end-to-end tracking",
+              "Lightweight eCommerce at volume, lowest cost per unit",
             ],
           },
           {
-            carrier: "Parcelforce International",
-            logo: "/logos/carriers/parcel-force.svg",
+            carrier: "Starlinks",
+            logo: "/logos/carriers/starlinks_logo.png",
             cells: [
-              "240+ countries",
-              "Globalexpress, Globalpriority, Globalvalue, EuroPriority",
-              "Customs declarations included, IOSS supported",
-              "Heavier international parcels at postal pricing",
+              "200+ countries",
+              "European Express (1–2 days), Rest of World (1–3 days)",
+              "Customs clearance support, delivered duty paid options",
+              "Cross-border eCommerce with fast European transit",
             ],
           },
         ],
@@ -254,7 +254,7 @@ export default function ShippingInternationalPage() {
         {
           icon: Zap,
           title: "Live rate comparison across six international carriers.",
-          desc: "DHL Express, FedEx, UPS, DPD, Royal Mail International, and Parcelforce International run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.",
+          desc: "DHL Express, FedEx, UPS, Evri EU, Deutsche Post, and Starlinks run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.",
         },
         {
           icon: Calculator,
@@ -285,25 +285,25 @@ export default function ShippingInternationalPage() {
           href: "/integrations/carriers",
         },
         {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
+          name: "Evri EU",
+          logo: "/logos/carriers/evrieu_logo.png",
           description:
-            "EU eCommerce shipping with automated customs declarations and IOSS support.",
-          href: "/integrations/carriers/dpd",
+            "Tracked delivery into Europe and 200+ countries worldwide. Cost-effective for lighter consumer parcels.",
+          href: "/integrations/carriers/evri-eu",
         },
         {
-          name: "Royal Mail International",
-          logo: "/logos/carriers/royal-mail-icon.png",
+          name: "Deutsche Post",
+          logo: "/logos/carriers/deutschepost_logo.avif",
           description:
-            "International Tracked & Signed, Tracked, Signed, Standard, Business. 230+ countries.",
-          href: "/integrations/carriers/royal-mail",
+            "Packet Tracked and Warenpost International to 220+ countries via established postal networks.",
+          href: "/integrations/carriers/deutsche-post",
         },
         {
-          name: "Parcelforce International",
-          logo: "/logos/carriers/parcel-force.svg",
+          name: "Starlinks",
+          logo: "/logos/carriers/starlinks_logo.png",
           description:
-            "Globalexpress, Globalpriority, Globalvalue, EuroPriority. 240+ countries.",
-          href: "/integrations/carriers/parcelforce",
+            "European Express in 1–2 days, Rest of World in 1–3 days. Tracked as standard.",
+          href: "/integrations/carriers/starlinks",
         },
         {
           name: "Shopify",
@@ -332,7 +332,7 @@ export default function ShippingInternationalPage() {
         {
           question: "Which international carriers can I ship with through ITD?",
           answer:
-            "The major global and postal carriers: DHL Express, FedEx, UPS, DPD, Royal Mail International and Parcelforce International. We compare them on each order and route to the best-value one for the destination.",
+            "The major global and postal carriers: DHL Express, FedEx, UPS, Evri EU, Deutsche Post and Starlinks. We compare them on each order and route to the best-value one for the destination.",
         },
         {
           question: "Will my customers get charged surprise duties or taxes?",
