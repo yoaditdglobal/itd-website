@@ -175,7 +175,7 @@ export default function ShippingDomesticPage() {
       carrierComparison={{
         title: "UK carrier comparison",
         intro:
-          "The seven carriers below cover the vast majority of UK domestic volume. Each one is strong on a specific use case and weak on another. Connexx runs all of them through one rate engine on every order, so the strongest carrier wins the shipment.",
+          "The six carriers below cover the vast majority of UK domestic volume. Each one is strong on a specific use case and weak on another. Connexx runs all of them through one rate engine on every order, so the strongest carrier wins the shipment.",
         columns: ["Speed", "Weight", "UK coverage", "Tracking", "Best for"],
         rows: [
           {
@@ -248,24 +248,6 @@ export default function ShippingDomesticPage() {
             },
             tracking: { live: "live", pod: "signature" },
             bestFor: ["Residential bulk", "Marketplace"],
-          },
-          {
-            carrier: "DX",
-            descriptor: "B2B specialist — irregular dimensions",
-            speeds: [
-              { label: "Same Day", tier: "special" },
-              { label: "Next Day", tier: "express" },
-              { label: "Two-Man", tier: "standard" },
-              { label: "Secure", tier: "special" },
-            ],
-            weightCeilingKg: 30,
-            weightCeilingNote: "Irregular dimensions accepted",
-            coverage: {
-              tier: "mainland",
-              zones: ["Mainland UK", "Business postcodes prioritised"],
-            },
-            tracking: { live: "live", pod: "signature" },
-            bestFor: ["B2B", "Enterprise"],
           },
           {
             carrier: "Parcelforce",
