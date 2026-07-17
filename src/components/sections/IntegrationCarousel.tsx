@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
@@ -15,7 +15,36 @@ export interface IntegrationItem {
 
 const AUTOPLAY_MS = 3500;
 
+/** Carriers link under /integrations/carriers; everything else is tech. */
+function isCarrier(item: IntegrationItem): boolean {
+  return item.href?.startsWith("/integrations/carriers") ?? false;
+}
+
 export default function IntegrationCarousel({ integrations }: { integrations: IntegrationItem[] }) {
+  const { carriers, tech } = useMemo(
+    () => ({
+      carriers: integrations.filter(isCarrier),
+      tech: integrations.filter((i) => !isCarrier(i)),
+    }),
+    [integrations],
+  );
+  const hasToggle = carriers.length > 0 && tech.length > 0;
+  // Default to the group the page leads with (shipping pages list carriers
+  // first, solution pages their platforms) — respects each page's emphasis.
+  const [tab, setTab] = useState<"carriers" | "tech">(() =>
+    integrations[0] && isCarrier(integrations[0]) ? "carriers" : "tech",
+  );
+  // Effective group when there's nothing to toggle (single-kind pages show
+  // their full list and route Browse to the matching directory).
+  const effectiveTab = hasToggle ? tab : carriers.length > 0 ? "carriers" : "tech";
+  const visibleItems = hasToggle
+    ? tab === "carriers"
+      ? carriers
+      : tech
+    : integrations;
+  const browseHref =
+    effectiveTab === "carriers" ? "/integrations/carriers" : "/integrations/tech";
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [inView, setInView] = useState(false);
@@ -60,7 +89,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
       selectedIndex === null && inView && pageVisible && !reducedMotion;
     if (shouldPlay) {
       intervalRef.current = setInterval(() => {
-        setActiveIndex((i) => (i + 1) % integrations.length);
+        setActiveIndex((i) => (i + 1) % visibleItems.length);
       }, AUTOPLAY_MS);
     }
     return () => {
@@ -69,7 +98,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
         intervalRef.current = null;
       }
     };
-  }, [selectedIndex, inView, pageVisible, reducedMotion, integrations.length]);
+  }, [selectedIndex, inView, pageVisible, reducedMotion, visibleItems.length]);
 
   const handleCardClick = (index: number) => {
     if (selectedIndex === index) {
@@ -80,13 +109,49 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
     }
   };
 
-  const selected = selectedIndex !== null ? integrations[selectedIndex] : null;
+  const handleTabSwitch = (next: "carriers" | "tech") => {
+    setTab(next);
+    setSelectedIndex(null);
+    setActiveIndex(0);
+  };
+
+  const selected = selectedIndex !== null ? visibleItems[selectedIndex] : null;
 
   return (
     <div ref={containerRef}>
+      {/* Carrier ⇄ Tech toggle — only when the page mixes both kinds */}
+      {hasToggle && (
+        <div
+          role="tablist"
+          aria-label="Integration type"
+          className="mb-6 inline-flex rounded-lg border border-border bg-bg-secondary p-1"
+        >
+          {(
+            [
+              { key: "carriers", label: "Carriers" },
+              { key: "tech", label: "Tech Integrations" },
+            ] as const
+          ).map((t) => (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={tab === t.key}
+              onClick={() => handleTabSwitch(t.key)}
+              className={`min-h-[44px] rounded-md px-5 py-2 text-sm font-medium transition-all ${
+                tab === t.key
+                  ? "bg-white shadow-sm text-text-primary"
+                  : "text-text-secondary hover:text-text-primary"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Card grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        {integrations.map((item, i) => {
+        {visibleItems.map((item, i) => {
           const isActive = activeIndex === i && selectedIndex === null;
           const isSelected = selectedIndex === i;
           return (
@@ -142,9 +207,10 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
         </div>
       )}
 
-      {/* Browse integrations — always visible below the panel */}
+      {/* Browse integrations — routes to the directory matching the active
+          toggle state (carriers ⇄ tech) */}
       <div className="mt-4">
-        <Link href="/integrations/carriers" className="link-underline text-sm text-text-tertiary hover:text-accent transition-colors">
+        <Link href={browseHref} className="link-underline text-sm text-accent font-medium">
           Browse integrations →
         </Link>
       </div>
