@@ -193,9 +193,9 @@ export default function Footer() {
         {/* Legal row */}
         <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap gap-6 text-xs text-white/40">
-            <Link href="#" className="hover:text-white/70">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white/70">Terms of Service</Link>
-            <Link href="#" className="hover:text-white/70">Cookie Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-white/70">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="hover:text-white/70">Terms of Service</Link>
+            <Link href="/cookie-policy" className="hover:text-white/70">Cookie Policy</Link>
           </div>
           <div className="text-xs text-white/30">
             &copy; {new Date().getFullYear()} ITD Global. All rights reserved.
