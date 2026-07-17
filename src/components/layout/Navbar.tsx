@@ -79,11 +79,6 @@ const resourcesMenu = {
     { name: "Help Centre", href: "/help/centre" },
     { name: "Submit a request", href: "https://support.itdglobal.com/hc/en-gb/requests/new" },
   ],
-  developers: [
-    { name: "Developer resources", href: "/help/developers" },
-    { name: "API documentation", href: "/help/developers" },
-    { name: "Status", href: "/help/developers" },
-  ],
 };
 
 interface NavDropdownProps {
@@ -420,14 +415,17 @@ export default function Navbar() {
           <NavDropdown
             {...dropdownProps("resources")}
             label="Resources"
-            panelClassName="absolute top-full -right-8 mt-1 w-[680px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-4 gap-5"
+            panelClassName="absolute top-full -right-8 mt-1 w-[560px] bg-white rounded-xl shadow-2xl border border-border p-5 grid grid-cols-[1.5fr_1fr_1fr] gap-5"
           >
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Customer Stories</div>
+            {/* Customer Stories — the lead section of this menu */}
+            <div className="rounded-lg bg-accent-light/40 p-4 -my-1">
+              <div className="text-eyebrow text-accent mb-3">Customer Stories</div>
               {resourcesMenu.customerStories.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
+                <Link key={item.name} href={item.href} className="block py-1.5 text-sm font-medium text-text-primary hover:text-accent">{item.name}</Link>
               ))}
-              <Link href="/resources/case-studies" className="link-underline text-xs text-accent mt-2">See all →</Link>
+              <Link href="/resources/case-studies" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline underline-offset-2">
+                See all stories →
+              </Link>
             </div>
             <div>
               <div className="text-eyebrow text-text-tertiary mb-3">Knowledge</div>
@@ -438,12 +436,6 @@ export default function Navbar() {
             <div>
               <div className="text-eyebrow text-text-tertiary mb-3">Support</div>
               {resourcesMenu.support.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-              ))}
-            </div>
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Developers</div>
-              {resourcesMenu.developers.map((item) => (
                 <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
               ))}
             </div>
@@ -573,10 +565,6 @@ export default function Navbar() {
                 ))}
                 <div className="text-xs font-semibold uppercase text-white/40 mt-3">Support</div>
                 {resourcesMenu.support.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-                <div className="text-xs font-semibold uppercase text-white/40 mt-3">Developers</div>
-                {resourcesMenu.developers.map((item) => (
                   <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
                 ))}
               </div>
