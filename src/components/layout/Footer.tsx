@@ -149,23 +149,25 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Brand + memberships row */}
+        {/* Brand + memberships row — logos sit right beside the "Member of"
+            label; the copyright line takes the far end of the row. */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-center gap-5 lg:flex-row lg:justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/" aria-label="ITD Global — home">
-              <Image
-                src="/logos/itd/itd-global-logo.webp"
-                alt="ITD Global"
-                width={576}
-                height={240}
-                className="h-8 w-auto"
-              />
-            </Link>
-            <span className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
-            <span className="text-eyebrow text-white/40">Member of</span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {memberships.map((m) => (
+          <div className="flex flex-col items-center gap-5 lg:flex-row lg:gap-4">
+            <div className="flex items-center gap-4">
+              <Link href="/" aria-label="ITD Global — home">
+                <Image
+                  src="/logos/itd/itd-global-logo.webp"
+                  alt="ITD Global"
+                  width={576}
+                  height={240}
+                  className="h-8 w-auto"
+                />
+              </Link>
+              <span className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
+              <span className="text-eyebrow text-white/40">Member of</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {memberships.map((m) => (
               <a
                 key={m.name}
                 href={m.href}
@@ -187,6 +189,10 @@ export default function Footer() {
                 />
               </a>
             ))}
+            </div>
+          </div>
+          <div className="text-xs text-white/30">
+            &copy; {new Date().getFullYear()} ITD Global. All rights reserved.
           </div>
         </div>
 
@@ -196,9 +202,6 @@ export default function Footer() {
             <Link href="/privacy-policy" className="hover:text-white/70">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-white/70">Terms of Service</Link>
             <Link href="/cookie-policy" className="hover:text-white/70">Cookie Policy</Link>
-          </div>
-          <div className="text-xs text-white/30">
-            &copy; {new Date().getFullYear()} ITD Global. All rights reserved.
           </div>
         </div>
       </div>
