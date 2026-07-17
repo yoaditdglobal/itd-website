@@ -86,16 +86,55 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Link href="/" aria-label="ITD Global — home">
-            <Image
-              src="/logos/itd/itd-global-logo.webp"
-              alt="ITD Global"
-              width={576}
-              height={240}
-              className="h-8 w-auto"
-            />
-          </Link>
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          {/* Brand + memberships. The association marks are official full-colour
+              assets (never recoloured), so each sits on a white tile to stay
+              legible on the dark footer. */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+            <Link href="/" aria-label="ITD Global — home">
+              <Image
+                src="/logos/itd/itd-global-logo.webp"
+                alt="ITD Global"
+                width={576}
+                height={240}
+                className="h-8 w-auto"
+              />
+            </Link>
+            <span className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
+            <div className="flex items-center gap-3">
+              <span className="text-eyebrow text-white/40">Member of</span>
+              <a
+                href="https://www.bifa.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="BIFA — British International Freight Association (opens in a new tab)"
+                className="inline-flex h-11 items-center rounded-lg bg-white px-2.5 py-1.5 transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              >
+                <Image
+                  src="/logos/memberships/bifa.png"
+                  alt="BIFA — British International Freight Association"
+                  width={600}
+                  height={600}
+                  className="h-8 w-auto object-contain"
+                />
+              </a>
+              <a
+                href="https://www.wcaworld.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WCA — World Cargo Alliance (opens in a new tab)"
+                className="inline-flex h-11 items-center rounded-lg bg-white px-2.5 py-1.5 transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              >
+                <Image
+                  src="/logos/memberships/wca.png"
+                  alt="WCA — World Cargo Alliance"
+                  width={800}
+                  height={287}
+                  className="h-7 w-auto object-contain"
+                />
+              </a>
+            </div>
+          </div>
           <div className="flex flex-wrap gap-6 text-xs text-white/40">
             <Link href="#" className="hover:text-white/70">Privacy Policy</Link>
             <Link href="#" className="hover:text-white/70">Terms of Service</Link>
