@@ -14,15 +14,11 @@ export default function ConnexxPreview() {
                 The Connexx Platform
               </p>
               <h2 className="text-display-lg text-text-primary">
-                One platform. Every shipment.
+                The engine behind 17.5 million labels a year.
               </h2>
               <p className="mt-6 text-body-lg text-text-secondary">
-                Connexx is the multi-carrier shipping platform behind ITD Global.
-                It compares live rates across every connected carrier, generates
-                the right label, tracks the parcel from collection to delivery,
-                and handles customs paperwork on cross-border shipments. Rate
-                engine, label generation, tracking, and compliance run in a
-                single dashboard.
+                A new one every 2.7 seconds, across 16 carriers and used by more
+                than 6,000 UK businesses for over 20 years.
               </p>
               <div className="mt-8">
                 <Button href="/connexx">Explore</Button>
