@@ -1,4 +1,4 @@
-import { Truck, Plane, Ship, Package, Warehouse, Star, CheckCircle2 } from "lucide-react";
+import { Truck, Plane, Ship, Package, Star, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
@@ -77,21 +77,6 @@ const services = [
     ],
     image: "/shipping/shipment-consolidation-v2.jpg",
     objectPosition: "50% 40%",
-    featured: false,
-  },
-  {
-    icon: Warehouse,
-    label: "Warehousing & Fulfilment",
-    heading: "Freight that doesn't stop at the port.",
-    body: "Through our sister company Delta Fulfilment: goods-in, storage, pick and pack, marketplace integrations and returns, under one roof.",
-    points: [
-      "Goods-in and unloading",
-      "Storage and inventory management",
-      "Pick and pack",
-      "Marketplace integrations",
-      "Returns handling",
-    ],
-    image: "/shipping/Warehousing and Fulfilment.jpg",
     featured: false,
   },
 ];
