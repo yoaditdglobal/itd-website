@@ -17,10 +17,6 @@ export default function SocialProof() {
             <AnimatedCounter key={stat.label} surface="light" {...stat} />
           ))}
         </div>
-        {/* Trust line sits above the logo marquee (per home-page copy doc). */}
-        <p className="text-center text-body-sm text-text-tertiary mb-6">
-          Connected to the carriers and platforms you already run.
-        </p>
         <LogoTicker />
       </div>
     </section>
