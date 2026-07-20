@@ -164,12 +164,11 @@ export default function ConnexxOrbit() {
               priority
               className="block mx-auto h-20 md:h-28 w-auto mb-6"
             />
-            <h2 className="text-display-lg text-white">
-              Connects your stack to every carrier.
-            </h2>
-            <p className="mt-5 text-body-md text-white/75">
-              One platform, every integration — eCommerce platforms,
-              marketplaces, ERPs and 16 carriers, all from a single workflow.
+            <p className="text-body-lg text-white/85">
+              Connexx is a multi-carrier shipping platform powered by ITD
+              Global. Each order from any of your sales channels routes to the
+              best-value carrier and gets a label in seconds, with tracking and
+              customs handled in the same place.
             </p>
           </div>
         </ScrollReveal>
