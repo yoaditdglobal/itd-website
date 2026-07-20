@@ -42,7 +42,7 @@ export default function ShippingFreightPage() {
           nav-bleed, data-hero-tone="dark". */}
       <VideoHero
         label="Freight"
-        heading="Freight built around your supply chain."
+        heading="Freight built around your supply chain"
         sub="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
@@ -57,7 +57,7 @@ export default function ShippingFreightPage() {
           objectPosition: "50% 70%",
         }}
         eyebrow=""
-        heading="What sets ITD apart."
+        heading="What sets ITD apart"
         lead="Three things that make freight work, built into the service from the start."
       />
       <FreightCarrierTicker />
@@ -67,7 +67,7 @@ export default function ShippingFreightPage() {
         hideDefaultHero
         hidePainPoints
         label="Freight"
-        title="Freight built around your supply chain."
+        title="Freight built around your supply chain"
         subtitle="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
         primaryCta={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         heroImage={{
@@ -139,7 +139,7 @@ export default function ShippingFreightPage() {
           },
         ]}
         closingCta={{
-          headline: "Let's move your freight.",
+          headline: "Let's move your freight",
           subhead:
             "A bespoke review looks at your lanes and volumes and shows where we'd save you money, across pallet, LTL, air and sea.",
           primary: { label: "Get Quote", href: "/contact?enquiry=freight" },

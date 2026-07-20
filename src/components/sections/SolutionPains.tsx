@@ -46,7 +46,7 @@ export default function SolutionPains({
   pains,
   image,
   eyebrow = "Where the margin leaves",
-  heading = "What gets in the way today.",
+  heading = "What gets in the way today",
   lead = DEFAULT_LEAD,
 }: SolutionPainsProps) {
   const Icon = image.icon;

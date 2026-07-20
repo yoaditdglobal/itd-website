@@ -39,7 +39,7 @@ export default function TeamPage() {
               Our team
             </span>
             <h1 className="text-display-xl text-text-primary">
-              The team behind ITD Global.
+              The team behind ITD Global
             </h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               Logistics is a people business. Behind the Connexx platform is a
@@ -90,7 +90,7 @@ export default function TeamPage() {
       )}
 
       <ClosingCTA
-        headline="Work with a team that knows your lanes."
+        headline="Work with a team that knows your lanes"
         subtitle="Talk to an operator who manages shipping like yours every day."
         primaryCta={{ label: "Contact Us", href: "/contact" }}
         secondaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}

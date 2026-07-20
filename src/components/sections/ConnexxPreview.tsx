@@ -14,7 +14,7 @@ export default function ConnexxPreview() {
                 The Connexx Platform
               </p>
               <h2 className="text-display-lg text-text-primary">
-                The engine behind 17.5 million labels a year.
+                The engine behind 17.5 million labels a year
               </h2>
               <p className="mt-6 text-body-lg text-text-secondary">
                 A new one every 2.7 seconds, across 16 carriers and used by more

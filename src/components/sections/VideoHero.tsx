@@ -24,7 +24,7 @@ const POSTER = "/hero/hero-poster.jpg";
 const HEADING = (
   <>
     Smarter Shipping
-    <br className="hidden sm:block" /> for a Simpler Tomorrow.
+    <br className="hidden sm:block" /> for a Simpler Tomorrow
   </>
 );
 const SUB =

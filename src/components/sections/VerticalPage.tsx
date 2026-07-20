@@ -251,7 +251,7 @@ export default function VerticalPage({
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">The problem</p>
             <h2 id="pain-points-heading" className="text-display-md text-text-primary mb-8 md:mb-10">
-              What gets in the way today.
+              What gets in the way today
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-3 gap-4 items-stretch">

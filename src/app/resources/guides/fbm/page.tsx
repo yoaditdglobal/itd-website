@@ -119,7 +119,7 @@ export default function FbmGuidePage() {
               </span>
             </div>
             <h1 className="text-display-xl text-text-primary">
-              Fulfilled by Merchant on Amazon: the UK seller&apos;s guide.
+              Fulfilled by Merchant on Amazon: the UK seller&apos;s guide
             </h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               A working guide for UK Amazon sellers running their own dispatch instead of FBA. The metrics that get you suspended, the carriers that keep you compliant, the workflow that scales past 1,000 orders a day, and how Seller Fulfilled Prime actually works in 2026.
@@ -312,19 +312,19 @@ export default function FbmGuidePage() {
               </p>
               <div className="mt-4 space-y-3">
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-heading-sm text-text-primary mb-1">LSR protection.</p>
+                  <p className="text-heading-sm text-text-primary mb-1">LSR protection</p>
                   <p className="text-body-sm text-text-secondary">
                     Confirmed shipped through Buy Shipping by the deadline = not a late shipment, regardless of carrier delay.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-heading-sm text-text-primary mb-1">VTR protection.</p>
+                  <p className="text-heading-sm text-text-primary mb-1">VTR protection</p>
                   <p className="text-body-sm text-text-secondary">
                     Tracking numbers from Buy Shipping are valid by definition. The tracking event feed is wired into Seller Central automatically.
                   </p>
                 </div>
                 <div className="bg-bg-secondary rounded-xl border border-border p-4">
-                  <p className="text-heading-sm text-text-primary mb-1">OTDR protection.</p>
+                  <p className="text-heading-sm text-text-primary mb-1">OTDR protection</p>
                   <p className="text-body-sm text-text-secondary">
                     Buy Shipping bookings carry an Amazon estimated delivery date that aligns with the carrier&apos;s published transit time. OTDR is calculated against that date, so a carrier delay does not automatically penalise you.
                   </p>

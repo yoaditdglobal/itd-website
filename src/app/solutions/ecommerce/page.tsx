@@ -16,7 +16,7 @@ export default function EcommercePage() {
   return (
     <VerticalPage
       label="eCommerce"
-      title="Give shoppers more delivery choice while you grow your margins."
+      title="Give shoppers more delivery choice while you grow your margins"
       subtitle="Our multi-carrier solution fits into your workflow. We integrate with your eCommerce platform, giving you more delivery options to offer shoppers and lower rates to ship orders."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{
@@ -64,22 +64,22 @@ export default function EcommercePage() {
       features={[
         {
           icon: RefreshCw,
-          title: "Orders arrive before you go looking.",
+          title: "Orders arrive before you go looking",
           desc: "Connexx pulls new Shopify, WooCommerce and BigCommerce orders in around the clock. Cancellations sync too, so a refunded order never gets a label printed against it.",
         },
         {
           icon: Zap,
-          title: "Rate comparison, done in milliseconds.",
+          title: "Rate comparison, done in milliseconds",
           desc: "On each order, Connexx checks live rates across your active UK and international carriers and applies the best-value compliant option, on the rules you set.",
         },
         {
           icon: RotateCcw,
-          title: "Returns that don't eat your margin.",
+          title: "Returns that don't eat your margin",
           desc: "A self-service returns portal raises a pre-paid label against your carrier rules automatically. Returns stop being the line that quietly costs 8% of revenue.",
         },
         {
           icon: ShieldCheck,
-          title: "Customs sorted before the parcel leaves.",
+          title: "Customs sorted before the parcel leaves",
           desc: "HS codes pulled from your product catalogue, EORI and IOSS applied to the right shipments, country paperwork generated on the spot.",
         },
       ]}
@@ -161,7 +161,7 @@ export default function EcommercePage() {
         },
       ]}
       closingCta={{
-        headline: "See the rate your orders should ship at.",
+        headline: "See the rate your orders should ship at",
         subhead: "Let us show you what the same orders would cost on our rates.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
         secondary: {

@@ -42,7 +42,7 @@ export default function IntegrationHighlights() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <SectionLabel
-            title="Works with your active workflows."
+            title="Works with your active workflows"
             subtitle="We integrate directly with your store, your ERP, your WMS, and the active carriers on your account."
             align="center"
           />

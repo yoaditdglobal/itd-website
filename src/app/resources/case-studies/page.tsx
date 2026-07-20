@@ -57,7 +57,7 @@ export default async function CaseStudiesPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary max-w-4xl mx-auto">
-              The businesses that stopped leaving money on shipping.
+              The businesses that stopped leaving money on shipping
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Real UK businesses, from fast-growing brands to 3PLs, shipping
@@ -115,7 +115,7 @@ export default async function CaseStudiesPage({
       />
 
       <ClosingCTA
-        headline="Become the next story."
+        headline="Become the next story"
         subtitle="Tell us what you ship and we'll show you what we'd change."
         primaryCta={{ label: "Contact us", href: "/contact" }}
         secondaryCta={null}

@@ -16,7 +16,7 @@ export default function SmallBusinessPage() {
   return (
     <VerticalPage
       label="SMEs"
-      title="Punch above your shipping weight."
+      title="Punch above your shipping weight"
       subtitle="You ship on the rates and carrier choice a big retailer gets, without committing to their volume. No minimum and no lock-in, just shipping sized for a smaller operation."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{
@@ -64,22 +64,22 @@ export default function SmallBusinessPage() {
       features={[
         {
           icon: Zap,
-          title: "Rate comparison across Royal Mail, Evri, DPD, and Parcelforce.",
+          title: "Rate comparison across Royal Mail, Evri, DPD, and Parcelforce",
           desc: "On every order, Connexx checks live rates and picks the cheapest carrier that meets your rules. Weight, postcode, service speed, and Highlands & Islands surcharges are factored in automatically. You see the saving per parcel before the label prints.",
         },
         {
           icon: Printer,
-          title: "Batch label printing in one click.",
+          title: "Batch label printing in one click",
           desc: "Connect Shopify or WooCommerce, choose the orders, and print 60 labels in one go. No carrier portal logins. No address paste. Branded packing slips and customs forms generate alongside the labels for shipments that need them.",
         },
         {
           icon: Eye,
-          title: "One tracking page for every parcel.",
+          title: "One tracking page for every parcel",
           desc: "Customers get a branded tracking page with proactive email and SMS updates. Where's my order emails drop because the customer already knows. When you do need to look something up, every parcel lives in one screen, not four carrier websites.",
         },
         {
           icon: CreditCard,
-          title: "No monthly minimum, no contract, no sales call.",
+          title: "No monthly minimum, no contract, no sales call",
           desc: "Sign up online and ship the same day. Pay per label at Connexx's negotiated Royal Mail, Evri, DPD, Parcelforce, and InPost rates, which are usually lower than the rates you'd get opening accounts directly. Cancel any time.",
         },
       ]}
@@ -167,7 +167,7 @@ export default function SmallBusinessPage() {
         },
       ]}
       closingCta={{
-        headline: "Find out what shipping should cost a business your size.",
+        headline: "Find out what shipping should cost a business your size",
         subhead:
           "Send a recent invoice and the Parcel Rate Checker shows what the same parcels would cost on our rates. Minutes of your time, that's it.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },

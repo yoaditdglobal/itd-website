@@ -16,11 +16,11 @@ export default function ErpWmsPage() {
 
   return (
     <IntegrationCategoryPage
-      title="Your ERP and WMS stay the source of truth. We handle the carriers."
+      title="Your ERP and WMS stay the source of truth. We handle the carriers"
       subtitle="We plug into the ERP or WMS your team already runs, so it stays your single source of truth. Orders pull in, and shipping data writes back the moment a label prints."
       integrations={integrations}
       heroLabel="ERP and WMS"
-      heroH1="Your ERP and WMS stay the source of truth. We handle the carriers."
+      heroH1="Your ERP and WMS stay the source of truth. We handle the carriers"
       heroSubhead="We plug into the ERP or WMS your team already runs, so it stays your single source of truth. Orders pull in, and shipping data writes back the moment a label prints."
       heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=erp-wms" }}
       heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
@@ -57,19 +57,19 @@ export default function ErpWmsPage() {
       howItWorks={[
         {
           step: 1,
-          title: "Order pull.",
+          title: "Order pull",
           description:
             "Your ERP or WMS sends each confirmed order across, with the weight, destination, service level and delivery date the label needs. Polling, webhook and event-driven options are all supported.",
         },
         {
           step: 2,
-          title: "Carrier rates and label.",
+          title: "Carrier rates and label",
           description:
             "We compare the active carriers on each order and apply the best-priced compliant one. The label generates in the right format for the carrier and your warehouse printer.",
         },
         {
           step: 3,
-          title: "Write-back.",
+          title: "Write-back",
           description:
             "The carrier, tracking number, dispatch time and freight cost write straight back into your ERP or WMS. Your team sees tracking in the system they already use, with no second login.",
         },
@@ -78,22 +78,22 @@ export default function ErpWmsPage() {
         features: [
           {
             icon: Warehouse,
-            title: "Nothing changes on the warehouse floor.",
+            title: "Nothing changes on the warehouse floor",
             desc: "Connexx sits beneath Mintsoft, ShipHero, ShipStation, Veeqo, Selro, Aimco, OrderWise, Magento and WooCommerce. Pickers and packers keep the workflow they know. What changes is which carrier the parcel leaves on.",
           },
           {
             icon: Plug,
-            title: "One connection instead of a dozen.",
+            title: "One connection instead of a dozen",
             desc: "Connect Connexx once and the full carrier line-up opens up, domestic and international, with rates, labels and tracking handled centrally rather than built carrier by carrier inside your WMS.",
           },
           {
             icon: Printer,
-            title: "Labels print at line speed.",
+            title: "Labels print at line speed",
             desc: "Orders flow from your WMS into Connexx and come back ready to print. Tracking writes back automatically. No swivel-chair work between systems, no CSV round-trips.",
           },
           {
             icon: Route,
-            title: "Your routing rules, applied automatically.",
+            title: "Your routing rules, applied automatically",
             desc: "Set your logic once — weight bands, destinations, service levels, client requirements — and Connexx applies it to each order your WMS sends. Anything that needs a human gets flagged before it becomes a mis-shipment. Runs the same way across multiple warehouses and multiple clients, with every shipment traceable back to its source.",
           },
         ],
@@ -136,7 +136,7 @@ export default function ErpWmsPage() {
         },
       ]}
       closingCta={{
-        headline: "Request a technical integration review.",
+        headline: "Request a technical integration review",
         subhead: "Let's go through your integration requirements together, so our dev team can get up to speed.",
         primary: { label: "Contact Us", href: "/contact?enquiry=erp-wms" },
         secondary: { label: "Explore", href: "/integrations/tech" },

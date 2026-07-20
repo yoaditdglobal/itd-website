@@ -170,7 +170,7 @@ export default function ContactPage() {
               <span className="text-2xl text-success-dark">&#10003;</span>
             </div>
             <h1 className="text-display-lg text-text-primary">
-              We&apos;ve got your details.
+              We&apos;ve got your details
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary">
               We&apos;ll run your volumes and lanes against the carrier network, and an
@@ -206,7 +206,7 @@ export default function ContactPage() {
                   Contact Sales
                 </span>
                 <h1 className="text-display-lg text-white">
-                  Tell us what you ship. We&apos;ll tell you what it should cost.
+                  Tell us what you ship. We&apos;ll tell you what it should cost
                 </h1>
                 <p className="mt-5 max-w-md text-body-lg text-white/70">
                   Send your volumes and lanes, and your account manager comes back with

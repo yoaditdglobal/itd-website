@@ -41,7 +41,7 @@ export default function LogisticsPartnerBand() {
                 More than a platform
               </p>
               <h2 className="text-display-lg text-white">
-                There&rsquo;s a logistics company behind the software.
+                There&rsquo;s a logistics company behind the software
               </h2>
               <p className="mt-5 text-body-lg text-white/75">
                 Connexx is built and run by people who ship for a living. From

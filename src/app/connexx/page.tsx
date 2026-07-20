@@ -194,7 +194,7 @@ export default function ConnexxPage() {
                 The Connexx platform
               </p>
               <h1 className="hero-entrance-h1 text-display-xl text-text-primary">
-                The engine behind 17.5 million labels a year.
+                The engine behind 17.5 million labels a year
               </h1>
               <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary max-w-xl">
                 A new one every 2.7 seconds, across 16 carriers and used by more
@@ -293,7 +293,7 @@ export default function ConnexxPage() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <h2 className="text-display-lg text-text-primary">
-                What Connexx does.
+                What Connexx does
               </h2>
               <p className="mt-3 text-text-secondary max-w-2xl mx-auto">
                 Four modules cover the shipment from quote to tracking. Each
@@ -377,7 +377,7 @@ export default function ConnexxPage() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <h2 className="text-display-lg text-text-primary">
-                Connects to everything.
+                Connects to everything
               </h2>
               <p className="mt-3 text-text-secondary max-w-2xl mx-auto leading-relaxed">
                 Connexx slots into your existing stack. Sales channels send
@@ -421,14 +421,14 @@ export default function ConnexxPage() {
 
       {/* FAQ */}
       <FaqSection
-        heading="Eight questions buyers ask."
+        heading="Eight questions buyers ask"
         subheading="The answers most operators want before booking a call."
         items={faqItems}
       />
 
       {/* Closing CTA */}
       <ClosingCTA
-        headline="Connexx comes with shipping through ITD."
+        headline="Connexx comes with shipping through ITD"
         subtitle="Get a quote and we'll show you the rates you'd ship on, and how Connexx runs day to day."
         primaryCta={{ label: "Get a quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact us", href: "/contact?enquiry=connexx-demo" }}

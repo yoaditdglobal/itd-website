@@ -69,7 +69,7 @@ export default function ImportPage() {
           objectPosition: "55% 50%",
         }}
         eyebrow="Why ITD Global"
-        heading="Three reasons importers choose us."
+        heading="Three reasons importers choose us"
         lead="Corporate rates, total accountability, and a team on the ground wherever your goods start."
       />
 
@@ -105,7 +105,7 @@ export default function ImportPage() {
               <div>
                 <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
                 <h2 className="text-display-lg text-text-primary">
-                  Compare rates. Clear customs. Track each shipment home.
+                  Compare rates. Clear customs. Track each shipment home
                 </h2>
                 <div className="mt-6 space-y-4">
                   <p className="text-body-lg text-text-secondary">
@@ -157,7 +157,7 @@ export default function ImportPage() {
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">What we handle</p>
             <h2 className="text-display-lg text-text-primary mb-10">
-              What you get with ITD Global.
+              What you get with ITD Global
             </h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -179,7 +179,7 @@ export default function ImportPage() {
         hideDefaultHero
         hidePainPoints
         label="Import"
-        title="Importing from the Far East or worldwide? We've got it covered."
+        title="Importing from the Far East or worldwide? We've got it covered"
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=import" }}
         secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}

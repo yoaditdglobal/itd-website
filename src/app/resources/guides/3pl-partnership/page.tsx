@@ -114,7 +114,7 @@ export default function ThreePlGuidePage() {
               </span>
             </div>
             <h1 className="text-display-xl text-text-primary">
-              3PL Partnership: what working with ITD Global looks like.
+              3PL Partnership: what working with ITD Global looks like
             </h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               A practical guide for 3PLs looking to expand their carrier

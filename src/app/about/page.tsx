@@ -106,7 +106,7 @@ export default function AboutPage() {
       {/* Hero */}
       <SolutionHero
         label="About ITD Global"
-        title="20 years of logistics expertise, at your service."
+        title="20 years of logistics expertise, at your service"
         subtitle="From a small team solving a real problem, to a global logistics partner with teams across four continents. Here's who we are."
         image={{
           src: "/about/IDT-DRONE_0001.jpg",
@@ -122,7 +122,7 @@ export default function AboutPage() {
             <ScrollReveal>
               <p className="text-eyebrow text-accent mb-3">What we do</p>
               <h2 className="text-display-lg text-text-primary mb-6">
-                Built for businesses that need more from their shipping.
+                Built for businesses that need more from their shipping
               </h2>
               <div className="space-y-5 text-body-md text-text-secondary leading-relaxed">
                 <p>
@@ -170,7 +170,7 @@ export default function AboutPage() {
             <ScrollReveal className="lg:sticky lg:top-24">
               <p className="text-eyebrow text-accent mb-3">Our story</p>
               <h2 className="text-display-lg text-text-primary mb-6">
-                Two decades of getting it right.
+                Two decades of getting it right
               </h2>
               <div className="space-y-5 text-body-md text-text-secondary leading-relaxed">
                 <p>
@@ -232,7 +232,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-display-lg text-text-primary mb-4 text-center">
-              The same goal, wherever we&rsquo;re based.
+              The same goal, wherever we&rsquo;re based
             </h2>
             <p className="text-body-md text-text-secondary text-center max-w-2xl mx-auto mb-12">
               We&rsquo;re 100+ logistics and technology specialists spread

@@ -29,7 +29,7 @@ export default function Error({
       <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
         <p className="text-eyebrow text-accent mb-3">Something went wrong</p>
         <h1 className="text-display-md text-text-primary">
-          This page hit an unexpected error.
+          This page hit an unexpected error
         </h1>
         <p className="mt-4 text-body-md text-text-secondary">
           The rest of the site is still working. Try again, or head back to the

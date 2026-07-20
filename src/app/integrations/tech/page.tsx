@@ -31,7 +31,7 @@ export default function TechIntegrationsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <p className="text-eyebrow text-accent-secondary mb-3">Tech integrations</p>
           <h1 className="text-display-xl text-text-primary max-w-3xl">
-            Connects to the tools you already run.
+            Connects to the tools you already run
           </h1>
           <p className="mt-4 text-body-lg text-text-secondary max-w-2xl">
             {tech.length} ERP, WMS, eCommerce, and marketplace integrations push orders
