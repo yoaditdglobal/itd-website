@@ -93,7 +93,7 @@ const ICPS: Icp[] = [
   },
 ];
 
-const TITLE = "Find the page built for your operation.";
+const TITLE = "Solutions built for your needs";
 const SUBTITLE =
   "Each route below curates the carriers, integrations and real customer stories that match how you ship.";
 
@@ -307,8 +307,7 @@ export default function SolutionsRouting({
                 "Used by" case-study logos + explore link directly beneath its
                 headline. Active state is driven by SCROLL ONLY (no hover). */}
             <div>
-              <p className="text-eyebrow text-text-tertiary">For how you ship</p>
-              <h2 className="mt-2 max-w-md text-display-sm text-text-primary">
+              <h2 className="max-w-md text-display-sm text-text-primary">
                 {TITLE}
               </h2>
 
