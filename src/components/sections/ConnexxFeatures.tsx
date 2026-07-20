@@ -5,6 +5,7 @@ import { BarChart3, Truck, MapPin, Plug, type LucideIcon } from "lucide-react";
 import IntelligenceAnimation from "@/components/sections/IntelligenceAnimation";
 import DispatchAnimation from "@/components/sections/DispatchAnimation";
 import TrackingAnimation from "@/components/sections/TrackingAnimation";
+import ConnectAnimation from "@/components/sections/ConnectAnimation";
 
 /**
  * Connexx feature explorer. Replaces the old stack of four scrolling
@@ -19,7 +20,7 @@ type Feature = {
   summary: string;
   lead: string;
   bullets: string[];
-  preview?: "intelligence" | "dispatch" | "tracking";
+  preview?: "intelligence" | "dispatch" | "tracking" | "connect";
 };
 
 const FEATURES: Feature[] = [
@@ -78,6 +79,7 @@ const FEATURES: Feature[] = [
       "Routing rules match each shipment to a carrier and service on conditions like weight and warehouse, flagging anything that doesn't fit for review.",
       "Import profiles map incoming order data to Connexx's shipment fields, so a new order source isn't a custom engineering job.",
     ],
+    preview: "connect",
   },
 ];
 
@@ -186,6 +188,8 @@ export default function ConnexxFeatures() {
                   <DispatchAnimation />
                 ) : f.preview === "tracking" ? (
                   <TrackingAnimation />
+                ) : f.preview === "connect" ? (
+                  <ConnectAnimation />
                 ) : (
                   <div className="rounded-2xl border border-border bg-bg-secondary flex items-center justify-center aspect-[1152/702]">
                     <div className="text-center">
