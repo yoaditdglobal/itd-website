@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { BarChart3, Truck, MapPin, Plug, type LucideIcon } from "lucide-react";
 import IntelligenceAnimation from "@/components/sections/IntelligenceAnimation";
 import DispatchAnimation from "@/components/sections/DispatchAnimation";
+import TrackingAnimation from "@/components/sections/TrackingAnimation";
 
 /**
  * Connexx feature explorer. Replaces the old stack of four scrolling
@@ -18,7 +19,7 @@ type Feature = {
   summary: string;
   lead: string;
   bullets: string[];
-  preview?: "intelligence" | "dispatch";
+  preview?: "intelligence" | "dispatch" | "tracking";
 };
 
 const FEATURES: Feature[] = [
@@ -63,6 +64,7 @@ const FEATURES: Feature[] = [
       "A real-time push the moment a label job or batch completes, so no one refreshes a screen to check.",
       "Status updates and tracking codes push to your own systems via webhook, alongside the label and shipment data.",
     ],
+    preview: "tracking",
   },
   {
     icon: Plug,
@@ -182,6 +184,8 @@ export default function ConnexxFeatures() {
                   <IntelligenceAnimation />
                 ) : f.preview === "dispatch" ? (
                   <DispatchAnimation />
+                ) : f.preview === "tracking" ? (
+                  <TrackingAnimation />
                 ) : (
                   <div className="rounded-2xl border border-border bg-bg-secondary flex items-center justify-center aspect-[1152/702]">
                     <div className="text-center">
