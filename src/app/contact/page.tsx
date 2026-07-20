@@ -6,7 +6,18 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
 
-const shippingTypes = ["Domestic UK", "Export", "Import", "Freight"] as const;
+const shippingTypes = [
+  "Domestic B2C",
+  "Domestic B2B",
+  "Import",
+  "Export",
+  "Sea Freight",
+  "Air Freight",
+] as const;
+
+const isFreightType = (type: string) =>
+  type === "Sea Freight" || type === "Air Freight";
+const isDomesticType = (type: string) => type.startsWith("Domestic");
 
 const freightTypes = ["Parcel", "Box", "Pallet"] as const;
 
@@ -63,7 +74,7 @@ export default function ContactPage() {
   const [error, setError] = useState("");
 
   const showMainLanes = shippingType === "Export" || shippingType === "Import";
-  const isFreight = shippingType === "Freight";
+  const isFreight = isFreightType(shippingType);
   const showWeightDims =
     shippingType === "Export" || shippingType === "Import" || isFreight;
 
@@ -72,14 +83,14 @@ export default function ContactPage() {
     setShippingType(type);
     setError("");
     if (type !== "Export" && type !== "Import") setMainLanes([]);
-    if (type === "Freight") setWeeklyVolume("");
-    if (type === "Domestic UK") {
+    if (isFreightType(type)) setWeeklyVolume("");
+    if (isDomesticType(type)) {
       setWeight("");
       setDimL("");
       setDimW("");
       setDimH("");
     }
-    if (type !== "Freight") {
+    if (!isFreightType(type)) {
       setFreightType("");
       setQuantity("");
       setSupplierInvoiceFile(null);
