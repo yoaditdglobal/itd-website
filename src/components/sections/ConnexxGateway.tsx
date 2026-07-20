@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import AutoplayVideo from "@/components/ui/AutoplayVideo";
 import { Zap, Eye, ShieldCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -15,6 +16,14 @@ export interface GatewayStatTile {
   val: string;
   tint: string;
   bg: string;
+}
+
+/** When provided, a looping feature animation replaces the static dashboard mock. */
+export interface GatewayMedia {
+  mp4: string;
+  webm?: string;
+  poster: string;
+  caption?: string;
 }
 
 const DEFAULT_STAT_TILES: GatewayStatTile[] = [
@@ -33,9 +42,11 @@ const DEFAULT_STAT_TILES: GatewayStatTile[] = [
 export default function ConnexxGateway({
   features,
   statTiles = DEFAULT_STAT_TILES,
+  media,
 }: {
   features: GatewayFeature[];
   statTiles?: GatewayStatTile[];
+  media?: GatewayMedia;
 }) {
   return (
     <section className="bg-white py-16 md:py-24">
@@ -77,6 +88,20 @@ export default function ConnexxGateway({
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
+            {media ? (
+              <div className="rounded-2xl border border-border shadow-md overflow-hidden bg-bg-secondary">
+                <AutoplayVideo
+                  mp4={media.mp4}
+                  webm={media.webm}
+                  poster={media.poster}
+                  ariaLabel={
+                    media.caption ??
+                    "Connexx routing a domestic parcel to the cheapest carrier, dispatching it, and writing the shipment back to your systems."
+                  }
+                  className="block w-full h-auto"
+                />
+              </div>
+            ) : (
             <div className="bg-gradient-to-br from-white to-bg-tertiary rounded-2xl border border-border p-6 shadow-md">
               {/* App-style header */}
               <div className="flex items-center justify-between mb-5 pb-3 border-b border-border">
@@ -126,6 +151,7 @@ export default function ConnexxGateway({
                 ))}
               </div>
             </div>
+            )}
           </ScrollReveal>
         </div>
       </div>

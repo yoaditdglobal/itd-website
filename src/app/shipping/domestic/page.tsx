@@ -26,6 +26,13 @@ export const metadata = buildMetadata({
 export default function ShippingDomesticPage() {
   return (
     <VerticalPage
+      gatewayMedia={{
+        mp4: "/media/connexx-domestic.mp4",
+        webm: "/media/connexx-domestic.webm",
+        poster: "/media/connexx-domestic-poster.jpg",
+        caption:
+          "Connexx routing a Highlands parcel to the cheapest carrier, dispatching the batch, and writing tracking back to Linnworks, Shopify and more.",
+      }}
       label="Domestic Shipping"
       title="Run all your carriers from one screen"
       subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
