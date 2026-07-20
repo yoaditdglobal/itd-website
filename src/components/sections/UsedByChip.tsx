@@ -27,12 +27,14 @@ export default function UsedByChip({ cs }: { cs: CaseStudyPreview }) {
         <Link
           href={`/resources/case-studies/${cs.slug}`}
           aria-label={`${cs.brandName} — read case study`}
-          className="group inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-white p-1 transition-[border-color,box-shadow] duration-150 hover:border-accent/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          className="group inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-border bg-white transition-[border-color,box-shadow] duration-150 hover:border-accent/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
           {/* Scale the logo inside the fixed-size tile so the trigger's rect
-              (the hover-card anchor) never moves — no card jitter. */}
+              (the hover-card anchor) never moves — no card jitter. The logo
+              fills the tile edge-to-edge (no padding ring); wide wordmarks
+              stay object-contain so they letterbox instead of cropping. */}
           <span className="flex h-full w-full items-center justify-center transition-transform duration-150 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
-            <IntegrationLogo name={cs.brandName} logo={cs.logo} size="xs" />
+            <IntegrationLogo name={cs.brandName} logo={cs.logo} size="fill" />
           </span>
         </Link>
       </HoverCardTrigger>

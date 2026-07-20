@@ -3,7 +3,7 @@ import Image from "next/image";
 interface IntegrationLogoProps {
   name: string;
   logo?: string | null;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "fill";
   /**
    * How the image is fitted inside the box.
    * - "contain" (default) → preserves the logo's natural aspect ratio, never
@@ -20,6 +20,9 @@ interface IntegrationLogoProps {
 
 const sizes = {
   xs: { container: "w-5 h-5", image: 20, text: "text-[10px]", radius: "rounded" },
+  /** Fills the parent box edge-to-edge — for chips/tiles that own their own
+      border, radius and clipping (e.g. UsedByChip). */
+  fill: { container: "w-full h-full", image: 28, text: "text-[10px]", radius: "rounded-none" },
   sm: { container: "w-10 h-10", image: 40, text: "text-sm", radius: "rounded-md" },
   md: { container: "w-16 h-12", image: 64, text: "text-lg", radius: "rounded-lg" },
   lg: { container: "w-14 h-14 md:w-16 md:h-16", image: 80, text: "text-xl", radius: "rounded-xl" },
