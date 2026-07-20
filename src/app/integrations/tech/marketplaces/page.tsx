@@ -99,7 +99,7 @@ export default function MarketplacesPage() {
   return (
     <IntegrationCategoryPage
       heroLabel="Marketplaces"
-      title="Marketplace integrations for multi-channel sellers."
+      title="Marketplace integrations for multi-channel sellers"
       subtitle="We connect to Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
       heroPrimaryCta={{ label: "Talk to us", href: "/contact" }}
       heroVisual={<MarketplaceOrbit />}
@@ -112,7 +112,7 @@ export default function MarketplacesPage() {
       howItWorks={HOW_IT_WORKS}
       faq={FAQ}
       closingCta={{
-        headline: "Sell across channels, dispatch from one place.",
+        headline: "Sell across channels, dispatch from one place",
         subhead:
           "Connect the channels you sell on and dispatch them from one queue, each order on a carrier that can meet its window.",
         primary: { label: "Talk to us", href: "/contact" },

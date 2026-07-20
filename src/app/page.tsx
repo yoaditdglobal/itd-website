@@ -35,7 +35,7 @@ export default function Home() {
           without touching the default other pages rely on. */}
       <CaseStudyCards subtitle="" />
       <ClosingCTA
-        headline="Put your carrier costs to the test."
+        headline="Put your carrier costs to the test"
         subtitle="The rate checker compares your current shipping against ITD's rates and shows the saving. Send a recent invoice and see for yourself."
         primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}

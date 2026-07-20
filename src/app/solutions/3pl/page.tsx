@@ -44,7 +44,7 @@ export default function ThreePLPage() {
     <>
       <SolutionHero
         label="3PL"
-        title="Undercut your rivals without undercutting yourself."
+        title="Undercut your rivals without undercutting yourself"
         subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
         primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondary={{ label: "Explore", href: "/resources/case-studies/delta-fulfilment" }}
@@ -69,7 +69,7 @@ export default function ThreePLPage() {
           objectPosition: "50% 50%",
         }}
         eyebrow="Where the margin leaves"
-        heading="What gets in the way today."
+        heading="What gets in the way today"
         lead="Four places a 3PL's margin and pitch leak away — from winning the client to reconciling the monthly bill."
       />
       <SolutionRealities
@@ -112,7 +112,7 @@ export default function ThreePLPage() {
         hideDefaultHero
         hidePainPoints
       label="3PL"
-      title="Undercut your rivals without undercutting yourself."
+      title="Undercut your rivals without undercutting yourself"
       subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
       primaryCta={{
         label: "Get Quote",
@@ -124,7 +124,7 @@ export default function ThreePLPage() {
       }}
       integrationsGateway={
         <IntegrationsGateway
-          heading="Sits over the WMS you already run."
+          heading="Sits over the WMS you already run"
           subtext="We're the shipping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders pull in with each brand's rules, we apply the carrier and rate, and the tracking and cost write back. Nothing gets re-keyed."
           logos={[
             { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png" },
@@ -154,22 +154,22 @@ export default function ThreePLPage() {
       features={[
         {
           icon: Users,
-          title: "Child account architecture for every client brand.",
+          title: "Child account architecture for every client brand",
           desc: "Each brand becomes a tenant under your parent contract with Royal Mail, DPD, Evri, DHL Express, and the rest. Per-client rate cards, dispatch rules, branded tracking page, and reporting all sit under one parent account. Billing exports per child account at month-end.",
         },
         {
           icon: Plug,
-          title: "Mintsoft, Linnworks, ShipHero, and Veeqo integration.",
+          title: "Mintsoft, Linnworks, ShipHero, and Veeqo integration",
           desc: "Connexx sits on top of your WMS as the shipping and rate-shopping layer. Mintsoft, Linnworks, ShipHero, and Veeqo all push orders into Connexx for carrier selection. Tracking and POD data write back automatically. No parallel systems, no double data entry.",
         },
         {
           icon: ShieldCheck,
-          title: "Customs automation per child account.",
+          title: "Customs automation per child account",
           desc: "Each client EORI, each client IOSS registration, and each client's HS code library lives in the platform. Commercial invoice, CN22, and CN23 documentation generates per shipment, per country. SwiftLog Fulfilment lifted customs accuracy from 93% to 98.7% and cut customs-related delays 85%.",
         },
         {
           icon: BarChart3,
-          title: "Branded reporting your clients log in to see.",
+          title: "Branded reporting your clients log in to see",
           desc: "Each brand gets a live dashboard showing volume, cost per carrier, SLA performance, and exception rate. Account management stops requiring an ops analyst in a spreadsheet. Client retention conversations start from a position of data, not defence.",
         },
       ]}
@@ -258,7 +258,7 @@ export default function ThreePLPage() {
         },
       ]}
       closingCta={{
-        headline: "Find out what our rates do for your margin.",
+        headline: "Find out what our rates do for your margin",
         subhead:
           "A bespoke review of your carrier setup shows the rates you could put in front of clients and the margin left for you.",
         primary: {

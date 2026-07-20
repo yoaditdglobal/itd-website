@@ -32,7 +32,7 @@ const PAINS = [
   },
 ];
 
-const HERO_TITLE = "In wholesale, the delivery is the relationship.";
+const HERO_TITLE = "In wholesale, the delivery is the relationship";
 const HERO_SUBTITLE =
   "B2B orders are heavy, high-value and tied to a long-term account, so the carrier has to be one that's genuinely good at delivering to businesses, on time. We guide the right carrier and service on each consignment.";
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
@@ -63,7 +63,7 @@ export default function B2BPage() {
           icon: Building2,
         }}
         eyebrow="Where deliveries go wrong"
-        heading="What gets in the way today."
+        heading="What gets in the way today"
         lead="Three places a B2B order slips — a late delivery, the wrong carrier, a border hold — and the account can slip with it."
       />
       <VerticalPage
@@ -109,7 +109,7 @@ export default function B2BPage() {
           },
         ]}
         closingCta={{
-          headline: "Let's get the right carrier on your B2B lanes.",
+          headline: "Let's get the right carrier on your B2B lanes",
           subhead:
             "Tell us where your orders go and how fast they need to be there. We'll line up the right carrier and service for each lane, at home and abroad.",
           primary: PRIMARY,

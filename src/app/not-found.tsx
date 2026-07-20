@@ -11,7 +11,7 @@ export default function NotFound() {
       <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
         <p className="text-eyebrow text-accent mb-3">404</p>
         <h1 className="text-display-md text-text-primary">
-          This page doesn&apos;t exist.
+          This page doesn&apos;t exist
         </h1>
         <p className="mt-4 text-body-md text-text-secondary">
           The link may be out of date or the page may have moved. The rest of

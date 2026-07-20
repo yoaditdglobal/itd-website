@@ -27,7 +27,7 @@ export default function CarrierIntegrationsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <p className="text-eyebrow text-accent-secondary mb-3">Carrier integrations</p>
           <h1 className="text-display-xl text-text-primary max-w-3xl">
-            One connection to an entire carrier network.
+            One connection to an entire carrier network
           </h1>
           <p className="mt-4 text-body-lg text-text-secondary max-w-2xl">
             Domestic and international carriers in one network, on rates you
@@ -44,7 +44,7 @@ export default function CarrierIntegrationsPage() {
       </section>
 
       <ClosingCTA
-        headline="The network keeps growing."
+        headline="The network keeps growing"
         subtitle="Tell us who you ship with — if a carrier isn't on the list yet, we'll look at adding it."
         primaryCta={{ label: "Talk to us", href: "/contact" }}
         secondaryCta={{ label: "Browse tech integrations", href: "/integrations/tech" }}

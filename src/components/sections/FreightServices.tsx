@@ -6,7 +6,7 @@ const services = [
   {
     icon: Truck,
     label: "Pallet & LTL",
-    heading: "Pallets and part-loads, UK to worldwide.",
+    heading: "Pallets and part-loads, UK to worldwide",
     body: "For freight bigger than a parcel but short of a full container. We book it across road, pallet and groupage networks and manage it to the door.",
     points: [
       "UK and international pallet delivery",
@@ -21,7 +21,7 @@ const services = [
   {
     icon: Plane,
     label: "Air Freight",
-    heading: "Express and economy air freight from the Far East and worldwide origins.",
+    heading: "Express and economy air freight from the Far East and worldwide origins",
     body: "Our office manages factory collections directly, no agents in between, with customs handled as standard.",
     points: [
       "Express and economy options",
@@ -36,7 +36,7 @@ const services = [
   {
     icon: Ship,
     label: "Sea Freight",
-    heading: "The cost-effective way to move larger volumes internationally.",
+    heading: "The cost-effective way to move larger volumes internationally",
     body: "FCL, LCL or buyers consolidation, with full customs handling included.",
     points: [
       "FCL – Full Container Load",
@@ -51,7 +51,7 @@ const services = [
   {
     icon: Package,
     label: "Console Sample Service",
-    heading: "A fixed weekly air consolidation from China, built for UK buyers.",
+    heading: "A fixed weekly air consolidation from China, built for UK buyers",
     body: "We collect from your suppliers, consolidate, handle customs and deliver to the UK on a fixed Tuesday slot at a set rate. No per-factory courier bookings, and no surprise at invoice.",
     points: [
       "Fixed weekly Tuesday departure",
@@ -66,7 +66,7 @@ const services = [
   {
     icon: Package,
     label: "Shipment Consolidation",
-    heading: "Group smaller orders into a single movement.",
+    heading: "Group smaller orders into a single movement",
     body: "Cuts cost per unit for businesses with regular import schedules, seasonal peaks or trade-show freight.",
     points: [
       "Combine multiple supplier orders",

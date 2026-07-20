@@ -53,7 +53,7 @@ export default function SolutionsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary">
-              Solutions built for how you ship.
+              Solutions built for how you ship
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Every business ships differently. Select your stage or business model to see how ITD Global fits your operations.

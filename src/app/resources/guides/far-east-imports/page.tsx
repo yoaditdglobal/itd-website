@@ -121,7 +121,7 @@ export default function FarEastImportsGuidePage() {
               </span>
             </div>
             <h1 className="text-display-xl text-text-primary">
-              Importing from China and the Far East into the UK.
+              Importing from China and the Far East into the UK
             </h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               A working guide for UK importers bringing goods in from China, Vietnam, India, Bangladesh, and Turkey. CDS declarations, UK Global Tariff duty, Incoterms, sea versus air freight, Postponed VAT Accounting, and the holds that catch new importers. Built for the import manager, not the textbook reader.

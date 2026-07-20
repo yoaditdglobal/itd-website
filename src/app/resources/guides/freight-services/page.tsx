@@ -116,7 +116,7 @@ export default function FreightServicesGuidePage() {
               </span>
             </div>
             <h1 className="text-display-xl text-text-primary">
-              Freight Services: a working guide for UK clients.
+              Freight Services: a working guide for UK clients
             </h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               What you need to know about moving goods internationally by air or

@@ -27,7 +27,7 @@ export default function ShippingDomesticPage() {
   return (
     <VerticalPage
       label="Domestic Shipping"
-      title="Run all your carriers from one screen."
+      title="Run all your carriers from one screen"
       subtitle="ITD Global is the single shipping partner for businesses moving parcels across the UK. The country's biggest carriers sit under one account, and each parcel goes with the best-value carrier that can deliver, so the margin stays yours."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       heroImage={{
@@ -270,22 +270,22 @@ export default function ShippingDomesticPage() {
       features={[
         {
           icon: Route,
-          title: "Postcode-aware routing on every order.",
+          title: "Postcode-aware routing on every order",
           desc: "The rate engine reads the destination postcode against every carrier's coverage map and surcharge schedule. Highlands & Islands, Channel Islands, Northern Ireland, BFPO, and residential vs business postcodes are all handled in the rules. The right carrier wins the shipment automatically.",
         },
         {
           icon: Zap,
-          title: "Live rate comparison across all seven major UK carriers.",
+          title: "Live rate comparison across all seven major UK carriers",
           desc: "On every parcel, Connexx checks Royal Mail, DPD, Evri, InPost, DX, Parcelforce, and Amazon Shipping in milliseconds. The cheapest compliant carrier is selected against your rules for speed, weight, and service tier. Manual overrides are always one click away.",
         },
         {
           icon: LayoutDashboard,
-          title: "One dashboard, one label batch, one tracking link.",
+          title: "One dashboard, one label batch, one tracking link",
           desc: "Every carrier prints from the same screen. Label generation is batched, manifested, and queued to the carrier collection in one run. Customers receive a single branded tracking link regardless of which carrier carried the parcel.",
         },
         {
           icon: RefreshCw,
-          title: "ERP and order-management write-back.",
+          title: "ERP and order-management write-back",
           desc: "Connexx connects to Linnworks, Mintsoft, Veeqo, ShipStation, and Shopify. Tracking numbers, booking confirmations, and PODs flow back into the order record. No CSV imports. No re-keyed data.",
         },
       ]}

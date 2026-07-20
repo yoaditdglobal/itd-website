@@ -65,7 +65,7 @@ export default function ExportPage() {
     <>
       <SolutionHero
         label="Export"
-        title="Ship internationally with the rates, reach, and support to do it properly."
+        title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         image={{
           src: "/solutions/loading plane.png",
@@ -82,7 +82,7 @@ export default function ExportPage() {
           objectPosition: "50% 50%",
         }}
         eyebrow="Why ITD Global"
-        heading="Three reasons exporters choose us."
+        heading="Three reasons exporters choose us"
         lead="Corporate rates, total accountability, and a team that handles the full export journey from collection to delivery."
       />
 
@@ -118,7 +118,7 @@ export default function ExportPage() {
               <div>
                 <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
                 <h2 className="text-display-lg text-text-primary">
-                  Compare rates. Generate customs paperwork. Track each shipment.
+                  Compare rates. Generate customs paperwork. Track each shipment
                 </h2>
                 <div className="mt-6 space-y-4">
                   <p className="text-body-lg text-text-secondary">
@@ -170,7 +170,7 @@ export default function ExportPage() {
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">What we handle</p>
             <h2 className="text-display-lg text-text-primary mb-10">
-              What you get with ITD Global.
+              What you get with ITD Global
             </h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -192,7 +192,7 @@ export default function ExportPage() {
         hideDefaultHero
         hidePainPoints
         label="Export"
-        title="Ship internationally with the rates, reach, and support to do it properly."
+        title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=export" }}
         secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}

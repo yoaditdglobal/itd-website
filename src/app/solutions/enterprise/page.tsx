@@ -37,7 +37,7 @@ const PAINS = [
   },
 ];
 
-const HERO_TITLE = "Even at your scale, your carriers have more to give.";
+const HERO_TITLE = "Even at your scale, your carriers have more to give";
 const HERO_SUBTITLE =
   "Your volume is strong. Our carrier network makes it stronger, with rates and capacity your own contracts can't reach. A dedicated team runs it alongside yours.";
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
@@ -68,7 +68,7 @@ export default function EnterprisePage() {
           icon: Network,
         }}
         eyebrow="Where the margin leaves"
-        heading="What gets in the way today."
+        heading="What gets in the way today"
         lead="Four places your scale still leaves rate, capacity, and accountability on the table."
       />
       <VerticalPage
@@ -82,22 +82,22 @@ export default function EnterprisePage() {
         features={[
           {
             icon: Building2,
-            title: "Each brand or entity, its own account.",
+            title: "Each brand or entity, its own account",
             desc: "Set up a child account per subsidiary, brand or business unit. Labels, carriers and billing stay ring-fenced to that entity, while you keep sight of the whole group.",
           },
           {
             icon: LayoutDashboard,
-            title: "One dashboard over the whole network.",
+            title: "One dashboard over the whole network",
             desc: "Tracking data from each carrier lands in one dashboard, backed by a single API, so your team isn't building or maintaining a connection per carrier. Analytics on volume, cost and service sit on top, across the whole group.",
           },
           {
             icon: Receipt,
-            title: "Billing split the way finance needs it.",
+            title: "Billing split the way finance needs it",
             desc: "Child accounts bill separately, so cost centres, subsidiaries or client brands see only their own spend, without finance unpicking one consolidated invoice.",
           },
           {
             icon: Plug,
-            title: "New services, no new integration work.",
+            title: "New services, no new integration work",
             desc: "Add a carrier, a lane or a service level to the network and it appears in the dashboard your team already uses. Nothing to rebuild on your side.",
           },
         ]}
@@ -153,7 +153,7 @@ export default function EnterprisePage() {
           },
         ]}
         closingCta={{
-          headline: "Benchmark your carrier rates against our network.",
+          headline: "Benchmark your carrier rates against our network",
           subhead:
             "A bespoke review shows the gap in rate and service between what you pay now and what our carrier network can reach for you. Let us help you plan a carrier strategy that fits your entire supply chain.",
           primary: PRIMARY,

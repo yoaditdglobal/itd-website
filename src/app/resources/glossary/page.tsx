@@ -85,7 +85,7 @@ export default function GlossaryPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="text-display-lg text-white mb-3">
-              The vocabulary, applied to your dispatch.
+              The vocabulary, applied to your dispatch
             </h2>
             <p className="text-white/80 mb-8 text-body-lg">
               Connexx handles every term in this glossary inside one platform. From WISMO to PVA, from VTR to landed cost. Talk to us about the ones that hurt right now.

@@ -16,7 +16,7 @@ export default function MarketplaceSellerPage() {
   return (
     <VerticalPage
       label="Marketplace Seller"
-      title="Protect your marketplace SLAs and your margin."
+      title="Protect your marketplace SLAs and your margin"
       subtitle="When a carrier misses the promise, the penalty lands on you. A refund off your margin and a late mark on your account. We match each order to a Prime-ready carrier, with the rates and support to grow your channel."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{ label: "Explore", href: "/resources/case-studies/west-ham-united" }}
@@ -46,22 +46,22 @@ export default function MarketplaceSellerPage() {
       features={[
         {
           icon: LayoutGrid,
-          title: "One dispatch queue for Amazon, eBay, Etsy, TikTok Shop and Temu.",
+          title: "One dispatch queue for Amazon, eBay, Etsy, TikTok Shop and Temu",
           desc: "Each order lands with its SLA deadline, its marketplace carrier whitelist, and the recommended carrier already populated.",
         },
         {
           icon: Zap,
-          title: "SLA-aware routing that protects your metrics.",
+          title: "SLA-aware routing that protects your metrics",
           desc: "Connexx knows each platform's cut-off and routes to a Valid Tracking Rate-compliant carrier automatically. Tracking writes back to Seller Central and eBay Seller Hub in real time, with automatic retries if a marketplace API stumbles.",
         },
         {
           icon: ClipboardList,
-          title: "Exceptions drop into a queue, not a missed delivery.",
+          title: "Exceptions drop into a queue, not a missed delivery",
           desc: "Anything Connexx can't route with confidence lands in a “To Fix” list for a quick human check, instead of shipping wrong or shipping late.",
         },
         {
           icon: Search,
-          title: "Penalty fee tracing in minutes, not hours.",
+          title: "Penalty fee tracing in minutes, not hours",
           desc: "Every penalty invoice ties back to a specific shipment, carrier and SLA breach, so the dashboard shows exactly which dispatch decision caused it.",
         },
       ]}
@@ -149,7 +149,7 @@ export default function MarketplaceSellerPage() {
         },
       ]}
       closingCta={{
-        headline: "Protect your ratings before the next peak.",
+        headline: "Protect your ratings before the next peak",
         subhead:
           "Share with us your carrier mix or a recent invoice. We'll show you where your metrics slip and what the same orders would cost on our rates.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
