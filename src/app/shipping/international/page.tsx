@@ -7,7 +7,8 @@ import {
   FileCheck,
   Globe,
   Zap,
-  Calculator,
+  Eye,
+  ArrowLeftRight,
   ShoppingCart,
   Building2,
   Boxes,
@@ -236,22 +237,29 @@ export default function ShippingInternationalPage() {
         footnote:
           "Connexx integrates with all six. The rate engine compares them in real time against your routing rules. The cheapest compliant carrier for the destination, weight, and service tier wins the shipment automatically.",
       }}
+      gatewayMedia={{
+        mp4: "/media/connexx-international.mp4",
+        webm: "/media/connexx-international.webm",
+        poster: "/media/connexx-international-poster.jpg",
+        caption:
+          "Connexx routing a Berlin parcel to the best-value international carrier, generating the customs pack, and writing tracking back to your systems.",
+      }}
       features={[
         {
-          icon: FileCheck,
-          title: "Customs documentation generated from your product data",
-        },
-        {
-          icon: Globe,
-          title: "Regulatory rules engine updated for you",
-        },
-        {
           icon: Zap,
-          title: "Live rate comparison across six international carriers",
+          title: "Live rate comparison across the world's leading carriers",
         },
         {
-          icon: Calculator,
-          title: "Landed cost calculation at checkout",
+          icon: FileCheck,
+          title: "Customs documents generated from your invoice",
+        },
+        {
+          icon: ArrowLeftRight,
+          title: "DDP or DDU, switched per shipment",
+        },
+        {
+          icon: Eye,
+          title: "One dashboard and one tracking link, from collection to delivery",
         },
       ]}
       integrations={[
