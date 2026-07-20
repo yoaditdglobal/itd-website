@@ -32,7 +32,8 @@ interface PainPoint {
 interface Feature {
   icon: LucideIcon;
   title: string;
-  desc: string;
+  /** Optional — cards render title-only when omitted (mirrors GatewayFeature). */
+  desc?: string;
 }
 
 export interface FaqItem {
