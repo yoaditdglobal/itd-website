@@ -1,13 +1,28 @@
-import { Plane, Ship, Package, Star, CheckCircle2 } from "lucide-react";
+import { Truck, Plane, Ship, Package, Warehouse, Star, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
 const services = [
   {
+    icon: Truck,
+    label: "Pallet & LTL",
+    heading: "Pallets and part-loads, UK to worldwide.",
+    body: "For freight bigger than a parcel but short of a full container. We book it across road, pallet and groupage networks and manage it to the door.",
+    points: [
+      "UK and international pallet delivery",
+      "LTL and groupage (less-than-truckload)",
+      "Road freight across the UK and Europe",
+      "Customs handled on international lanes",
+      "One account, one point of contact",
+    ],
+    image: "/shipping/domestic.webp",
+    featured: false,
+  },
+  {
     icon: Plane,
     label: "Air Freight",
-    heading: "Express and economy air freight from China and worldwide origins.",
-    body: "Our China office manages factory collections directly. No agents, no gaps. Customs handled as standard.",
+    heading: "Express and economy air freight from the Far East and worldwide origins.",
+    body: "Our office manages factory collections directly, no agents in between, with customs handled as standard.",
     points: [
       "Express and economy options",
       "Courier and parcel services",
@@ -21,12 +36,12 @@ const services = [
   {
     icon: Ship,
     label: "Sea Freight",
-    heading: "The most cost-efficient way to move significant volumes internationally.",
-    body: "FCL, LCL, or buyers consolidation, all with full customs handling included.",
+    heading: "The cost-effective way to move larger volumes internationally.",
+    body: "FCL, LCL or buyers consolidation, with full customs handling included.",
     points: [
       "FCL – Full Container Load",
       "LCL – Less than Container Load",
-      "Buyers Consolidation from multiple factories",
+      "Buyers consolidation from multiple factories",
       "Customs clearance handled",
       "Door-to-door worldwide",
     ],
@@ -36,10 +51,10 @@ const services = [
   {
     icon: Package,
     label: "Console Sample Service",
-    heading: "A fixed weekly air consolidation from China, purpose-built for UK buyers.",
-    body: "We collect, consolidate, handle customs, and deliver to the UK every Tuesday at a set rate. No individual courier bookings per factory. No surprises at invoice.",
+    heading: "A fixed weekly air consolidation from China, built for UK buyers.",
+    body: "We collect from your suppliers, consolidate, handle customs and deliver to the UK on a fixed Tuesday slot at a set rate. No per-factory courier bookings, and no surprise at invoice.",
     points: [
-      "Fixed weekly departure every Tuesday",
+      "Fixed weekly Tuesday departure",
       "Collection direct from your suppliers",
       "One consolidated shipment, one invoice",
       "Set rate with no hidden costs",
@@ -52,7 +67,7 @@ const services = [
     icon: Package,
     label: "Shipment Consolidation",
     heading: "Group smaller orders into a single movement.",
-    body: "Reduces cost per unit significantly for businesses with regular import schedules, seasonal peaks, or trade show freight.",
+    body: "Cuts cost per unit for businesses with regular import schedules, seasonal peaks or trade-show freight.",
     points: [
       "Combine multiple supplier orders",
       "Lower cost per unit",
@@ -62,6 +77,21 @@ const services = [
     ],
     image: "/shipping/shipment-consolidation-v2.jpg",
     objectPosition: "50% 40%",
+    featured: false,
+  },
+  {
+    icon: Warehouse,
+    label: "Warehousing & Fulfilment",
+    heading: "Freight that doesn't stop at the port.",
+    body: "Through our sister company Delta Fulfilment: goods-in, storage, pick and pack, marketplace integrations and returns, under one roof.",
+    points: [
+      "Goods-in and unloading",
+      "Storage and inventory management",
+      "Pick and pack",
+      "Marketplace integrations",
+      "Returns handling",
+    ],
+    image: "/shipping/Warehousing and Fulfilment.jpg",
     featured: false,
   },
 ];
