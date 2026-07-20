@@ -357,18 +357,25 @@ function IntelligenceScene({ T }: { T: number }) {
 const DUR_MS = 14000; // real-time loop duration (OM_SCENES dur: 14)
 const STATIC_T = 5.2; // composed-dashboard frame for reduced motion
 
+// Crop the 1200×750 stage to the dashboard card so it fills the frame edge to
+// edge (no surrounding dead margin, no outer frame needed).
+const CARD_X = 24,
+  CARD_Y = 24,
+  CARD_W = 1152,
+  CARD_H = 702;
+
 export default function IntelligenceAnimation() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
   const [T, setT] = useState(STATIC_T);
 
-  // Scale the fixed 1200×750 stage to the container width.
+  // Scale the stage so the dashboard card fills the container width.
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => setScale(el.clientWidth / 1200));
+    const ro = new ResizeObserver(() => setScale(el.clientWidth / CARD_W));
     ro.observe(el);
-    setScale(el.clientWidth / 1200);
+    setScale(el.clientWidth / CARD_W);
     return () => ro.disconnect();
   }, []);
 
@@ -415,10 +422,10 @@ export default function IntelligenceAnimation() {
       ref={wrapRef}
       aria-label="Connexx intelligence dashboard — animated preview"
       role="img"
-      style={{ position: "relative", width: "100%", aspectRatio: "1200 / 750", overflow: "hidden", borderRadius: 16 }}
+      style={{ position: "relative", width: "100%", aspectRatio: CARD_W + " / " + CARD_H, overflow: "hidden", borderRadius: 20 }}
     >
       {scale > 0 && (
-        <div style={{ position: "absolute", top: 0, left: 0, width: 1200, height: 750, transformOrigin: "top left", transform: "scale(" + scale + ")" }}>
+        <div style={{ position: "absolute", top: -CARD_Y * scale, left: -CARD_X * scale, width: 1200, height: 750, transformOrigin: "top left", transform: "scale(" + scale + ")" }}>
           <IntelligenceScene T={T} />
         </div>
       )}

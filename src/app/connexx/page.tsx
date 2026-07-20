@@ -363,9 +363,7 @@ export default function ConnexxPage() {
 
               <ScrollReveal delay={0.15} className={i % 2 === 1 ? "lg:order-1" : ""}>
                 {mod.preview === "intelligence" ? (
-                  <div className="rounded-2xl border border-border bg-bg-secondary overflow-hidden shadow-sm">
-                    <IntelligenceAnimation />
-                  </div>
+                  <IntelligenceAnimation />
                 ) : (
                   <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
                     <div className="text-center">
