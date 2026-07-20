@@ -33,6 +33,8 @@ export default function ShippingInternationalPage() {
         href: RATE_CHECKER_URL,
       }}
       heroImage={{
+        src: "/shipping/international-hero.webp",
+        alt: "AirBridgeCargo freighter aircraft climbing after take-off",
         gradient: "from-bg-secondary via-accent-light to-accent/10",
         icon: Globe,
       }}
