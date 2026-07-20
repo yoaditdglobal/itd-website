@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import CountUp from "@/components/ui/CountUp";
+import FullOverviewAnimation from "@/components/sections/FullOverviewAnimation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import ConnexxOrbit from "@/components/sections/ConnexxOrbit";
@@ -218,59 +218,7 @@ export default function ConnexxPage() {
             </div>
 
             <div className="hero-entrance-aside">
-              <div className="bg-bg-secondary rounded-2xl border border-border p-6 shadow-lg">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="ml-2 text-xs text-text-tertiary">
-                    Connexx Dashboard
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-3 mb-4">
-                  <div className="bg-white rounded-lg p-3 border border-border text-center">
-                    <div className="text-xs text-text-tertiary">Active shipments</div>
-                    <div className="text-lg font-bold text-text-primary">
-                      <CountUp to={1247} duration={1600} />
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-lg p-3 border border-border text-center">
-                    <div className="text-xs text-text-tertiary">Carriers connected</div>
-                    <div className="text-lg font-bold text-text-primary">
-                      <CountUp to={16} duration={1200} />
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-lg p-3 border border-border text-center">
-                    <div className="text-xs text-text-tertiary">Cost saved MTD</div>
-                    <div className="text-lg font-bold text-text-primary">
-                      <CountUp to={18.4} duration={1500} decimals={1} prefix="£" suffix="K" />
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg p-3 border border-border">
-                  <div className="h-24 flex items-end gap-1.5 px-2">
-                    {[40, 55, 35, 70, 60, 80, 50, 90, 75, 85, 65, 95].map(
-                      (h, i) => (
-                        <div
-                          key={i}
-                          className="flex-1 bg-accent/20 rounded-t"
-                          style={{ height: `${h}%` }}
-                        >
-                          <div
-                            className="w-full bg-accent rounded-t"
-                            style={{
-                              height: `${Math.min(h + 10, 100) - 20}%`,
-                            }}
-                          />
-                        </div>
-                      ),
-                    )}
-                  </div>
-                  <p className="text-xs text-text-tertiary text-center mt-2">
-                    Shipment volume — last 12 months
-                  </p>
-                </div>
-              </div>
+              <FullOverviewAnimation />
             </div>
           </div>
         </div>
