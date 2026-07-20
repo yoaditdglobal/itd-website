@@ -1196,11 +1196,6 @@ export const team: TeamMember[] = [
     photo: "/team/dalya-rotgolz.jpg",
   },
   {
-    name: "Rafi Grosskopf",
-    role: "3PL & Strategic Partnership",
-    photo: "/team/rafi-grosskopf.jpg",
-  },
-  {
     name: "Leah Faulk",
     role: "Account Manager",
     photo: "/team/leah-faulk.jpg",
