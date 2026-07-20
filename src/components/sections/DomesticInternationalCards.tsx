@@ -35,7 +35,7 @@ const cards: ShowcaseCard[] = [
     href: "/shipping/freight",
     image: {
       src: "/shipping/freight-hero.webp",
-      alt: "HGV and palletised freight at an ITD distribution hub",
+      alt: "AirBridgeCargo freighter aircraft climbing after take-off",
     },
   },
 ];
