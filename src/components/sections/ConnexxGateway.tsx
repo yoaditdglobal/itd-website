@@ -51,8 +51,10 @@ export default function ConnexxGateway({
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <ScrollReveal>
+        {/* With a feature animation the media column takes 3/5 of the grid so
+            the panel renders larger; the mockup fallback keeps the 50/50 split. */}
+        <div className={`grid gap-12 items-center ${media ? "lg:grid-cols-5" : "lg:grid-cols-2"}`}>
+          <ScrollReveal className={media ? "lg:col-span-2" : undefined}>
             <div>
               <p className="text-eyebrow text-accent mb-3">Connexx Platform</p>
               <h2 className="text-display-lg text-text-primary">How Connexx solves it</h2>
@@ -91,7 +93,7 @@ export default function ConnexxGateway({
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15}>
+          <ScrollReveal delay={0.15} className={media ? "lg:col-span-3" : undefined}>
             {media ? (
               <div className="rounded-2xl border border-border shadow-md overflow-hidden">
                 <AutoplayVideo
