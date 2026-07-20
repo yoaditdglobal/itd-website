@@ -9,7 +9,7 @@ import IntegrationCarousel from "@/components/sections/IntegrationCarousel";
 import type { IntegrationItem } from "@/components/sections/IntegrationCarousel";
 import CarrierComparisonTable from "@/components/sections/CarrierComparisonTable";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
-import ConnexxGateway from "@/components/sections/ConnexxGateway";
+import ConnexxGateway, { type GatewayMedia } from "@/components/sections/ConnexxGateway";
 import type {
   CarrierComparisonRow,
   MethodologyCallout,
@@ -154,6 +154,9 @@ interface VerticalPageProps {
 
   /** Optional content rendered between the "How Connexx solves it" features block and the integrations carousel. */
   integrationsGateway?: ReactNode;
+
+  /** Optional looping feature animation that replaces the ConnexxGateway static dashboard mock (used by /shipping/domestic). */
+  gatewayMedia?: GatewayMedia;
 }
 
 export default function VerticalPage({
@@ -177,6 +180,7 @@ export default function VerticalPage({
   breadcrumbs,
   jsonLd,
   integrationsGateway,
+  gatewayMedia,
 }: VerticalPageProps) {
   // Assemble JSON-LD payload: explicit schemas + auto-generated faq/breadcrumb.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -308,7 +312,9 @@ export default function VerticalPage({
       )}
 
       {/* Connexx for [vertical] */}
-      {features && features.length > 0 && <ConnexxGateway features={features} />}
+      {features && features.length > 0 && (
+        <ConnexxGateway features={features} media={gatewayMedia} />
+      )}
 
       {integrationsGateway}
 
