@@ -15,7 +15,7 @@ import {
   breadcrumbSchema,
   faqSchema,
 } from "@/components/seo/JsonLd";
-import { Scale, Truck, MapPin, Plug, Code, ArrowRight } from "lucide-react";
+import { Scale, Truck, MapPin, Plug, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const metadata = buildMetadata({
@@ -370,72 +370,6 @@ export default function ConnexxPage() {
           </div>
         </section>
       ))}
-
-      {/* Developer API section */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal>
-              <div>
-                <Code className="w-10 h-10 text-accent mb-4" />
-                <h2 className="text-display-lg text-text-primary">
-                  Native where it matters, an API for the rest.
-                </h2>
-                <p className="mt-4 text-body-md text-text-secondary">
-                  A REST API covers shipment creation, cancellation, carrier
-                  lookup, and tracking, so any system you run can plug straight
-                  in. Authentication is bearer token. Webhooks fire on every
-                  shipment lifecycle event. The full reference, with code samples
-                  in cURL, Node, Python, and PHP, is in the developer
-                  documentation.
-                </p>
-                <p className="mt-4 text-body-md text-text-secondary">
-                  The response returns the selected carrier, the service code,
-                  the rate, the label as a base64 PDF or PNG, the tracking
-                  number, and a webhook subscription URL for status updates.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Button href="/help/developers" variant="secondary">
-                    See full API documentation
-                  </Button>
-                  <Button href="https://status.itdglobal.com" variant="secondary">
-                    Status page
-                  </Button>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.15}>
-              <div className="bg-bg-dark rounded-xl p-6 font-mono text-xs sm:text-sm overflow-x-auto">
-                <div className="text-white/40 mb-2"># Create a shipment</div>
-                <pre className="text-white/90 leading-relaxed">{`curl -X POST https://api.itdglobal.com/v1/shipments \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "from": {
-      "name": "Acme UK Ltd",
-      "postcode": "M1 1AA",
-      "country": "GB"
-    },
-    "to": {
-      "name": "Jane Doe",
-      "postcode": "EH1 1YZ",
-      "country": "GB"
-    },
-    "parcel": {
-      "weight_kg": 2.5,
-      "length_cm": 30,
-      "width_cm": 20,
-      "height_cm": 10
-    },
-    "service_preference": "cheapest",
-    "reference": "ORDER-10247"
-  }'`}</pre>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
 
       {/* How Connexx integrates */}
       <section className="bg-bg-secondary py-16 md:py-24">
