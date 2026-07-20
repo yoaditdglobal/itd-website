@@ -23,15 +23,6 @@ const freightTypes = ["Parcel", "Box", "Pallet"] as const;
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10MB
 
-const volumeOptions = [
-  "50-150",
-  "150-300",
-  "300-500",
-  "500-1000",
-  "1000-5000",
-  "5000+",
-];
-
 const countryOptions = countries.map((c) => ({
   value: c.code,
   label: c.name,
@@ -351,22 +342,18 @@ export default function ContactPage() {
                     <label htmlFor="volume" className={labelClass}>
                       Weekly Volume <span className="text-red-500">*</span>
                     </label>
-                    <select
+                    <input
                       id="volume"
+                      type="number"
+                      inputMode="numeric"
+                      min="1"
+                      step="1"
                       value={weeklyVolume}
                       onChange={(e) => setWeeklyVolume(e.target.value)}
                       required
-                      className={`${fieldClass} appearance-none`}
-                    >
-                      <option value="" disabled>
-                        Select weekly volume...
-                      </option>
-                      {volumeOptions.map((vol) => (
-                        <option key={vol} value={vol}>
-                          {vol} shipments
-                        </option>
-                      ))}
-                    </select>
+                      placeholder="e.g. 250"
+                      className={fieldClass}
+                    />
                   </div>
                 )}
 
