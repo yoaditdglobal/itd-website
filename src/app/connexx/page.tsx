@@ -287,27 +287,6 @@ export default function ConnexxPage() {
       {/* Ecosystem orbit — interactive radar showing what Connexx connects to */}
       <ConnexxOrbit />
 
-      {/* What Connexx is */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <h2 className="text-display-lg text-text-primary mb-6">
-              What Connexx is.
-            </h2>
-            <p className="text-body-lg text-text-secondary">
-              Connexx is a multi-carrier shipping platform powered by ITD
-              Global. Each order from any of your sales channels routes to the
-              best-value carrier and gets a label in seconds, with tracking and
-              customs handled in the same place.
-            </p>
-            <p className="mt-5 text-body-md text-text-secondary">
-              Behind it sits our carrier network and the team who run it
-              alongside you.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* What Connexx does — four-module summary */}
       <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
