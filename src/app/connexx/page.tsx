@@ -95,35 +95,6 @@ const modules: ConnexxModule[] = [
   },
 ];
 
-const integrationBreakdown = [
-  {
-    category: "eCommerce",
-    count: "3",
-    examples: "Shopify, WooCommerce, Magento / Adobe Commerce",
-  },
-  {
-    category: "ERP and WMS",
-    count: "11",
-    examples:
-      "Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero",
-  },
-  {
-    category: "Marketplaces",
-    count: "5",
-    examples: "Amazon, eBay, Etsy, TikTok Shop, Temu",
-  },
-  {
-    category: "Carriers (UK)",
-    count: "8",
-    examples: "Royal Mail, DPD, Evri, Parcelforce, DX, InPost, Amazon Shipping",
-  },
-  {
-    category: "Carriers (international)",
-    count: "8",
-    examples: "DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT",
-  },
-];
-
 const faqItems = [
   {
     question: "What is Connexx?",
@@ -294,32 +265,12 @@ export default function ConnexxPage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {integrationBreakdown.map((row, i) => (
-              <ScrollReveal key={row.category} delay={i * 0.05}>
-                <div className="bg-white rounded-xl border border-border p-5 h-full">
-                  <div className="flex items-baseline justify-between mb-2">
-                    <p className="text-heading-sm text-text-primary">
-                      {row.category}
-                    </p>
-                    <span className="text-stat-lg text-accent">
-                      {row.count}
-                    </span>
-                  </div>
-                  <p className="text-xs text-text-secondary leading-relaxed">
-                    {row.examples}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
+          <div className="text-center">
             <Link
               href="/integrations/carriers"
               className="inline-flex items-center gap-1.5 text-sm text-accent font-medium hover:underline"
             >
-              See every integration <ArrowRight className="w-4 h-4" />
+              Browse Integrations <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
