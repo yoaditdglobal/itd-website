@@ -333,20 +333,30 @@ export default function ConnexxPage() {
           className={`py-16 md:py-24 ${i % 2 === 0 ? "bg-white" : "bg-bg-secondary"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <ScrollReveal className={i % 2 === 1 ? "lg:order-2" : ""}>
-                <div>
-                  <mod.icon className="w-10 h-10 text-accent mb-4" />
-                  <p className="text-eyebrow text-accent mb-2">
-                    Module {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h2 className="text-display-lg text-text-primary">
-                    {mod.name}
-                  </h2>
-                  <p className="mt-3 text-body-md text-text-secondary">
-                    {mod.lead}
-                  </p>
-                  <ul className="mt-6 space-y-3">
+            {mod.preview === "intelligence" ? (
+              // Full-width layout so the live dashboard reads at scale.
+              <div>
+                <ScrollReveal>
+                  <div className="max-w-3xl">
+                    <mod.icon className="w-10 h-10 text-accent mb-4" />
+                    <p className="text-eyebrow text-accent mb-2">
+                      Module {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h2 className="text-display-lg text-text-primary">
+                      {mod.name}
+                    </h2>
+                    <p className="mt-3 text-body-md text-text-secondary">
+                      {mod.lead}
+                    </p>
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal delay={0.12}>
+                  <div className="mt-8">
+                    <IntelligenceAnimation />
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal delay={0.18}>
+                  <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
                     {mod.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-3">
                         <span className="text-accent mt-1 flex-shrink-0">
@@ -358,13 +368,38 @@ export default function ConnexxPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
-              </ScrollReveal>
+                </ScrollReveal>
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <ScrollReveal className={i % 2 === 1 ? "lg:order-2" : ""}>
+                  <div>
+                    <mod.icon className="w-10 h-10 text-accent mb-4" />
+                    <p className="text-eyebrow text-accent mb-2">
+                      Module {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h2 className="text-display-lg text-text-primary">
+                      {mod.name}
+                    </h2>
+                    <p className="mt-3 text-body-md text-text-secondary">
+                      {mod.lead}
+                    </p>
+                    <ul className="mt-6 space-y-3">
+                      {mod.bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-3">
+                          <span className="text-accent mt-1 flex-shrink-0">
+                            &#10003;
+                          </span>
+                          <span className="text-text-secondary text-sm leading-relaxed">
+                            {b}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </ScrollReveal>
 
-              <ScrollReveal delay={0.15} className={i % 2 === 1 ? "lg:order-1" : ""}>
-                {mod.preview === "intelligence" ? (
-                  <IntelligenceAnimation />
-                ) : (
+                <ScrollReveal delay={0.15} className={i % 2 === 1 ? "lg:order-1" : ""}>
                   <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
                     <div className="text-center">
                       <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
@@ -373,9 +408,9 @@ export default function ConnexxPage() {
                       </p>
                     </div>
                   </div>
-                )}
-              </ScrollReveal>
-            </div>
+                </ScrollReveal>
+              </div>
+            )}
           </div>
         </section>
       ))}
