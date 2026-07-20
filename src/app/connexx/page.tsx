@@ -336,7 +336,7 @@ export default function ConnexxPage() {
                     Module {String(i + 1).padStart(2, "0")}
                   </p>
                   <h2 className="text-display-lg text-text-primary">
-                    {mod.name}.
+                    {mod.name}
                   </h2>
                   <p className="mt-3 text-body-md text-text-secondary">
                     {mod.lead}
