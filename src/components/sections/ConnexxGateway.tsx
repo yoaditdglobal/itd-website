@@ -7,7 +7,7 @@ import type { LucideIcon } from "lucide-react";
 export interface GatewayFeature {
   icon: LucideIcon;
   title: string;
-  desc: string;
+  desc?: string;
 }
 
 export interface GatewayStatTile {
@@ -72,9 +72,13 @@ export default function ConnexxGateway({
                         <div className={`flex-shrink-0 w-11 h-11 rounded-lg ${tint.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
                           <f.icon className={`w-5 h-5 ${tint.fg}`} />
                         </div>
-                        <div>
-                          <h3 className="text-heading-sm text-text-primary mb-1">{f.title}</h3>
-                          <p className="text-body-sm text-text-secondary">{f.desc}</p>
+                        <div className="flex items-center">
+                          <div>
+                            <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
+                            {f.desc && (
+                              <p className="mt-1 text-body-sm text-text-secondary">{f.desc}</p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </ScrollReveal>
@@ -89,7 +93,7 @@ export default function ConnexxGateway({
 
           <ScrollReveal delay={0.15}>
             {media ? (
-              <div className="rounded-2xl border border-border shadow-md overflow-hidden bg-bg-secondary">
+              <div className="rounded-2xl border border-border shadow-md overflow-hidden">
                 <AutoplayVideo
                   mp4={media.mp4}
                   webm={media.webm}
