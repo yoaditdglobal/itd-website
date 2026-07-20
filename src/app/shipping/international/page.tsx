@@ -240,22 +240,18 @@ export default function ShippingInternationalPage() {
         {
           icon: FileCheck,
           title: "Customs documentation generated from your product data",
-          desc: "HS codes pulled from the product catalogue. EORI applied to UK exporters automatically. IOSS for EU B2C consignments under €150. Country of origin declarations, EUR.1 certificates where applicable, CN22 and CN23 for postal services. The right paperwork pack assembles itself before the carrier scans the label.",
         },
         {
           icon: Globe,
           title: "Regulatory rules engine updated for you",
-          desc: "When a destination country changes its import requirements, the document template changes in Connexx. UK exporters do not chase regulatory emails. The Saudi SABER update, the post-Brexit EU rules change, the IOSS threshold adjustment all flow into the documentation engine before they hit your next shipment.",
         },
         {
           icon: Zap,
           title: "Live rate comparison across six international carriers",
-          desc: "DHL Express, FedEx, UPS, Evri EU, Deutsche Post, and Starlinks run through one rate engine on every cross-border order. The cheapest compliant carrier for the destination, weight, and speed requirement wins. Manual overrides remain available for known-difficult lanes.",
         },
         {
           icon: Calculator,
           title: "Landed cost calculation at checkout",
-          desc: "Duty, VAT, carrier surcharges, and broker fees calculated from the actual tariff schedule, not from last quarter's spreadsheet estimate. Show the buyer the all-in cost before they pay. Conversion rises, returns from surprise charges fall, finance gets accurate numbers for pricing decisions.",
         },
       ]}
       integrations={[
