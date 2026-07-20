@@ -45,7 +45,7 @@ const services = [
       "Set rate with no hidden costs",
       "Used by major UK retailers",
     ],
-    image: "/shipping/console sample service.jpg",
+    image: "/shipping/console-sample-service-v2.jpg",
     featured: true,
   },
   {
@@ -60,8 +60,8 @@ const services = [
       "Trade show and event freight",
       "Regular import schedules",
     ],
-    image: "/shipping/shipment consolidation.jpg",
-    objectPosition: "50% 80%",
+    image: "/shipping/shipment-consolidation-v2.jpg",
+    objectPosition: "50% 40%",
     featured: false,
   },
 ];
