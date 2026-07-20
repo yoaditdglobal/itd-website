@@ -158,7 +158,7 @@ function OverviewScene({ T }: { T: number }) {
 
   return (
     <div style={{ position: "absolute", inset: 0, fontFamily: BODY, background: "transparent", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: 24, top: 24, width: 1152, height: 702, background: "#fff", border: "1px solid " + BORD, borderRadius: 20, boxShadow: "0 4px 8px rgba(38,38,38,0.04), 0 24px 56px rgba(38,38,38,0.1)", overflow: "hidden" }}>
+      <div style={{ position: "absolute", left: 24, top: 24, width: 1152, height: 702, background: "transparent", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: "30px 30px 30px 30px" }}>
           <div style={{ height: 56, display: "flex", alignItems: "center", gap: 14 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
@@ -386,10 +386,12 @@ function OverviewScene({ T }: { T: number }) {
 
 const DUR_MS = 14000;
 const STATIC_T = 3.9; // rate comparison resolved (cheapest ringed) for reduced motion
-const CARD_X = 24,
-  CARD_Y = 24,
-  CARD_W = 1152,
-  CARD_H = 702;
+// Crop to the inner browser-window (its stage rect) — the connexx wordmark now
+// lives in the section copy, so the preview is just the product UI.
+const CARD_X = 200,
+  CARD_Y = 146,
+  CARD_W = 800,
+  CARD_H = 470;
 
 export default function OverviewAnimation() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -447,7 +449,7 @@ export default function OverviewAnimation() {
       ref={wrapRef}
       aria-label="Connexx platform overview — animated preview"
       role="img"
-      style={{ position: "relative", width: "100%", aspectRatio: CARD_W + " / " + CARD_H, overflow: "hidden", borderRadius: 20 }}
+      style={{ position: "relative", width: "100%", aspectRatio: CARD_W + " / " + CARD_H, overflow: "hidden", borderRadius: 16 }}
     >
       {scale > 0 && (
         <div style={{ position: "absolute", top: -CARD_Y * scale, left: -CARD_X * scale, width: 1200, height: 750, transformOrigin: "top left", transform: "scale(" + scale + ")" }}>
