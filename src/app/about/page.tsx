@@ -106,7 +106,7 @@ export default function AboutPage() {
       {/* Hero */}
       <SolutionHero
         label="About ITD Global"
-        title="20 years of logistics expertise, at your service"
+        title="20+ years of logistics behind your business."
         subtitle="From a small team solving a real problem, to a global logistics partner with teams across four continents. Here's who we are."
         image={{
           src: "/about/IDT-DRONE_0001.jpg",
