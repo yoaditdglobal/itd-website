@@ -2,7 +2,6 @@ import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ImageCarousel from "@/components/ui/ImageCarousel";
 import { companyPhotos } from "@/lib/data";
-import { ArrowRight } from "lucide-react";
 
 const PHOTOS = companyPhotos;
 
@@ -41,22 +40,20 @@ export default function LogisticsPartnerBand() {
                 More than a platform
               </p>
               <h2 className="text-display-lg text-white">
-                There&rsquo;s a logistics company behind the software
+                Run by people who ship for a living
               </h2>
               <p className="mt-5 text-body-lg text-white/75">
-                Connexx is built and run by people who ship for a living. From
-                our HQ near Manchester, the ITD Global team manages carrier
-                relationships, customs, and peak planning for hundreds of UK
-                businesses — so you get operators on the phone, not a ticket
-                queue.
+                ITD Global has been in logistics for +20 years, run from our HQ
+                in Manchester. Our team handles carriers, customs and peak
+                season for hundreds of UK businesses, and when you call, you get
+                a person who knows your account.
               </p>
               <div className="mt-8">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white hover:bg-accent-dark transition-colors group"
+                  className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white hover:bg-accent-dark transition-colors"
                 >
-                  Meet ITD Global
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform motion-reduce:transform-none" />
+                  Meet the Team
                 </Link>
               </div>
             </div>
