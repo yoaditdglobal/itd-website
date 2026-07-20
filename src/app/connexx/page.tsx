@@ -8,7 +8,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import ConnexxOrbit from "@/components/sections/ConnexxOrbit";
 import FaqSection from "@/components/sections/FaqSection";
-import IntelligenceAnimation from "@/components/sections/IntelligenceAnimation";
+import ConnexxFeatures from "@/components/sections/ConnexxFeatures";
 import { buildMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -326,94 +326,8 @@ export default function ConnexxPage() {
         </div>
       </section>
 
-      {/* Four alternating module deep dives */}
-      {modules.map((mod, i) => (
-        <section
-          key={mod.name}
-          className={`py-16 md:py-24 ${i % 2 === 0 ? "bg-white" : "bg-bg-secondary"}`}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {mod.preview === "intelligence" ? (
-              // Full-width layout so the live dashboard reads at scale.
-              <div>
-                <ScrollReveal>
-                  <div className="max-w-3xl">
-                    <mod.icon className="w-10 h-10 text-accent mb-4" />
-                    <p className="text-eyebrow text-accent mb-2">
-                      Module {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h2 className="text-display-lg text-text-primary">
-                      {mod.name}
-                    </h2>
-                    <p className="mt-3 text-body-md text-text-secondary">
-                      {mod.lead}
-                    </p>
-                  </div>
-                </ScrollReveal>
-                <ScrollReveal delay={0.12}>
-                  <div className="mt-8">
-                    <IntelligenceAnimation />
-                  </div>
-                </ScrollReveal>
-                <ScrollReveal delay={0.18}>
-                  <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
-                    {mod.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3">
-                        <span className="text-accent mt-1 flex-shrink-0">
-                          &#10003;
-                        </span>
-                        <span className="text-text-secondary text-sm leading-relaxed">
-                          {b}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </ScrollReveal>
-              </div>
-            ) : (
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <ScrollReveal className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <div>
-                    <mod.icon className="w-10 h-10 text-accent mb-4" />
-                    <p className="text-eyebrow text-accent mb-2">
-                      Module {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h2 className="text-display-lg text-text-primary">
-                      {mod.name}
-                    </h2>
-                    <p className="mt-3 text-body-md text-text-secondary">
-                      {mod.lead}
-                    </p>
-                    <ul className="mt-6 space-y-3">
-                      {mod.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-3">
-                          <span className="text-accent mt-1 flex-shrink-0">
-                            &#10003;
-                          </span>
-                          <span className="text-text-secondary text-sm leading-relaxed">
-                            {b}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal delay={0.15} className={i % 2 === 1 ? "lg:order-1" : ""}>
-                  <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
-                    <div className="text-center">
-                      <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
-                      <p className="text-body-sm text-text-tertiary">
-                        {mod.name} — UI preview
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              </div>
-            )}
-          </div>
-        </section>
-      ))}
+      {/* Feature explorer — in-place switcher across the four modules */}
+      <ConnexxFeatures />
 
       {/* How Connexx integrates */}
       <section className="bg-bg-secondary py-16 md:py-24">
