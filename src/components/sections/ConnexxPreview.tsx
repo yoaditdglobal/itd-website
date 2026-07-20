@@ -9,7 +9,7 @@ export default function ConnexxPreview() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Copy beside the live preview — the animation takes the wider column
             opposite the text. */}
-        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] lg:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,1.44fr)] lg:gap-12">
           <ScrollReveal>
             <div>
               <Image
@@ -17,7 +17,7 @@ export default function ConnexxPreview() {
                 alt="Connexx"
                 width={225}
                 height={105}
-                className="h-11 w-auto mb-5"
+                className="h-16 w-auto mb-6"
               />
               <h2 className="text-display-lg text-text-primary">
                 The engine behind 17.5 million labels a year
