@@ -175,12 +175,10 @@ export default function ConnexxPage() {
               </p>
               <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
                 <MagneticButton>
-                  <Button href="/contact?enquiry=connexx-demo">
-                    Request a Connexx demo
-                  </Button>
+                  <Button href={RATE_CHECKER_URL}>Get a quote</Button>
                 </MagneticButton>
-                <Button href={RATE_CHECKER_URL} variant="secondary">
-                  Get a quote
+                <Button href="/contact?enquiry=connexx-demo" variant="secondary">
+                  Contact Sales
                 </Button>
               </div>
             </div>
