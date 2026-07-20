@@ -62,7 +62,7 @@ export interface AudienceAnchor {
   href: string;
   /** Drives the chip + the "Used by" case-study lookup. */
   solutionTag: SolutionTag;
-  category: AudienceCategory;
+  category?: AudienceCategory;
   image: AudienceImage;
   /** @deprecated kept for back-compat; the grid card uses an arrow affordance. */
   ctaLabel?: string;
@@ -497,9 +497,11 @@ function AudienceGridCard({ anchor }: { anchor: AudienceAnchor }) {
 
       {/* Overlaid content */}
       <div className="absolute inset-x-0 bottom-0 p-5 xl:p-6">
-        <span className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white backdrop-blur-sm">
-          {anchor.category}
-        </span>
+        {anchor.category && (
+          <span className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white backdrop-blur-sm">
+            {anchor.category}
+          </span>
+        )}
         <p className="mt-3 text-heading-md text-white">{anchor.headline}</p>
 
         {/* Summary — hover/focus reveal on hover-capable devices; always in
