@@ -154,7 +154,7 @@ export default function ConnexxOrbit() {
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10">
             <p className="text-eyebrow text-accent-secondary mb-3">
-              One platform, every connection
+              Multi-carrier platform
             </p>
             <Image
               src="/logos/connexx/connexx-logo-white-tight.svg"
