@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import { Zap, Eye, ShieldCheck, LayoutDashboard, BarChart3, Settings } from "lucide-react";
+import OverviewAnimation from "@/components/sections/OverviewAnimation";
 
 export default function ConnexxPreview() {
   return (
@@ -28,29 +28,7 @@ export default function ConnexxPreview() {
 
           {/* Right — platform mockup */}
           <ScrollReveal delay={0.15}>
-            <div className="bg-white rounded-2xl border border-border p-6 shadow-lg">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="ml-2 text-xs text-text-tertiary">Connexx — Platform Modules</span>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {[
-                  { icon: Zap, name: "Rate Compare" },
-                  { icon: LayoutDashboard, name: "Label Gen" },
-                  { icon: Eye, name: "Tracking" },
-                  { icon: ShieldCheck, name: "Compliance" },
-                  { icon: BarChart3, name: "Analytics" },
-                  { icon: Settings, name: "Returns" },
-                ].map((mod) => (
-                  <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
-                    <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />
-                    <p className="text-xs font-medium text-text-primary">{mod.name}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <OverviewAnimation />
           </ScrollReveal>
         </div>
       </div>
