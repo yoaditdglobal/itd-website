@@ -94,7 +94,6 @@ export default function ShippingDomesticPage() {
           summary:
             "Courier rates climb year on year, and the carrier that saves you most shifts from one order to the next. Connect your Shopify or WooCommerce store and each order routes to the best-value carrier the moment it's placed, with labels and returns handled in one click.",
           solutionTag: "eCommerce",
-          category: "By business model",
           image: {
             src: "/icp/ecommerce-domestic.webp",
             alt: "Shopper checking out at a UK fashion eCommerce store with a contactless card",
@@ -109,7 +108,6 @@ export default function ShippingDomesticPage() {
           summary:
             "On a marketplace, one late delivery becomes a defect, and a defect costs you the rating you've spent years building. Amazon, eBay, Etsy, TikTok Shop and Temu orders flow into one dispatch queue with each marketplace's deadline applied, so the carrier that can actually hit it gets the parcel.",
           solutionTag: "Marketplace",
-          category: "By business model",
           image: {
             src: "/icp/marketplace-domestic.webp",
             alt: "Hand holding an Amazon Prime parcel on UK doorstep steps",
@@ -124,7 +122,6 @@ export default function ShippingDomesticPage() {
           summary:
             "Single-carrier deals cap your rates and leave nothing to earn on shipping. Set each client's carriers, packaging and routing rules once, onboard new brands in days instead of weeks, and make a margin on the parcels you ship instead of passing the carrier's bill straight through.",
           solutionTag: "3PL",
-          category: "By business model",
           image: {
             src: "/icp/3pl-domestic.webp",
             alt: "Deep aisle inside a UK pallet-storage warehouse with high racking on both sides",
@@ -139,7 +136,6 @@ export default function ShippingDomesticPage() {
           summary:
             "Wholesale and Amazon injection are won or lost on the SLA. ITD routes each consignment to a service that meets your partner's delivery and labelling terms and protects your margin, turning compliance into growth instead of chargebacks.",
           solutionTag: "B2B",
-          category: "By business model",
           image: {
             src: "/icp/b2b-domestic.webp",
             alt: "Stacked beverage crates awaiting B2B distribution from a wholesale yard",
@@ -154,7 +150,6 @@ export default function ShippingDomesticPage() {
           summary:
             "Carrier portals, a legacy WMS, and each new lane turns into an IT project. Run 2,000+ parcels a day the way you've always pictured it: one dashboard across the full parcel journey, carriers and regions added without a build or a binding contract, and the MI reporting your board asks for.",
           solutionTag: "Enterprise",
-          category: "By stage",
           image: {
             src: "/icp/enterprise-domestic.webp",
             alt: "Live performance dashboard showing trending lane and SLA metrics on a laptop screen",
@@ -169,7 +164,6 @@ export default function ShippingDomesticPage() {
           summary:
             "No volume means no leverage on rates, and most contracts want a commitment you can't make yet. Compare Royal Mail, Evri and DPD side by side with no minimum and no lock-in, and batch the whole day's labels in one run.",
           solutionTag: "Small Business",
-          category: "By stage",
           image: {
             src: "/icp/small-business-domestic.webp",
             alt: "Small-business founder packing orders at a kitchen-table workspace",

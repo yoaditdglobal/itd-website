@@ -87,7 +87,6 @@ export default function ShippingInternationalPage() {
           summary:
             "A new market brings new rules and service choices you've not faced before. We set your export lanes up properly and keep them right as things change, on rates that keep you competitive.",
           solutionTag: "Export",
-          category: "By business model",
           image: {
             src: "/icp/export.jpg",
             alt: "British Airways aircraft taking off at sunset — UK exports",
@@ -102,7 +101,6 @@ export default function ShippingInternationalPage() {
           summary:
             "Importing isn't just about the rate. Our Far East Hub in China works hand in hand with your suppliers, on shipping accounts built around your supply chain strategy and production SLAs, so samples arrive cheaper and on schedule.",
           solutionTag: "Import",
-          category: "By business model",
           image: {
             src: "/icp/import.jpg",
             alt: "Wide-body cargo aircraft on final approach — UK imports",
@@ -117,7 +115,6 @@ export default function ShippingInternationalPage() {
           summary:
             "Connect your Shopify or WooCommerce store and open your checkout to overseas buyers. Competitive rates and the right carrier for each destination grow the margin on your international orders.",
           solutionTag: "eCommerce",
-          category: "By business model",
           image: {
             src: "/icp/ecommerce-intl.webp",
             alt: "Customer paying at an international online checkout with a Mastercard",
@@ -132,7 +129,6 @@ export default function ShippingInternationalPage() {
           summary:
             "Sell to buyers worldwide on Amazon, eBay, Etsy and TikTok Shop without the shipping cost eating the margin. Competitive cross-border rates keep overseas orders worth taking.",
           solutionTag: "Marketplace",
-          category: "By business model",
           image: {
             src: "/icp/marketplace-intl.jpg",
             alt: "Shopper browsing the Temu app next to a Temu-branded box — cross-border marketplace orders",
@@ -147,7 +143,6 @@ export default function ShippingInternationalPage() {
           summary:
             "Add a competitive international service without holding your own global carrier accounts. You win new clients on overseas rates and earn a margin on the shipping you handle for them.",
           solutionTag: "3PL",
-          category: "By business model",
           image: {
             src: "/icp/3pl-intl.jpg",
             alt: "Two operators walking a warehouse aisle with a trolley — 3PL fulfilment",
@@ -162,7 +157,6 @@ export default function ShippingInternationalPage() {
           summary:
             "Run your international shipping through one managed relationship. A dedicated account manager gives you a single view of your global shipping spend, with MI and reporting on your shipping data. You see where margin can grow and how your performance is tracking.",
           solutionTag: "Enterprise",
-          category: "By stage",
           image: {
             src: "/icp/enterprise-intl.webp",
             alt: "Live performance dashboard showing trade volumes and SLA metrics in an enterprise operations room",
