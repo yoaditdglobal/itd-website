@@ -123,14 +123,14 @@ export default function ConnexxFeatures() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[300px_1fr] lg:gap-10">
-          {/* Menu rail — horizontal scroll on mobile, vertical list on desktop */}
+        <div>
+          {/* Tab row — module names only, above the panel */}
           <div
             role="tablist"
             aria-label="Connexx modules"
-            aria-orientation="vertical"
+            aria-orientation="horizontal"
             onKeyDown={onKeyDown}
-            className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0"
+            className="flex flex-wrap gap-2 mb-8 md:mb-10"
           >
             {FEATURES.map((feat, i) => {
               const FIcon = feat.icon;
@@ -147,32 +147,24 @@ export default function ConnexxFeatures() {
                   aria-controls="connexx-tabpanel"
                   tabIndex={on ? 0 : -1}
                   onClick={() => setActive(i)}
-                  className={`group flex-none lg:flex-auto text-left rounded-xl border p-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                     on
-                      ? "border-accent/40 bg-accent-light/50"
-                      : "border-border bg-white hover:border-accent/20 hover:bg-bg-secondary/60"
+                      ? "border-accent/40 bg-accent-light/60 text-text-primary"
+                      : "border-border bg-white text-text-secondary hover:border-accent/20 hover:text-text-primary"
                   }`}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <FIcon className={`w-5 h-5 flex-none ${on ? "text-accent" : "text-text-tertiary group-hover:text-accent"}`} strokeWidth={1.75} />
-                    <span className={`text-sm font-semibold whitespace-nowrap lg:whitespace-normal ${on ? "text-text-primary" : "text-text-secondary"}`}>
-                      {feat.name}
-                    </span>
-                  </div>
-                  <p className="mt-2 hidden lg:block text-body-sm text-text-tertiary">
-                    {feat.summary}
-                  </p>
+                  <FIcon className={`w-4 h-4 flex-none ${on ? "text-accent" : "text-text-tertiary"}`} strokeWidth={1.75} />
+                  {feat.name}
                 </button>
               );
             })}
           </div>
 
-          {/* Panel — swaps in place */}
+          {/* Panel — swaps in place below the tabs */}
           <div
             role="tabpanel"
             id="connexx-tabpanel"
             aria-labelledby={`connexx-tab-${active}`}
-            className="min-w-0"
           >
             <div
               key={active}
