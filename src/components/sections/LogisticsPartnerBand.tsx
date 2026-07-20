@@ -14,15 +14,8 @@ const PHOTOS = companyPhotos;
  */
 export default function LogisticsPartnerBand() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-bg-dark via-bg-dark-card to-bg-dark py-16 md:py-24">
-      {/* Accent glow — warm cobalt bloom top-right for depth */}
-      <div
-        className="absolute -top-1/3 -right-1/4 w-[60%] h-[120%] rounded-full pointer-events-none opacity-50"
-        style={{ background: "radial-gradient(circle, rgba(29,63,184,0.28) 0%, transparent 65%)" }}
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-noise opacity-[0.4] mix-blend-soft-light pointer-events-none" aria-hidden />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Visual hook — carousel (warehouse first) */}
           <ScrollReveal>
@@ -36,13 +29,13 @@ export default function LogisticsPartnerBand() {
           {/* Copy */}
           <ScrollReveal delay={0.1}>
             <div>
-              <p className="text-eyebrow text-accent-secondary mb-4">
+              <p className="text-eyebrow text-accent mb-4">
                 More than a platform
               </p>
-              <h2 className="text-display-lg text-white">
+              <h2 className="text-display-lg text-text-primary">
                 Run by people who ship for a living
               </h2>
-              <p className="mt-5 text-body-lg text-white/75">
+              <p className="mt-5 text-body-lg text-text-secondary">
                 ITD Global has been in logistics for +20 years, run from our HQ
                 in Manchester. Our team handles carriers, customs and peak
                 season for hundreds of UK businesses, and when you call, you get
