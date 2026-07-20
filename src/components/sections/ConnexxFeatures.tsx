@@ -118,13 +118,9 @@ export default function ConnexxFeatures() {
     <section className="bg-white py-16 md:py-24 border-t border-border" aria-labelledby="connexx-features-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 md:mb-12 max-w-2xl">
-          <p className="text-eyebrow text-accent mb-2">The platform, module by module</p>
           <h2 id="connexx-features-heading" className="text-display-lg text-text-primary">
-            Explore each feature
+            What Connexx does
           </h2>
-          <p className="mt-3 text-body-md text-text-secondary">
-            Pick a module to see what it does and how it looks in Connexx. Everything updates in place.
-          </p>
         </div>
 
         <div>
