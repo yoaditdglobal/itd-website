@@ -28,9 +28,9 @@ export default function Home() {
       </ScrollForward>
       <DomesticInternationalCards />
       <SolutionsRouting />
-      <LogisticsPartnerBand />
       <ConnexxPreview />
       <IntegrationHighlights />
+      <LogisticsPartnerBand />
       {/* subtitle="" removes the meta line under the heading (per copy doc)
           without touching the default other pages rely on. */}
       <CaseStudyCards subtitle="" />
