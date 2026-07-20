@@ -8,6 +8,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import ConnexxOrbit from "@/components/sections/ConnexxOrbit";
 import FaqSection from "@/components/sections/FaqSection";
+import IntelligenceAnimation from "@/components/sections/IntelligenceAnimation";
 import { buildMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -33,6 +34,8 @@ interface ConnexxModule {
   /** One-liner under the module title in the deep-dive. */
   lead: string;
   bullets: string[];
+  /** Optional animated preview keyed by name; falls back to the icon placeholder. */
+  preview?: "intelligence";
 }
 
 const modules: ConnexxModule[] = [
@@ -49,6 +52,7 @@ const modules: ConnexxModule[] = [
       "Open exceptions are grouped by who can act on them, so your team goes straight to the ones they can move.",
       "An action queue lists the longest-stuck parcels first, with barcode, carrier, destination and last tracking event.",
     ],
+    preview: "intelligence",
   },
   {
     icon: Truck,
@@ -358,14 +362,20 @@ export default function ConnexxPage() {
               </ScrollReveal>
 
               <ScrollReveal delay={0.15} className={i % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
-                  <div className="text-center">
-                    <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
-                    <p className="text-body-sm text-text-tertiary">
-                      {mod.name} — UI preview
-                    </p>
+                {mod.preview === "intelligence" ? (
+                  <div className="rounded-2xl border border-border bg-bg-secondary overflow-hidden shadow-sm">
+                    <IntelligenceAnimation />
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-bg-secondary rounded-2xl border border-border p-8 flex items-center justify-center min-h-[280px]">
+                    <div className="text-center">
+                      <mod.icon className="w-16 h-16 text-accent/20 mx-auto mb-3" />
+                      <p className="text-body-sm text-text-tertiary">
+                        {mod.name} — UI preview
+                      </p>
+                    </div>
+                  </div>
+                )}
               </ScrollReveal>
             </div>
           </div>
