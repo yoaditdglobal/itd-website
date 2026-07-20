@@ -15,7 +15,7 @@ import {
   breadcrumbSchema,
   faqSchema,
 } from "@/components/seo/JsonLd";
-import { Scale, Truck, MapPin, Plug, ArrowRight } from "lucide-react";
+import { BarChart3, Truck, MapPin, Plug, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const metadata = buildMetadata({
@@ -37,16 +37,17 @@ interface ConnexxModule {
 
 const modules: ConnexxModule[] = [
   {
-    icon: Scale,
-    name: "Rate Comparison",
+    icon: BarChart3,
+    name: "Intelligence",
     summary:
-      "Rates pulled from your carriers on each shipment, so you book on the best-value one.",
-    lead: "Compare what each carrier costs before you commit to a label.",
+      "A live view of what you're shipping, with problem parcels flagged before your customers chase them.",
+    lead: "A live view of everything you ship, with the parcels that need attention surfaced before your customers chase you.",
     bullets: [
-      "Rates come from your negotiated tariffs held in Connexx, with live calls to FedEx and UPS for real-time pricing where it applies.",
-      "Chargeable weight and destination are worked out per shipment, so each carrier and service is priced correctly.",
-      "Domestic and international are quoted separately, since the carriers, services and tariffs differ by direction.",
-      "Each quote returns the carrier and service options side by side, so you can compare before dispatch.",
+      "Label volume broken down by carrier, service, order source and destination, with UK and worldwide delivery maps and CSV export on each view.",
+      "Filter by labels printed or all shipments, over 1, 7, 14 or 30 days, or a full year.",
+      "The Exceptions view tracks your delivery rate and flags parcels that have gone quiet, so a stuck order shows up before the buyer emails in.",
+      "Open exceptions are grouped by who can act on them, so your team goes straight to the ones they can move.",
+      "An action queue lists the longest-stuck parcels first, with barcode, carrier, destination and last tracking event.",
     ],
   },
   {
