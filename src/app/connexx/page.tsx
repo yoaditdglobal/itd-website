@@ -279,7 +279,7 @@ export default function ConnexxPage() {
       {/* FAQ */}
       <FaqSection
         heading="Eight questions buyers ask"
-        subheading="The answers most operators want before booking a call."
+        subheading=""
         items={faqItems}
       />
 
