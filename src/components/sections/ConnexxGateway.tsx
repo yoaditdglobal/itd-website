@@ -57,7 +57,6 @@ export default function ConnexxGateway({
         <div className={media ? "" : "grid gap-12 items-center lg:grid-cols-2"}>
           <ScrollReveal>
             <div>
-              <p className="text-eyebrow text-accent mb-3">Connexx Platform</p>
               <h2 className="text-display-lg text-text-primary">How Connexx solves it</h2>
               <div className={media ? "mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 items-stretch" : "mt-6 space-y-3"}>
                 {features.map((f, i) => {
