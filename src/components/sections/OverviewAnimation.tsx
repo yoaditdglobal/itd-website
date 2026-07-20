@@ -158,7 +158,7 @@ function OverviewScene({ T }: { T: number }) {
 
   return (
     <div style={{ position: "absolute", inset: 0, fontFamily: BODY, background: "transparent", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: 24, top: 24, width: 1152, height: 702, background: "#fff", border: "1px solid " + BORD, borderRadius: 20, boxShadow: "0 4px 8px rgba(38,38,38,0.04), 0 24px 56px rgba(38,38,38,0.1)", overflow: "hidden" }}>
+      <div style={{ position: "absolute", left: 24, top: 24, width: 1152, height: 702, background: "transparent", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: "30px 30px 30px 30px" }}>
           <div style={{ height: 56, display: "flex", alignItems: "center", gap: 14 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
