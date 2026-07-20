@@ -193,7 +193,7 @@ export default function ConnexxPage() {
         <div className="hero-bg-blob" aria-hidden />
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
             <div>
               <p className="hero-entrance-h1 text-eyebrow text-accent mb-3">
                 The Connexx platform
