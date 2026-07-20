@@ -204,12 +204,14 @@ export default function ConnexxOrbit() {
             mobileHide={MARKETPLACES_MOBILE_HIDE}
           />
 
-          {/* Middle orbit — carriers, 50s counter-clockwise */}
+          {/* Middle orbit — carriers, 50s counter-clockwise (rings alternate
+              direction for depth; each chip's paired counter-rotation keeps
+              the tiles upright either way) */}
           <OrbitLayer
             brands={CARRIERS}
             radiusPct={40}
             durationS={50}
-            direction="cw"
+            direction="ccw"
             mobileHide={CARRIERS_MOBILE_HIDE}
           />
 
@@ -222,18 +224,25 @@ export default function ConnexxOrbit() {
             mobileHide={WMS_MOBILE_HIDE}
           />
 
-          {/* Centre — Connexx mark (transparent, no badge) */}
+          {/* Centre — Connexx mark (transparent, no badge). The spin and the
+              breathing scale live on separate elements so the transforms
+              compose; both carry .connexx-anim for the reduced-motion freeze. */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Image
-              src="/logos/connexx/connexx-icon.svg"
-              alt=""
-              width={200}
-              height={200}
-              className="connexx-anim w-24 h-24 md:w-32 md:h-32"
-              style={{
-                animation: "connexx-spin 30s linear infinite",
-              }}
-            />
+            <div
+              className="connexx-anim"
+              style={{ animation: "connexx-breathe 6s ease-in-out infinite" }}
+            >
+              <Image
+                src="/logos/connexx/connexx-icon.svg"
+                alt=""
+                width={200}
+                height={200}
+                className="connexx-anim w-24 h-24 md:w-32 md:h-32"
+                style={{
+                  animation: "connexx-spin 18s linear infinite",
+                }}
+              />
+            </div>
           </div>
         </div>
 
