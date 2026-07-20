@@ -27,7 +27,7 @@ export default function ConnexxPreview() {
                 className="h-16 w-auto mb-6"
               />
               <h2 className="text-display-lg text-white">
-                The engine behind 17.5 million labels a year
+                The engine behind 17.5M labels a year
               </h2>
               <p className="mt-6 text-body-lg text-white/75">
                 A new one every 2.7 seconds, across 16 carriers and used by more
