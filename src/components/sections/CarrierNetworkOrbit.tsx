@@ -106,7 +106,7 @@ export default function CarrierNetworkOrbit({
                 brands={inner}
                 radiusPct={28}
                 durationS={35}
-                direction="cw"
+                direction="ccw"
                 mobileHide={hide}
               />
             </div>
