@@ -7,7 +7,7 @@ import type { LucideIcon } from "lucide-react";
 export interface GatewayFeature {
   icon: LucideIcon;
   title: string;
-  desc: string;
+  desc?: string;
 }
 
 export interface GatewayStatTile {
@@ -51,10 +51,11 @@ export default function ConnexxGateway({
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <ScrollReveal>
+        {/* With a feature animation the media column takes 2/3 of the grid so
+            the panel renders larger; the mockup fallback keeps the 50/50 split. */}
+        <div className={`grid gap-12 items-center ${media ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+          <ScrollReveal className={media ? "lg:col-span-1" : undefined}>
             <div>
-              <p className="text-eyebrow text-accent mb-3">Connexx Platform</p>
               <h2 className="text-display-lg text-text-primary">How Connexx solves it</h2>
               <div className="mt-6 space-y-3">
                 {features.map((f, i) => {
@@ -72,9 +73,13 @@ export default function ConnexxGateway({
                         <div className={`flex-shrink-0 w-11 h-11 rounded-lg ${tint.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
                           <f.icon className={`w-5 h-5 ${tint.fg}`} />
                         </div>
-                        <div>
-                          <h3 className="text-heading-sm text-text-primary mb-1">{f.title}</h3>
-                          <p className="text-body-sm text-text-secondary">{f.desc}</p>
+                        <div className="flex items-center">
+                          <div>
+                            <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
+                            {f.desc && (
+                              <p className="mt-1 text-body-sm text-text-secondary">{f.desc}</p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </ScrollReveal>
@@ -87,9 +92,9 @@ export default function ConnexxGateway({
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15}>
+          <ScrollReveal delay={0.15} className={media ? "lg:col-span-2" : undefined}>
             {media ? (
-              <div className="rounded-2xl border border-border shadow-md overflow-hidden bg-bg-secondary">
+              <div className="rounded-2xl border border-border shadow-md overflow-hidden">
                 <AutoplayVideo
                   mp4={media.mp4}
                   webm={media.webm}
