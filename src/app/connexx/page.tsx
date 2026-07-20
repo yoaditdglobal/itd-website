@@ -166,9 +166,6 @@ export default function ConnexxPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
             <div>
-              <p className="hero-entrance-h1 text-eyebrow text-accent mb-3">
-                The Connexx platform
-              </p>
               <h1 className="hero-entrance-h1 text-display-xl text-text-primary">
                 The engine behind 17.5 million labels a year
               </h1>
