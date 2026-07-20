@@ -3,11 +3,11 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import Image from "next/image";
 
 const POINTS = [
-  "Weekly sample consolidations from China, fixed rate, guaranteed departure",
-  "FCL, LCL, and buyers consolidation from one account",
-  "Customs clearance handled for you, no broker fees",
-  "Named account contact throughout",
-  "China office managing collections on the ground",
+  "Weekly sample consolidations from China, fixed rate and guaranteed departure",
+  "FCL, LCL and buyers consolidation from one account",
+  "Pallet and LTL freight, UK to worldwide",
+  "Customs handled for you, no broker fees",
+  "A named account contact throughout",
   "Warehousing and fulfilment via Delta Fulfilment",
 ];
 
@@ -20,7 +20,7 @@ export default function FreightAudience() {
         <ScrollReveal>
           <div className="mb-12">
             <h2 className="text-display-lg text-text-primary">
-              Built for Importers
+              Built for the way you ship
             </h2>
           </div>
         </ScrollReveal>
@@ -52,7 +52,7 @@ export default function FreightAudience() {
           {/* Right — checklist */}
           <ScrollReveal delay={0.16}>
             <p className="text-body-md text-text-secondary mb-6">
-              Everything you need to import regularly, managed by one team from start to finish.
+              Importing regularly from overseas, or sending pallets and part-loads out to your own customers, either way one team handles it from collection to delivery.
             </p>
             <ul className="space-y-0">
               {POINTS.map((point, i) => (

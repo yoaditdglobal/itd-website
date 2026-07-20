@@ -19,18 +19,18 @@ export const metadata = buildMetadata({
 const PAINS = [
   {
     num: "01",
-    title: "Regular, reliable departures",
-    desc: "Fixed weekly schedules so your supply chain runs to a timetable, not a best-efforts estimate. The same cut-off, the same departure, every week.",
+    title: "Regular & reliable departures",
+    desc: "Fixed weekly schedules, so your supply chain runs to a timetable you can plan around. The cut-off and the departure hold, week after week.",
   },
   {
     num: "02",
-    title: "Local China office",
-    desc: "Our team is based in China, working directly with your factories in the same time zone. Faster collections, accurate documentation, fewer delays.",
+    title: "Our own office in China",
+    desc: "Our team sits in the same time zone as your factories and works with them directly. That means quicker collections and paperwork that's right first time.",
   },
   {
     num: "03",
-    title: "Dedicated customer service",
-    desc: "A named account contact who knows your lanes and suppliers. One call. One person. Done.",
+    title: "A named account contact",
+    desc: "One person who knows your lanes and your suppliers, and already has the context when you call.",
   },
 ];
 
@@ -42,8 +42,8 @@ export default function ShippingFreightPage() {
           nav-bleed, data-hero-tone="dark". */}
       <VideoHero
         label="Freight"
-        heading="Freight services built around your supply chain."
-        sub="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
+        heading="Freight built around your supply chain."
+        sub="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
         videoSrc="/hero/freight.mp4"
@@ -58,7 +58,7 @@ export default function ShippingFreightPage() {
         }}
         eyebrow=""
         heading="What sets ITD apart."
-        lead="Three things that make freight work, when they're built into the service from the start."
+        lead="Three things that make freight work, built into the service from the start."
       />
       <FreightCarrierTicker />
       <FreightServices />
@@ -67,8 +67,8 @@ export default function ShippingFreightPage() {
         hideDefaultHero
         hidePainPoints
         label="Freight"
-        title="Freight services built around your supply chain."
-        subtitle="ITD Global is a UK logistics partner specialising in international freight for businesses that import regularly from China and beyond. One point of contact. Customs handled for you. A China team on the ground."
+        title="Freight built around your supply chain."
+        subtitle="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
         primaryCta={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
         heroImage={{
           gradient: "from-accent-light via-white to-accent/15",
@@ -100,43 +100,48 @@ export default function ShippingFreightPage() {
           {
             question: "What freight services does ITD Global offer?",
             answer:
-              "Air freight, sea freight (FCL, LCL, buyers consolidation), the Console Sample Service, and shipment consolidation. All services include in-house customs clearance and a dedicated account contact.",
+              "Pallet and LTL, air freight, sea freight (FCL, LCL and buyers consolidation), the Console Sample Service, and shipment consolidation. All of them include in-house customs clearance and a named account contact.",
+          },
+          {
+            question: "Do you handle pallet and LTL freight?",
+            answer:
+              "Yes. We move pallets and part-loads UK to worldwide across road, pallet and groupage networks, with customs handled on international lanes and one account for the lot.",
           },
           {
             question: "What is the Console Sample Service?",
             answer:
-              "A fixed weekly air freight consolidation from China. ITD's China team collects samples from your suppliers, consolidates them into one shipment, clears customs, and delivers to your UK address every Tuesday at a set rate.",
+              "A fixed weekly air freight consolidation from China. Our China team collects samples from your suppliers, consolidates them into one shipment, clears customs, and delivers to your UK address each Tuesday at a set rate.",
           },
           {
             question: "What is the difference between FCL and LCL?",
             answer:
-              "FCL is a full, dedicated container most cost-effective for large volumes. LCL means your cargo shares a container and you pay only for the space you use. We'll advise on which suits your volumes and route.",
+              "FCL is a full, dedicated container, most cost-effective for large volumes. LCL means your cargo shares a container and you pay only for the space you use. We'll advise on which suits your volumes and route.",
           },
           {
             question: "What is buyers consolidation?",
             answer:
-              "We collect cargo from multiple Chinese suppliers and combine it into one container before shipping to the UK. Ideal for importers sourcing from several factories at similar times — one container, one invoice, lower cost.",
+              "We collect cargo from multiple suppliers and combine it into one container before shipping to the UK. Ideal for importers sourcing from several factories at similar times. One container, one invoice, lower cost.",
           },
           {
             question: "Does ITD handle customs clearance?",
             answer:
-              "Yes, in-house across all freight services. Our team prepares and submits all HMRC import entries. You provide invoices and packing lists, we handle everything else.",
+              "Yes, in-house across all freight services. Our team prepares and submits the HMRC import entries. You provide invoices and packing lists, and we handle the rest.",
           },
           {
             question: "Who manages my account?",
             answer:
-              "A named contact, not a rotating helpdesk. The same person throughout, who knows your routes, suppliers, and requirements.",
+              "A named contact who stays with you throughout and knows your routes, suppliers and requirements.",
           },
           {
             question: "Does ITD offer UK warehousing once goods arrive?",
             answer:
-              "Yes, through Delta Fulfilment. Unloading, storage, pick and pack, marketplace integrations, and returns all available as a direct extension of your freight service.",
+              "Yes, through Delta Fulfilment. Unloading, storage, pick and pack, marketplace integrations and returns, all available as a direct extension of your freight service.",
           },
         ]}
         closingCta={{
-          headline: "One platform for every pallet, parcel, and container.",
+          headline: "Let's move your freight.",
           subhead:
-            "A tailored review covers your top freight lanes, your current pallet network mix, and the per-consignment saving across UK pallet, LTL, and international freight tiers.",
+            "A bespoke review looks at your lanes and volumes and shows where we'd save you money, across pallet, LTL, air and sea.",
           primary: { label: "Get Quote", href: "/contact?enquiry=freight" },
           secondary: {
             label: "Explore",
