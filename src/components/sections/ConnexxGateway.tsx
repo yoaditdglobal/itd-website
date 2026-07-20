@@ -51,14 +51,13 @@ export default function ConnexxGateway({
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* With a feature animation the section stacks: header + feature cards
-            in a row, then the animation at full container width (the largest
-            possible panel). The mockup fallback keeps the original 50/50 grid. */}
-        <div className={media ? "" : "grid gap-12 items-center lg:grid-cols-2"}>
-          <ScrollReveal>
+        {/* With a feature animation the media column takes 2/3 of the grid so
+            the panel renders larger; the mockup fallback keeps the 50/50 split. */}
+        <div className={`grid gap-12 items-center ${media ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+          <ScrollReveal className={media ? "lg:col-span-1" : undefined}>
             <div>
               <h2 className="text-display-lg text-text-primary">How Connexx solves it</h2>
-              <div className={media ? "mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 items-stretch" : "mt-6 space-y-3"}>
+              <div className="mt-6 space-y-3">
                 {features.map((f, i) => {
                   // Rotate icon background colour so the list doesn't look monotone.
                   const tints = [
@@ -69,8 +68,8 @@ export default function ConnexxGateway({
                   ];
                   const tint = tints[i % tints.length];
                   return (
-                    <ScrollReveal key={f.title} delay={i * 0.08} className={media ? "h-full" : undefined}>
-                      <div className="card-hover group flex h-full gap-4 p-4 bg-white rounded-xl border border-border hover:border-accent/30">
+                    <ScrollReveal key={f.title} delay={i * 0.08}>
+                      <div className="card-hover group flex gap-4 p-4 bg-white rounded-xl border border-border hover:border-accent/30">
                         <div className={`flex-shrink-0 w-11 h-11 rounded-lg ${tint.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
                           <f.icon className={`w-5 h-5 ${tint.fg}`} />
                         </div>
@@ -93,7 +92,7 @@ export default function ConnexxGateway({
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15} className={media ? "mt-10" : undefined}>
+          <ScrollReveal delay={0.15} className={media ? "lg:col-span-2" : undefined}>
             {media ? (
               <div className="rounded-2xl border border-border shadow-md overflow-hidden">
                 <AutoplayVideo
