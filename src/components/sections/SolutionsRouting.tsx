@@ -307,7 +307,7 @@ export default function SolutionsRouting({
                 "Used by" case-study logos + explore link directly beneath its
                 headline. Active state is driven by SCROLL ONLY (no hover). */}
             <div>
-              <h2 className="max-w-md text-display-lg text-text-primary">
+              <h2 className="max-w-md text-display-md text-text-primary">
                 {TITLE}
               </h2>
 
