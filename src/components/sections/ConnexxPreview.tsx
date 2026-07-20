@@ -24,7 +24,7 @@ export default function ConnexxPreview() {
                 alt="Connexx"
                 width={225}
                 height={105}
-                className="h-16 w-auto mb-6"
+                className="h-20 w-auto mb-6"
               />
               <h2 className="text-display-lg text-white">
                 The engine behind 17.5m labels a year
