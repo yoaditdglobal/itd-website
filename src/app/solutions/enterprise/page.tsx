@@ -72,6 +72,13 @@ export default function EnterprisePage() {
         lead="Four places your scale still leaves rate, capacity, and accountability on the table."
       />
       <VerticalPage
+        gatewayMedia={{
+          mp4: "/media/connexx-enterprise.mp4",
+          webm: "/media/connexx-enterprise.webm",
+          poster: "/media/connexx-enterprise-poster.jpg",
+          caption:
+            "Connexx fanning shipments out across child accounts, consolidating billing to one invoice, writing back to your ERP, and triaging delivery exceptions.",
+        }}
         hideDefaultHero
         hidePainPoints
         label="Enterprise"

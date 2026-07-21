@@ -15,6 +15,13 @@ export const metadata = buildMetadata({
 export default function SmallBusinessPage() {
   return (
     <VerticalPage
+      gatewayMedia={{
+        mp4: "/media/connexx-sme.mp4",
+        webm: "/media/connexx-sme.webm",
+        poster: "/media/connexx-sme-poster.jpg",
+        caption:
+          "Connexx setting up an SME account same-day, printing across the UK's major carriers, flagging a delayed parcel, and connecting Shopify, eBay and WooCommerce.",
+      }}
       label="SMEs"
       title="Punch above your shipping weight"
       subtitle="You ship on the rates and carrier choice a big retailer gets, without committing to their volume. No minimum and no lock-in, just shipping sized for a smaller operation."
