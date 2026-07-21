@@ -111,6 +111,13 @@ export default function ThreePLPage() {
       <VerticalPage
         hideDefaultHero
         hidePainPoints
+        gatewayMedia={{
+          mp4: "/media/connexx-3pl.mp4",
+          webm: "/media/connexx-3pl.webm",
+          poster: "/media/connexx-3pl-poster.jpg",
+          caption:
+            "Connexx running a 3PL parent account: ring-fenced child accounts per client, per-client statements ready to invoice, exceptions triaged inside SLA, and a shareable client report.",
+        }}
       label="3PL"
       title="Undercut your rivals without undercutting yourself"
       subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
