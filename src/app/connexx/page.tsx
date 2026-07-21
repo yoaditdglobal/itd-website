@@ -170,7 +170,7 @@ export default function ConnexxPage() {
 
       {/* FAQ */}
       <FaqSection
-        heading="Eight questions buyers ask"
+        heading="FAQ"
         subheading=""
         items={faqItems}
       />
