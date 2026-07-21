@@ -5,7 +5,7 @@ import SolutionPains from "@/components/sections/SolutionPains";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Network, Building2, LayoutDashboard, Receipt, Plug } from "lucide-react";
+import { AlertTriangle, Building2, Network, Plug, Receipt } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Enterprise carrier network for UK and international shipping",
@@ -82,23 +82,19 @@ export default function EnterprisePage() {
         features={[
           {
             icon: Building2,
-            title: "Each brand or entity, its own account",
-            desc: "Set up a child account per subsidiary, brand or business unit. Labels, carriers and billing stay ring-fenced to that entity, while you keep sight of the whole group.",
-          },
-          {
-            icon: LayoutDashboard,
-            title: "One dashboard over the whole network",
-            desc: "Tracking data from each carrier lands in one dashboard, backed by a single API, so your team isn't building or maintaining a connection per carrier. Analytics on volume, cost and service sit on top, across the whole group.",
+            title: "Child accounts for each site, brand and region",
           },
           {
             icon: Receipt,
-            title: "Billing split the way finance needs it",
-            desc: "Child accounts bill separately, so cost centres, subsidiaries or client brands see only their own spend, without finance unpicking one consolidated invoice.",
+            title: "Consolidated billing across all your accounts",
           },
           {
             icon: Plug,
-            title: "New services, no new integration work",
-            desc: "Add a carrier, a lane or a service level to the network and it appears in the dashboard your team already uses. Nothing to rebuild on your side.",
+            title: "Native ERP and WMS integrations, with shipment write-back",
+          },
+          {
+            icon: AlertTriangle,
+            title: "Delivery exceptions caught and triaged before customers chase",
           },
         ]}
         breadcrumbs={[

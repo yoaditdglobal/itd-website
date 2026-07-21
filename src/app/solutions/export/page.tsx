@@ -3,26 +3,11 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import Button from "@/components/ui/Button";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import type { LucideIcon } from "lucide-react";
-import {
-  Globe,
-  Package,
-  ShieldCheck,
-  UserCheck,
-  Zap,
-  Eye,
-  Sparkles,
-  ArrowLeftRight,
-  AlertTriangle,
-  TrendingDown,
-  MapPin,
-  Truck,
-  Plug,
-} from "lucide-react";
+import { AlertTriangle, ArrowLeftRight, FileCheck, Globe, MapPin, Package, Plug, ShieldCheck, TrendingDown, UserCheck, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "International Export Shipping Services | ITD Global",
@@ -109,60 +94,6 @@ export default function ExportPage() {
         </div>
       </section>
 
-      {/* Connexx platform section */}
-      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — copy */}
-            <ScrollReveal>
-              <div>
-                <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
-                <h2 className="text-display-lg text-text-primary">
-                  Compare rates. Generate customs paperwork. Track each shipment
-                </h2>
-                <div className="mt-6 space-y-4">
-                  <p className="text-body-lg text-text-secondary">
-                    Connexx is ITD Global's multi-courier platform for international export. Compare live rates across DHL Express, FedEx, UPS, DPD and Evri, generate labels and customs documents automatically, and follow each consignment from collection to delivery. One login covers the lot.
-                  </p>
-                  <p className="text-body-md text-text-secondary">
-                    Drop in an existing commercial invoice and Connexx's AI reads the line items, turning a PDF or screenshot into structured customs data in seconds. Ship DDP or DDU, switched per shipment or set in bulk, with the right party billed automatically either way. Restricted items are covered too, including dry ice and lithium batteries, captured at the point of booking.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Button href="/connexx">Explore Connexx</Button>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right — platform mockup */}
-            <ScrollReveal delay={0.15}>
-              <div className="bg-white rounded-2xl border border-border p-6 shadow-lg">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="ml-2 text-xs text-text-tertiary">Connexx: Export Modules</span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    { icon: Zap,            name: "Rate Compare" },
-                    { icon: Truck,          name: "Carrier Select" },
-                    { icon: Sparkles,       name: "Customs AI" },
-                    { icon: ArrowLeftRight, name: "DDP/DDU" },
-                    { icon: AlertTriangle,  name: "Dangerous Goods" },
-                    { icon: Eye,            name: "Tracking" },
-                  ].map((mod) => (
-                    <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
-                      <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />
-                      <p className="text-xs font-medium text-text-primary">{mod.name}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
 
       {/* What you get — card grid */}
       <section className="bg-white py-16 md:py-20 border-t border-border">
@@ -191,6 +122,24 @@ export default function ExportPage() {
       <VerticalPage
         hideDefaultHero
         hidePainPoints
+        features={[
+          {
+            icon: FileCheck,
+            title: "Customs documents generated from your invoice",
+          },
+          {
+            icon: ArrowLeftRight,
+            title: "DDP or DDU, switched per shipment or in bulk",
+          },
+          {
+            icon: AlertTriangle,
+            title: "Restricted goods captured at booking, including dry ice and lithium batteries",
+          },
+          {
+            icon: Zap,
+            title: "Live rates and tracking across the world's leading carriers",
+          },
+        ]}
         label="Export"
         title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."

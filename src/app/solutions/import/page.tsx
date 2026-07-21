@@ -3,12 +3,11 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import Button from "@/components/ui/Button";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import type { LucideIcon } from "lucide-react";
-import { MapPin, TrendingDown, Plane, Package, Calendar, Warehouse, ShieldCheck, UserCheck, Zap, Truck, Sparkles, ArrowLeftRight, AlertTriangle, Eye } from "lucide-react";
+import { ArrowLeftRight, Calendar, Eye, FileCheck, MapPin, Package, Plane, ShieldCheck, TrendingDown, UserCheck, Warehouse, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Import Shipping Services UK | ITD Global",
@@ -96,60 +95,6 @@ export default function ImportPage() {
         </div>
       </section>
 
-      {/* Connexx platform section */}
-      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — copy */}
-            <ScrollReveal>
-              <div>
-                <p className="text-eyebrow text-accent mb-3">The Connexx Platform</p>
-                <h2 className="text-display-lg text-text-primary">
-                  Compare rates. Clear customs. Track each shipment home
-                </h2>
-                <div className="mt-6 space-y-4">
-                  <p className="text-body-lg text-text-secondary">
-                    Connexx is ITD Global's multi-courier platform for import. Compare live rates across DHL Express, FedEx, UPS, DPD and Evri, generate customs paperwork automatically, and follow each consignment from collection to your door.
-                  </p>
-                  <p className="text-body-md text-text-secondary">
-                    The same AI reads an existing invoice and turns it into structured customs data, whichever direction the parcel's travelling. DDP or DDU, switched per shipment. Dangerous goods captured at the point of booking, not chased up after.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Button href="/connexx">Explore Connexx</Button>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right — platform mockup */}
-            <ScrollReveal delay={0.15}>
-              <div className="bg-white rounded-2xl border border-border p-6 shadow-lg">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="ml-2 text-xs text-text-tertiary">Connexx: Import Modules</span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    { icon: Zap,            name: "Rate Compare" },
-                    { icon: Truck,          name: "Carrier Select" },
-                    { icon: Sparkles,       name: "Customs AI" },
-                    { icon: ArrowLeftRight, name: "DDP/DDU" },
-                    { icon: AlertTriangle,  name: "Dangerous Goods" },
-                    { icon: Eye,            name: "Tracking" },
-                  ].map((mod) => (
-                    <div key={mod.name} className="bg-bg-secondary rounded-lg p-3 border border-border text-center">
-                      <mod.icon className="w-6 h-6 text-accent mx-auto mb-1.5" />
-                      <p className="text-xs font-medium text-text-primary">{mod.name}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
 
       {/* What you get — card grid */}
       <section className="bg-white py-16 md:py-20 border-t border-border">
@@ -178,6 +123,24 @@ export default function ImportPage() {
       <VerticalPage
         hideDefaultHero
         hidePainPoints
+        features={[
+          {
+            icon: FileCheck,
+            title: "Customs cleared, with paperwork read from your invoice",
+          },
+          {
+            icon: ArrowLeftRight,
+            title: "Duties handled DDP or DDU, per shipment",
+          },
+          {
+            icon: Zap,
+            title: "Live rate comparison across the world's leading carriers",
+          },
+          {
+            icon: Eye,
+            title: "One dashboard, tracking each shipment to your door",
+          },
+        ]}
         label="Import"
         title="Importing from the Far East or worldwide? We've got it covered"
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."

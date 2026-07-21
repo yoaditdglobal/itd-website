@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { LayoutGrid, Zap, Search, ClipboardList, Store } from "lucide-react";
+import { ClipboardList, LayoutGrid, RefreshCw, Store, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "Amazon and eBay shipping software for UK marketplace sellers",
@@ -46,23 +46,19 @@ export default function MarketplaceSellerPage() {
       features={[
         {
           icon: LayoutGrid,
-          title: "One dispatch queue for Amazon, eBay, Etsy, TikTok Shop and Temu",
-          desc: "Each order lands with its SLA deadline, its marketplace carrier whitelist, and the recommended carrier already populated.",
+          title: "Your marketplaces connected in one place",
         },
         {
           icon: Zap,
-          title: "SLA-aware routing that protects your metrics",
-          desc: "Connexx knows each platform's cut-off and routes to a Valid Tracking Rate-compliant carrier automatically. Tracking writes back to Seller Central and eBay Seller Hub in real time, with automatic retries if a marketplace API stumbles.",
+          title: "Carrier selection that respects each marketplace's delivery promise",
+        },
+        {
+          icon: RefreshCw,
+          title: "Tracking pushed back to each marketplace automatically",
         },
         {
           icon: ClipboardList,
-          title: "Exceptions drop into a queue, not a missed delivery",
-          desc: "Anything Connexx can't route with confidence lands in a “To Fix” list for a quick human check, instead of shipping wrong or shipping late.",
-        },
-        {
-          icon: Search,
-          title: "Penalty fee tracing in minutes, not hours",
-          desc: "Every penalty invoice ties back to a specific shipment, carrier and SLA breach, so the dashboard shows exactly which dispatch decision caused it.",
+          title: "Exceptions flagged early to protect your seller metrics",
         },
       ]}
       integrations={[
