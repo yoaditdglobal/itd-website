@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Zap, Printer, Eye, CreditCard, Store } from "lucide-react";
+import { BadgeCheck, Eye, Plug, Store, Truck } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "SME shipping software UK, no contracts",
@@ -63,24 +63,20 @@ export default function SmallBusinessPage() {
       ]}
       features={[
         {
-          icon: Zap,
-          title: "Rate comparison across Royal Mail, Evri, DPD, and Parcelforce",
-          desc: "On every order, Connexx checks live rates and picks the cheapest carrier that meets your rules. Weight, postcode, service speed, and Highlands & Islands surcharges are factored in automatically. You see the saving per parcel before the label prints.",
+          icon: Truck,
+          title: "The UK's major carriers in one account",
         },
         {
-          icon: Printer,
-          title: "Batch label printing in one click",
-          desc: "Connect Shopify or WooCommerce, choose the orders, and print 60 labels in one go. No carrier portal logins. No address paste. Branded packing slips and customs forms generate alongside the labels for shipments that need them.",
+          icon: BadgeCheck,
+          title: "No contract, no minimum volume",
         },
         {
           icon: Eye,
-          title: "One tracking page for every parcel",
-          desc: "Customers get a branded tracking page with proactive email and SMS updates. Where's my order emails drop because the customer already knows. When you do need to look something up, every parcel lives in one screen, not four carrier websites.",
+          title: "One tracking view, with problem parcels flagged",
         },
         {
-          icon: CreditCard,
-          title: "No monthly minimum, no contract, no sales call",
-          desc: "Sign up online and ship the same day. Pay per label at Connexx's negotiated Royal Mail, Evri, DPD, Parcelforce, and InPost rates, which are usually lower than the rates you'd get opening accounts directly. Cancel any time.",
+          icon: Plug,
+          title: "Connects to your store and marketplaces",
         },
       ]}
       integrations={[

@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Zap, RefreshCw, RotateCcw, ShieldCheck, ShoppingCart } from "lucide-react";
+import { Eye, MapPin, Plug, ShoppingCart, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "eCommerce shipping software for UK retailers",
@@ -63,24 +63,20 @@ export default function EcommercePage() {
       ]}
       features={[
         {
-          icon: RefreshCw,
-          title: "Orders arrive before you go looking",
-          desc: "Connexx pulls new Shopify, WooCommerce and BigCommerce orders in around the clock. Cancellations sync too, so a refunded order never gets a label printed against it.",
+          icon: Plug,
+          title: "Plugs into Shopify, your marketplaces and WMS",
+        },
+        {
+          icon: Eye,
+          title: "A live view of what you're shipping and where",
         },
         {
           icon: Zap,
-          title: "Rate comparison, done in milliseconds",
-          desc: "On each order, Connexx checks live rates across your active UK and international carriers and applies the best-value compliant option, on the rules you set.",
+          title: "Live rate comparison across your carriers",
         },
         {
-          icon: RotateCcw,
-          title: "Returns that don't eat your margin",
-          desc: "A self-service returns portal raises a pre-paid label against your carrier rules automatically. Returns stop being the line that quietly costs 8% of revenue.",
-        },
-        {
-          icon: ShieldCheck,
-          title: "Customs sorted before the parcel leaves",
-          desc: "HS codes pulled from your product catalogue, EORI and IOSS applied to the right shipments, country paperwork generated on the spot.",
+          icon: MapPin,
+          title: "One tracking link across your carriers",
         },
       ]}
       integrations={[

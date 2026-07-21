@@ -7,7 +7,7 @@ import IntegrationsGateway from "@/components/sections/IntegrationsGateway";
 import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
-import { Users, Plug, ShieldCheck, BarChart3 } from "lucide-react";
+import { AlertTriangle, BarChart3, Building2, Receipt } from "lucide-react";
 
 export const metadata = buildMetadata({
   title: "3PL shipping software with child accounts and customs automation",
@@ -153,24 +153,20 @@ export default function ThreePLPage() {
       pains={PAINS}
       features={[
         {
-          icon: Users,
-          title: "Child account architecture for every client brand",
-          desc: "Each brand becomes a tenant under your parent contract with Royal Mail, DPD, Evri, DHL Express, and the rest. Per-client rate cards, dispatch rules, branded tracking page, and reporting all sit under one parent account. Billing exports per child account at month-end.",
+          icon: Building2,
+          title: "A ring-fenced child account for each client",
         },
         {
-          icon: Plug,
-          title: "Mintsoft, Linnworks, ShipHero, and Veeqo integration",
-          desc: "Connexx sits on top of your WMS as the shipping and rate-shopping layer. Mintsoft, Linnworks, ShipHero, and Veeqo all push orders into Connexx for carrier selection. Tracking and POD data write back automatically. No parallel systems, no double data entry.",
+          icon: Receipt,
+          title: "Per-client billing, ready to pass on",
         },
         {
-          icon: ShieldCheck,
-          title: "Customs automation per child account",
-          desc: "Each client EORI, each client IOSS registration, and each client's HS code library lives in the platform. Commercial invoice, CN22, and CN23 documentation generates per shipment, per country. SwiftLog Fulfilment lifted customs accuracy from 93% to 98.7% and cut customs-related delays 85%.",
+          icon: AlertTriangle,
+          title: "Exceptions triaged per client before they escalate",
         },
         {
           icon: BarChart3,
-          title: "Branded reporting your clients log in to see",
-          desc: "Each brand gets a live dashboard showing volume, cost per carrier, SLA performance, and exception rate. Account management stops requiring an ops analyst in a spreadsheet. Client retention conversations start from a position of data, not defence.",
+          title: "Shipping reports you can share with each client",
         },
       ]}
       integrations={[
