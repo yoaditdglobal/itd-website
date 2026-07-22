@@ -11,6 +11,7 @@ type ChangeFreq = MetadataRoute.Sitemap[number]["changeFrequency"];
  * drift out of sync with the actual pages the way the old hand-list did.
  */
 const EXTRA_STATIC = [
+  "/shipping",
   "/solutions",
   "/about",
   "/about/team",
