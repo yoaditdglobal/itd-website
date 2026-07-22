@@ -35,7 +35,6 @@ export interface CarrierPageProps {
   region: string;
   services: string[];
   features: CarrierFeature[];
-  stats: { label: string; value: string }[];
   /** Optional "About {name}" narrative prose, rendered between the hero and the
    *  Features grid. Each string is a paragraph. */
   about?: string[];
@@ -57,11 +56,9 @@ export default function CarrierPage({
   region,
   services,
   features,
-  stats,
   about,
   video,
 }: CarrierPageProps) {
-  const realStats = stats.filter((s) => s.value && s.value !== "—");
   const realServices = services.filter(Boolean);
   return (
     <>
@@ -127,24 +124,6 @@ export default function CarrierPage({
           </ScrollReveal>
         </div>
       </section>
-
-      {/* Key facts — carrier stats (citable, GEO-friendly) */}
-      {realStats.length > 0 && (
-        <section className="border-b border-border bg-white py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <dl className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
-              {realStats.map((s) => (
-                <div key={s.label}>
-                  <dd className="text-3xl font-semibold text-text-primary md:text-4xl">
-                    {s.value}
-                  </dd>
-                  <dt className="mt-1 text-sm text-text-tertiary">{s.label}</dt>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-      )}
 
       {/* About {name} — narrative prose (optional) */}
       {about && about.length > 0 && (

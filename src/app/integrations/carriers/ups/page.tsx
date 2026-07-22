@@ -36,12 +36,6 @@ export default function UPSPage() {
         { icon: ShieldCheck, title: "UPS Access Point", desc: "Delivery to or collection from thousands of Access Point locations across the UK. Convenient for recipients who are unavailable for home delivery, or for businesses using drop-off despatch." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "220+ countries" },
-        { label: "Network", value: "Air & ground" },
-        { label: "Best for", value: "International express" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

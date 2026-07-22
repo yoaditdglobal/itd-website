@@ -35,12 +35,6 @@ export default function RoyalMailPage() {
         { icon: Zap, title: "Signed For (1st and 2nd Class)", desc: "1st Class with 1–2-day delivery or 2nd Class with 2-3 day delivery, both with signature confirmation. Suitable for lower-weight items where proof of delivery is required." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "Every UK address" },
-        { label: "Frequency", value: "6 days a week" },
-        { label: "Best for", value: "Lighter parcels" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

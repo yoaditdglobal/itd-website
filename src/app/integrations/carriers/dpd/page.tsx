@@ -35,12 +35,6 @@ export default function DpdPage() {
         { icon: Globe, title: "DPD Classic (European)", desc: "Road-based delivery into 24 European countries in 1-4 working days. Cost-effective for regular European volume where transit time flexibility is acceptable." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Network", value: "68 UK depots" },
-        { label: "Volume", value: "4.8M parcels/day" },
-        { label: "International", value: "230+ destinations" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }
