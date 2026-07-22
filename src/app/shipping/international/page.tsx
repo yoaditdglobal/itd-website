@@ -168,18 +168,16 @@ export default function ShippingInternationalPage() {
         },
       ]}
       carrierComparison={{
-        title: "International carrier comparison",
-        intro:
-          "International parcels require different carriers for different jobs. Express to North America is a different problem from postal to Australia. Connexx compares all six major international carriers on every cross-border order.",
+        title: "International carrier network",
         columns: ["Country reach", "Speed tiers", "Customs handling", "Best for"],
         rows: [
           {
             carrier: "DHL Express",
             logo: "/logos/carriers/dhl_logo.webp",
             cells: [
-              "220+ countries",
-              "Express Worldwide (1–3 days), Express 9:00, Express 12:00, Economy Select",
-              "Full pre-clearance, broker network in 220+ countries",
+              "220+ countries and territories",
+              "Express Worldwide (next possible working day), Express 9:00 / Express 12:00 (time-definite), Economy Select (1–3 days, EU)",
+              "Full pre-clearance, DHL broker network in 220+ countries, MyGTS duty and HS code tools",
               "Time-critical international parcels, high-value goods",
             ],
           },
@@ -187,9 +185,9 @@ export default function ShippingInternationalPage() {
             carrier: "FedEx",
             logo: "/logos/carriers/fedex-icon.png",
             cells: [
-              "220+ countries",
-              "International Priority (1–3 days), Economy (2–5 days), International Connect Plus",
-              "Pre-clearance, US-strong customs brokerage",
+              "Up to 220+ countries (varies by service)",
+              "International Priority / Priority Express (1–3 days), International Connect Plus (1–4 days, eCommerce), International Economy (2–5 days)",
+              "Customs clearance included, strong US customs brokerage",
               "North America, time-critical APAC",
             ],
           },
@@ -197,45 +195,43 @@ export default function ShippingInternationalPage() {
             carrier: "UPS",
             logo: "/logos/carriers/ups_logo.png",
             cells: [
-              "220+ countries",
-              "Express Plus, Worldwide Express, Worldwide Expedited, Worldwide Saver",
-              "Full customs brokerage, strong in US and EU",
+              "220+ countries and territories",
+              "Worldwide Express Plus / Express (next day, timed), Worldwide Saver (1–3 days), Worldwide Expedited (2–5 days)",
+              "In-house customs brokerage, strong in US and EU",
               "US-bound parcels, EU lanes, regulated commodities",
             ],
           },
           {
-            carrier: "Evri EU",
-            logo: "/logos/carriers/evrieu_logo.png",
+            carrier: "DPD",
+            logo: "/logos/carriers/DPD-LOGO.png",
             cells: [
-              "Europe + 200+ countries",
-              "European Tracked (3–7 days), International Tracked (3–7 days)",
-              "Cleared via established postal partners in destination countries; parcels up to 15kg",
-              "Cost-effective lighter consumer parcels into Europe, drop-off despatch",
+              "37 European countries by road, 230+ worldwide via Air Classic",
+              "Classic (2–8 days, EU road network), Air Classic (worldwide, air freight)",
+              "Customs invoice submitted at booking, full tracking and signature",
+              "EU eCommerce at cost-effective rates",
             ],
           },
           {
-            carrier: "Deutsche Post",
-            logo: "/logos/carriers/deutschepost_logo.avif",
+            carrier: "Royal Mail International",
+            logo: "/logos/carriers/royal-mail-icon.png",
             cells: [
-              "220+ countries",
-              "Packet Tracked, Warenpost International — Europe 2–6 days, Rest of World 3–9 days",
-              "Postal-network clearance via local partners, electronic end-to-end tracking",
-              "Lightweight eCommerce at volume, lowest cost per unit",
+              "230+ countries and territories",
+              "International Tracked & Signed / Tracked (3–7 days), International Standard (3–7 days), International Economy (up to 12 weeks by region)",
+              "Customs form required (CN22/CN23), free returns for undelivered items",
+              "Small parcels and letters worldwide, low-value shipments",
             ],
           },
           {
-            carrier: "Starlinks",
-            logo: "/logos/carriers/starlinks_logo.png",
+            carrier: "Parcelforce International",
+            logo: "/logos/carriers/parcel-force.svg",
             cells: [
-              "200+ countries",
-              "European Express (1–2 days), Rest of World (1–3 days)",
-              "Customs clearance support, delivered duty paid options",
-              "Cross-border eCommerce with fast European transit",
+              "Delivers to 99.6% of the world",
+              "globalexpress (2 days US/Canada/Europe, 3 days worldwide), globalpriority Europe (from 3 days), globalpriority ROW (from 4 days)",
+              "Customs declarations included, compensation up to £2,500 available",
+              "Heavier international parcels at postal pricing",
             ],
           },
         ],
-        footnote:
-          "Connexx integrates with all six. The rate engine compares them in real time against your routing rules. The cheapest compliant carrier for the destination, weight, and service tier wins the shipment automatically.",
       }}
       gatewayMedia={{
         mp4: "/media/connexx-international.mp4",
