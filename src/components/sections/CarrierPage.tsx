@@ -81,6 +81,11 @@ export default function CarrierPage({
                 <h1 className="text-display-xl text-white">
                   {`${name} + ITD`}
                 </h1>
+                {/* Mobile orbit — directly below the title; hidden at lg where
+                    the orbit renders in the right-hand column instead. */}
+                <div className="lg:hidden flex justify-center my-8">
+                  <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
+                </div>
                 <p className="mt-4 text-body-lg text-white/70 font-medium">{tagline}</p>
                 <p className="mt-4 text-body-md text-white/50">{description}</p>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -88,9 +93,9 @@ export default function CarrierPage({
                 </div>
               </div>
 
-              {/* Mini orbit — right of the copy on desktop, stacked below it on
-                  mobile (flex-col). Shown on all breakpoints. */}
-              <div className="flex flex-shrink-0 items-center justify-center">
+              {/* Mini orbit — desktop only (right of the copy). On mobile it's
+                  rendered inside the copy column, directly below the title. */}
+              <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
                 <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
               </div>
             </div>
