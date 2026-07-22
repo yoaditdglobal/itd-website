@@ -45,10 +45,17 @@ const WHAT_YOU_GET: { icon: LucideIcon; text: string }[] = [
   { icon: MapPin,       text: "Cross-border shipping expertise across ecommerce, retail, and manufacturing" },
 ];
 
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "Export", path: "/solutions/export" },
+];
+
 export default function ExportPage() {
   return (
     <>
       <SolutionHero
+        breadcrumbs={CRUMBS}
         label="Export"
         title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
@@ -202,11 +209,7 @@ export default function ExportPage() {
           primary: { label: "Get Quote", href: RATE_CHECKER_URL },
           secondary: { label: "Contact Sales", href: "/contact?enquiry=export" },
         }}
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Solutions", path: "/solutions" },
-          { name: "Export", path: "/solutions/export" },
-        ]}
+        breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
             name: "International Export Shipping Services",

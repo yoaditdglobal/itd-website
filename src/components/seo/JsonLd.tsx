@@ -268,6 +268,43 @@ export function definedTermSetSchema(input: {
   };
 }
 
+/**
+ * HowTo schema for the guides.
+ *
+ * GEO note: Google retired HowTo rich results (2023), but AI engines still
+ * parse HowTo step structure when assembling procedural answers ("how do I
+ * import from China?"), so it remains citation-relevant. Steps must mirror
+ * real on-page content — each step anchors to its guide section. Never invent
+ * steps that don't correspond to a section of the page.
+ */
+export function howToSchema(input: {
+  path: string;
+  name: string;
+  description: string;
+  steps: Array<{
+    /** Section anchor id on the guide page, e.g. "eori". */
+    anchor: string;
+    name: string;
+    /** 1-2 sentence instruction, faithful to the section prose. */
+    text: string;
+  }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `${SITE_URL}${input.path}#howto`,
+    name: input.name,
+    description: input.description,
+    step: input.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+      url: `${SITE_URL}${input.path}#${s.anchor}`,
+    })),
+  };
+}
+
 /** ItemList schema for integration hub / category pages. */
 export function itemListSchema(input: {
   path: string;

@@ -34,6 +34,12 @@ const PAINS = [
   },
 ];
 
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Shipping", path: "/shipping" },
+  { name: "Freight", path: "/shipping/freight" },
+];
+
 export default function ShippingFreightPage() {
   return (
     <>
@@ -41,6 +47,7 @@ export default function ShippingFreightPage() {
           homepage VideoHero machinery: reduced-motion → poster, dark scrim,
           nav-bleed, data-hero-tone="dark". */}
       <VideoHero
+        breadcrumbs={CRUMBS}
         label="Freight"
         heading="Freight built around your supply chain"
         sub="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
@@ -79,11 +86,7 @@ export default function ShippingFreightPage() {
           label: "Contact Sales",
           href: "/contact?enquiry=freight",
         }}
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Shipping", path: "/shipping" },
-          { name: "Freight", path: "/shipping/freight" },
-        ]}
+        breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
             name: "Freight & Pallet Shipping",

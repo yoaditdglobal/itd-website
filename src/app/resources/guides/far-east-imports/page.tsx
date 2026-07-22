@@ -7,6 +7,7 @@ import {
   articleSchema,
   breadcrumbSchema,
   faqSchema,
+  howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 
@@ -78,8 +79,60 @@ const faqs = [
   },
 ];
 
+/** HowTo steps mirror the numbered guide sections below — each step anchors
+ *  to its section and states only what that section's prose says. */
+const HOW_TO = {
+  path: PATH,
+  name: "How to import from China and the Far East into the UK",
+  description:
+    "The working sequence for a first-time UK importer: choose the freight mode, set up EORI and CDS, classify goods under the UK Global Tariff, agree Incoterms, use Postponed VAT Accounting, and avoid the common customs holds.",
+  steps: [
+    {
+      anchor: "the-four-ways",
+      name: "Choose your freight mode",
+      text: "Pick express courier (3–6 days) for samples and urgent consignments under 100kg, air freight (7–12 days) for 100kg–1,000kg, sea LCL (35–50 days) for 1–15m³, or sea FCL (30–45 days) for full-container volumes — based on lead time, cost per kg, and how much working capital you can tie up in transit.",
+    },
+    {
+      anchor: "eori",
+      name: "Set up your EORI number with HMRC",
+      text: "Apply free at gov.uk/eori (processed within about 5 working days), then register for the Customs Declaration Service at the same portal. Always quote the full GB-prefixed number including the trailing zeros, and get a separate XI-prefixed EORI for Northern Ireland imports.",
+    },
+    {
+      anchor: "ukgt",
+      name: "Classify your goods under the UK Global Tariff",
+      text: "Find each product's 10-digit commodity code at gov.uk/trade-tariff to determine the duty rate, VAT, anti-dumping duties and licence requirements, and store the code in your ERP so every shipment reuses it. For high-volume SKUs, consider a free Binding Tariff Information ruling (valid three years).",
+    },
+    {
+      anchor: "cds",
+      name: "File the customs declaration through CDS",
+      text: "Have your broker or forwarder file the import declaration in the Customs Declaration Service (typically £25–£75 per declaration), and lock HS codes and customs values in your PO system before the goods land so pre-clearance releases the shipment on arrival.",
+    },
+    {
+      anchor: "incoterms",
+      name: "Agree Incoterms with your supplier",
+      text: "FOB is the sea-freight default and keeps control and visibility with you. Avoid DDP unless you have audited the supplier's duty calculation, and avoid EXW without a forwarder present in the relevant province.",
+    },
+    {
+      anchor: "pva",
+      name: "Use Postponed VAT Accounting",
+      text: "Declare import VAT on your VAT return instead of paying it at the border. You need a GB EORI and VAT registration, the PVA flag marked on each CDS declaration, and a monthly reconciliation against HMRC's statement. PVA defers VAT only, not duty.",
+    },
+    {
+      anchor: "holds",
+      name: "Pre-empt the common customs holds",
+      text: "Classify HS codes in advance, use a UK-compliant commercial invoice, check anti-dumping duty and CE/UKCA marking, and check the licence indicator before loading. Fixing issues at origin is cheap; fixing them at the UK border is expensive.",
+    },
+    {
+      anchor: "partners",
+      name: "Choose your freight partners",
+      text: "Start with a freight forwarder for sea and air freight, use the courier as customs broker for express shipments, and ask any forwarder whether they broker your customs in-house or through a third party.",
+    },
+  ],
+};
+
 export default function FarEastImportsGuidePage() {
   const jsonLd = [
+    howToSchema(HOW_TO),
     articleSchema({
       headline: "Importing from China and the Far East into the UK",
       description:

@@ -37,11 +37,17 @@ const HERO_SUBTITLE =
   "B2B orders are heavy, high-value and tied to a long-term account, so the carrier has to be one that's genuinely good at delivering to businesses, on time. We guide the right carrier and service on each consignment.";
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
 const SECONDARY = { label: "Contact Sales", href: "/contact?enquiry=b2b" };
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "B2B", path: "/solutions/b2b" },
+];
 
 export default function B2BPage() {
   return (
     <>
       <SolutionHero
+        breadcrumbs={CRUMBS}
         label="B2B"
         title={HERO_TITLE}
         subtitle={HERO_SUBTITLE}
@@ -116,11 +122,7 @@ export default function B2BPage() {
           primary: PRIMARY,
           secondary: SECONDARY,
         }}
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Solutions", path: "/solutions" },
-          { name: "B2B", path: "/solutions/b2b" },
-        ]}
+        breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
             name: "B2B and wholesale shipping",
