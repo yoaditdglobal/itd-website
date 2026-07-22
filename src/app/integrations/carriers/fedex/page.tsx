@@ -36,12 +36,6 @@ export default function FedExPage() {
         { icon: Truck, title: "FedEx International Priority Freight", desc: "For heavy consignments from 68kg. Midday next business day delivery. Combines FedEx's express transit times with freight-grade capacity." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "220+ countries" },
-        { label: "Strength", value: "North America" },
-        { label: "Best for", value: "International express" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

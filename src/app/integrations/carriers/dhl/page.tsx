@@ -35,12 +35,6 @@ export default function DhlPage() {
         { icon: Zap, title: "DHL Express Envelope", desc: "Express delivery for documents and small lightweight items. Next possible business day, door-to-door, to 220+ countries. Straightforward customs clearance for document-only shipments." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "220+ countries" },
-        { label: "Network", value: "Deutsche Post DHL Group" },
-        { label: "Best for", value: "International express" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

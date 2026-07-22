@@ -35,12 +35,6 @@ export default function AmazonShippingPage() {
         { icon: ShieldCheck, title: "Residential coverage", desc: "Amazon's network is built around residential delivery at high volume. Dense urban coverage and high first-attempt delivery rates, backed by customer-familiar tracking." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "UK" },
-        { label: "Same-day", value: "80+ towns & cities" },
-        { label: "Best for", value: "Residential volume" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

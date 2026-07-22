@@ -105,12 +105,6 @@ export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
       { icon: ShieldCheck, title: "Saturday delivery", desc: "Next-day weekend delivery for businesses whose customers are unavailable during the working week. Available across APC's full UK network." },
       RATES_FEATURE,
     ],
-    stats: [
-      { label: "Coverage", value: "UK" },
-      { label: "Network", value: "90+ local depots" },
-      { label: "Volume", value: "1M+ parcels / month" },
-      { label: "Specialism", value: "Timed & fragile" },
-    ],
   },
   starlinks: {
     tagline:
@@ -136,12 +130,6 @@ export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
       { icon: Zap, title: "European Express (1–2 days)", desc: "Fast tracked delivery into key European markets in 1-2 working days. Suited to businesses with regular European volume requiring short transit times." },
       { icon: Globe, title: "Rest of World (1–3 days)", desc: "Tracked international delivery to 200+ countries in 1-3 working days for key destinations. Full tracking as standard across all international services." },
       RATES_FEATURE,
-    ],
-    stats: [
-      { label: "Coverage", value: "200+ countries" },
-      { label: "Europe transit", value: "1–2 days" },
-      { label: "Drop-off points", value: "2,500+" },
-      { label: "Tracking", value: "Standard" },
     ],
   },
   landmark: {
@@ -169,12 +157,6 @@ export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
       { icon: Clock, title: "Europe 2–6 days / Rest of World 3–9 days", desc: "Standard international transit times across Landmark Global's postal network. Delivery through trusted local carriers at the destination, with end-to-end tracking on tracked service tiers." },
       RATES_FEATURE,
     ],
-    stats: [
-      { label: "Coverage", value: "220+ destinations" },
-      { label: "Parent group", value: "bpost" },
-      { label: "Europe transit", value: "2–6 days" },
-      { label: "Customs", value: "Built-in" },
-    ],
   },
   tnt: {
     tagline:
@@ -201,12 +183,6 @@ export const CARRIER_PAGE_OVERRIDES: Record<string, Partial<CarrierContent>> = {
       { icon: Globe, title: "TNT Economy Express (International)", desc: "Road-based day-definite international delivery across Europe and to global destinations. Cost-effective option for non-urgent international volume where transit date certainty is required." },
       RATES_FEATURE,
     ],
-    stats: [
-      { label: "Coverage", value: "200+ countries" },
-      { label: "Parent network", value: "FedEx" },
-      { label: "Timed options", value: "9am / 10am / 12pm" },
-      { label: "Express heritage", value: "70+ years" },
-    ],
   },
 };
 
@@ -220,12 +196,6 @@ export function getCarrierPageContent(carrier: Integration): CarrierPageProps {
     region,
     services: DEFAULT_SERVICES,
     features: DEFAULT_FEATURES,
-    stats: [
-      { label: "ITD integration", value: "Live" },
-      { label: "Coverage", value: region },
-      { label: "Services", value: "—" },
-      { label: "Avg transit", value: "—" },
-    ],
   };
 
   const override = CARRIER_PAGE_OVERRIDES[getIntegrationSlug(carrier)] ?? {};

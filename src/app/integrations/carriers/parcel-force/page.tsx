@@ -36,12 +36,6 @@ export default function ParcelforcePage() {
         { icon: Globe, title: "GlobalValue / GlobalExpress", desc: "International services covering 240+ countries. GlobalValue provides cost-effective international delivery from 4 working days; GlobalExpress provides faster time-definite international delivery via the Royal Mail Group network." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "240+ countries" },
-        { label: "Best for", value: "Heavier & timed" },
-        { label: "Network", value: "Royal Mail Group" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

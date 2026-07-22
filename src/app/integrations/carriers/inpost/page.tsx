@@ -35,12 +35,6 @@ export default function InPostPage() {
         { icon: RefreshCw, title: "Returns", desc: "Customer drops their return at any InPost locker or shop. Tracked back through the network, with confirmation on receipt. No printer required for the customer — label generated via QR code." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Network", value: "15,000 UK lockers" },
-        { label: "Access", value: "24/7" },
-        { label: "Best for", value: "Out-of-home & returns" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }

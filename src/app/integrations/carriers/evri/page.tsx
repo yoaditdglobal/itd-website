@@ -40,12 +40,6 @@ export default function EvriPage() {
         { icon: ShieldCheck, title: "Out of Home", desc: "Delivery to Evri's network of 10,000+ parcel shops and lockers across the UK. Convenient for customers who prefer to collect, with locations open early and late." },
         RATES_FEATURE,
       ]}
-      stats={[
-        { label: "Coverage", value: "Full UK" },
-        { label: "Out-of-home", value: "10,000+ shops & lockers" },
-        { label: "Best for", value: "Residential parcels" },
-        { label: "ITD integration", value: "Live" },
-      ]}
     />
   );
 }
