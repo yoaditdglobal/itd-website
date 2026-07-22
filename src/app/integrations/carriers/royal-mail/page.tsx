@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Truck, ShieldCheck } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Royal Mail integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "Royal Mail integration",
   description: "The UK's national postal network, reaching every address in the country. Access Royal Mail's full business service range through ITD on rates managed at network scale.",
-};
+  path: "/integrations/carriers/royal-mail",
+});
 
 export default function RoyalMailPage() {
   return (

@@ -10,7 +10,7 @@ import {
 
 // Carriers that already have a bespoke, hand-written page in their own folder.
 // Excluded here so the dynamic route doesn't shadow or duplicate them.
-const EXISTING_STATIC = new Set(["dhl", "evri", "dpd", "royal-mail", "amazon-shipping", "inpost", "parcel-force"]);
+const EXISTING_STATIC = new Set(["dhl", "evri", "dpd", "royal-mail", "amazon-shipping", "inpost", "parcel-force", "fedex", "ups"]);
 
 export const dynamicParams = false;
 

@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Globe } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "DHL Express integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "DHL Express integration",
   description: "The world's leading international express courier, delivering to over 220 countries and territories. Access DHL Express through ITD on rates managed at network scale.",
-};
+  path: "/integrations/carriers/dhl",
+});
 
 export default function DhlPage() {
   return (

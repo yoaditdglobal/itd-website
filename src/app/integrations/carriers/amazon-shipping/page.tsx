@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Truck, ShieldCheck } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Amazon Shipping integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "Amazon Shipping integration",
   description: "Amazon's own delivery network, available for eCommerce shipments beyond the Amazon platform. Access Amazon Shipping through ITD on rates managed at scale.",
-};
+  path: "/integrations/carriers/amazon-shipping",
+});
 
 export default function AmazonShippingPage() {
   return (

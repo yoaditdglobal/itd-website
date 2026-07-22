@@ -2,12 +2,13 @@ import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { Building2, Store, ShoppingCart, Package, Truck, Globe, Factory, ArrowRight } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Solutions — ITD Global",
+export const metadata = buildMetadata({
+  title: "Solutions",
   description: "Solutions built for how you ship. Find the right path for your business stage and model.",
-};
+  path: "/solutions",
+});
 
 const stages = [
   {

@@ -9,6 +9,10 @@ export const metadata = buildMetadata({
   description:
     "Watch a single parcel move across every mode ITD Global handles — UK domestic, international air, and sea freight — all from one multi-carrier platform.",
   path: "/rc",
+  // Immersive campaign landing page: no global nav/footer, thin crawlable prose,
+  // and a near-duplicate of the homepage message. Keep it out of the index so it
+  // doesn't compete with / dilute the homepage.
+  noindex: true,
 });
 
 /**

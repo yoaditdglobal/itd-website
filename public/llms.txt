@@ -29,9 +29,8 @@ ITD is UK-based, serves UK and EU shippers, and integrates with Shopify, WooComm
 
 - [Integrations hub](https://itdglobal.com/integrations): full directory of all platform connections.
 - [ERP & WMS](https://itdglobal.com/integrations/erp-wms): NetSuite, Linnworks, Mintsoft, Veeqo, Selro, StoreFeeder, ShipHero.
-- [eCommerce](https://itdglobal.com/integrations/ecommerce): Shopify, WooCommerce, Magento.
+- [eCommerce & Logistics](https://itdglobal.com/integrations/ecommerce-logistics): Shopify, WooCommerce, Magento, ShipStation.
 - [Marketplaces](https://itdglobal.com/integrations/marketplaces): Amazon, eBay, Etsy, Temu, TikTok Shop.
-- [Logistics](https://itdglobal.com/integrations/logistics): ShipStation.
 
 ## Carriers
 
