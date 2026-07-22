@@ -288,7 +288,7 @@ function BestForPills({ items }: { items: string[] }) {
       {items.map((p, i) => (
         <span
           key={i}
-          className={`inline-flex items-center rounded-full px-2 py-0.5 text-micro ${pillClassFor(p)}`}
+          className={`inline-flex items-center whitespace-nowrap rounded-full px-2 py-0.5 text-micro ${pillClassFor(p)}`}
         >
           {p}
         </span>

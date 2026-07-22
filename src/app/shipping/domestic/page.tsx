@@ -206,7 +206,7 @@ export default function ShippingDomesticPage() {
               podLabel: "Photo on delivery",
               details: ["Signature options"],
             },
-            bestFor: ["Universal coverage", "Letters", "Guaranteed timed delivery"],
+            bestFor: ["Universal", "Letters", "Timed delivery"],
           },
           {
             carrier: "DPD",
@@ -228,7 +228,7 @@ export default function ShippingDomesticPage() {
               liveLabel: "Follow My Parcel",
               pod: "photo-signature",
             },
-            bestFor: ["eCommerce", "B2B", "Precise delivery slots"],
+            bestFor: ["eCommerce", "B2B", "Delivery slots"],
           },
           {
             carrier: "Evri",
@@ -250,7 +250,7 @@ export default function ShippingDomesticPage() {
               podLabel: "Digital signature option",
               details: ["1-hour text window"],
             },
-            bestFor: ["eCommerce", "Returns", "Best-value delivery"],
+            bestFor: ["eCommerce", "Returns", "Best value"],
           },
           {
             carrier: "InPost",
@@ -270,7 +270,7 @@ export default function ShippingDomesticPage() {
               pod: "none",
               details: ["Locker QR code / PIN"],
             },
-            bestFor: ["Out-of-home delivery", "Marketplace", "Residential convenience"],
+            bestFor: ["Out-of-home", "Marketplace", "Residential"],
           },
           {
             carrier: "DHL Parcel",
@@ -295,7 +295,7 @@ export default function ShippingDomesticPage() {
               pod: "none",
               details: ["1-hour collection/delivery window"],
             },
-            bestFor: ["Cost-effective drop-off", "3,500+ ServicePoints"],
+            bestFor: ["Drop-off", "ServicePoints"],
           },
           {
             carrier: "Amazon Shipping",
@@ -318,7 +318,7 @@ export default function ShippingDomesticPage() {
               podLabel: "Photo on delivery",
               details: ["SMS/email notifications"],
             },
-            bestFor: ["High-volume sellers", "Marketplace integration"],
+            bestFor: ["High volume", "Marketplace"],
           },
           {
             carrier: "APC",
@@ -346,7 +346,7 @@ export default function ShippingDomesticPage() {
               podLabel: "Photo + GPS proof",
               details: ["2-hour delivery window"],
             },
-            bestFor: ["SME network", "Fragile, liquid or security handling"],
+            bestFor: ["SMEs", "Fragile", "Liquids", "Security"],
           },
           {
             carrier: "FedEx",
@@ -371,11 +371,7 @@ export default function ShippingDomesticPage() {
               pod: "none",
               details: ["Delivery notifications"],
             },
-            bestFor: [
-              "Heavy parcels",
-              "Time-definite B2B",
-              "International-linked shipping",
-            ],
+            bestFor: ["Heavy parcels", "Timed B2B", "International"],
           },
           {
             carrier: "UPS",
