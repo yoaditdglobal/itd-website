@@ -32,80 +32,14 @@ export default function CaseStudiesCarousel({
   const [progress, setProgress] = useState(0);
   const reduceMotion = useRef(false);
 
-  // ── Mobile autoplay (<1024px only; desktop behavior untouched) ──
-  // Cards advance left→right on an interval, pause while the user is
-  // touching, and loop back to the start at the end. Gated like
-  // IntegrationCarousel: in view + visible tab + no reduced motion.
-  const AUTOPLAY_MS = 3800;
-  const RESUME_AFTER_MS = 4000;
-  const [inView, setInView] = useState(false);
-  const [pageVisible, setPageVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(false); // false on SSR → autoplay starts post-mount
-  const [paused, setPaused] = useState(false); // true while touching / shortly after
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   useEffect(() => {
-    const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduceMotion.current = mqReduce.matches;
-    setReducedMotion(mqReduce.matches);
-    const onReduce = (e: MediaQueryListEvent) => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduceMotion.current = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => {
       reduceMotion.current = e.matches;
-      setReducedMotion(e.matches);
     };
-    mqReduce.addEventListener("change", onReduce);
-
-    const mqDesktop = window.matchMedia("(min-width: 1024px)");
-    const onBp = () => setIsMobile(!mqDesktop.matches);
-    onBp();
-    mqDesktop.addEventListener("change", onBp);
-
-    setPageVisible(!document.hidden);
-    const onVis = () => setPageVisible(!document.hidden);
-    document.addEventListener("visibilitychange", onVis);
-
-    const el = trackRef.current;
-    let io: IntersectionObserver | undefined;
-    if (el && typeof IntersectionObserver !== "undefined") {
-      io = new IntersectionObserver(
-        (entries) => setInView(entries[0]?.isIntersecting ?? false),
-        { threshold: 0.2 },
-      );
-      io.observe(el);
-    } else {
-      setInView(true);
-    }
-
-    return () => {
-      mqReduce.removeEventListener("change", onReduce);
-      mqDesktop.removeEventListener("change", onBp);
-      document.removeEventListener("visibilitychange", onVis);
-      io?.disconnect();
-    };
-  }, []);
-
-  // Touch pause/resume — touch events are unambiguous on a native-scroll
-  // track (pointer events get cancelled once the browser takes over).
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const pause = () => {
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-      setPaused(true);
-    };
-    const scheduleResume = () => {
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-      resumeTimerRef.current = setTimeout(() => setPaused(false), RESUME_AFTER_MS);
-    };
-    el.addEventListener("touchstart", pause, { passive: true });
-    el.addEventListener("touchend", scheduleResume, { passive: true });
-    el.addEventListener("touchcancel", scheduleResume, { passive: true });
-    return () => {
-      el.removeEventListener("touchstart", pause);
-      el.removeEventListener("touchend", scheduleResume);
-      el.removeEventListener("touchcancel", scheduleResume);
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
   }, []);
 
   const update = useCallback(() => {
@@ -137,56 +71,6 @@ export default function CaseStudiesCarousel({
     const step = first ? first.offsetWidth + 24 : el.clientWidth * 0.8;
     el.scrollBy({ left: dir * step, behavior: reduceMotion.current ? "auto" : "smooth" });
   }, []);
-
-  // The autoplay tick. End detection reads the DOM each tick (matches
-  // update()'s 4px tolerance — snap-proximity rarely lands exactly on max).
-  // Advances via a small rAF tween — programmatic smooth scrolling silently
-  // no-ops in some embedded browsers, and the tween is snap-proof.
-  useEffect(() => {
-    const shouldPlay = isMobile && inView && pageVisible && !paused && !reducedMotion;
-    if (!shouldPlay) return;
-    let raf = 0;
-    const tweenTo = (el: HTMLElement, target: number) => {
-      const from = el.scrollLeft;
-      const delta = target - from;
-      if (Math.abs(delta) < 1) return;
-      const prevSnap = el.style.scrollSnapType;
-      el.style.scrollSnapType = "none"; // snap fights per-frame scrollLeft writes
-      const start = performance.now();
-      const dur = Math.min(900, 350 + Math.abs(delta) * 0.3);
-      const step = (now: number) => {
-        const t = Math.min(1, (now - start) / dur);
-        const e = 1 - Math.pow(1 - t, 3); // ease-out cubic
-        el.scrollLeft = from + delta * e;
-        if (t < 1) {
-          raf = requestAnimationFrame(step);
-        } else {
-          el.style.scrollSnapType = prevSnap;
-        }
-      };
-      raf = requestAnimationFrame(step);
-    };
-    const id = setInterval(() => {
-      const el = trackRef.current;
-      if (!el) return;
-      const max = el.scrollWidth - el.clientWidth;
-      if (max <= 0) return; // nothing to scroll
-      if (el.scrollLeft >= max - 4) {
-        tweenTo(el, 0); // loop back to the start
-      } else {
-        const first = el.firstElementChild as HTMLElement | null;
-        const step = first ? first.offsetWidth + 24 : el.clientWidth * 0.8;
-        tweenTo(el, Math.min(el.scrollLeft + step, max));
-      }
-    }, AUTOPLAY_MS);
-    return () => {
-      clearInterval(id);
-      if (raf) cancelAnimationFrame(raf);
-      // A cancelled mid-tween must not leave snap disabled on the track.
-      const el = trackRef.current;
-      if (el) el.style.scrollSnapType = "";
-    };
-  }, [isMobile, inView, pageVisible, paused, reducedMotion]);
 
   // ── Drag-to-scroll (mouse only). Threshold keeps card clicks working. ──
   const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
