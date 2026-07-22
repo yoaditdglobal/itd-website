@@ -176,56 +176,7 @@ export default function ThreePLPage() {
           title: "Shipping reports you can share with each client",
         },
       ]}
-      integrations={[
-        {
-          name: "Mintsoft",
-          logo: "/logos/ecommerce/mintsoft-icon.png",
-          description: "WMS most common in UK mid-market 3PLs. Connexx adds the carrier layer.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Linnworks",
-          logo: "/logos/erp-wms/linnworks_logo.png",
-          description: "Multi-channel order management with marketplace import for client brands.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Veeqo",
-          logo: "/logos/ecommerce/veeqo-icon.webp",
-          description: "Inventory and shipping platform with multi-client support.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "ShipHero",
-          logo: "/logos/erp-wms/shiphero_logo.png",
-          description: "Warehouse and shipping management for high-volume fulfilment houses.",
-          href: "/integrations/erp-wms",
-        },
-        {
-          name: "Royal Mail",
-          logo: "/logos/carriers/royal-mail-icon.png",
-          description: "Tracked 24, Tracked 48, Signed, First/Second Class per child account.",
-          href: "/integrations/carriers/royal-mail",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description: "Next Day, Saturday, B2B with per-client routing rules.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "Evri",
-          logo: "/logos/carriers/evri_logo.png",
-          description: "Standard, Next Day, ParcelShop drop-off, and Evri EU coverage.",
-          href: "/integrations/carriers/evri",
-        },
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description: "International express to 220+ countries for cross-border client volume.",
-          href: "/integrations/carriers/dhl",
-        },
-      ]}
+      integrationsContext="3PL"
       caseStudy={getCaseStudiesBySolution("3PL")[0] ?? caseStudies[2]}
       caseStudies={getCaseStudiesBySolution("3PL")}
       faq={[

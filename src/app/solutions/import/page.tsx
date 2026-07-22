@@ -121,6 +121,7 @@ export default function ImportPage() {
       </section>
 
       <VerticalPage
+        integrationsContext="Import"
         hideDefaultHero
         hidePainPoints
         gatewayMedia={{

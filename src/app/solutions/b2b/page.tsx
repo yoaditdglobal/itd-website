@@ -67,6 +67,7 @@ export default function B2BPage() {
         lead="Three places a B2B order slips — a late delivery, the wrong carrier, a border hold — and the account can slip with it."
       />
       <VerticalPage
+        integrationsContext="B2B"
         hideDefaultHero
         hidePainPoints
         label="B2B"

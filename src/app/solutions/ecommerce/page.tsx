@@ -86,50 +86,7 @@ export default function EcommercePage() {
           title: "One tracking link across your carriers",
         },
       ]}
-      integrations={[
-        {
-          name: "Shopify",
-          logo: "/logos/ecommerce/shopify_logo.png",
-          description: "Direct connection. Orders flow in within seconds of customer checkout.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "WooCommerce",
-          logo: "/logos/erp-wms/woocommerce_logo.svg",
-          description: "WordPress plugin. Multi-carrier shipping inside your WP admin.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "Magento",
-          logo: "/logos/erp-wms/magento-icon.webp",
-          description: "Adobe Commerce / Magento 2 integration with multi-carrier routing rules.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "Royal Mail",
-          logo: "/logos/carriers/royal-mail-icon.png",
-          description: "Tracked 24, Tracked 48, Signed, First Class, Second Class.",
-          href: "/integrations/carriers/royal-mail",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description: "Next Day, Two Day, Saturday delivery across the UK and EU.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "Evri",
-          logo: "/logos/carriers/evri_logo.png",
-          description: "ParcelShop drop-off and standard parcel delivery across the UK.",
-          href: "/integrations/carriers/evri",
-        },
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description: "International express delivery to 220+ countries.",
-          href: "/integrations/carriers/dhl",
-        },
-      ]}
+      integrationsContext="eCommerce"
       caseStudy={getCaseStudiesBySolution("eCommerce")[0] ?? caseStudies[0]}
       faq={[
         {

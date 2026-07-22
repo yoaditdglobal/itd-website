@@ -1303,6 +1303,167 @@ export function getIntegrations(type?: string, category?: string) {
   return result;
 }
 
+// ─── "Key integrations" section — page-relevant carrier/tech selection ────────
+// The shared "Key integrations" carousel (VerticalPage → IntegrationCarousel)
+// takes a lightweight item list. These helpers derive a curated, page-relevant
+// list from the single `integrations[]` source of truth, so each shipping /
+// solution page declares its audience instead of hand-authoring an array.
+
+export interface KeyIntegrationItem {
+  name: string;
+  logo?: string;
+  description?: string;
+  href: string;
+}
+
+/** Carriers serving a region, honouring the `regions[]` dual-membership override (FedEx/UPS are in both). */
+export function getCarriersByRegion(
+  region: "Domestic" | "International",
+): Integration[] {
+  return getIntegrationsByType("carrier").filter((c) =>
+    (c.regions ?? (c.region ? [c.region] : [])).includes(region),
+  );
+}
+
+/** Map an Integration to the carousel item shape, with a real detail-page href. */
+function toKeyIntegrationItem(i: Integration): KeyIntegrationItem {
+  const slug = getIntegrationSlug(i);
+  return {
+    name: i.name,
+    logo: i.logo,
+    description: i.description,
+    href:
+      i.type === "carrier"
+        ? `/integrations/carriers/${slug}`
+        : `/integrations/tech/${slug}`,
+  };
+}
+
+/** Featured entries first (stable within each group), then capped. */
+function curateIntegrations(items: Integration[], cap: number): Integration[] {
+  return [...items]
+    .sort((a, b) => Number(b.featured) - Number(a.featured))
+    .slice(0, cap);
+}
+
+export type KeyIntegrationsContext = ShippingType | SolutionTag;
+
+interface KeyContextSpec {
+  carrierRegion?: "Domestic" | "International";
+  techCategories?: string[];
+  /** Which kind leads — the carousel opens on whichever kind is first. */
+  lead: "carriers" | "tech";
+  blurb: string;
+}
+
+const KEY_INTEGRATIONS_CONTEXT: Record<KeyIntegrationsContext, KeyContextSpec> = {
+  // Shipping
+  Domestic: {
+    carrierRegion: "Domestic",
+    techCategories: ["ecommerce_logistics", "erp_wms"],
+    lead: "carriers",
+    blurb: "Every UK carrier and the platforms that feed them, wired into one account.",
+  },
+  "International Export": {
+    carrierRegion: "International",
+    techCategories: ["ecommerce_logistics", "erp_wms"],
+    lead: "carriers",
+    blurb: "The international carriers and systems your cross-border shipping runs on.",
+  },
+  "International Import": {
+    carrierRegion: "International",
+    techCategories: ["erp_wms", "ecommerce_logistics"],
+    lead: "carriers",
+    blurb: "The carriers and systems behind your inbound parcels and freight, in one place.",
+  },
+  Freight: {
+    carrierRegion: "International",
+    techCategories: ["erp_wms"],
+    lead: "carriers",
+    blurb: "The freight and express carriers ITD moves your pallets and consignments with.",
+  },
+  // Solutions
+  eCommerce: {
+    techCategories: ["ecommerce_logistics"],
+    carrierRegion: "Domestic",
+    lead: "tech",
+    blurb: "Your storefront and the carriers behind every order, in one connected flow.",
+  },
+  "3PL": {
+    techCategories: ["erp_wms", "ecommerce_logistics"],
+    carrierRegion: "Domestic",
+    lead: "tech",
+    blurb: "The WMS and order systems your fulfilment runs on, plus the full carrier network.",
+  },
+  Marketplace: {
+    techCategories: ["marketplace"],
+    carrierRegion: "Domestic",
+    lead: "tech",
+    blurb: "Every marketplace you sell on and the carriers that get each order delivered.",
+  },
+  B2B: {
+    techCategories: ["erp_wms"],
+    carrierRegion: "Domestic",
+    lead: "tech",
+    blurb: "The ERP and WMS platforms your trade operation runs on, connected to every carrier.",
+  },
+  Enterprise: {
+    techCategories: ["erp_wms", "ecommerce_logistics"],
+    carrierRegion: "International",
+    lead: "tech",
+    blurb: "Enterprise ERP/WMS and the full domestic-to-global carrier network in one integration.",
+  },
+  "Small Business": {
+    carrierRegion: "Domestic",
+    techCategories: ["ecommerce_logistics"],
+    lead: "carriers",
+    blurb: "The UK carriers and store platforms a growing business ships with, in one place.",
+  },
+  Export: {
+    carrierRegion: "International",
+    techCategories: ["ecommerce_logistics", "erp_wms"],
+    lead: "carriers",
+    blurb: "The international carriers and systems your export operation runs on.",
+  },
+  Import: {
+    carrierRegion: "International",
+    techCategories: ["erp_wms", "ecommerce_logistics"],
+    lead: "carriers",
+    blurb: "The carriers and systems behind your imports, managed from one account.",
+  },
+};
+
+/** One-line subtitle for the "Key integrations" header on a given page. */
+export function getKeyIntegrationsBlurb(context: KeyIntegrationsContext): string {
+  return KEY_INTEGRATIONS_CONTEXT[context].blurb;
+}
+
+/**
+ * Curated, page-relevant list for the "Key integrations" carousel, drawn from
+ * the single `integrations[]` source: carriers by region + tech by category,
+ * featured-first and capped. The page's emphasis kind is placed first so the
+ * carousel opens on the right tab.
+ */
+export function getKeyIntegrations(
+  context: KeyIntegrationsContext,
+): KeyIntegrationItem[] {
+  const spec = KEY_INTEGRATIONS_CONTEXT[context];
+  const carriers = spec.carrierRegion
+    ? curateIntegrations(getCarriersByRegion(spec.carrierRegion), 8)
+    : [];
+  const tech = spec.techCategories
+    ? curateIntegrations(
+        spec.techCategories.flatMap((c) => getIntegrations("tech", c)),
+        8,
+      )
+    : [];
+  const carrierItems = carriers.map(toKeyIntegrationItem);
+  const techItems = tech.map(toKeyIntegrationItem);
+  return spec.lead === "carriers"
+    ? [...carrierItems, ...techItems]
+    : [...techItems, ...carrierItems];
+}
+
 // ─── Content indexing helpers ────────────────────────────────────────────────
 // Pure functions over the static `caseStudies` array. Pages should query these
 // instead of indexing `caseStudies[N]` positionally — see "Content Indexing

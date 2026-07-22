@@ -52,6 +52,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
   const [reducedMotion, setReducedMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   // Gate autoplay: only tick while on screen, in a visible tab, and the user
   // hasn't asked for reduced motion — no background CPU/battery burn.
@@ -100,6 +101,11 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
     };
   }, [selectedIndex, inView, pageVisible, reducedMotion, visibleItems.length]);
 
+  // Move focus into the detail panel when it opens (keyboard a11y).
+  useEffect(() => {
+    if (selectedIndex !== null) panelRef.current?.focus();
+  }, [selectedIndex]);
+
   const handleCardClick = (index: number) => {
     if (selectedIndex === index) {
       setSelectedIndex(null);
@@ -131,26 +137,37 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
               { key: "carriers", label: "Carriers" },
               { key: "tech", label: "Tech Integrations" },
             ] as const
-          ).map((t) => (
-            <button
-              key={t.key}
-              role="tab"
-              aria-selected={tab === t.key}
-              onClick={() => handleTabSwitch(t.key)}
-              className={`min-h-[44px] rounded-md px-5 py-2 text-sm font-medium transition-all ${
-                tab === t.key
-                  ? "bg-white shadow-sm text-text-primary"
-                  : "text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+          ).map((t) => {
+            const count = t.key === "carriers" ? carriers.length : tech.length;
+            return (
+              <button
+                key={t.key}
+                role="tab"
+                aria-selected={tab === t.key}
+                onClick={() => handleTabSwitch(t.key)}
+                className={`inline-flex items-center gap-1.5 min-h-[44px] rounded-md px-5 py-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
+                  tab === t.key
+                    ? "bg-white shadow-sm text-text-primary"
+                    : "text-text-secondary hover:text-text-primary"
+                }`}
+              >
+                {t.label}
+                <span
+                  className={`text-xs tabular-nums ${
+                    tab === t.key ? "text-text-tertiary" : "text-text-tertiary/70"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
-      {/* Card grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      {/* Card grid — centered flex-wrap of uniform, fixed-size cards so any
+          count (6–9 per tab) sits on-grid with a balanced, centered last row. */}
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
         {visibleItems.map((item, i) => {
           const isActive = activeIndex === i && selectedIndex === null;
           const isSelected = selectedIndex === i;
@@ -158,7 +175,8 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
             <button
               key={item.name}
               onClick={() => handleCardClick(i)}
-              className={`card-hover bg-white rounded-xl border p-4 text-center cursor-pointer ${
+              aria-expanded={isSelected}
+              className={`group card-hover flex flex-col items-center justify-center w-[calc(50%-0.375rem)] sm:w-36 md:w-40 min-h-[116px] bg-white rounded-xl border p-4 text-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isSelected
                   ? "border-accent shadow-md ring-1 ring-accent/20"
                   : isActive
@@ -166,8 +184,12 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
                   : "border-border hover:border-accent/30"
               }`}
             >
-              <IntegrationLogo name={item.name} logo={item.logo} size="sm" className="mx-auto mb-2" />
-              <p className="text-xs font-semibold text-text-primary leading-tight">{item.name}</p>
+              <span className="flex h-10 items-center justify-center mb-3 transition-transform duration-300 motion-safe:group-hover:scale-110">
+                <IntegrationLogo name={item.name} logo={item.logo} size="sm" />
+              </span>
+              <p className="text-xs font-semibold text-text-primary leading-tight line-clamp-2">
+                {item.name}
+              </p>
             </button>
           );
         })}
@@ -175,7 +197,14 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
 
       {/* Expanded panel */}
       {selected && (
-        <div className="mt-4 bg-white rounded-xl border border-accent/30 p-5 sm:p-6">
+        <div
+          ref={panelRef}
+          tabIndex={-1}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setSelectedIndex(null);
+          }}
+          className="mt-4 bg-white rounded-xl border border-accent/30 p-5 sm:p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        >
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
               <IntegrationLogo key={selected.name} name={selected.name} logo={selected.logo} size="md" />

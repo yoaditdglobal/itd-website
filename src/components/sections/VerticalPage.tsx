@@ -16,8 +16,18 @@ import type {
 } from "@/components/sections/CarrierComparisonTable";
 import FaqAccordion from "@/components/sections/FaqAccordion";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
-import type { CaseStudy, SolutionTag, LibrarySegment } from "@/lib/data";
-import { getCaseStudiesBySolution, SOLUTION_SLUGS } from "@/lib/data";
+import type {
+  CaseStudy,
+  SolutionTag,
+  LibrarySegment,
+  KeyIntegrationsContext,
+} from "@/lib/data";
+import {
+  getCaseStudiesBySolution,
+  SOLUTION_SLUGS,
+  getKeyIntegrations,
+  getKeyIntegrationsBlurb,
+} from "@/lib/data";
 import UsedByChip from "@/components/sections/UsedByChip";
 import { ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -158,6 +168,11 @@ interface VerticalPageProps {
 
   /** Optional looping feature animation that replaces the ConnexxGateway static dashboard mock (used by /shipping/domestic). */
   gatewayMedia?: GatewayMedia;
+
+  /** Page context for the "Key integrations" section. When set (and no explicit
+   *  `integrations` array is passed), the relevant carriers + tech are derived
+   *  from the data layer and the header blurb is filled in automatically. */
+  integrationsContext?: KeyIntegrationsContext;
 }
 
 export default function VerticalPage({
@@ -182,7 +197,19 @@ export default function VerticalPage({
   jsonLd,
   integrationsGateway,
   gatewayMedia,
+  integrationsContext,
 }: VerticalPageProps) {
+  // "Key integrations" list: an explicit `integrations` array wins; otherwise
+  // derive the page-relevant set from the data layer via `integrationsContext`.
+  const keyIntegrations =
+    integrations && integrations.length > 0
+      ? integrations
+      : integrationsContext
+        ? getKeyIntegrations(integrationsContext)
+        : [];
+  const keyIntegrationsBlurb = integrationsContext
+    ? getKeyIntegrationsBlurb(integrationsContext)
+    : undefined;
   // Assemble JSON-LD payload: explicit schemas + auto-generated faq/breadcrumb.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ldData: Record<string, any>[] = [...(jsonLd ?? [])];
@@ -319,12 +346,17 @@ export default function VerticalPage({
 
       {integrationsGateway}
 
-      {integrations && integrations.length > 0 && (
+      {keyIntegrations.length > 0 && (
       <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h3 className="text-heading-md text-text-primary mb-6">Key integrations</h3>
-            <IntegrationCarousel integrations={integrations} />
+            <p className="text-eyebrow text-accent mb-3">Integrations</p>
+            <h2 className="text-display-lg text-text-primary">Key integrations</h2>
+            <p className="mt-3 mb-8 text-body-md text-text-secondary max-w-2xl">
+              {keyIntegrationsBlurb ??
+                "Every carrier and platform your operation runs on, connected through one account."}
+            </p>
+            <IntegrationCarousel integrations={keyIntegrations} />
           </ScrollReveal>
         </div>
       </section>

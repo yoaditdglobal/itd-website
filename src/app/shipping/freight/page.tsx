@@ -64,6 +64,7 @@ export default function ShippingFreightPage() {
       <FreightServices />
       <FreightAudience />
       <VerticalPage
+        integrationsContext="Freight"
         hideDefaultHero
         hidePainPoints
         label="Freight"

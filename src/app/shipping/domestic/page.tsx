@@ -286,64 +286,7 @@ export default function ShippingDomesticPage() {
           title: "ERP and order-management write-back",
         },
       ]}
-      integrations={[
-        {
-          name: "Royal Mail",
-          logo: "/logos/carriers/royal-mail-icon.png",
-          description:
-            "Universal UK coverage including Highlands, Islands, and BFPO. Tracked 24, Tracked 48, Signed, First and Second Class.",
-          href: "/integrations/carriers/royal-mail",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description:
-            "1-hour delivery slot for Mainland UK. Next Day, Pre-9, Pre-10:30, Saturday, Sunday options.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "Evri",
-          logo: "/logos/carriers/evri_logo.png",
-          description:
-            "Cost-effective parcel delivery across the UK. Standard 2–3 day, Next Day, ParcelShop drop-off, doorstep collection.",
-          href: "/integrations/carriers/evri",
-        },
-        {
-          name: "InPost",
-          logo: "/logos/carriers/inpost-icon.png",
-          description:
-            "UK residential strength including Sunday delivery. Next Day and 48-hour services.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "Parcelforce",
-          logo: "/logos/carriers/parcel-force.svg",
-          description:
-            "Tracked UK parcel delivery to every postcode including Highlands and Islands. Express24, Express48 services.",
-          href: "/integrations/carriers/parcelforce",
-        },
-        {
-          name: "Amazon Shipping",
-          logo: "/logos/carriers/amazonshipping_logo.png",
-          description:
-            "Amazon's UK logistics network at competitive volume rates. Next-day and two-day services.",
-          href: "/integrations/carriers/amazon-shipping",
-        },
-        {
-          name: "Shopify",
-          logo: "/logos/ecommerce/shopify_logo.png",
-          description:
-            "Direct Shopify connection. Orders flow into Connexx within seconds of checkout.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "Linnworks",
-          logo: "/logos/erp-wms/linnworks_logo.png",
-          description:
-            "Multi-channel order management. Domestic orders routed and labelled inside your existing Linnworks workflow.",
-          href: "/integrations/erp-wms",
-        },
-      ]}
+      integrationsContext="Domestic"
       caseStudy={getCaseStudiesByShippingType("Domestic")[0] ?? caseStudies[0]}
       caseStudies={getCaseStudiesByShippingType("Domestic")}
       faq={[
