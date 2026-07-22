@@ -4,7 +4,7 @@ import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import SolutionRealities from "@/components/sections/SolutionRealities";
 import IntegrationsGateway from "@/components/sections/IntegrationsGateway";
-import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
+import { caseStudies, getCaseStudiesBySolution, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import { AlertTriangle, BarChart3, Building2, Receipt } from "lucide-react";
@@ -178,7 +178,7 @@ export default function ThreePLPage() {
       ]}
       integrationsContext="3PL"
       caseStudy={getCaseStudiesBySolution("3PL")[0] ?? caseStudies[2]}
-      caseStudies={getCaseStudiesBySolution("3PL")}
+      caseStudies={getRelevantCaseStudies({ solutions: ["3PL"] })}
       faq={[
         {
           question: "Do I need to commit volume to unlock your rates?",

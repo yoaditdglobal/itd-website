@@ -3,7 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
+import { caseStudies, getCaseStudiesBySolution, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import type { LucideIcon } from "lucide-react";
@@ -155,7 +155,7 @@ export default function ExportPage() {
         secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
-        caseStudies={getCaseStudiesBySolution("Export")}
+        caseStudies={getRelevantCaseStudies({ solutions: ["Export"] })}
         faq={[
           {
             question: "Which couriers does ITD work with for international shipping?",

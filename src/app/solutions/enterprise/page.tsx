@@ -2,7 +2,7 @@ import VerticalPage from "@/components/sections/VerticalPage";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SolutionHero from "@/components/sections/SolutionHero";
 import SolutionPains from "@/components/sections/SolutionPains";
-import { caseStudies, getCaseStudiesBySolution } from "@/lib/data";
+import { caseStudies, getCaseStudiesBySolution, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import { AlertTriangle, Building2, Network, Plug, Receipt } from "lucide-react";
@@ -122,7 +122,7 @@ export default function EnterprisePage() {
         ]}
         pains={PAINS}
         caseStudy={getCaseStudiesBySolution("Enterprise")[0] ?? caseStudies[2]}
-        caseStudies={getCaseStudiesBySolution("Enterprise")}
+        caseStudies={getRelevantCaseStudies({ solutions: ["Enterprise"] })}
         faq={[
           {
             question:
