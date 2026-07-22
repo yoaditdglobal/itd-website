@@ -178,7 +178,7 @@ export default function ShippingInternationalPage() {
               "220+ countries and territories",
               "Express Worldwide (next possible working day), Express 9:00 / Express 12:00 (time-definite), Economy Select (1–3 days, EU)",
               "Full pre-clearance, DHL broker network in 220+ countries, MyGTS duty and HS code tools",
-              "Time-critical international parcels, high-value goods",
+              "Time-critical, High-value",
             ],
           },
           {
@@ -188,7 +188,7 @@ export default function ShippingInternationalPage() {
               "Up to 220+ countries (varies by service)",
               "International Priority / Priority Express (1–3 days), International Connect Plus (1–4 days, eCommerce), International Economy (2–5 days)",
               "Customs clearance included, strong US customs brokerage",
-              "North America, time-critical APAC",
+              "North America, APAC express",
             ],
           },
           {
@@ -198,7 +198,7 @@ export default function ShippingInternationalPage() {
               "220+ countries and territories",
               "Worldwide Express Plus / Express (next day, timed), Worldwide Saver (1–3 days), Worldwide Expedited (2–5 days)",
               "In-house customs brokerage, strong in US and EU",
-              "US-bound parcels, EU lanes, regulated commodities",
+              "US-bound, EU lanes, Regulated goods",
             ],
           },
           {
@@ -208,7 +208,7 @@ export default function ShippingInternationalPage() {
               "37 European countries by road, 230+ worldwide via Air Classic",
               "Classic (2–8 days, EU road network), Air Classic (worldwide, air freight)",
               "Customs invoice submitted at booking, full tracking and signature",
-              "EU eCommerce at cost-effective rates",
+              "EU eCommerce, Cost-effective",
             ],
           },
           {
@@ -218,7 +218,7 @@ export default function ShippingInternationalPage() {
               "230+ countries and territories",
               "International Tracked & Signed / Tracked (3–7 days), International Standard (3–7 days), International Economy (up to 12 weeks by region)",
               "Customs form required (CN22/CN23), free returns for undelivered items",
-              "Small parcels and letters worldwide, low-value shipments",
+              "Small parcels, Letters, Low-value",
             ],
           },
           {
@@ -228,7 +228,7 @@ export default function ShippingInternationalPage() {
               "Delivers to 99.6% of the world",
               "globalexpress (2 days US/Canada/Europe, 3 days worldwide), globalpriority Europe (from 3 days), globalpriority ROW (from 4 days)",
               "Customs declarations included, compensation up to £2,500 available",
-              "Heavier international parcels at postal pricing",
+              "Heavier parcels, Postal pricing",
             ],
           },
         ],
