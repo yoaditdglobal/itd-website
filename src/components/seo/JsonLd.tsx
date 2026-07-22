@@ -7,6 +7,7 @@ import {
   ORG_AREA_SERVED,
   ORG_CONTACT,
   ORG_SAMEAS,
+  ORG_KNOWS_ABOUT,
 } from "@/lib/site-config";
 
 /**
@@ -71,6 +72,7 @@ export function organizationSchema() {
       availableLanguage: ["English"],
     },
     sameAs: ORG_SAMEAS,
+    knowsAbout: ORG_KNOWS_ABOUT,
   };
 }
 
@@ -128,6 +130,31 @@ export function productSchema(input: {
     category: input.category ?? "Shipping software",
     brand: { "@id": `${SITE_URL}#organization` },
     url: `${SITE_URL}${input.path}`,
+  };
+}
+
+/**
+ * SoftwareApplication schema for the Connexx product page — more accurate than
+ * Product for a SaaS app, and helps AI engines classify Connexx correctly.
+ * No `offers`/`aggregateRating`: pricing is quote-based and we don't fabricate
+ * ratings (add them later only with real review data).
+ */
+export function softwareApplicationSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  applicationCategory?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${SITE_URL}${input.path}#software`,
+    name: input.name,
+    description: input.description,
+    applicationCategory: input.applicationCategory ?? "BusinessApplication",
+    operatingSystem: "Web",
+    url: `${SITE_URL}${input.path}`,
+    publisher: { "@id": `${SITE_URL}#organization` },
   };
 }
 

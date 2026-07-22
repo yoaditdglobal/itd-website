@@ -12,7 +12,8 @@ export const SITE_TAGLINE = "Smarter Shipping for a Simpler Tomorrow.";
 export const SITE_DESCRIPTION =
   "ITD Global is the multi-carrier shipping platform for UK retailers, eCommerce brands, marketplace sellers, 3PLs, and exporters. Connexx routes every parcel through the cheapest compliant carrier, automates customs, and gives you one dashboard for every dispatch.";
 
-export const ORG_LEGAL_NAME = "ITD Global";
+// Registered company name; trades as "ITD Global" (the public brand = SITE_NAME).
+export const ORG_LEGAL_NAME = "Interdelta Ltd";
 export const ORG_FOUNDING_LOCATION = "United Kingdom";
 export const ORG_AREA_SERVED = ["United Kingdom", "European Union", "Worldwide"];
 export const ORG_CONTACT = {
@@ -20,9 +21,24 @@ export const ORG_CONTACT = {
   url: `${SITE_URL}/contact`,
 };
 export const ORG_SAMEAS: string[] = [
-  // Add real LinkedIn / X / company directory URLs when confirmed.
-  // "https://www.linkedin.com/company/itd-global",
-  // "https://twitter.com/itdglobal",
+  "https://www.linkedin.com/company/itd-global",
+];
+
+/**
+ * Topical-authority signal for the Organization entity (schema.org knowsAbout).
+ * These are the domains ITD demonstrably operates in — used by AI/search to
+ * associate the entity with the right subject areas.
+ */
+export const ORG_KNOWS_ABOUT = [
+  "Multi-carrier shipping",
+  "Parcel delivery and courier services",
+  "Customs clearance and automation",
+  "Cross-border eCommerce fulfilment",
+  "Third-party logistics (3PL)",
+  "Freight and pallet shipping",
+  "Carrier rate comparison and management",
+  "Shipping label generation and dispatch",
+  "Order tracking",
 ];
 
 /**

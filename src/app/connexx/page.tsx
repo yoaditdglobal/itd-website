@@ -12,7 +12,7 @@ import ConnexxFeatures from "@/components/sections/ConnexxFeatures";
 import { buildMetadata } from "@/lib/metadata";
 import {
   JsonLd,
-  productSchema,
+  softwareApplicationSchema,
   breadcrumbSchema,
   faqSchema,
 } from "@/components/seo/JsonLd";
@@ -72,12 +72,12 @@ const faqItems = [
 
 export default function ConnexxPage() {
   const ldData = [
-    productSchema({
+    softwareApplicationSchema({
       name: "Connexx",
       description:
         "Multi-carrier shipping platform powered by ITD Global. Every order routes to the best-value carrier and gets a label in seconds, with rate comparison, multi-carrier dispatch, integrated tracking, and store and workflow connectivity in one place.",
       path: "/connexx",
-      category: "Shipping software",
+      applicationCategory: "BusinessApplication",
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
