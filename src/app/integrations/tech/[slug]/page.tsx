@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
-import IntegrationDetail from "@/components/sections/IntegrationDetail";
-import TechPage from "@/components/sections/TechPage";
+import TechIntegrationPage from "@/components/sections/TechIntegrationPage";
+import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/metadata";
 import {
   getIntegrationsByType,
   getIntegrationSlug,
   getIntegrationBySlug,
 } from "@/lib/data";
-import { getTechPageContent } from "@/lib/tech-pages";
+import { getTechIntegrationPageProps } from "@/lib/tech-pages";
 
 export const dynamicParams = false;
 
@@ -43,6 +43,17 @@ export default async function TechDetailPage({
   const { slug } = await params;
   const tool = getIntegrationBySlug(slug, "tech");
   if (!tool) notFound();
-  const content = getTechPageContent(tool);
-  return <IntegrationDetail integration={tool} body={<TechPage {...content} />} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Integrations", path: "/integrations" },
+          { name: "Tech integrations", path: "/integrations/tech" },
+          { name: tool.name, path: `/integrations/tech/${slug}` },
+        ])}
+      />
+      <TechIntegrationPage {...getTechIntegrationPageProps(tool)} />
+    </>
+  );
 }
