@@ -86,56 +86,7 @@ export default function SmallBusinessPage() {
           title: "Connects to your store and marketplaces",
         },
       ]}
-      integrations={[
-        {
-          name: "Shopify",
-          logo: "/logos/ecommerce/shopify_logo.png",
-          description: "Install from the Shopify App Store. Orders flow in within seconds.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "WooCommerce",
-          logo: "/logos/erp-wms/woocommerce_logo.svg",
-          description: "WordPress plugin. Multi-carrier shipping inside your WP admin.",
-          href: "/integrations/ecommerce",
-        },
-        {
-          name: "Royal Mail",
-          logo: "/logos/carriers/royal-mail-icon.png",
-          description: "Tracked 24, Tracked 48, Signed, First Class, Second Class on Connexx negotiated rates.",
-          href: "/integrations/carriers/royal-mail",
-        },
-        {
-          name: "Evri",
-          logo: "/logos/carriers/evri_logo.png",
-          description: "Standard, Next Day, and ParcelShop drop-off for sub-2kg parcels.",
-          href: "/integrations/carriers/evri",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description: "Next Day and Saturday delivery for parcels over 5kg.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "InPost",
-          logo: "/logos/carriers/inpost-icon.png",
-          description: "B2C 48 hour delivery across Mainland UK.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "Amazon Shipping",
-          logo: "/logos/carriers/amazonshipping_logo.png",
-          description: "Amazon-eligible carrier for Prime sellers.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "Parcel Force",
-          logo: "/logos/carriers/parcel-force.svg",
-          description: "Express24 and Express48 for heavier or signed-for parcels.",
-          href: "/integrations/carriers",
-        },
-      ]}
+      integrationsContext="Small Business"
       caseStudy={getCaseStudiesBySolution("Small Business")[0] ?? caseStudies[8]}
       faq={[
         {

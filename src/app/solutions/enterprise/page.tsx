@@ -72,6 +72,7 @@ export default function EnterprisePage() {
         lead="Four places your scale still leaves rate, capacity, and accountability on the table."
       />
       <VerticalPage
+        integrationsContext="Enterprise"
         gatewayMedia={{
           mp4: "/media/connexx-enterprise.mp4",
           webm: "/media/connexx-enterprise.webm",

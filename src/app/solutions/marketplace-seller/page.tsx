@@ -68,56 +68,7 @@ export default function MarketplaceSellerPage() {
           title: "Exceptions flagged early to protect your seller metrics",
         },
       ]}
-      integrations={[
-        {
-          name: "Amazon",
-          logo: "/logos/marketplaces/amazon-icon.webp",
-          description: "Amazon Seller Central UK, DE, FR, IT, ES, and NL with Buy Shipping support.",
-          href: "/integrations/marketplaces",
-        },
-        {
-          name: "eBay",
-          logo: "/logos/marketplaces/ebay-icon.png",
-          description: "eBay UK and DE with Late Shipment Rate-compliant carrier routing.",
-          href: "/integrations/marketplaces",
-        },
-        {
-          name: "Etsy",
-          logo: "/logos/marketplaces/etsy-icon.png",
-          description: "Etsy shop integration with branded tracking for the marketplace's reach.",
-          href: "/integrations/marketplaces",
-        },
-        {
-          name: "TikTok Shop",
-          logo: "/logos/marketplaces/tiktok-tile.png",
-          description: "TikTok Shop UK fulfilment with same multi-carrier routing as the rest of the stack.",
-          href: "/integrations/marketplaces",
-        },
-        {
-          name: "Royal Mail",
-          logo: "/logos/carriers/royal-mail-icon.png",
-          description: "Tracked 24 and Tracked 48 are Amazon Valid Tracking Rate compliant.",
-          href: "/integrations/carriers/royal-mail",
-        },
-        {
-          name: "Evri",
-          logo: "/logos/carriers/evri_logo.png",
-          description: "Standard and Next Day with ParcelShop drop-off for high-volume periods.",
-          href: "/integrations/carriers/evri",
-        },
-        {
-          name: "DPD",
-          logo: "/logos/carriers/DPD-LOGO.png",
-          description: "Next Day and Saturday for Amazon Prime and eBay Guaranteed Delivery.",
-          href: "/integrations/carriers/dpd",
-        },
-        {
-          name: "Amazon Shipping",
-          logo: "/logos/carriers/amazonshipping_logo.png",
-          description: "Seller Fulfilled Prime-approved carrier with same-day rate access.",
-          href: "/integrations/carriers/amazon-shipping",
-        },
-      ]}
+      integrationsContext="Marketplace"
       caseStudy={getCaseStudiesBySolution("Marketplace")[0] ?? caseStudies[1]}
       faq={[
         {

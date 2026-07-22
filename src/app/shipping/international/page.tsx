@@ -258,57 +258,7 @@ export default function ShippingInternationalPage() {
           title: "One dashboard and one tracking link, from collection to delivery",
         },
       ]}
-      integrations={[
-        {
-          name: "DHL Express",
-          logo: "/logos/carriers/dhl_logo.webp",
-          description:
-            "Worldwide express delivery to 220+ countries. Full pre-clearance and customs broker network.",
-          href: "/integrations/carriers/dhl",
-        },
-        {
-          name: "FedEx",
-          logo: "/logos/carriers/fedex-icon.png",
-          description:
-            "International Priority and Economy services to 220+ countries. US-strong customs brokerage.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "UPS",
-          logo: "/logos/carriers/ups_logo.png",
-          description:
-            "Worldwide Express, Expedited, and Saver services. Customs handling across EU and North America.",
-          href: "/integrations/carriers",
-        },
-        {
-          name: "Evri EU",
-          logo: "/logos/carriers/evrieu_logo.png",
-          description:
-            "Tracked delivery into Europe and 200+ countries worldwide. Cost-effective for lighter consumer parcels.",
-          href: "/integrations/carriers/evri-eu",
-        },
-        {
-          name: "Deutsche Post",
-          logo: "/logos/carriers/deutschepost_logo.avif",
-          description:
-            "Packet Tracked and Warenpost International to 220+ countries via established postal networks.",
-          href: "/integrations/carriers/deutsche-post",
-        },
-        {
-          name: "Starlinks",
-          logo: "/logos/carriers/starlinks_logo.png",
-          description:
-            "European Express in 1–2 days, Rest of World in 1–3 days. Tracked as standard.",
-          href: "/integrations/carriers/starlinks",
-        },
-        {
-          name: "Shopify",
-          logo: "/logos/ecommerce/shopify_logo.png",
-          description:
-            "Cross-border Shopify orders flow into Connexx for automated customs paperwork and carrier selection.",
-          href: "/integrations/ecommerce",
-        },
-      ]}
+      integrationsContext="International Export"
       caseStudy={getCaseStudiesByShippingType("International Export")[0] ?? caseStudies[3]}
       caseStudies={[
         ...getCaseStudiesByShippingType("International Export"),

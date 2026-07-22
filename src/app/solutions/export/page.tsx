@@ -120,6 +120,7 @@ export default function ExportPage() {
       </section>
 
       <VerticalPage
+        integrationsContext="Export"
         hideDefaultHero
         hidePainPoints
         gatewayMedia={{
