@@ -88,7 +88,10 @@
   --gradient-dark-radial: radial-gradient(ellipse at top, rgba(29, 63, 184, 0.18) 0%, transparent 60%), #15192b;
 
   /* Fonts */
-  --font-display: "Cabinet Grotesk", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Cabinet Grotesk is self-hosted via next/font/local (layout.tsx) — the
+     hashed family name arrives through this variable. The quoted name stays
+     as a fallback for any consumer outside the variable's scope. */
+  --font-display: var(--font-cabinet-grotesk, "Cabinet Grotesk"), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 

@@ -59,7 +59,7 @@ export default function VideoHero({
   sub = SUB,
   primary = PRIMARY,
   secondary = SECONDARY,
-  videoSrc = "/hero/hero.mp4",
+  videoSrc = "/hero/hero-v2.mp4",
   poster = POSTER,
   breadcrumbs,
 }: VideoHeroProps = {}) {
@@ -75,6 +75,10 @@ export default function VideoHero({
 
   return (
     <section data-hero-tone="dark" className="hero-bg relative h-[calc(100vh+var(--nav-h))] overflow-hidden mt-[calc(-1*var(--nav-h))]">
+      {/* CWV: the poster is the hero's first paint (and the LCP candidate)
+          both as the <video> poster and the reduced-motion fallback — preload
+          it at high priority. React hoists this into <head>. */}
+      <link rel="preload" as="image" href={poster} fetchPriority="high" />
       {/* Background: video when motion is allowed, poster otherwise */}
       {motionOk ? (
         <video

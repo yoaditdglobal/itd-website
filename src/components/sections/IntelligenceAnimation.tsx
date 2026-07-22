@@ -60,7 +60,7 @@ const YEL = "#ffe500",
   WARNT = "#fbf1d8",
   SUCC = "#1a9e5c",
   SUCCT = "#e4f4ea";
-const DISP = "'Cabinet Grotesk','Helvetica Neue',Arial,sans-serif";
+const DISP = "var(--font-display, 'Helvetica Neue'),'Helvetica Neue',Arial,sans-serif";
 const BODY = "'Inter','Helvetica Neue',Arial,sans-serif";
 const EYE: CSSProperties = {
   fontFamily: BODY,
