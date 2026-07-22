@@ -40,7 +40,7 @@ export default function ShippingInternationalPage() {
         icon: Globe,
       }}
       secondaryCta={{
-        label: "Explore",
+        label: "Contact Sales",
         href: "/contact?enquiry=international",
       }}
       breadcrumbs={[
@@ -312,7 +312,7 @@ export default function ShippingInternationalPage() {
           href: RATE_CHECKER_URL,
         },
         secondary: {
-          label: "Explore",
+          label: "Contact Sales",
           href: "/contact?enquiry=international",
         },
       }}

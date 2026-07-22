@@ -36,7 +36,7 @@ const HERO_TITLE = "In wholesale, the delivery is the relationship";
 const HERO_SUBTITLE =
   "B2B orders are heavy, high-value and tied to a long-term account, so the carrier has to be one that's genuinely good at delivering to businesses, on time. We guide the right carrier and service on each consignment.";
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
-const SECONDARY = { label: "Explore", href: "/resources/case-studies" };
+const SECONDARY = { label: "Contact Sales", href: "/contact?enquiry=b2b" };
 
 export default function B2BPage() {
   return (

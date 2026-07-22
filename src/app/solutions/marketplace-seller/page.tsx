@@ -26,7 +26,7 @@ export default function MarketplaceSellerPage() {
       title="Protect your marketplace SLAs and your margin"
       subtitle="When a carrier misses the promise, the penalty lands on you. A refund off your margin and a late mark on your account. We match each order to a Prime-ready carrier, with the rates and support to grow your channel."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
-      secondaryCta={{ label: "Explore", href: "/resources/case-studies/west-ham-united" }}
+      secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=marketplace-seller" }}
       heroImage={{
         src: "/solutions/marketplace-seller-hero.webp",
         alt: "Shopper browsing a marketplace app on a phone — local warehouse listings",
@@ -107,7 +107,7 @@ export default function MarketplaceSellerPage() {
         subhead:
           "Share with us your carrier mix or a recent invoice. We'll show you where your metrics slip and what the same orders would cost on our rates.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
-        secondary: { label: "Explore", href: "/resources/case-studies/west-ham-united" },
+        secondary: { label: "Contact Sales", href: "/contact?enquiry=marketplace-seller" },
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

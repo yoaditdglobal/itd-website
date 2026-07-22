@@ -27,8 +27,8 @@ export default function SmallBusinessPage() {
       subtitle="You ship on the rates and carrier choice a big retailer gets, without committing to their volume. No minimum and no lock-in, just shipping sized for a smaller operation."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{
-        label: "Explore",
-        href: "/resources/case-studies",
+        label: "Contact Sales",
+        href: "/contact?enquiry=small-business",
       }}
       heroImage={{
         src: "/solutions/sme-hero.webp",
@@ -125,7 +125,7 @@ export default function SmallBusinessPage() {
         subhead:
           "Send a recent invoice and the Parcel Rate Checker shows what the same parcels would cost on our rates. Minutes of your time, that's it.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
-        secondary: { label: "Explore", href: "/resources/case-studies" },
+        secondary: { label: "Contact Sales", href: "/contact?enquiry=small-business" },
       }}
     />
   );

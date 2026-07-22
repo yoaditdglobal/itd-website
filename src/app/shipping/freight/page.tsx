@@ -45,7 +45,7 @@ export default function ShippingFreightPage() {
         heading="Freight built around your supply chain"
         sub="We move your freight between the UK and the rest of the world, by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery. Importing from the Far East runs through our own office on the ground there."
         primary={{ label: "Get Quote", href: "/contact?enquiry=freight" }}
-        secondary={{ label: "Learn More", href: "/resources/case-studies/home-bargains" }}
+        secondary={{ label: "Contact Sales", href: "/contact?enquiry=freight" }}
         videoSrc="/hero/freight.mp4"
         poster="/hero/freight-poster.jpg"
       />
@@ -76,8 +76,8 @@ export default function ShippingFreightPage() {
           icon: PackageOpen,
         }}
         secondaryCta={{
-          label: "Learn More",
-          href: "/resources/case-studies/home-bargains",
+          label: "Contact Sales",
+          href: "/contact?enquiry=freight",
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -145,8 +145,8 @@ export default function ShippingFreightPage() {
             "A bespoke review looks at your lanes and volumes and shows where we'd save you money, across pallet, LTL, air and sea.",
           primary: { label: "Get Quote", href: "/contact?enquiry=freight" },
           secondary: {
-            label: "Explore",
-            href: "/resources/case-studies",
+            label: "Contact Sales",
+            href: "/contact?enquiry=freight",
           },
         }}
       />

@@ -52,6 +52,8 @@ export default function ExportPage() {
         label="Export"
         title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
+        primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondary={{ label: "Contact Sales", href: "/contact?enquiry=export" }}
         image={{
           src: "/solutions/loading plane.png",
           alt: "Cargo aircraft on the apron being prepared for an international export flight",
@@ -151,8 +153,8 @@ export default function ExportPage() {
         label="Export"
         title="Ship internationally with the rates, reach, and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
-        primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=export" }}
-        secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=export" }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Export")[0] ?? caseStudies[3]}
         caseStudies={getRelevantCaseStudies({ solutions: ["Export"] })}
@@ -197,8 +199,8 @@ export default function ExportPage() {
           headline: "Ready to take the complexity out of international shipping?",
           subhead:
             "One conversation. We'll show you the rates, the courier network, and what a single point of contact actually looks like in practice.",
-          primary: { label: "Get in Touch", href: "/contact?enquiry=export" },
-          secondary: { label: "Request a Quote", href: RATE_CHECKER_URL },
+          primary: { label: "Get Quote", href: RATE_CHECKER_URL },
+          secondary: { label: "Contact Sales", href: "/contact?enquiry=export" },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },
