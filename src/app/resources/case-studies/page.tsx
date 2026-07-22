@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import LogoTicker from "@/components/ui/LogoTicker";
 import StoriesLibrary from "@/components/sections/StoriesLibrary";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
@@ -52,24 +53,43 @@ export default async function CaseStudiesPage({
 
   return (
     <>
-      {/* Hero */}
-      <section className="bleed-nav bg-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Hero — dark, carrier-page style */}
+      <section
+        data-hero-tone="dark"
+        className="bleed-nav bg-bg-dark py-16 md:py-24 overflow-hidden relative"
+      >
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h1 className="text-display-xl text-text-primary max-w-4xl mx-auto">
-              The businesses that stopped leaving money on shipping
-            </h1>
-            <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
-              Real UK businesses, from fast-growing brands to 3PLs, shipping
-              better at home and abroad through ITD.
-            </p>
+            <div className="max-w-3xl">
+              <span className="text-eyebrow text-accent mb-4 block">
+                Customer stories
+              </span>
+              <h1 className="text-display-xl text-white">
+                The businesses that stopped leaving money on shipping
+              </h1>
+              <p className="mt-4 text-body-lg text-white/70">
+                Real UK businesses, from fast-growing brands to 3PLs, shipping
+                better at home and abroad through ITD.
+              </p>
+            </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Customer logo strip — same ticker as the homepage */}
+      <section className="bg-white border-b border-border py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LogoTicker />
         </div>
       </section>
 
       {/* Featured story — spotlight */}
       {featured && (
-        <section className="bg-white pb-16 md:pb-20">
+        <section className="bg-white pt-16 md:pt-20 pb-16 md:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <div className="relative overflow-hidden rounded-3xl bg-bg-dark px-6 py-10 md:px-12 md:py-14">
