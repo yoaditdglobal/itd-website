@@ -230,9 +230,9 @@ export default function VerticalPage({
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={heroImage ? "grid lg:grid-cols-2 lg:gap-12 items-center" : ""}>
-            <div className={heroImage ? "max-w-2xl" : "max-w-3xl"}>
+            <div className={heroImage ? "order-2 lg:order-none max-w-2xl" : "max-w-3xl"}>
               {label && (
-                <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
+                <span className="hero-entrance-h1 hidden lg:inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
                   {label}
                 </span>
               )}
@@ -244,7 +244,7 @@ export default function VerticalPage({
               </div>
             </div>
             {heroImage && (
-              <div className="hero-entrance-sub mt-10 lg:mt-0">
+              <div className="hero-entrance-sub order-1 lg:order-none mb-8 lg:mb-0">
                 <div className={`relative ${heroImage.aspect ?? "aspect-[4/3]"} w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-bg-secondary`}>
                   {heroImage.src ? (
                     <Image
@@ -317,10 +317,17 @@ export default function VerticalPage({
               ShippingShowcase visual language. */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Mobile: horizontal swipe row (one card + peek) so the six
+                  audiences don't become a ~1,900px vertical stack. From `sm`
+                  up it reverts to the desktop grid, untouched. */}
+              <div className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
                 {audienceAnchors.map((a) => (
-                  <AudienceGridCard key={a.anchor} anchor={a} />
+                  <div key={a.anchor} className="w-[82%] shrink-0 snap-start sm:w-auto">
+                    <AudienceGridCard anchor={a} />
+                  </div>
                 ))}
+                {/* Trailing spacer so the last card can clear the edge on mobile. */}
+                <span aria-hidden className="w-px shrink-0 sm:hidden" />
               </div>
             </ScrollReveal>
           </div>

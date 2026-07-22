@@ -427,22 +427,26 @@ export default function CarrierComparisonTable({
           />
         )}
 
-        {/* Mobile cards */}
-        <div className="md:hidden space-y-4 mt-4">
-          {rows.map((row, i) =>
-            isRichRow(row) ? (
-              <RichMobileCard key={row.carrier} row={row} columns={columns} index={i} />
-            ) : (
-              <LegacyMobileCard
-                key={row.carrier}
-                row={row}
-                columns={columns}
-                index={i}
-                bestForColumnIndex={bestForColumnIndex}
-                speedColumnIndex={speedColumnIndex}
-              />
-            ),
-          )}
+        {/* Mobile: horizontal swipe row (one carrier card + peek) instead of a
+            long vertical stack. Desktop keeps the <table> (hidden md:block). */}
+        <div className="md:hidden flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden mt-4">
+          {rows.map((row, i) => (
+            <div key={row.carrier} className="w-[86%] shrink-0 snap-start">
+              {isRichRow(row) ? (
+                <RichMobileCard row={row} columns={columns} index={i} />
+              ) : (
+                <LegacyMobileCard
+                  row={row}
+                  columns={columns}
+                  index={i}
+                  bestForColumnIndex={bestForColumnIndex}
+                  speedColumnIndex={speedColumnIndex}
+                />
+              )}
+            </div>
+          ))}
+          {/* Trailing spacer so the last card can clear the edge. */}
+          <span aria-hidden className="w-px shrink-0" />
         </div>
 
         {methodology ? (
@@ -667,8 +671,8 @@ function RichMobileCard({
     rest[3] ?? "Best for",
   ];
   return (
-    <ScrollReveal delay={index * 0.04}>
-      <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
+    <ScrollReveal delay={index * 0.04} className="h-full">
+      <div className="h-full rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
         {/* Banner */}
         <div className="bg-bg-secondary px-5 py-4 border-b border-border">
           <CarrierIdentity
@@ -745,8 +749,8 @@ function LegacyMobileCard({
 }) {
   const bestForIdx = bestForColumnIndex ?? columns.length - 1;
   return (
-    <ScrollReveal delay={index * 0.04}>
-      <div className="bg-white rounded-xl border border-border p-5 shadow-sm">
+    <ScrollReveal delay={index * 0.04} className="h-full">
+      <div className="h-full bg-white rounded-xl border border-border p-5 shadow-sm">
         <div className="mb-4 pb-3 border-b border-border">
           <CarrierIdentity carrier={row.carrier} logo={row.logo} />
         </div>
