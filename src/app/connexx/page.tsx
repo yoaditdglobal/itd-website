@@ -98,7 +98,7 @@ export default function ConnexxPage() {
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
             <div>
               <h1 className="hero-entrance-h1 text-display-xl text-text-primary">
-                The engine behind 17.5 million labels a year
+                The engine behind 17.5m labels a year
               </h1>
               <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary max-w-xl">
                 A new one every 2.7 seconds, across 16 carriers and used by more
