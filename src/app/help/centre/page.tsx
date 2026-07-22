@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  Plug,
-  Truck,
-  Receipt,
-  Users,
-  Code,
-  ArrowRight,
-} from "lucide-react";
+import { Plug, Receipt, Users, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import FaqSection from "@/components/sections/FaqSection";
 import HelpSearchBar from "@/components/help/HelpSearchBar";
@@ -31,28 +23,12 @@ export const metadata = buildMetadata({
 // pass, every category card and featured article links back to /help/centre.
 const categories = [
   {
-    icon: LayoutDashboard,
-    name: "Connexx platform",
-    description:
-      "Getting started, dashboard tour, rate engine, dispatch rules, account settings, and reporting.",
-    href: "/help/centre",
-    slug: "connexx",
-  },
-  {
     icon: Plug,
     name: "Integrations",
     description:
       "eCommerce platforms, ERPs, WMS, marketplaces, and accounting tools that connect to Connexx.",
     href: "/help/centre/integrations",
     slug: "integrations",
-  },
-  {
-    icon: Truck,
-    name: "Carriers",
-    description:
-      "Setting up carrier accounts, label printing, manifesting, and managing carrier-specific services.",
-    href: "/help/centre",
-    slug: "carriers",
   },
   {
     icon: Receipt,
@@ -69,14 +45,6 @@ const categories = [
       "Users, permissions, child accounts, single sign-on, audit logs, and account security.",
     href: "/help/centre/account",
     slug: "account",
-  },
-  {
-    icon: Code,
-    name: "API & developers",
-    description:
-      "API authentication, endpoints, webhooks, rate limits, SDKs, and the changelog.",
-    href: "/help/developers",
-    slug: "developers",
   },
 ];
 
@@ -244,7 +212,7 @@ export default function HelpCentrePage() {
                 Browse by category
               </h2>
               <p className="mt-2 text-text-secondary">
-                Six product areas. Pick the one closest to your question.
+                Three product areas. Pick the one closest to your question.
               </p>
             </div>
           </ScrollReveal>
