@@ -35,7 +35,7 @@ export default function ClosingCTA({
           <h2 className="text-display-lg text-white">{headline}</h2>
           <p className="mt-4 text-body-lg text-white/60">{subtitle}</p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button href={primary.href} variant="primary" surface="dark">{primary.label}</Button>
             {secondary && (
               <Button href={secondary.href} variant="secondary" surface="dark">{secondary.label}</Button>

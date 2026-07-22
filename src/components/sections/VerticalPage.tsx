@@ -238,7 +238,7 @@ export default function VerticalPage({
               )}
               <h1 className="hero-entrance-h1 text-display-xl text-text-primary">{title}</h1>
               <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary">{subtitle}</p>
-              <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+              <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
                 <Button href={heroPrimary.href}>{heroPrimary.label}</Button>
                 <Button href={heroSecondary.href} variant="secondary">{heroSecondary.label}</Button>
               </div>
@@ -442,7 +442,7 @@ export default function VerticalPage({
               {closingCta.subhead && (
                 <p className="text-body-lg text-white/80 mb-8">{closingCta.subhead}</p>
               )}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-3">
                 {closingCta.primary && (
                   <Button href={closingCta.primary.href} surface="dark">{closingCta.primary.label}</Button>
                 )}

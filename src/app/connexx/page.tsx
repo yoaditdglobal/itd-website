@@ -104,7 +104,7 @@ export default function ConnexxPage() {
                 A new one every 2.7 seconds, across 16 carriers and used by more
                 than 6,000 UK businesses for over 20 years.
               </p>
-              <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+              <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
                 <MagneticButton>
                   <Button href={RATE_CHECKER_URL}>Get a quote</Button>
                 </MagneticButton>
