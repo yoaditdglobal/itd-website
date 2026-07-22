@@ -7,6 +7,7 @@ import LogisticsPartnerBand from "@/components/sections/LogisticsPartnerBand";
 import ConnexxPreview from "@/components/sections/ConnexxPreview";
 import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
+import { getRelevantCaseStudies } from "@/lib/data";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import ScrollForward from "@/components/animations/ScrollForward";
 import { buildMetadata } from "@/lib/metadata";
@@ -33,7 +34,7 @@ export default function Home() {
       <LogisticsPartnerBand />
       {/* subtitle="" removes the meta line under the heading (per copy doc)
           without touching the default other pages rely on. */}
-      <CaseStudyCards subtitle="" />
+      <CaseStudyCards studies={getRelevantCaseStudies({})} subtitle="" />
       <ClosingCTA
         headline="Put your carrier costs to the test"
         subtitle="The rate checker compares your current shipping against ITD's rates and shows the saving. Send a recent invoice and see for yourself."

@@ -1,6 +1,6 @@
 import VerticalPage from "@/components/sections/VerticalPage";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
-import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
+import { caseStudies, getCaseStudiesByShippingType, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import {
@@ -310,10 +310,7 @@ export default function ShippingInternationalPage() {
         },
       ]}
       caseStudy={getCaseStudiesByShippingType("International Export")[0] ?? caseStudies[3]}
-      caseStudies={[
-        ...getCaseStudiesByShippingType("International Export"),
-        ...getCaseStudiesByShippingType("International Import"),
-      ]}
+      caseStudies={getRelevantCaseStudies({ shippingTypes: ["International Export", "International Import"] })}
       faq={[
         {
           question: "How do I know which service fits each market?",

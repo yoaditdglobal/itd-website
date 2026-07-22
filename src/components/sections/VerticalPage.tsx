@@ -333,12 +333,7 @@ export default function VerticalPage({
       {/* Featured case study(ies) — multi-card carousel when `caseStudies` provided,
           single-spotlight fallback otherwise. */}
       {caseStudies && caseStudies.length >= 2 ? (
-        <CaseStudyCards
-          studies={caseStudies}
-          title="Real businesses using ITD"
-          subtitle="See how customers across this category ship through us."
-          showFooter
-        />
+        <CaseStudyCards studies={caseStudies} showFooter />
       ) : (
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

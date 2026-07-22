@@ -1324,6 +1324,50 @@ export function getCaseStudiesByIntegration(slug: string): CaseStudy[] {
   return caseStudies.filter((cs) => cs.integrations?.includes(slug));
 }
 
+/**
+ * Smart, reusable relevance selector for the "Customer Stories" carousel — the
+ * deployment standard for showing case studies on any page. Scores each study by
+ * how many of the requested taxonomy dimensions it matches (solution / shipping
+ * type / carrier / integration), then orders by (match score → featured →
+ * original dataset order) and backfills with the remaining studies, so a caller
+ * always gets a full, coherently-ordered set instead of an unbounded, per-page
+ * count. Pass an empty context for a featured-first global list (e.g. homepage).
+ *
+ * Mirrors the tiered logic already used by `getRelatedStories`.
+ */
+export function getRelevantCaseStudies(
+  ctx: {
+    solutions?: SolutionTag[];
+    shippingTypes?: ShippingType[];
+    carriers?: string[];
+    integrations?: string[];
+  } = {},
+  limit = 6,
+): CaseStudy[] {
+  const { solutions = [], shippingTypes = [], carriers = [], integrations = [] } = ctx;
+
+  const score = (cs: CaseStudy): number => {
+    let s = 0;
+    for (const v of solutions) if (cs.solutions?.includes(v)) s++;
+    for (const v of shippingTypes) if (cs.shippingTypes?.includes(v)) s++;
+    for (const v of carriers) if (cs.carriers?.includes(v)) s++;
+    for (const v of integrations) if (cs.integrations?.includes(v)) s++;
+    return s;
+  };
+
+  return caseStudies
+    .map((cs, index) => ({ cs, index, score: score(cs) }))
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score; // most relevant first
+      const fa = a.cs.featured ? 1 : 0;
+      const fb = b.cs.featured ? 1 : 0;
+      if (fb !== fa) return fb - fa; // then featured
+      return a.index - b.index; // then stable dataset order
+    })
+    .slice(0, limit)
+    .map((e) => e.cs);
+}
+
 // ─── LINKED_ENTITIES — slug → displayable record ─────────────────────────────
 // Resolves carrier / integration / platform / shipping slugs (used in case
 // study taxonomies) to a click-through chip: { name, logo, href }.

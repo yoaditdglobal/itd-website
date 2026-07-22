@@ -4,7 +4,7 @@ import SolutionPains from "@/components/sections/SolutionPains";
 import FreightServices from "@/components/sections/FreightServices";
 import FreightAudience from "@/components/sections/FreightAudience";
 import FreightCarrierTicker from "@/components/sections/FreightCarrierTicker";
-import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
+import { caseStudies, getCaseStudiesByShippingType, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import { PackageOpen } from "lucide-react";
@@ -95,7 +95,7 @@ export default function ShippingFreightPage() {
         ]}
         pains={PAINS}
         caseStudy={getCaseStudiesByShippingType("Freight")[0] ?? caseStudies[4]}
-        caseStudies={getCaseStudiesByShippingType("Freight")}
+        caseStudies={getRelevantCaseStudies({ shippingTypes: ["Freight"] })}
         faq={[
           {
             question: "What freight services does ITD Global offer?",

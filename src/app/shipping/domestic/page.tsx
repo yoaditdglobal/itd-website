@@ -1,6 +1,6 @@
 import VerticalPage from "@/components/sections/VerticalPage";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
-import { caseStudies, getCaseStudiesByShippingType } from "@/lib/data";
+import { caseStudies, getCaseStudiesByShippingType, getRelevantCaseStudies } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { serviceSchema } from "@/components/seo/JsonLd";
 import {
@@ -476,7 +476,7 @@ export default function ShippingDomesticPage() {
         },
       ]}
       caseStudy={getCaseStudiesByShippingType("Domestic")[0] ?? caseStudies[0]}
-      caseStudies={getCaseStudiesByShippingType("Domestic")}
+      caseStudies={getRelevantCaseStudies({ shippingTypes: ["Domestic"] })}
       faq={[
         {
           question: "Does ITD cover the Highlands & Islands and the Channel Islands?",
