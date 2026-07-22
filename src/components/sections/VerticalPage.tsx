@@ -184,7 +184,6 @@ interface VerticalPageProps {
 export default function VerticalPage({
   title,
   subtitle,
-  label,
   pains,
   features,
   integrations,
@@ -247,11 +246,6 @@ export default function VerticalPage({
                     }))}
                   />
                 </div>
-              )}
-              {label && (
-                <span className="hero-entrance-h1 hidden lg:inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
-                  {label}
-                </span>
               )}
               <h1 className="hero-entrance-h1 text-display-xl text-text-primary">{title}</h1>
               <p className="hero-entrance-sub mt-5 text-body-lg text-text-secondary">{subtitle}</p>

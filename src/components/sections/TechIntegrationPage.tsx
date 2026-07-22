@@ -36,7 +36,6 @@ export interface TechIntegrationPageProps {
 export default function TechIntegrationPage({
   name,
   logo,
-  eyebrow,
   tagline,
   description,
   about,
@@ -66,9 +65,6 @@ export default function TechIntegrationPage({
                 >
                   ← All tech integrations
                 </Link>
-                <span className="text-eyebrow text-accent mb-4 block">
-                  {eyebrow}
-                </span>
                 <h1 className="text-display-xl text-white">{`${name} + ITD`}</h1>
                 <p className="mt-4 text-body-lg text-white/70 font-medium">
                   {tagline}

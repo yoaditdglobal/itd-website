@@ -54,7 +54,6 @@ export interface VideoHeroProps {
 }
 
 export default function VideoHero({
-  label,
   heading = HEADING,
   sub = SUB,
   primary = PRIMARY,
@@ -123,11 +122,6 @@ export default function VideoHero({
                   }))}
                 />
               </div>
-            )}
-            {label && (
-              <p className="mb-4 text-eyebrow text-white/70 [text-shadow:0_1px_12px_rgba(0,0,0,0.4)]">
-                {label}
-              </p>
             )}
             <h1 className="text-display-xl text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
               {heading}

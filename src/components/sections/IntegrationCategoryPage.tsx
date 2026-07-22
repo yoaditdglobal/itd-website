@@ -120,7 +120,6 @@ export default function IntegrationCategoryPage({
   title,
   subtitle,
   integrations,
-  heroLabel,
   heroH1,
   heroSubhead,
   heroPrimaryCta,
@@ -172,13 +171,6 @@ export default function IntegrationCategoryPage({
                     <span aria-hidden>←</span> Tech integrations
                   </Link>
                 </div>
-                {heroLabel && (
-                  <div className="mb-5">
-                    <span className={`text-xs font-semibold uppercase tracking-widest ${heroVisual ? "text-accent" : "inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow"}`}>
-                      {heroLabel}
-                    </span>
-                  </div>
-                )}
                 <h1 className={`text-display-xl ${heroVisual ? "text-white" : "text-text-primary"}`}>{headline}</h1>
                 <p className={`mt-4 text-lg ${heroVisual ? "text-white/70 font-medium" : "text-text-secondary"}`}>{subhead}</p>
                 {(heroPrimaryCta || heroSecondaryCta) && (

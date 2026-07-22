@@ -168,14 +168,6 @@ export default function FbmGuidePage() {
             >
               <ArrowLeft className="w-4 h-4" /> Back to guides
             </Link>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="inline-block px-2.5 py-1 rounded-full bg-accent-light text-accent text-eyebrow">
-                Guide
-              </span>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-bg-secondary text-text-secondary text-eyebrow">
-                Marketplace
-              </span>
-            </div>
             <h1 className="text-display-xl text-text-primary">
               Fulfilled by Merchant on Amazon: the UK seller&apos;s guide
             </h1>

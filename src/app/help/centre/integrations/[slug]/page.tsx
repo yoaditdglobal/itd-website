@@ -85,14 +85,6 @@ export default async function IntegrationGuidePage({
                   fit="contain"
                 />
               </span>
-              <div className="flex items-center gap-2">
-                <span className="inline-block px-2.5 py-1 rounded-full bg-accent-light text-accent text-eyebrow">
-                  Integrations
-                </span>
-                <span className="inline-block px-2.5 py-1 rounded-full bg-bg-secondary text-text-secondary text-eyebrow">
-                  Setup guide
-                </span>
-              </div>
             </div>
             <h1 className="text-display-lg text-text-primary">
               {guide.metaTitle}

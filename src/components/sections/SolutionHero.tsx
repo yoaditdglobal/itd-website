@@ -122,9 +122,6 @@ export default function SolutionHero({
               />
             </div>
           )}
-          <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-white/15 text-white text-eyebrow tracking-wider mb-5">
-            {label}
-          </span>
           <h1 className="hero-entrance-h1 text-display-xl text-white">
             {title}
           </h1>

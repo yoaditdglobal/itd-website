@@ -165,14 +165,6 @@ export default function FreightServicesGuidePage() {
             >
               <ArrowLeft className="w-4 h-4" /> Back to guides
             </Link>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="inline-block px-2.5 py-1 rounded-full bg-accent-light text-accent text-eyebrow">
-                Guide
-              </span>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-bg-secondary text-text-secondary text-eyebrow">
-                Freight
-              </span>
-            </div>
             <h1 className="text-display-xl text-text-primary">
               Freight Services: a working guide for UK clients
             </h1>

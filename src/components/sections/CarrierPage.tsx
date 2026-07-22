@@ -99,7 +99,6 @@ export default function CarrierPage({
                 <Link href="/integrations/carriers" className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 mb-6 transition-colors">
                   ← All carriers
                 </Link>
-                <span className="text-eyebrow text-accent mb-4 block">Integration</span>
                 <h1 className="text-display-xl text-white">
                   {`${name} + ITD`}
                 </h1>

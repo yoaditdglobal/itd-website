@@ -214,9 +214,6 @@ export default function ContactForm() {
             />
             <div className="relative">
               <ScrollReveal>
-                <span className="mb-5 inline-block rounded-full bg-white/10 px-3 py-1 text-eyebrow tracking-wider text-white/80">
-                  Contact Sales
-                </span>
                 <h1 className="text-display-lg text-white">
                   Tell us what you ship. We&apos;ll tell you what it should cost
                 </h1>
