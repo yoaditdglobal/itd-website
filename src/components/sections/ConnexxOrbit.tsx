@@ -41,6 +41,10 @@ const WMS_MOBILE_HIDE = new Set(["ShipStation", "Veeqo"]);
 const CARRIERS_MOBILE_HIDE = new Set(["Parcelforce", "Amazon Shipping"]);
 const MARKETPLACES_MOBILE_HIDE = new Set(["Etsy", "Temu"]);
 
+/** Orbit tile size. Shrinks to 28px on true mobile (<640px) so the outer ring
+ *  + tiles fit narrow viewports, then matches the original 36/40px from sm/md up. */
+const CHIP_SIZE = "w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10";
+
 /** Position a child on a circle of `radiusPct` from the centre. 0° = top. */
 export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProperties {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
@@ -52,14 +56,22 @@ export function orbitStyle(angleDeg: number, radiusPct: number): React.CSSProper
   };
 }
 
-export function IconChip({ brand }: { brand: Brand }) {
+export function IconChip({
+  brand,
+  sizeClass = "w-9 h-9 md:w-10 md:h-10",
+}: {
+  brand: Brand;
+  /** Tailwind width/height classes for the tile. Defaults to the fixed 36/40px
+   *  used by CarrierNetworkOrbit; ConnexxOrbit passes a smaller mobile size. */
+  sizeClass?: string;
+}) {
   // Edge-to-edge square rounded brand tile — every orbit asset is a full-bleed
   // 512x512 tile (see scripts/gen-orbit-tiles.py). No white chip, no padding.
   if (brand.logo) {
     return (
       <span
         title={brand.name}
-        className="inline-flex items-center justify-center overflow-hidden rounded-xl shadow-lg w-9 h-9 md:w-10 md:h-10"
+        className={`inline-flex items-center justify-center overflow-hidden rounded-xl shadow-lg ${sizeClass}`}
       >
         <Image
           src={brand.logo}
@@ -76,7 +88,7 @@ export function IconChip({ brand }: { brand: Brand }) {
   return (
     <span
       title={brand.name}
-      className="inline-flex items-center justify-center rounded-xl bg-accent-light shadow-lg w-9 h-9 md:w-10 md:h-10"
+      className={`inline-flex items-center justify-center rounded-xl bg-accent-light shadow-lg ${sizeClass}`}
     >
       <span aria-hidden className="text-xs font-bold text-accent">
         {brand.name[0]}
@@ -93,6 +105,8 @@ interface OrbitLayerProps {
   /** "cw" → wrapper rotates clockwise; child counter-rotates ccw. */
   direction: "cw" | "ccw";
   mobileHide: Set<string>;
+  /** Optional tile size classes forwarded to IconChip (defaults to 36/40px). */
+  chipSize?: string;
 }
 
 export function OrbitLayer({
@@ -101,6 +115,7 @@ export function OrbitLayer({
   durationS,
   direction,
   mobileHide,
+  chipSize,
 }: OrbitLayerProps) {
   const wrapperAnim =
     direction === "cw"
@@ -126,7 +141,7 @@ export function OrbitLayer({
         return (
           <div key={brand.name} className={hide} style={orbitStyle(angle, radiusPct)}>
             <div className="connexx-anim" style={{ animation: counterAnim }}>
-              <IconChip brand={brand} />
+              <IconChip brand={brand} sizeClass={chipSize} />
             </div>
           </div>
         );
@@ -177,7 +192,7 @@ export default function ConnexxOrbit() {
         <div
           role="img"
           aria-label="Connexx connects to 16 carriers, 5 marketplaces, and major ERP and WMS systems."
-          className="relative aspect-square mx-auto w-full max-w-[300px] md:max-w-[460px] lg:max-w-[540px]"
+          className="relative aspect-square mx-auto w-full max-w-[260px] sm:max-w-[300px] md:max-w-[460px] lg:max-w-[540px]"
         >
           {/* Dashed concentric circles — rendered with CSS `border-dashed`
               on percentage-sized circles. CSS handles the dash pattern
@@ -201,6 +216,7 @@ export default function ConnexxOrbit() {
             durationS={65}
             direction="cw"
             mobileHide={MARKETPLACES_MOBILE_HIDE}
+            chipSize={CHIP_SIZE}
           />
 
           {/* Middle orbit — carriers, 50s counter-clockwise (rings alternate
@@ -212,6 +228,7 @@ export default function ConnexxOrbit() {
             durationS={50}
             direction="ccw"
             mobileHide={CARRIERS_MOBILE_HIDE}
+            chipSize={CHIP_SIZE}
           />
 
           {/* Inner orbit — WMS / ERP / eCommerce, 35s clockwise */}
@@ -221,6 +238,7 @@ export default function ConnexxOrbit() {
             durationS={35}
             direction="cw"
             mobileHide={WMS_MOBILE_HIDE}
+            chipSize={CHIP_SIZE}
           />
 
           {/* Centre — Connexx mark (transparent, no badge). The spin and the
