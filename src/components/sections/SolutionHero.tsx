@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import { entityHref } from "@/lib/data";
 import type { LucideIcon } from "lucide-react";
@@ -35,6 +36,9 @@ export interface SolutionHeroProps {
   chips?: SolutionHeroChip[];
   /** Tailwind max-width class for the glass card. Defaults to "max-w-xl". */
   glassWidth?: string;
+  /** Visible breadcrumb trail rendered above the label chip. Pair with the
+   *  BreadcrumbList JSON-LD the page already emits (e.g. via VerticalPage). */
+  breadcrumbs?: Array<{ name: string; path: string }>;
 }
 
 /**
@@ -57,6 +61,7 @@ export default function SolutionHero({
   image,
   chips,
   glassWidth = "max-w-xl",
+  breadcrumbs,
 }: SolutionHeroProps) {
   const Icon = image.icon;
   const gradient = image.gradient ?? "from-bg-dark via-bg-dark-card to-bg-dark";
@@ -106,6 +111,17 @@ export default function SolutionHero({
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32 min-h-[inherit] flex items-center">
         <div className={`${glassWidth} rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 shadow-2xl p-7 md:p-10`}>
+          {breadcrumbs && breadcrumbs.length > 1 && (
+            <div className="hero-entrance-h1 mb-4">
+              <Breadcrumb
+                tone="dark"
+                items={breadcrumbs.map((c, i) => ({
+                  name: c.name,
+                  href: i < breadcrumbs.length - 1 ? c.path : undefined,
+                }))}
+              />
+            </div>
+          )}
           <span className="hero-entrance-h1 inline-block px-3 py-1 rounded-full bg-white/15 text-white text-eyebrow tracking-wider mb-5">
             {label}
           </span>

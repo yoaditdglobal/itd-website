@@ -43,10 +43,17 @@ const HERO_SUBTITLE =
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
 const SECONDARY = { label: "Contact Sales", href: "/contact?enquiry=enterprise" };
 
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "Enterprise", path: "/solutions/enterprise" },
+];
+
 export default function EnterprisePage() {
   return (
     <>
       <SolutionHero
+        breadcrumbs={CRUMBS}
         label="Enterprise"
         title={HERO_TITLE}
         subtitle={HERO_SUBTITLE}
@@ -105,11 +112,7 @@ export default function EnterprisePage() {
             title: "Delivery exceptions caught and triaged before customers chase",
           },
         ]}
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Solutions", path: "/solutions" },
-          { name: "Enterprise", path: "/solutions/enterprise" },
-        ]}
+        breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
             name: "Enterprise carrier network",

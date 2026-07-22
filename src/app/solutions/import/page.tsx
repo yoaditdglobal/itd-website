@@ -45,10 +45,17 @@ const WHAT_YOU_GET: { icon: LucideIcon; text: string }[] = [
   { icon: UserCheck,    text: "Named account contact throughout, not a helpdesk" },
 ];
 
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "Import", path: "/solutions/import" },
+];
+
 export default function ImportPage() {
   return (
     <>
       <SolutionHero
+        breadcrumbs={CRUMBS}
         label="Import"
         title={<>Importing from the<br />Far East or worldwide?</>}
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery, staying focused on your business while we move your goods."
@@ -198,11 +205,7 @@ export default function ImportPage() {
           primary: { label: "Get Quote", href: RATE_CHECKER_URL },
           secondary: { label: "Contact Sales", href: "/contact?enquiry=import" },
         }}
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Solutions", path: "/solutions" },
-          { name: "Import", path: "/solutions/import" },
-        ]}
+        breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
             name: "Import Shipping Services",

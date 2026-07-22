@@ -7,6 +7,7 @@ import {
   articleSchema,
   breadcrumbSchema,
   faqSchema,
+  howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 
@@ -76,8 +77,55 @@ const faqs = [
   },
 ];
 
+/** HowTo steps mirror the numbered guide sections below — each step anchors
+ *  to its section and states only what that section's prose says. */
+const HOW_TO = {
+  path: PATH,
+  name: "How to run FBM on Amazon UK without hurting your account metrics",
+  description:
+    "The working sequence for a UK seller fulfilling Amazon orders themselves: decide FBM vs FBA per SKU, keep the four account metrics inside threshold, use Buy Shipping where it fits, pick compliant carriers, and re-tool as volume grows.",
+  steps: [
+    {
+      anchor: "fbm-vs-fba",
+      name: "Decide FBM vs FBA per SKU",
+      text: "FBA usually wins for fast-moving small items; FBM usually wins for slow-moving, oversize, multi-channel, restricted or bundled SKUs. Decide on storage velocity, unit weight and SKU count rather than across the whole catalogue.",
+    },
+    {
+      anchor: "metrics",
+      name: "Keep the four account metrics inside threshold",
+      text: "Late Shipment Rate below 4%, Pre-Fulfilment Cancel Rate below 2.5%, Valid Tracking Rate above 95%, and On-Time Delivery Rate above 97%. Confirm dispatch in Seller Central before the deadline and use tracked carriers that push scan events to Amazon.",
+    },
+    {
+      anchor: "buy-shipping",
+      name: "Ship through Amazon Buy Shipping where it fits",
+      text: "Labels bought inside Seller Central and dispatched by the deadline protect your LSR, VTR and OTDR even when the carrier is delayed. It covers roughly 80% of orders — multi-piece, palletised and specialised services need another route.",
+    },
+    {
+      anchor: "carriers",
+      name: "Select the carrier per order",
+      text: "Match the listing's promised dispatch speed, the parcel's weight and dimensions, and the destination postcode across Royal Mail Tracked, DPD, Evri, Amazon Shipping and Parcelforce. Rate-shop per order and account for Highlands & Islands, Channel Islands and Northern Ireland surcharges.",
+    },
+    {
+      anchor: "labels",
+      name: "Keep labels and tracking compliant",
+      text: "Use carriers that push scan events back to Amazon, match the tracking number format to the carrier selected in Seller Central, print labels at the carrier-required size, and write tracking back via the Selling Partner API rather than manual upload.",
+    },
+    {
+      anchor: "sfp",
+      name: "Work towards Seller Fulfilled Prime if it fits",
+      text: "SFP requires On-Time Delivery Rate above 99%, Valid Tracking Rate above 99%, Cancel Rate below 0.5%, weekend dispatch and approved carriers via Buy Shipping, audited over a trial period. Get standard FBM metrics to a consistent ~98% before applying.",
+    },
+    {
+      anchor: "scale",
+      name: "Re-tool as volume grows",
+      text: "Manual Buy Shipping printing works to around 50 orders a day; batch printing to 200; a WMS or OMS such as Linnworks, Selro, Veeqo or Mintsoft to 1,000; beyond that an OMS plus a multi-carrier platform and a dedicated dispatch team.",
+    },
+  ],
+};
+
 export default function FbmGuidePage() {
   const jsonLd = [
+    howToSchema(HOW_TO),
     articleSchema({
       headline: "Fulfilled by Merchant (FBM) on Amazon: the UK seller's guide",
       description:

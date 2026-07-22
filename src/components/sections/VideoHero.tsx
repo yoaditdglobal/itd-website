@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Button from "@/components/ui/Button";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 /**
@@ -47,6 +48,9 @@ export interface VideoHeroProps {
   videoSrc?: string;
   /** First frame of the video — instant paint + reduced-motion fallback. */
   poster?: string;
+  /** Visible breadcrumb trail rendered above the eyebrow/heading. Pair with
+   *  the BreadcrumbList JSON-LD the page already emits. */
+  breadcrumbs?: Array<{ name: string; path: string }>;
 }
 
 export default function VideoHero({
@@ -57,6 +61,7 @@ export default function VideoHero({
   secondary = SECONDARY,
   videoSrc = "/hero/hero.mp4",
   poster = POSTER,
+  breadcrumbs,
 }: VideoHeroProps = {}) {
   const [motionOk, setMotionOk] = useState(false);
 
@@ -104,6 +109,17 @@ export default function VideoHero({
       <div className="relative z-10 flex h-full items-center pt-[var(--nav-h)]">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
+            {breadcrumbs && breadcrumbs.length > 1 && (
+              <div className="mb-4 [text-shadow:0_1px_12px_rgba(0,0,0,0.4)]">
+                <Breadcrumb
+                  tone="dark"
+                  items={breadcrumbs.map((c, i) => ({
+                    name: c.name,
+                    href: i < breadcrumbs.length - 1 ? c.path : undefined,
+                  }))}
+                />
+              </div>
+            )}
             {label && (
               <p className="mb-4 text-eyebrow text-white/70 [text-shadow:0_1px_12px_rgba(0,0,0,0.4)]">
                 {label}

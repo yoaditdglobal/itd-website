@@ -2,6 +2,7 @@ import Image from "next/image";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
@@ -231,6 +232,16 @@ export default function VerticalPage({
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={heroImage ? "grid lg:grid-cols-2 lg:gap-12 items-center" : ""}>
             <div className={heroImage ? "order-2 lg:order-none max-w-2xl" : "max-w-3xl"}>
+              {breadcrumbs && breadcrumbs.length > 1 && (
+                <div className="hero-entrance-h1 mb-4">
+                  <Breadcrumb
+                    items={breadcrumbs.map((c, i) => ({
+                      name: c.name,
+                      href: i < breadcrumbs.length - 1 ? c.path : undefined,
+                    }))}
+                  />
+                </div>
+              )}
               {label && (
                 <span className="hero-entrance-h1 hidden lg:inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
                   {label}

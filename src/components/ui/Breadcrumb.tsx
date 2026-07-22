@@ -11,11 +11,24 @@ export interface Crumb {
  * pages (e.g. IntegrationDetail). Renders a labelled <nav>; the last crumb
  * is the current page (aria-current). Emit BreadcrumbList JSON-LD separately
  * via `breadcrumbSchema` for structured data.
+ *
+ * `tone="dark"` restyles for photographic/dark heroes (SolutionHero, VideoHero).
  */
-export default function Breadcrumb({ items }: { items: Crumb[] }) {
+export default function Breadcrumb({
+  items,
+  tone = "light",
+  className = "",
+}: {
+  items: Crumb[];
+  tone?: "light" | "dark";
+  className?: string;
+}) {
+  const dark = tone === "dark";
   return (
     <nav
-      className="flex flex-wrap items-center gap-2 text-sm text-text-tertiary"
+      className={`flex flex-wrap items-center gap-2 text-sm ${
+        dark ? "text-white/60" : "text-text-tertiary"
+      } ${className}`}
       aria-label="Breadcrumb"
     >
       {items.map((item, i) => {
@@ -25,12 +38,19 @@ export default function Breadcrumb({ items }: { items: Crumb[] }) {
             {item.href && !last ? (
               <Link
                 href={item.href}
-                className="hover:text-text-primary transition-colors"
+                className={
+                  dark
+                    ? "hover:text-white transition-colors"
+                    : "hover:text-text-primary transition-colors"
+                }
               >
                 {item.name}
               </Link>
             ) : (
-              <span className="text-text-primary" aria-current="page">
+              <span
+                className={dark ? "text-white/90" : "text-text-primary"}
+                aria-current="page"
+              >
                 {item.name}
               </span>
             )}

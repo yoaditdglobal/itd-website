@@ -7,6 +7,7 @@ import {
   articleSchema,
   breadcrumbSchema,
   faqSchema,
+  howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 
@@ -73,8 +74,55 @@ const faqs = [
   },
 ];
 
+/** HowTo mirrors the seven-stage LCL table in the Consolidation section —
+ *  each step states only what that section's prose/table says. */
+const HOW_TO = {
+  path: PATH,
+  name: "How an LCL sea freight shipment works, from booking to UK delivery",
+  description:
+    "The seven stages of a less-than-container-load shipment with ITD — booking, origin consolidation, ocean transit, UK deconsolidation, customs clearance and final delivery — and what you need to do at each one.",
+  steps: [
+    {
+      anchor: "consolidation",
+      name: "Booking",
+      text: "Confirm the CBM, weight and commodity with ITD, get the origin CFS cut-off date, and provide the packing list and dimensions.",
+    },
+    {
+      anchor: "consolidation",
+      name: "Origin CFS",
+      text: "Make sure your supplier delivers the goods to the container freight station before the cut-off — missing it means the goods wait around a week for the next vessel.",
+    },
+    {
+      anchor: "consolidation",
+      name: "Consolidation",
+      text: "Your goods are loaded into a shared container and you receive your House Bill of Lading. Keep the HBL number — it is your tracking reference until UK release.",
+    },
+    {
+      anchor: "consolidation",
+      name: "Ocean transit",
+      text: "Monitor vessel updates and confirm your delivery address while the container is at sea.",
+    },
+    {
+      anchor: "consolidation",
+      name: "UK CFS",
+      text: "The container is deconsolidated at Felixstowe, Southampton or London Gateway. Have your customs data ready before the vessel arrives — that is one of the two common failure points.",
+    },
+    {
+      anchor: "cds",
+      name: "Customs clearance",
+      text: "Approve the duty figures so the CDS declaration clears. Booking freight with ITD includes CDS clearance, so no separate broker is needed.",
+    },
+    {
+      anchor: "consolidation",
+      name: "Delivery",
+      text: "Confirm the delivery window and the unloading bay for final delivery to your warehouse.",
+    },
+  ],
+};
+
 export default function FreightServicesGuidePage() {
   const jsonLd = [
+    howToSchema(HOW_TO),
     articleSchema({
       headline: "Freight Services: a working guide for UK clients",
       description:

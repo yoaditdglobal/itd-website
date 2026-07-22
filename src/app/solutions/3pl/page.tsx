@@ -39,10 +39,17 @@ const PAINS = [
   },
 ];
 
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "3PL", path: "/solutions/3pl" },
+];
+
 export default function ThreePLPage() {
   return (
     <>
       <SolutionHero
+        breadcrumbs={CRUMBS}
         label="3PL"
         title="Undercut your rivals without undercutting yourself"
         subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
@@ -142,11 +149,7 @@ export default function ThreePLPage() {
           browseHref="/integrations/erp-wms"
         />
       }
-      breadcrumbs={[
-        { name: "Home", path: "/" },
-        { name: "Solutions", path: "/solutions" },
-        { name: "3PL", path: "/solutions/3pl" },
-      ]}
+      breadcrumbs={CRUMBS}
       jsonLd={[
         serviceSchema({
           name: "3PL shipping software",

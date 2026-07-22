@@ -7,6 +7,7 @@ import {
   articleSchema,
   breadcrumbSchema,
   faqSchema,
+  howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 
@@ -71,8 +72,40 @@ const faqs = [
   },
 ];
 
+/** HowTo mirrors the four-step onboarding list in the Onboarding section —
+ *  each step states only what that section's prose says. */
+const HOW_TO = {
+  path: PATH,
+  name: "How ITD onboards a 3PL partner",
+  description:
+    "The four-step onboarding ITD's implementation team runs for a new 3PL partner — typically two to four weeks end to end, depending on integration complexity and the number of brands.",
+  steps: [
+    {
+      anchor: "onboarding",
+      name: "Scoping call",
+      text: "ITD maps your current carrier setup, client structure and WMS integration requirements.",
+    },
+    {
+      anchor: "onboarding",
+      name: "Connexx integration",
+      text: "ITD's implementation team connects your WMS or OMS to Connexx while your IT team provides access — one connection covers all your brands.",
+    },
+    {
+      anchor: "onboarding",
+      name: "Child ID setup",
+      text: "Your existing clients are set up as child ID accounts, each with its own carrier allocation, label configuration and ring-fenced reporting view.",
+    },
+    {
+      anchor: "onboarding",
+      name: "Go-live and handover",
+      text: "Live testing and sign-off, then handover to your dedicated account manager.",
+    },
+  ],
+};
+
 export default function ThreePlGuidePage() {
   const jsonLd = [
+    howToSchema(HOW_TO),
     articleSchema({
       headline: "3PL Partnership: what working with ITD Global looks like",
       description:

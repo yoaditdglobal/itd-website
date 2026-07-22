@@ -83,6 +83,14 @@ const nextConfig: NextConfig = {
         destination: "/integrations/tech",
         permanent: true,
       },
+      // There is no /shipping hub page either, but the shipping pages'
+      // breadcrumbs (visible + BreadcrumbList JSON-LD) use it as their parent.
+      // 301 to the flagship shipping page instead of 404ing.
+      {
+        source: "/shipping",
+        destination: "/shipping/domestic",
+        permanent: true,
+      },
     ];
   },
 
