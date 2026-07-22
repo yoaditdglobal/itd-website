@@ -88,8 +88,9 @@ export default function CarrierPage({
                 </div>
               </div>
 
-              {/* Right — mini orbit */}
-              <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
+              {/* Mini orbit — right of the copy on desktop, stacked below it on
+                  mobile (flex-col). Shown on all breakpoints. */}
+              <div className="flex flex-shrink-0 items-center justify-center">
                 <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
               </div>
             </div>
