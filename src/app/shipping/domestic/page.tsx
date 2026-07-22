@@ -175,7 +175,7 @@ export default function ShippingDomesticPage() {
       ]}
       carrierComparison={{
         title: "UK carrier network",
-        columns: ["Speed", "Max weight", "UK coverage", "Tracking", "Best for"],
+        columns: ["Max weight", "UK coverage", "Tracking", "Best for"],
         rows: [
           {
             carrier: "Royal Mail",

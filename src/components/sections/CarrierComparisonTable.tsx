@@ -484,6 +484,7 @@ function RichDesktopTable({
   rows: CarrierComparisonRichRow[];
   columns: string[];
 }) {
+  const hasSpeed = columns.some((c) => /speed/i.test(c));
   return (
     <ScrollReveal>
       <div className="hidden md:block rounded-2xl border border-border bg-white shadow-md overflow-hidden">
@@ -527,10 +528,12 @@ function RichDesktopTable({
                         descriptor={row.descriptor}
                       />
                     </td>
-                    {/* Speed */}
-                    <td className="border-b border-border px-5 py-5 align-middle">
-                      <SpeedPills speeds={row.speeds} />
-                    </td>
+                    {/* Speed — only when the columns include it */}
+                    {hasSpeed && (
+                      <td className="border-b border-border px-5 py-5 align-middle">
+                        <SpeedPills speeds={row.speeds} />
+                      </td>
+                    )}
                     {/* Weight */}
                     <td className="border-b border-border px-5 py-5 align-middle">
                       <p className="text-body-sm font-medium text-text-primary">
@@ -652,13 +655,16 @@ function RichMobileCard({
   columns: string[];
   index: number;
 }) {
-  // columns expected order for rich: [Speed, Weight, Coverage, Tracking, Best for]
-  const [speedLabel, weightLabel, coverageLabel, trackingLabel, bestForLabel] = [
-    columns[0] ?? "Speed",
-    columns[1] ?? "Weight",
-    columns[2] ?? "Coverage",
-    columns[3] ?? "Tracking",
-    columns[4] ?? "Best for",
+  // columns expected order for rich: [Speed?, Weight, Coverage, Tracking, Best for]
+  // Speed is optional — rendered only when the columns include it.
+  const hasSpeed = columns.some((c) => /speed/i.test(c));
+  const rest = hasSpeed ? columns.slice(1) : columns;
+  const speedLabel = hasSpeed ? columns[0] : null;
+  const [weightLabel, coverageLabel, trackingLabel, bestForLabel] = [
+    rest[0] ?? "Weight",
+    rest[1] ?? "Coverage",
+    rest[2] ?? "Tracking",
+    rest[3] ?? "Best for",
   ];
   return (
     <ScrollReveal delay={index * 0.04}>
@@ -673,12 +679,16 @@ function RichMobileCard({
         </div>
         {/* 2-col grid */}
         <dl className="px-5 py-5 grid grid-cols-[88px_1fr] gap-x-4 gap-y-5 items-start">
-          <dt className="text-eyebrow text-text-tertiary text-right pt-0.5">
-            {speedLabel}
-          </dt>
-          <dd>
-            <SpeedPills speeds={row.speeds} />
-          </dd>
+          {speedLabel && (
+            <>
+              <dt className="text-eyebrow text-text-tertiary text-right pt-0.5">
+                {speedLabel}
+              </dt>
+              <dd>
+                <SpeedPills speeds={row.speeds} />
+              </dd>
+            </>
+          )}
           <dt className="text-eyebrow text-text-tertiary text-right pt-0.5">
             {weightLabel}
           </dt>
