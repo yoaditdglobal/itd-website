@@ -1,10 +1,10 @@
-import { Check } from "lucide-react";
+import { Check, ListChecks } from "lucide-react";
 import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
 
 /**
  * "TL;DR" / key-takeaways block (GEO extractability).
  *
- * A compact, visually distinct box of 2–5 one-sentence takeaways placed near
+ * A compact, visually distinct summary of 2–5 one-sentence takeaways placed near
  * the top of long informational pages (guides, solution/shipping pages,
  * glossary intro). AI engines lift these summaries near-verbatim when citing
  * a page, so every bullet must be verifiable against the page's own content —
@@ -23,23 +23,36 @@ export default function KeyTakeaways({
   return (
     <aside
       aria-label="Key takeaways"
-      className="rounded-2xl border border-accent/20 bg-accent-light/40 p-6 md:p-7"
+      className="relative overflow-hidden rounded-2xl border border-accent/15 bg-white shadow-sm"
     >
-      <p className="text-eyebrow text-accent mb-4">{title}</p>
-      <ul className="space-y-3">
-        {items.map((item) => (
-          <li key={item} className="flex items-start gap-3">
-            <Check
-              aria-hidden
-              className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent"
-              strokeWidth={2.5}
-            />
-            <span className="text-body-md text-text-secondary">
-              {linkifyGlossaryTerms(item)}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {/* Accent rail — marks this as a deliberate summary module and bridges
+          the transition out of the hero into the page body. */}
+      <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent" />
+      <div className="p-6 md:p-8">
+        {/* Header — icon chip + eyebrow label, echoing the site's section rhythm */}
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent">
+            <ListChecks aria-hidden className="h-5 w-5" strokeWidth={2} />
+          </span>
+          <span className="text-eyebrow text-accent">{title}</span>
+        </div>
+
+        {/* Hairline divider separates the label from the takeaways */}
+        <div aria-hidden className="my-5 h-px bg-border" />
+
+        <ul className="space-y-4">
+          {items.map((item) => (
+            <li key={item} className="flex items-start gap-3">
+              <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent-light text-accent">
+                <Check aria-hidden className="h-3.5 w-3.5" strokeWidth={2.75} />
+              </span>
+              <span className="text-body-md text-text-secondary">
+                {linkifyGlossaryTerms(item)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </aside>
   );
 }
