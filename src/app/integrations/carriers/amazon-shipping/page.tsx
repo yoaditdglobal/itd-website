@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function AmazonShippingPage() {
   return (
     <CarrierPage
+      slug="amazon-shipping"
       name="Amazon Shipping"
       logo="/logos/carriers/amazonshipping_logo.png"
       tagline="Amazon's own delivery network, available for eCommerce shipments beyond the Amazon platform."

@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function DpdPage() {
   return (
     <CarrierPage
+      slug="dpd"
       name="DPD"
       logo="/logos/carriers/dpd-tile.png"
       tagline="Precise tracked delivery across the UK and into Europe, with one-hour delivery windows as standard."

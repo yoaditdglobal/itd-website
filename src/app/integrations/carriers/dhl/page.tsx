@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function DhlPage() {
   return (
     <CarrierPage
+      slug="dhl"
       name="DHL Express"
       logo="/logos/carriers/dhl_logo.webp"
       tagline="The world's leading international express courier, delivering to over 220 countries and territories."

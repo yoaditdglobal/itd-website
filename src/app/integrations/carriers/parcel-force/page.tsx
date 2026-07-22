@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function ParcelforcePage() {
   return (
     <CarrierPage
+      slug="parcel-force"
       name="Parcelforce"
       logo="/logos/carriers/parcel-force.svg"
       logoBg="#ed2929"

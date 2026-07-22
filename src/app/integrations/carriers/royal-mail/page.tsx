@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function RoyalMailPage() {
   return (
     <CarrierPage
+      slug="royal-mail"
       name="Royal Mail"
       logo="/logos/carriers/royal-mail-icon.png"
       tagline="The UK's national postal network, reaching every address in the country."
