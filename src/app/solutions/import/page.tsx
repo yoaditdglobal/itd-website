@@ -55,7 +55,7 @@ const CRUMBS = [
 const TLDR = [
   "We take the complexity out of importing from China or worldwide for UK businesses, giving you a single point of contact from collection to delivery.",
   "Our China-based team manages factory collections in your suppliers' time zone, and we clear customs in-house across all import routes with no third-party broker fees.",
-  "Parcel consolidation through our Shenzhen warehouse typically reduces delivery costs by 20% or more compared with shipping each order individually.",
+  "Parcel consolidation through our Shenzhen warehouse typically reduces delivery costs by 30% or more compared with shipping each order individually.",
 ];
 
 export default function ImportPage() {
@@ -192,7 +192,7 @@ export default function ImportPage() {
           {
             question: "How does parcel consolidation work?",
             answer:
-              "We group your smaller consignments through our Shenzhen warehouse before they ship. Consolidating into a single movement typically reduces delivery costs by 20% or more compared to shipping each order individually.",
+              "We group your smaller consignments through our Shenzhen warehouse before they ship. Consolidating into a single movement typically reduces delivery costs by 30% or more compared to shipping each order individually.",
           },
           {
             question: "Do you offer warehousing once goods arrive in the UK?",
