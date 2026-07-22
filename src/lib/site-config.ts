@@ -14,6 +14,7 @@ export const SITE_DESCRIPTION =
 
 // Registered company name; trades as "ITD Global" (the public brand = SITE_NAME).
 export const ORG_LEGAL_NAME = "Interdelta Ltd";
+export const ORG_FOUNDING_DATE = "2004"; // user-confirmed founding year
 export const ORG_FOUNDING_LOCATION = "United Kingdom";
 export const ORG_AREA_SERVED = ["United Kingdom", "European Union", "Worldwide"];
 export const ORG_CONTACT = {
