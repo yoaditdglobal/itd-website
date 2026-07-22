@@ -51,12 +51,16 @@ export default function ConnexxGateway({
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile-only heading. On mobile the animation is promoted directly
+            beneath this heading (above the feature cards) via the column order
+            below; on lg this heading is hidden and the in-column one is shown. */}
+        <h2 className="lg:hidden text-display-lg text-text-primary mb-6">How Connexx solves it</h2>
         {/* With a feature animation the media column takes 2/3 of the grid so
             the panel renders larger; the mockup fallback keeps the 50/50 split. */}
-        <div className={`grid gap-12 items-center ${media ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
-          <ScrollReveal className={media ? "lg:col-span-1" : undefined}>
+        <div className={`grid gap-8 lg:gap-12 items-center ${media ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+          <ScrollReveal className={media ? "order-2 lg:order-none lg:col-span-1" : "order-2 lg:order-none"}>
             <div>
-              <h2 className="text-display-lg text-text-primary">How Connexx solves it</h2>
+              <h2 className="hidden lg:block text-display-lg text-text-primary">How Connexx solves it</h2>
               <div className="mt-6 space-y-3">
                 {features.map((f, i) => {
                   // Rotate icon background colour so the list doesn't look monotone.
@@ -92,7 +96,7 @@ export default function ConnexxGateway({
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15} className={media ? "lg:col-span-2" : undefined}>
+          <ScrollReveal delay={0.15} className={media ? "order-1 lg:order-none lg:col-span-2" : "order-1 lg:order-none"}>
             {media ? (
               <div className="rounded-2xl border border-border shadow-md overflow-hidden">
                 <AutoplayVideo
