@@ -26,6 +26,23 @@ export const ORG_SAMEAS: string[] = [
 ];
 
 /**
+ * Topical-authority signal for the Organization entity (schema.org knowsAbout).
+ * These are the domains ITD demonstrably operates in — used by AI/search to
+ * associate the entity with the right subject areas.
+ */
+export const ORG_KNOWS_ABOUT = [
+  "Multi-carrier shipping",
+  "Parcel delivery and courier services",
+  "Customs clearance and automation",
+  "Cross-border eCommerce fulfilment",
+  "Third-party logistics (3PL)",
+  "Freight and pallet shipping",
+  "Carrier rate comparison and management",
+  "Shipping label generation and dispatch",
+  "Order tracking",
+];
+
+/**
  * OG image: Next 16's opengraph-image.tsx file convention at src/app/opengraph-image.tsx
  * auto-generates the site-wide default at build time. Per-page overrides drop a
  * route-segment opengraph-image.tsx (e.g. src/app/solutions/ecommerce/opengraph-image.tsx).
