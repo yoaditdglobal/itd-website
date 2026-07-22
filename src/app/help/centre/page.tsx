@@ -327,8 +327,8 @@ export default function HelpCentrePage() {
       {/* FAQ */}
       <FaqSection
         items={faqItems}
-        heading="Frequently asked questions"
-        subheading="Cross-category questions that come up most often."
+        heading="FAQ"
+        subheading=""
       />
     </>
   );

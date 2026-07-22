@@ -212,8 +212,8 @@ export default function HelpHubPage() {
       {/* FAQ */}
       <FaqSection
         items={faqItems}
-        heading="Frequently asked questions"
-        subheading="The answers operators ask about the help system itself."
+        heading="FAQ"
+        subheading=""
       />
     </>
   );

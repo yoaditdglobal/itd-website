@@ -723,12 +723,9 @@ export default function BillingPage() {
       <section id="faq" className="bg-bg-secondary py-16 md:py-20 border-t border-border scroll-mt-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="text-display-lg text-text-primary mb-2 text-center">
-              Invoice FAQ
+            <h2 className="text-display-lg text-text-primary mb-10 text-center">
+              FAQ
             </h2>
-            <p className="text-text-secondary text-center mb-10">
-              The questions customers ask most about their invoices.
-            </p>
           </ScrollReveal>
           <div className="space-y-3">
             {faqs.map((item, i) => (

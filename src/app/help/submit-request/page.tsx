@@ -208,8 +208,8 @@ export default function SubmitRequestPage() {
       {/* FAQ */}
       <FaqSection
         items={faqItems}
-        heading="Frequently asked questions"
-        subheading="What operators ask before opening a ticket."
+        heading="FAQ"
+        subheading=""
       />
     </>
   );
