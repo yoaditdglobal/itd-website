@@ -558,7 +558,7 @@ export default function ThreePlGuidePage() {
               multi-client fulfilment centres. Talk to the team about your
               current setup and what a partnership could look like.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact?enquiry=3pl"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"

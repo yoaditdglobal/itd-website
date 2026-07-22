@@ -90,7 +90,7 @@ export default function GlossaryPage() {
             <p className="text-white/80 mb-8 text-body-lg">
               Connexx handles every term in this glossary inside one platform. From WISMO to PVA, from VTR to landed cost. Talk to us about the ones that hurt right now.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/connexx"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"

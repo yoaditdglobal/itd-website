@@ -83,7 +83,7 @@ export default function CarrierPage({
                 </h1>
                 <p className="mt-4 text-body-lg text-white/70 font-medium">{tagline}</p>
                 <p className="mt-4 text-body-md text-white/50">{description}</p>
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Button href="#features">Explore</Button>
                 </div>
               </div>

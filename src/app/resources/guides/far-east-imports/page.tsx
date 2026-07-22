@@ -625,7 +625,7 @@ export default function FarEastImportsGuidePage() {
             <p className="text-white/80 mb-8 text-body-lg">
               Connexx calculates landed cost per SKU, files CDS declarations alongside your broker, and tracks every shipment from supplier to UK warehouse. Northgate Imports cut clearance delays 60% with the same setup.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/solutions/import"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
