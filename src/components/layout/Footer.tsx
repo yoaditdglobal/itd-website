@@ -81,7 +81,7 @@ const footerLinks = {
   ],
   resources: [
     { name: "Case Studies", href: "/resources/case-studies" },
-    { name: "Help Center", href: "/help" },
+    { name: "Help Centre", href: "/help" },
   ],
   company: [
     { name: "About", href: "/about" },
