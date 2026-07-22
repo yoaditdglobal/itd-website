@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Globe } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Parcelforce integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "Parcelforce integration",
   description: "Guaranteed timed delivery across the UK, with international services through the Royal Mail Group network. Access Parcelforce through ITD on rates managed at network scale.",
-};
+  path: "/integrations/carriers/parcel-force",
+});
 
 export default function ParcelforcePage() {
   return (

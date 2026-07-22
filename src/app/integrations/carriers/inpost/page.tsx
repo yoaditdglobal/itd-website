@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Clock, Truck, ShieldCheck, RefreshCw } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "InPost integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "InPost integration",
   description: "The UK's largest parcel locker network, with 15,000 locations accessible 24 hours a day. Access InPost through ITD on rates managed at scale.",
-};
+  path: "/integrations/carriers/inpost",
+});
 
 export default function InPostPage() {
   return (

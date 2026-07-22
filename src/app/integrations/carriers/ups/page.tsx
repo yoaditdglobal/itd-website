@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Globe, ShieldCheck } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "UPS integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "UPS integration",
   description: "Global express and standard delivery across 220 countries, with a trusted business parcel network in the UK. Access UPS through ITD on rates managed at network scale.",
-};
+  path: "/integrations/carriers/ups",
+});
 
 export default function UPSPage() {
   return (

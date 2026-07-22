@@ -13,6 +13,7 @@ export default function robots(): MetadataRoute.Robots {
 
       // Major AI crawlers — explicit allow.
       { userAgent: "GPTBot", allow: "/" },
+      { userAgent: "CCBot", allow: "/" },
       { userAgent: "ChatGPT-User", allow: "/" },
       { userAgent: "OAI-SearchBot", allow: "/" },
       { userAgent: "ClaudeBot", allow: "/" },

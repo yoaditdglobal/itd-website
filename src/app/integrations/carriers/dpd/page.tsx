@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Clock, Truck, Globe } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "DPD integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "DPD integration",
   description: "Precise tracked delivery across the UK and into Europe, with one-hour delivery windows as standard. Access DPD through ITD on rates built across the network.",
-};
+  path: "/integrations/carriers/dpd",
+});
 
 export default function DpdPage() {
   return (

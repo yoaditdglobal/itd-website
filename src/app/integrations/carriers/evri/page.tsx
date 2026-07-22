@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Truck, ShieldCheck } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Evri integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "Evri integration",
   description: "High-volume residential parcel delivery across the full UK network. Access Evri through ITD on rates that reflect network-scale buying power.",
-};
+  path: "/integrations/carriers/evri",
+});
 
 export default function EvriPage() {
   return (

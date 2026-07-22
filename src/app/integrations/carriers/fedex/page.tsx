@@ -1,12 +1,13 @@
 import CarrierPage from "@/components/sections/CarrierPage";
 import { RATES_FEATURE } from "@/lib/carrier-pages";
 import { Zap, Clock, Globe, Truck } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "FedEx integration — ITD Global",
+export const metadata = buildMetadata({
+  title: "FedEx integration",
   description: "Time-definite international delivery across 220 countries, with priority and economy options for every shipment type. Access FedEx through ITD on rates managed at network scale.",
-};
+  path: "/integrations/carriers/fedex",
+});
 
 export default function FedExPage() {
   return (
