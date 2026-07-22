@@ -113,7 +113,7 @@ export default function VideoHero({
               {heading}
             </h1>
             <p className="mt-6 max-w-xl text-body-lg text-white/85">{sub}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <MagneticButton>
                 <Button href={primary.href} variant="primary" surface="dark">
                   {primary.label}

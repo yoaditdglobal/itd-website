@@ -116,7 +116,7 @@ export default function SolutionHero({
             {subtitle}
           </p>
           {(primary || secondary) && (
-            <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
               {primary && <Button href={primary.href}>{primary.label}</Button>}
               {secondary && (
                 <Button href={secondary.href} variant="secondary" surface="dark">

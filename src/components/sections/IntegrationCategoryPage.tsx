@@ -182,7 +182,7 @@ export default function IntegrationCategoryPage({
                 <h1 className={`text-display-xl ${heroVisual ? "text-white" : "text-text-primary"}`}>{headline}</h1>
                 <p className={`mt-4 text-lg ${heroVisual ? "text-white/70 font-medium" : "text-text-secondary"}`}>{subhead}</p>
                 {(heroPrimaryCta || heroSecondaryCta) && (
-                  <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
                     {heroPrimaryCta && (
                       <Button href={heroPrimaryCta.href}>{heroPrimaryCta.label}</Button>
                     )}
@@ -314,7 +314,7 @@ export default function IntegrationCategoryPage({
             <ScrollReveal>
               <h2 className="text-display-lg text-white mb-3">{closingCta.headline}</h2>
               <p className="text-body-lg text-white/80 mb-8">{closingCta.subhead}</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-3">
                 <Button href={closingCta.primary.href} surface="dark">{closingCta.primary.label}</Button>
                 {closingCta.secondary && (
                   <Button href={closingCta.secondary.href} variant="secondary" surface="dark">

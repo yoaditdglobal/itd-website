@@ -26,6 +26,12 @@ export default function ConnexxPreview() {
                 height={105}
                 className="h-20 w-auto mb-6"
               />
+              {/* Mobile-only: the live preview sits between the logo and the
+                  headline. Costs ~nothing when hidden — OverviewAnimation
+                  renders no scene until its container has width. */}
+              <div className="lg:hidden mt-2 mb-6">
+                <OverviewAnimation />
+              </div>
               <h2 className="text-display-lg text-white">
                 The engine behind 17.5m labels a year
               </h2>
@@ -39,7 +45,7 @@ export default function ConnexxPreview() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15}>
+          <ScrollReveal delay={0.15} className="hidden lg:block">
             <OverviewAnimation />
           </ScrollReveal>
         </div>

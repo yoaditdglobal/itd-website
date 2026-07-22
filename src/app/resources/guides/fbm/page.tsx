@@ -691,7 +691,7 @@ export default function FbmGuidePage() {
             <p className="text-white/80 mb-8 text-body-lg">
               Connexx covers the orders Buy Shipping does not, routes across every marketplace from one queue, and writes tracking back to Amazon, eBay, Etsy, and TikTok Shop automatically. Velocity Sellers eliminated £12,000 a month in penalty fees on the same setup.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/solutions/marketplace-seller"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
