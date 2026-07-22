@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  Plug,
-  Truck,
-  Receipt,
-  Users,
-  Code,
-  ArrowRight,
-} from "lucide-react";
+import { Plug, Receipt, Users, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import FaqSection from "@/components/sections/FaqSection";
 import HelpSearchBar from "@/components/help/HelpSearchBar";
@@ -31,28 +23,12 @@ export const metadata = buildMetadata({
 // pass, every category card and featured article links back to /help/centre.
 const categories = [
   {
-    icon: LayoutDashboard,
-    name: "Connexx platform",
-    description:
-      "Getting started, dashboard tour, rate engine, dispatch rules, account settings, and reporting.",
-    href: "/help/centre",
-    slug: "connexx",
-  },
-  {
     icon: Plug,
     name: "Integrations",
     description:
       "eCommerce platforms, ERPs, WMS, marketplaces, and accounting tools that connect to Connexx.",
     href: "/help/centre/integrations",
     slug: "integrations",
-  },
-  {
-    icon: Truck,
-    name: "Carriers",
-    description:
-      "Setting up carrier accounts, label printing, manifesting, and managing carrier-specific services.",
-    href: "/help/centre",
-    slug: "carriers",
   },
   {
     icon: Receipt,
@@ -69,14 +45,6 @@ const categories = [
       "Users, permissions, child accounts, single sign-on, audit logs, and account security.",
     href: "/help/centre/account",
     slug: "account",
-  },
-  {
-    icon: Code,
-    name: "API & developers",
-    description:
-      "API authentication, endpoints, webhooks, rate limits, SDKs, and the changelog.",
-    href: "/help/developers",
-    slug: "developers",
   },
 ];
 
@@ -101,37 +69,6 @@ const featuredArticles: {
     href: "/help/centre/integrations/shopify",
   },
   {
-    title: "Setting up your Royal Mail account",
-    summary:
-      "Add Tracked 24, Tracked 48, Signed, First Class, and Second Class services to your dispatch flow.",
-    category: "Carriers",
-  },
-  {
-    title: "How rate comparison works",
-    summary:
-      "Live API call on every shipment, rule-based carrier selection, and overrides for specific products or lanes.",
-    category: "Connexx platform",
-  },
-  {
-    title: "Generating customs documentation",
-    summary:
-      "HS codes from your product catalogue, EORI numbers, IOSS for EU under 150 EUR, and country-specific paperwork.",
-    category: "Connexx platform",
-  },
-  {
-    title: "Linking your ERP to Connexx",
-    summary:
-      "Order pull, label write-back, and tracking sync for the most common ERPs and WMSs.",
-    category: "Integrations",
-    href: "/help/centre/integrations",
-  },
-  {
-    title: "Inviting users and setting permissions",
-    summary:
-      "Adding teammates, role-based access control, and managing child accounts under a parent contract.",
-    category: "Account & admin",
-  },
-  {
     title: "Billing & Invoices — how weekly billing works",
     summary:
       "The Sat–Fri billing week, when your first invoice lands, and how to read the Ecommerce, Transport Charges, and Duty & VAT invoices tab by tab.",
@@ -139,22 +76,25 @@ const featuredArticles: {
     href: "/help/centre/billing",
   },
   {
-    title: "Printing a label",
+    title: "Connecting eBay to ITD Global",
     summary:
-      "Format options, printer setup, and what to do when label generation fails.",
-    category: "Connexx platform",
+      "Connect your eBay store to ITD Global for multi-carrier shipping and tracking sent back to eBay with each label printed.",
+    category: "Integrations",
+    href: "/help/centre/integrations/ebay",
   },
   {
-    title: "Handling a customs hold",
+    title: "Connecting Linnworks to ITD Global",
     summary:
-      "What to do when a carrier flags a customs issue, how to upload missing documents, and how to prevent the same issue next time.",
-    category: "Carriers",
+      "Add ITD Global as a shipping integration in Linnworks for multi-carrier dispatch and tracking sync, from adding the integration to updating vendor names.",
+    category: "Integrations",
+    href: "/help/centre/integrations/linnworks",
   },
   {
-    title: "API authentication",
+    title: "Connecting Veeqo to ITD Global",
     summary:
-      "Bearer token setup, key rotation, environment separation between staging and production.",
-    category: "API & developers",
+      "Add ITD Global as a custom carrier in Veeqo for multi-carrier shipping and tracking sync, completed step by step with the ITD Global team.",
+    category: "Integrations",
+    href: "/help/centre/integrations/veeqo",
   },
 ];
 
@@ -244,7 +184,7 @@ export default function HelpCentrePage() {
                 Browse by category
               </h2>
               <p className="mt-2 text-text-secondary">
-                Six product areas. Pick the one closest to your question.
+                Three product areas. Pick the one closest to your question.
               </p>
             </div>
           </ScrollReveal>

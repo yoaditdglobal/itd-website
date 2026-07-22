@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  ShieldCheck,
-  Users,
-  Building2,
-  KeyRound,
-  ScrollText,
-  Lock,
-  ArrowRight,
-} from "lucide-react";
+import { ShieldCheck, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
@@ -34,46 +26,6 @@ const subcategories = [
     href: "/help/centre/account/claims",
     meta: "14 carriers",
     live: true,
-  },
-  {
-    icon: Users,
-    name: "Users & permissions",
-    description:
-      "Invite teammates, assign role-based access, and manage who can dispatch, refund, or change settings.",
-    href: "/help/centre",
-    live: false,
-  },
-  {
-    icon: Building2,
-    name: "Child accounts",
-    description:
-      "Run multiple trading entities or clients under one parent contract with separate billing and branding.",
-    href: "/help/centre",
-    live: false,
-  },
-  {
-    icon: KeyRound,
-    name: "Single sign-on (SSO)",
-    description:
-      "Connect your identity provider so the team signs in with your existing company credentials.",
-    href: "/help/centre",
-    live: false,
-  },
-  {
-    icon: ScrollText,
-    name: "Audit logs",
-    description:
-      "See who changed what and when — dispatch overrides, rate-card edits, user changes, and exports.",
-    href: "/help/centre",
-    live: false,
-  },
-  {
-    icon: Lock,
-    name: "Account security",
-    description:
-      "Two-factor authentication, session controls, API key rotation, and recovery options.",
-    href: "/help/centre",
-    live: false,
   },
 ];
 
