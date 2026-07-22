@@ -32,7 +32,13 @@ export type TrackingPodQuality = "photo-signature" | "signature" | "none";
 
 export interface TrackingInfo {
   live: TrackingLiveQuality;
+  /** Label shown next to the live badge. Defaults per tier ("Live tracking"). */
+  liveLabel?: string;
   pod: TrackingPodQuality;
+  /** Overrides the default proof-of-delivery label (e.g. "Photo + GPS proof"). */
+  podLabel?: string;
+  /** Extra verbatim detail lines (e.g. "1-hour text window"). */
+  details?: string[];
 }
 
 /**
@@ -202,35 +208,50 @@ function CoverageBar({ tier, label, zones }: CoverageInfo) {
 
 // ─── Tracking cell ────────────────────────────────────────────────────────────
 
-function TrackingCell({ live, pod }: TrackingInfo) {
+function TrackingCell({ live, liveLabel, pod, podLabel, details }: TrackingInfo) {
   const liveSpec = {
-    live: { Icon: Check, color: "text-success-dark", bg: "bg-success-light", label: "Live" },
+    live: { Icon: Check, color: "text-success-dark", bg: "bg-success-light", label: "Live tracking" },
     limited: { Icon: AlertCircle, color: "text-warning-dark", bg: "bg-warning-light", label: "Limited" },
     none: { Icon: Minus, color: "text-text-quaternary", bg: "bg-bg-tertiary", label: "None" },
   }[live];
   const podSpec = {
     "photo-signature": { Icon: Camera, color: "text-success-dark", label: "Photo + signature" },
     signature: { Icon: Signature, color: "text-text-secondary", label: "Signature" },
-    none: { Icon: Minus, color: "text-text-quaternary", label: "—" },
+    none: null,
   }[pod];
 
   return (
-    <div className="space-y-1.5 min-w-[150px]">
+    <div className="space-y-1.5 min-w-[150px] max-w-[200px]">
       <div className="flex items-center gap-1.5">
         <span
-          className={`inline-flex h-5 w-5 items-center justify-center rounded-full ${liveSpec.bg}`}
+          className={`inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${liveSpec.bg}`}
           aria-hidden
         >
           <liveSpec.Icon className={`h-3 w-3 ${liveSpec.color}`} strokeWidth={2.5} />
         </span>
-        <span className="text-body-sm text-text-secondary">{liveSpec.label}</span>
-      </div>
-      <div className="flex items-center gap-1.5">
-        <span className="inline-flex h-5 w-5 items-center justify-center" aria-hidden>
-          <podSpec.Icon className={`h-3.5 w-3.5 ${podSpec.color}`} strokeWidth={2.25} />
+        <span className="text-body-sm text-text-secondary">
+          {liveLabel ?? liveSpec.label}
         </span>
-        <span className="text-body-sm text-text-secondary">{podSpec.label}</span>
       </div>
+      {podSpec && (
+        <div className="flex items-center gap-1.5">
+          <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center" aria-hidden>
+            <podSpec.Icon className={`h-3.5 w-3.5 ${podSpec.color}`} strokeWidth={2.25} />
+          </span>
+          <span className="text-body-sm text-text-secondary">
+            {podLabel ?? podSpec.label}
+          </span>
+        </div>
+      )}
+      {details && details.length > 0 && (
+        <ul className="space-y-0.5">
+          {details.map((line) => (
+            <li key={line} className="text-caption text-text-tertiary leading-snug pl-[26px]">
+              {line}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
@@ -368,7 +389,7 @@ function CarrierIdentity({
  * Mobile: 2-column grid cards (88px label gutter + fluid value column).
  */
 export default function CarrierComparisonTable({
-  title = "Carrier comparison",
+  title = "Carrier network",
   intro,
   columns,
   rows,
@@ -383,12 +404,11 @@ export default function CarrierComparisonTable({
     <section className="bg-white py-12 md:py-16 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-2">
-            <h2 className="text-display-lg text-text-primary">{title}</h2>
-            <div className="text-eyebrow text-text-tertiary">
-              {rows.length} carriers compared
-            </div>
-          </div>
+          <h2
+            className={`text-display-lg text-text-primary ${intro ? "mb-2" : "mb-8"}`}
+          >
+            {title}
+          </h2>
           {intro && (
             <p className="text-body-md text-text-secondary max-w-3xl mb-8">
               {intro}
