@@ -72,23 +72,33 @@ export default function IntegrationHighlights() {
           </div>
         </ScrollReveal>
 
-        {/* Content */}
+        {/* Content — BOTH grids stay mounted and toggle via CSS so the
+            inactive tab's logos are already fetched/decoded when the user
+            switches (a conditional render made every carrier icon start
+            loading only at click time — visible pop-in on mobile). */}
         <ScrollReveal>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {(tab === "tech" ? techLogos : carrierLogos).map((logo) => (
-              <Link
-                key={logo.name}
-                href={logo.href}
-                className="group card-hover flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
-              >
-                <IntegrationLogo name={logo.name} logo={logo.logo} size="sm" className="mb-3" />
-                <span className="text-sm font-medium text-text-primary text-center group-hover:text-accent transition-colors">{logo.name}</span>
-                <span className="text-[10px] text-text-tertiary">
-                  {"region" in logo ? logo.region : logo.cat}
-                </span>
-              </Link>
-            ))}
-          </div>
+          {(["tech", "carriers"] as const).map((t) => (
+            <div
+              key={t}
+              className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 ${
+                tab === t ? "" : "hidden"
+              }`}
+            >
+              {(t === "tech" ? techLogos : carrierLogos).map((logo) => (
+                <Link
+                  key={logo.name}
+                  href={logo.href}
+                  className="group card-hover flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-bg-secondary hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
+                >
+                  <IntegrationLogo name={logo.name} logo={logo.logo} size="sm" className="mb-3" />
+                  <span className="text-sm font-medium text-text-primary text-center group-hover:text-accent transition-colors">{logo.name}</span>
+                  <span className="text-[10px] text-text-tertiary">
+                    {"region" in logo ? logo.region : logo.cat}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          ))}
         </ScrollReveal>
 
         <div className="mt-8 text-center">

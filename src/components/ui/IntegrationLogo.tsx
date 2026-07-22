@@ -40,6 +40,11 @@ export default function IntegrationLogo({
 
   if (logo) {
     const objectFit = fit === "contain" ? "object-contain" : "object-cover";
+    // Small tiers skip the image optimizer: a 20–40px logo doesn't need
+    // resizing, and each optimizer variant is a slow cold-cache round-trip
+    // (visible icon pop-in on mobile). Serving the original static asset is
+    // one CDN-cached URL reused by every page. Larger tiers keep optimization.
+    const tiny = size === "xs" || size === "sm" || size === "fill";
     return (
       <div
         className={`${s.container} ${s.radius} overflow-hidden flex items-center justify-center flex-shrink-0 ${className}`}
@@ -50,6 +55,7 @@ export default function IntegrationLogo({
           width={s.image}
           height={s.image}
           quality={90}
+          unoptimized={tiny}
           className={`${objectFit} w-full h-full`}
         />
       </div>

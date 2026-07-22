@@ -311,35 +311,85 @@ export default function SolutionsRouting({
     }
   };
 
-  // Touch swipe between audiences on the panel. Handlers only read the touch
-  // points (no preventDefault), so native vertical page scrolling stays intact
-  // — a gesture only pages when it's decisively horizontal. No wrap at the
-  // ends: an ignored swipe reads as "you're at the edge", matching the
-  // physical card metaphor. The direction seeds a subtle slide-in so the new
-  // card enters from the side you pulled it from.
-  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  // Touch swipe between audiences on the panel, with an AXIS LOCK so the
+  // gesture feels solid: on the first ~10px of movement the gesture commits
+  // to horizontal (page the cards) or vertical (scroll the page) and stays
+  // there. Once horizontal, touchmove is preventDefault'ed so the page stops
+  // creeping vertically under the finger — that "scrolls while I swipe"
+  // wobble was the original bug. preventDefault needs a NATIVE non-passive
+  // touchmove listener (React attaches touch handlers passively), hence the
+  // effect instead of JSX props. `touch-action: pan-y` on the panel is the
+  // browser-level version of the same contract. No wrap at the ends: an
+  // ignored swipe reads as "you're at the edge". The direction seeds a subtle
+  // slide-in so the new card enters from the side you pulled it from.
+  const panelRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(active);
+  activeRef.current = active;
   const slideDirRef = useRef(0);
-  const onPanelTouchStart = (e: React.TouchEvent) => {
-    swipeStart.current =
-      e.touches.length === 1
-        ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
-        : null;
-  };
-  const onPanelTouchEnd = (e: React.TouchEvent) => {
-    const start = swipeStart.current;
-    swipeStart.current = null;
-    const end = e.changedTouches[0];
-    if (!start || !end) return;
-    const dx = end.clientX - start.x;
-    const dy = end.clientY - start.y;
-    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-    const dir = dx < 0 ? 1 : -1; // swipe left → next audience
-    const next = active + dir;
-    if (next < 0 || next >= ICPS.length) return;
-    slideDirRef.current = dir;
-    setActive(next);
-    centerTab(next);
-  };
+  const centerTabRef = useRef(centerTab);
+  centerTabRef.current = centerTab;
+
+  useEffect(() => {
+    if (enhanced) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    let startX = 0;
+    let startY = 0;
+    let axis: "h" | "v" | null = null;
+    let tracking = false;
+
+    const onStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) {
+        tracking = false;
+        return;
+      }
+      tracking = true;
+      axis = null;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+    const onMove = (e: TouchEvent) => {
+      if (!tracking) return;
+      const t = e.touches[0];
+      if (!t) return;
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (!axis) {
+        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+        axis = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+      }
+      if (axis === "h" && e.cancelable) e.preventDefault();
+    };
+    const onEnd = (e: TouchEvent) => {
+      if (!tracking) return;
+      tracking = false;
+      if (axis !== "h") return;
+      const t = e.changedTouches[0];
+      if (!t) return;
+      const dx = t.clientX - startX;
+      if (Math.abs(dx) < 48) return;
+      const dir: 1 | -1 = dx < 0 ? 1 : -1; // swipe left → next audience
+      const next = activeRef.current + dir;
+      if (next < 0 || next >= ICPS.length) return;
+      slideDirRef.current = dir;
+      setActive(next);
+      centerTabRef.current(next);
+    };
+    const onCancel = () => {
+      tracking = false;
+    };
+
+    panel.addEventListener("touchstart", onStart, { passive: true });
+    panel.addEventListener("touchmove", onMove, { passive: false });
+    panel.addEventListener("touchend", onEnd, { passive: true });
+    panel.addEventListener("touchcancel", onCancel, { passive: true });
+    return () => {
+      panel.removeEventListener("touchstart", onStart);
+      panel.removeEventListener("touchmove", onMove);
+      panel.removeEventListener("touchend", onEnd);
+      panel.removeEventListener("touchcancel", onCancel);
+    };
+  }, [enhanced]);
 
   if (!enhanced) {
     const icp = ICPS[active];
@@ -386,15 +436,12 @@ export default function SolutionsRouting({
 
             {/* Panel — swaps in place with a short fade */}
             <div
+              ref={panelRef}
               role="tabpanel"
               id="solutions-tabpanel"
               aria-labelledby={`solutions-tab-${active}`}
               className="mt-6"
-              onTouchStart={onPanelTouchStart}
-              onTouchEnd={onPanelTouchEnd}
-              onTouchCancel={() => {
-                swipeStart.current = null;
-              }}
+              style={{ touchAction: "pan-y" }}
             >
               <div
                 key={active}
