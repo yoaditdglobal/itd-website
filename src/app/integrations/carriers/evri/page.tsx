@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function EvriPage() {
   return (
     <CarrierPage
+      slug="evri"
       name="Evri"
       logo="/logos/carriers/evri_logo.png"
       tagline="High-volume residential parcel delivery across the full UK network."

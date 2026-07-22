@@ -4,7 +4,8 @@ import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import CarrierOrbit from "@/components/sections/CarrierOrbit"; // client component
-import { Truck, Globe, Clock, ShieldCheck, Zap, BarChart3 } from "lucide-react";
+import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
+import { Truck, Globe, Clock, ShieldCheck, Zap, BarChart3, Check } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface CarrierFeature {
@@ -24,6 +25,8 @@ export interface CarrierVideo {
 
 export interface CarrierPageProps {
   name: string;
+  /** URL slug, e.g. "dhl" → /integrations/carriers/dhl. Enables Service + BreadcrumbList JSON-LD. */
+  slug?: string;
   logo?: string;
   logoBg?: string;
   heroBg?: string;
@@ -45,6 +48,7 @@ export interface CarrierPageProps {
 
 export default function CarrierPage({
   name,
+  slug,
   logo,
   logoBg,
   heroBg,
@@ -57,8 +61,29 @@ export default function CarrierPage({
   about,
   video,
 }: CarrierPageProps) {
+  const realStats = stats.filter((s) => s.value && s.value !== "—");
+  const realServices = services.filter(Boolean);
   return (
     <>
+      {slug && (
+        <JsonLd
+          data={[
+            serviceSchema({
+              name: `${name} integration`,
+              description,
+              path: `/integrations/carriers/${slug}`,
+              serviceType: "Carrier integration",
+              areaServed: region ? [region] : undefined,
+            }),
+            breadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: "Carriers", path: "/integrations/carriers" },
+              { name, path: `/integrations/carriers/${slug}` },
+            ]),
+          ]}
+        />
+      )}
+
       {/* Hero */}
       <section
         data-hero-tone="dark"
@@ -96,6 +121,24 @@ export default function CarrierPage({
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Key facts — carrier stats (citable, GEO-friendly) */}
+      {realStats.length > 0 && (
+        <section className="border-b border-border bg-white py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <dl className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
+              {realStats.map((s) => (
+                <div key={s.label}>
+                  <dd className="text-3xl font-semibold text-text-primary md:text-4xl">
+                    {s.value}
+                  </dd>
+                  <dt className="mt-1 text-sm text-text-tertiary">{s.label}</dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       {/* About {name} — narrative prose (optional) */}
       {about && about.length > 0 && (
@@ -171,6 +214,33 @@ export default function CarrierPage({
                 </video>
               </div>
             </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* Services available through ITD */}
+      {realServices.length > 0 && (
+        <section className="border-t border-border bg-bg-secondary py-16 md:py-20">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <h2 className="text-display-md text-text-primary mb-2">
+                {name} services on Connexx
+              </h2>
+              <p className="text-body-md text-text-secondary mb-8 max-w-2xl">
+                Every {name} service you can book and track from the ITD dashboard.
+              </p>
+            </ScrollReveal>
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {realServices.map((svc) => (
+                <li
+                  key={svc}
+                  className="flex items-start gap-2 rounded-lg border border-border bg-white px-4 py-3"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                  <span className="text-body-sm text-text-primary">{svc}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}

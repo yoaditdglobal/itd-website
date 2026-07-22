@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function FedExPage() {
   return (
     <CarrierPage
+      slug="fedex"
       name="FedEx"
       logo="/logos/carriers/fedex-icon.png"
       logoBg="#4D148C"

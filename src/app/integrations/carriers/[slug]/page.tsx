@@ -44,5 +44,5 @@ export default async function CarrierDetailPage({
   const { slug } = await params;
   const carrier = getIntegrationBySlug(slug, "carrier");
   if (!carrier) notFound();
-  return <CarrierPage {...getCarrierPageContent(carrier)} />;
+  return <CarrierPage {...getCarrierPageContent(carrier)} slug={slug} />;
 }

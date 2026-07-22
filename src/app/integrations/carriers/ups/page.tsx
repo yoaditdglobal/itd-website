@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function UPSPage() {
   return (
     <CarrierPage
+      slug="ups"
       name="UPS"
       logo="/logos/carriers/ups_logo.png"
       logoBg="#351C15"

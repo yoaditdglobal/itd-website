@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
 export default function InPostPage() {
   return (
     <CarrierPage
+      slug="inpost"
       name="InPost"
       logo="/logos/carriers/inpost-icon.png"
       tagline="The UK's largest parcel locker network, with 15,000 locations accessible 24 hours a day."
