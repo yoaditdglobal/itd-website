@@ -140,22 +140,53 @@ export default function CaseStudiesCarousel({
 
   // The autoplay tick. End detection reads the DOM each tick (matches
   // update()'s 4px tolerance — snap-proximity rarely lands exactly on max).
+  // Advances via a small rAF tween — programmatic smooth scrolling silently
+  // no-ops in some embedded browsers, and the tween is snap-proof.
   useEffect(() => {
     const shouldPlay = isMobile && inView && pageVisible && !paused && !reducedMotion;
     if (!shouldPlay) return;
+    let raf = 0;
+    const tweenTo = (el: HTMLElement, target: number) => {
+      const from = el.scrollLeft;
+      const delta = target - from;
+      if (Math.abs(delta) < 1) return;
+      const prevSnap = el.style.scrollSnapType;
+      el.style.scrollSnapType = "none"; // snap fights per-frame scrollLeft writes
+      const start = performance.now();
+      const dur = Math.min(900, 350 + Math.abs(delta) * 0.3);
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        el.scrollLeft = from + delta * e;
+        if (t < 1) {
+          raf = requestAnimationFrame(step);
+        } else {
+          el.style.scrollSnapType = prevSnap;
+        }
+      };
+      raf = requestAnimationFrame(step);
+    };
     const id = setInterval(() => {
       const el = trackRef.current;
       if (!el) return;
       const max = el.scrollWidth - el.clientWidth;
       if (max <= 0) return; // nothing to scroll
       if (el.scrollLeft >= max - 4) {
-        el.scrollTo({ left: 0, behavior: "smooth" }); // loop back to the start
+        tweenTo(el, 0); // loop back to the start
       } else {
-        scrollByCards(1);
+        const first = el.firstElementChild as HTMLElement | null;
+        const step = first ? first.offsetWidth + 24 : el.clientWidth * 0.8;
+        tweenTo(el, Math.min(el.scrollLeft + step, max));
       }
     }, AUTOPLAY_MS);
-    return () => clearInterval(id);
-  }, [isMobile, inView, pageVisible, paused, reducedMotion, scrollByCards]);
+    return () => {
+      clearInterval(id);
+      if (raf) cancelAnimationFrame(raf);
+      // A cancelled mid-tween must not leave snap disabled on the track.
+      const el = trackRef.current;
+      if (el) el.style.scrollSnapType = "";
+    };
+  }, [isMobile, inView, pageVisible, paused, reducedMotion]);
 
   // ── Drag-to-scroll (mouse only). Threshold keeps card clicks working. ──
   const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });

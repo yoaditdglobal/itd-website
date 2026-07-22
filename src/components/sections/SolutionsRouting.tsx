@@ -265,12 +265,29 @@ export default function SolutionsRouting({
     const row = pillRowRef.current;
     const el = tabRefs.current[i];
     if (!row || !el) return;
-    const target = el.offsetLeft - (row.clientWidth - el.offsetWidth) / 2;
     const max = row.scrollWidth - row.clientWidth;
-    row.scrollTo({
-      left: Math.max(0, Math.min(target, max)),
-      behavior: reducedMotionRef.current ? "auto" : "smooth",
-    });
+    const target = Math.max(
+      0,
+      Math.min(el.offsetLeft - (row.clientWidth - el.offsetWidth) / 2, max),
+    );
+    if (reducedMotionRef.current) {
+      row.scrollLeft = target;
+      return;
+    }
+    // Tiny rAF tween — programmatic smooth scrollTo silently no-ops in some
+    // embedded browsers, and this matches the codebase's rAF idiom anyway.
+    const from = row.scrollLeft;
+    const delta = target - from;
+    if (Math.abs(delta) < 1) return;
+    const start = performance.now();
+    const dur = 300;
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      row.scrollLeft = from + delta * e;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   };
   const selectTab = (i: number) => {
     setActive(i);
