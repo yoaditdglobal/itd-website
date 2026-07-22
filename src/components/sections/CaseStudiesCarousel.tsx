@@ -31,6 +31,9 @@ export default function CaseStudiesCarousel({
   const [canRight, setCanRight] = useState(true);
   const [progress, setProgress] = useState(0);
   const reduceMotion = useRef(false);
+  // Interaction pause + in-view gating for the mobile-only autoplay.
+  const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(true);
 
   useEffect(() => {
     reduceMotion.current =
@@ -68,10 +71,44 @@ export default function CaseStudiesCarousel({
     el.scrollBy({ left: dir * step, behavior: reduceMotion.current ? "auto" : "smooth" });
   }, []);
 
+  // ── Autoplay (mobile only): timed auto-advance L→R, looping. Never runs at
+  //    lg+ (desktop keeps its arrows/drag) or under prefers-reduced-motion;
+  //    pauses on interaction, when off-screen, and when the tab is hidden. ──
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (paused || !inView) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const blocked = () =>
+      document.hidden ||
+      !window.matchMedia("(max-width: 1023.98px)").matches || // desktop → no autoplay
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches; // a11y → no autoplay
+    const id = setInterval(() => {
+      if (blocked()) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
+      // Loop back to the first card once the last one is reached.
+      if (el.scrollLeft >= max - 4) el.scrollTo({ left: 0, behavior: "smooth" });
+      else scrollByCards(1);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [paused, inView, scrollByCards]);
+
   // ── Drag-to-scroll (mouse only). Threshold keeps card clicks working. ──
   const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
 
   const onPointerDown = (e: ReactPointerEvent) => {
+    setPaused(true); // pause autoplay on any touch/mouse interaction
     if (e.pointerType !== "mouse") return;
     const el = trackRef.current;
     if (!el) return;
@@ -100,10 +137,18 @@ export default function CaseStudiesCarousel({
       el.style.scrollSnapType = "";
     }
     drag.current.active = false;
+    setPaused(false); // resume autoplay; the effect restarts the ~5s timer
   };
 
   return (
-    <div role="region" aria-roledescription="carousel" aria-label={label} className="relative">
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={label}
+      className="relative"
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
       <div
         ref={trackRef}
         className={`flex gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-proximity lg:cursor-grab lg:active:cursor-grabbing ${
@@ -112,6 +157,7 @@ export default function CaseStudiesCarousel({
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
+        onPointerCancel={endDrag}
         onPointerLeave={endDrag}
       >
         {children}
