@@ -114,7 +114,7 @@ export default function ConnexxPage() {
               </div>
             </div>
 
-            <div className="hero-entrance-aside">
+            <div className="hero-entrance-aside order-first lg:order-none">
               <FullOverviewAnimation />
             </div>
           </div>
