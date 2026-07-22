@@ -757,7 +757,7 @@ export default function BillingPage() {
               within 7 days of receiving the invoice, quoting the invoice number
               — or raise a request and the team will pick it up.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <a
                 href="https://support.itdglobal.com/hc/en-gb/requests/new"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"

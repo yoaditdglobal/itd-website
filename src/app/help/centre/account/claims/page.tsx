@@ -105,7 +105,7 @@ export default function ClaimsPage() {
               above, and the ITD team will start the claim with the carrier on
               your behalf.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/help/submit-request"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"

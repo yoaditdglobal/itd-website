@@ -164,7 +164,8 @@ function UsedByCluster({ tag }: { tag: SolutionTag }) {
  * scroll position (not a flat crossfade), the left list highlights + scales the
  * active name, and the active audience's real customer case studies appear as
  * hoverable, click-through logos. The headline links to the solution page.
- * Mobile / reduced-motion: a static stacked layout (SSR-safe).
+ * Mobile / reduced-motion: a click-based pill mini-nav + swapping panel
+ * (SSR-safe; the first audience renders server-side).
  *
  * `forceEnhanced` bypasses the media-query gate — used only by the isolated dev
  * preview route so the pinned animation can be observed off the scroll-jacked
@@ -179,10 +180,18 @@ export default function SolutionsRouting({
   const stageRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Mobile tab-pager state (the !enhanced branch).
+  const [shown, setShown] = useState(true);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const pillRowRef = useRef<HTMLDivElement>(null);
+  const reducedMotionRef = useRef(false);
+
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const decide = () =>
+    const decide = () => {
+      reducedMotionRef.current = mql.matches;
       setEnhanced(forceEnhanced || (!mql.matches && window.innerWidth >= 1024));
+    };
     decide();
     mql.addEventListener("change", decide);
     window.addEventListener("resize", decide);
@@ -191,6 +200,15 @@ export default function SolutionsRouting({
       window.removeEventListener("resize", decide);
     };
   }, [forceEnhanced]);
+
+  // Mobile tabs: fade the panel on switch (ConnexxFeatures pattern). Skipped
+  // for the desktop pager (scroll drives `active` there) and reduced motion.
+  useEffect(() => {
+    if (enhanced || reducedMotionRef.current) return;
+    setShown(false);
+    const id = requestAnimationFrame(() => setShown(true));
+    return () => cancelAnimationFrame(id);
+  }, [active, enhanced]);
 
   // Scroll → active index + INTENSE continuous zoom. The active panel's scale is
   // driven per-frame from sub-progress within its band (transforms applied
@@ -238,17 +256,113 @@ export default function SolutionsRouting({
     return () => window.removeEventListener("scroll", onScroll);
   }, [enhanced]);
 
-  // ─── Static fallback (mobile / reduced-motion) ───
+  // ─── Mobile / reduced-motion: click-based tab pager ───
+  // A horizontally-scrollable pill mini-nav + one swapping panel (same
+  // interaction as the Connexx feature explorer) instead of a long stack —
+  // keeps the homepage short on phones. Scrolls ONLY the pill row (never
+  // scrollIntoView, which can yank the page vertically).
+  const centerTab = (i: number) => {
+    const row = pillRowRef.current;
+    const el = tabRefs.current[i];
+    if (!row || !el) return;
+    const max = row.scrollWidth - row.clientWidth;
+    const target = Math.max(
+      0,
+      Math.min(el.offsetLeft - (row.clientWidth - el.offsetWidth) / 2, max),
+    );
+    if (reducedMotionRef.current) {
+      row.scrollLeft = target;
+      return;
+    }
+    // Tiny rAF tween — programmatic smooth scrollTo silently no-ops in some
+    // embedded browsers, and this matches the codebase's rAF idiom anyway.
+    const from = row.scrollLeft;
+    const delta = target - from;
+    if (Math.abs(delta) < 1) return;
+    const start = performance.now();
+    const dur = 300;
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      row.scrollLeft = from + delta * e;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const selectTab = (i: number) => {
+    setActive(i);
+    centerTab(i);
+  };
+  const moveTab = (dir: 1 | -1) => {
+    const next = (active + dir + ICPS.length) % ICPS.length;
+    setActive(next);
+    tabRefs.current[next]?.focus({ preventScroll: true });
+    centerTab(next);
+  };
+  const onTabKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      e.preventDefault();
+      moveTab(1);
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      e.preventDefault();
+      moveTab(-1);
+    }
+  };
+
   if (!enhanced) {
+    const icp = ICPS[active];
     return (
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <SectionLabel title={TITLE} subtitle={SUBTITLE} align="center" />
-          </ScrollReveal>
-          <div className="mt-12 space-y-12 md:space-y-16">
-            {ICPS.map((icp, i) => (
-              <ScrollReveal key={icp.name} delay={i * 0.04}>
+
+            {/* Pill mini-nav — horizontal, edge-bleeding scroll row */}
+            <div
+              ref={pillRowRef}
+              role="tablist"
+              aria-label="Audiences"
+              aria-orientation="horizontal"
+              onKeyDown={onTabKeyDown}
+              className="relative mt-10 flex gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {ICPS.map((item, i) => {
+                const on = i === active;
+                return (
+                  <button
+                    key={item.name}
+                    ref={(el) => {
+                      tabRefs.current[i] = el;
+                    }}
+                    role="tab"
+                    id={`solutions-tab-${i}`}
+                    aria-selected={on}
+                    aria-controls="solutions-tabpanel"
+                    tabIndex={on ? 0 : -1}
+                    onClick={() => selectTab(i)}
+                    className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      on
+                        ? "border-accent/40 bg-accent-light/60 text-text-primary"
+                        : "border-border bg-white text-text-secondary hover:border-accent/20 hover:text-text-primary"
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Panel — swaps in place with a short fade */}
+            <div
+              role="tabpanel"
+              id="solutions-tabpanel"
+              aria-labelledby={`solutions-tab-${active}`}
+              className="mt-6"
+            >
+              <div
+                key={active}
+                style={{ opacity: shown ? 1 : 0, transition: "opacity 0.3s ease" }}
+              >
                 <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
                   <Link
                     href={icp.href}
@@ -262,6 +376,9 @@ export default function SolutionsRouting({
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                     />
+                    <span className="absolute left-3 top-3 rounded-full bg-bg-dark/80 px-3 py-1 text-caption text-white backdrop-blur-sm">
+                      {icp.tag}
+                    </span>
                   </Link>
                   <div>
                     <Link href={icp.href} className="group inline-block">
@@ -282,9 +399,9 @@ export default function SolutionsRouting({
                     </div>
                   </div>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     );

@@ -187,7 +187,7 @@ export default function DevelopersPage() {
               reference, the live status page, the changelog, webhooks, rate
               limits, and SDK examples.
             </p>
-            <div className="mt-7 flex flex-col sm:flex-row gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <Button href="https://docs.itdglobal.com">
                 Open the API reference
               </Button>

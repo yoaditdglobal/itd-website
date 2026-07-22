@@ -256,7 +256,7 @@ export default async function IntegrationGuidePage({
               Submit a support request and include your account ID and the name
               of the integration. We respond within 1 business day.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/help/submit-request"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"

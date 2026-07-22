@@ -69,7 +69,7 @@ export default function Hero({
             <p className="hero-entrance-sub mt-6 text-body-lg text-text-secondary max-w-xl">
               {sub}
             </p>
-            <div className="hero-entrance-cta mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
               <MagneticButton>
                 <Button href={primary.href} variant="primary">{primary.label}</Button>
               </MagneticButton>
