@@ -290,11 +290,13 @@ export default function SolutionsRouting({
     requestAnimationFrame(step);
   };
   const selectTab = (i: number) => {
+    slideDirRef.current = 0;
     setActive(i);
     centerTab(i);
   };
   const moveTab = (dir: 1 | -1) => {
     const next = (active + dir + ICPS.length) % ICPS.length;
+    slideDirRef.current = 0;
     setActive(next);
     tabRefs.current[next]?.focus({ preventScroll: true });
     centerTab(next);
@@ -307,6 +309,36 @@ export default function SolutionsRouting({
       e.preventDefault();
       moveTab(-1);
     }
+  };
+
+  // Touch swipe between audiences on the panel. Handlers only read the touch
+  // points (no preventDefault), so native vertical page scrolling stays intact
+  // — a gesture only pages when it's decisively horizontal. No wrap at the
+  // ends: an ignored swipe reads as "you're at the edge", matching the
+  // physical card metaphor. The direction seeds a subtle slide-in so the new
+  // card enters from the side you pulled it from.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const slideDirRef = useRef(0);
+  const onPanelTouchStart = (e: React.TouchEvent) => {
+    swipeStart.current =
+      e.touches.length === 1
+        ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
+        : null;
+  };
+  const onPanelTouchEnd = (e: React.TouchEvent) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    const end = e.changedTouches[0];
+    if (!start || !end) return;
+    const dx = end.clientX - start.x;
+    const dy = end.clientY - start.y;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    const dir = dx < 0 ? 1 : -1; // swipe left → next audience
+    const next = active + dir;
+    if (next < 0 || next >= ICPS.length) return;
+    slideDirRef.current = dir;
+    setActive(next);
+    centerTab(next);
   };
 
   if (!enhanced) {
@@ -358,10 +390,21 @@ export default function SolutionsRouting({
               id="solutions-tabpanel"
               aria-labelledby={`solutions-tab-${active}`}
               className="mt-6"
+              onTouchStart={onPanelTouchStart}
+              onTouchEnd={onPanelTouchEnd}
+              onTouchCancel={() => {
+                swipeStart.current = null;
+              }}
             >
               <div
                 key={active}
-                style={{ opacity: shown ? 1 : 0, transition: "opacity 0.3s ease" }}
+                style={{
+                  opacity: shown ? 1 : 0,
+                  transform: shown
+                    ? "translateX(0)"
+                    : `translateX(${slideDirRef.current * 20}px)`,
+                  transition: "opacity 0.3s ease, transform 0.3s ease",
+                }}
               >
                 <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
                   <Link
