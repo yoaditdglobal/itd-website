@@ -10,6 +10,8 @@ import {
   howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
+import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
+import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "Importing from China and the Far East to the UK",
@@ -77,6 +79,14 @@ const faqs = [
     answer:
       "Yes. You cannot import commercial goods into the UK without an EORI number. Apply free at gov.uk/eori. Processing usually takes 5 working days. If you are VAT registered, your EORI is your VAT number prefixed GB and suffixed 000. If you also import into Northern Ireland, you need an XI-prefixed EORI in addition to the GB one.",
   },
+];
+
+/** TL;DR — every bullet is verifiable against the guide sections below. */
+const TLDR = [
+  "Express courier suits urgent consignments under 100kg, air freight 100kg\u20131,000kg, and sea LCL or FCL everything larger \u2014 decided by lead time, cost per kg and working capital.",
+  "You cannot import commercial goods without an EORI number \u2014 apply free at gov.uk/eori, usually processed within 5 working days.",
+  "Postponed VAT Accounting lets you declare import VAT on your VAT return instead of paying it at the border.",
+  "Most holds trace to a wrong HS code, a non-compliant commercial invoice or missed anti-dumping duty \u2014 all far cheaper to fix at origin than at the UK border.",
 ];
 
 /** HowTo steps mirror the numbered guide sections below — each step anchors
@@ -187,6 +197,15 @@ export default function FarEastImportsGuidePage() {
                 <Clock className="w-3.5 h-3.5" /> 18 minute read
               </span>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* TL;DR — GEO-extractable summary */}
+      <section className="bg-white pb-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <KeyTakeaways items={TLDR} />
           </ScrollReveal>
         </div>
       </section>
@@ -605,7 +624,7 @@ export default function FarEastImportsGuidePage() {
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
                     <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{linkifyGlossaryTerms(item.answer)}</p>
                 </details>
               </ScrollReveal>
             ))}

@@ -12,6 +12,13 @@ export const metadata = buildMetadata({
   path: "/solutions/small-business",
 });
 
+/** TL;DR — every bullet is verifiable against this page's own copy. */
+const TLDR = [
+  "We let UK SMEs ship on the rates and carrier choice a big retailer gets, with no minimum volume and no lock-in.",
+  "We bring the UK's major carriers into one account, flag problem parcels in a single tracking view, and connect your store and marketplaces.",
+  "You ship on our buying power, so the rate beats what a business your size would get on its own, and there's a real person to call when something needs sorting.",
+];
+
 export default function SmallBusinessPage() {
   return (
     <VerticalPage
@@ -36,6 +43,7 @@ export default function SmallBusinessPage() {
         gradient: "from-accent-light via-white to-accent/15",
         icon: Store,
       }}
+      keyTakeaways={TLDR}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Solutions", path: "/solutions" },

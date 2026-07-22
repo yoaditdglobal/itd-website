@@ -2,6 +2,7 @@
 
 import { useState, useId } from "react";
 import { ChevronDown } from "lucide-react";
+import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
 
 export interface FaqItem {
   question: string;
@@ -66,7 +67,7 @@ export default function FaqAccordion({ items }: FaqAccordionProps) {
                 className={`overflow-hidden min-h-0 transition-[opacity] duration-[250ms] ${isOpen ? "visible opacity-100" : "invisible opacity-0"}`}
               >
                 <p className="mt-3 text-body-sm text-text-secondary whitespace-pre-line">
-                  {item.answer}
+                  {linkifyGlossaryTerms(item.answer)}
                 </p>
               </div>
             </div>

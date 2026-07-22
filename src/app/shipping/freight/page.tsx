@@ -40,6 +40,13 @@ const CRUMBS = [
   { name: "Freight", path: "/shipping/freight" },
 ];
 
+/** TL;DR — every bullet is verifiable against this page's own copy. */
+const TLDR = [
+  "We move UK businesses' freight worldwide by pallet, road, air and sea, with customs handled and one team managing it from collection to delivery.",
+  "We offer pallet and LTL, air and sea freight (FCL, LCL and buyers consolidation), and the Console Sample Service, all with in-house customs clearance.",
+  "The Console Sample Service runs a fixed weekly air consolidation from China, collected by our own team there and delivered to your UK address each Tuesday at a set rate.",
+];
+
 export default function ShippingFreightPage() {
   return (
     <>
@@ -86,6 +93,7 @@ export default function ShippingFreightPage() {
           label: "Contact Sales",
           href: "/contact?enquiry=freight",
         }}
+        keyTakeaways={TLDR}
         breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({

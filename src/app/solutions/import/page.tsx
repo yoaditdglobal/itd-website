@@ -51,6 +51,13 @@ const CRUMBS = [
   { name: "Import", path: "/solutions/import" },
 ];
 
+/** TL;DR — every bullet is verifiable against this page's own copy. */
+const TLDR = [
+  "We take the complexity out of importing from China or worldwide for UK businesses, giving you a single point of contact from collection to delivery.",
+  "Our China-based team manages factory collections in your suppliers' time zone, and we clear customs in-house across all import routes with no third-party broker fees.",
+  "Parcel consolidation through our Shenzhen warehouse typically reduces delivery costs by 20% or more compared with shipping each order individually.",
+];
+
 export default function ImportPage() {
   return (
     <>
@@ -205,6 +212,7 @@ export default function ImportPage() {
           primary: { label: "Get Quote", href: RATE_CHECKER_URL },
           secondary: { label: "Contact Sales", href: "/contact?enquiry=import" },
         }}
+        keyTakeaways={TLDR}
         breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({
