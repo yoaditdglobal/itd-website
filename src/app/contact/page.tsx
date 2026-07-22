@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
@@ -63,6 +64,15 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
+
+  // After a successful submit, don't leave the user parked on the confirmation
+  // screen — send them back to the homepage within a few seconds (< 4s).
+  useEffect(() => {
+    if (!submitted) return;
+    const t = setTimeout(() => router.push("/"), 3500);
+    return () => clearTimeout(t);
+  }, [submitted, router]);
 
   const showMainLanes = shippingType === "Export" || shippingType === "Import";
   const isFreight = isFreightType(shippingType);
