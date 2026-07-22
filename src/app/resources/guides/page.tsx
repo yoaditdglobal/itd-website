@@ -86,9 +86,6 @@ export default function GuidesIndexPage() {
       <section className="bleed-nav bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <span className="inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow mb-4">
-              Resources
-            </span>
             <h1 className="text-display-xl text-text-primary">Guides</h1>
             <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
               Operator guides for UK shippers, importers, and marketplace sellers. Plain definitions, working examples, and the trade-offs the textbooks skip.

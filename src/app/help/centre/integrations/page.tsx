@@ -42,9 +42,6 @@ export default function HelpIntegrationsPage() {
       <section className="bleed-nav bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <span className="inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow mb-4">
-              Integrations
-            </span>
             <h1 className="text-display-xl text-text-primary">
               Integration setup guides
             </h1>

@@ -173,9 +173,6 @@ export default function DevelopersPage() {
               <span className="mx-2">/</span>
               <span className="text-text-secondary">Developer resources</span>
             </nav>
-            <p className="text-eyebrow text-accent mb-3">
-              For developers
-            </p>
             <h1 className="text-display-xl text-text-primary">
               Developer resources
             </h1>

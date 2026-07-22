@@ -36,9 +36,6 @@ export default function LegalPage({
       <section className="bleed-nav bg-white py-16 md:py-20 border-b border-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <span className="inline-block px-3 py-1 rounded-full bg-accent-light text-accent text-eyebrow mb-4">
-              Legal
-            </span>
             <h1 className="text-display-lg text-text-primary">{title}</h1>
             <p className="mt-3 text-sm text-text-tertiary">
               Last updated: {updated}

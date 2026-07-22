@@ -35,9 +35,6 @@ export default function TeamPage() {
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-block px-3 py-1 rounded-full bg-accent-light text-accent-dark text-eyebrow mb-4">
-              Our team
-            </span>
             <h1 className="text-display-xl text-text-primary">
               The team behind ITD Global
             </h1>

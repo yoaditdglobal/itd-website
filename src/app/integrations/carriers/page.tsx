@@ -52,9 +52,6 @@ export default function CarrierIntegrationsPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="max-w-2xl">
-              <span className="text-eyebrow text-accent mb-4 block">
-                Carrier integrations
-              </span>
               <h1 className="text-display-xl text-white">
                 One connection to an entire carrier network
               </h1>
