@@ -12,7 +12,7 @@ import { AlertTriangle, ArrowLeftRight, FileCheck, Globe, MapPin, Package, Plug,
 export const metadata = buildMetadata({
   title: "International Export Shipping Services | ITD Global",
   description:
-    "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 190+ countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
+    "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 152 countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
   path: "/solutions/export",
 });
 
@@ -35,7 +35,7 @@ const PILLARS = [
 ];
 
 const WHAT_YOU_GET: { icon: LucideIcon; text: string }[] = [
-  { icon: Globe,        text: "International parcel delivery to 195+ countries from one account" },
+  { icon: Globe,        text: "International parcel delivery to 152 countries from one account" },
   { icon: TrendingDown, text: "Access to FedEx, UPS, DHL, DPD, Evri, and more at high-volume corporate rates" },
   { icon: ShieldCheck,  text: "In-house export customs support including commercial invoices, packing lists, HS codes, and certificates of origin" },
   { icon: Package,      text: "DDP and DDU shipping managed end to end" },
@@ -53,7 +53,7 @@ const CRUMBS = [
 
 /** TL;DR — every bullet is verifiable against this page's own copy. */
 const TLDR = [
-  "We give UK businesses the rates, reach and support to ship internationally properly, to 190+ countries through one account.",
+  "We give UK businesses the rates, reach and support to ship internationally properly, to 152 countries through one account.",
   "We access FedEx, UPS, DHL and Evri at corporate rates and support export customs in-house, including commercial invoices, HS code classification and certificates of origin.",
   "We manage DDP and DDU end to end and flag compliance issues before a shipment moves, so buyers avoid surprise charges at the door.",
 ];
@@ -201,7 +201,7 @@ export default function ExportPage() {
           {
             question: "What countries does ITD ship to?",
             answer:
-              "190+ countries. Our network covers major export markets including the US, Europe, China, Australia, and the Middle East, with both parcel and freight options available.",
+              "152 countries. Our network covers major export markets including the US, Europe, China, Australia, and the Middle East, with both parcel and freight options available.",
           },
           {
             question: "Who manages my account?",
@@ -222,7 +222,7 @@ export default function ExportPage() {
           serviceSchema({
             name: "International Export Shipping Services",
             description:
-              "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 190+ countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
+              "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 152 countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
             path: "/solutions/export",
             serviceType: "International Export Shipping and Logistics Services",
             areaServed: ["United Kingdom", "European Union", "United States", "Worldwide"],
