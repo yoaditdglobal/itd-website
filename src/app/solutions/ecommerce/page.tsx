@@ -15,6 +15,13 @@ export const metadata = buildMetadata({
 export default function EcommercePage() {
   return (
     <VerticalPage
+      gatewayMedia={{
+        mp4: "/media/connexx-ecommerce.mp4",
+        webm: "/media/connexx-ecommerce.webm",
+        poster: "/media/connexx-ecommerce-poster.jpg",
+        caption:
+          "Connexx syncing orders from Shopify, Amazon, eBay and Veeqo, mapping where they ship, picking the winning rate, and tracking every parcel to the door on one link.",
+      }}
       label="eCommerce"
       title="Give shoppers more delivery choice while you grow your margins"
       subtitle="Our multi-carrier solution fits into your workflow. We integrate with your eCommerce platform, giving you more delivery options to offer shoppers and lower rates to ship orders."
