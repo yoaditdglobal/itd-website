@@ -136,7 +136,7 @@ export default function FbmGuidePage() {
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Resources", path: "/resources/case-studies" },
+      { name: "Resources", path: "/resources" },
       { name: "Guides", path: "/resources/guides" },
       { name: "Fulfilled by Merchant (FBM)", path: PATH },
     ]),

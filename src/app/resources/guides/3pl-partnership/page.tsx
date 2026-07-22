@@ -116,7 +116,7 @@ export default function ThreePlGuidePage() {
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Resources", path: "/resources/case-studies" },
+      { name: "Resources", path: "/resources" },
       { name: "Guides", path: "/resources/guides" },
       { name: "3PL Partnership", path: PATH },
     ]),

@@ -82,6 +82,7 @@ export const ROUTES = [
   { path: "/integrations/carriers/amazon-shipping", priority: 0.75, changeFrequency: "monthly" as const },
 
   // Resources
+  { path: "/resources", priority: 0.7, changeFrequency: "weekly" as const },
   { path: "/resources/case-studies", priority: 0.7, changeFrequency: "weekly" as const },
   { path: "/resources/case-studies/tatti-lashes", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/west-ham-united", priority: 0.65, changeFrequency: "monthly" as const },

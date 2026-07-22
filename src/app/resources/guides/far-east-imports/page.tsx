@@ -143,7 +143,7 @@ export default function FarEastImportsGuidePage() {
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Resources", path: "/resources/case-studies" },
+      { name: "Resources", path: "/resources" },
       { name: "Guides", path: "/resources/guides" },
       { name: "Far East Imports", path: PATH },
     ]),

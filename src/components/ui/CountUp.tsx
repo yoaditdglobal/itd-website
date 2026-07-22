@@ -40,19 +40,21 @@ export default function CountUp({
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState<number>(from);
+  // GEO-critical: initialise to the REAL figure so the server-rendered HTML
+  // (what crawlers and AI engines read) carries the stat, not the `from`
+  // baseline. The count-up is a client enhancement on viewport entry.
+  const [value, setValue] = useState<number>(to);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Reduced motion: snap to final value and skip animation.
+    // Reduced motion: keep the final value and skip animation.
     const prefersReduced =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
-      setValue(to);
       hasAnimated.current = true;
       return;
     }
