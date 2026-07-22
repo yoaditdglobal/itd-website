@@ -469,12 +469,32 @@ export default function Navbar() {
     <div
       data-open={mobileOpen || undefined}
       aria-hidden={!mobileOpen}
-      className="nav-mobile-overlay lg:hidden fixed inset-0 top-[56px] bg-bg-dark z-40 overflow-y-auto"
+      className="nav-mobile-overlay lg:hidden fixed inset-0 bg-bg-dark z-[60] overflow-y-auto"
     >
+          {/* Overlay-internal top bar — the floating pill header sits underneath
+              the full-screen menu, so the close affordance lives in here. */}
+          <div className="flex items-center justify-between px-4 pt-3 pb-1">
+            <Link href="/" aria-label="ITD Global — home" onClick={() => setMobileOpen(false)}>
+              <Image
+                src="/logos/itd/itd-global-logo.webp"
+                alt="ITD Global"
+                width={576}
+                height={240}
+                className="h-9 w-auto"
+              />
+            </Link>
+            <button
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
           <div className="px-4 py-6 flex flex-col gap-1">
             {/* Shipping accordion */}
             <button
-              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/shipping") ? "text-accent" : "text-white"}`}
+              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/shipping") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("shipping")}
             >
               Shipping
@@ -490,7 +510,7 @@ export default function Navbar() {
 
             {/* Solutions accordion */}
             <button
-              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/solutions") ? "text-accent" : "text-white"}`}
+              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/solutions") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("solutions")}
             >
               Solutions
@@ -513,7 +533,7 @@ export default function Navbar() {
             <Link
               href="/connexx"
               aria-current={isActive("/connexx") ? "page" : undefined}
-              className={`py-3 text-base font-medium border-b border-white/10 ${isActive("/connexx") ? "text-accent" : "text-white"}`}
+              className={`py-3 font-display text-base font-medium ${isActive("/connexx") ? "text-accent" : "text-white"}`}
               onClick={() => setMobileOpen(false)}
             >
               Platform
@@ -521,7 +541,7 @@ export default function Navbar() {
 
             {/* Integrations accordion */}
             <button
-              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/integrations") ? "text-accent" : "text-white"}`}
+              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/integrations") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("integrations")}
             >
               Integrations
@@ -546,7 +566,7 @@ export default function Navbar() {
 
             {/* Resources accordion */}
             <button
-              className={`flex items-center justify-between w-full py-3 text-base font-medium border-b border-white/10 ${isActive("/resources") ? "text-accent" : "text-white"}`}
+              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/resources") ? "text-accent" : "text-white"}`}
               onClick={() => toggleMobileAccordion("resources")}
             >
               Resources
