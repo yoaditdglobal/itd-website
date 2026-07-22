@@ -126,7 +126,7 @@ export default function ConnexxPage() {
         <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.4] mix-blend-multiply" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <AnimatedCounter end={17.5} decimals={1} suffix="M" label="Labels a year" surface="light" />
+            <AnimatedCounter end={17.5} decimals={1} suffix="m" label="Labels a year" surface="light" />
             <AnimatedCounter end={16} label="Carriers" surface="light" />
             <AnimatedCounter end={6000} suffix="+" label="UK businesses" surface="light" />
             <AnimatedCounter end={20} suffix="+" label="Years" surface="light" />
