@@ -15,6 +15,13 @@ export const metadata = buildMetadata({
 export default function MarketplaceSellerPage() {
   return (
     <VerticalPage
+      gatewayMedia={{
+        mp4: "/media/connexx-marketplace.mp4",
+        webm: "/media/connexx-marketplace.webm",
+        poster: "/media/connexx-marketplace-poster.jpg",
+        caption:
+          "Connexx connecting Amazon, eBay, Etsy, TikTok Shop and Temu, picking a carrier that meets each delivery promise, writing tracking back to every marketplace, and flagging late-dispatch risk before it hits your seller metrics.",
+      }}
       label="Marketplace Seller"
       title="Protect your marketplace SLAs and your margin"
       subtitle="When a carrier misses the promise, the penalty lands on you. A refund off your margin and a late mark on your account. We match each order to a Prime-ready carrier, with the rates and support to grow your channel."
