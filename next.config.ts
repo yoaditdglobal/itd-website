@@ -75,6 +75,14 @@ const nextConfig: NextConfig = {
         destination: "/resources/case-studies",
         permanent: true,
       },
+      // There is no /integrations hub page. The tech pages link to it (a
+      // back-link + their breadcrumb parent), so 301 it to the tech integrations
+      // landing instead of 404ing.
+      {
+        source: "/integrations",
+        destination: "/integrations/tech",
+        permanent: true,
+      },
     ];
   },
 
