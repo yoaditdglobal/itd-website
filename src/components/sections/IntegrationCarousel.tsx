@@ -165,9 +165,9 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
         </div>
       )}
 
-      {/* Card grid — centered flex-wrap of uniform, fixed-size cards so any
-          count (6–9 per tab) sits on-grid with a balanced, centered last row. */}
-      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+      {/* Card grid — left-aligned responsive grid: 2 cols on mobile, 3 on
+          small, 4 on desktop, so a full tab (8 items) sits as a clean 4×2. */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {visibleItems.map((item, i) => {
           const isActive = activeIndex === i && selectedIndex === null;
           const isSelected = selectedIndex === i;
@@ -176,7 +176,7 @@ export default function IntegrationCarousel({ integrations }: { integrations: In
               key={item.name}
               onClick={() => handleCardClick(i)}
               aria-expanded={isSelected}
-              className={`group card-hover flex flex-col items-center justify-center w-[calc(50%-0.375rem)] sm:w-36 md:w-40 min-h-[116px] bg-white rounded-xl border p-4 text-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
+              className={`group card-hover flex flex-col items-center justify-center w-full min-h-[116px] bg-white rounded-xl border p-4 text-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isSelected
                   ? "border-accent shadow-md ring-1 ring-accent/20"
                   : isActive

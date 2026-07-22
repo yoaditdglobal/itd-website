@@ -350,7 +350,6 @@ export default function VerticalPage({
       <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-eyebrow text-accent mb-3">Integrations</p>
             <h2 className="text-display-lg text-text-primary">Key integrations</h2>
             <p className="mt-3 mb-8 text-body-md text-text-secondary max-w-2xl">
               {keyIntegrationsBlurb ??
