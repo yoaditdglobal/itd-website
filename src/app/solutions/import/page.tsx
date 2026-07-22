@@ -52,6 +52,8 @@ export default function ImportPage() {
         label="Import"
         title={<>Importing from the<br />Far East or worldwide?</>}
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery, staying focused on your business while we move your goods."
+        primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondary={{ label: "Contact Sales", href: "/contact?enquiry=import" }}
         image={{
           src: "/solutions/port container yard.jpg",
           alt: "Port container yard with stacked shipping containers",
@@ -152,8 +154,8 @@ export default function ImportPage() {
         label="Import"
         title="Importing from the Far East or worldwide? We've got it covered"
         subtitle="ITD Global takes the complexity out of importing. With our teams on the ground in China, we offer a single point of contact from collection to delivery."
-        primaryCta={{ label: "Get in Touch", href: "/contact?enquiry=import" }}
-        secondaryCta={{ label: "Request a Quote", href: RATE_CHECKER_URL }}
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=import" }}
         pains={PILLARS}
         caseStudy={getCaseStudiesBySolution("Import")[0] ?? caseStudies[4]}
         caseStudies={getRelevantCaseStudies({ solutions: ["Import"] })}
@@ -193,8 +195,8 @@ export default function ImportPage() {
           headline: "Ready to simplify your import operation?",
           subhead:
             "One conversation. We'll show you the rates, the route, and what a single point of contact actually looks like in practice.",
-          primary: { label: "Get in Touch", href: "/contact?enquiry=import" },
-          secondary: { label: "Request a Quote", href: RATE_CHECKER_URL },
+          primary: { label: "Get Quote", href: RATE_CHECKER_URL },
+          secondary: { label: "Contact Sales", href: "/contact?enquiry=import" },
         }}
         breadcrumbs={[
           { name: "Home", path: "/" },

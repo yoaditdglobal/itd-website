@@ -27,8 +27,8 @@ export default function EcommercePage() {
       subtitle="Our multi-carrier solution fits into your workflow. We integrate with your eCommerce platform, giving you more delivery options to offer shoppers and lower rates to ship orders."
       primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
       secondaryCta={{
-        label: "Explore",
-        href: "/resources/case-studies/freedom-fire",
+        label: "Contact Sales",
+        href: "/contact?enquiry=ecommerce",
       }}
       heroImage={{
         src: "/solutions/ecommerce-hero.webp",
@@ -125,8 +125,8 @@ export default function EcommercePage() {
         subhead: "Let us show you what the same orders would cost on our rates.",
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
         secondary: {
-          label: "Explore",
-          href: "/resources/case-studies/freedom-fire",
+          label: "Contact Sales",
+          href: "/contact?enquiry=ecommerce",
         },
       }}
     />

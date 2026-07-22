@@ -45,8 +45,8 @@ export default function ShippingDomesticPage() {
         icon: Truck,
       }}
       secondaryCta={{
-        label: "Learn More",
-        href: "/resources/case-studies/tatti-lashes",
+        label: "Contact Sales",
+        href: "/contact?enquiry=domestic",
       }}
       breadcrumbs={[
         { name: "Home", path: "/" },

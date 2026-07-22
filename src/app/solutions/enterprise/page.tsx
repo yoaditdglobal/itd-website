@@ -41,7 +41,7 @@ const HERO_TITLE = "Even at your scale, your carriers have more to give";
 const HERO_SUBTITLE =
   "Your volume is strong. Our carrier network makes it stronger, with rates and capacity your own contracts can't reach. A dedicated team runs it alongside yours.";
 const PRIMARY = { label: "Get Quote", href: RATE_CHECKER_URL };
-const SECONDARY = { label: "Explore", href: "/resources/case-studies" };
+const SECONDARY = { label: "Contact Sales", href: "/contact?enquiry=enterprise" };
 
 export default function EnterprisePage() {
   return (

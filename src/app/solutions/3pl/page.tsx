@@ -47,7 +47,7 @@ export default function ThreePLPage() {
         title="Undercut your rivals without undercutting yourself"
         subtitle="We back you with a carrier package that wins the pitch, then turns the client's outbound into real profit for you."
         primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
-        secondary={{ label: "Explore", href: "/resources/case-studies/delta-fulfilment" }}
+        secondary={{ label: "Contact Sales", href: "/contact?enquiry=3pl" }}
         image={{
           src: "/solutions/3pl-hero-v2.webp",
           alt: "Warehouse operative with a picking trolley reaching stock from racking in a 3PL fulfilment centre",
@@ -126,8 +126,8 @@ export default function ThreePLPage() {
         href: RATE_CHECKER_URL,
       }}
       secondaryCta={{
-        label: "Explore",
-        href: "/resources/case-studies/delta-fulfilment",
+        label: "Contact Sales",
+        href: "/contact?enquiry=3pl",
       }}
       integrationsGateway={
         <IntegrationsGateway
@@ -220,8 +220,8 @@ export default function ThreePLPage() {
           href: RATE_CHECKER_URL,
         },
         secondary: {
-          label: "Explore",
-          href: "/resources/case-studies/delta-fulfilment",
+          label: "Contact Sales",
+          href: "/contact?enquiry=3pl",
         },
       }}
       />
