@@ -43,6 +43,13 @@ const CRUMBS = [
   { name: "B2B", path: "/solutions/b2b" },
 ];
 
+/** TL;DR — every bullet is verifiable against this page's own copy. */
+const TLDR = [
+  "We serve UK wholesalers whose orders are heavy, high-value and tied to long-term accounts, guiding the right carrier and service onto every consignment.",
+  "We match each delivery to a carrier built for it \u2014 heavy or oversized goods, timed services like Pre-9, Pre-10, Pre-12 and Next Day, or high-value international.",
+  "We price Highlands and out-of-area surcharges in up front and help complete the commercial invoice, so a consignment isn't the one held at the border.",
+];
+
 export default function B2BPage() {
   return (
     <>
@@ -122,6 +129,7 @@ export default function B2BPage() {
           primary: PRIMARY,
           secondary: SECONDARY,
         }}
+        keyTakeaways={TLDR}
         breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({

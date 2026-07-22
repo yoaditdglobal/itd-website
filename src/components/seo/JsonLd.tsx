@@ -3,6 +3,7 @@ import {
   SITE_NAME,
   SITE_DESCRIPTION,
   ORG_LEGAL_NAME,
+  ORG_FOUNDING_DATE,
   ORG_FOUNDING_LOCATION,
   ORG_AREA_SERVED,
   ORG_CONTACT,
@@ -52,6 +53,7 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/logos/itd-global.png`,
     description: SITE_DESCRIPTION,
+    foundingDate: ORG_FOUNDING_DATE,
     foundingLocation: { "@type": "Place", name: ORG_FOUNDING_LOCATION },
     areaServed: ORG_AREA_SERVED.map((name) => ({ "@type": "Place", name })),
     // Head office (Manchester HQ) — the full office list renders on

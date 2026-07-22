@@ -3,6 +3,7 @@ import { RATE_CHECKER_URL } from "@/lib/site-config";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import KeyTakeaways from "@/components/ui/KeyTakeaways";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
@@ -160,6 +161,10 @@ interface VerticalPageProps {
   /** Optional breadcrumb trail. Renders BreadcrumbList JSON-LD. */
   breadcrumbs?: Crumb[];
 
+  /** Optional TL;DR bullets rendered as the first band after the hero (GEO
+   *  extractability). Each bullet must be verifiable against page content. */
+  keyTakeaways?: string[];
+
   /** Optional additional JSON-LD schemas (Service, Product, etc.). Rendered in addition to FAQ + breadcrumb. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonLd?: Record<string, any>[];
@@ -195,6 +200,7 @@ export default function VerticalPage({
   faq,
   closingCta,
   breadcrumbs,
+  keyTakeaways,
   jsonLd,
   integrationsGateway,
   gatewayMedia,
@@ -285,6 +291,15 @@ export default function VerticalPage({
           </div>
         </div>
       </section>
+      )}
+
+      {/* TL;DR — GEO-extractable summary band */}
+      {keyTakeaways && keyTakeaways.length > 0 && (
+        <section className="bg-white py-10 md:py-12">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <KeyTakeaways items={keyTakeaways} />
+          </div>
+        </section>
       )}
 
       {/* Pain Points */}

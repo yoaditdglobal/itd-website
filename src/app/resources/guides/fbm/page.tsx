@@ -10,6 +10,8 @@ import {
   howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
+import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
+import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "Fulfilled by Merchant (FBM) on Amazon: UK guide",
@@ -75,6 +77,14 @@ const faqs = [
     answer:
       "Three things move the needle. First, set realistic handling time on your listings. If your warehouse closes at 16:00 and orders arriving after 14:00 ship the next day, set handling time to one working day rather than same-day. Second, route to a carrier whose published transit time matches the delivery promise. Third, monitor OTDR weekly, not monthly, so a bad week does not become a bad quarter.",
   },
+];
+
+/** TL;DR — every bullet is verifiable against the guide sections below. */
+const TLDR = [
+  "FBM means you store, pick, pack and ship Amazon orders yourself or through a 3PL, choosing your own carrier \u2014 FBA hands all of that to Amazon for a fee.",
+  "Four metrics decide your account health: Late Shipment Rate under 4%, Cancel Rate under 2.5%, Valid Tracking Rate above 95% and On-Time Delivery Rate above 97%.",
+  "Amazon Buy Shipping protects those metrics on the orders it covers \u2014 roughly 80% \u2014 as long as you confirm dispatch by the deadline.",
+  "Above 200 orders a day or across multiple marketplaces, a multi-carrier platform consolidates dispatch across Amazon, eBay, Etsy and TikTok Shop.",
 ];
 
 /** HowTo steps mirror the numbered guide sections below — each step anchors
@@ -180,6 +190,15 @@ export default function FbmGuidePage() {
                 <Clock className="w-3.5 h-3.5" /> 16 minute read
               </span>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* TL;DR — GEO-extractable summary */}
+      <section className="bg-white pb-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <KeyTakeaways items={TLDR} />
           </ScrollReveal>
         </div>
       </section>
@@ -666,7 +685,7 @@ export default function FbmGuidePage() {
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
                     <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{linkifyGlossaryTerms(item.answer)}</p>
                 </details>
               </ScrollReveal>
             ))}

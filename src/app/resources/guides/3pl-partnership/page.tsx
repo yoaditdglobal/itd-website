@@ -10,6 +10,8 @@ import {
   howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
+import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
+import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "3PL Partnership: what working with ITD Global looks like",
@@ -70,6 +72,14 @@ const faqs = [
     answer:
       "Your dedicated ITD account manager. One point of contact covers all carriers and all client accounts. You don't need to manage separate carrier support queues.",
   },
+];
+
+/** TL;DR — every bullet is verifiable against the guide sections below. */
+const TLDR = [
+  "One commercial relationship gives your 3PL the full ITD carrier network \u2014 no per-carrier contracts, rate negotiations or support queues.",
+  "Connexx connects your WMS or OMS once; every client onboards as a child ID account with its own ring-fenced reporting view.",
+  "Rates are based on ITD's collective partner volume rather than yours alone, with no volume commitments or minimum contract terms.",
+  "Onboarding is a four-step process run by ITD's implementation team, typically two to four weeks end to end.",
 ];
 
 /** HowTo mirrors the four-step onboarding list in the Onboarding section —
@@ -162,6 +172,15 @@ export default function ThreePlGuidePage() {
                 <Clock className="w-3.5 h-3.5" /> 9 minute read
               </span>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* TL;DR — GEO-extractable summary */}
+      <section className="bg-white pb-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <KeyTakeaways items={TLDR} />
           </ScrollReveal>
         </div>
       </section>
@@ -527,7 +546,7 @@ export default function ThreePlGuidePage() {
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
                     <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{linkifyGlossaryTerms(item.answer)}</p>
                 </details>
               </ScrollReveal>
             ))}

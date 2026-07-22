@@ -10,6 +10,8 @@ import {
   howToSchema,
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
+import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
+import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "Freight Services: a working guide for UK clients",
@@ -72,6 +74,14 @@ const faqs = [
     answer:
       "ITD sends automated updates each time the vessel or flight status changes, from departure through to UK delivery. For LCL shipments, your House Bill of Lading number is the reference until the container is deconsolidated at the UK CFS. After that, ITD updates you directly.",
   },
+];
+
+/** TL;DR — every bullet is verifiable against the guide sections below. */
+const TLDR = [
+  "Sea freight is the default mode (30\u201350 days); air freight (7\u201312 days) is for time-sensitive cargo; under 100kg an express courier usually wins.",
+  "LCL shares a container and is priced per cubic metre; above roughly 12\u201315 CBM a full container (FCL) is usually cheaper.",
+  "Booking freight with ITD includes CDS customs clearance \u2014 you do not need to appoint a separate broker.",
+  "The two common failure points are missing the origin CFS cut-off and customs data not being ready before the vessel arrives.",
 ];
 
 /** HowTo mirrors the seven-stage LCL table in the Consolidation section —
@@ -179,6 +189,15 @@ export default function FreightServicesGuidePage() {
                 <Clock className="w-3.5 h-3.5" /> 12 minute read
               </span>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* TL;DR — GEO-extractable summary */}
+      <section className="bg-white pb-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <KeyTakeaways items={TLDR} />
           </ScrollReveal>
         </div>
       </section>
@@ -678,7 +697,7 @@ export default function FreightServicesGuidePage() {
                   <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
                     <h3 className="text-heading-sm text-text-primary">{item.question}</h3>
                   </summary>
-                  <p className="mt-3 text-body-sm text-text-secondary">{item.answer}</p>
+                  <p className="mt-3 text-body-sm text-text-secondary">{linkifyGlossaryTerms(item.answer)}</p>
                 </details>
               </ScrollReveal>
             ))}
