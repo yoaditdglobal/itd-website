@@ -81,14 +81,11 @@ const footerLinks = {
   ],
   resources: [
     { name: "Case Studies", href: "/resources/case-studies" },
-    { name: "Help Center", href: "#" },
-    { name: "Developers", href: "#" },
-    { name: "Status", href: "#" },
+    { name: "Help Center", href: "/help" },
   ],
   company: [
     { name: "About", href: "/about" },
     { name: "Locations", href: "/about#locations" },
-    { name: "Careers", href: "#" },
     { name: "Contact", href: "/contact" },
   ],
 };
