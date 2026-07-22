@@ -398,10 +398,7 @@ export default function VerticalPage({
         <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-2 text-center">Frequently asked questions</h2>
-              <p className="text-body-md text-text-secondary text-center mb-10">
-                The answers most operators ask before booking a call.
-              </p>
+              <h2 className="text-display-lg text-text-primary mb-10 text-center">FAQ</h2>
             </ScrollReveal>
             <FaqAccordion items={faq} />
           </div>

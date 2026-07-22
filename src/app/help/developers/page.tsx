@@ -273,8 +273,8 @@ export default function DevelopersPage() {
       {/* FAQ */}
       <FaqSection
         items={faqItems}
-        heading="Frequently asked questions"
-        subheading="The questions developers ask before integrating."
+        heading="FAQ"
+        subheading=""
       />
     </>
   );

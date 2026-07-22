@@ -22,8 +22,8 @@ interface FaqSectionProps {
  */
 export default function FaqSection({
   items,
-  heading = "Frequently asked questions",
-  subheading = "The answers most operators ask before booking a call.",
+  heading = "FAQ",
+  subheading = "",
 }: FaqSectionProps) {
   if (!items || items.length === 0) return null;
 
@@ -31,11 +31,11 @@ export default function FaqSection({
     <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <h2 className="text-display-lg text-text-primary mb-2 text-center">
+          <h2 className="text-display-lg text-text-primary mb-10 text-center">
             {heading}
           </h2>
           {subheading && (
-            <p className="text-body-md text-text-secondary text-center mb-10">{subheading}</p>
+            <p className="text-body-md text-text-secondary text-center -mt-6 mb-10">{subheading}</p>
           )}
         </ScrollReveal>
         <FaqAccordion items={items} />
