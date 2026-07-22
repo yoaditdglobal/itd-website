@@ -24,8 +24,18 @@ import {
 } from "@/lib/data";
 
 const CS_BASE = "/resources/case-studies";
-/** Fallback publish date for Article JSON-LD when a story carries none. */
-const DEFAULT_PUBLISHED = "2026-01-01";
+/** Maintained publish / last-reviewed date for the case-study Article JSON-LD.
+ *  All stories currently share this; override per story via `cs.datePublished`. */
+const DEFAULT_PUBLISHED = "2026-07-22";
+/** Human-readable form of an ISO date, e.g. "2026-07-22" → "22 July 2026". */
+function formatDate(iso: string): string {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -133,6 +143,9 @@ export default async function CaseStudyPage({
 
             <h1 className="text-display-xl text-text-primary">{cs.headline}</h1>
             <p className="mt-5 text-body-lg text-text-secondary">{cs.summary}</p>
+            <p className="mt-4 text-caption text-text-tertiary">
+              Last updated {formatDate(cs.datePublished ?? DEFAULT_PUBLISHED)}
+            </p>
           </ScrollReveal>
 
           {cs.heroImage && (
