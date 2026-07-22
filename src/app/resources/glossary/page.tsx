@@ -23,7 +23,7 @@ export default function GlossaryPage() {
   const jsonLd = [
     breadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Resources", path: "/resources/case-studies" },
+      { name: "Resources", path: "/resources" },
       { name: "Glossary", path: PATH },
     ]),
     definedTermSetSchema({

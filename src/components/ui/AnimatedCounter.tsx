@@ -23,13 +23,21 @@ export default function AnimatedCounter({
   decimals = 0,
   surface = "dark",
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  // GEO-critical: initialise to the REAL figure so the server-rendered HTML
+  // (what crawlers and AI engines read) carries "6,000+", not "0+". The
+  // count-up is a client enhancement that kicks in on viewport entry.
+  const [count, setCount] = useState(end);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Reduced motion: keep the final value, no animation.
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
