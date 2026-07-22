@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import SiteChrome from "@/components/layout/SiteChrome";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -16,6 +17,19 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+// Cabinet Grotesk (display face) — self-hosted via next/font/local (CWV:
+// replaces the render-blocking Fontshare stylesheet + two third-party
+// origins; woff2s are same-origin, preloaded, and inlined as @font-face).
+// Source files downloaded from Fontshare (ITF Free Font License).
+const cabinetGrotesk = localFont({
+  src: [
+    { path: "../fonts/cabinet-grotesk-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/cabinet-grotesk-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-cabinet-grotesk",
+  display: "swap",
+});
+
 export const metadata = rootMetadata;
 
 export default function RootLayout({
@@ -30,23 +44,8 @@ export default function RootLayout({
     <html
       lang="en-GB"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${cabinetGrotesk.variable} h-full antialiased`}
     >
-      <head>
-        {/* Cabinet Grotesk (Fontshare) — display face for all .text-display-* and .text-heading-*.
-            Preconnect + preload the stylesheet to remove render-blocking on first paint. */}
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
-        <link
-          rel="preload"
-          as="style"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700&display=swap"
-        />
-      </head>
       <body className="min-h-full flex flex-col font-sans">
         {/* Google Analytics 4 — gtag.js */}
         <Script
