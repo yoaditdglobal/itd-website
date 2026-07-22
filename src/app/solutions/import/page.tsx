@@ -123,6 +123,13 @@ export default function ImportPage() {
       <VerticalPage
         hideDefaultHero
         hidePainPoints
+        gatewayMedia={{
+          mp4: "/media/connexx-import.mp4",
+          webm: "/media/connexx-import.webm",
+          poster: "/media/connexx-import-poster.jpg",
+          caption:
+            "Connexx clearing an import through the customs pipeline: HS codes read straight from your supplier invoice, duties switched DDP or DDU, rates compared across DHL, UPS and FedEx, and the shipment tracked from Shenzhen to your door.",
+        }}
         features={[
           {
             icon: FileCheck,
