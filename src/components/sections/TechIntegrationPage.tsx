@@ -30,7 +30,8 @@ export interface TechIntegrationPageProps {
  * Hero ({name} + ITD, tagline, description, Explore → #features) → About →
  * "Features built for your workflow" → "Start shipping with {name}" closing CTA.
  * Rendered by bespoke routes (e.g. /integrations/tech/linnworks) that supply the
- * copy; other tech pages still use the generic IntegrationDetail + TechPage.
+ * copy, and by the generic /integrations/tech/[slug] route via
+ * getTechIntegrationPageProps in src/lib/tech-pages.ts.
  */
 export default function TechIntegrationPage({
   name,
@@ -47,7 +48,10 @@ export default function TechIntegrationPage({
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg-dark py-16 md:py-24 overflow-hidden relative">
+      <section
+        data-hero-tone="dark"
+        className="bleed-nav bg-bg-dark py-16 md:py-24 overflow-hidden relative"
+      >
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
         </div>
@@ -57,10 +61,10 @@ export default function TechIntegrationPage({
               {/* Left — text */}
               <div className="max-w-2xl">
                 <Link
-                  href="/integrations"
+                  href="/integrations/tech"
                   className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 mb-6 transition-colors"
                 >
-                  ← All integrations
+                  ← All tech integrations
                 </Link>
                 <span className="text-eyebrow text-accent mb-4 block">
                   {eyebrow}

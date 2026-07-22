@@ -2,13 +2,15 @@ import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3 } from "lucide-react
 import type { LucideIcon } from "lucide-react";
 import type { Integration } from "@/lib/data";
 import { getIntegrationSlug, TECH_CATEGORY_LABELS } from "@/lib/data";
+import type { TechIntegrationPageProps } from "@/components/sections/TechIntegrationPage";
 
 /**
  * Per-tech-integration content for the dedicated detail pages, rendered through
- * the shared TechPage body layout (same pattern as carrier-pages.ts / CarrierPage).
+ * the standardised TechIntegrationPage layout (same pattern as carrier-pages.ts
+ * / CarrierPage) via `getTechIntegrationPageProps` below.
  *
- * `getTechPageContent` returns on-format defaults derived from the integration
- * record. Drop real copy per integration in TECH_PAGE_OVERRIDES (keyed by slug).
+ * Drop real copy per integration in TECH_PAGE_OVERRIDES (keyed by slug);
+ * integrations without an override get on-format generated defaults.
  */
 
 export interface TechFeature {
@@ -460,5 +462,58 @@ export function getTechPageContent(tool: Integration): TechPageProps {
     name: tool.name,
     ...defaults,
     ...override,
+  };
+}
+
+// ─── TechIntegrationPage adapter ─────────────────────────────────────────────
+// Builds the full prop set for the standardised TechIntegrationPage layout
+// (the tech analogue of CarrierPage) from an integration record, reusing the
+// per-slug copy in TECH_PAGE_OVERRIDES where it exists.
+
+/** Category-specific openers for the generic About narrative. */
+const CATEGORY_ABOUT_INTROS: Record<string, string> = {
+  erp_wms:
+    "runs the operational side of your business — stock, orders and the warehouse workflow that gets each parcel packed and ready to go",
+  ecommerce_logistics:
+    "keeps your online selling operation in one place — orders, stock and the despatch queue that follows every sale",
+  marketplace:
+    "puts your products in front of buyers at a scale few businesses reach on their own — and leaves the despatch side of each order with you",
+};
+
+function buildDefaultAbout(tool: Integration): string[] {
+  const intro =
+    CATEGORY_ABOUT_INTROS[tool.category] ??
+    "manages a core part of how your team processes orders day to day";
+  return [
+    `${tool.name} ${intro}. What it does not come with is a carrier network: the rates you ship at, the labels you produce and the tracking your customers receive all depend on carrier accounts arranged separately — usually one at a time, at an earlier stage of the business.`,
+    `Connect ITD and that side of the operation is handled. Orders from ${tool.name} route to the right carrier on the right rate, labels are produced automatically, and tracking returns to the order record — so your team keeps working in ${tool.name} while ITD manages the carrier relationships behind each despatch.`,
+  ];
+}
+
+/** Full props for the standardised tech-integration detail page. */
+export function getTechIntegrationPageProps(
+  tool: Integration,
+): TechIntegrationPageProps {
+  const slug = getIntegrationSlug(tool);
+  const override = TECH_PAGE_OVERRIDES[slug] ?? {};
+  const categoryLabel = TECH_CATEGORY_LABELS[tool.category];
+
+  const tagline = `Connect ${tool.name} to ITD and ship every order through our carrier network on rates the network earns.`;
+
+  const description = tool.description
+    ? `${tool.description.replace(/\.?\s*$/, ".")} Orders flow straight into dispatch, labels print against the right carrier and service, and tracking writes back to the order record — with no separate carrier setup for your team to maintain.`
+    : `${tool.name} connects to ITD so orders flow straight into dispatch, labels print against the right carrier and service, and tracking writes back to the order record — with no separate carrier setup for your team to maintain.`;
+
+  return {
+    name: tool.name,
+    logo: tool.logo,
+    eyebrow: categoryLabel ? `${categoryLabel} Integration` : "Tech Integration",
+    tagline,
+    description,
+    about: override.about ?? buildDefaultAbout(tool),
+    features: override.features ?? DEFAULT_FEATURES,
+    closingSubtitle: `Connect ${tool.name} and ship every order through one carrier network.`,
+    primaryCta: { label: "Get a quote", href: `/contact?enquiry=${slug}` },
+    secondaryCta: { label: "Contact us", href: "/contact" },
   };
 }
