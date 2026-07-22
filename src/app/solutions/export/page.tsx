@@ -122,6 +122,13 @@ export default function ExportPage() {
       <VerticalPage
         hideDefaultHero
         hidePainPoints
+        gatewayMedia={{
+          mp4: "/media/connexx-export.mp4",
+          webm: "/media/connexx-export.webm",
+          poster: "/media/connexx-export-poster.jpg",
+          caption:
+            "Connexx working a 312-order export batch: orders pulled from your stores, labels printed across five carriers, duties set DDP in bulk with a per-shipment override, restricted goods flagged at booking, and the day's volume rolled into intelligence.",
+        }}
         features={[
           {
             icon: FileCheck,
