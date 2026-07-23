@@ -15,7 +15,7 @@ export default function TrackPage() {
   return (
     <>
       <JsonLd
-        schema={breadcrumbSchema([
+        data={breadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "Track your shipment", path: "/track" },
         ])}
