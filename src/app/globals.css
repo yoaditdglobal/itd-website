@@ -99,8 +99,14 @@ html {
   scroll-behavior: smooth;
   /* Anchor links account for the fixed 72px navbar + 16px breathing room. */
   scroll-padding-top: 88px;
-  /* Overscroll canvas: rubber-banding past the dark nav (top) or dark footer
-     (bottom) must show dark, not the beige body background. */
+  /* No elastic rubber-banding past the document edges: the bounce dragged the
+     whole page down and exposed a dark band above light heroes with the fixed
+     nav floating on it (user-reported). Scrolling hard-stops at the boundary.
+     Safari < 16 ignores this — the dark background-color below keeps that
+     legacy bounce reading as intentional, so keep both. */
+  overscroll-behavior-y: none;
+  /* Overscroll canvas (legacy-Safari fallback): rubber-banding past the dark
+     nav (top) or dark footer (bottom) must show dark, not the beige body. */
   background-color: var(--color-bg-dark);
   /* Thin scrollbar with a transparent track (Firefox). */
   scrollbar-width: thin;
