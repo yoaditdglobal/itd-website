@@ -1,6 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 
+/** LinkedIn brand glyph — inline because lucide-react no longer ships brand icons. */
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  );
+}
+
 /**
  * Association memberships shown in the footer. Official marks are never
  * recoloured: full-colour logos ("light" variant) sit on white tiles to stay
@@ -200,6 +209,15 @@ export default function Footer() {
             <Link href="/terms-of-service" className="hover:text-white/70">Terms of Service</Link>
             <Link href="/cookie-policy" className="hover:text-white/70">Cookie Policy</Link>
           </div>
+          <a
+            href="https://www.linkedin.com/company/itd-global/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ITD Global on LinkedIn (opens in a new tab)"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-white/60 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          >
+            <LinkedinIcon className="h-5 w-5" />
+          </a>
         </div>
       </div>
     </footer>
