@@ -1,12 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/chat/ChatWidget";
 
 /**
- * Renders the global site chrome (nav + footer + chat) around the page, EXCEPT
+ * Renders the global site chrome (nav + footer + Zoho SalesIQ chat) around the page, EXCEPT
  * on immersive routes (e.g. the standalone cinematic landing page at /rc), which
  * are shown full-bleed with no nav/footer/chat and no top padding.
  */
@@ -27,7 +27,15 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <Navbar />
       <main className="flex-1 pt-[72px]">{children}</main>
       <Footer />
-      <ChatWidget />
+      {/* Zoho SalesIQ chat widget (replaces the in-house Connexx Assistant). */}
+      <Script id="zsiq-init" strategy="afterInteractive">
+        {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
+      </Script>
+      <Script
+        id="zsiqscript"
+        src="https://salesiq.zohopublic.eu/widget?wc=siq42d4b24a5cfcd3ce5cfd0120d26fca9f565a0a51a015874f3c450ea900dac9ae"
+        strategy="afterInteractive"
+      />
     </>
   );
 }
