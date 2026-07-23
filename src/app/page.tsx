@@ -13,7 +13,7 @@ import ScrollForward from "@/components/animations/ScrollForward";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "Multi-carrier shipping platform for UK businesses",
+  title: "Multi-carrier shipping platform",
   description:
     "Compare every UK and international carrier on every shipment. Connexx routes the cheapest compliant option, prints the label, and tracks the parcel from one dashboard.",
   path: "/",

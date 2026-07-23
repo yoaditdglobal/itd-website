@@ -10,7 +10,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { PackageOpen } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Pallet and freight shipping software for UK businesses",
+  title: "Freight shipping",
   description:
     "Book UK pallet networks, EU freight lanes, and worldwide LCL/FCL on one platform. Live rates from Pall-Ex, Palletline, Palletways, DHL, and more.",
   path: "/shipping/freight",

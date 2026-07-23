@@ -10,7 +10,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { AlertTriangle, BarChart3, Building2, Receipt } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "3PL shipping software with child accounts and customs automation",
+  title: "3PL shipping",
   description:
     "Onboard new clients in 2 days, not 2 weeks. Connexx adds multi-client child accounts, per-brand carrier rules, and customs automation on top of Mintsoft, Linnworks, and ShipHero.",
   path: "/solutions/3pl",

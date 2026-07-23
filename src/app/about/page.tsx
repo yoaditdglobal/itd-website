@@ -15,7 +15,7 @@ import {
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "About ITD Global",
+  title: "About us",
   description:
     "ITD Global is a logistics partner and multi-courier platform helping ecommerce brands, retailers and manufacturers simplify domestic and international shipping. Find out who we are and how we got here.",
   path: "/about",

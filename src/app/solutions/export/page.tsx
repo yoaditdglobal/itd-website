@@ -10,7 +10,7 @@ import type { LucideIcon } from "lucide-react";
 import { AlertTriangle, ArrowLeftRight, FileCheck, Globe, MapPin, Package, Plug, ShieldCheck, TrendingDown, UserCheck, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "International Export Shipping Services | ITD Global",
+  title: "Export shipping",
   description:
     "ITD Global helps UK businesses ship internationally with confidence. Multi-courier parcel delivery to 152 countries, export customs clearance, DDP shipping, and one point of contact for the whole operation.",
   path: "/solutions/export",

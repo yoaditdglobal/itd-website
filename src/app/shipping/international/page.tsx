@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "International shipping with automated customs documentation",
+  title: "International shipping",
   description:
     "Ship to EU and worldwide destinations with HS codes, EORI, IOSS, and customs paperwork generated automatically. DHL Express, FedEx, UPS, Evri EU, Deutsche Post, and Starlinks on one platform.",
   path: "/shipping/international",

@@ -10,7 +10,7 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowLeftRight, Calendar, Eye, FileCheck, MapPin, Package, Plane, ShieldCheck, TrendingDown, UserCheck, Warehouse, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Import Shipping Services UK | ITD Global",
+  title: "Import shipping",
   description:
     "ITD Global helps UK businesses manage international imports from China and worldwide. In-house customs clearance, competitive rates, and one point of contact for the entire journey.",
   path: "/solutions/import",

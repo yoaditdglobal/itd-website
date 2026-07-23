@@ -19,7 +19,7 @@ import {
 import { ArrowRight } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Connexx, the multi-carrier shipping platform from ITD",
+  title: "Connexx",
   description:
     "Connexx is the multi-carrier shipping platform powered by ITD Global. Every order routes to the best-value carrier and gets a label in seconds, with tracking and customs in one place. 17.5 million labels a year across 16 carriers.",
   path: "/connexx",

@@ -8,7 +8,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { AlertTriangle, Building2, Network, Plug, Receipt } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Enterprise carrier network for UK and international shipping",
+  title: "Enterprise shipping",
   description:
     "Pool your volume across our carrier network for rates and capacity your own contracts can't reach, with a dedicated team running it alongside yours. UK and international.",
   path: "/solutions/enterprise",

@@ -5,7 +5,7 @@ import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "One parcel, every mode — domestic, international & freight",
+  title: "Shipping with ITD",
   description:
     "Watch a single parcel move across every mode ITD Global handles — UK domestic, international air, and sea freight — all from one multi-carrier platform.",
   path: "/rc",

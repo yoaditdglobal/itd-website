@@ -4,7 +4,7 @@ import { getIntegrationsByType } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "Marketplace integrations — Amazon, eBay, Etsy, TikTok Shop & more",
+  title: "Marketplace integrations",
   description:
     "Connect Amazon, eBay, Etsy, Walmart, Zalando, Temu and TikTok Shop to Connexx. Orders from every channel land in one queue, routed to a carrier that can meet each marketplace's delivery window.",
   path: "/integrations/tech/marketplaces",
