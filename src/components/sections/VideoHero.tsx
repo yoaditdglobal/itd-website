@@ -58,7 +58,7 @@ export default function VideoHero({
   sub = SUB,
   primary = PRIMARY,
   secondary = SECONDARY,
-  videoSrc = "/hero/hero-v2.mp4",
+  videoSrc = "/hero/hero-v3.mp4",
   poster = POSTER,
   breadcrumbs,
 }: VideoHeroProps = {}) {
