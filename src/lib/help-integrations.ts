@@ -2,7 +2,7 @@
 //
 // Content transcribed verbatim from the HC_Integrations_*.docx source docs
 // (one per integration). Each guide renders through the shared dynamic route
-// at /help/centre/integrations/[slug]. Related-article links are remapped to
+// at /help/integrations/[slug]. Related-article links are remapped to
 // live routes; the docs' references to not-yet-built pages
 // (/help/platform/*, /help/carriers/*) are omitted until those pages exist.
 
@@ -12,7 +12,7 @@ export type IntegrationGuideStep = {
 };
 
 export type IntegrationGuide = {
-  /** URL slug under /help/centre/integrations/ (per the source docs). */
+  /** URL slug under /help/integrations/ (per the source docs). */
   slug: string;
   /** Display name, e.g. "TikTok Shop". */
   name: string;
@@ -34,7 +34,7 @@ export type IntegrationGuide = {
   related: { label: string; href: string }[];
 };
 
-const BASE = "/help/centre/integrations";
+const BASE = "/help/integrations";
 
 export const INTEGRATION_GUIDES: IntegrationGuide[] = [
   {

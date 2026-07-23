@@ -10,7 +10,7 @@ interface HelpSearchBarProps {
 }
 
 /**
- * Live typeahead search for /help and /help/centre. As the user types we rank
+ * Live typeahead search for /help and /help. As the user types we rank
  * the static help index (existing articles + one entry per carrier Claims
  * policy) client-side and show the top matches in a dropdown. A carrier query
  * ("dhl claim", "evri damage") floats that carrier's Claims policy to the top

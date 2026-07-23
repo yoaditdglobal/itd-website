@@ -16,9 +16,9 @@ const EXTRA_STATIC = [
   "/about",
   "/about/team",
   "/integrations/tech/marketplaces",
-  "/help/centre/account",
-  "/help/centre/account/claims",
-  "/help/centre/billing",
+  "/help/account",
+  "/help/account/claims",
+  "/help/billing",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

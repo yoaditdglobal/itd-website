@@ -185,7 +185,7 @@ export default function SubmitRequestPage() {
                       <li>
                         Search the{" "}
                         <Link
-                          href="/help/centre"
+                          href="/help"
                           className="text-accent hover:underline"
                         >
                           Help Centre
