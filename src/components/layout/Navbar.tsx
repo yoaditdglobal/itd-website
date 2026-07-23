@@ -13,13 +13,8 @@ import IntegrationLogo from "@/components/ui/IntegrationLogo";
 // server (SSR) to avoid React's "useLayoutEffect does nothing on the server".
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-// Connexx login (Auth0). NOTE: this is a captured Universal Login URL whose
-// `?state=` value is a one-time Auth0 transaction token that expires within
-// minutes — it will eventually fail with an "invalid state" error. Replace it
-// with the Connexx app login URL (the app mints a fresh state on each visit) or
-// an Auth0 `/authorize?client_id=s0kxkIGBPCRAvm1Y9kBENuuU8b3fhb6Y&...` link.
-const LOGIN_URL =
-  "https://connexx-itd.eu.auth0.com/u/login?state=hKFo2SBxT2lSaUI3S25PbWNTUGtyaGtqMzlKOGQ0ZkdCNTkxLaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIEd2MlpxQVVXbC1hMXFxSmM2OFUzbVZPN1h5Vlp0WjREo2NpZNkgczBreGtJR0JQQ1JBdm0xWTlrQkVOdXVVOGIzZmhiNlk";
+// Connexx login — the Connexx app portal, which handles its own auth session.
+const LOGIN_URL = "https://connexx.co.uk/";
 
 const shippingMenu = [
   { name: "Domestic", desc: "UK & local parcel delivery", href: "/shipping/domestic" },
