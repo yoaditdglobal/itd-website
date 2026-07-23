@@ -36,7 +36,7 @@ export default function TimelinePlane() {
         alt=""
         width={140}
         height={140}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg w-14 h-14 md:w-[140px] md:h-[140px]"
       />
     </div>
   );
