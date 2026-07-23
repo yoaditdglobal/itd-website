@@ -115,10 +115,6 @@ export default function TrackShipment() {
         placeholder="e.g. AB123456789GB"
         className="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-body-md text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
       />
-      <p className="mt-2 text-caption text-text-tertiary">
-        Copy it from your dispatch email or order page.
-      </p>
-
       <fieldset className="mt-6">
         <legend className="text-label text-text-primary">Carrier</legend>
         <div
