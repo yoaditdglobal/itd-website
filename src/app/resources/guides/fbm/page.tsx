@@ -212,7 +212,7 @@ export default function FbmGuidePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="border-l-4 border-accent bg-accent-light/40 rounded-r-xl p-6">
-              <p className="text-eyebrow text-accent mb-3">The TL;DR</p>
+              <p className="text-eyebrow text-accent mb-3">Quick View</p>
               <p className="text-text-primary leading-relaxed">
                 Fulfilled by Merchant (FBM) on Amazon means you handle dispatch yourself instead of using FBA. Winning at FBM requires keeping Late Shipment Rate under 4%, Cancel Rate under 2.5%, Valid Tracking Rate above 95%, and On-Time Delivery Rate above 97%. Buy Shipping through Amazon protects your LSR and VTR if you ship by the cut-off. Royal Mail Tracked 24, Royal Mail Tracked 48, DPD Next Day, and Evri Standard are the four UK carriers most Amazon sellers route through. Seller Fulfilled Prime requires hitting tighter thresholds (99% on-time, 99% Valid Tracking, weekend dispatch) and using approved carriers. The manual workflow breaks at around 50 orders a day per operator. This guide covers each decision with the actual thresholds.
               </p>

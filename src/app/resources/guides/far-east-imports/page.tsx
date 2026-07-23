@@ -219,7 +219,7 @@ export default function FarEastImportsGuidePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="border-l-4 border-accent bg-accent-light/40 rounded-r-xl p-6">
-              <p className="text-eyebrow text-accent mb-3">The TL;DR</p>
+              <p className="text-eyebrow text-accent mb-3">Quick View</p>
               <p className="text-text-primary leading-relaxed">
                 Importing from China and the Far East into the UK in 2026 means filing CDS declarations, classifying goods against the UK Global Tariff, choosing between sea freight (cost) and air freight (speed), and picking Incoterms that match your control appetite. The four levers that move the actual numbers are HS code accuracy, Incoterms choice, freight mode, and whether you are using Postponed VAT Accounting. A misclassified HS code costs you in three places: duty rate, customs hold time, and HMRC penalty exposure. PVA defers the import VAT cash hit to your next return. DDP shifts the customs work to the supplier and removes your visibility. This guide covers each decision with the actual numbers.
               </p>
