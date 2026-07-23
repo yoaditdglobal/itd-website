@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import IntegrationsGateway from "@/components/sections/IntegrationsGateway";
 import { Truck, Globe, Boxes, Network, Route, MapPin, ArrowRight } from "lucide-react";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -95,7 +96,6 @@ export default function ShippingPage() {
       <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-eyebrow text-accent mb-2">By lane</p>
             <h2 className="text-display-lg text-text-primary mb-8">
               Where are you shipping?
             </h2>
@@ -129,7 +129,6 @@ export default function ShippingPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-eyebrow text-accent mb-2">One platform</p>
             <h2 className="text-display-lg text-text-primary mb-8">
               What every shipment gets
             </h2>
@@ -158,6 +157,24 @@ export default function ShippingPage() {
           </div>
         </div>
       </section>
+
+      {/* Carrier gateway */}
+      <IntegrationsGateway
+        heading="The UK's biggest carrier network"
+        subtext="Royal Mail, DPD, Evri, InPost, DHL, Amazon Shipping and more — every carrier ready to print from one screen, on rates managed by ITD at network scale."
+        logos={[
+          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
+          { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+          { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+          { name: "InPost", logo: "/logos/carriers/inpost-icon.png" },
+          { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
+          { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
+          { name: "FedEx", logo: "/logos/carriers/fedex-icon.png" },
+          { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
+        ]}
+        browseHref="/integrations/carriers"
+        browseLabel="Explore"
+      />
 
       <ClosingCTA
         headline="Ready to ship smarter?"
