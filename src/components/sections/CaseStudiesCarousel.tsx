@@ -13,8 +13,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 /**
  * Horizontal scroll-snap carousel for the Customer Stories cards.
  * - Children are the (server-rendered) sized slides; this shell only scrolls them.
- * - Desktop (lg): end-aware prev/next arrows, a progress bar, and drag-to-scroll.
- * - Mobile/tablet: the snap track = native touch swipe (no arrows/drag/progress).
+ * - Desktop (lg): end-aware prev/next arrows and drag-to-scroll.
+ * - Mobile/tablet: the snap track = native touch swipe (no arrows/drag).
  * Card links stay real links — a small drag threshold + a swallowed post-drag
  * click prevents a drag from triggering navigation. Smooth scroll + drag are
  * gated by prefers-reduced-motion.
@@ -29,7 +29,6 @@ export default function CaseStudiesCarousel({
   const trackRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
-  const [progress, setProgress] = useState(0);
   const reduceMotion = useRef(false);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ export default function CaseStudiesCarousel({
     const max = el.scrollWidth - el.clientWidth;
     setCanLeft(el.scrollLeft > 4);
     setCanRight(el.scrollLeft < max - 4);
-    setProgress(max > 0 ? el.scrollLeft / max : 0);
   }, []);
 
   useEffect(() => {
@@ -123,14 +121,8 @@ export default function CaseStudiesCarousel({
         <span aria-hidden className="w-px shrink-0" />
       </div>
 
-      {/* Desktop controls: progress bar + end-aware arrows. */}
-      <div className="mt-6 hidden items-center justify-between gap-4 lg:flex">
-        <div className="h-1 max-w-[160px] flex-1 overflow-hidden rounded-full bg-border">
-          <div
-            className="h-full rounded-full bg-accent transition-[width] duration-150"
-            style={{ width: `${Math.max(12, progress * 100)}%` }}
-          />
-        </div>
+      {/* Desktop controls: end-aware arrows. */}
+      <div className="mt-6 hidden items-center justify-end gap-4 lg:flex">
         <div className="flex items-center gap-2">
           <button
             type="button"
