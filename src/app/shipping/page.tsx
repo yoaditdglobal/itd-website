@@ -160,7 +160,7 @@ export default function ShippingPage() {
 
       {/* Carrier gateway */}
       <IntegrationsGateway
-        heading="The UK's biggest carrier network, one account"
+        heading="The UK's biggest carrier network"
         subtext="Royal Mail, DPD, Evri, InPost, DHL, Amazon Shipping and more — every carrier ready to print from one screen, on rates managed by ITD at network scale."
         logos={[
           { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
