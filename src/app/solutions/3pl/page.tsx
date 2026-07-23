@@ -45,13 +45,6 @@ const CRUMBS = [
   { name: "3PL", path: "/solutions/3pl" },
 ];
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We back UK 3PLs with a carrier package that wins the pitch and turns each client's outbound into real profit, without undercutting yourself.",
-  "We sit over Mintsoft, Linnworks, ShipHero and Veeqo, running a ring-fenced child account per client with its own rates, rules and branded tracking.",
-  "New clients onboard in days not weeks, and month-end billing splits out per brand so rebilling each client stays clean.",
-];
-
 export default function ThreePLPage() {
   return (
     <>
@@ -156,7 +149,6 @@ export default function ThreePLPage() {
           browseHref="/integrations/erp-wms"
         />
       }
-      keyTakeaways={TLDR}
       breadcrumbs={CRUMBS}
       jsonLd={[
         serviceSchema({

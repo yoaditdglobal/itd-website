@@ -12,13 +12,6 @@ export const metadata = buildMetadata({
   path: "/solutions/ecommerce",
 });
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We give UK online retailers more delivery choice to offer shoppers while lowering the rates they pay, so margins grow as they scale.",
-  "We plug into Shopify, WooCommerce and Magento, then compare live carrier rates on every order and track it all on one link.",
-  "Because your shipping sits on our pooled buying power, your rates rise far less at each carrier price increase than they would on your own account.",
-];
-
 export default function EcommercePage() {
   return (
     <VerticalPage
@@ -43,7 +36,6 @@ export default function EcommercePage() {
         gradient: "from-accent-light via-white to-accent/15",
         icon: ShoppingCart,
       }}
-      keyTakeaways={TLDR}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Solutions", path: "/solutions" },

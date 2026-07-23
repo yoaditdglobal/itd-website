@@ -51,13 +51,6 @@ const CRUMBS = [
   { name: "Export", path: "/solutions/export" },
 ];
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We give UK businesses the rates, reach and support to ship internationally properly, to 152 countries through one account.",
-  "We access FedEx, UPS, DHL and Evri at corporate rates and support export customs in-house, including commercial invoices, HS code classification and certificates of origin.",
-  "We manage DDP and DDU end to end and flag compliance issues before a shipment moves, so buyers avoid surprise charges at the door.",
-];
-
 export default function ExportPage() {
   return (
     <>
@@ -216,7 +209,6 @@ export default function ExportPage() {
           primary: { label: "Get Quote", href: RATE_CHECKER_URL },
           secondary: { label: "Contact Sales", href: "/contact?enquiry=export" },
         }}
-        keyTakeaways={TLDR}
         breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({

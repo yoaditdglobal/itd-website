@@ -23,13 +23,6 @@ export const metadata = buildMetadata({
   path: "/shipping/domestic",
 });
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We run all the UK's biggest carriers from one screen, sending each parcel with the best-value carrier that can deliver so the margin stays yours.",
-  "We route on the destination postcode across carriers like Royal Mail, DPD, Evri, InPost, DX, Parcelforce and Amazon Shipping, with out-of-area surcharges priced in up front.",
-  "We cover every postcode including the Highlands and Islands, Channel Islands, Northern Ireland and BFPO, and most businesses are live within a few days.",
-];
-
 export default function ShippingDomesticPage() {
   return (
     <VerticalPage
@@ -55,7 +48,6 @@ export default function ShippingDomesticPage() {
         label: "Contact Sales",
         href: "/contact?enquiry=domestic",
       }}
-      keyTakeaways={TLDR}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Shipping", path: "/shipping" },

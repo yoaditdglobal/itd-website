@@ -23,13 +23,6 @@ export const metadata = buildMetadata({
   path: "/shipping/international",
 });
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We ship worldwide for UK businesses with a team that lays out the options for each lane and tells you which service we'd pick.",
-  "We compare carriers like DHL Express, FedEx, UPS, Evri EU, Deutsche Post and Starlinks across 220+ countries, and generate customs documents from your invoice.",
-  "Through our buying power the same parcels come in 20 to 30% lower than shipping direct, and you choose whether duties are settled up front or passed on.",
-];
-
 export default function ShippingInternationalPage() {
   return (
     <VerticalPage
@@ -50,7 +43,6 @@ export default function ShippingInternationalPage() {
         label: "Contact Sales",
         href: "/contact?enquiry=international",
       }}
-      keyTakeaways={TLDR}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Shipping", path: "/shipping" },
