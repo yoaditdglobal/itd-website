@@ -12,6 +12,11 @@ import Footer from "@/components/layout/Footer";
  */
 const IMMERSIVE = ["/rc"];
 
+// Zoho SalesIQ chat — temporarily disabled on request. Flip to `true` to
+// re-enable; the embed + CSP allowlist are left in place so it comes straight
+// back with no other changes.
+const CHAT_ENABLED = false;
+
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "";
   const immersive = IMMERSIVE.some(
@@ -32,15 +37,19 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           so they never block first paint. The bot, operators and appearance are
           configured in the Zoho SalesIQ console and served live for this widget
           code — no site change is needed when those are updated there. */}
-      <Script id="zsiqinit" strategy="afterInteractive">
-        {`window.$zoho = window.$zoho || {};
+      {CHAT_ENABLED ? (
+        <>
+          <Script id="zsiqinit" strategy="afterInteractive">
+            {`window.$zoho = window.$zoho || {};
 window.$zoho.salesiq = window.$zoho.salesiq || { ready: function () {} };`}
-      </Script>
-      <Script
-        id="zsiqscript"
-        src="https://salesiq.zohopublic.eu/widget?wc=siq42d4b24a5cfcd3ce5cfd0120d26fca9f565a0a51a015874f3c450ea900dac9ae"
-        strategy="afterInteractive"
-      />
+          </Script>
+          <Script
+            id="zsiqscript"
+            src="https://salesiq.zohopublic.eu/widget?wc=siq42d4b24a5cfcd3ce5cfd0120d26fca9f565a0a51a015874f3c450ea900dac9ae"
+            strategy="afterInteractive"
+          />
+        </>
+      ) : null}
     </>
   );
 }
