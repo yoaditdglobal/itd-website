@@ -119,6 +119,9 @@ export default function ContactForm() {
   const fileMeta = (file: File | null) =>
     file ? { name: file.name, size: file.size, type: file.type } : undefined;
 
+  // GTM dataLayer (loaded globally in layout.tsx).
+  type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -164,6 +167,16 @@ export default function ContactForm() {
         const data = await res.json();
         throw new Error(data.error || "Something went wrong");
       }
+
+      // GTM: fire generate_lead only on a confirmed successful submit.
+      const w = window as DataLayerWindow;
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "generate_lead",
+        form_name: "contact_sales",
+        shipping_type: shippingType,
+        weekly_volume: isFreight ? quantity : weeklyVolume,
+      });
 
       setSubmitted(true);
     } catch (err) {
