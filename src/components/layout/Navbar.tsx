@@ -182,6 +182,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+    // Initialize immediately: pages can MOUNT already scrolled (anchor links
+    // like /shipping/domestic#estimator, reload scroll-restoration, bfcache,
+    // hydration finishing mid-scroll). Waiting for the first scroll EVENT left
+    // the nav transparent with page content colliding under the bare links.
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -198,6 +203,9 @@ export default function Navbar() {
   useIsoLayoutEffect(() => {
     const tone = document.querySelector("[data-hero-tone]")?.getAttribute("data-hero-tone");
     setHeroTone(tone === "light" || tone === "dark" ? tone : null);
+    // Re-assert the scroll state per route: an anchored navigation can land
+    // the new page mid-scroll without a scroll event reaching the listener.
+    if (typeof window !== "undefined") setScrolled(window.scrollY > 20);
   }, [pathname]);
 
   const transparent = !scrolled && heroTone === "light"; // only light heroes
