@@ -150,14 +150,11 @@ export default function TrackShipment() {
         </div>
       </fieldset>
 
-      <div className="mt-6 flex flex-wrap items-center gap-4">
+      <div className="mt-6">
         <Button type="submit" disabled={!ready}>
           Track shipment
           <ArrowUpRight className="w-4 h-4" aria-hidden />
         </Button>
-        <p className="text-caption text-text-tertiary">
-          Opens the carrier&apos;s tracking page in a new tab.
-        </p>
       </div>
     </form>
   );
