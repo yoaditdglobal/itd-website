@@ -117,6 +117,7 @@ export const ROUTES = [
   { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" as const },
 
   // Help
+  { path: "/track", priority: 0.6, changeFrequency: "yearly" as const },
   { path: "/help", priority: 0.6, changeFrequency: "weekly" as const },
   { path: "/help/integrations", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/help/integrations/shopify", priority: 0.6, changeFrequency: "monthly" as const },
