@@ -91,8 +91,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = cn(buttonVariants({ variant, size, surface, className }));
     if (href) {
       // External hrefs (http/https) render a plain <a>; default to opening in a
-      // new tab unless the caller pins target explicitly (e.g. the nav Log in
-      // link stays same-tab). Internal hrefs keep Next's <Link>.
+      // new tab unless the caller pins target explicitly. Internal hrefs keep
+      // Next's <Link>.
       const isExternal = /^https?:\/\//.test(href);
       if (isExternal) {
         const resolvedTarget = target ?? "_blank";
