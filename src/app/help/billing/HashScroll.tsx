@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /**
  * Scrolls to `location.hash` on arrival and on hash change. Needed because
- * cross-page deep links (e.g. Help search → /help/centre/billing#faq) race the
+ * cross-page deep links (e.g. Help search → /help/billing#faq) race the
  * page-enter animation + Next's post-navigation scroll reset — same pattern as
  * ClaimsIndex/GlossaryIndex, minus the filter toolbar.
  */

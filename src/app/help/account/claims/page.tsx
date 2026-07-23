@@ -6,7 +6,7 @@ import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/site-config";
 import { CLAIMS_POLICIES } from "@/lib/help-claims";
 
-const PATH = "/help/centre/account/claims";
+const PATH = "/help/account/claims";
 
 export const metadata = buildMetadata({
   title: "Claims policies by carrier",
@@ -37,8 +37,7 @@ export default function ClaimsPage() {
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Help", path: "/help" },
-            { name: "Help Centre", path: "/help/centre" },
-            { name: "Account & admin", path: "/help/centre/account" },
+            { name: "Account & admin", path: "/help/account" },
             { name: "Claims policies", path: PATH },
           ]),
           carrierItemList,
@@ -110,7 +109,7 @@ export default function ClaimsPage() {
                 Submit a request
               </Link>
               <Link
-                href="/help/centre"
+                href="/help"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
                 Back to Help Centre

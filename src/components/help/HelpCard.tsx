@@ -10,7 +10,7 @@ interface HelpCardProps {
 }
 
 /**
- * Large card used on /help and /help/centre. Full-tile clickable
+ * Large card used on /help and /help. Full-tile clickable
  * (entire card is wrapped in a Link). Icon + H3 + description + CTA row.
  *
  * Voice note: H3 is the actual heading here (not a card label) because each

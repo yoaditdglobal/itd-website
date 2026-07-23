@@ -5,7 +5,7 @@ import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import { Download, FileSpreadsheet } from "lucide-react";
 import HashScroll from "./HashScroll";
 
-const PATH = "/help/centre/billing";
+const PATH = "/help/billing";
 const QUERIES_EMAIL = "uk-invqueries@itdglobal.com";
 
 export const metadata = buildMetadata({
@@ -213,7 +213,6 @@ export default function BillingPage() {
     breadcrumbSchema([
       { name: "Home", path: "/" },
       { name: "Help", path: "/help" },
-      { name: "Help Centre", path: "/help/centre" },
       { name: "Billing & Invoices", path: PATH },
     ]),
     faqSchema(faqs),
@@ -762,7 +761,7 @@ export default function BillingPage() {
                 Submit a request
               </a>
               <Link
-                href="/help/centre"
+                href="/help"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
                 Back to Help Centre

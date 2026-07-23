@@ -38,7 +38,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Loss and damage claim windows, value limits, and exactly what to send — for every carrier ITD works with.",
     categoryLabel: "Account & admin",
-    href: "/help/centre/account/claims",
+    href: "/help/account/claims",
     keywords: [...CLAIM_TERMS, "carrier", "parcel", "policy", "evidence"],
   },
   {
@@ -46,7 +46,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Adding teammates, role-based access control, and managing child accounts under a parent contract.",
     categoryLabel: "Account & admin",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["users", "permissions", "roles", "access", "child account", "sso"],
   },
   {
@@ -54,7 +54,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Step-by-step guides for connecting Shopify, eBay, TikTok Shop, Selro, Linnworks, and Veeqo to ITD Global.",
     categoryLabel: "Integrations",
-    href: "/help/centre/integrations",
+    href: "/help/integrations",
     keywords: ["integration", "integrations", "connect", "setup", "store", "marketplace", "wms", "oms"],
   },
   {
@@ -62,7 +62,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Add Tracked 24, Tracked 48, Signed, First Class, and Second Class services to your dispatch flow.",
     categoryLabel: "Carriers",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["royal mail", "carrier", "services", "tracked 24", "tracked 48"],
   },
   {
@@ -70,7 +70,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Live API call on every shipment, rule-based carrier selection, and overrides for specific products or lanes.",
     categoryLabel: "Connexx platform",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["rate", "comparison", "rate engine", "pricing", "carrier selection"],
   },
   {
@@ -78,7 +78,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "HS codes from your product catalogue, EORI numbers, IOSS for EU under 150 EUR, and country-specific paperwork.",
     categoryLabel: "Connexx platform",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["customs", "hs code", "eori", "ioss", "documentation", "paperwork"],
   },
   {
@@ -86,7 +86,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Order pull, label write-back, and tracking sync for the most common ERPs and WMSs.",
     categoryLabel: "Integrations",
-    href: "/help/centre/integrations",
+    href: "/help/integrations",
     keywords: ["erp", "wms", "integration", "sync", "orders", "labels"],
   },
   {
@@ -94,7 +94,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "The Sat–Fri billing week, when your first invoice lands, payment terms, and how to raise an invoice query.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing",
+    href: "/help/billing",
     keywords: ["invoice", "billing", "billing week", "weekly", "payment", "due date", "bacs", "account reference", "first invoice", "charges", "query"],
   },
   {
@@ -102,7 +102,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Billing weeks run Saturday to Friday — one weekly invoice covers every carrier you shipped with, issued in arrears.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing#billing-cycle",
+    href: "/help/billing#billing-cycle",
     keywords: ["billing cycle", "billing week", "weekly", "arrears", "first invoice", "payment terms", "due date", "invoice query"],
   },
   {
@@ -110,7 +110,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "INVOICE, Summary, UK/Intl Consignments and Surcharge tabs — which page you pay from and where each charge lives.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing#ecommerce-invoice",
+    href: "/help/billing#ecommerce-invoice",
     keywords: ["ecommerce invoice", "invoice tabs", "summary", "consignments", "surcharge", "fuel", "global energy", "fctotal", "relabelling", "underdeclared"],
   },
   {
@@ -118,7 +118,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "The invoice for express / courier freight (FedEx, UPS, DHL) — INVOICE and Consignments tabs, one row per shipment.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing#transport-charges",
+    href: "/help/billing#transport-charges",
     keywords: ["transport charges", "express", "courier freight", "awb", "freight amount", "fuel surcharge", "invoice"],
   },
   {
@@ -126,7 +126,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "The customs duty and import VAT due on your imported goods — separate from carriage, with a Details tab per cleared shipment.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing#duty-vat",
+    href: "/help/billing#duty-vat",
     keywords: ["duty", "vat", "customs", "import", "duty and vat", "clearance", "admin fee", "invoice"],
   },
   {
@@ -134,7 +134,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Download fictional demo workbooks of each invoice type and explore the tabs in Excel.",
     categoryLabel: "Billing",
-    href: "/help/centre/billing#demo-downloads",
+    href: "/help/billing#demo-downloads",
     keywords: ["demo invoice", "example invoice", "sample invoice", "download", "xlsx", "workbook"],
   },
   {
@@ -142,7 +142,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Format options, printer setup, and what to do when label generation fails.",
     categoryLabel: "Connexx platform",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["label", "print", "printer", "format", "thermal"],
   },
   {
@@ -150,7 +150,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "What to do when a carrier flags a customs issue, how to upload missing documents, and how to prevent the same issue next time.",
     categoryLabel: "Carriers",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["customs hold", "carrier", "documents", "delay", "clearance"],
   },
   {
@@ -158,7 +158,7 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     summary:
       "Bearer token setup, key rotation, environment separation between staging and production.",
     categoryLabel: "API & developers",
-    href: "/help/centre",
+    href: "/help",
     keywords: ["api", "authentication", "token", "key", "developers"],
   },
 ];
@@ -172,7 +172,7 @@ const CLAIMS_DOCS: SearchDoc[] = CLAIMS_POLICIES.map((p) => ({
   title: `Claims policy — ${p.carrier}`,
   summary: `How to claim for a lost or damaged ${p.carrier} parcel — claim windows, value limits, and the evidence to send.`,
   categoryLabel: "Account & admin",
-  href: `/help/centre/account/claims#${p.slug}`,
+  href: `/help/account/claims#${p.slug}`,
   carrierSlug: p.slug,
   keywords: uniqueLower([
     ...p.aliases,
@@ -186,7 +186,7 @@ const INTEGRATION_DOCS: SearchDoc[] = INTEGRATION_GUIDES.map((g) => ({
   title: `Connecting ${g.name} to ITD Global`,
   summary: g.metaDescription,
   categoryLabel: "Integrations",
-  href: `/help/centre/integrations/${g.slug}`,
+  href: `/help/integrations/${g.slug}`,
   keywords: uniqueLower([
     g.name,
     g.slug,

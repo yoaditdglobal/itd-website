@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/site-config";
 
-const PATH = "/help/centre/account";
+const PATH = "/help/account";
 
 export const metadata = buildMetadata({
   title: "Account & admin — Help Centre",
@@ -23,7 +23,7 @@ const subcategories = [
     name: "Claims policies by carrier",
     description:
       "Loss and damage claim windows, value limits, and the evidence to send — for all 14 carriers ITD works with.",
-    href: "/help/centre/account/claims",
+    href: "/help/account/claims",
     meta: "14 carriers",
     live: true,
   },
@@ -49,7 +49,6 @@ export default function AccountHelpPage() {
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Help", path: "/help" },
-            { name: "Help Centre", path: "/help/centre" },
             { name: "Account & admin", path: PATH },
           ]),
           itemList,
@@ -61,7 +60,7 @@ export default function AccountHelpPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <nav className="mb-4 text-caption text-text-tertiary" aria-label="Breadcrumb">
-              <Link href="/help/centre" className="hover:text-accent">
+              <Link href="/help" className="hover:text-accent">
                 Help Centre
               </Link>{" "}
               / <span className="text-text-secondary">Account &amp; admin</span>

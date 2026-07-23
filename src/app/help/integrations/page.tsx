@@ -6,7 +6,7 @@ import { JsonLd, breadcrumbSchema, itemListSchema } from "@/components/seo/JsonL
 import { INTEGRATION_GUIDES } from "@/lib/help-integrations";
 import { ArrowRight, ListChecks } from "lucide-react";
 
-const PATH = "/help/centre/integrations";
+const PATH = "/help/integrations";
 
 export const metadata = buildMetadata({
   title: "Integration setup guides",
@@ -20,7 +20,6 @@ export default function HelpIntegrationsPage() {
     breadcrumbSchema([
       { name: "Home", path: "/" },
       { name: "Help", path: "/help" },
-      { name: "Help Centre", path: "/help/centre" },
       { name: "Integrations", path: PATH },
     ]),
     itemListSchema({
@@ -116,7 +115,7 @@ export default function HelpIntegrationsPage() {
                 Submit a request
               </Link>
               <Link
-                href="/help/centre"
+                href="/help"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
                 Back to Help Centre

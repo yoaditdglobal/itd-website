@@ -50,7 +50,7 @@ const sections: ResourceSection[] = [
   },
   {
     name: "Help Centre",
-    href: "/help/centre",
+    href: "/help",
     icon: LifeBuoy,
     description:
       "Account and admin, claims policies for every carrier, billing, and how-tos for the Connexx platform.",

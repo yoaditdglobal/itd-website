@@ -132,7 +132,7 @@ export default function SupportForm() {
           you need to add information, reply to the confirmation email.
         </p>
         <Link
-          href="/help/centre"
+          href="/help"
           className="mt-6 inline-flex items-center gap-2 bg-bg-dark text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-bg-dark-card transition-colors"
         >
           Back to Help Centre

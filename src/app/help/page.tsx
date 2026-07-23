@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { BookOpen, MessageSquare, Code, ArrowRight } from "lucide-react";
+import { Plug, Receipt, Users, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import FaqSection from "@/components/sections/FaqSection";
-import HelpCard from "@/components/help/HelpCard";
 import HelpSearchBar from "@/components/help/HelpSearchBar";
 import { buildMetadata } from "@/lib/metadata";
 import {
@@ -10,110 +9,136 @@ import {
   breadcrumbSchema,
   faqSchema,
 } from "@/components/seo/JsonLd";
+import { SITE_URL } from "@/lib/site-config";
 
 export const metadata = buildMetadata({
-  title: "Help & Support",
+  title: "Help Centre",
   description:
-    "Find answers in the Help Centre, submit a support request, or open the developer resources. We respond to every request within 1 business day.",
+    "Documentation and walkthroughs for Connexx, integrations, carriers, billing, and account admin. Browse by category or search for an article.",
   path: "/help",
 });
 
-const helpCards = [
+// TODO: category and article routes (/help/[category],
+// /help/[category]/[article]) arrive in Phase 5b. For this scaffold
+// pass, every category card and featured article links back to /help.
+const categories = [
   {
-    icon: BookOpen,
-    title: "Help Centre",
+    icon: Plug,
+    name: "Integrations",
     description:
-      "Documentation, walkthroughs, and answers for Connexx, integrations, carriers, billing, and account admin. Browse by category or search.",
-    ctaLabel: "Browse the Help Centre",
-    href: "/help/centre",
+      "eCommerce platforms, ERPs, WMS, marketplaces, and accounting tools that connect to Connexx.",
+    href: "/help/integrations",
+    slug: "integrations",
   },
   {
-    icon: MessageSquare,
-    title: "Submit a request",
+    icon: Receipt,
+    name: "Billing",
     description:
-      "Need a direct answer from our team? Tell us what's happening and we respond within 1 business day, 1 hour for platform-down issues.",
-    ctaLabel: "Submit a request",
-    href: "/help/submit-request",
+      "Invoicing, payment methods, rate cards, billing cycles, and credit notes.",
+    href: "/help/billing",
+    slug: "billing",
   },
   {
-    icon: Code,
-    title: "Developer resources",
+    icon: Users,
+    name: "Account & admin",
     description:
-      "API documentation, the live status page, the changelog, and webhook reference. Everything you need to integrate with Connexx.",
-    ctaLabel: "Open developer resources",
-    href: "/help/developers",
+      "Users, permissions, child accounts, single sign-on, audit logs, and account security.",
+    href: "/help/account",
+    slug: "account",
   },
 ];
 
-// Placeholder until the support team confirms the live top 5.
-// TODO: replace with the real list once /help/centre articles ship in Phase 5b.
-const popularArticles = [
+const featuredArticles: {
+  title: string;
+  summary: string;
+  category: string;
+  href?: string;
+}[] = [
   {
-    title: "Connecting Shopify to Connexx",
+    title: "Claims policies by carrier",
     summary:
-      "The 10-minute setup. Carrier accounts, label printing, and order sync from the Shopify admin.",
+      "Loss and damage claim windows, value limits, and exactly what to send — for every carrier ITD works with.",
+    category: "Account & admin",
+    href: "/help/account/claims",
+  },
+  {
+    title: "Connecting Shopify to ITD Global",
+    summary:
+      "Add your store domain, install the ITD Global app, and orders come through in near real-time with tracking synced back to Shopify.",
     category: "Integrations",
-    slug: "connecting-shopify-to-connexx",
+    href: "/help/integrations/shopify",
   },
   {
-    title: "Setting up your Royal Mail account in Connexx",
+    title: "Billing & Invoices — how weekly billing works",
     summary:
-      "How to add Tracked 24, Tracked 48, Signed, and First/Second Class services to your dispatch flow.",
-    category: "Carriers",
-    slug: "setting-up-royal-mail",
+      "The Sat–Fri billing week, when your first invoice lands, and how to read the Ecommerce, Transport Charges, and Duty & VAT invoices tab by tab.",
+    category: "Billing",
+    href: "/help/billing",
   },
   {
-    title: "How rate comparison works",
+    title: "Connecting eBay to ITD Global",
     summary:
-      "Live API call on every shipment, rule-based selection, and how to override the cheapest option when you need to.",
-    category: "Connexx platform",
-    slug: "how-rate-comparison-works",
+      "Connect your eBay store to ITD Global for multi-carrier shipping and tracking sent back to eBay with each label printed.",
+    category: "Integrations",
+    href: "/help/integrations/ebay",
   },
   {
-    title: "Generating customs documentation for international shipments",
+    title: "Connecting Linnworks to ITD Global",
     summary:
-      "HS codes, EORI, IOSS for EU orders under 150 EUR, and country-specific paperwork.",
-    category: "Connexx platform",
-    slug: "generating-customs-documentation",
+      "Add ITD Global as a shipping integration in Linnworks for multi-carrier dispatch and tracking sync, from adding the integration to updating vendor names.",
+    category: "Integrations",
+    href: "/help/integrations/linnworks",
   },
   {
-    title: "API authentication and rate limits",
+    title: "Connecting Veeqo to ITD Global",
     summary:
-      "Bearer token setup, per-endpoint rate limits, and how to request a higher tier.",
-    category: "API & Developers",
-    slug: "api-authentication-and-rate-limits",
+      "Add ITD Global as a custom carrier in Veeqo for multi-carrier shipping and tracking sync, completed step by step with the ITD Global team.",
+    category: "Integrations",
+    href: "/help/integrations/veeqo",
   },
 ];
 
 const faqItems = [
   {
-    question: "How do I contact ITD support?",
+    question: "Where do I start if I am new to Connexx?",
     answer:
-      "Submit a request at /help/submit-request and our team responds within 1 business day. Platform-down issues are responded to within 1 hour. Include your account ID and a clear description of what's happening, with screenshots if useful. Confirmation arrives by email within 5 minutes of submission.",
+      "Start with the Connexx platform category for the dashboard tour and the rate engine overview, then move to Integrations to connect your eCommerce platform or ERP, then to Carriers to add your carrier accounts. Most new customers are dispatching live within two business days of signing.",
   },
   {
-    question: "What is your support SLA?",
+    question: "How do I search for a specific article?",
     answer:
-      "We respond to low-priority requests within 1 business day, medium-priority operational issues within 4 business hours, and high-priority platform-down issues within 1 hour around the clock. Enterprise customers on a custom contract may have a different SLA in their agreement.",
+      "Use the search bar at the top of this page or on /help. Search matches article titles, summaries, and body text across every category. If the search returns no results, the article may not exist yet. Submit a request at /help/submit-request and the team will answer directly.",
   },
   {
-    question: "Do you offer phone support?",
+    question: "Can I get help if I am not yet a customer?",
     answer:
-      "Phone support is available for existing customers on a Connexx Pro or Enterprise plan. Submit a request first and a member of the team will call back within the SLA window. We do not operate a public support line.",
+      "Yes. The Help Centre is open to anyone evaluating Connexx. Browse the categories, read the integration guides, and check the developer documentation at /help/developers.",
   },
   {
-    question: "Where can I find the API documentation?",
+    question: "Are these articles kept up to date?",
     answer:
-      "API documentation lives at /help/developers, with the full reference at docs.itdglobal.com. The reference includes every Connexx endpoint, authentication, webhooks, rate limits, and the OpenAPI spec.",
+      "Yes. Articles are reviewed by the product and support teams whenever the underlying feature changes. Every article shows its last-updated date at the top.",
   },
   {
-    question: "Can I get help setting up a carrier account?",
+    question: "What if I cannot find the answer here?",
     answer:
-      "Yes. Carrier account setup is part of Connexx onboarding for new customers, and the Help Centre includes a walkthrough for every supported carrier. For account-specific issues, submit a request and the team will work with you and the carrier directly.",
+      "Submit a request at /help/submit-request. Tell us what you were trying to do and what happened. We respond within 1 business day, 1 hour for platform-down issues.",
   },
 ];
 
-export default function HelpHubPage() {
+// ItemList schema for the 6 categories — helps AI models cite the structure.
+const categoryItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: categories.map((cat, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: cat.name,
+    url: `${SITE_URL}${cat.href}`,
+  })),
+};
+
+export default function HelpCentrePage() {
   return (
     <>
       <JsonLd
@@ -122,6 +147,7 @@ export default function HelpHubPage() {
             { name: "Home", path: "/" },
             { name: "Help", path: "/help" },
           ]),
+          categoryItemList,
           faqSchema(faqItems),
         ]}
       />
@@ -131,77 +157,108 @@ export default function HelpHubPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary">
-              How can we help?
+              Help Centre
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary max-w-3xl mx-auto">
-              Browse the Help Centre for documentation and walkthroughs, submit
-              a request if you need a direct answer from the support team, or
-              open the developer resources for API documentation and the
-              platform changelog.
+              Documentation, walkthroughs, and answers for Connexx and every
+              supported integration. Browse the categories below or search for
+              the article you need.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
             <div className="mt-8 md:mt-10">
-              <HelpSearchBar />
+              <HelpSearchBar placeholder="Search articles..." />
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Three help cards */}
+      {/* Browse by category */}
       <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-5 md:gap-6">
-              {helpCards.map((card) => (
-                <HelpCard key={card.title} {...card} />
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Popular articles */}
-      <section className="bg-white py-16 md:py-20 border-t border-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
             <div className="mb-10">
               <h2 className="text-display-lg text-text-primary">
-                Popular articles
+                Browse by category
               </h2>
               <p className="mt-2 text-text-secondary">
-                The five articles most operators read first.
+                Three product areas. Pick the one closest to your question.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.05}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {popularArticles.map((article) => (
-                <Link
-                  key={article.slug}
-                  // TODO: dynamic article routing arrives in Phase 5b. For now,
-                  // popular articles link to the Help Centre index.
-                  href="/help/centre"
-                  className="group bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/30 transition-all flex flex-col"
-                >
-                  <span className="text-eyebrow text-accent mb-2">
-                    {article.category}
-                  </span>
-                  <p className="text-heading-sm text-text-primary group-hover:text-accent transition-colors">
-                    {article.title}
-                  </p>
-                  <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                    {article.summary}
-                  </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-accent">
-                    Read article
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              ))}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <Link
+                    key={cat.slug}
+                    href={cat.href}
+                    className="group bg-white rounded-xl border border-border p-6 hover:shadow-md hover:border-accent/30 transition-all flex flex-col h-full"
+                  >
+                    <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                      <Icon className="w-5 h-5 text-accent" />
+                    </div>
+                    <p className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
+                      {cat.name}
+                    </p>
+                    <p className="text-body-sm text-text-secondary mt-1.5 flex-1">
+                      {cat.description}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
+                      Browse category
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Featured articles */}
+      <section className="bg-white py-16 md:py-20 border-t border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="mb-10">
+              <h2 className="text-display-lg text-text-primary">
+                Featured articles
+              </h2>
+              <p className="mt-2 text-text-secondary">
+                Popular articles across the Help Centre.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.05}>
+            <ol className="grid sm:grid-cols-2 gap-4">
+              {featuredArticles.map((article, i) => (
+                <li key={article.title}>
+                  <Link
+                    href={article.href ?? "/help"}
+                    className="group bg-white rounded-xl border border-border p-5 hover:shadow-md hover:border-accent/30 transition-all flex gap-4 h-full"
+                  >
+                    <span className="flex-shrink-0 w-8 h-8 rounded-md bg-accent/10 text-accent text-sm font-semibold flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-eyebrow text-accent">
+                        {article.category}
+                      </span>
+                      <p className="text-heading-sm text-text-primary group-hover:text-accent transition-colors mt-1">
+                        {article.title}
+                      </p>
+                      <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                        {article.summary}
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </ScrollReveal>
         </div>
       </section>

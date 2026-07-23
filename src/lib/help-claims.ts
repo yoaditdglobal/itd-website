@@ -1,5 +1,5 @@
 // Help Centre — Claims policies by carrier. Single source of truth for
-// /help/centre/account/claims and for the help search index.
+// /help/account/claims and for the help search index.
 //
 // Values are transcribed VERBATIM from the ITD "Claims Policy" documents (one
 // per carrier). Each policy has a Loss and a Damage column with: the ITD claim-

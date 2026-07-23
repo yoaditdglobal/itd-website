@@ -71,7 +71,7 @@ const resourcesMenu = {
     { name: "Glossary", href: "/resources/glossary" },
   ],
   support: [
-    { name: "Help Centre", href: "/help/centre" },
+    { name: "Help Centre", href: "/help" },
     { name: "Submit a request", href: "https://support.itdglobal.com/hc/en-gb/requests/new" },
   ],
 };

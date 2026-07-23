@@ -84,6 +84,18 @@ const nextConfig: NextConfig = {
         destination: "/integrations/tech",
         permanent: true,
       },
+      // The Help Centre moved from /help/centre up to /help. 301 the old hub
+      // and every old sub-path so bookmarks and indexed URLs don't 404.
+      {
+        source: "/help/centre",
+        destination: "/help",
+        permanent: true,
+      },
+      {
+        source: "/help/centre/:path*",
+        destination: "/help/:path*",
+        permanent: true,
+      },
     ];
   },
 

@@ -14,7 +14,7 @@ import {
 } from "@/lib/help-integrations";
 import { ArrowLeft, ArrowRight, CircleCheck } from "lucide-react";
 
-const BASE = "/help/centre/integrations";
+const BASE = "/help/integrations";
 
 export function generateStaticParams() {
   return INTEGRATION_GUIDES.map((g) => ({ slug: g.slug }));
@@ -56,7 +56,6 @@ export default async function IntegrationGuidePage({
     breadcrumbSchema([
       { name: "Home", path: "/" },
       { name: "Help", path: "/help" },
-      { name: "Help Centre", path: "/help/centre" },
       { name: "Integrations", path: BASE },
       { name: guide.name, path },
     ]),
