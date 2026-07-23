@@ -45,6 +45,11 @@ const CARRIERS: TrackCarrier[] = [
     pattern: /^JJD\d+$/i,
   },
   {
+    name: "Deutsche Post",
+    logo: "/logos/carriers/deutschepost_logo.avif",
+    url: "https://www.dhl.com/de-en/home/tracking.html?tracking-id={n}",
+  },
+  {
     name: "Amazon Shipping",
     logo: "/logos/carriers/amazonshipping_logo.png",
     url: "https://track.amazon.co.uk/tracking/{n}",
