@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, BookMarked, Newspaper, LifeBuoy } from "lucide-re
 import type { LucideIcon } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Resources — customer stories, guides, glossary and help",
+  title: "Resources",
   description:
     "Everything we publish for UK shippers in one place: customer case studies, operator guides on shipping and customs, a logistics glossary, and the Help Centre.",
   path: "/resources",

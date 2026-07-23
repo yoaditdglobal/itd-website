@@ -11,7 +11,7 @@ import {
 } from "@/lib/data";
 
 export const metadata = buildMetadata({
-  title: "Tech integrations — ERP, WMS, eCommerce & marketplaces",
+  title: "Tech integrations",
   description:
     "Connexx connects to the ERP, WMS, eCommerce, and marketplace tools you already run — NetSuite, Shopify, WooCommerce, Amazon, eBay and more.",
   path: "/integrations/tech",

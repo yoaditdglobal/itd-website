@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { getIntegrationsByType } from "@/lib/data";
 
 export const metadata = buildMetadata({
-  title: "Carrier integrations — one connection to an entire network",
+  title: "Carrier integrations",
   description:
     "Domestic and international carriers in one network — Royal Mail, Evri, DPD, InPost, DHL, FedEx, UPS, Amazon Shipping and more. Pick a carrier to see its services and how it works with us.",
   path: "/integrations/carriers",

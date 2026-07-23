@@ -6,7 +6,7 @@ import { JsonLd, breadcrumbSchema, itemListSchema } from "@/components/seo/JsonL
 import { ArrowRight, Clock } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Guides for UK shippers, importers, and marketplace sellers",
+  title: "Guides",
   description:
     "Operator guides on UK shipping, customs, imports, and marketplace fulfilment. Written for dispatch managers, import leads, and marketplace sellers. Plain English, no fluff.",
   path: "/resources/guides",

@@ -6,7 +6,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { BadgeCheck, Eye, Plug, Store, Truck } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "SME shipping software UK, no contracts",
+  title: "SME shipping",
   description:
     "Multi-carrier shipping built for SMEs. Royal Mail, Evri, and DPD from one screen, no monthly minimum, no carrier accounts, no setup call. Live with Shopify or WooCommerce in under 10 minutes.",
   path: "/solutions/small-business",

@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { getLeadership, getWiderTeam } from "@/lib/data";
 
 export const metadata = buildMetadata({
-  title: "Meet the team — ITD Global",
+  title: "Meet the team",
   description:
     "The people behind ITD Global and the Connexx platform — the leadership and operators managing carriers, customs, and fulfilment for hundreds of UK businesses.",
   path: "/about/team",

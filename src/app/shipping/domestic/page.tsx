@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "UK domestic parcel shipping across every carrier",
+  title: "UK domestic shipping",
   description:
     "Compare Royal Mail, DPD, Evri, InPost, DX, Parcelforce, and Amazon Shipping on every UK order. One dashboard, every postcode, including Highlands and Islands.",
   path: "/shipping/domestic",

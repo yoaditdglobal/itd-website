@@ -8,7 +8,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { Building2 } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "B2B & wholesale shipping — the right carrier for every order",
+  title: "B2B & wholesale shipping",
   description:
     "In wholesale, the delivery is the relationship. We match the right carrier and service to every B2B consignment — heavy, high-value, timed, UK or international — so deliveries land on time.",
   path: "/solutions/b2b",

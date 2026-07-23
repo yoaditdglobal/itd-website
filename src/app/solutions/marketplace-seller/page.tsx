@@ -6,7 +6,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { ClipboardList, LayoutGrid, RefreshCw, Store, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "Amazon and eBay shipping software for UK marketplace sellers",
+  title: "Marketplace seller shipping",
   description:
     "Cut Amazon late shipment penalties to zero. One dispatch queue for Amazon, eBay, Etsy, and TikTok Shop, with SLA-aware carrier routing for Royal Mail, Evri, DPD, and Amazon Shipping.",
   path: "/solutions/marketplace-seller",

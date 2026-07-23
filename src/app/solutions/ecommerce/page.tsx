@@ -6,7 +6,7 @@ import { serviceSchema } from "@/components/seo/JsonLd";
 import { Eye, MapPin, Plug, ShoppingCart, Zap } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "eCommerce shipping software for UK retailers",
+  title: "eCommerce shipping",
   description:
     "Cut shipping costs by routing every order through the cheapest compliant carrier. Connexx connects Shopify, WooCommerce, and 12+ carriers from one dashboard.",
   path: "/solutions/ecommerce",
