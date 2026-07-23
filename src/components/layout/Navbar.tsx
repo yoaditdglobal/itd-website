@@ -73,6 +73,7 @@ const resourcesMenu = {
   support: [
     { name: "Help Centre", href: "/help" },
     { name: "Submit a request", href: "https://support.itdglobal.com/hc/en-gb/requests/new" },
+    { name: "Track Shipment", href: "/track" },
   ],
 };
 

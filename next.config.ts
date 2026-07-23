@@ -96,6 +96,38 @@ const nextConfig: NextConfig = {
         destination: "/help/:path*",
         permanent: true,
       },
+      // ── Old WordPress site (pre-2026 relaunch) ──────────────────────────
+      // Google still indexes the old site's URLs (sitelinks incl. "Track Your
+      // Parcel", "Customer Login", "E-Commerce Fulfilment") and they all 404
+      // on the new site. 301 every old family to its closest new equivalent
+      // so link equity transfers and the stale sitelinks refresh on recrawl.
+      // Inventory sourced from the Wayback Machine (2025+ captures).
+      // Specific rules must precede their :path* catch-alls (array order wins).
+      { source: "/track-your-parcel", destination: "/track", permanent: true },
+      { source: "/customer-login", destination: "https://connexx.co.uk/", permanent: true },
+      { source: "/contact-us", destination: "/contact", permanent: true },
+      { source: "/contact-us/:path*", destination: "/contact", permanent: true },
+      { source: "/our-services/e-commerce", destination: "/solutions/ecommerce", permanent: true },
+      { source: "/our-services/freight", destination: "/shipping/freight", permanent: true },
+      { source: "/our-services/parcel", destination: "/shipping/domestic", permanent: true },
+      { source: "/our-services", destination: "/shipping", permanent: true },
+      { source: "/our-services/:path*", destination: "/shipping", permanent: true },
+      { source: "/knowledge-hub", destination: "/resources/guides", permanent: true },
+      { source: "/knowledge-hub/:path*", destination: "/resources/guides", permanent: true },
+      { source: "/our-customers/case-studies", destination: "/resources/case-studies", permanent: true },
+      { source: "/our-customers/industries", destination: "/solutions", permanent: true },
+      { source: "/our-customers/industries/:path*", destination: "/solutions", permanent: true },
+      { source: "/our-customers", destination: "/resources/case-studies", permanent: true },
+      { source: "/our-customers/:path*", destination: "/resources/case-studies", permanent: true },
+      { source: "/our-company", destination: "/about", permanent: true },
+      { source: "/our-company/:path*", destination: "/about", permanent: true },
+      { source: "/our-story", destination: "/about", permanent: true },
+      { source: "/why-itd", destination: "/about", permanent: true },
+      { source: "/careers", destination: "/about", permanent: true },
+      { source: "/our-partners", destination: "/integrations/carriers", permanent: true },
+      { source: "/our-partners/:path*", destination: "/integrations/carriers", permanent: true },
+      { source: "/faqs", destination: "/help", permanent: true },
+      { source: "/terms-conditions", destination: "/terms-of-service", permanent: true },
     ];
   },
 
