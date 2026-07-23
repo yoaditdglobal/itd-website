@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Linkedin } from "lucide-react";
 
 /**
  * Association memberships shown in the footer. Official marks are never
@@ -200,6 +201,15 @@ export default function Footer() {
             <Link href="/terms-of-service" className="hover:text-white/70">Terms of Service</Link>
             <Link href="/cookie-policy" className="hover:text-white/70">Cookie Policy</Link>
           </div>
+          <a
+            href="https://www.linkedin.com/company/itd-global/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ITD Global on LinkedIn (opens in a new tab)"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-white/60 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          >
+            <Linkedin className="h-5 w-5" aria-hidden />
+          </a>
         </div>
       </div>
     </footer>
