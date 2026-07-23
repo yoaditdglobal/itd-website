@@ -27,9 +27,14 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <Navbar />
       <main className="flex-1 pt-[72px]">{children}</main>
       <Footer />
-      {/* Zoho SalesIQ chat widget (replaces the in-house Connexx Assistant). */}
-      <Script id="zsiq-init" strategy="afterInteractive">
-        {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
+      {/* Zoho SalesIQ chat widget. Canonical two-part embed: the init defines
+          window.$zoho before the widget bundle loads; both run after hydration
+          so they never block first paint. The bot, operators and appearance are
+          configured in the Zoho SalesIQ console and served live for this widget
+          code — no site change is needed when those are updated there. */}
+      <Script id="zsiqinit" strategy="afterInteractive">
+        {`window.$zoho = window.$zoho || {};
+window.$zoho.salesiq = window.$zoho.salesiq || { ready: function () {} };`}
       </Script>
       <Script
         id="zsiqscript"

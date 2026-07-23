@@ -13,13 +13,13 @@ import type { NextConfig } from "next";
 // prerendered pages) into dynamic rendering.
 const cspReportOnly = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://salesiq.zohopublic.eu https://*.zohocdn.com",
-  "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://*.zohocdn.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.zohopublic.eu https://*.zohocdn.com https://*.zoho.eu",
+  "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://*.zohopublic.eu https://*.zohocdn.com",
   "font-src 'self' data: https://cdn.fontshare.com https://*.zohocdn.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://salesiq.zohopublic.eu wss://salesiq.zohopublic.eu https://*.zoho.eu",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu",
   "frame-ancestors 'none'",
-  "frame-src 'self' https://salesiq.zohopublic.eu",
+  "frame-src 'self' https://*.zohopublic.eu",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
