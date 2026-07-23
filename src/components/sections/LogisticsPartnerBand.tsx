@@ -29,9 +29,6 @@ export default function LogisticsPartnerBand() {
           {/* Copy */}
           <ScrollReveal delay={0.1}>
             <div>
-              <p className="text-eyebrow text-accent mb-4">
-                More than a platform
-              </p>
               <h2 className="text-display-lg text-text-primary">
                 Run by people who ship for a living
               </h2>
