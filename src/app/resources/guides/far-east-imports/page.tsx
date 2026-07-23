@@ -11,7 +11,6 @@ import {
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
-import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "Importing from China and the Far East to the UK",
@@ -79,14 +78,6 @@ const faqs = [
     answer:
       "Yes. You cannot import commercial goods into the UK without an EORI number. Apply free at gov.uk/eori. Processing usually takes 5 working days. If you are VAT registered, your EORI is your VAT number prefixed GB and suffixed 000. If you also import into Northern Ireland, you need an XI-prefixed EORI in addition to the GB one.",
   },
-];
-
-/** TL;DR — every bullet is verifiable against the guide sections below. */
-const TLDR = [
-  "Express courier suits urgent consignments under 100kg, air freight 100kg\u20131,000kg, and sea LCL or FCL everything larger \u2014 decided by lead time, cost per kg and working capital.",
-  "You cannot import commercial goods without an EORI number \u2014 apply free at gov.uk/eori, usually processed within 5 working days.",
-  "Postponed VAT Accounting lets you declare import VAT on your VAT return instead of paying it at the border.",
-  "Most holds trace to a wrong HS code, a non-compliant commercial invoice or missed anti-dumping duty \u2014 all far cheaper to fix at origin than at the UK border.",
 ];
 
 /** HowTo steps mirror the numbered guide sections below — each step anchors
@@ -193,15 +184,6 @@ export default function FarEastImportsGuidePage() {
         </div>
       </section>
 
-      {/* TL;DR — GEO-extractable summary */}
-      <section className="bg-white pb-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <KeyTakeaways items={TLDR} />
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Who this is for */}
       <section className="bg-white pb-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -210,20 +192,6 @@ export default function FarEastImportsGuidePage() {
             <p className="text-text-secondary leading-relaxed">
               This guide is written for UK import managers, eCommerce brands sourcing from Asia, and 3PLs handling client inbound flows. If you are running 50 to 500 import shipments a month and your landed cost spreadsheet is out of date the moment a fuel surcharge changes, you are the reader we wrote this for. We assume you already know what an EORI number is. If you do not, start with the EORI section and come back.
             </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* TL;DR */}
-      <section className="bg-white pb-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="border-l-4 border-accent bg-accent-light/40 rounded-r-xl p-6">
-              <p className="text-eyebrow text-accent mb-3">Quick View</p>
-              <p className="text-text-primary leading-relaxed">
-                Importing from China and the Far East into the UK in 2026 means filing CDS declarations, classifying goods against the UK Global Tariff, choosing between sea freight (cost) and air freight (speed), and picking Incoterms that match your control appetite. The four levers that move the actual numbers are HS code accuracy, Incoterms choice, freight mode, and whether you are using Postponed VAT Accounting. A misclassified HS code costs you in three places: duty rate, customs hold time, and HMRC penalty exposure. PVA defers the import VAT cash hit to your next return. DDP shifts the customs work to the supplier and removes your visibility. This guide covers each decision with the actual numbers.
-              </p>
-            </div>
           </ScrollReveal>
         </div>
       </section>

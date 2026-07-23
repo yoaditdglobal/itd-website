@@ -49,13 +49,6 @@ const CRUMBS = [
   { name: "Enterprise", path: "/solutions/enterprise" },
 ];
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We help large UK and international shippers reach rates and capacity their own contracts can't, by pooling their volume across our carrier network.",
-  "We give you child accounts per site, brand and region, consolidated billing, native ERP and WMS write-back, and exceptions triaged before customers chase.",
-  "A dedicated account team runs the carrier relationships and escalations, so a lost shipment or billing dispute isn't your senior people's to chase.",
-];
-
 export default function EnterprisePage() {
   return (
     <>
@@ -119,7 +112,6 @@ export default function EnterprisePage() {
             title: "Delivery exceptions caught and triaged before customers chase",
           },
         ]}
-        keyTakeaways={TLDR}
         breadcrumbs={CRUMBS}
         jsonLd={[
           serviceSchema({

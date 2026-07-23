@@ -12,13 +12,6 @@ export const metadata = buildMetadata({
   path: "/solutions/marketplace-seller",
 });
 
-/** TL;DR — every bullet is verifiable against this page's own copy. */
-const TLDR = [
-  "We help UK marketplace sellers protect their SLAs and margin by matching each order to a Prime-ready carrier that meets the delivery promise.",
-  "We connect Amazon, eBay, Etsy and TikTok Shop into one dispatch queue, route by each marketplace's cut-off, and push tracking back automatically.",
-  "We flag exceptions early and route to carriers that hit the promise using tracking the platforms recognise, so your seller metrics hold without manual checking.",
-];
-
 export default function MarketplaceSellerPage() {
   return (
     <VerticalPage
@@ -116,7 +109,6 @@ export default function MarketplaceSellerPage() {
         primary: { label: "Get Quote", href: RATE_CHECKER_URL },
         secondary: { label: "Contact Sales", href: "/contact?enquiry=marketplace-seller" },
       }}
-      keyTakeaways={TLDR}
       breadcrumbs={[
         { name: "Home", path: "/" },
         { name: "Solutions", path: "/solutions" },

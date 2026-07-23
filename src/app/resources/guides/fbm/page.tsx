@@ -11,7 +11,6 @@ import {
 } from "@/components/seo/JsonLd";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { linkifyGlossaryTerms } from "@/lib/glossary-inline";
-import KeyTakeaways from "@/components/ui/KeyTakeaways";
 
 export const metadata = buildMetadata({
   title: "Fulfilled by Merchant (FBM) on Amazon: UK guide",
@@ -77,14 +76,6 @@ const faqs = [
     answer:
       "Three things move the needle. First, set realistic handling time on your listings. If your warehouse closes at 16:00 and orders arriving after 14:00 ship the next day, set handling time to one working day rather than same-day. Second, route to a carrier whose published transit time matches the delivery promise. Third, monitor OTDR weekly, not monthly, so a bad week does not become a bad quarter.",
   },
-];
-
-/** TL;DR — every bullet is verifiable against the guide sections below. */
-const TLDR = [
-  "FBM means you store, pick, pack and ship Amazon orders yourself or through a 3PL, choosing your own carrier \u2014 FBA hands all of that to Amazon for a fee.",
-  "Four metrics decide your account health: Late Shipment Rate under 4%, Cancel Rate under 2.5%, Valid Tracking Rate above 95% and On-Time Delivery Rate above 97%.",
-  "Amazon Buy Shipping protects those metrics on the orders it covers \u2014 roughly 80% \u2014 as long as you confirm dispatch by the deadline.",
-  "Above 200 orders a day or across multiple marketplaces, a multi-carrier platform consolidates dispatch across Amazon, eBay, Etsy and TikTok Shop.",
 ];
 
 /** HowTo steps mirror the numbered guide sections below — each step anchors
@@ -186,15 +177,6 @@ export default function FbmGuidePage() {
         </div>
       </section>
 
-      {/* TL;DR — GEO-extractable summary */}
-      <section className="bg-white pb-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <KeyTakeaways items={TLDR} />
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Who this is for */}
       <section className="bg-white pb-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,20 +185,6 @@ export default function FbmGuidePage() {
             <p className="text-text-secondary leading-relaxed">
               This guide is for Amazon sellers running FBM (Fulfilled by Merchant), marketplace sellers who dispatch across Amazon plus other platforms, and 3PLs handling client FBM volume. If you are watching your Late Shipment Rate creep towards 4% and Amazon&apos;s seller performance team has started sending warnings, you are the reader we wrote this for. We assume you already know what an ASIN is and have shipped at least one order this week.
             </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* TL;DR */}
-      <section className="bg-white pb-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="border-l-4 border-accent bg-accent-light/40 rounded-r-xl p-6">
-              <p className="text-eyebrow text-accent mb-3">Quick View</p>
-              <p className="text-text-primary leading-relaxed">
-                Fulfilled by Merchant (FBM) on Amazon means you handle dispatch yourself instead of using FBA. Winning at FBM requires keeping Late Shipment Rate under 4%, Cancel Rate under 2.5%, Valid Tracking Rate above 95%, and On-Time Delivery Rate above 97%. Buy Shipping through Amazon protects your LSR and VTR if you ship by the cut-off. Royal Mail Tracked 24, Royal Mail Tracked 48, DPD Next Day, and Evri Standard are the four UK carriers most Amazon sellers route through. Seller Fulfilled Prime requires hitting tighter thresholds (99% on-time, 99% Valid Tracking, weekend dispatch) and using approved carriers. The manual workflow breaks at around 50 orders a day per operator. This guide covers each decision with the actual thresholds.
-              </p>
-            </div>
           </ScrollReveal>
         </div>
       </section>
