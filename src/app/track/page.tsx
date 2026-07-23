@@ -47,10 +47,6 @@ export default function TrackPage() {
           <ScrollReveal>
             <div className="mt-8 space-y-2 text-body-sm text-text-secondary">
               <p>
-                The tracking link in your dispatch email goes straight to the
-                same place — either works.
-              </p>
-              <p>
                 Shipping with us through Connexx?{" "}
                 <a
                   href="https://connexx.co.uk/"
