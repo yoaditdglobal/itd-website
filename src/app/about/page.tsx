@@ -201,8 +201,11 @@ export default function AboutPage() {
               <ol className="space-y-6">
                 {TIMELINE.map((item, i) => (
                   <ScrollReveal key={item.year} delay={i * 0.05} className="relative pl-12">
-                    {/* Year dot on spine */}
-                    <div className="absolute left-0 top-5 -translate-x-1/2 z-10 flex items-center justify-center">
+                    {/* Year pill centered ON the spine (left-4 = the spine's x).
+                        left-0 centered it 16px further left, hanging half the
+                        pill outside the container — cropped at the viewport
+                        edge on mobile. */}
+                    <div className="absolute left-4 top-5 -translate-x-1/2 z-10 flex items-center justify-center">
                       <span className="px-2.5 py-0.5 rounded-full bg-accent text-white text-caption font-semibold whitespace-nowrap shadow-sm text-xs">
                         {item.year}
                       </span>
