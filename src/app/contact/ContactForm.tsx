@@ -30,17 +30,9 @@ const countryOptions = countries.map((c) => ({
 }));
 
 const steps = [
-  { num: "01", title: "Send the form", desc: "Two minutes, no commitment." },
-  {
-    num: "02",
-    title: "We run the numbers",
-    desc: "We run your volumes and lanes against the carrier network.",
-  },
-  {
-    num: "03",
-    title: "You get the rates back",
-    desc: "You get the rates back, with an account manager to talk them through.",
-  },
+  { num: "01", title: "Send the form" },
+  { num: "02", title: "We run the numbers" },
+  { num: "03", title: "You get the rates back" },
 ];
 
 export default function ContactForm() {
@@ -230,10 +222,6 @@ export default function ContactForm() {
                 <h1 className="text-display-lg text-white">
                   Tell us what you ship. We&apos;ll tell you what it should cost
                 </h1>
-                <p className="mt-5 max-w-md text-body-lg text-white/70">
-                  Send your volumes and lanes, and your account manager comes back with
-                  what our carrier network can do on price.
-                </p>
               </ScrollReveal>
 
               {/* What happens next */}
@@ -259,7 +247,6 @@ export default function ContactForm() {
                         </div>
                         <div className="flex-1 pt-0.5">
                           <h2 className="text-heading-md text-white">{s.title}</h2>
-                          <p className="mt-1 text-body-sm text-white/65">{s.desc}</p>
                         </div>
                       </div>
                     </ScrollReveal>
@@ -272,9 +259,6 @@ export default function ContactForm() {
           {/* ── Right: enquiry form ── */}
           <div className="px-6 py-12 sm:px-10 md:py-16">
             <ScrollReveal delay={0.15}>
-              <p className="mb-6 text-body-md text-text-secondary">
-                Give us the shape of what you ship and we&apos;ll do the digging.
-              </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Shipping Type */}
@@ -616,7 +600,7 @@ export default function ContactForm() {
                   className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-bg-dark px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-bg-dark-card active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
-                  <span>{submitting ? "Submitting…" : "Submit Enquiry"}</span>
+                  <span>{submitting ? "Submitting…" : "Submit"}</span>
                 </button>
               </form>
             </ScrollReveal>
