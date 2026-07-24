@@ -49,6 +49,7 @@ export async function emailTeam(opts: {
   rows: Record<string, unknown>;
   /** Render every row, showing "—" for blanks (constant table shape). */
   keepEmptyRows?: boolean;
+  attachments?: import("@/lib/server/email").MailAttachment[];
 }): Promise<boolean> {
   if (!opts.to || !isEmailConfigured()) return false;
   try {
@@ -68,6 +69,7 @@ export async function emailTeam(opts: {
       replyTo: opts.replyTo,
       subject: opts.subject,
       html,
+      attachments: opts.attachments,
     });
     return true;
   } catch {

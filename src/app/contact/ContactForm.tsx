@@ -22,7 +22,10 @@ const isDomesticType = (type: string) => type.startsWith("Domestic");
 
 const freightTypes = ["Parcel", "Box", "Pallet"] as const;
 
-const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10MB
+// Files travel base64 inside the JSON submission (and on to the lead webhook
+// + notification email), so the cap must fit the serverless request limit.
+const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4MB per file
+const MAX_COMBINED_UPLOAD_BYTES = 4 * 1024 * 1024; // 4MB across both files
 
 // Full country names as values — the submitted mainLanes array (and the
 // lead webhook payload behind it) carries names, not ISO codes.
@@ -103,15 +106,25 @@ export default function ContactForm() {
       return;
     }
     if (file.size > MAX_UPLOAD_BYTES) {
-      setError(`"${file.name}" is over 10MB. Please choose a smaller file.`);
+      setError(`"${file.name}" is over 4MB. Please choose a smaller file.`);
       return;
     }
     setError("");
     setter(file);
   };
 
-  const fileMeta = (file: File | null) =>
-    file ? { name: file.name, size: file.size, type: file.type } : undefined;
+  /** Read a file into the submission payload — metadata + base64 bytes. */
+  const filePayload = async (file: File | null) => {
+    if (!file) return undefined;
+    const content = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () =>
+        resolve(String(reader.result).replace(/^data:[^;]*;base64,/, ""));
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+    return { name: file.name, size: file.size, type: file.type, content };
+  };
 
   // GTM dataLayer (loaded globally in layout.tsx).
   type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] };
@@ -126,6 +139,12 @@ export default function ContactForm() {
     }
     if (isFreight && !freightType) {
       setError("Please select a freight type (Parcel, Box, or Pallet).");
+      return;
+    }
+    const combinedBytes =
+      (supplierInvoiceFile?.size ?? 0) + (freightPhotoFile?.size ?? 0);
+    if (combinedBytes > MAX_COMBINED_UPLOAD_BYTES) {
+      setError("Attachments are over 4MB combined. Please use smaller files.");
       return;
     }
 
@@ -145,8 +164,8 @@ export default function ContactForm() {
           dimensions: showWeightDims
             ? { length: dimL, width: dimW, height: dimH }
             : undefined,
-          supplierInvoice: isFreight ? fileMeta(supplierInvoiceFile) : undefined,
-          freightPhoto: isFreight ? fileMeta(freightPhotoFile) : undefined,
+          supplierInvoice: isFreight ? await filePayload(supplierInvoiceFile) : undefined,
+          freightPhoto: isFreight ? await filePayload(freightPhotoFile) : undefined,
           collectionPostcode: isFreight ? undefined : collectionPostcode,
           company: companyName,
           firstName,
