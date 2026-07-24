@@ -5,7 +5,7 @@ import TeamCard from "@/components/sections/TeamCard";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/metadata";
-import { getLeadership, getWiderTeam } from "@/lib/data";
+import { getLeadership } from "@/lib/data";
 
 export const metadata = buildMetadata({
   title: "Meet the team",
@@ -16,7 +16,6 @@ export const metadata = buildMetadata({
 
 export default function TeamPage() {
   const leadership = getLeadership();
-  const widerTeam = getWiderTeam();
 
   return (
     <>
@@ -65,26 +64,6 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
-
-      {/* Wider team — renders only when populated */}
-      {widerTeam.length > 0 && (
-        <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <h2 className="text-display-md text-text-primary mb-8">
-                ITD Global Team
-              </h2>
-            </ScrollReveal>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-              {widerTeam.map((member, i) => (
-                <ScrollReveal key={member.name} delay={i * 0.05}>
-                  <TeamCard member={member} />
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       <ClosingCTA
         headline="Work with a team that knows your lanes"
