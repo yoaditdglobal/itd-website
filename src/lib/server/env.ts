@@ -54,9 +54,37 @@ export function getGraphEnv(): GraphEnv | null {
   return parsed.success ? parsed.data : null;
 }
 
+// ── Resend (mail send — primary provider) ───────────────────────────────────
+const resendSchema = z.object({
+  RESEND_API_KEY: z.string().min(1),
+  RESEND_FROM: z.string().min(3),
+});
+export type ResendEnv = z.infer<typeof resendSchema>;
+
+/** Returns validated Resend config, or null if not configured. The from
+ *  address must belong to a domain verified in the Resend account. */
+export function getResendEnv(): ResendEnv | null {
+  const parsed = resendSchema.safeParse({
+    RESEND_API_KEY: read("RESEND_API_KEY"),
+    RESEND_FROM: read("RESEND_FROM") ?? "ITD Global <noreply@itdglobal.com>",
+  });
+  return parsed.success ? parsed.data : null;
+}
+
 // ── Notification recipients ─────────────────────────────────────────────────
-export function getNotifyEmails(): { leads?: string; support?: string } {
-  return { leads: read("LEADS_NOTIFY_TO"), support: read("SUPPORT_NOTIFY_TO") };
+// Lead recipients have baked defaults (same precedent as the lead webhook
+// below) so internal notifications work with only RESEND_API_KEY set;
+// env vars override.
+export function getNotifyEmails(): {
+  leads?: string;
+  leadsCc?: string;
+  support?: string;
+} {
+  return {
+    leads: read("LEADS_NOTIFY_TO") ?? "yoad.tzor@itdglobal.com",
+    leadsCc: read("LEADS_NOTIFY_CC") ?? "cc@itdglobal.com",
+    support: read("SUPPORT_NOTIFY_TO"),
+  };
 }
 
 // ── Lead webhook (Make.com → Zoho CRM) ──────────────────────────────────────

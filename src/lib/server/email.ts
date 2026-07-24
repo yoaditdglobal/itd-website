@@ -1,15 +1,68 @@
-import { getGraphEnv, type GraphEnv } from "./env";
+import { getGraphEnv, getResendEnv, type GraphEnv } from "./env";
 
 /**
- * Microsoft Graph mail sender (client-credentials). Sends as the configured
- * shared mailbox (MS_SENDER_UPN). Token cached in memory until ~5 min before
- * expiry. `isEmailConfigured()` lets routes skip email and fall back when the
- * env isn't present.
+ * Outbound mail with two providers behind one seam:
+ *
+ * - **Resend** (primary when RESEND_API_KEY is set) — plain fetch against
+ *   https://api.resend.com/emails, no SDK. The from address (RESEND_FROM)
+ *   must belong to a domain verified in the Resend account.
+ * - **Microsoft Graph** (fallback) — client-credentials send as the configured
+ *   shared mailbox (MS_SENDER_UPN). Token cached until ~5 min before expiry.
+ *
+ * `isEmailConfigured()` lets routes skip email and degrade when neither
+ * provider is present.
  */
 
 export function isEmailConfigured(): boolean {
-  return getGraphEnv() !== null;
+  return getResendEnv() !== null || getGraphEnv() !== null;
 }
+
+export interface MailOptions {
+  to: string | string[];
+  subject: string;
+  html: string;
+  cc?: string | string[];
+  /** Submitter's address on team notifications, so "Reply" answers the lead. */
+  replyTo?: string;
+}
+
+const asList = (v: string | string[] | undefined): string[] =>
+  v == null ? [] : Array.isArray(v) ? v : [v];
+
+export async function sendMail(opts: MailOptions): Promise<void> {
+  if (getResendEnv()) return sendViaResend(opts);
+  if (getGraphEnv()) return sendViaGraph(opts);
+  throw new Error("Email not configured");
+}
+
+// ── Resend ───────────────────────────────────────────────────────────────────
+
+async function sendViaResend({ to, subject, html, cc, replyTo }: MailOptions): Promise<void> {
+  const env = getResendEnv();
+  if (!env) throw new Error("Resend not configured");
+  const ccList = asList(cc);
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: env.RESEND_FROM,
+      to: asList(to),
+      ...(ccList.length > 0 && { cc: ccList }),
+      ...(replyTo && { reply_to: replyTo }),
+      subject,
+      html,
+    }),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`Resend HTTP ${res.status}: ${detail.slice(0, 300)}`);
+  }
+}
+
+// ── Microsoft Graph ──────────────────────────────────────────────────────────
 
 let cached: { token: string; expiresAt: number } | null = null;
 
@@ -43,21 +96,12 @@ async function getGraphToken(env: GraphEnv): Promise<string> {
   return body.access_token;
 }
 
-export async function sendMail({
-  to,
-  subject,
-  html,
-}: {
-  to: string | string[];
-  subject: string;
-  html: string;
-}): Promise<void> {
+async function sendViaGraph({ to, subject, html, cc, replyTo }: MailOptions): Promise<void> {
   const env = getGraphEnv();
   if (!env) throw new Error("Graph not configured");
   const token = await getGraphToken(env);
-  const recipients = (Array.isArray(to) ? to : [to]).map((address) => ({
-    emailAddress: { address },
-  }));
+  const recipient = (address: string) => ({ emailAddress: { address } });
+  const ccList = asList(cc);
   const res = await fetch(
     `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.MS_SENDER_UPN)}/sendMail`,
     {
@@ -67,7 +111,9 @@ export async function sendMail({
         message: {
           subject,
           body: { contentType: "HTML", content: html },
-          toRecipients: recipients,
+          toRecipients: asList(to).map(recipient),
+          ...(ccList.length > 0 && { ccRecipients: ccList.map(recipient) }),
+          ...(replyTo && { replyTo: [recipient(replyTo)] }),
         },
         saveToSentItems: false,
       }),

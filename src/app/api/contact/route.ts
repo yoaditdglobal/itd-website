@@ -3,7 +3,8 @@ import { z } from "zod";
 import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 import { createLead, isZohoConfigured } from "@/lib/server/zoho";
 import { getNotifyEmails } from "@/lib/server/env";
-import { splitName, emailTeam } from "@/lib/server/leads";
+import { splitName, emailTeam, emailSubmitter } from "@/lib/server/leads";
+import { contactAckHtml } from "@/lib/server/email-templates";
 import { postLeadToWebhook } from "@/lib/server/webhook";
 
 /**
@@ -115,7 +116,57 @@ export async function POST(request: Request) {
   };
 
   const notify = getNotifyEmails();
-  const subject = `New website enquiry — ${d.company || d.email}`;
+  const subject = "NEW Website Lead";
+  // Headline above the table: "{Company}: {shipping type} — {weekly volume}",
+  // degrading gracefully when fields are blank.
+  const heading = [
+    d.company || d.email,
+    [d.shippingType, d.weeklyVolume].filter(Boolean).join(" — "),
+  ]
+    .filter(Boolean)
+    .join(": ");
+  // Every field, human-readable labels, contact details first. Rendered with
+  // keepEmptyRows so the table shape is identical on every lead.
+  const teamRows: Record<string, unknown> = {
+    "First name": d.firstName,
+    "Last name": d.lastName || lastName,
+    Company: d.company,
+    Email: d.email,
+    Phone: d.phone,
+    "Shipping type": d.shippingType,
+    "Main lanes": d.mainLanes?.join(", "),
+    "Weekly volume": d.weeklyVolume,
+    "Freight type": d.freightType,
+    Quantity: d.quantity,
+    Weight: d.weight,
+    "Dimensions (L×W×H)":
+      dims && (dims.length || dims.width || dims.height)
+        ? `${dims.length ?? "?"} × ${dims.width ?? "?"} × ${dims.height ?? "?"}`
+        : "",
+    "Collection postcode": d.collectionPostcode,
+    "Supplier invoice file": d.supplierInvoice?.name,
+    "Freight photo file": d.freightPhoto?.name,
+    "Form source": d.source,
+    Submitted: new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC",
+  };
+  const notifyTeam = (extra?: { intro?: string; rows?: Record<string, unknown> }) =>
+    emailTeam({
+      to: notify.leads,
+      cc: notify.leadsCc,
+      replyTo: d.email,
+      subject,
+      heading,
+      intro: extra?.intro,
+      rows: extra?.rows ?? teamRows,
+      keepEmptyRows: true,
+    });
+  // Acknowledgement to the submitter — fire-and-forget, never blocks the lead.
+  const acknowledgeSubmitter = () =>
+    emailSubmitter({
+      to: d.email,
+      subject: "We've got your enquiry — ITD Global",
+      html: contactAckHtml({ firstName: d.firstName }),
+    });
 
   // Primary delivery: the Make.com lead webhook (its scenario writes the lead
   // into Zoho CRM). Flat keys so the scenario's field mapping stays simple.
@@ -154,16 +205,28 @@ export async function POST(request: Request) {
         company: d.company,
       });
     }
-    const emailed = await emailTeam({ to: notify.leads, subject, rows: d });
+    const [emailed, acknowledged] = await Promise.all([
+      notifyTeam(),
+      acknowledgeSubmitter(),
+    ]);
     return NextResponse.json(
-      { success: true, persisted: webhookDelivered, webhookDelivered, fallbackEmailed: emailed },
+      {
+        success: true,
+        persisted: webhookDelivered,
+        webhookDelivered,
+        fallbackEmailed: emailed,
+        acknowledged,
+      },
       { status: 201 },
     );
   }
 
   try {
     const { id } = await createLead(leadFields);
-    await emailTeam({ to: notify.leads, subject, rows: { ...d, zohoLeadId: id } });
+    await Promise.all([
+      notifyTeam({ rows: { ...teamRows, "Zoho lead ID": id } }),
+      acknowledgeSubmitter(),
+    ]);
     return NextResponse.json({ success: true, id, webhookDelivered }, { status: 201 });
   } catch (err) {
     console.error(
@@ -171,14 +234,18 @@ export async function POST(request: Request) {
       err instanceof Error ? err.message : err,
     );
     // Soft success to the user; email the team so the lead is never lost.
-    const emailed = await emailTeam({
-      to: notify.leads,
-      subject: `⚠ Website enquiry (CRM write failed) — ${d.company || d.email}`,
-      intro: "Zoho lead create failed — captured here as a fallback.",
-      rows: d,
-    });
+    const [emailed, acknowledged] = await Promise.all([
+      notifyTeam({ intro: "Zoho lead create failed — captured here as a fallback." }),
+      acknowledgeSubmitter(),
+    ]);
     return NextResponse.json(
-      { success: true, persisted: webhookDelivered, webhookDelivered, fallbackEmailed: emailed },
+      {
+        success: true,
+        persisted: webhookDelivered,
+        webhookDelivered,
+        fallbackEmailed: emailed,
+        acknowledged,
+      },
       { status: 201 },
     );
   }
