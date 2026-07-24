@@ -20,7 +20,13 @@ import { postLeadToWebhook } from "@/lib/server/webhook";
 export const runtime = "nodejs";
 
 const fileMeta = z
-  .object({ name: z.string().max(255), size: z.number(), type: z.string().max(120) })
+  .object({
+    name: z.string().max(255),
+    size: z.number(),
+    type: z.string().max(120),
+    /** Raw file bytes, base64-encoded (no data: prefix). ~4MB binary max. */
+    content: z.string().max(6_000_000),
+  })
   .partial()
   .optional();
 
@@ -115,6 +121,17 @@ export async function POST(request: Request) {
     Description: description || undefined,
   };
 
+  // Attachments travel base64 inside the JSON body — cap the combined size
+  // well under the serverless request limit.
+  const attachmentChars =
+    (d.supplierInvoice?.content?.length ?? 0) + (d.freightPhoto?.content?.length ?? 0);
+  if (attachmentChars > 5_800_000) {
+    return NextResponse.json(
+      { error: "Attachments too large — please keep files under 4MB combined." },
+      { status: 413 },
+    );
+  }
+
   const notify = getNotifyEmails();
   const subject = "NEW Website Lead";
   // Headline above the table: "{Company}: {shipping type} — {weekly volume}",
@@ -149,6 +166,14 @@ export async function POST(request: Request) {
     "Form source": d.source,
     Submitted: new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC",
   };
+  // Real file bytes on the internal notification, when provided.
+  const mailAttachments = [d.supplierInvoice, d.freightPhoto]
+    .filter((f): f is NonNullable<typeof f> => Boolean(f?.content && f?.name))
+    .map((f) => ({
+      name: f.name!,
+      contentType: f.type || "application/octet-stream",
+      contentBase64: f.content!,
+    }));
   const notifyTeam = (extra?: { intro?: string; rows?: Record<string, unknown> }) =>
     emailTeam({
       to: notify.leads,
@@ -159,6 +184,7 @@ export async function POST(request: Request) {
       intro: extra?.intro,
       rows: extra?.rows ?? teamRows,
       keepEmptyRows: true,
+      attachments: mailAttachments.length > 0 ? mailAttachments : undefined,
     });
   // Acknowledgement to the submitter — fire-and-forget, never blocks the lead.
   const acknowledgeSubmitter = () =>
@@ -189,7 +215,11 @@ export async function POST(request: Request) {
         : "",
     collectionPostcode: d.collectionPostcode || "",
     supplierInvoiceFile: d.supplierInvoice?.name || "",
+    supplierInvoiceType: d.supplierInvoice?.type || "",
+    supplierInvoiceContent: d.supplierInvoice?.content || "",
     freightPhotoFile: d.freightPhoto?.name || "",
+    freightPhotoType: d.freightPhoto?.type || "",
+    freightPhotoContent: d.freightPhoto?.content || "",
     description,
     leadSource: "ITD Website",
     page: "/contact",

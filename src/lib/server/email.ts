@@ -17,6 +17,13 @@ export function isEmailConfigured(): boolean {
   return getResendEnv() !== null || getGraphEnv() !== null;
 }
 
+export interface MailAttachment {
+  name: string;
+  contentType: string;
+  /** Raw file bytes, base64-encoded (no data: prefix). */
+  contentBase64: string;
+}
+
 export interface MailOptions {
   to: string | string[];
   subject: string;
@@ -24,6 +31,7 @@ export interface MailOptions {
   cc?: string | string[];
   /** Submitter's address on team notifications, so "Reply" answers the lead. */
   replyTo?: string;
+  attachments?: MailAttachment[];
 }
 
 const asList = (v: string | string[] | undefined): string[] =>
@@ -37,7 +45,7 @@ export async function sendMail(opts: MailOptions): Promise<void> {
 
 // ── Resend ───────────────────────────────────────────────────────────────────
 
-async function sendViaResend({ to, subject, html, cc, replyTo }: MailOptions): Promise<void> {
+async function sendViaResend({ to, subject, html, cc, replyTo, attachments }: MailOptions): Promise<void> {
   const env = getResendEnv();
   if (!env) throw new Error("Resend not configured");
   const ccList = asList(cc);
@@ -52,6 +60,9 @@ async function sendViaResend({ to, subject, html, cc, replyTo }: MailOptions): P
       to: asList(to),
       ...(ccList.length > 0 && { cc: ccList }),
       ...(replyTo && { reply_to: replyTo }),
+      ...(attachments && attachments.length > 0 && {
+        attachments: attachments.map((a) => ({ filename: a.name, content: a.contentBase64 })),
+      }),
       subject,
       html,
     }),
@@ -96,7 +107,7 @@ async function getGraphToken(env: GraphEnv): Promise<string> {
   return body.access_token;
 }
 
-async function sendViaGraph({ to, subject, html, cc, replyTo }: MailOptions): Promise<void> {
+async function sendViaGraph({ to, subject, html, cc, replyTo, attachments }: MailOptions): Promise<void> {
   const env = getGraphEnv();
   if (!env) throw new Error("Graph not configured");
   const token = await getGraphToken(env);
@@ -114,6 +125,14 @@ async function sendViaGraph({ to, subject, html, cc, replyTo }: MailOptions): Pr
           toRecipients: asList(to).map(recipient),
           ...(ccList.length > 0 && { ccRecipients: ccList.map(recipient) }),
           ...(replyTo && { replyTo: [recipient(replyTo)] }),
+          ...(attachments && attachments.length > 0 && {
+            attachments: attachments.map((a) => ({
+              "@odata.type": "#microsoft.graph.fileAttachment",
+              name: a.name,
+              contentType: a.contentType,
+              contentBytes: a.contentBase64,
+            })),
+          }),
         },
         saveToSentItems: false,
       }),
