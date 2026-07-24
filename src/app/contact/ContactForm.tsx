@@ -24,8 +24,10 @@ const freightTypes = ["Parcel", "Box", "Pallet"] as const;
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10MB
 
+// Full country names as values — the submitted mainLanes array (and the
+// lead webhook payload behind it) carries names, not ISO codes.
 const countryOptions = countries.map((c) => ({
-  value: c.code,
+  value: c.name,
   label: c.name,
 }));
 
