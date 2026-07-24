@@ -403,7 +403,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <span className={labelClass}>
-                        Box dimensions (L &times; W &times; H, cm){" "}
+                        Dimensions (L &times; W &times; H, cm){" "}
                         <span className="text-red-500">*</span>
                       </span>
                       <div className="grid grid-cols-3 gap-4">
