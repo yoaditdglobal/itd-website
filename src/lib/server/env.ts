@@ -62,11 +62,12 @@ const resendSchema = z.object({
 export type ResendEnv = z.infer<typeof resendSchema>;
 
 /** Returns validated Resend config, or null if not configured. The from
- *  address must belong to a domain verified in the Resend account. */
+ *  address must belong to a domain verified in the Resend account —
+ *  uk.itdglobal.com is the verified one (apex itdglobal.com is NOT). */
 export function getResendEnv(): ResendEnv | null {
   const parsed = resendSchema.safeParse({
     RESEND_API_KEY: read("RESEND_API_KEY"),
-    RESEND_FROM: read("RESEND_FROM") ?? "ITD Global <noreply@itdglobal.com>",
+    RESEND_FROM: read("RESEND_FROM") ?? "ITD Global <noreply@uk.itdglobal.com>",
   });
   return parsed.success ? parsed.data : null;
 }
