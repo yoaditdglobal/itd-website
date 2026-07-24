@@ -24,8 +24,10 @@ const freightTypes = ["Parcel", "Box", "Pallet"] as const;
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10MB
 
+// Full country names as values — the submitted mainLanes array (and the
+// lead webhook payload behind it) carries names, not ISO codes.
 const countryOptions = countries.map((c) => ({
-  value: c.code,
+  value: c.name,
   label: c.name,
 }));
 
@@ -588,7 +590,10 @@ export default function ContactForm() {
 
                 {/* Error */}
                 {error && (
-                  <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-600">
+                  <p
+                    role="alert"
+                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-600"
+                  >
                     {error}
                   </p>
                 )}
@@ -596,7 +601,7 @@ export default function ContactForm() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={submitting || !shippingType || !weeklyVolume}
+                  disabled={submitting}
                   className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-bg-dark px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-bg-dark-card active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
