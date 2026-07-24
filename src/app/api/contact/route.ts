@@ -144,6 +144,11 @@ export async function POST(request: Request) {
     .join(": ");
   // Every field, human-readable labels, contact details first. Rendered with
   // keepEmptyRows so the table shape is identical on every lead.
+  // Only the fields that exist on this enquiry's variant of the form —
+  // freight-only rows on an Import lead (etc.) read as skipped mandatory
+  // fields when they were never shown to the submitter.
+  const isFreightType = /freight/i.test(d.shippingType || "");
+  const isImportExport = d.shippingType === "Export" || d.shippingType === "Import";
   const teamRows: Record<string, unknown> = {
     "First name": d.firstName,
     "Last name": d.lastName || lastName,
@@ -151,18 +156,21 @@ export async function POST(request: Request) {
     Email: d.email,
     Phone: d.phone,
     "Shipping type": d.shippingType,
-    "Main lanes": d.mainLanes?.join(", "),
-    "Weekly volume": d.weeklyVolume,
-    "Freight type": d.freightType,
-    Quantity: d.quantity,
-    Weight: d.weight,
-    "Dimensions (L×W×H)":
-      dims && (dims.length || dims.width || dims.height)
-        ? `${dims.length ?? "?"} × ${dims.width ?? "?"} × ${dims.height ?? "?"}`
-        : "",
-    "Collection postcode": d.collectionPostcode,
-    "Supplier invoice file": d.supplierInvoice?.name,
-    "Freight photo file": d.freightPhoto?.name,
+    ...(isImportExport && { "Main lanes": d.mainLanes?.join(", ") }),
+    ...(!isFreightType && { "Weekly volume": d.weeklyVolume }),
+    ...(isFreightType && { "Freight type": d.freightType, Quantity: d.quantity }),
+    ...((isFreightType || isImportExport) && {
+      Weight: d.weight,
+      "Dimensions (L×W×H)":
+        dims && (dims.length || dims.width || dims.height)
+          ? `${dims.length ?? "?"} × ${dims.width ?? "?"} × ${dims.height ?? "?"}`
+          : "",
+    }),
+    ...(!isFreightType && { "Collection postcode": d.collectionPostcode }),
+    ...(isFreightType && {
+      "Supplier invoice file": d.supplierInvoice?.name,
+      "Freight photo file": d.freightPhoto?.name,
+    }),
     "Form source": d.source,
     Submitted: new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC",
   };
