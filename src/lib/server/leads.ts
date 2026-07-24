@@ -20,28 +20,55 @@ export function esc(s: unknown): string {
     .replaceAll(">", "&gt;");
 }
 
-function tableHtml(rows: Record<string, unknown>): string {
+function tableHtml(rows: Record<string, unknown>, opts?: { keepEmpty?: boolean }): string {
   const cells = Object.entries(rows)
-    .filter(([, v]) => v != null && v !== "" && !(Array.isArray(v) && v.length === 0))
+    .filter(
+      ([, v]) =>
+        opts?.keepEmpty ||
+        (v != null && v !== "" && !(Array.isArray(v) && v.length === 0)),
+    )
     .map(([k, v]) => {
-      const val = typeof v === "object" ? JSON.stringify(v) : v;
-      return `<tr><td style="padding:4px 12px 4px 0;font-weight:600;vertical-align:top">${esc(k)}</td><td style="padding:4px 0">${esc(val)}</td></tr>`;
+      const empty = v == null || v === "" || (Array.isArray(v) && v.length === 0);
+      const val = empty ? "—" : typeof v === "object" ? JSON.stringify(v) : v;
+      return `<tr><td style="padding:6px 16px 6px 0;font-weight:600;vertical-align:top;white-space:nowrap;border-bottom:1px solid #ececec">${esc(k)}</td><td style="padding:6px 0;border-bottom:1px solid #ececec;${empty ? "color:#9aa0ab" : ""}">${esc(val)}</td></tr>`;
     })
     .join("");
-  return `<table style="border-collapse:collapse;font-family:system-ui,sans-serif;font-size:14px">${cells}</table>`;
+  return `<table style="border-collapse:collapse;font-family:system-ui,sans-serif;font-size:14px;width:100%;max-width:640px">${cells}</table>`;
 }
 
 /** Email a submission to the team. Returns true if sent. Never throws. */
 export async function emailTeam(opts: {
   to?: string;
+  cc?: string;
+  /** Submitter's address — team hits Reply and answers the lead directly. */
+  replyTo?: string;
   subject: string;
+  /** Large one-line headline rendered above the table. */
+  heading?: string;
   intro?: string;
   rows: Record<string, unknown>;
+  /** Render every row, showing "—" for blanks (constant table shape). */
+  keepEmptyRows?: boolean;
 }): Promise<boolean> {
   if (!opts.to || !isEmailConfigured()) return false;
   try {
-    const html = `${opts.intro ? `<p>${esc(opts.intro)}</p>` : ""}${tableHtml(opts.rows)}`;
-    await sendMail({ to: opts.to, subject: opts.subject, html });
+    const html = [
+      opts.heading
+        ? `<h2 style="margin:0 0 4px;font-family:system-ui,sans-serif;font-size:20px;line-height:1.3;color:#15192b">${esc(opts.heading)}</h2>`
+        : "",
+      opts.intro
+        ? `<p style="margin:0 0 12px;font-family:system-ui,sans-serif;font-size:14px;color:#4b5160">${esc(opts.intro)}</p>`
+        : "",
+      opts.heading && !opts.intro ? `<div style="height:12px"></div>` : "",
+      tableHtml(opts.rows, { keepEmpty: opts.keepEmptyRows }),
+    ].join("");
+    await sendMail({
+      to: opts.to,
+      cc: opts.cc,
+      replyTo: opts.replyTo,
+      subject: opts.subject,
+      html,
+    });
     return true;
   } catch {
     return false;
