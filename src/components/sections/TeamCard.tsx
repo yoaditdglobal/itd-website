@@ -26,18 +26,21 @@ export default function TeamCard({ member }: TeamCardProps) {
         fill
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         style={{
-          ...(member.objectPosition ? { objectPosition: member.objectPosition } : {}),
+          // Sources are 2:3 in a 3:4 box, so object-cover trims height —
+          // anchor to the top by default so the trim comes off the torso,
+          // never the head. Per-member objectPosition still overrides.
+          objectPosition: member.objectPosition ?? "50% 0%",
           ...(zoom !== 1
             ? {
                 transform: `scale(${zoom})`,
-                transformOrigin: member.objectPosition ?? "center",
+                transformOrigin: member.objectPosition ?? "top",
               }
             : {}),
         }}
         className={
           zoom !== 1
             ? "object-cover transition-transform duration-300 ease-out"
-            : "object-cover transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            : "object-cover origin-top transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         }
       />
 
