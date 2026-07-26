@@ -32,7 +32,12 @@ const CLAIM_TERMS = [
 // Existing Help Centre articles. These have no detail pages yet, so they link
 // back to the centre (as they do today); they are indexed so search covers the
 // whole centre, not only claims. The first entry is the new Claims hub.
-export const ARTICLE_DOCS: SearchDoc[] = [
+// Billing + Account & admin are hidden from the Help hub (see
+// HIDDEN_CATEGORY_SLUGS in src/app/help/page.tsx) — their docs are filtered
+// out of search below. Restore both together.
+const HIDDEN_HREF_PREFIXES = ["/help/billing", "/help/account"];
+
+const ALL_ARTICLE_DOCS: SearchDoc[] = [
   {
     title: "Claims policies by carrier",
     summary:
@@ -162,6 +167,10 @@ export const ARTICLE_DOCS: SearchDoc[] = [
     keywords: ["api", "authentication", "token", "key", "developers"],
   },
 ];
+
+export const ARTICLE_DOCS: SearchDoc[] = ALL_ARTICLE_DOCS.filter(
+  (d) => !HIDDEN_HREF_PREFIXES.some((p) => d.href.startsWith(p)),
+);
 
 function uniqueLower(values: string[]): string[] {
   return Array.from(new Set(values.map((v) => v.toLowerCase()).filter(Boolean)));

@@ -430,7 +430,7 @@ export default function ThreePlGuidePage() {
               </p>
               <p className="text-body-sm">
                 For the full breakdown of how weekly invoicing works, see the{" "}
-                <Link href="/help/billing" className="text-accent hover:underline">
+                <Link href="/help" className="text-accent hover:underline">
                   Billing &amp; Invoices guide
                 </Link>{" "}
                 in the Help Centre.
@@ -558,7 +558,7 @@ export default function ThreePlGuidePage() {
               </li>
               <li>
                 <Link
-                  href="/help/billing"
+                  href="/help"
                   className="group flex items-center justify-between gap-4 p-4 bg-bg-secondary rounded-xl border border-border hover:border-accent/20 transition-colors"
                 >
                   <span className="text-sm font-medium text-text-primary group-hover:text-accent">
