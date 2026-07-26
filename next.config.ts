@@ -13,17 +13,18 @@ import type { NextConfig } from "next";
 // prerendered pages) into dynamic rendering.
 const cspReportOnly = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.zohopublic.eu https://*.zohocdn.com https://*.zoho.eu",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.zohopublic.eu https://*.zohocdn.com https://*.zoho.eu https://assets.apollo.io",
   "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://*.zohopublic.eu https://*.zohocdn.com",
   "font-src 'self' data: https://cdn.fontshare.com https://*.zohocdn.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu https://assets.apollo.io https://*.aplo-evnt.com",
   "frame-ancestors 'none'",
   "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
-  "upgrade-insecure-requests",
+  // NOTE: add "upgrade-insecure-requests" back when this policy is enforced —
+  // in report-only mode browsers ignore it and log a console error.
 ].join("; ");
 
 const securityHeaders = [

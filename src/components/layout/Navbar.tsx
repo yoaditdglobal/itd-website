@@ -318,7 +318,9 @@ export default function Navbar() {
             width={576}
             height={240}
             priority
+            fetchPriority="high"
             loading="eager"
+            sizes="90px"
             className="h-9 w-auto"
           />
         </Link>
@@ -484,6 +486,7 @@ export default function Navbar() {
                 alt="ITD Global"
                 width={576}
                 height={240}
+                sizes="90px"
                 className="h-9 w-auto"
               />
             </Link>

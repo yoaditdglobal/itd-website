@@ -1273,12 +1273,12 @@ export interface CompanyPhoto {
 
 export const companyPhotos: CompanyPhoto[] = [
   { src: "/about/warehouse.jpg", alt: "Aerial view of the ITD Global headquarters and warehouse" },
-  { src: "/about/team-training.jpg", alt: "The ITD Global team in a standards and expectations session" },
+  { src: "/about/team-training-v2.jpg", alt: "The ITD Global team in a standards and expectations session" },
   { src: "/about/account-update.jpg", alt: "The ITD Global account management team in a weekly update" },
   { src: "/about/green-wall.jpg", alt: "Two ITD Global team members reviewing shipping data together" },
   { src: "/about/team-meeting.jpg", alt: "ITD Global team members in discussion under the company logo" },
   { src: "/about/resellers-talk.jpg", alt: "An ITD Global team member presenting carrier pricing" },
-  { src: "/about/staircase-mural.jpg", alt: "ITD Global colleagues reviewing a tablet by the company mural" },
+  { src: "/about/staircase-mural-v2.jpg", alt: "ITD Global colleagues reviewing a tablet by the company mural" },
 ];
 
 export function getWiderTeam(): TeamMember[] {
