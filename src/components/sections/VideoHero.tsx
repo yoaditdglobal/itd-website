@@ -20,7 +20,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 // Homepage defaults — <VideoHero /> with no props renders the homepage hero
 // exactly as before; other pages (e.g. /shipping/freight) pass their own copy
 // and assets to reuse the same machinery.
-const POSTER = "/hero/hero-poster.jpg";
+const POSTER = "/hero/hero-poster-v2.jpg";
 
 const HEADING = (
   <>
