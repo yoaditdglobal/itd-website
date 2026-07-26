@@ -56,6 +56,11 @@ const HIDDEN_CATEGORY_SLUGS = new Set<string>(["billing", "account"]);
 const visibleCategories = categories.filter(
   (c) => !HIDDEN_CATEGORY_SLUGS.has(c.slug),
 );
+const hiddenCategoryNames = new Set(
+  categories
+    .filter((c) => HIDDEN_CATEGORY_SLUGS.has(c.slug))
+    .map((c) => c.name),
+);
 
 const featuredArticles: {
   title: string;
@@ -244,7 +249,7 @@ export default function HelpCentrePage() {
 
           <ScrollReveal delay={0.05}>
             <ol className="grid sm:grid-cols-2 gap-4">
-              {featuredArticles.map((article, i) => (
+              {featuredArticles.filter((a) => !hiddenCategoryNames.has(a.category)).map((article, i) => (
                 <li key={article.title}>
                   <Link
                     href={article.href ?? "/help"}
