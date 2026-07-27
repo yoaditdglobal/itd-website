@@ -1,11 +1,7 @@
-import Link from "next/link";
 import {
   Route,
   MousePointerClick,
   PiggyBank,
-  SlidersHorizontal,
-  PackageCheck,
-  CalendarClock,
   Sparkles,
   Gift,
   Shirt,
@@ -14,12 +10,14 @@ import {
   HeartPulse,
   PawPrint,
   Puzzle,
-  ArrowRight,
 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import Button from "@/components/ui/Button";
-import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import CheckoutChoiceDemo from "@/components/sections/CheckoutChoiceDemo";
+import InsightTakeover from "@/components/sections/InsightTakeover";
+import BrandSpotlight, {
+  type SpotlightBrand,
+} from "@/components/sections/BrandSpotlight";
 import FaqSection from "@/components/sections/FaqSection";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
@@ -53,23 +51,6 @@ const SUPPORT = [
   },
 ];
 
-const WANTS = [
-  {
-    icon: SlidersHorizontal,
-    title: "Freedom of choice",
-    desc: "Give shoppers a say in how their parcel arrives and who carries it. Most never get the option.",
-  },
-  {
-    icon: PackageCheck,
-    title: "A parcel that actually arrives",
-    desc: "Reliability is where delivery breaks down. More carriers, more ways to route around a weak lane.",
-  },
-  {
-    icon: CalendarClock,
-    title: "Certainty over speed",
-    desc: "They don't need it tomorrow. They need to know when.",
-  },
-];
 
 const INDUSTRIES = [
   {
@@ -114,30 +95,49 @@ const INDUSTRIES = [
   },
 ];
 
-const BRANDS = [
+/* Spotlight copy sourced from each brand's case study in src/lib/data.ts
+   (headlineResult + oneLiner). KitchenCraft has no published story — logo only. */
+const BRANDS: SpotlightBrand[] = [
   {
     name: "Tatti Lashes",
+    sector: "Beauty & cosmetics",
     logo: "/logos/customers/tatti-lashes.webp",
+    stat: { value: "60%", label: "of volume shifted to a cheaper carrier" },
+    blurb:
+      "Delivery choice at checkout and margin back on each order, after adding Evri alongside DPD.",
     href: "/resources/case-studies/tatti-lashes",
   },
   {
     name: "West Ham United",
+    sector: "Sports retail",
     logo: "/logos/customers/west-ham.webp",
+    stat: { value: "One framework", label: "for multi-carrier control, UK and international" },
+    blurb:
+      "Steadier collections and a clear view of UK and international spend.",
     href: "/resources/case-studies/west-ham-united",
   },
   {
     name: "Sifcon International",
+    sector: "Gifts & homeware",
     logo: "/case-studies/sifcon-international/logo.png",
+    stat: { value: "Up to 35%", label: "saved a year on international shipping" },
+    blurb:
+      "Sample consolidation from China and better courier rates than going direct.",
     href: "/resources/case-studies/sifcon-international",
   },
   {
     name: "KitchenCraft",
+    sector: "Kitchen & dining",
     logo: "/logos/customers/kitchencraft.webp",
-    href: undefined,
+    blurb: "Kitchen and dining essentials, shipped with ITD Global.",
   },
   {
     name: "Wenrit Global",
+    sector: "Fulfilment & furniture",
     logo: "/case-studies/wenrit-global/logo.png",
+    stat: { value: "~2,000", label: "parcels a day, moved reliably" },
+    blurb:
+      "A large-parcel solution for flatpack furniture where the incumbent couldn't cope.",
     href: "/resources/case-studies/wenrit-global",
   },
 ];
@@ -278,39 +278,7 @@ export default function BrandsPage() {
             </p>
           </ScrollReveal>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 items-stretch">
-            <ScrollReveal className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
-                <p className="text-stat-xl text-white">2 in 3</p>
-                <p className="mt-2 text-body-md text-white/70">
-                  shoppers have had a recent delivery problem — and fewer than
-                  half are satisfied when they complain.
-                </p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={0.08} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
-                <p className="text-stat-xl text-white">3 in 4</p>
-                <p className="mt-2 text-body-md text-white/70">
-                  had no say in who delivered their parcel.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          <div className="mt-5 grid gap-5 md:grid-cols-3 items-stretch">
-            {WANTS.map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 0.08} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
-                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent-secondary">
-                    <item.icon className="h-5 w-5" aria-hidden />
-                  </span>
-                  <p className="text-heading-md text-white">{item.title}</p>
-                  <p className="mt-2 text-body-sm text-white/70">{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <InsightTakeover />
 
           <ScrollReveal>
             <p className="mt-10 max-w-3xl text-body-lg text-white/85">
@@ -361,35 +329,7 @@ export default function BrandsPage() {
               From beauty to homeware to football shirts, brands rely on us to
               get their orders to the customer.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              {BRANDS.map((b) => {
-                const inner = (
-                  <>
-                    <IntegrationLogo name={b.name} logo={b.logo} size="sm" fit="contain" />
-                    <span className="text-sm font-medium text-text-primary">{b.name}</span>
-                  </>
-                );
-                const base =
-                  "flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3";
-                return b.href ? (
-                  <Link
-                    key={b.name}
-                    href={b.href}
-                    className={`group/b ${base} transition-colors hover:border-accent/40 hover:text-accent motion-reduce:transition-none`}
-                  >
-                    {inner}
-                    <ArrowRight
-                      className="w-4 h-4 -ml-1 text-text-tertiary opacity-0 transition-all group-hover/b:opacity-100 group-hover/b:text-accent motion-reduce:transition-none"
-                      aria-hidden
-                    />
-                  </Link>
-                ) : (
-                  <div key={b.name} className={base}>
-                    {inner}
-                  </div>
-                );
-              })}
-            </div>
+            <BrandSpotlight brands={BRANDS} />
           </ScrollReveal>
         </div>
       </section>
