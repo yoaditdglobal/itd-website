@@ -152,7 +152,7 @@ export default function IntegrationCategoryPage({
       {ldData.length > 0 && <JsonLd data={ldData} />}
 
       {/* Hero */}
-      <section data-hero-tone={heroVisual ? "dark" : "light"} className={`bleed-nav ${heroVisual ? "bg-bg-dark" : "bg-bg-secondary border-b border-border"} py-16 md:py-24 overflow-hidden relative`}>
+      <section data-hero-tone={heroVisual ? "dark" : "light"} className={`bleed-nav ${heroVisual ? "bg-bg-dark" : "bg-bg-secondary"} py-16 md:py-24 overflow-hidden relative`}>
         {heroVisual && (
           <div className="absolute inset-0 pointer-events-none" aria-hidden>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
@@ -230,7 +230,7 @@ export default function IntegrationCategoryPage({
 
       {/* Common use cases */}
       {useCases && useCases.length > 0 && (
-        <section className="bg-white py-16 md:py-24 border-t border-border">
+        <section className="bg-white py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-text-primary mb-3">{useCasesHeading}</h2>
@@ -266,7 +266,7 @@ export default function IntegrationCategoryPage({
 
       {/* How the integration works */}
       {howItWorks && howItWorks.length > 0 && (
-        <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+        <section className="bg-bg-secondary py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-text-primary mb-3">{howItWorksHeading}</h2>

@@ -78,7 +78,7 @@ export default async function CaseStudiesPage({
       </section>
 
       {/* Customer logo strip — same ticker as the homepage */}
-      <section className="bg-white border-b border-border py-10 md:py-12">
+      <section className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <LogoTicker />
         </div>

@@ -189,7 +189,7 @@ export default function HelpCentrePage() {
       </section>
 
       {/* Browse by category */}
-      <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
+      <section className="bg-bg-secondary py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-10">
@@ -234,7 +234,7 @@ export default function HelpCentrePage() {
       </section>
 
       {/* Featured articles */}
-      <section className="bg-white py-16 md:py-20 border-t border-border">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-10">

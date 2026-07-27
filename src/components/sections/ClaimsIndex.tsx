@@ -138,7 +138,7 @@ export default function ClaimsIndex({ policies }: { policies: ClaimsPolicy[] }) 
       {/* Search toolbar */}
       <section
         id="claims-toolbar"
-        className="bg-white py-6 sticky top-[72px] z-30 border-b border-border"
+        className="bg-white py-6 sticky top-[72px] z-30"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">

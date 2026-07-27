@@ -62,7 +62,7 @@ export default function ClaimsPage() {
       </section>
 
       {/* How to use this page */}
-      <section className="bg-bg-secondary py-12 md:py-16 border-y border-border">
+      <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">How to use this page</p>

@@ -75,7 +75,7 @@ export default function AccountHelpPage() {
       </section>
 
       {/* Subcategories */}
-      <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
+      <section className="bg-bg-secondary py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-10">

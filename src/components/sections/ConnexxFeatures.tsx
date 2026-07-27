@@ -115,7 +115,7 @@ export default function ConnexxFeatures() {
   const Icon = f.icon;
 
   return (
-    <section className="bg-white py-16 md:py-24 border-t border-border" aria-labelledby="connexx-features-heading">
+    <section className="bg-white py-16 md:py-24" aria-labelledby="connexx-features-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 md:mb-12 max-w-2xl">
           <h2 id="connexx-features-heading" className="text-display-lg text-text-primary">

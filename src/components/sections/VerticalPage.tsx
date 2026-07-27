@@ -283,7 +283,7 @@ export default function VerticalPage({
 
       {/* Pain Points */}
       {!hidePainPoints && (
-      <section className="bg-bg-secondary py-14 md:py-20 border-t border-border" aria-labelledby="pain-points-heading">
+      <section className="bg-bg-secondary py-14 md:py-20" aria-labelledby="pain-points-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">The problem</p>
@@ -308,7 +308,7 @@ export default function VerticalPage({
 
       {/* "Built for" — optional audience anchors (used by shipping pages) */}
       {audienceAnchors && audienceAnchors.length > 0 && (
-        <section className="bg-white py-12 md:py-16 border-t border-border">
+        <section className="bg-white py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-text-primary mb-2">Built for</h2>
@@ -433,7 +433,7 @@ export default function VerticalPage({
 
       {/* FAQ — optional, GEO-friendly */}
       {faq && faq.length > 0 && (
-        <section className="bg-bg-secondary py-16 md:py-20 border-t border-border">
+        <section className="bg-bg-secondary py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-text-primary mb-10 text-center">FAQ</h2>

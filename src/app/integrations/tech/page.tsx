@@ -68,7 +68,7 @@ export default function TechIntegrationsPage() {
       </section>
 
       {/* Key facts */}
-      <section className="border-b border-border bg-white py-12">
+      <section className=" bg-white py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <dl className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
             {keyFacts.map((s) => (

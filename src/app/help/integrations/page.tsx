@@ -55,7 +55,7 @@ export default function HelpIntegrationsPage() {
       </section>
 
       {/* Guide cards */}
-      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+      <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-5 items-stretch">
             {INTEGRATION_GUIDES.map((g, i) => (

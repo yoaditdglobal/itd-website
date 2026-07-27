@@ -116,7 +116,7 @@ export default function AboutPage() {
       />
 
       {/* What we do */}
-      <section className="bg-white py-16 md:py-24 border-t border-border">
+      <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
             <ScrollReveal>
@@ -162,7 +162,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our story + Timeline */}
-      <section className="bg-white py-16 md:py-24 border-t border-border">
+      <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
@@ -189,7 +189,7 @@ export default function AboutPage() {
             </ScrollReveal>
 
             {/* Right: timeline */}
-            <div className="relative pt-12 border-t border-border lg:pt-0 lg:border-t-0">
+            <div className="relative pt-12 lg:pt-0">
               {/* Spine */}
               <div
                 data-timeline-spine
@@ -230,7 +230,7 @@ export default function AboutPage() {
           ("Locations" → /about#locations). scroll-mt clears the fixed nav. */}
       <section
         id="locations"
-        className="scroll-mt-24 bg-bg-secondary py-16 md:py-24 border-t border-border"
+        className="scroll-mt-24 bg-bg-secondary py-16 md:py-24"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>

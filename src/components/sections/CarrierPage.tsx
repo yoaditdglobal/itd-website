@@ -173,7 +173,7 @@ export default function CarrierPage({
           autoplay (audio); preload="metadata" so the page pays nothing until
           the user presses play. max-w-xl caps upscaling of low-res sources. */}
       {video && (
-        <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+        <section className="bg-bg-secondary py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-lg text-text-primary mb-3">
@@ -204,7 +204,7 @@ export default function CarrierPage({
 
       {/* Services available through ITD */}
       {realServices.length > 0 && (
-        <section className="border-t border-border bg-bg-secondary py-16 md:py-20">
+        <section className=" bg-bg-secondary py-16 md:py-20">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
               <h2 className="text-display-md text-text-primary mb-2">

@@ -44,7 +44,7 @@ export default function CaseStudyStack({ cs }: CaseStudyStackProps) {
   }
 
   return (
-    <section className="bg-white py-10 md:py-14 border-t border-border">
+    <section className="bg-white py-10 md:py-14">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-eyebrow text-text-tertiary mb-5">
           The stack behind this story

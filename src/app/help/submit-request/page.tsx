@@ -111,7 +111,7 @@ export default function SubmitRequestPage() {
       </section>
 
       {/* Form + SLA panel */}
-      <section className="bg-bg-secondary py-12 md:py-16 border-t border-border">
+      <section className="bg-bg-secondary py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
             {/* Form */}

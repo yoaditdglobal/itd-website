@@ -82,7 +82,7 @@ export default function ImportPage() {
       />
 
       {/* Body copy */}
-      <section className="bg-white py-16 md:py-24 border-t border-border">
+      <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">The full picture</p>
@@ -106,7 +106,7 @@ export default function ImportPage() {
 
 
       {/* What you get — card grid */}
-      <section className="bg-white py-16 md:py-20 border-t border-border">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="text-eyebrow text-accent mb-3">What we handle</p>

@@ -152,7 +152,7 @@ export function OrbitLayer({
 
 export default function ConnexxOrbit() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-bg-dark via-bg-dark-card to-bg-dark border-t border-border py-12 md:py-16">
+    <section className="relative overflow-hidden bg-gradient-to-br from-bg-dark via-bg-dark-card to-bg-dark py-12 md:py-16">
       {/* Subtle accent glow behind the centre to make the yellow icon pop */}
       <div
         aria-hidden

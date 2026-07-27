@@ -14,7 +14,7 @@ const PHOTOS = companyPhotos;
  */
 export default function LogisticsPartnerBand() {
   return (
-    <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+    <section className="bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Visual hook — carousel (warehouse first) */}
