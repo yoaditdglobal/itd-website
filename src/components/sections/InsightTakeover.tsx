@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
@@ -19,6 +20,10 @@ interface InsightSlide {
   source?: string;
   /** Panel background — vivid, on-brand gradient over the dark base. */
   gradient: string;
+  /** "outline": transparent card, the gradient renders as a stroke only. */
+  variant?: "outline";
+  /** Transparent-cutout visual, pinned to the card's bottom right. */
+  image?: string;
 }
 
 /* Stats verbatim from the Brands page copy doc (Ofcom / Citizens Advice). */
@@ -46,6 +51,8 @@ const SLIDES: InsightSlide[] = [
     body: "Give shoppers a say in how their parcel arrives and who carries it. Most never get the option.",
     gradient:
       "linear-gradient(135deg, rgba(29,63,184,0.75) 0%, rgba(13,20,50,0.95) 65%)",
+    variant: "outline",
+    image: "/brands/freedom-of-choice.png",
   },
   {
     id: "arrives",
@@ -170,14 +177,45 @@ export default function InsightTakeover() {
           <div
             key={s.id}
             className="relative flex min-h-[380px] w-[88%] flex-shrink-0 snap-start flex-col justify-center overflow-hidden rounded-3xl p-8 sm:w-[92%] md:min-h-[440px] md:p-14 lg:p-16"
-            style={{ background: s.gradient }}
+            style={s.variant === "outline" ? undefined : { background: s.gradient }}
             aria-hidden={i !== active}
           >
-            <div
-              aria-hidden
-              className="bg-noise pointer-events-none absolute inset-0 opacity-40"
-            />
-            <div className="relative max-w-3xl">
+            {s.variant === "outline" ? (
+              /* Transparent card: the slide gradient drawn as a stroke only. */
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-3xl"
+                style={{
+                  padding: "2.5px",
+                  background: s.gradient,
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude",
+                }}
+              />
+            ) : (
+              <div
+                aria-hidden
+                className="bg-noise pointer-events-none absolute inset-0 opacity-40"
+              />
+            )}
+            {s.image && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-0 w-1/2 sm:w-[45%]"
+              >
+                <Image
+                  src={s.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 40vw, 50vw"
+                  className="object-contain object-[right_bottom]"
+                />
+              </div>
+            )}
+            <div className={s.image ? "relative z-10 max-w-[52%] md:max-w-[50%]" : "relative max-w-3xl"}>
               {s.stat ? (
                 <>
                   <p className="text-stat-hero text-white">{s.stat}</p>
