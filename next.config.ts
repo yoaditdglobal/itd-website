@@ -104,6 +104,8 @@ const nextConfig: NextConfig = {
       // so link equity transfers and the stale sitelinks refresh on recrawl.
       // Inventory sourced from the Wayback Machine (2025+ captures).
       // Specific rules must precede their :path* catch-alls (array order wins).
+      // Team page retired (July 2026) — leadership lives on /about now.
+      { source: "/about/team", destination: "/about", permanent: true },
       { source: "/track-your-parcel", destination: "/track", permanent: true },
       { source: "/customer-login", destination: "https://connexx.co.uk/", permanent: true },
       { source: "/contact-us", destination: "/contact", permanent: true },
