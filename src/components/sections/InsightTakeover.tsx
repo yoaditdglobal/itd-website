@@ -26,7 +26,7 @@ const SLIDES: InsightSlide[] = [
   {
     id: "problem",
     stat: "68%",
-    body: "shoppers have had a recent delivery problem — and fewer than half are satisfied when they complain.",
+    body: "shoppers have had a recent delivery problem.",
     source: "Ofcom parcel-delivery research",
     gradient:
       "radial-gradient(circle at 12% 8%, rgba(59,91,219,0.85) 0%, rgba(29,63,184,0.35) 45%, rgba(10,15,40,0.9) 100%)",
@@ -34,7 +34,7 @@ const SLIDES: InsightSlide[] = [
   {
     id: "no-say",
     stat: "75%",
-    body: "want to choose their carrier and delivery — today they get no say in who delivers their parcel.",
+    body: "want to choose their carrier and delivery.",
     source: "Citizens Advice, via the Financial Times",
     gradient:
       "radial-gradient(circle at 88% 10%, rgba(59,91,219,0.85) 0%, rgba(20,46,140,0.4) 45%, rgba(10,15,40,0.9) 100%)",
