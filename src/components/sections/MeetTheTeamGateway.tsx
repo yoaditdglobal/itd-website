@@ -1,12 +1,11 @@
-import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import TeamCard from "@/components/sections/TeamCard";
 import { getLeadership } from "@/lib/data";
-import { ArrowRight } from "lucide-react";
 
 /**
  * "Meet the Team" gateway band for the About page. Shows the leadership
- * (c-suite + directors) and routes to the full /about/team page.
+ * (c-suite + directors); gateway membership is driven by the
+ * hideFromGateway flag on TeamMember entries in data.ts.
  */
 export default function MeetTheTeamGateway() {
   const leaders = getLeadership().filter((m) => !m.hideFromGateway);
@@ -28,12 +27,6 @@ export default function MeetTheTeamGateway() {
                 talk to.
               </p>
             </div>
-            <Link
-              href="/about/team"
-              className="link-underline gap-1 text-sm text-accent font-medium flex-shrink-0"
-            >
-              Explore <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </ScrollReveal>
 

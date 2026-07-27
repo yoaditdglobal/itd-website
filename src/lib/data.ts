@@ -1111,9 +1111,9 @@ export const TECH_CATEGORY_LABELS: Record<string, string> = {
 };
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
-// Leadership shown in the About-page "Meet the Team" gateway + the top of the
-// /about/team page. Append non-leadership members and they flow into the wider
-// grid automatically.
+// Leadership (minus hideFromGateway) renders in the About-page "Meet the Team"
+// gateway. The /about/team page was retired July 2026 — non-leadership members
+// below are dormant data until a team page returns.
 
 export const team: TeamMember[] = [
   {
@@ -1121,7 +1121,6 @@ export const team: TeamMember[] = [
     role: "Co-founder",
     photo: "/team/avi-mechlowitz.jpg",
     leadership: true,
-    hideFromGateway: true,
   },
   {
     name: "Jonathan Mocton",
@@ -1164,6 +1163,7 @@ export const team: TeamMember[] = [
     photo: "/team/louise-powell-v2.jpg",
     linkedin: "https://www.linkedin.com/in/louise-powell-0b999058/",
     leadership: true,
+    hideFromGateway: true,
   },
   {
     name: "Yoad Tzor",
