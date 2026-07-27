@@ -180,7 +180,7 @@ export default function InsightTakeover() {
             <div className="relative max-w-3xl">
               {s.stat ? (
                 <>
-                  <p className="text-stat-3xl text-white">{s.stat}</p>
+                  <p className="text-stat-hero text-white">{s.stat}</p>
                   <p className="mt-5 text-body-lg text-white/85 md:text-2xl md:leading-snug">
                     {s.body}
                   </p>
