@@ -204,18 +204,18 @@ export default function InsightTakeover() {
             {s.image && (
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 right-0 w-1/2 sm:w-[45%]"
+                className="pointer-events-none absolute inset-y-0 left-0 w-1/2 sm:w-[45%]"
               >
                 <Image
                   src={s.image}
                   alt=""
                   fill
                   sizes="(min-width: 768px) 40vw, 50vw"
-                  className="object-contain object-[right_bottom]"
+                  className="object-contain object-[left_bottom]"
                 />
               </div>
             )}
-            <div className={s.image ? "relative z-10 max-w-[52%] md:max-w-[50%]" : "relative max-w-3xl"}>
+            <div className={s.image ? "relative z-10 ml-auto max-w-[52%] md:max-w-[50%]" : "relative max-w-3xl"}>
               {s.stat ? (
                 <>
                   <p className="text-stat-hero text-white">{s.stat}</p>
