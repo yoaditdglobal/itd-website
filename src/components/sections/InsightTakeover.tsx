@@ -34,7 +34,7 @@ const SLIDES: InsightSlide[] = [
   {
     id: "no-say",
     stat: "75%",
-    body: "had no say in who delivered their parcel.",
+    body: "want to choose their carrier and delivery — today they get no say in who delivers their parcel.",
     source: "Citizens Advice, via the Financial Times",
     gradient:
       "radial-gradient(circle at 88% 10%, rgba(59,91,219,0.85) 0%, rgba(20,46,140,0.4) 45%, rgba(10,15,40,0.9) 100%)",
