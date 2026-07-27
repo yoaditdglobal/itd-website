@@ -130,6 +130,7 @@ const BRANDS: SpotlightBrand[] = [
     sector: "Kitchen & dining",
     logo: "/logos/customers/kitchencraft.webp",
     blurb: "Kitchen and dining essentials, shipped with ITD Global.",
+    href: "/resources/case-studies/lifetime-brands",
   },
   {
     name: "Red Label",
