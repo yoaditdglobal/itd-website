@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   Gem,
   Gift,
@@ -19,6 +20,8 @@ interface Industry {
   /** Short tab label so all eight fit a row on desktop. */
   tab: string;
   desc: string;
+  /** 1000x1000 export from the "Built for your industry" set. */
+  image: string;
 }
 
 /* Copy verbatim from the Brands page doc. */
@@ -27,48 +30,56 @@ const INDUSTRIES: Industry[] = [
     icon: Sparkles,
     name: "Beauty & cosmetics",
     tab: "Beauty",
+    image: "/industries/beauty.png",
     desc: "High-frequency DTC orders and repeat buyers who expect their parcel tracked and on time.",
   },
   {
     icon: Gift,
     name: "Giftware & homeware",
     tab: "Giftware",
+    image: "/industries/giftware.png",
     desc: "Mixed parcel sizes and gifting peaks, handled without the seasonal wobble.",
   },
   {
     icon: Shirt,
     name: "Fashion & footwear",
     tab: "Fashion",
+    image: "/industries/fashion.png",
     desc: "Returns come with the territory, so shoppers get the delivery and return options they expect.",
   },
   {
     icon: Gem,
     name: "Jewellery & accessories",
     tab: "Jewellery",
+    image: "/industries/jewellery.png",
     desc: "Small, high-value parcels that need secure, tracked delivery to the door.",
   },
   {
     icon: Trophy,
     name: "Sports & fan merch",
     tab: "Sports",
+    image: "/industries/sports.png",
     desc: "Kit drops and match-day spikes that need carriers to flex with demand.",
   },
   {
     icon: HeartPulse,
     name: "Health & wellness",
     tab: "Health",
+    image: "/industries/health.png",
     desc: "Subscription and repeat orders that have to arrive like clockwork.",
   },
   {
     icon: PawPrint,
     name: "Pet supplies",
     tab: "Pets",
+    image: "/industries/pets.png",
     desc: "Bulky, heavy repeat orders customers want delivered when they're in.",
   },
   {
     icon: Puzzle,
     name: "Toys, hobby & craft",
     tab: "Toys & hobby",
+    image: "/industries/toys.png",
     desc: "Gifting peaks and marketplace orders, delivered on the date you promised.",
   },
 ];
@@ -212,41 +223,44 @@ export default function IndustryExplorer() {
         </div>
       </div>
 
-      {/* Takeover panel */}
+      {/* Takeover panel — copy left, industry image right (stacked on mobile) */}
       <div
         id="industry-panel"
         role="tabpanel"
         aria-labelledby={`industry-tab-${active}`}
-        className="relative mt-6 aspect-square w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-white"
+        className="relative mt-6 overflow-hidden rounded-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at 12% 8%, rgba(59,91,219,0.85) 0%, rgba(29,63,184,0.35) 45%, rgba(10,15,40,0.9) 100%), #15192b",
+        }}
       >
-        {/* Decorative motif */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 88% 0%, rgba(29,63,184,0.08) 0%, transparent 55%)",
-          }}
-        />
-        <item.icon
-          key={`motif-${active}`}
-          aria-hidden
-          className="brand-spotlight-in pointer-events-none absolute -right-10 -bottom-10 h-56 w-56 text-accent/10 md:-right-6 md:bottom-auto md:top-1/2 md:h-72 md:w-72 md:-translate-y-1/2"
-          strokeWidth={1.2}
-        />
-
-        <div
-          key={active}
-          className="brand-spotlight-in relative flex h-full flex-col justify-center p-8 md:p-12"
-        >
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light text-accent">
-            <item.icon className="h-6 w-6" aria-hidden />
-          </span>
-          <p className="text-display-md mt-5 text-text-primary">{item.name}</p>
-          <p className="mt-3 max-w-2xl text-body-lg text-text-secondary">
-            {item.desc}
-          </p>
-
+        <div key={active} className="grid md:grid-cols-2">
+          <div className="industry-media-in relative order-first aspect-square md:order-last">
+            <Image
+              src={item.image}
+              alt={item.name}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 hidden md:block"
+              style={{
+                background:
+                  "linear-gradient(to right, rgba(21,25,43,0.55) 0%, transparent 22%)",
+              }}
+            />
+          </div>
+          <div className="brand-spotlight-in relative flex flex-col justify-center p-8 md:p-12 lg:p-14">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white">
+              <item.icon className="h-6 w-6" aria-hidden />
+            </span>
+            <p className="text-display-md mt-5 text-white">{item.name}</p>
+            <p className="mt-3 max-w-2xl text-body-lg text-white/70">
+              {item.desc}
+            </p>
+          </div>
         </div>
       </div>
     </div>
