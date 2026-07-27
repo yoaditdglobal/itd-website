@@ -25,7 +25,7 @@ interface InsightSlide {
 const SLIDES: InsightSlide[] = [
   {
     id: "problem",
-    stat: "2 in 3",
+    stat: "68%",
     body: "shoppers have had a recent delivery problem — and fewer than half are satisfied when they complain.",
     source: "Ofcom parcel-delivery research",
     gradient:
@@ -33,7 +33,7 @@ const SLIDES: InsightSlide[] = [
   },
   {
     id: "no-say",
-    stat: "3 in 4",
+    stat: "75%",
     body: "had no say in who delivered their parcel.",
     source: "Citizens Advice, via the Financial Times",
     gradient:
