@@ -101,7 +101,7 @@ const BRANDS: SpotlightBrand[] = [
   {
     name: "Tatti Lashes",
     sector: "Beauty & cosmetics",
-    logo: "/logos/customers/tatti-lashes.webp",
+    logo: "/case-studies/tatti-lashes/logo.jpeg",
     stat: { value: "60%", label: "of volume shifted to a cheaper carrier" },
     blurb:
       "Delivery choice at checkout and margin back on each order, after adding Evri alongside DPD.",
@@ -132,13 +132,13 @@ const BRANDS: SpotlightBrand[] = [
     blurb: "Kitchen and dining essentials, shipped with ITD Global.",
   },
   {
-    name: "Wenrit Global",
-    sector: "Fulfilment & furniture",
-    logo: "/case-studies/wenrit-global/logo.png",
-    stat: { value: "~2,000", label: "parcels a day, moved reliably" },
+    name: "Red Label",
+    sector: "Perfume & beauty",
+    logo: "/case-studies/red-label/logo.png",
+    stat: { value: "3,000", label: "shipments a week through one account" },
     blurb:
-      "A large-parcel solution for flatpack furniture where the incumbent couldn't cope.",
-    href: "/resources/case-studies/wenrit-global",
+      "One multi-carrier setup and a single point of contact for their full beauty volume.",
+    href: "/resources/case-studies/red-label",
   },
 ];
 
