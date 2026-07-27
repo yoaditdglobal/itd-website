@@ -28,7 +28,7 @@ const BASE = "/logos/carriers/freight-trimmed/";
 export default function FreightCarrierTicker() {
   return (
     <ScrollReveal>
-      <div className="bg-white border-y border-border py-5 overflow-hidden relative">
+      <div className="bg-white py-5 overflow-hidden relative">
         {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />

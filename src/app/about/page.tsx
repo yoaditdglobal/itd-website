@@ -189,7 +189,7 @@ export default function AboutPage() {
             </ScrollReveal>
 
             {/* Right: timeline */}
-            <div className="relative pt-12 border-t border-border lg:pt-0 lg:border-t-0">
+            <div className="relative pt-12 lg:pt-0">
               {/* Spine */}
               <div
                 data-timeline-spine
