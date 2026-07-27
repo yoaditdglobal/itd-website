@@ -314,9 +314,6 @@ export default function BrandsPage() {
             <h2 className="text-display-lg text-text-primary">
               Built for your industry
             </h2>
-            <p className="mt-4 max-w-3xl text-body-md text-text-secondary">
-              Each category ships differently. A few we know well:
-            </p>
           </ScrollReveal>
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
             {INDUSTRIES.map((item, i) => (
