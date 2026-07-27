@@ -197,7 +197,7 @@ export default function DevelopersPage() {
       </section>
 
       {/* Canonical code snippet */}
-      <section className="bg-bg-secondary py-14 md:py-16 border-t border-border">
+      <section className="bg-bg-secondary py-14 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-5">
@@ -221,7 +221,7 @@ export default function DevelopersPage() {
       </section>
 
       {/* Six resource cards */}
-      <section className="bg-white py-16 md:py-20 border-t border-border">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-10">

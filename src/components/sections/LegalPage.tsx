@@ -33,7 +33,7 @@ export default function LegalPage({
       />
 
       {/* Hero */}
-      <section className="bleed-nav bg-white py-16 md:py-20 border-b border-border">
+      <section className="bleed-nav bg-white py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h1 className="text-display-lg text-text-primary">{title}</h1>
@@ -55,7 +55,7 @@ export default function LegalPage({
       </article>
 
       {/* Related policies */}
-      <section className="bg-bg-secondary py-10 border-t border-border">
+      <section className="bg-bg-secondary py-10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           <span className="text-text-tertiary">Related:</span>
           {[

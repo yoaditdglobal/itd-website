@@ -172,7 +172,7 @@ export default async function CaseStudyPage({
       <CaseStudyStack cs={cs} />
 
       {/* Challenge / Solution / Result (+ optional inline pull quote) */}
-      <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+      <section className="bg-bg-secondary py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="space-y-12">

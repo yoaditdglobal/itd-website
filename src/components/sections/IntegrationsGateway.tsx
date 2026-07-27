@@ -33,7 +33,7 @@ export default function IntegrationsGateway({
   browseLabel = "Browse integrations",
 }: IntegrationsGatewayProps) {
   return (
-    <section className="bg-bg-tertiary py-16 md:py-24 border-t border-border">
+    <section className="bg-bg-tertiary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <h2 className="text-display-md text-text-primary mb-3">{heading}</h2>

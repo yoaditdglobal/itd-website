@@ -55,7 +55,7 @@ export default function SolutionPains({
   const objectPosition = image.objectPosition ?? "60% 50%";
 
   return (
-    <section className="bg-bg-secondary py-16 md:py-24 border-t border-border">
+    <section className="bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* Photo / placeholder */}

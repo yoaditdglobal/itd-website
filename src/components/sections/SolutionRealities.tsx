@@ -26,7 +26,7 @@ export default function SolutionRealities({
   items,
 }: SolutionRealitiesProps) {
   return (
-    <section className="bg-white py-16 md:py-24 border-t border-border">
+    <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           {eyebrow && <p className="text-eyebrow text-accent mb-3">{eyebrow}</p>}

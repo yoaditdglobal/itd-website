@@ -13,7 +13,7 @@ const POINTS = [
 
 export default function FreightAudience() {
   return (
-    <section className="bg-white py-16 md:py-24 border-t border-border">
+    <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
