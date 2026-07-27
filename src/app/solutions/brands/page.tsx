@@ -2,18 +2,12 @@ import {
   Route,
   MousePointerClick,
   PiggyBank,
-  Sparkles,
-  Gift,
-  Shirt,
-  Gem,
-  Trophy,
-  HeartPulse,
-  PawPrint,
-  Puzzle,
 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import Button from "@/components/ui/Button";
 import CheckoutChoiceDemo from "@/components/sections/CheckoutChoiceDemo";
+import IndustryExplorer from "@/components/sections/IndustryExplorer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import InsightTakeover from "@/components/sections/InsightTakeover";
 import BrandSpotlight, {
   type SpotlightBrand,
@@ -52,48 +46,6 @@ const SUPPORT = [
 ];
 
 
-const INDUSTRIES = [
-  {
-    icon: Sparkles,
-    name: "Beauty & cosmetics",
-    desc: "High-frequency DTC orders and repeat buyers who expect their parcel tracked and on time.",
-  },
-  {
-    icon: Gift,
-    name: "Giftware & homeware",
-    desc: "Mixed parcel sizes and gifting peaks, handled without the seasonal wobble.",
-  },
-  {
-    icon: Shirt,
-    name: "Fashion & footwear",
-    desc: "Returns come with the territory, so shoppers get the delivery and return options they expect.",
-  },
-  {
-    icon: Gem,
-    name: "Jewellery & accessories",
-    desc: "Small, high-value parcels that need secure, tracked delivery to the door.",
-  },
-  {
-    icon: Trophy,
-    name: "Sports & fan merch",
-    desc: "Kit drops and match-day spikes that need carriers to flex with demand.",
-  },
-  {
-    icon: HeartPulse,
-    name: "Health & wellness",
-    desc: "Subscription and repeat orders that have to arrive like clockwork.",
-  },
-  {
-    icon: PawPrint,
-    name: "Pet supplies",
-    desc: "Bulky, heavy repeat orders customers want delivered when they're in.",
-  },
-  {
-    icon: Puzzle,
-    name: "Toys, hobby & craft",
-    desc: "Gifting peaks and marketplace orders, delivered on the date you promised.",
-  },
-];
 
 /* Spotlight copy sourced from each brand's case study in src/lib/data.ts
    (headlineResult + oneLiner). KitchenCraft has no published story — logo only. */
@@ -200,9 +152,15 @@ export default function BrandsPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <ScrollReveal>
               <div>
-                <span className="hero-entrance-h1 inline-block rounded-full bg-white/15 px-3 py-1 text-eyebrow tracking-wider text-white mb-5">
-                  Brands
-                </span>
+                <div className="hero-entrance-h1 mb-5">
+                  <Breadcrumb
+                    tone="dark"
+                    items={CRUMBS.map((c, i) => ({
+                      name: c.name,
+                      href: i < CRUMBS.length - 1 ? c.path : undefined,
+                    }))}
+                  />
+                </div>
                 <h1 className="hero-entrance-h1 text-display-xl text-white">
                   Give your customers the delivery they actually want
                 </h1>
@@ -244,12 +202,14 @@ export default function BrandsPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-3 items-stretch">
             {SUPPORT.map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 0.08} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-secondary p-7 transition-all hover:border-accent/30 hover:shadow-md motion-reduce:transition-none">
-                  <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light text-accent">
-                    <item.icon className="h-5 w-5" aria-hidden />
-                  </span>
-                  <p className="text-heading-md text-text-primary">{item.title}</p>
-                  <p className="mt-2 text-body-md text-text-secondary">{item.desc}</p>
+                <div className="h-full rounded-2xl bg-gradient-to-br from-accent-200 via-accent to-accent-600 p-[2.5px] transition-shadow hover:shadow-md motion-reduce:transition-none">
+                  <div className="flex h-full flex-col rounded-[calc(1rem-2.5px)] bg-white p-7">
+                    <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light text-accent">
+                      <item.icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <p className="text-heading-md text-text-primary">{item.title}</p>
+                    <p className="mt-2 text-body-md text-text-secondary">{item.desc}</p>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -315,19 +275,7 @@ export default function BrandsPage() {
               Built for your industry
             </h2>
           </ScrollReveal>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-            {INDUSTRIES.map((item, i) => (
-              <ScrollReveal key={item.name} delay={i * 0.05} className="h-full">
-                <div className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white motion-reduce:transition-none">
-                    <item.icon className="h-5 w-5" aria-hidden />
-                  </span>
-                  <p className="text-heading-sm text-text-primary">{item.name}</p>
-                  <p className="mt-1.5 text-body-sm text-text-secondary">{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <IndustryExplorer />
         </div>
       </section>
 
