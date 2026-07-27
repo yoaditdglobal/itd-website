@@ -76,7 +76,7 @@ export default function BrandSpotlight({ brands }: { brands: SpotlightBrand[] })
       <div
         role="tablist"
         aria-label="Brands shipping with ITD Global"
-        className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0"
+        className="order-last flex gap-3 overflow-x-auto pb-2 lg:order-none lg:flex-col lg:overflow-visible lg:pb-0"
       >
         {brands.map((b, i) => {
           const isActive = i === selected;
