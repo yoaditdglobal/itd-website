@@ -282,8 +282,25 @@ export default function BrandsPage() {
 
           <ScrollReveal>
             <p className="mt-6 text-caption text-white/40">
-              Sources: Ofcom parcel-delivery research; Citizens Advice, via the
-              Financial Times.
+              Sources:{" "}
+              <a
+                href="https://www.ofcom.org.uk/post/deliveries-and-charges/best-and-worst-parcel-firms-for-customer-satisfaction-revealed-2025"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/30 underline-offset-2 transition-colors hover:text-white/70 motion-reduce:transition-none"
+              >
+                Ofcom parcel-delivery research
+              </a>
+              ; Citizens Advice, via the{" "}
+              <a
+                href="https://www.ft.com/content/17ba6971-847a-4882-8510-cb2b31f8be1f"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/30 underline-offset-2 transition-colors hover:text-white/70 motion-reduce:transition-none"
+              >
+                Financial Times
+              </a>
+              .
             </p>
           </ScrollReveal>
         </div>
