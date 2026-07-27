@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
-  CalendarClock,
   PackageCheck,
   SlidersHorizontal,
   type LucideIcon,
@@ -22,8 +21,9 @@ interface InsightSlide {
   gradient: string;
   /** "outline": transparent card, the gradient renders as a stroke only. */
   variant?: "outline";
-  /** Transparent-cutout visual, pinned to the card's bottom right. */
+  /** Transparent-cutout visual, pinned to the card's bottom edge. */
   image?: string;
+  imageSide?: "left" | "right";
 }
 
 /* Stats verbatim from the Brands page copy doc (Ofcom / Citizens Advice). */
@@ -53,6 +53,7 @@ const SLIDES: InsightSlide[] = [
       "linear-gradient(135deg, rgba(29,63,184,0.75) 0%, rgba(13,20,50,0.95) 65%)",
     variant: "outline",
     image: "/brands/freedom-of-choice.png",
+    imageSide: "left",
   },
   {
     id: "arrives",
@@ -61,14 +62,9 @@ const SLIDES: InsightSlide[] = [
     body: "Reliability is where delivery breaks down. More carriers, more ways to route around a weak lane.",
     gradient:
       "linear-gradient(225deg, rgba(29,63,184,0.75) 0%, rgba(13,20,50,0.95) 65%)",
-  },
-  {
-    id: "certainty",
-    icon: CalendarClock,
-    title: "Certainty over speed",
-    body: "They don't need it tomorrow. They need to know when.",
-    gradient:
-      "radial-gradient(circle at 50% 110%, rgba(59,91,219,0.8) 0%, rgba(13,20,50,0.95) 70%)",
+    variant: "outline",
+    image: "/brands/parcel-arrives.png",
+    imageSide: "right",
   },
 ];
 
@@ -204,18 +200,32 @@ export default function InsightTakeover() {
             {s.image && (
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-0 w-1/2 sm:w-[45%]"
+                className={`pointer-events-none absolute inset-y-0 w-1/2 sm:w-[45%] ${
+                  s.imageSide === "right" ? "right-0" : "left-0"
+                }`}
               >
                 <Image
                   src={s.image}
                   alt=""
                   fill
                   sizes="(min-width: 768px) 40vw, 50vw"
-                  className="object-contain object-[left_bottom]"
+                  className={`object-contain ${
+                    s.imageSide === "right"
+                      ? "object-[right_bottom]"
+                      : "object-[left_bottom]"
+                  }`}
                 />
               </div>
             )}
-            <div className={s.image ? "relative z-10 ml-auto max-w-[52%] md:max-w-[50%]" : "relative max-w-3xl"}>
+            <div
+              className={
+                s.image
+                  ? `relative z-10 max-w-[52%] md:max-w-[50%] ${
+                      s.imageSide === "right" ? "" : "ml-auto"
+                    }`
+                  : "relative max-w-3xl"
+              }
+            >
               {s.stat ? (
                 <>
                   <p className="text-stat-hero text-white">{s.stat}</p>
