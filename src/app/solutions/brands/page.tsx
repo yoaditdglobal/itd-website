@@ -281,11 +281,7 @@ export default function BrandsPage() {
           <InsightTakeover />
 
           <ScrollReveal>
-            <p className="mt-10 max-w-3xl text-body-lg text-white/85">
-              So your checkout offers the choice, and each order goes out on the
-              carrier best placed to deliver it.
-            </p>
-            <p className="mt-4 text-caption text-white/40">
+            <p className="mt-6 text-caption text-white/40">
               Sources: Ofcom parcel-delivery research; Citizens Advice, via the
               Financial Times.
             </p>
