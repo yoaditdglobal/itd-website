@@ -26,6 +26,7 @@ const solutionsMenu = {
   byStage: [
     { name: "Enterprise", desc: "Scale logistics across global operations", href: "/solutions/enterprise" },
     { name: "SMEs", desc: "Ship smarter from day one", href: "/solutions/small-business" },
+    { name: "Brands", desc: "Delivery your customers choose", href: "/solutions/brands" },
   ],
   byModel: [
     { name: "eCommerce", desc: "Multi-carrier shipping for online stores", href: "/solutions/ecommerce" },

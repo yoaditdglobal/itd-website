@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
-import { Building2, Store, ShoppingCart, Package, Truck, Globe, Factory, ArrowRight } from "lucide-react";
+import { Building2, Store, Sparkles, ShoppingCart, Package, Truck, Globe, Factory, ArrowRight } from "lucide-react";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
@@ -33,6 +33,19 @@ const stages = [
       "One-click label generation and batch processing",
       "Integrated tracking with customer notification emails",
       "No minimum volumes — pay as you grow",
+    ],
+  },
+  {
+    id: "brands",
+    name: "Brands",
+    icon: Sparkles,
+    href: "/solutions/brands",
+    desc: "Give your customers the delivery they actually want.",
+    details: [
+      "Delivery choice at checkout — faster or cheaper, door or pickup point",
+      "Each order on the carrier most likely to deliver on time",
+      "Carrier rates compared per order to protect your margin",
+      "Connects to Shopify, WooCommerce, marketplaces and WMS",
     ],
   },
 ];
@@ -71,7 +84,7 @@ export default function SolutionsPage() {
             <h2 className="text-display-lg text-text-primary mb-8">Where is your business today?</h2>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stages.map((stage, i) => (
               <ScrollReveal key={stage.id} delay={i * 0.1}>
                 <div id={stage.id} className="bg-white rounded-xl border border-border p-8 h-full">
@@ -85,6 +98,14 @@ export default function SolutionsPage() {
                       </li>
                     ))}
                   </ul>
+                  {"href" in stage && stage.href && (
+                    <Link
+                      href={stage.href}
+                      className="link-underline gap-1 mt-5 text-sm text-accent font-medium"
+                    >
+                      View full page <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
                 </div>
               </ScrollReveal>
             ))}

@@ -1,0 +1,408 @@
+import Link from "next/link";
+import {
+  Route,
+  MousePointerClick,
+  PiggyBank,
+  SlidersHorizontal,
+  PackageCheck,
+  CalendarClock,
+  Sparkles,
+  Gift,
+  Shirt,
+  Gem,
+  Trophy,
+  HeartPulse,
+  PawPrint,
+  Puzzle,
+  ArrowRight,
+} from "lucide-react";
+import ScrollReveal from "@/components/animations/ScrollReveal";
+import Button from "@/components/ui/Button";
+import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import CheckoutChoiceDemo from "@/components/sections/CheckoutChoiceDemo";
+import FaqSection from "@/components/sections/FaqSection";
+import ClosingCTA from "@/components/sections/ClosingCTA";
+import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
+import { buildMetadata } from "@/lib/metadata";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
+
+export const metadata = buildMetadata({
+  title: "Brands",
+  description:
+    "Shoppers value reliable, on-time delivery over gimmicks. ITD Global helps brands build the parcel journey around that, with choice at checkout and pricing that protects your margin.",
+  path: "/solutions/brands",
+});
+
+/* ── Copy (verbatim from the approved doc) ──────────────────────────────────── */
+
+const SUPPORT = [
+  {
+    icon: Route,
+    title: "The right carrier for each order",
+    desc: "Each order runs on the carrier most likely to get it there on time and to the door, so your delivery promise doesn't rest on a single courier.",
+  },
+  {
+    icon: MousePointerClick,
+    title: "Delivery choice at checkout",
+    desc: "Give shoppers the delivery options they want at checkout, faster or cheaper, to the door or a pickup point, across a network of carriers.",
+  },
+  {
+    icon: PiggyBank,
+    title: "Pricing that protects your margin",
+    desc: "You ship on our carrier rates, compared per order, so delivery stays affordable as you grow and postage doesn't eat into your margin.",
+  },
+];
+
+const WANTS = [
+  {
+    icon: SlidersHorizontal,
+    title: "Freedom of choice",
+    desc: "Give shoppers a say in how their parcel arrives and who carries it. Most never get the option.",
+  },
+  {
+    icon: PackageCheck,
+    title: "A parcel that actually arrives",
+    desc: "Reliability is where delivery breaks down. More carriers, more ways to route around a weak lane.",
+  },
+  {
+    icon: CalendarClock,
+    title: "Certainty over speed",
+    desc: "They don't need it tomorrow. They need to know when.",
+  },
+];
+
+const INDUSTRIES = [
+  {
+    icon: Sparkles,
+    name: "Beauty & cosmetics",
+    desc: "High-frequency DTC orders and repeat buyers who expect their parcel tracked and on time.",
+  },
+  {
+    icon: Gift,
+    name: "Giftware & homeware",
+    desc: "Mixed parcel sizes and gifting peaks, handled without the seasonal wobble.",
+  },
+  {
+    icon: Shirt,
+    name: "Fashion & footwear",
+    desc: "Returns come with the territory, so shoppers get the delivery and return options they expect.",
+  },
+  {
+    icon: Gem,
+    name: "Jewellery & accessories",
+    desc: "Small, high-value parcels that need secure, tracked delivery to the door.",
+  },
+  {
+    icon: Trophy,
+    name: "Sports & fan merch",
+    desc: "Kit drops and match-day spikes that need carriers to flex with demand.",
+  },
+  {
+    icon: HeartPulse,
+    name: "Health & wellness",
+    desc: "Subscription and repeat orders that have to arrive like clockwork.",
+  },
+  {
+    icon: PawPrint,
+    name: "Pet supplies",
+    desc: "Bulky, heavy repeat orders customers want delivered when they're in.",
+  },
+  {
+    icon: Puzzle,
+    name: "Toys, hobby & craft",
+    desc: "Gifting peaks and marketplace orders, delivered on the date you promised.",
+  },
+];
+
+const BRANDS = [
+  {
+    name: "Tatti Lashes",
+    logo: "/logos/customers/tatti-lashes.webp",
+    href: "/resources/case-studies/tatti-lashes",
+  },
+  {
+    name: "West Ham United",
+    logo: "/logos/customers/west-ham.webp",
+    href: "/resources/case-studies/west-ham-united",
+  },
+  {
+    name: "Sifcon International",
+    logo: "/case-studies/sifcon-international/logo.png",
+    href: "/resources/case-studies/sifcon-international",
+  },
+  {
+    name: "KitchenCraft",
+    logo: "/logos/customers/kitchencraft.webp",
+    href: undefined,
+  },
+  {
+    name: "Wenrit Global",
+    logo: "/case-studies/wenrit-global/logo.png",
+    href: "/resources/case-studies/wenrit-global",
+  },
+];
+
+const FAQ = [
+  {
+    question: "How do I give customers a choice of carrier at checkout?",
+    answer:
+      "You offer delivery options at checkout and we route each order to the right carrier behind the scenes. The shopper picks how it arrives; we handle who fulfils it.",
+  },
+  {
+    question: "Do I have to manage a string of carrier accounts?",
+    answer:
+      "No. You ship on one account with us and we hold the carrier relationships, so you get the network without chasing separate contracts.",
+  },
+  {
+    question: "Won't running multiple carriers complicate dispatch?",
+    answer:
+      "No. Labels, tracking and routing sit in one place, so your team works from one screen whichever carrier takes the order.",
+  },
+  {
+    question: "How does this make delivery more reliable?",
+    answer:
+      "Each order can go to the carrier that performs best on that lane, so you're not tied to one carrier's off day. If a service slips, orders route elsewhere.",
+  },
+  {
+    question: "Will it save me money?",
+    answer:
+      "You ship on our carrier rates, compared per order, usually below what a business your size reaches alone. We'll show you the numbers against your current setup.",
+  },
+  {
+    question: "Do I need to change my store or systems?",
+    answer:
+      "No. We connect to what you already run, Shopify, WooCommerce, your marketplaces and WMS, so orders come in and tracking goes back automatically.",
+  },
+];
+
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Solutions", path: "/solutions" },
+  { name: "Brands", path: "/solutions/brands" },
+];
+
+export default function BrandsPage() {
+  return (
+    <>
+      <JsonLd data={[breadcrumbSchema(CRUMBS), faqSchema(FAQ)]} />
+
+      {/* Hero — dark ink panel with the interactive checkout demo */}
+      <section
+        data-hero-tone="dark"
+        className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24"
+      >
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute -top-20 left-1/4 h-[420px] w-[640px] rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute bottom-0 right-0 h-[300px] w-[420px] rounded-full bg-accent-secondary/10 blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <ScrollReveal>
+              <div>
+                <span className="hero-entrance-h1 inline-block rounded-full bg-white/15 px-3 py-1 text-eyebrow tracking-wider text-white mb-5">
+                  Brands
+                </span>
+                <h1 className="hero-entrance-h1 text-display-xl text-white">
+                  Give your customers the delivery they actually want
+                </h1>
+                <p className="hero-entrance-sub mt-5 max-w-xl text-body-lg text-white/70">
+                  Shoppers value reliable, on-time delivery over gimmicks. We
+                  help you build your parcel journey around that, with choice at
+                  checkout and pricing that protects your margin.
+                </p>
+                <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
+                  <Button href={RATE_CHECKER_URL}>Get Quote</Button>
+                  <Button href="/contact?enquiry=brands" variant="secondary" surface="dark">
+                    Contact Sales
+                  </Button>
+                </div>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.12}>
+              <div className="flex justify-center lg:justify-end">
+                <CheckoutChoiceDemo />
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* How we support brands */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <h2 className="text-display-lg text-text-primary">
+              How we support brands
+            </h2>
+            <p className="mt-4 max-w-3xl text-body-md text-text-secondary">
+              We help you build your parcel journey around the shopper, then
+              deliver it through our carrier network. What that means in
+              practice:
+            </p>
+          </ScrollReveal>
+          <div className="mt-10 grid gap-5 md:grid-cols-3 items-stretch">
+            {SUPPORT.map((item, i) => (
+              <ScrollReveal key={item.title} delay={i * 0.08} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-secondary p-7 transition-all hover:border-accent/30 hover:shadow-md motion-reduce:transition-none">
+                  <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light text-accent">
+                    <item.icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <p className="text-heading-md text-text-primary">{item.title}</p>
+                  <p className="mt-2 text-body-md text-text-secondary">{item.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What your customers actually want — dark stats band */}
+      <section className="relative overflow-hidden bg-bg-dark py-16 md:py-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle at 15% 15%, rgba(29,63,184,0.35) 0%, transparent 55%)",
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <h2 className="text-display-lg text-white max-w-3xl">
+              What your customers actually want
+            </h2>
+            <p className="mt-4 max-w-3xl text-body-md text-white/70">
+              Parcel delivery is retail&apos;s weak link: two in three shoppers
+              have had a recent delivery problem, and three in four had no say
+              in who delivered it.
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 items-stretch">
+            <ScrollReveal className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
+                <p className="text-stat-xl text-white">2 in 3</p>
+                <p className="mt-2 text-body-md text-white/70">
+                  shoppers have had a recent delivery problem — and fewer than
+                  half are satisfied when they complain.
+                </p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.08} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
+                <p className="text-stat-xl text-white">3 in 4</p>
+                <p className="mt-2 text-body-md text-white/70">
+                  had no say in who delivered their parcel.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          <div className="mt-5 grid gap-5 md:grid-cols-3 items-stretch">
+            {WANTS.map((item, i) => (
+              <ScrollReveal key={item.title} delay={i * 0.08} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7">
+                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-accent-secondary">
+                    <item.icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <p className="text-heading-md text-white">{item.title}</p>
+                  <p className="mt-2 text-body-sm text-white/70">{item.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal>
+            <p className="mt-10 max-w-3xl text-body-lg text-white/85">
+              So your checkout offers the choice, and each order goes out on the
+              carrier best placed to deliver it.
+            </p>
+            <p className="mt-4 text-caption text-white/40">
+              Sources: Ofcom parcel-delivery research; Citizens Advice, via the
+              Financial Times.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Built for your industry */}
+      <section className="bg-bg-secondary py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <h2 className="text-display-lg text-text-primary">
+              Built for your industry
+            </h2>
+            <p className="mt-4 max-w-3xl text-body-md text-text-secondary">
+              Each category ships differently. A few we know well:
+            </p>
+          </ScrollReveal>
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+            {INDUSTRIES.map((item, i) => (
+              <ScrollReveal key={item.name} delay={i * 0.05} className="h-full">
+                <div className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white motion-reduce:transition-none">
+                    <item.icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <p className="text-heading-sm text-text-primary">{item.name}</p>
+                  <p className="mt-1.5 text-body-sm text-text-secondary">{item.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* In good company */}
+      <section className="bg-white py-16 md:py-24 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <h2 className="text-display-md text-text-primary">In good company</h2>
+            <p className="mt-3 max-w-2xl text-body-md text-text-secondary">
+              From beauty to homeware to football shirts, brands rely on us to
+              get their orders to the customer.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              {BRANDS.map((b) => {
+                const inner = (
+                  <>
+                    <IntegrationLogo name={b.name} logo={b.logo} size="sm" fit="contain" />
+                    <span className="text-sm font-medium text-text-primary">{b.name}</span>
+                  </>
+                );
+                const base =
+                  "flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3";
+                return b.href ? (
+                  <Link
+                    key={b.name}
+                    href={b.href}
+                    className={`group/b ${base} transition-colors hover:border-accent/40 hover:text-accent motion-reduce:transition-none`}
+                  >
+                    {inner}
+                    <ArrowRight
+                      className="w-4 h-4 -ml-1 text-text-tertiary opacity-0 transition-all group-hover/b:opacity-100 group-hover/b:text-accent motion-reduce:transition-none"
+                      aria-hidden
+                    />
+                  </Link>
+                ) : (
+                  <div key={b.name} className={base}>
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <FaqSection items={FAQ} />
+
+      <ClosingCTA
+        headline="Build your delivery around your customers"
+        subtitle="Get a quote and we'll map your orders to the carriers and checkout options that fit your brand."
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=brands" }}
+      />
+    </>
+  );
+}
