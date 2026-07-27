@@ -22,7 +22,7 @@ const OPTIONS: DemoOption[] = [
     eta: "Arrives tomorrow",
     price: "£4.99",
     carrier: "DPD",
-    logo: "/logos/carriers/DPD-LOGO.png",
+    logo: "/logos/carriers/dpd-tile.png",
     lane: "best next-day performance on this lane",
   },
   {
@@ -109,7 +109,7 @@ export default function CheckoutChoiceDemo() {
 
           {/* Routing strip — swaps with the selection */}
           <div className="mt-4 flex items-center gap-3 rounded-xl bg-bg-dark px-4 py-3">
-            <span className="relative h-7 w-7 flex-shrink-0 overflow-hidden rounded-md bg-white">
+            <span className="relative h-7 w-7 flex-shrink-0 overflow-hidden rounded-md">
               <Image
                 key={active.carrier}
                 src={active.logo}
@@ -117,7 +117,7 @@ export default function CheckoutChoiceDemo() {
                 fill
                 sizes="28px"
                 quality={90}
-                className="object-contain p-0.5"
+                className="object-cover"
               />
             </span>
             <p className="text-caption text-white/80 leading-snug">
@@ -129,9 +129,6 @@ export default function CheckoutChoiceDemo() {
         </div>
       </div>
 
-      <p className="mt-3 text-center text-caption text-white/60">
-        Your customer picks the promise. We pick the carrier that keeps it.
-      </p>
     </div>
   );
 }
