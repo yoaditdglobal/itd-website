@@ -19,7 +19,8 @@ const cspReportOnly = [
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu https://assets.apollo.io https://*.aplo-evnt.com",
   "frame-ancestors 'none'",
-  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com",
+  // outlook.office.com / office365.com — the Microsoft Bookings embed on /contact.
+  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com https://outlook.office.com https://outlook.office365.com",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",

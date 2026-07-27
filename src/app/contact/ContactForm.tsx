@@ -274,6 +274,26 @@ export default function ContactForm() {
                   );
                 })}
               </div>
+
+              {/* Book a meeting — Microsoft Bookings embed. White card on the
+                  dark panel (the Bookings page is light-themed); fixed height
+                  with the page scrolling inside the frame. */}
+              <ScrollReveal delay={0.4}>
+                <div className="mt-12">
+                  <p className="text-eyebrow text-white/50 mb-1">Prefer to talk?</p>
+                  <h2 className="text-heading-md text-white mb-4">
+                    Book a meeting with the team
+                  </h2>
+                  <div className="overflow-hidden rounded-2xl border border-white/10 bg-white">
+                    <iframe
+                      src="https://outlook.office.com/book/ITDGlobal1@NLGITDglobal.onmicrosoft.com/?ismsaljsauthenabled"
+                      title="Book a meeting with ITD Global"
+                      loading="lazy"
+                      className="h-[640px] w-full border-0"
+                    />
+                  </div>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
 
