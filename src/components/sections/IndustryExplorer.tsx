@@ -217,7 +217,7 @@ export default function IndustryExplorer() {
         id="industry-panel"
         role="tabpanel"
         aria-labelledby={`industry-tab-${active}`}
-        className="relative mt-6 overflow-hidden rounded-3xl border border-border bg-white"
+        className="relative mt-6 aspect-square w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-white"
       >
         {/* Decorative motif */}
         <div
@@ -237,7 +237,7 @@ export default function IndustryExplorer() {
 
         <div
           key={active}
-          className="brand-spotlight-in relative flex min-h-[280px] flex-col justify-center p-8 md:min-h-[340px] md:p-12"
+          className="brand-spotlight-in relative flex h-full flex-col justify-center p-8 md:p-12"
         >
           <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light text-accent">
             <item.icon className="h-6 w-6" aria-hidden />
