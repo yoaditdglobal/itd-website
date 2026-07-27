@@ -165,7 +165,7 @@ export default function IndustryExplorer() {
           aria-label="Industries"
           aria-orientation="horizontal"
           onKeyDown={onKeyDown}
-          className="flex w-max min-w-full gap-1 border-b border-border"
+          className="flex w-max min-w-full gap-1"
         >
           {INDUSTRIES.map((ind, i) => {
             const on = i === active;
