@@ -26,7 +26,7 @@ const SLIDES: InsightSlide[] = [
   {
     id: "problem",
     stat: "68%",
-    body: "shoppers have had a recent delivery problem.",
+    body: "of shoppers have had a recent delivery problem.",
     source: "Ofcom parcel-delivery research",
     gradient:
       "radial-gradient(circle at 12% 8%, rgba(59,91,219,0.85) 0%, rgba(29,63,184,0.35) 45%, rgba(10,15,40,0.9) 100%)",
