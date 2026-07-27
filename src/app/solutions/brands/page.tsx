@@ -268,7 +268,7 @@ export default function BrandsPage() {
       </section>
 
       {/* Built for your industry */}
-      <section className="bg-bg-secondary py-16 md:py-24">
+      <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-display-lg text-text-primary">
