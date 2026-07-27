@@ -336,10 +336,6 @@ export default function BrandsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h2 className="text-display-md text-text-primary">In good company</h2>
-            <p className="mt-3 max-w-2xl text-body-md text-text-secondary">
-              From beauty to homeware to football shirts, brands rely on us to
-              get their orders to the customer.
-            </p>
             <BrandSpotlight brands={BRANDS} />
           </ScrollReveal>
         </div>
