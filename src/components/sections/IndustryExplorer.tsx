@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import {
-  ArrowRight,
   Gem,
   Gift,
   HeartPulse,
@@ -16,60 +13,27 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-interface IndustryBrand {
-  name: string;
-  logo: string;
-  href: string;
-}
-
 interface Industry {
   icon: LucideIcon;
   name: string;
   /** Short tab label so all eight fit a row on desktop. */
   tab: string;
   desc: string;
-  /** Customer brands we actually ship in this category (case-study links). */
-  brands?: IndustryBrand[];
 }
 
-/* Copy verbatim from the Brands page doc; brand chips only where a real
-   customer case study exists — no invented claims. */
+/* Copy verbatim from the Brands page doc. */
 const INDUSTRIES: Industry[] = [
   {
     icon: Sparkles,
     name: "Beauty & cosmetics",
     tab: "Beauty",
     desc: "High-frequency DTC orders and repeat buyers who expect their parcel tracked and on time.",
-    brands: [
-      {
-        name: "Tatti Lashes",
-        logo: "/case-studies/tatti-lashes/logo.jpeg",
-        href: "/resources/case-studies/tatti-lashes",
-      },
-      {
-        name: "Red Label",
-        logo: "/case-studies/red-label/logo.png",
-        href: "/resources/case-studies/red-label",
-      },
-    ],
   },
   {
     icon: Gift,
     name: "Giftware & homeware",
     tab: "Giftware",
     desc: "Mixed parcel sizes and gifting peaks, handled without the seasonal wobble.",
-    brands: [
-      {
-        name: "Sifcon International",
-        logo: "/case-studies/sifcon-international/logo.png",
-        href: "/resources/case-studies/sifcon-international",
-      },
-      {
-        name: "KitchenCraft",
-        logo: "/logos/customers/kitchencraft.webp",
-        href: "/resources/case-studies/lifetime-brands",
-      },
-    ],
   },
   {
     icon: Shirt,
@@ -88,13 +52,6 @@ const INDUSTRIES: Industry[] = [
     name: "Sports & fan merch",
     tab: "Sports",
     desc: "Kit drops and match-day spikes that need carriers to flex with demand.",
-    brands: [
-      {
-        name: "West Ham United",
-        logo: "/logos/customers/west-ham.webp",
-        href: "/resources/case-studies/west-ham-united",
-      },
-    ],
   },
   {
     icon: HeartPulse,
@@ -280,7 +237,7 @@ export default function IndustryExplorer() {
 
         <div
           key={active}
-          className="brand-spotlight-in relative p-8 md:min-h-[320px] md:p-12 lg:p-14"
+          className="brand-spotlight-in relative flex min-h-[280px] flex-col justify-center p-8 md:min-h-[340px] md:p-12"
         >
           <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light text-accent">
             <item.icon className="h-6 w-6" aria-hidden />
@@ -290,37 +247,6 @@ export default function IndustryExplorer() {
             {item.desc}
           </p>
 
-          {item.brands && (
-            <div className="mt-7">
-              <p className="text-eyebrow text-text-tertiary">Brands we ship</p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {item.brands.map((b) => (
-                  <Link
-                    key={b.name}
-                    href={b.href}
-                    className="group/b flex items-center gap-2.5 rounded-xl border border-border bg-white py-2.5 pl-3 pr-4 transition-colors hover:border-accent/40 motion-reduce:transition-none"
-                  >
-                    <span className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-md">
-                      <Image
-                        src={b.logo}
-                        alt={`${b.name} logo`}
-                        fill
-                        sizes="32px"
-                        className="object-contain"
-                      />
-                    </span>
-                    <span className="text-sm font-medium text-text-primary">
-                      {b.name}
-                    </span>
-                    <ArrowRight
-                      className="h-4 w-4 text-text-tertiary opacity-0 transition-all group-hover/b:text-accent group-hover/b:opacity-100 motion-reduce:transition-none"
-                      aria-hidden
-                    />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
