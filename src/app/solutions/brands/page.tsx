@@ -284,7 +284,7 @@ export default function BrandsPage() {
             <p className="mt-6 text-caption text-white/40">
               Sources:{" "}
               <a
-                href="https://www.ofcom.org.uk/post/deliveries-and-charges/best-and-worst-parcel-firms-for-customer-satisfaction-revealed-2025"
+                href="https://www.ofcom.org.uk/post/market-performance/post-monitoring-report-2024-25-interactive-data"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline decoration-white/30 underline-offset-2 transition-colors hover:text-white/70 motion-reduce:transition-none"
