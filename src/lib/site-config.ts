@@ -57,6 +57,7 @@ export const ROUTES = [
 
   // Solutions
   { path: "/solutions/enterprise", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/solutions/brands", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/solutions/small-business", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/solutions/ecommerce", priority: 0.95, changeFrequency: "monthly" as const },
   { path: "/solutions/marketplace-seller", priority: 0.9, changeFrequency: "monthly" as const },
