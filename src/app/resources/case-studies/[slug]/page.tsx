@@ -172,7 +172,7 @@ export default async function CaseStudyPage({
       <CaseStudyStack cs={cs} />
 
       {/* Challenge / Solution / Result — numbered journey, bold payoff panel */}
-      <section className="bg-bg-secondary py-16 md:py-24">
+      <section className="bg-white py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-6 md:space-y-0">
             {/* 01 — Challenge */}
