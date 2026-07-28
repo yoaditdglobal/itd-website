@@ -60,6 +60,8 @@ export interface CaseStudy {
   brandName: string;
   /** Brand's own site — the first brand mention in the challenge copy links here. */
   website?: string;
+  /** LinkedIn post URL (feed/update/urn:li:activity:...) embedded below the feature quote. */
+  linkedinPost?: string;
   industry: string;
   headline: string;
   metric: string;
@@ -301,6 +303,8 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "2",
     slug: "west-ham-united",
+    linkedinPost:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7440004084096651264",
     website: "https://www.whufc.com/",
     primarySegment: "eCommerce",
     segments: ["eCommerce"],

@@ -327,7 +327,7 @@ export default async function CaseStudyPage({
       </section>
 
       {/* Feature quote(s) — proof, lifted ahead of the related/CTA tail */}
-      {featureQuotes.length > 0 && (
+      {(featureQuotes.length > 0 || cs.linkedinPost) && (
         <section className="bg-white py-16 md:py-24">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             {featureQuotes.map((q, i) => (
@@ -335,6 +335,18 @@ export default async function CaseStudyPage({
                 <QuoteBlock {...q} placement="feature" />
               </ScrollReveal>
             ))}
+            {cs.linkedinPost && (
+              <ScrollReveal>
+                <iframe
+                  src={cs.linkedinPost.replace("/feed/update/", "/embed/feed/update/")}
+                  height={640}
+                  loading="lazy"
+                  allowFullScreen
+                  title={`LinkedIn post — ${cs.brandName}`}
+                  className="mx-auto block w-full max-w-[504px] rounded-2xl border border-border"
+                />
+              </ScrollReveal>
+            )}
           </div>
         </section>
       )}
