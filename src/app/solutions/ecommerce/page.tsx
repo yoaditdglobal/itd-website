@@ -15,6 +15,7 @@ export const metadata = buildMetadata({
 export default function EcommercePage() {
   return (
     <VerticalPage
+      industryExplorer
       gatewayMedia={{
         mp4: "/media/connexx-ecommerce.mp4",
         webm: "/media/connexx-ecommerce.webm",
