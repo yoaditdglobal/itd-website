@@ -15,6 +15,7 @@ export const metadata = buildMetadata({
 export default function MarketplaceSellerPage() {
   return (
     <VerticalPage
+      industryExplorer
       gatewayMedia={{
         mp4: "/media/connexx-marketplace.mp4",
         webm: "/media/connexx-marketplace.webm",

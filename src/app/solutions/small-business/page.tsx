@@ -15,6 +15,7 @@ export const metadata = buildMetadata({
 export default function SmallBusinessPage() {
   return (
     <VerticalPage
+      industryExplorer
       gatewayMedia={{
         mp4: "/media/connexx-sme.mp4",
         webm: "/media/connexx-sme.webm",

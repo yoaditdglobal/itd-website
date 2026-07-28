@@ -11,6 +11,7 @@ import type { IntegrationItem } from "@/components/sections/IntegrationCarousel"
 import CarrierComparisonTable from "@/components/sections/CarrierComparisonTable";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import ConnexxGateway, { type GatewayMedia } from "@/components/sections/ConnexxGateway";
+import IndustryExplorer from "@/components/sections/IndustryExplorer";
 import type {
   CarrierComparisonRow,
   MethodologyCallout,
@@ -170,6 +171,10 @@ interface VerticalPageProps {
   /** Optional looping feature animation that replaces the ConnexxGateway static dashboard mock (used by /shipping/domestic). */
   gatewayMedia?: GatewayMedia;
 
+  /** Render the "Built for your industry" explorer (the Brands-page section)
+   *  directly above "How Connexx solves it". */
+  industryExplorer?: boolean;
+
   /** Page context for the "Key integrations" section. When set (and no explicit
    *  `integrations` array is passed), the relevant carriers + tech are derived
    *  from the data layer and the header blurb is filled in automatically. */
@@ -197,6 +202,7 @@ export default function VerticalPage({
   jsonLd,
   integrationsGateway,
   gatewayMedia,
+  industryExplorer,
   integrationsContext,
 }: VerticalPageProps) {
   // "Key integrations" list: an explicit `integrations` array wins; otherwise
@@ -349,6 +355,20 @@ export default function VerticalPage({
           footnote={carrierComparison.footnote}
           methodology={carrierComparison.methodology}
         />
+      )}
+
+      {/* Built for your industry — the Brands-page explorer, opt-in */}
+      {industryExplorer && (
+        <section className="bg-white py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <h2 className="text-display-lg text-text-primary">
+                Built for your industry
+              </h2>
+            </ScrollReveal>
+            <IndustryExplorer />
+          </div>
+        </section>
       )}
 
       {/* Connexx for [vertical] */}
