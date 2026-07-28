@@ -14,7 +14,7 @@ export default function RelatedStories({ stories }: { stories: CaseStudy[] }) {
   if (!stories || stories.length === 0) return null;
 
   return (
-    <section className="bg-bg-secondary py-16 md:py-24">
+    <section className="border-t border-border bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="flex items-end justify-between gap-4 mb-8">

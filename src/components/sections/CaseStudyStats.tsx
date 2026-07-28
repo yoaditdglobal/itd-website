@@ -58,18 +58,15 @@ export default function CaseStudyStats({
 
         {hasGlance && (
           <ScrollReveal delay={(statCount * 0.08) + 0.05}>
-            <div className="rounded-2xl bg-bg-secondary border border-border p-5 md:p-6">
-              <p className="text-eyebrow text-text-tertiary mb-4">At a glance</p>
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+            <div className="rounded-2xl border border-border bg-white p-6 md:p-8">
+              <p className="text-eyebrow text-text-tertiary">At a glance</p>
+              <dl className="mt-5 grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-3">
                 {atGlance!.map((row, i) => (
-                  <div
-                    key={i}
-                    className="flex items-baseline justify-between gap-3 border-b border-border last:border-0 sm:border-0 pb-2 sm:pb-0"
-                  >
-                    <dt className="text-eyebrow text-text-tertiary flex-shrink-0">
+                  <div key={i}>
+                    <dt className="text-eyebrow text-text-tertiary">
                       {row.label}
                     </dt>
-                    <dd className="text-body-sm font-medium text-text-primary text-right">
+                    <dd className="mt-1.5 text-body-md font-semibold leading-snug text-text-primary">
                       {row.value}
                     </dd>
                   </div>
@@ -89,12 +86,17 @@ function StatCard({ stat }: { stat: CaseStudyStat }) {
 
   return (
     <div
-      className={`group h-full flex flex-col rounded-2xl border p-5 md:p-6 transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 hover:shadow-md ${
+      className={`h-full rounded-2xl ${
         isFeatured
-          ? "bg-accent-light border-accent/25 hover:border-accent/45"
-          : "bg-white border-border hover:border-accent/30"
+          ? "bg-gradient-to-br from-accent-200 via-accent to-accent-600 p-[2.5px]"
+          : "border border-border bg-white"
       }`}
     >
+      <div
+        className={`flex h-full flex-col p-5 md:p-6 ${
+          isFeatured ? "rounded-[calc(1rem-2.5px)] bg-white" : ""
+        }`}
+      >
       {/* Value — fixed minimum height so 1-line and 2-line values reserve the same
           vertical space, keeping the eyebrow labels horizontally aligned across cards. */}
       <div className="text-accent min-h-[3.25rem] md:min-h-[3.5rem] flex items-start">
@@ -118,6 +120,7 @@ function StatCard({ stat }: { stat: CaseStudyStat }) {
           {stat.sub}
         </p>
       )}
+      </div>
     </div>
   );
 }

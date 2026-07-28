@@ -46,10 +46,10 @@ export default function CaseStudyStack({ cs }: CaseStudyStackProps) {
   return (
     <section className="bg-white py-10 md:py-14">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-eyebrow text-text-tertiary mb-5">
+        <p className="text-eyebrow text-text-tertiary">
           The stack behind this story
         </p>
-        <div className="space-y-5">
+        <div className="mt-5 flex flex-wrap gap-x-12 gap-y-6">
           {shipping.length > 0 && (
             <ChipGroup label="Shipping" entities={shipping} />
           )}
@@ -73,16 +73,16 @@ function ChipGroup({
   entities: LinkedEntity[];
 }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4">
-      <p className="text-eyebrow text-text-tertiary sm:w-28 sm:flex-shrink-0 sm:pt-2">
+    <div>
+      <p className="text-caption font-semibold uppercase tracking-wider text-text-tertiary">
         {label}
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="mt-2.5 flex flex-wrap gap-2">
         {entities.map((e) => (
           <Link
             key={e.href + e.name}
             href={e.href}
-            className="group inline-flex items-center gap-2 rounded-full border border-border bg-bg-secondary px-3 py-1.5 text-sm text-text-primary hover:border-accent/40 hover:bg-white transition-colors"
+            className="group inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-2 text-sm text-text-primary transition-colors hover:border-accent/40 hover:text-accent motion-reduce:transition-none"
           >
             {e.logo && (
               <IntegrationLogo name={e.name} logo={e.logo} size="xs" />

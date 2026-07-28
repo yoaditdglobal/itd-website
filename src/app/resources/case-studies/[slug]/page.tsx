@@ -78,6 +78,47 @@ function resolveQuotes(cs: CaseStudy): CaseStudyQuote[] {
   return [];
 }
 
+/**
+ * Wraps the first mention of the brand in a paragraph with a link to the
+ * brand's own site. Tries the full brand name first, then progressively
+ * shorter forms (suffixes like "FC"/"(KitchenCraft)" stripped, then fewer
+ * words), and picks the earliest match. Returns plain text when the story
+ * has no website or the name never appears.
+ */
+function linkBrandMention(text: string, brandName: string, website?: string) {
+  if (!website) return text;
+  const base = brandName.replace(/\s*\(.*?\)\s*/g, " ").replace(/\s+(FC|PLC|Ltd)$/i, "").trim();
+  const words = base.split(/\s+/);
+  const candidates = [brandName, base];
+  for (let n = words.length - 1; n >= 1; n--) {
+    candidates.push(words.slice(0, n).join(" "));
+  }
+  let best: { index: number; name: string } | null = null;
+  for (const name of candidates) {
+    if (name.length < 3) continue;
+    const index = text.indexOf(name);
+    if (index === -1) continue;
+    if (!best || index < best.index || (index === best.index && name.length > best.name.length)) {
+      best = { index, name };
+    }
+  }
+  if (!best) return text;
+  return (
+    <>
+      {text.slice(0, best.index)}
+      <a
+        href={website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-text-primary underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent motion-reduce:transition-none"
+      >
+        {best.name}
+      </a>
+      {text.slice(best.index + best.name.length)}
+    </>
+  );
+}
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -171,39 +212,122 @@ export default async function CaseStudyPage({
       {/* The stack behind this story — click-through to carriers/integrations/shipping */}
       <CaseStudyStack cs={cs} />
 
-      {/* Challenge / Solution / Result (+ optional inline pull quote) */}
-      <section className="bg-bg-secondary py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="space-y-12">
-              <div>
-                <h3 className="text-eyebrow text-accent mb-3">The Challenge</h3>
-                <p className="text-text-secondary leading-relaxed">
-                  {cs.challenge}
-                </p>
+      {/* Challenge / Solution / Result — numbered journey, bold payoff panel */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-6 md:space-y-0">
+            {/* 01 — Challenge */}
+            <ScrollReveal>
+              <div className="md:grid md:grid-cols-[88px_1fr]">
+                <div className="hidden md:flex md:flex-col md:items-center">
+                  <span aria-hidden className="text-stat-xl font-bold text-accent/20">
+                    01
+                  </span>
+                  <span aria-hidden className="mt-4 w-px flex-1 bg-border-strong/60" />
+                </div>
+                <div className="rounded-3xl border border-border bg-white p-7 md:p-10">
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-sm font-bold text-accent md:hidden"
+                    >
+                      1
+                    </span>
+                    <h3 className="text-heading-lg text-text-primary">The challenge</h3>
+                  </div>
+                  <p className="mt-4 text-body-lg leading-relaxed text-text-secondary">
+                    {linkBrandMention(cs.challenge, cs.brandName, cs.website)}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-eyebrow text-accent mb-3">The Solution</h3>
-                <p className="text-text-secondary leading-relaxed">
-                  {cs.solution}
-                </p>
+            </ScrollReveal>
+
+            {/* 02 — Solution */}
+            <ScrollReveal delay={0.06}>
+              <div className="md:grid md:grid-cols-[88px_1fr]">
+                <div className="hidden md:flex md:flex-col md:items-center">
+                  <span aria-hidden className="mb-4 w-px flex-1 bg-border-strong/60" />
+                  <span aria-hidden className="text-stat-xl font-bold text-accent/40">
+                    02
+                  </span>
+                  <span aria-hidden className="mt-4 w-px flex-1 bg-border-strong/60" />
+                </div>
+                <div className="mt-0 rounded-3xl bg-gradient-to-br from-accent-200 via-accent to-accent-600 p-[2.5px] md:mt-6">
+                  <div className="h-full rounded-[calc(1.5rem-2.5px)] bg-white p-7 md:p-10">
+                    <div className="flex items-center gap-3">
+                      <span
+                        aria-hidden
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-sm font-bold text-accent md:hidden"
+                      >
+                        2
+                      </span>
+                      <h3 className="text-heading-lg text-text-primary">The solution</h3>
+                    </div>
+                    <p className="mt-4 text-body-lg leading-relaxed text-text-secondary">
+                      {cs.solution}
+                    </p>
+                  </div>
+                </div>
               </div>
-              {inlineQuotes.map((q, i) => (
-                <QuoteBlock key={`inline-${i}`} {...q} placement="inline" />
-              ))}
-              <div>
-                <h3 className="text-eyebrow text-accent mb-3">The Result</h3>
-                <p className="text-text-secondary leading-relaxed">
-                  {cs.result}
-                </p>
+            </ScrollReveal>
+
+            {inlineQuotes.length > 0 && (
+              <div className="md:grid md:grid-cols-[88px_1fr]">
+                <div className="hidden md:flex md:flex-col md:items-center">
+                  <span aria-hidden className="w-px flex-1 bg-border-strong/60" />
+                </div>
+                <div className="space-y-8 py-8 md:py-10">
+                  {inlineQuotes.map((q, i) => (
+                    <QuoteBlock key={`inline-${i}`} {...q} placement="inline" />
+                  ))}
+                </div>
               </div>
-            </div>
-          </ScrollReveal>
+            )}
+
+            {/* 03 — Result: the payoff, takeover panel */}
+            <ScrollReveal delay={0.06}>
+              <div className="md:grid md:grid-cols-[88px_1fr]">
+                <div className="hidden md:flex md:flex-col md:items-center">
+                  <span aria-hidden className="mb-4 h-10 w-px bg-border-strong/60" />
+                  <span aria-hidden className="text-stat-xl font-bold text-accent">
+                    03
+                  </span>
+                </div>
+                <div
+                  className="relative mt-0 overflow-hidden rounded-3xl p-7 md:mt-6 md:p-12"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 12% 8%, rgba(59,91,219,0.85) 0%, rgba(29,63,184,0.35) 45%, rgba(10,15,40,0.9) 100%), #15192b",
+                  }}
+                >
+                  <div
+                    aria-hidden
+                    className="bg-noise pointer-events-none absolute inset-0 opacity-40"
+                  />
+                  <div className="relative">
+                    <div className="flex items-center gap-3">
+                      <span
+                        aria-hidden
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-sm font-bold text-white md:hidden"
+                      >
+                        3
+                      </span>
+                      <h3 className="text-heading-lg text-white">The result</h3>
+                    </div>
+                    <p className="text-stat-2xl mt-5 text-white">{cs.metric}</p>
+                    <p className="mt-5 max-w-3xl text-body-lg leading-relaxed text-white/85">
+                      {cs.result}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* Feature quote(s) — proof, lifted ahead of the related/CTA tail */}
-      {featureQuotes.length > 0 && (
+      {(featureQuotes.length > 0 || cs.linkedinPost) && (
         <section className="bg-white py-16 md:py-24">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             {featureQuotes.map((q, i) => (
@@ -211,6 +335,18 @@ export default async function CaseStudyPage({
                 <QuoteBlock {...q} placement="feature" />
               </ScrollReveal>
             ))}
+            {cs.linkedinPost && (
+              <ScrollReveal>
+                <iframe
+                  src={cs.linkedinPost.replace("/feed/update/", "/embed/feed/update/")}
+                  height={640}
+                  loading="lazy"
+                  allowFullScreen
+                  title={`LinkedIn post — ${cs.brandName}`}
+                  className="mx-auto block w-full max-w-[504px] rounded-2xl border border-border"
+                />
+              </ScrollReveal>
+            )}
           </div>
         </section>
       )}
