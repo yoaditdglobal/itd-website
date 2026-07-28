@@ -58,6 +58,8 @@ export interface CaseStudy {
   id: string;
   slug: string;
   brandName: string;
+  /** Brand's own site — the first brand mention in the challenge copy links here. */
+  website?: string;
   industry: string;
   headline: string;
   metric: string;
@@ -260,6 +262,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "1",
     slug: "tatti-lashes",
+    website: "https://tattilashes.com/",
     primarySegment: "eCommerce",
     segments: ["eCommerce"],
     outcomes: ["Save money"],
@@ -298,6 +301,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "2",
     slug: "west-ham-united",
+    website: "https://www.whufc.com/",
     primarySegment: "eCommerce",
     segments: ["eCommerce"],
     outcomes: ["Get control"],
@@ -338,6 +342,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "3",
     slug: "delta-fulfilment",
+    website: "https://deltafulfilment.co.uk/",
     primarySegment: "3PL",
     segments: ["3PL", "eCommerce"],
     outcomes: ["Save money", "Get control"],
@@ -377,6 +382,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "4",
     slug: "arlo-fulfilment",
+    website: "https://arlofulfilment.co.uk/",
     primarySegment: "Export",
     segments: ["Export", "3PL"],
     outcomes: ["Go international", "Win new business"],
@@ -414,6 +420,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "5",
     slug: "home-bargains",
+    website: "https://www.homebargains.co.uk/",
     primarySegment: "Import",
     segments: ["Import", "Freight"],
     outcomes: ["Save money"],
@@ -451,6 +458,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "6",
     slug: "rioz-global",
+    website: "https://www.riozglobal.com/",
     primarySegment: "3PL",
     segments: ["3PL"],
     outcomes: ["Win new business", "Save money"],
@@ -489,6 +497,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "7",
     slug: "pb-fulfilment",
+    website: "https://pbfulfilment.com/",
     primarySegment: "3PL",
     segments: ["3PL", "Import"],
     outcomes: ["Go international"],
@@ -529,6 +538,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "8",
     slug: "sainsburys-argos",
+    website: "https://www.sainsburys.co.uk/",
     primarySegment: "Import",
     segments: ["Import"],
     outcomes: ["Get control"],
@@ -603,6 +613,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "10",
     slug: "beauty-bay",
+    website: "https://www.beautybay.com/",
     primarySegment: "Freight",
     segments: ["Freight"],
     headlineResult: "Air, rail & sea — one shipment",
@@ -722,6 +733,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "13",
     slug: "sifcon-international",
+    website: "https://www.silplc.com/EN",
     primarySegment: "Import",
     segments: ["Import", "B2B"],
     outcomes: ["Save money", "Go international"],
@@ -774,6 +786,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "14",
     slug: "cummins",
+    website: "https://www.cummins.com/",
     primarySegment: "Import",
     segments: ["Import", "Freight"],
     outcomes: ["Go international", "Get control"],
@@ -826,6 +839,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "15",
     slug: "regatta",
+    website: "https://www.regatta.com/",
     primarySegment: "Import",
     segments: ["Import", "Freight"],
     outcomes: ["Go international", "Get control"],
@@ -877,6 +891,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "16",
     slug: "lifetime-brands",
+    website: "https://www.kitchencraft.co.uk/",
     primarySegment: "B2B",
     segments: ["B2B", "eCommerce"],
     outcomes: ["Get control"],
@@ -969,6 +984,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "18",
     slug: "red-label",
+    website: "https://redlabeloutlet.co.uk/",
     primarySegment: "eCommerce",
     segments: ["eCommerce"],
     outcomes: ["Save money", "Get control"],

@@ -78,6 +78,47 @@ function resolveQuotes(cs: CaseStudy): CaseStudyQuote[] {
   return [];
 }
 
+/**
+ * Wraps the first mention of the brand in a paragraph with a link to the
+ * brand's own site. Tries the full brand name first, then progressively
+ * shorter forms (suffixes like "FC"/"(KitchenCraft)" stripped, then fewer
+ * words), and picks the earliest match. Returns plain text when the story
+ * has no website or the name never appears.
+ */
+function linkBrandMention(text: string, brandName: string, website?: string) {
+  if (!website) return text;
+  const base = brandName.replace(/\s*\(.*?\)\s*/g, " ").replace(/\s+(FC|PLC|Ltd)$/i, "").trim();
+  const words = base.split(/\s+/);
+  const candidates = [brandName, base];
+  for (let n = words.length - 1; n >= 1; n--) {
+    candidates.push(words.slice(0, n).join(" "));
+  }
+  let best: { index: number; name: string } | null = null;
+  for (const name of candidates) {
+    if (name.length < 3) continue;
+    const index = text.indexOf(name);
+    if (index === -1) continue;
+    if (!best || index < best.index || (index === best.index && name.length > best.name.length)) {
+      best = { index, name };
+    }
+  }
+  if (!best) return text;
+  return (
+    <>
+      {text.slice(0, best.index)}
+      <a
+        href={website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-text-primary underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent motion-reduce:transition-none"
+      >
+        {best.name}
+      </a>
+      {text.slice(best.index + best.name.length)}
+    </>
+  );
+}
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -195,7 +236,7 @@ export default async function CaseStudyPage({
                     <h3 className="text-heading-lg text-text-primary">The challenge</h3>
                   </div>
                   <p className="mt-4 text-body-lg leading-relaxed text-text-secondary">
-                    {cs.challenge}
+                    {linkBrandMention(cs.challenge, cs.brandName, cs.website)}
                   </p>
                 </div>
               </div>
