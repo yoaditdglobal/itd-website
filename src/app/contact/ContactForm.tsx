@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
+import { LEAD_EVENT, leadParams } from "@/lib/analytics";
 
 const shippingTypes = [
   "Domestic B2C",
@@ -181,14 +182,19 @@ export default function ContactForm() {
         throw new Error(data.error || "Something went wrong");
       }
 
-      // GTM: fire generate_lead only on a confirmed successful submit.
+      // Fire the unified generate_lead conversion only on a confirmed successful
+      // submit. Kept on the GTM dataLayer so existing GTM tags still receive it;
+      // same event name + schema as the chat lead, so GA4 aggregates them as one
+      // conversion. leadParams adds lead_source (+ value/currency once configured).
       const w = window as DataLayerWindow;
       w.dataLayer = w.dataLayer || [];
       w.dataLayer.push({
-        event: "generate_lead",
+        event: LEAD_EVENT,
         form_name: "contact_sales",
-        shipping_type: shippingType,
-        weekly_volume: isFreight ? quantity : weeklyVolume,
+        ...leadParams("contact_form", {
+          shipping_type: shippingType,
+          weekly_volume: isFreight ? quantity : weeklyVolume,
+        }),
       });
 
       setSubmitted(true);

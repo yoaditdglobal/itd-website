@@ -20,6 +20,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { PROACTIVE_GREETING, WELCOME_MESSAGE, MENU_GREETING } from "@/lib/chat/knowledge";
+import { track, trackLead } from "@/lib/analytics";
 import {
   STEPS,
   FIRST_STEP,
@@ -102,13 +103,6 @@ const ANSWER_KEY: Record<Exclude<StepId, "lanes">, keyof FunnelAnswers> = {
 
 let idCounter = 0;
 const newId = () => `m${Date.now()}_${idCounter++}`;
-
-function track(event: string, params?: Record<string, unknown>) {
-  if (typeof window !== "undefined") {
-    const w = window as unknown as { gtag?: (...a: unknown[]) => void };
-    w.gtag?.("event", event, params ?? {});
-  }
-}
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -319,7 +313,7 @@ export default function ChatWidget() {
       setAnswers(nextAnswers);
       markAnswered(msgId);
       append({ id: newId(), role: "user", content: choiceLabel(stepId, value) });
-      track("chat_step", { step: stepId, value });
+      track("chat_step", { step: stepId, answer: value });
       advance(stepId, nextAnswers);
     },
     [append, markAnswered, advance],
@@ -653,7 +647,7 @@ export default function ChatWidget() {
   const onLeadDone = useCallback(
     (routing?: RoutingResult) => {
       setLeadDone(true);
-      track("chat_lead", { journey: routing?.icpJourney, intent: routing?.intentGrade });
+      trackLead("chat", { journey: routing?.icpJourney, intent: routing?.intentGrade });
       const hot = routing?.intentGrade === "hot";
       append({
         id: newId(),
