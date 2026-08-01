@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { countries } from "@/lib/countries";
-import { LEAD_EVENT, leadParams } from "@/lib/analytics";
+import { LEAD_EVENT, leadParams, track } from "@/lib/analytics";
 
 const shippingTypes = [
   "Domestic B2C",
@@ -62,6 +62,31 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+
+  // Microsoft Bookings is embedded cross-origin, so an actual completed booking
+  // is unreadable from this page — the confirmation only exists inside Outlook.
+  // The best available signal is that the embed was genuinely seen, which we
+  // fire once per page view as a leading indicator. Booked-meeting counts must
+  // come from Outlook, not GA4.
+  const bookingRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = bookingRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            track("booking_view");
+            observer.disconnect();
+          }
+        }
+      },
+      // Half the embed on screen — enough to mean "looked at", not "scrolled past".
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const router = useRouter();
 
   // After a successful submit, don't leave the user parked on the confirmation
@@ -290,7 +315,10 @@ export default function ContactForm() {
                   <h2 className="text-heading-md text-white mb-4">
                     Book a meeting with the team
                   </h2>
-                  <div className="overflow-hidden rounded-2xl border border-white/10 bg-white">
+                  <div
+                    ref={bookingRef}
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white"
+                  >
                     <iframe
                       src="https://outlook.office.com/book/ITDGlobal1@NLGITDglobal.onmicrosoft.com/?ismsaljsauthenabled"
                       title="Book a meeting with ITD Global"
