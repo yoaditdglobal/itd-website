@@ -55,6 +55,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/resources/case-studies/pb-fulfilment",
+        destination: "/resources/case-studies",
+        permanent: true,
+      },
+      {
         source: "/rate-checker",
         destination: "https://itdglobal-ratechecker.lovable.app/",
         permanent: true,

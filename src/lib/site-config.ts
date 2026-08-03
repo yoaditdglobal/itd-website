@@ -92,7 +92,6 @@ export const ROUTES = [
   { path: "/resources/case-studies/arlo-fulfilment", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/home-bargains", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/rioz-global", priority: 0.65, changeFrequency: "monthly" as const },
-  { path: "/resources/case-studies/pb-fulfilment", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/sainsburys-argos", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/freedom-fire", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/resources/case-studies/beauty-bay", priority: 0.65, changeFrequency: "monthly" as const },
