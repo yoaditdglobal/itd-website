@@ -24,7 +24,6 @@ const logos: CustomerLogo[] = [
   { name: "Lighting Online", src: "/logos/customers/lighting-online.webp", h: 36 },
   { name: "Rioz Global", src: "/logos/customers/rioz-global.webp", h: 34 },
   { name: "EFCL", src: "/logos/customers/efcl.webp", h: 34 },
-  { name: "PB Fulfilment", src: "/logos/customers/pb-fulfilment.webp", h: 36 },
   { name: "CK Fulfilment", src: "/logos/customers/ck-fulfilment.webp", h: 32 },
   { name: "Scale 3PL", src: "/logos/customers/scale3pl.webp", h: 34 },
   { name: "TBM Solution", src: "/logos/customers/tbm-solution.webp", h: 36 },
