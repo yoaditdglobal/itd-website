@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plug, Receipt, Users, ArrowRight } from "lucide-react";
+import { Plug, Receipt, Truck, Users, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import FaqSection from "@/components/sections/FaqSection";
 import HelpSearchBar from "@/components/help/HelpSearchBar";
@@ -22,6 +22,14 @@ export const metadata = buildMetadata({
 // /help/[category]/[article]) arrive in Phase 5b. For this scaffold
 // pass, every category card and featured article links back to /help.
 const categories = [
+  {
+    icon: Truck,
+    name: "Carrier",
+    description:
+      "Carrier news and network updates — acquisitions, rebrands, and service changes that affect your deliveries.",
+    href: "/help/carrier",
+    slug: "carrier",
+  },
   {
     icon: Plug,
     name: "Integrations",
@@ -72,8 +80,8 @@ const featuredArticles: {
     title: "Yodel is now InPost — what this means for your deliveries",
     summary:
       "Yodel and InPost have combined into a single delivery network. What changed on 17 July 2026, what carries over automatically, and where to go for support.",
-    category: "Carriers",
-    href: "/help/yodel-inpost",
+    category: "Carrier",
+    href: "/help/carrier/yodel-inpost",
   },
   {
     title: "Claims policies by carrier",

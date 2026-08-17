@@ -42,8 +42,8 @@ const ALL_ARTICLE_DOCS: SearchDoc[] = [
     title: "Yodel is now InPost — what this means for your deliveries",
     summary:
       "Yodel and InPost have combined into a single delivery network. What changed on 17 July 2026, what carries over automatically, and where to go for support.",
-    categoryLabel: "Carriers",
-    href: "/help/yodel-inpost",
+    categoryLabel: "Carrier",
+    href: "/help/carrier/yodel-inpost",
     keywords: [
       "yodel",
       "inpost",
@@ -87,7 +87,7 @@ const ALL_ARTICLE_DOCS: SearchDoc[] = [
     title: "Setting up your Royal Mail account",
     summary:
       "Add Tracked 24, Tracked 48, Signed, First Class, and Second Class services to your dispatch flow.",
-    categoryLabel: "Carriers",
+    categoryLabel: "Carrier",
     href: "/help",
     keywords: ["royal mail", "carrier", "services", "tracked 24", "tracked 48"],
   },
@@ -175,7 +175,7 @@ const ALL_ARTICLE_DOCS: SearchDoc[] = [
     title: "Handling a customs hold",
     summary:
       "What to do when a carrier flags a customs issue, how to upload missing documents, and how to prevent the same issue next time.",
-    categoryLabel: "Carriers",
+    categoryLabel: "Carrier",
     href: "/help",
     keywords: ["customs hold", "carrier", "documents", "delay", "clearance"],
   },
