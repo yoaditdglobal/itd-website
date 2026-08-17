@@ -57,10 +57,11 @@ const categories = [
 ];
 
 // ── Temporarily hidden categories ────────────────────────────────────────────
-// Billing and Account & admin are hidden from the hub on request (July 2026)
-// but their data above and their pages stay intact. TO BRING THEM BACK:
-// delete their slugs from this set — nothing else needs to change.
-const HIDDEN_CATEGORY_SLUGS = new Set<string>(["billing", "account"]);
+// Billing is hidden from the hub on request (July 2026) but its data above and
+// its pages stay intact. Account & admin was restored in August 2026. TO BRING
+// BILLING BACK: delete its slug from this set and mirror the change in
+// HIDDEN_HREF_PREFIXES in src/lib/help-search.ts.
+const HIDDEN_CATEGORY_SLUGS = new Set<string>(["billing"]);
 const visibleCategories = categories.filter(
   (c) => !HIDDEN_CATEGORY_SLUGS.has(c.slug),
 );
