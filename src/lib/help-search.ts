@@ -29,9 +29,9 @@ const CLAIM_TERMS = [
   "refund",
 ];
 
-// Existing Help Centre articles. These have no detail pages yet, so they link
-// back to the centre (as they do today); they are indexed so search covers the
-// whole centre, not only claims. The first entry is the new Claims hub.
+// Help Centre articles with REAL destination pages only — every doc's href
+// must resolve to an actual article (or a #section deep-link on one). Docs for
+// articles that don't exist yet stay out of the index until their page ships.
 // Billing is hidden from the Help hub (see HIDDEN_CATEGORY_SLUGS in
 // src/app/help/page.tsx) — its docs are filtered out of search below.
 // Account & admin was restored in August 2026; keep the two lists in sync.
@@ -68,44 +68,12 @@ const ALL_ARTICLE_DOCS: SearchDoc[] = [
     keywords: [...CLAIM_TERMS, "carrier", "parcel", "policy", "evidence"],
   },
   {
-    title: "Inviting users and setting permissions",
-    summary:
-      "Adding teammates, role-based access control, and managing child accounts under a parent contract.",
-    categoryLabel: "Account & admin",
-    href: "/help",
-    keywords: ["users", "permissions", "roles", "access", "child account", "sso"],
-  },
-  {
     title: "Integration setup guides",
     summary:
       "Step-by-step guides for connecting Shopify, eBay, TikTok Shop, Selro, Linnworks, and Veeqo to ITD Global.",
     categoryLabel: "Integrations",
     href: "/help/integrations",
     keywords: ["integration", "integrations", "connect", "setup", "store", "marketplace", "wms", "oms"],
-  },
-  {
-    title: "Setting up your Royal Mail account",
-    summary:
-      "Add Tracked 24, Tracked 48, Signed, First Class, and Second Class services to your dispatch flow.",
-    categoryLabel: "Carrier",
-    href: "/help",
-    keywords: ["royal mail", "carrier", "services", "tracked 24", "tracked 48"],
-  },
-  {
-    title: "How rate comparison works",
-    summary:
-      "Live API call on every shipment, rule-based carrier selection, and overrides for specific products or lanes.",
-    categoryLabel: "Connexx platform",
-    href: "/help",
-    keywords: ["rate", "comparison", "rate engine", "pricing", "carrier selection"],
-  },
-  {
-    title: "Generating customs documentation",
-    summary:
-      "HS codes from your product catalogue, EORI numbers, IOSS for EU under 150 EUR, and country-specific paperwork.",
-    categoryLabel: "Connexx platform",
-    href: "/help",
-    keywords: ["customs", "hs code", "eori", "ioss", "documentation", "paperwork"],
   },
   {
     title: "Linking your ERP to Connexx",
@@ -162,30 +130,6 @@ const ALL_ARTICLE_DOCS: SearchDoc[] = [
     categoryLabel: "Billing",
     href: "/help/billing#demo-downloads",
     keywords: ["demo invoice", "example invoice", "sample invoice", "download", "xlsx", "workbook"],
-  },
-  {
-    title: "Printing a label",
-    summary:
-      "Format options, printer setup, and what to do when label generation fails.",
-    categoryLabel: "Connexx platform",
-    href: "/help",
-    keywords: ["label", "print", "printer", "format", "thermal"],
-  },
-  {
-    title: "Handling a customs hold",
-    summary:
-      "What to do when a carrier flags a customs issue, how to upload missing documents, and how to prevent the same issue next time.",
-    categoryLabel: "Carrier",
-    href: "/help",
-    keywords: ["customs hold", "carrier", "documents", "delay", "clearance"],
-  },
-  {
-    title: "API authentication",
-    summary:
-      "Bearer token setup, key rotation, environment separation between staging and production.",
-    categoryLabel: "API & developers",
-    href: "/help",
-    keywords: ["api", "authentication", "token", "key", "developers"],
   },
 ];
 
