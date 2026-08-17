@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck, ArrowRight } from "lucide-react";
+import { ShieldCheck, FileText, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
@@ -18,6 +18,15 @@ export const metadata = buildMetadata({
 // (link back to the centre, like the other Help Centre topics) until their
 // articles land.
 const subcategories = [
+  {
+    icon: FileText,
+    name: "How to raise a claim",
+    description:
+      "Step-by-step: raise a lost or damaged parcel claim on Connexx, attach the right evidence, and track it through to an outcome.",
+    href: "/help/account/how-to-raise-a-claim",
+    meta: "Guide",
+    live: true,
+  },
   {
     icon: ShieldCheck,
     name: "Claims policies by carrier",

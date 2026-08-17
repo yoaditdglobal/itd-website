@@ -197,6 +197,29 @@ function uniqueLower(values: string[]): string[] {
   return Array.from(new Set(values.map((v) => v.toLowerCase()).filter(Boolean)));
 }
 
+// The claims how-to guide. Surfaced in search even though /help/account is
+// hidden from the Help hub — claims content is intentionally searchable, like
+// the per-carrier policies below.
+const CLAIM_HOWTO_DOC: SearchDoc = {
+  title: "How to raise a claim on Connexx",
+  summary:
+    "Step-by-step: raise a lost or damaged parcel claim on Connexx — the eligibility checks, the four-step flow, the evidence to attach, and how to track the outcome.",
+  categoryLabel: "Account & admin",
+  href: "/help/account/how-to-raise-a-claim",
+  keywords: uniqueLower([
+    ...CLAIM_TERMS,
+    "how to",
+    "raise",
+    "process",
+    "denial of receipt",
+    "dor",
+    "proof of value",
+    "support case",
+    "eligibility",
+    "parcel",
+  ]),
+};
+
 // One search doc per carrier claims policy, deep-linking to its hub section.
 const CLAIMS_DOCS: SearchDoc[] = CLAIMS_POLICIES.map((p) => ({
   title: `Claims policy — ${p.carrier}`,
@@ -229,6 +252,7 @@ const INTEGRATION_DOCS: SearchDoc[] = INTEGRATION_GUIDES.map((g) => ({
 }));
 
 export const HELP_INDEX: SearchDoc[] = [
+  CLAIM_HOWTO_DOC,
   ...ARTICLE_DOCS,
   ...INTEGRATION_DOCS,
   ...CLAIMS_DOCS,
