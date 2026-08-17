@@ -181,8 +181,11 @@ export default function HelpCentrePage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="bleed-nav bg-white py-16 md:py-24">
+      {/* Hero — relative z-30 lifts its stacking context above the sections
+          below so the search typeahead dropdown (inside a transformed
+          ScrollReveal, which traps its own z-index) overlays the category
+          cards cleanly instead of being painted over. Stays under the nav (z-40+). */}
+      <section className="bleed-nav bg-white py-16 md:py-24 relative z-30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary">
