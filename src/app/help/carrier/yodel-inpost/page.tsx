@@ -33,6 +33,7 @@ const jsonLd = [
     { name: "Home", path: "/" },
     { name: "Help", path: "/help" },
     { name: "Carrier", path: "/help/carrier" },
+    { name: "Carrier updates", path: "/help/carrier/updates" },
     { name: "Yodel is now InPost", path: PATH },
   ]),
 ];
@@ -47,7 +48,7 @@ export default function YodelInpostArticlePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <Link
-              href="/help/carrier"
+              href="/help/carrier/updates"
               className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6"
             >
               <ArrowLeft className="w-4 h-4" /> All carrier updates
