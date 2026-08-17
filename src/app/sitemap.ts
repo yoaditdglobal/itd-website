@@ -16,6 +16,7 @@ const EXTRA_STATIC = [
   "/about",
   "/integrations/tech/marketplaces",
   "/help/account",
+  "/help/account/how-to-raise-a-claim",
   "/help/account/claims",
   "/help/billing",
 ];

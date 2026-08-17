@@ -94,25 +94,25 @@ export default function ClaimsPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="text-display-lg text-white mb-3">
-              Need to raise a claim?
+              Ready to raise a claim?
             </h2>
             <p className="text-white/80 mb-8 text-body-lg">
-              Submit a request with your tracking number and the evidence listed
-              above, and the ITD team will start the claim with the carrier on
-              your behalf.
+              Follow the step-by-step guide to raise a lost or damaged parcel
+              claim on Connexx, or submit a request and the ITD team will start it
+              with the carrier on your behalf.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
-                href="/help/submit-request"
+                href="/help/account/how-to-raise-a-claim"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
               >
-                Submit a request
+                How to raise a claim
               </Link>
               <Link
-                href="/help"
+                href="/help/submit-request"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-transparent px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
-                Back to Help Centre
+                Submit a request
               </Link>
             </div>
           </ScrollReveal>
