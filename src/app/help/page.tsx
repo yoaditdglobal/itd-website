@@ -26,7 +26,7 @@ const categories = [
     icon: Truck,
     name: "Carrier",
     description:
-      "Carrier news and network updates — acquisitions, rebrands, and service changes that affect your deliveries.",
+      "Network updates, operations, and collections — everything about the carriers behind your deliveries.",
     href: "/help/carrier",
     slug: "carrier",
   },
