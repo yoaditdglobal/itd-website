@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import KeyTakeaways from "@/components/ui/KeyTakeaways";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema, howToSchema } from "@/components/seo/JsonLd";
 
@@ -14,13 +13,6 @@ export const metadata = buildMetadata({
     "Step-by-step guide to raising a lost or damaged parcel claim on Connexx — the automatic eligibility checks, the four-step flow (Issue, Eligibility, Evidence, Review), the evidence to attach, and how to track the outcome.",
   path: PATH,
 });
-
-const TLDR = [
-  "Raise Lost and Damaged parcel claims directly on Connexx — it checks eligibility, pre-fills the paperwork from your tracking data, and sends the claim to the carrier for you.",
-  "It's a four-step flow from the Shipments screen — Issue → Eligibility → Evidence → Review — and you can save a draft at any point and finish later.",
-  "Have your proof of value ready (a receipt or invoice); if a delivered parcel wasn't received, Connexx gives you a pre-filled Denial of Receipt (DOR) to sign and attach.",
-  "Track progress under Support Cases. An outcome usually takes 30–40 days (longer at peak), and the carrier makes the final decision.",
-];
 
 // HowTo steps mirror the on-page sections (each anchors to its heading).
 const HOWTO_STEPS = [
@@ -146,17 +138,8 @@ export default function HowToRaiseAClaimPage() {
         </div>
       </section>
 
-      {/* TL;DR */}
-      <section className="bg-bg-secondary py-12 md:py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <KeyTakeaways items={TLDR} />
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Body */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-bg-secondary py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-14">
           {/* Before you start */}
           <ScrollReveal>
