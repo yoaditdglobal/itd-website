@@ -57,10 +57,11 @@ const categories = [
 ];
 
 // ── Temporarily hidden categories ────────────────────────────────────────────
-// Billing and Account & admin are hidden from the hub on request (July 2026)
-// but their data above and their pages stay intact. TO BRING THEM BACK:
-// delete their slugs from this set — nothing else needs to change.
-const HIDDEN_CATEGORY_SLUGS = new Set<string>(["billing", "account"]);
+// Billing is hidden from the hub on request (July 2026) but its data above and
+// its pages stay intact. Account & admin was restored in August 2026. TO BRING
+// BILLING BACK: delete its slug from this set and mirror the change in
+// HIDDEN_HREF_PREFIXES in src/lib/help-search.ts.
+const HIDDEN_CATEGORY_SLUGS = new Set<string>(["billing"]);
 const visibleCategories = categories.filter(
   (c) => !HIDDEN_CATEGORY_SLUGS.has(c.slug),
 );
@@ -181,8 +182,11 @@ export default function HelpCentrePage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="bleed-nav bg-white py-16 md:py-24">
+      {/* Hero — relative z-30 lifts its stacking context above the sections
+          below so the search typeahead dropdown (inside a transformed
+          ScrollReveal, which traps its own z-index) overlays the category
+          cards cleanly instead of being painted over. Stays under the nav (z-40+). */}
+      <section className="bleed-nav bg-white py-16 md:py-24 relative z-30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h1 className="text-display-xl text-text-primary">

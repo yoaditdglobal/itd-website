@@ -32,10 +32,10 @@ const CLAIM_TERMS = [
 // Help Centre articles with REAL destination pages only — every doc's href
 // must resolve to an actual article (or a #section deep-link on one). Docs for
 // articles that don't exist yet stay out of the index until their page ships.
-// Billing + Account & admin are hidden from the Help hub (see
-// HIDDEN_CATEGORY_SLUGS in src/app/help/page.tsx) — their docs are filtered
-// out of search below. Restore both together.
-const HIDDEN_HREF_PREFIXES = ["/help/billing", "/help/account"];
+// Billing is hidden from the Help hub (see HIDDEN_CATEGORY_SLUGS in
+// src/app/help/page.tsx) — its docs are filtered out of search below.
+// Account & admin was restored in August 2026; keep the two lists in sync.
+const HIDDEN_HREF_PREFIXES = ["/help/billing"];
 
 const ALL_ARTICLE_DOCS: SearchDoc[] = [
   {
