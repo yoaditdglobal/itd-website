@@ -54,6 +54,13 @@ const nextConfig: NextConfig = {
   // stale bookmark to the old routes 301s to it instead of 404ing.
   async redirects() {
     return [
+      // The Carrier updates sub-listing was folded into the category page
+      // (topics cards link straight to articles).
+      {
+        source: "/help/carrier/updates",
+        destination: "/help/carrier",
+        permanent: true,
+      },
       // The Yodel/InPost article moved into the Carrier category the day
       // after launch; the flat URL was already live.
       {

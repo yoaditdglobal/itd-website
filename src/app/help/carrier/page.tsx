@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Megaphone, PackageCheck, Wrench, ArrowRight } from "lucide-react";
+import { Megaphone, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
@@ -14,44 +14,26 @@ export const metadata = buildMetadata({
   path: PATH,
 });
 
-// Subcategories of Carrier. Updates is live; the rest are scaffolded (link
-// back to the centre, like the other Help Centre topics) until their
-// articles land.
-const subcategories = [
+// Articles in the Carrier category. Every card links straight to an
+// article (Help Centre standard — no subcategory hops, no coming-soon
+// placeholders). New carrier articles get a card here + a search doc in
+// src/lib/help-search.ts.
+const articles = [
   {
     icon: Megaphone,
-    name: "Carrier updates",
+    name: "Yodel is now InPost — what this means for your deliveries",
     description:
-      "Acquisitions, rebrands, and service changes across the network — with what each one means for your deliveries.",
-    href: "/help/carrier/updates",
-    meta: "1 update",
-    live: true,
-  },
-  {
-    icon: PackageCheck,
-    name: "Collections & pickups",
-    description:
-      "Booking, changing, and troubleshooting carrier collections from your premises.",
-    href: "/help",
-    meta: null,
-    live: false,
-  },
-  {
-    icon: Wrench,
-    name: "Carrier operations",
-    description:
-      "Cut-off times, labels, surcharges, and the day-to-day mechanics of each carrier service.",
-    href: "/help",
-    meta: null,
-    live: false,
+      "Yodel and InPost have combined into a single delivery network. What changed on 17 July 2026, what carries over automatically, and where to go for support.",
+    href: "/help/carrier/yodel-inpost",
+    meta: "InPost",
   },
 ];
 
 const itemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Carrier help topics",
-  itemListElement: subcategories.map((s, i) => ({
+  name: "Carrier help articles",
+  itemListElement: articles.map((s, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: s.name,
@@ -100,15 +82,14 @@ export default function CarrierHelpPage() {
             <div className="mb-10">
               <h2 className="text-display-lg text-text-primary">Topics</h2>
               <p className="mt-2 text-text-secondary">
-                Everything under Carrier. Updates are live now; more topics are
-                on the way.
+                Every article under Carrier — pick the one you need.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.05}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {subcategories.map((sub) => {
+              {articles.map((sub) => {
                 const Icon = sub.icon;
                 return (
                   <Link
@@ -120,15 +101,9 @@ export default function CarrierHelpPage() {
                       <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center">
                         <Icon className="w-5 h-5 text-accent" />
                       </div>
-                      {sub.meta ? (
-                        <span className="text-eyebrow text-accent bg-accent/10 rounded-full px-2.5 py-1">
-                          {sub.meta}
-                        </span>
-                      ) : (
-                        <span className="text-eyebrow text-text-tertiary">
-                          Coming soon
-                        </span>
-                      )}
+                      <span className="text-eyebrow text-accent bg-accent/10 rounded-full px-2.5 py-1">
+                        {sub.meta}
+                      </span>
                     </div>
                     <p className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
                       {sub.name}
@@ -136,12 +111,10 @@ export default function CarrierHelpPage() {
                     <p className="text-body-sm text-text-secondary mt-1.5 flex-1">
                       {sub.description}
                     </p>
-                    {sub.live && (
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
-                        Open
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </span>
-                    )}
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
+                      Open
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </Link>
                 );
               })}

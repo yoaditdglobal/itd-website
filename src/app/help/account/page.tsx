@@ -110,15 +110,9 @@ export default function AccountHelpPage() {
                       <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center">
                         <Icon className="w-5 h-5 text-accent" />
                       </div>
-                      {sub.meta ? (
-                        <span className="text-eyebrow text-accent bg-accent/10 rounded-full px-2.5 py-1">
-                          {sub.meta}
-                        </span>
-                      ) : (
-                        <span className="text-eyebrow text-text-tertiary">
-                          Coming soon
-                        </span>
-                      )}
+                      <span className="text-eyebrow text-accent bg-accent/10 rounded-full px-2.5 py-1">
+                        {sub.meta}
+                      </span>
                     </div>
                     <p className="text-heading-md text-text-primary group-hover:text-accent transition-colors">
                       {sub.name}
@@ -126,12 +120,10 @@ export default function AccountHelpPage() {
                     <p className="text-body-sm text-text-secondary mt-1.5 flex-1">
                       {sub.description}
                     </p>
-                    {sub.live && (
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
-                        Open
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </span>
-                    )}
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent">
+                      Open
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </Link>
                 );
               })}
