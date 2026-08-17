@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import { buildMetadata } from "@/lib/metadata";
@@ -80,6 +81,22 @@ export default function YodelInpostArticlePage() {
       {/* Article */}
       <article className="bg-white pb-16 md:pb-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Lead image — Yodel → InPost brand transition */}
+          <ScrollReveal>
+            <figure className="overflow-hidden rounded-xl border border-border">
+              <Image
+                src="/help/carrier/yodel-inpost.jpg"
+                alt="The Yodel and InPost logos side by side, marking Yodel's move onto the InPost brand and delivery network."
+                width={1200}
+                height={800}
+                quality={90}
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="block w-full h-auto"
+                priority
+              />
+            </figure>
+          </ScrollReveal>
+
           <section aria-labelledby="whats-happened">
             <h2 id="whats-happened" className="text-heading-lg text-text-primary mb-4">
               What&rsquo;s happened
