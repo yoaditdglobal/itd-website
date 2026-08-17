@@ -54,6 +54,13 @@ const nextConfig: NextConfig = {
   // stale bookmark to the old routes 301s to it instead of 404ing.
   async redirects() {
     return [
+      // The Yodel/InPost article moved into the Carrier category the day
+      // after launch; the flat URL was already live.
+      {
+        source: "/help/yodel-inpost",
+        destination: "/help/carrier/yodel-inpost",
+        permanent: true,
+      },
       {
         source: "/resources/case-studies/pb-fulfilment",
         destination: "/resources/case-studies",

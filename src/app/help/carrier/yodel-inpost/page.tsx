@@ -9,7 +9,7 @@ import {
 } from "@/components/seo/JsonLd";
 import { ArrowLeft } from "lucide-react";
 
-const PATH = "/help/yodel-inpost";
+const PATH = "/help/carrier/yodel-inpost";
 const UPDATED = "2026-07-28";
 const UPDATED_LABEL = "28 July 2026";
 
@@ -32,6 +32,7 @@ const jsonLd = [
   breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Help", path: "/help" },
+    { name: "Carrier", path: "/help/carrier" },
     { name: "Yodel is now InPost", path: PATH },
   ]),
 ];
@@ -46,10 +47,10 @@ export default function YodelInpostArticlePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <Link
-              href="/help"
+              href="/help/carrier"
               className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6"
             >
-              <ArrowLeft className="w-4 h-4" /> Help Centre
+              <ArrowLeft className="w-4 h-4" /> All carrier updates
             </Link>
             <div className="flex items-center gap-4 mb-5">
               <span className="inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-2">
