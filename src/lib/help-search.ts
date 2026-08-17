@@ -32,10 +32,10 @@ const CLAIM_TERMS = [
 // Existing Help Centre articles. These have no detail pages yet, so they link
 // back to the centre (as they do today); they are indexed so search covers the
 // whole centre, not only claims. The first entry is the new Claims hub.
-// Billing + Account & admin are hidden from the Help hub (see
-// HIDDEN_CATEGORY_SLUGS in src/app/help/page.tsx) — their docs are filtered
-// out of search below. Restore both together.
-const HIDDEN_HREF_PREFIXES = ["/help/billing", "/help/account"];
+// Billing is hidden from the Help hub (see HIDDEN_CATEGORY_SLUGS in
+// src/app/help/page.tsx) — its docs are filtered out of search below.
+// Account & admin was restored in August 2026; keep the two lists in sync.
+const HIDDEN_HREF_PREFIXES = ["/help/billing"];
 
 const ALL_ARTICLE_DOCS: SearchDoc[] = [
   {
