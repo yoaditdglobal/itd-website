@@ -39,6 +39,27 @@ const HIDDEN_HREF_PREFIXES = ["/help/billing", "/help/account"];
 
 const ALL_ARTICLE_DOCS: SearchDoc[] = [
   {
+    title: "Yodel is now InPost — what this means for your deliveries",
+    summary:
+      "Yodel and InPost have combined into a single delivery network. What changed on 17 July 2026, what carries over automatically, and where to go for support.",
+    categoryLabel: "Carriers",
+    href: "/help/yodel-inpost",
+    keywords: [
+      "yodel",
+      "inpost",
+      "takeover",
+      "acquisition",
+      "merger",
+      "rebrand",
+      "locker",
+      "tracking",
+      "what3words",
+      "app",
+      "delivery network",
+    ],
+    carrierSlug: "inpost",
+  },
+  {
     title: "Claims policies by carrier",
     summary:
       "Loss and damage claim windows, value limits, and exactly what to send — for every carrier ITD works with.",
