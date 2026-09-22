@@ -138,6 +138,14 @@ export default function ContactForm() {
       setError("Please select a shipping type.");
       return;
     }
+    // Main Lanes is starred in the UI — enforce it for Import/Export, where
+    // the lanes are what the rate desk prices against.
+    if (showMainLanes && mainLanes.length === 0) {
+      setError(
+        `Please select at least one ${shippingType === "Export" ? "destination" : "origin"} country under Main Lanes.`,
+      );
+      return;
+    }
     if (isFreight && !freightType) {
       setError("Please select a freight type (Parcel, Box, or Pallet).");
       return;
