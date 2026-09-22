@@ -298,6 +298,19 @@ export default function ContactForm() {
                       className="h-[640px] w-full border-0"
                     />
                   </div>
+                  {/* Fallback when the embed can't frame (blocker, old browser,
+                      Microsoft outage) — otherwise the card is a blank white box. */}
+                  <p className="mt-3 text-body-sm text-white/60">
+                    Calendar not loading?{" "}
+                    <a
+                      href="https://outlook.office.com/book/ITDGlobal1@NLGITDglobal.onmicrosoft.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/80 underline underline-offset-2 transition-colors hover:text-white"
+                    >
+                      Open the booking page in a new tab
+                    </a>
+                  </p>
                 </div>
               </ScrollReveal>
             </div>
