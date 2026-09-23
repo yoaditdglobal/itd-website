@@ -134,7 +134,6 @@ export function contactAckHtml(d: ContactAckFields): string {
       <table role="presentation" cellpadding="0" cellspacing="0">
 ${summary.map(([l, v]) => summaryRow(l, v)).join("\n")}
       </table>
-      <p style="margin:10px 0 0;font-family:${FONT};font-size:13px;line-height:1.5;color:#6b7080">Spotted a mistake? Just reply to this email.</p>
     </td>
   </tr>
 </table>`;
@@ -180,7 +179,7 @@ export function contactAckText(d: ContactAckFields): string {
     "",
     ...ACK_STEPS.map(([t], i) => `${i + 1}. ${t}`),
     ...(summary.length > 0
-      ? ["", "What you sent us:", ...summary.map(([l, v]) => `- ${l}: ${v}`), "Spotted a mistake? Just reply to this email."]
+      ? ["", "What you sent us:", ...summary.map(([l, v]) => `- ${l}: ${v}`)]
       : []),
     "",
     `Customer stories: ${SITE}/resources/case-studies`,
