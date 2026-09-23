@@ -17,10 +17,15 @@ const cspReportOnly = [
   "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://*.zohopublic.eu https://*.zohocdn.com",
   "font-src 'self' data: https://cdn.fontshare.com https://*.zohocdn.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu https://assets.apollo.io https://*.aplo-evnt.com",
+  // aplo-evnt.com (apex, no subdomain) is what the Apollo intent pixel actually
+  // calls — a `*.aplo-evnt.com` wildcard does NOT match the apex domain.
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.zohopublic.eu wss://*.zohopublic.eu https://*.zoho.eu wss://*.zoho.eu https://assets.apollo.io https://aplo-evnt.com https://*.aplo-evnt.com",
   "frame-ancestors 'none'",
   // outlook.office.com / office365.com — the Microsoft Bookings embed on /contact.
-  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com https://outlook.office.com https://outlook.office365.com https://www.linkedin.com",
+  // bookings.cloud.microsoft — where that embed actually resolves to (the
+  // outlook.office.com /book URL frames it); without it the booking widget is
+  // blocked the day this policy is enforced.
+  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com https://outlook.office.com https://outlook.office365.com https://bookings.cloud.microsoft https://www.linkedin.com",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
@@ -54,6 +59,25 @@ const nextConfig: NextConfig = {
   // stale bookmark to the old routes 301s to it instead of 404ing.
   async redirects() {
     return [
+      // The Carrier updates sub-listing was folded into the category page
+      // (topics cards link straight to articles).
+      {
+        source: "/help/carrier/updates",
+        destination: "/help/carrier",
+        permanent: true,
+      },
+      // The Yodel/InPost article moved into the Carrier category the day
+      // after launch; the flat URL was already live.
+      {
+        source: "/help/yodel-inpost",
+        destination: "/help/carrier/yodel-inpost",
+        permanent: true,
+      },
+      {
+        source: "/resources/case-studies/pb-fulfilment",
+        destination: "/resources/case-studies",
+        permanent: true,
+      },
       {
         source: "/rate-checker",
         destination: "https://itdglobal-ratechecker.lovable.app/",

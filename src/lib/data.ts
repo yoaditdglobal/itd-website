@@ -182,7 +182,7 @@ export function getSegmentBySolutionSlug(
 
 /**
  * Library stories in a given segment. Matches against `segments[]` (so a
- * multi-segment story like PB Fulfilment appears under both 3PL and Import),
+ * multi-segment story appears under each of its segments),
  * falling back to `primarySegment` for any story without an explicit array.
  */
 export function getStoriesBySegment(seg: LibrarySegment): CaseStudy[] {
@@ -497,47 +497,6 @@ export const caseStudies: CaseStudy[] = [
     carriers: [],
     integrations: ["connexx"],
     solutions: ["3PL"],
-  },
-  {
-    id: "7",
-    slug: "pb-fulfilment",
-    website: "https://pbfulfilment.com/",
-    primarySegment: "3PL",
-    segments: ["3PL", "Import"],
-    outcomes: ["Go international"],
-    headlineResult: "Daily collections to the US",
-    oneLiner:
-      "Stable US delivery and the customs support their subscription brands rely on.",
-    featured: false,
-    brandName: "PB Fulfilment",
-    industry: "3PL",
-    headline: "PB Fulfilment secured reliable, scalable international delivery for high-volume subscription brands",
-    metric: "Daily collections to the US",
-    summary: "Switching to FedEx International Priority through ITD Global gave PB Fulfilment competitive rates, stable US delivery, daily collections, and the customs support subscription brands depend on.",
-    challenge: "PB Fulfilment serves fast-growing pet brands, subscription services, and D2C products — particularly across the United States, where delivery reliability directly impacts subscription renewals. Existing international carrier options were either too expensive or too unreliable. Transit times to the US were inconsistent. There was no proactive support around customs, duties, and tariff changes. And no partner could guarantee the daily collections subscription brands depend on. PB had the volume, but carrier constraints were capping their ability to scale.",
-    solution: "Partnering with ITD Global gave PB access to a premium, scalable cross-border shipping model powered by FedEx International Priority. Market-leading rates, faster delivery, and consistent performance across thousands of parcels. Hands-on customs and compliance advisory around documentation, HS codes, duty thresholds, and tariff reform. Guaranteed daily FedEx collections to stabilise the outbound workflow. And dedicated customer support for tracking escalations, delivery exceptions, and SLA management.",
-    result: "Within months of switching: all US delivery lanes stabilised, subscription churn decreased due to improved delivery reliability, PB became more competitive on international quotes, and onboarding friction with new US-bound clients dropped significantly. Daily collections created a dependable rhythm for packing and dispatch.",
-    quote: "ITD Global and FedEx transformed our US delivery performance. We finally have a reliable, fast international service with daily collections, competitive rates, and proper customs support. It's made scaling our subscription brands dramatically easier.",
-    quoteAuthor: "Steve Seymor, Director at PB Fulfilment",
-    quoteAuthorPhoto: "/case-studies/pb-fulfilment/author.webp",
-    heroImage: "/case-studies/pb-fulfilment/hero.webp",
-    logo: "/case-studies/pb-fulfilment/logo.jpeg",
-    stats: [
-      { value: "Daily", label: "FedEx collections", sub: "stabilised outbound workflow", featured: true },
-      { value: "US lanes", label: "Stabilised performance", sub: "subscription churn reduced" },
-      { value: "Lower", label: "Onboarding friction", sub: "for new US-bound clients" },
-    ],
-    atGlance: [
-      { label: "Industry", value: "3PL — pet, subscription, D2C" },
-      { label: "Market", value: "UK → US international" },
-      { label: "Carriers", value: "FedEx International Priority" },
-      { label: "Key Feature", value: "Daily collections + customs advisory" },
-      { label: "Services", value: "HS codes, duty thresholds, tariff-reform support" },
-    ],
-    shippingTypes: ["International Export"],
-    carriers: ["fedex"],
-    integrations: ["connexx"],
-    solutions: ["3PL", "Export"],
   },
   {
     id: "8",

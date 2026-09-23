@@ -1,48 +1,39 @@
 import Link from "next/link";
-import { ShieldCheck, FileText, ArrowRight } from "lucide-react";
+import { Megaphone, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/site-config";
 
-const PATH = "/help/account";
+const PATH = "/help/carrier";
 
 export const metadata = buildMetadata({
-  title: "Account & admin — Help Centre",
+  title: "Carrier — Help Centre",
   description:
-    "Account and admin documentation for Connexx: claims policies by carrier, users and permissions, child accounts, single sign-on, audit logs, and account security.",
+    "Carrier documentation for ITD: network updates, day-to-day carrier operations, and collections — everything about the carriers behind your deliveries.",
   path: PATH,
 });
 
-// Subcategories of Account & admin. Claims is live; the rest are scaffolded
-// (link back to the centre, like the other Help Centre topics) until their
-// articles land.
-const subcategories = [
+// Articles in the Carrier category. Every card links straight to an
+// article (Help Centre standard — no subcategory hops, no coming-soon
+// placeholders). New carrier articles get a card here + a search doc in
+// src/lib/help-search.ts.
+const articles = [
   {
-    icon: FileText,
-    name: "How to raise a claim",
+    icon: Megaphone,
+    name: "Yodel is now InPost — what this means for your deliveries",
     description:
-      "Step-by-step: raise a lost or damaged parcel claim on Connexx, attach the right evidence, and track it through to an outcome.",
-    href: "/help/account/how-to-raise-a-claim",
-    meta: "Guide",
-    live: true,
-  },
-  {
-    icon: ShieldCheck,
-    name: "Claims policies by carrier",
-    description:
-      "Loss and damage claim windows, value limits, and the evidence to send — for all 14 carriers ITD works with.",
-    href: "/help/account/claims",
-    meta: "14 carriers",
-    live: true,
+      "Yodel and InPost have combined into a single delivery network. What changed on 17 July 2026, what carries over automatically, and where to go for support.",
+    href: "/help/carrier/yodel-inpost",
+    meta: "InPost",
   },
 ];
 
 const itemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Account & admin help topics",
-  itemListElement: subcategories.map((s, i) => ({
+  name: "Carrier help articles",
+  itemListElement: articles.map((s, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: s.name,
@@ -50,7 +41,7 @@ const itemList = {
   })),
 };
 
-export default function AccountHelpPage() {
+export default function CarrierHelpPage() {
   return (
     <>
       <JsonLd
@@ -58,7 +49,7 @@ export default function AccountHelpPage() {
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Help", path: "/help" },
-            { name: "Account & admin", path: PATH },
+            { name: "Carrier", path: PATH },
           ]),
           itemList,
         ]}
@@ -72,12 +63,13 @@ export default function AccountHelpPage() {
               <Link href="/help" className="hover:text-accent">
                 Help Centre
               </Link>{" "}
-              / <span className="text-text-secondary">Account &amp; admin</span>
+              / <span className="text-text-secondary">Carrier</span>
             </nav>
-            <h1 className="text-display-xl text-text-primary">Account &amp; admin</h1>
+            <h1 className="text-display-xl text-text-primary">Carrier</h1>
             <p className="mt-4 text-body-lg text-text-secondary max-w-2xl mx-auto">
-              Users, permissions, child accounts, single sign-on, audit logs,
-              account security — and claims. Pick a topic below.
+              Network updates, day-to-day carrier operations, and collections —
+              everything about the carriers behind your deliveries. Pick a
+              topic below.
             </p>
           </ScrollReveal>
         </div>
@@ -90,15 +82,14 @@ export default function AccountHelpPage() {
             <div className="mb-10">
               <h2 className="text-display-lg text-text-primary">Topics</h2>
               <p className="mt-2 text-text-secondary">
-                Everything under account and admin. Claims is live now; more
-                topics are on the way.
+                Every article under Carrier — pick the one you need.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.05}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {subcategories.map((sub) => {
+              {articles.map((sub) => {
                 const Icon = sub.icon;
                 return (
                   <Link
