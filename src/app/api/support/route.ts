@@ -3,7 +3,8 @@ import { z } from "zod";
 import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 import { createCase, isZohoConfigured } from "@/lib/server/zoho";
 import { getNotifyEmails } from "@/lib/server/env";
-import { emailTeam, emailSubmitter, esc } from "@/lib/server/leads";
+import { emailTeam, emailSubmitter } from "@/lib/server/leads";
+import { supportAckHtml, supportAckText } from "@/lib/server/email-templates";
 
 /**
  * POST /api/support — capture a support request as a Zoho CRM Case.
@@ -138,14 +139,12 @@ export async function POST(request: NextRequest) {
   });
 
   // Confirmation email to the submitter — only claim it in the response if it sent.
+  const ackFields = { fullName: d.fullName, ticketId, issueSummary: d.issueSummary };
   const confirmationSent = await emailSubmitter({
     to: d.workEmail,
     subject: `We've received your request — ${ticketId}`,
-    html: `<p>Hi ${esc(d.fullName)},</p>
-<p>Thanks for getting in touch with ITD Global support. We've logged your request and the team will be in touch.</p>
-<p><strong>Your reference:</strong> ${esc(ticketId)}<br/>
-<strong>Summary:</strong> ${esc(d.issueSummary)}</p>
-<p>— ITD Global Support</p>`,
+    html: supportAckHtml(ackFields),
+    text: supportAckText(ackFields),
   });
 
   return NextResponse.json(

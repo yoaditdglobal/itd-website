@@ -28,6 +28,9 @@ export interface MailOptions {
   to: string | string[];
   subject: string;
   html: string;
+  /** Plain-text alternative. Sent by Resend as a multipart twin; the Graph
+   *  path ignores it (its message body is single-part HTML). */
+  text?: string;
   cc?: string | string[];
   /** Submitter's address on team notifications, so "Reply" answers the lead. */
   replyTo?: string;
@@ -45,7 +48,7 @@ export async function sendMail(opts: MailOptions): Promise<void> {
 
 // ── Resend ───────────────────────────────────────────────────────────────────
 
-async function sendViaResend({ to, subject, html, cc, replyTo, attachments }: MailOptions): Promise<void> {
+async function sendViaResend({ to, subject, html, text, cc, replyTo, attachments }: MailOptions): Promise<void> {
   const env = getResendEnv();
   if (!env) throw new Error("Resend not configured");
   const ccList = asList(cc);
@@ -65,6 +68,7 @@ async function sendViaResend({ to, subject, html, cc, replyTo, attachments }: Ma
       }),
       subject,
       html,
+      ...(text && { text }),
     }),
   });
   if (!res.ok) {

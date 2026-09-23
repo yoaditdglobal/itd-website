@@ -82,6 +82,9 @@ export async function emailSubmitter(opts: {
   to: string;
   subject: string;
   html: string;
+  text?: string;
+  cc?: string | string[];
+  replyTo?: string;
 }): Promise<boolean> {
   if (!isEmailConfigured()) return false;
   try {
