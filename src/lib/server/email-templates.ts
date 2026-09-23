@@ -12,6 +12,8 @@ import { esc } from "./leads";
 const SITE = "https://itdglobal.com";
 const LINKEDIN = "https://www.linkedin.com/company/itd-global/";
 const LOGO = `${SITE}/brand/email-logo.png`;
+const BOOKING =
+  "https://bookings.cloud.microsoft/book/ITDGlobal1@NLGITDglobal.onmicrosoft.com/?ismsaljsauthenabled=true";
 const FONT = "system-ui,-apple-system,'Segoe UI',Arial,sans-serif";
 
 /** Shared shell: hidden preheader → navy logo band → white card → footer. */
@@ -152,7 +154,7 @@ ${summaryBlock}
                     <a href="${SITE}/resources/case-studies" style="display:inline-block;padding:12px 24px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">Read customer stories</a>
                   </td>
                   <td style="padding-left:16px">
-                    <a href="${SITE}/track" style="font-family:${FONT};font-size:14px;font-weight:600;color:#1d3fb8;text-decoration:none">Track a shipment &rarr;</a>
+                    <a href="${BOOKING}" style="font-family:${FONT};font-size:14px;font-weight:600;color:#1d3fb8;text-decoration:none">Book a call &rarr;</a>
                   </td>
                 </tr>
               </table>
@@ -182,7 +184,7 @@ export function contactAckText(d: ContactAckFields): string {
       : []),
     "",
     `Customer stories: ${SITE}/resources/case-studies`,
-    `Track a shipment: ${SITE}/track`,
+    `Book a call: ${BOOKING}`,
     "",
     "Speak soon,",
     "The ITD Global team",
