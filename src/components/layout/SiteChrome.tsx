@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import LinkClickTracker from "@/components/analytics/LinkClickTracker";
 
 /**
  * Renders the global site chrome (nav + footer + Zoho SalesIQ chat) around the page, EXCEPT
@@ -37,6 +38,8 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       >
         Skip to main content
       </a>
+      {/* Site-wide CTA/link click tracking (analytics only; renders no DOM). */}
+      <LinkClickTracker />
       <Navbar />
       <main id="main-content" className="flex-1 pt-[72px]">{children}</main>
       <Footer />

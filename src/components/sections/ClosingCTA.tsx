@@ -29,7 +29,7 @@ export default function ClosingCTA({
     secondaryCta === null ? null : secondaryCta ?? { label: "Contact Us", href: "/contact" };
 
   return (
-    <section className="bg-bg-dark py-16 md:py-24">
+    <section className="bg-bg-dark py-16 md:py-24" data-analytics-location="closing_cta">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal>
           <h2 className="text-display-lg text-white">{headline}</h2>
