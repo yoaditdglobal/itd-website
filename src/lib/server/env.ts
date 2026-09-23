@@ -80,11 +80,18 @@ export function getNotifyEmails(): {
   leads?: string;
   leadsCc?: string;
   support?: string;
+  /** Internal CCs on the submitter acknowledgement email (comma-separated).
+   *  Visible to the lead — keep it to the people who'd jump into the thread. */
+  ackCc: string[];
 } {
   return {
     leads: read("LEADS_NOTIFY_TO") ?? "yoad.tzor@itdglobal.com",
     leadsCc: read("LEADS_NOTIFY_CC") ?? "cc@itdglobal.com",
     support: read("SUPPORT_NOTIFY_TO"),
+    ackCc: (read("LEADS_ACK_CC") ?? "yoad.tzor@itdglobal.com")
+      .split(",")
+      .map((v) => v.trim())
+      .filter(Boolean),
   };
 }
 

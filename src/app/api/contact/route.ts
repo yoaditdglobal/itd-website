@@ -4,7 +4,7 @@ import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 import { createLead, isZohoConfigured } from "@/lib/server/zoho";
 import { getNotifyEmails } from "@/lib/server/env";
 import { splitName, emailTeam, emailSubmitter } from "@/lib/server/leads";
-import { contactAckHtml } from "@/lib/server/email-templates";
+import { contactAckHtml, contactAckText } from "@/lib/server/email-templates";
 import { postLeadToWebhook } from "@/lib/server/webhook";
 
 /**
@@ -195,11 +195,23 @@ export async function POST(request: Request) {
       attachments: mailAttachments.length > 0 ? mailAttachments : undefined,
     });
   // Acknowledgement to the submitter — fire-and-forget, never blocks the lead.
+  const ackFields = {
+    firstName: d.firstName,
+    company: d.company,
+    shippingType: d.shippingType,
+    weeklyVolume: d.weeklyVolume,
+    mainLanes: d.mainLanes,
+  };
   const acknowledgeSubmitter = () =>
     emailSubmitter({
       to: d.email,
       subject: "We've got your enquiry — ITD Global",
-      html: contactAckHtml({ firstName: d.firstName }),
+      html: contactAckHtml(ackFields),
+      text: contactAckText(ackFields),
+      // Internal eyes on every acknowledgement; a customer reply-all reaches
+      // real people, and a plain Reply lands in the leads inbox.
+      cc: notify.ackCc,
+      replyTo: notify.leads,
     });
 
   // Primary delivery: the Make.com lead webhook (its scenario writes the lead
