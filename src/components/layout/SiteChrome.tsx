@@ -29,8 +29,16 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
   return (
     <>
+      {/* Skip link (WCAG 2.4.1): first tabbable element; visually hidden until
+          keyboard-focused, then drops in over the nav. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-bg-dark focus:px-4 focus:py-2.5 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <main className="flex-1 pt-[72px]">{children}</main>
+      <main id="main-content" className="flex-1 pt-[72px]">{children}</main>
       <Footer />
       {/* Zoho SalesIQ chat widget. Canonical two-part embed: the init defines
           window.$zoho before the widget bundle loads; both run after hydration
