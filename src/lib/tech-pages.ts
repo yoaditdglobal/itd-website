@@ -1,4 +1,4 @@
-import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3 } from "lucide-react";
+import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3, SlidersHorizontal } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Integration } from "@/lib/data";
 import { getIntegrationSlug, TECH_CATEGORY_LABELS } from "@/lib/data";
@@ -29,6 +29,8 @@ export interface TechPageProps {
   about?: string[];
   /** Optional heading for the features section (default "{name} + Connexx"). */
   featuresHeading?: string;
+  /** Partner's own page about this integration — rendered under the About prose. */
+  partnerLink?: { label: string; href: string };
 }
 
 /** Default value-add features — apply to every tech integration. */
@@ -208,6 +210,25 @@ export const TECH_PAGE_OVERRIDES: Record<
       { icon: Eye, title: "Tracking write-back", desc: "Carrier tracking and proof of delivery return to the order record. Your ops team and customers have one place to check status." },
       RATES_FEATURE,
       { icon: Globe, title: "Multi-channel, multi-carrier", desc: "Orders dispatching from different warehouses all go through the same ITD network. One set of rates and one tracking feed, regardless of which warehouse the order left from." },
+    ],
+  },
+  "helm-wms": {
+    featuresHeading: "Features built for your workflow",
+    partnerLink: {
+      label: "Helm WMS on the ITD Global integration",
+      href: "https://helmwms.com/en-us/integrations/itd-global",
+    },
+    about: [
+      "Helm WMS users run complex fulfilment operations across multiple sales channels and couriers. The carrier access behind each despatch matters as much as the warehouse workflow itself. Rates on individually held carrier accounts often do not keep up with the volume a growing 3PL or eCommerce business is shipping. With ITD connected to Helm WMS, orders that reach the despatch stage go out through our carrier network on rates that reflect buying power at scale.",
+      "Helm WMS is an AI-powered warehouse management and order management system built for eCommerce businesses and 3PLs. It connects over 650 sales channels, couriers and marketplaces from a single platform covering order management, warehouse operations and despatch. The rule engine handles repetitive tasks like routing orders, selecting services, correcting address data and setting despatch windows without requiring manual input on each order.",
+      "Helm is used by growing eCommerce businesses managing their own fulfilment and by established 3PLs running operations for multiple clients. In both cases the carrier side of the business is a significant cost line. Carrier accounts opened early in the business or carried over from previous arrangements rarely keep pace with what the operation is shipping now. Reviewing and renegotiating those accounts is something most operations never get around to. ITD handles that side so the rates behind each Helm WMS despatch reflect the volume the network carries.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Multichannel order sync", desc: "Orders from all connected sales channels feed into Helm WMS ready for despatch. ITD handles the carrier side of each outbound order without adding a step to the warehouse workflow." },
+      { icon: Zap, title: "Carrier label generation within Helm WMS", desc: "Labels are produced with the correct carrier, service and weight for each order. The Helm WMS workflow continues as it does today. ITD manages the carrier relationship behind each label." },
+      { icon: Eye, title: "Tracking returned across channels", desc: "Carrier events return to the relevant order records across all connected sales channels. Buyers stay informed and seller metrics stay current without needing to log in to carrier portals separately." },
+      { icon: SlidersHorizontal, title: "Carrier selection built into your despatch rules", desc: "Helm WMS's rule engine handles order routing and service selection. ITD's carrier network gives that rule engine access to a full range of services and rates so the rules you set have more to work with." },
+      RATES_FEATURE,
     ],
   },
   mintsoft: {
@@ -511,6 +532,7 @@ export function getTechIntegrationPageProps(
     tagline,
     description,
     about: override.about ?? buildDefaultAbout(tool),
+    partnerLink: override.partnerLink,
     features: override.features ?? DEFAULT_FEATURES,
     closingSubtitle: `Connect ${tool.name} and ship every order through one carrier network.`,
     primaryCta: { label: "Get a quote", href: `/contact?enquiry=${slug}` },

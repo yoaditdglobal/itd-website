@@ -21,6 +21,8 @@ export interface TechIntegrationPageProps {
   about: string[];
   features: TechFeature[];
   closingSubtitle?: string;
+  /** Partner's own page about this integration — external link under About. */
+  partnerLink?: { label: string; href: string };
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton | null;
 }
@@ -41,6 +43,7 @@ export default function TechIntegrationPage({
   about,
   features,
   closingSubtitle,
+  partnerLink,
   primaryCta,
   secondaryCta,
 }: TechIntegrationPageProps) {
@@ -113,6 +116,17 @@ export default function TechIntegrationPage({
                   </p>
                 ))}
               </div>
+              {partnerLink && (
+                <a
+                  href={partnerLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent transition-colors hover:text-accent-dark motion-reduce:transition-none"
+                >
+                  {partnerLink.label}
+                  <span aria-hidden>&#8599;</span>
+                </a>
+              )}
             </ScrollReveal>
           </div>
         </section>
