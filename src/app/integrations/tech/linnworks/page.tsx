@@ -15,7 +15,8 @@ export default function LinnworksPage() {
   return (
     <TechIntegrationPage
       name="Linnworks"
-      logo="/logos/erp-wms/linnworks_logo.png"
+      logo="/logos/erp-wms/linnworks-tile.png"
+      logoFill
       eyebrow="ERP / WMS Integration"
       tagline={TAGLINE}
       description="Linnworks already pulls your orders together across channels. When connecting to ITD, those orders will flow straight into dispatch, with our rates across the carriers applied as labels print and tracking written back into Linnworks. Your team will stop maintaining a separate carrier setup for each channel."
