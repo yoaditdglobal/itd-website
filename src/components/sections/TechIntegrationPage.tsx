@@ -18,9 +18,13 @@ export interface TechIntegrationPageProps {
   /** Hero eyebrow, e.g. "ERP / WMS Integration". */
   eyebrow: string;
   tagline: string;
-  description: string;
+  description?: string;
   /** "About {name}" paragraphs. */
   about: string[];
+  /** Designed highlight cards rendered inside the About section. */
+  aboutHighlights?: { lead?: string; items: TechFeature[] };
+  /** About paragraphs rendered AFTER the highlight cards. */
+  aboutAfter?: string[];
   features: TechFeature[];
   closingSubtitle?: string;
   /** Partner's own page about this integration — external link under About. */
@@ -44,6 +48,8 @@ export default function TechIntegrationPage({
   tagline,
   description,
   about,
+  aboutHighlights,
+  aboutAfter,
   features,
   closingSubtitle,
   partnerLink,
@@ -94,7 +100,9 @@ export default function TechIntegrationPage({
                 <p className="mt-4 text-body-lg text-white/70 font-medium">
                   {tagline}
                 </p>
-                <p className="mt-4 text-body-md text-white/50">{description}</p>
+                {description && (
+                  <p className="mt-4 text-body-md text-white/50">{description}</p>
+                )}
                 <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Button href="#features">Explore</Button>
                 </div>
@@ -142,6 +150,41 @@ export default function TechIntegrationPage({
                   </p>
                 ))}
               </div>
+              {aboutHighlights && (
+                <div className="mt-8">
+                  {aboutHighlights.lead && (
+                    <p className="max-w-3xl text-body-md leading-relaxed text-text-secondary">
+                      {aboutHighlights.lead}
+                    </p>
+                  )}
+                  <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {aboutHighlights.items.map((f) => (
+                      <div
+                        key={f.title}
+                        className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                      >
+                        <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white motion-reduce:transition-none">
+                          <f.icon className="h-5 w-5" aria-hidden />
+                        </span>
+                        <p className="text-heading-sm text-text-primary">{f.title}</p>
+                        <p className="mt-1.5 text-body-sm text-text-secondary">{f.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {aboutAfter && aboutAfter.length > 0 && (
+                <div className="mt-8 max-w-3xl space-y-4">
+                  {aboutAfter.map((p, i) => (
+                    <p
+                      key={i}
+                      className="text-body-md text-text-secondary leading-relaxed"
+                    >
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              )}
               {partnerLink && (
                 <a
                   href={partnerLink.href}
