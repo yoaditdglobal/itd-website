@@ -1,4 +1,4 @@
-import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3, SlidersHorizontal } from "lucide-react";
+import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3, SlidersHorizontal, Boxes, Map, Blocks, Workflow, LayoutDashboard, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Integration } from "@/lib/data";
 import { getIntegrationSlug, TECH_CATEGORY_LABELS } from "@/lib/data";
@@ -31,6 +31,13 @@ export interface TechPageProps {
   featuresHeading?: string;
   /** Partner's own page about this integration — rendered under the About prose. */
   partnerLink?: { label: string; href: string };
+  /** Hero copy overrides — when set, replace the templated tagline/description. */
+  tagline?: string;
+  description?: string;
+  /** Designed highlight cards rendered inside the About section. */
+  aboutHighlights?: { lead?: string; items: TechFeature[] };
+  /** About paragraphs rendered AFTER the highlight cards. */
+  aboutAfter?: string[];
 }
 
 /** Default value-add features — apply to every tech integration. */
@@ -214,14 +221,27 @@ export const TECH_PAGE_OVERRIDES: Record<
   },
   "helm-wms": {
     featuresHeading: "Features built for your workflow",
+    tagline: "Warehouse management without compromise, built for eCommerce brands and 3PLs.",
     partnerLink: {
       label: "Helm WMS on the ITD Global integration",
       href: "https://helmwms.com/en-us/integrations/itd-global",
     },
+    aboutHighlights: {
+      lead: "[Helm WMS](https://helmwms.com/) is an AI-powered warehouse management system from [The Despatch Company](https://www.thedespatchcompany.com/), built for fulfilment.",
+      items: [
+        { icon: Boxes, title: "Precise stock control", desc: "Guided picking and packing, so the right items end up in the right box." },
+        { icon: Map, title: "Warehouse Mapping", desc: "Your warehouse as a digital map with live Helm data, so you can see where everything is at a glance." },
+        { icon: Blocks, title: "Hundreds of pre-built integrations", desc: "Sales channels, marketplaces and couriers brought into one place." },
+        { icon: Workflow, title: "Automation Engine", desc: "Chooses shipping services, corrects addresses and routes orders without anyone lifting a finger." },
+        { icon: LayoutDashboard, title: "Live dashboards & Team Manager app", desc: "See how the team is performing, as it happens." },
+        { icon: Sparkles, title: "AI-driven insights", desc: "Ask questions of your warehouse data and get answers fast." },
+      ],
+    },
+    aboutAfter: [
+      "Your team has done the hard work by the time an order is packed. It shouldn't then wait while someone works out the cheapest way to send it. With ITD connected, Helm WMS sends each order to the right carrier at a rate backed by ITD's network, so it's out of the door without the extra admin.",
+    ],
     about: [
-      "Helm WMS users run complex fulfilment operations across multiple sales channels and couriers. The carrier access behind each despatch matters as much as the warehouse workflow itself. Rates on individually held carrier accounts often do not keep up with the volume a growing 3PL or eCommerce business is shipping. With ITD connected to Helm WMS, orders that reach the despatch stage go out through our carrier network on rates that reflect buying power at scale.",
-      "Helm WMS is an AI-powered warehouse management and order management system built for eCommerce businesses and 3PLs. It connects over 650 sales channels, couriers and marketplaces from a single platform covering order management, warehouse operations and despatch. The rule engine handles repetitive tasks like routing orders, selecting services, correcting address data and setting despatch windows without requiring manual input on each order.",
-      "Helm is used by growing eCommerce businesses managing their own fulfilment and by established 3PLs running operations for multiple clients. In both cases the carrier side of the business is a significant cost line. Carrier accounts opened early in the business or carried over from previous arrangements rarely keep pace with what the operation is shipping now. Reviewing and renegotiating those accounts is something most operations never get around to. ITD handles that side so the rates behind each Helm WMS despatch reflect the volume the network carries.",
+      "Busy warehouses don't have time for workarounds, mis-picks or chasing the team for updates. Helm WMS is warehouse management without compromise: the right orders picked, packed and out of the door, without trading speed for accuracy. Connect ITD and the last step is taken care of too. Orders move from Helm WMS straight into dispatch on ITD's carrier network, and tracking is written back to the order.",
     ],
     features: [
       { icon: RefreshCw, title: "Multichannel order sync", desc: "Orders from all connected sales channels feed into Helm WMS ready for despatch. ITD handles the carrier side of each outbound order without adding a step to the warehouse workflow." },
@@ -519,19 +539,26 @@ export function getTechIntegrationPageProps(
   const override = TECH_PAGE_OVERRIDES[slug] ?? {};
   const categoryLabel = TECH_CATEGORY_LABELS[tool.category];
 
-  const tagline = `Connect ${tool.name} to ITD and ship every order through our carrier network on rates the network earns.`;
+  const tagline =
+    override.tagline ??
+    `Connect ${tool.name} to ITD and ship every order through our carrier network on rates the network earns.`;
 
-  const description = tool.description
+  const description = override.tagline
+    ? override.description
+    : tool.description
     ? `${tool.description.replace(/\.?\s*$/, ".")} Orders flow straight into dispatch, labels print against the right carrier and service, and tracking writes back to the order record — with no separate carrier setup for your team to maintain.`
     : `${tool.name} connects to ITD so orders flow straight into dispatch, labels print against the right carrier and service, and tracking writes back to the order record — with no separate carrier setup for your team to maintain.`;
 
   return {
     name: tool.name,
     logo: tool.logo,
+    logoFill: tool.logoFill,
     eyebrow: categoryLabel ? `${categoryLabel} Integration` : "Tech Integration",
     tagline,
     description,
     about: override.about ?? buildDefaultAbout(tool),
+    aboutHighlights: override.aboutHighlights,
+    aboutAfter: override.aboutAfter,
     partnerLink: override.partnerLink,
     features: override.features ?? DEFAULT_FEATURES,
     closingSubtitle: `Connect ${tool.name} and ship every order through one carrier network.`,

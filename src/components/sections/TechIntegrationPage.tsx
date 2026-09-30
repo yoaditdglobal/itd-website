@@ -13,12 +13,18 @@ interface CtaButton {
 export interface TechIntegrationPageProps {
   name: string;
   logo?: string;
+  /** Logo is a full-bleed square tile — fills the hero cube, no white chip. */
+  logoFill?: boolean;
   /** Hero eyebrow, e.g. "ERP / WMS Integration". */
   eyebrow: string;
   tagline: string;
-  description: string;
+  description?: string;
   /** "About {name}" paragraphs. */
   about: string[];
+  /** Designed highlight cards rendered inside the About section. */
+  aboutHighlights?: { lead?: string; items: TechFeature[] };
+  /** About paragraphs rendered AFTER the highlight cards. */
+  aboutAfter?: string[];
   features: TechFeature[];
   closingSubtitle?: string;
   /** Partner's own page about this integration — external link under About. */
@@ -35,12 +41,37 @@ export interface TechIntegrationPageProps {
  * copy, and by the generic /integrations/tech/[slug] route via
  * getTechIntegrationPageProps in src/lib/tech-pages.ts.
  */
+/** Renders [text](https://url) spans in About copy as external links;
+ *  plain strings pass through untouched. */
+function renderWithLinks(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\))/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    if (!m) return part;
+    return (
+      <a
+        key={i}
+        href={m[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-text-primary underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent motion-reduce:transition-none"
+      >
+        {m[1]}
+      </a>
+    );
+  });
+}
+
 export default function TechIntegrationPage({
   name,
   logo,
+  logoFill,
   tagline,
   description,
   about,
+  aboutHighlights,
+  aboutAfter,
   features,
   closingSubtitle,
   partnerLink,
@@ -68,11 +99,32 @@ export default function TechIntegrationPage({
                 >
                   ← All tech integrations
                 </Link>
+                {/* Below lg the right-hand tile is hidden — show the mark
+                    above the H1 instead (left-aligned, unlike Helm's page). */}
+                {logo && (
+                  <div
+                    className={`relative mb-6 h-16 w-16 overflow-hidden rounded-2xl shadow-lg lg:hidden ${
+                      logoFill ? "" : "bg-white"
+                    }`}
+                  >
+                    <Image
+                      src={logo}
+                      alt=""
+                      aria-hidden
+                      fill
+                      priority
+                      sizes="64px"
+                      className={logoFill ? "object-cover" : "object-contain p-2"}
+                    />
+                  </div>
+                )}
                 <h1 className="text-display-xl text-white">{`${name} + ITD`}</h1>
                 <p className="mt-4 text-body-lg text-white/70 font-medium">
                   {tagline}
                 </p>
-                <p className="mt-4 text-body-md text-white/50">{description}</p>
+                {description && (
+                  <p className="mt-4 text-body-md text-white/50">{description}</p>
+                )}
                 <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Button href="#features">Explore</Button>
                 </div>
@@ -81,14 +133,18 @@ export default function TechIntegrationPage({
               {/* Right — logo tile */}
               {logo && (
                 <div className="hidden lg:block flex-shrink-0">
-                  <div className="relative h-44 w-44 rounded-3xl bg-white shadow-xl">
+                  <div
+                    className={`relative h-44 w-44 overflow-hidden rounded-3xl shadow-xl ${
+                      logoFill ? "" : "bg-white"
+                    }`}
+                  >
                     <Image
                       src={logo}
                       alt={`${name} logo`}
                       fill
                       priority
                       sizes="176px"
-                      className="object-contain p-5"
+                      className={logoFill ? "object-cover" : "object-contain p-5"}
                     />
                   </div>
                 </div>
@@ -112,10 +168,45 @@ export default function TechIntegrationPage({
                     key={i}
                     className="text-body-md text-text-secondary leading-relaxed"
                   >
-                    {p}
+                    {renderWithLinks(p)}
                   </p>
                 ))}
               </div>
+              {aboutHighlights && (
+                <div className="mt-8">
+                  {aboutHighlights.lead && (
+                    <p className="max-w-3xl text-body-md leading-relaxed text-text-secondary">
+                      {renderWithLinks(aboutHighlights.lead)}
+                    </p>
+                  )}
+                  <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {aboutHighlights.items.map((f) => (
+                      <div
+                        key={f.title}
+                        className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                      >
+                        <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white motion-reduce:transition-none">
+                          <f.icon className="h-5 w-5" aria-hidden />
+                        </span>
+                        <p className="text-heading-sm text-text-primary">{f.title}</p>
+                        <p className="mt-1.5 text-body-sm text-text-secondary">{f.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {aboutAfter && aboutAfter.length > 0 && (
+                <div className="mt-8 max-w-3xl space-y-4">
+                  {aboutAfter.map((p, i) => (
+                    <p
+                      key={i}
+                      className="text-body-md text-text-secondary leading-relaxed"
+                    >
+                      {renderWithLinks(p)}
+                    </p>
+                  ))}
+                </div>
+              )}
               {partnerLink && (
                 <a
                   href={partnerLink.href}
