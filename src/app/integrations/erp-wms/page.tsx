@@ -124,6 +124,7 @@ export default function ErpWmsPage() {
             { name: "NetSuite", url: "/integrations/erp-wms#netsuite", description: "Cloud ERP. Orders pull in, labels print on our carrier rates, and carrier and tracking write back." },
             { name: "Linnworks", url: "/integrations/erp-wms#linnworks", description: "Multi-channel order management. One connection brings our UK carriers and rates into the dispatch screen." },
             { name: "Mintsoft", url: "/integrations/erp-wms#mintsoft", description: "Warehouse management for 3PLs. Each brand's orders pull with their own routing rules." },
+            { name: "Helm WMS", url: "/integrations/erp-wms#helm-wms", description: "AI-powered WMS for eCommerce and 3PLs. Orders despatch through ITD's carrier network on network rates." },
             { name: "Magento", url: "/integrations/erp-wms#magento", description: "Adobe Commerce orders pull in for carrier selection, label generation, and tracking write-back." },
             { name: "OrderWise", url: "/integrations/erp-wms#orderwise", description: "Business management and WMS. Orders pull in and shipping data writes back." },
             { name: "Peoplevox", url: "/integrations/erp-wms#peoplevox", description: "eCommerce warehouse management. Native order pull, label generation, and write-back." },

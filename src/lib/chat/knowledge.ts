@@ -34,7 +34,7 @@ and ERP/WMS to 16 UK and international carriers from one dashboard.
 
 ## Integrations (26 tech + 16 carrier as of last update)
 - eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce.
-- ERP / WMS: Oracle NetSuite, Linnworks, Mintsoft, Veeqo, StoreFeeder, Selro, ShipHero.
+- ERP / WMS: Oracle NetSuite, Linnworks, Mintsoft, Helm WMS, Veeqo, StoreFeeder, Selro, ShipHero.
 - Marketplaces: Amazon, eBay, Etsy, TikTok Shop, Temu.
 - UK carriers: Royal Mail, DPD, Evri, Parcelforce, DX, InPost, Amazon Shipping.
 - International carriers: DHL Express, FedEx, UPS, DHL Parcel, Deutsche Post, TNT.
