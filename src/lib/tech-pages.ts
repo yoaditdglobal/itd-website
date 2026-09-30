@@ -227,7 +227,7 @@ export const TECH_PAGE_OVERRIDES: Record<
       href: "https://helmwms.com/en-us/integrations/itd-global",
     },
     aboutHighlights: {
-      lead: "Helm WMS is an AI-powered warehouse management system from The Despatch Company, built for fulfilment.",
+      lead: "[Helm WMS](https://helmwms.com/) is an AI-powered warehouse management system from [The Despatch Company](https://www.thedespatchcompany.com/), built for fulfilment.",
       items: [
         { icon: Boxes, title: "Precise stock control", desc: "Guided picking and packing, so the right items end up in the right box." },
         { icon: Map, title: "Warehouse Mapping", desc: "Your warehouse as a digital map with live Helm data, so you can see where everything is at a glance." },

@@ -41,6 +41,28 @@ export interface TechIntegrationPageProps {
  * copy, and by the generic /integrations/tech/[slug] route via
  * getTechIntegrationPageProps in src/lib/tech-pages.ts.
  */
+/** Renders [text](https://url) spans in About copy as external links;
+ *  plain strings pass through untouched. */
+function renderWithLinks(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\))/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    if (!m) return part;
+    return (
+      <a
+        key={i}
+        href={m[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-text-primary underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent motion-reduce:transition-none"
+      >
+        {m[1]}
+      </a>
+    );
+  });
+}
+
 export default function TechIntegrationPage({
   name,
   logo,
@@ -146,7 +168,7 @@ export default function TechIntegrationPage({
                     key={i}
                     className="text-body-md text-text-secondary leading-relaxed"
                   >
-                    {p}
+                    {renderWithLinks(p)}
                   </p>
                 ))}
               </div>
@@ -154,7 +176,7 @@ export default function TechIntegrationPage({
                 <div className="mt-8">
                   {aboutHighlights.lead && (
                     <p className="max-w-3xl text-body-md leading-relaxed text-text-secondary">
-                      {aboutHighlights.lead}
+                      {renderWithLinks(aboutHighlights.lead)}
                     </p>
                   )}
                   <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -180,7 +202,7 @@ export default function TechIntegrationPage({
                       key={i}
                       className="text-body-md text-text-secondary leading-relaxed"
                     >
-                      {p}
+                      {renderWithLinks(p)}
                     </p>
                   ))}
                 </div>
