@@ -71,6 +71,25 @@ export default function TechIntegrationPage({
                 >
                   ← All tech integrations
                 </Link>
+                {/* Below lg the right-hand tile is hidden — show the mark
+                    above the H1 instead (left-aligned, unlike Helm's page). */}
+                {logo && (
+                  <div
+                    className={`relative mb-6 h-16 w-16 overflow-hidden rounded-2xl shadow-lg lg:hidden ${
+                      logoFill ? "" : "bg-white"
+                    }`}
+                  >
+                    <Image
+                      src={logo}
+                      alt=""
+                      aria-hidden
+                      fill
+                      priority
+                      sizes="64px"
+                      className={logoFill ? "object-cover" : "object-contain p-2"}
+                    />
+                  </div>
+                )}
                 <h1 className="text-display-xl text-white">{`${name} + ITD`}</h1>
                 <p className="mt-4 text-body-lg text-white/70 font-medium">
                   {tagline}
