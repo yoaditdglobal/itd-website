@@ -32,8 +32,8 @@ and ERP/WMS to 16 UK and international carriers from one dashboard.
    marketplaces; REST API (bearer-token auth) with webhooks for the full shipment
    lifecycle. Docs at /help/developers.
 
-## Integrations (26 tech + 16 carrier as of last update)
-- eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce.
+## Integrations (28 tech + 16 carrier as of last update)
+- eCommerce: Shopify (official app), WooCommerce, Magento / Adobe Commerce, Voila (multi-carrier shipping software).
 - ERP / WMS: Oracle NetSuite, Linnworks, Mintsoft, Helm WMS, Veeqo, StoreFeeder, Selro, ShipHero.
 - Marketplaces: Amazon, eBay, Etsy, TikTok Shop, Temu.
 - UK carriers: Royal Mail, DPD, Evri, Parcelforce, DX, InPost, Amazon Shipping.
