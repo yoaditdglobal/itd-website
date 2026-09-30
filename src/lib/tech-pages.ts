@@ -528,6 +528,7 @@ export function getTechIntegrationPageProps(
   return {
     name: tool.name,
     logo: tool.logo,
+    logoFill: tool.logoFill,
     eyebrow: categoryLabel ? `${categoryLabel} Integration` : "Tech Integration",
     tagline,
     description,

@@ -13,6 +13,8 @@ interface CtaButton {
 export interface TechIntegrationPageProps {
   name: string;
   logo?: string;
+  /** Logo is a full-bleed square tile — fills the hero cube, no white chip. */
+  logoFill?: boolean;
   /** Hero eyebrow, e.g. "ERP / WMS Integration". */
   eyebrow: string;
   tagline: string;
@@ -38,6 +40,7 @@ export interface TechIntegrationPageProps {
 export default function TechIntegrationPage({
   name,
   logo,
+  logoFill,
   tagline,
   description,
   about,
@@ -81,14 +84,18 @@ export default function TechIntegrationPage({
               {/* Right — logo tile */}
               {logo && (
                 <div className="hidden lg:block flex-shrink-0">
-                  <div className="relative h-44 w-44 rounded-3xl bg-white shadow-xl">
+                  <div
+                    className={`relative h-44 w-44 overflow-hidden rounded-3xl shadow-xl ${
+                      logoFill ? "" : "bg-white"
+                    }`}
+                  >
                     <Image
                       src={logo}
                       alt={`${name} logo`}
                       fill
                       priority
                       sizes="176px"
-                      className="object-contain p-5"
+                      className={logoFill ? "object-cover" : "object-contain p-5"}
                     />
                   </div>
                 </div>

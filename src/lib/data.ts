@@ -241,6 +241,8 @@ export interface Integration {
   featured: boolean;
   description?: string;
   logo?: string;
+  /** Logo is a full-bleed square tile — render edge-to-edge, no white chip. */
+  logoFill?: boolean;
 }
 
 export interface TeamMember {
@@ -1001,33 +1003,33 @@ export const caseStudies: CaseStudy[] = [
 
 export const integrations: Integration[] = [
   // ─── Tech — ERP / WMS ──────────────────────────────────────────────
-  { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks_logo.png" },
+  { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks-tile.png", logoFill: true },
   { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "ITD connects directly to your Magento store, so orders move from checkout to carrier without a manual step in between.", logo: "/logos/erp-wms/magento-icon.webp" },
-  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "NetSuite runs your financials, inventory and orders in one system. ITD brings your carrier network into the same workflow.", logo: "/logos/erp-wms/netsuite-icon.png" },
+  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "NetSuite runs your financials, inventory and orders in one system. ITD brings your carrier network into the same workflow.", logo: "/logos/erp-wms/netsuite-icon.png", logoFill: true },
   { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "OrderWise gives UK product businesses precise control of their warehouse and orders. ITD extends that precision to the carrier side.", logo: "/logos/erp-wms/orderwise-icon.webp" },
-  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "Peoplevox runs your warehouse floor; ITD connects it to a carrier network your team doesn't need to build alone.", logo: "/logos/erp-wms/peoplevox-icon.jpg" },
+  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "Peoplevox runs your warehouse floor; ITD connects it to a carrier network your team doesn't need to build alone.", logo: "/logos/erp-wms/peoplevox-icon.jpg", logoFill: true },
   { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Selro manages your listings and orders across more than 40 channels, and ITD handles the shipping.", logo: "/logos/erp-wms/selro-mark.png" },
   { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "TradePeg gives wholesale and multi-channel businesses visibility and control of their inventory. ITD takes care of the shipping.", logo: "/logos/erp-wms/tradepeg-icon.png" },
-  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "JonasSports runs the commercial operation of sports organisations. ITD ships the merchandise.", logo: "/logos/erp-wms/jonassports-icon.png" },
-  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "BrightPearl automates your retail operation from order to accounts. ITD connects the carrier network to complete the workflow.", logo: "/logos/erp-wms/brightpearl-icon.png" },
-  { id: "t-helm", name: "Helm WMS", category: "erp_wms", type: "tech", featured: false, description: "Helm WMS brings your multichannel warehouse operations together. ITD handles the carrier side of each despatch.", logo: "/logos/erp-wms/helm-icon.png" },
+  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "JonasSports runs the commercial operation of sports organisations. ITD ships the merchandise.", logo: "/logos/erp-wms/jonassports-icon.png", logoFill: true },
+  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "BrightPearl automates your retail operation from order to accounts. ITD connects the carrier network to complete the workflow.", logo: "/logos/erp-wms/brightpearl-icon.png", logoFill: true },
+  { id: "t-helm", name: "Helm WMS", category: "erp_wms", type: "tech", featured: false, description: "Helm WMS brings your multichannel warehouse operations together. ITD handles the carrier side of each despatch.", logo: "/logos/erp-wms/helm-icon.png", logoFill: true },
   // ─── Tech — eCommerce & Logistics ──────────────────────────────────
-  { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Base manages your eCommerce operation. ITD takes care of the carrier side.", logo: "/logos/ecommerce/base-icon.png" },
+  { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Base manages your eCommerce operation. ITD takes care of the carrier side.", logo: "/logos/ecommerce/base-icon.png", logoFill: true },
   { id: "t-aimco", name: "Aimco", category: "ecommerce_logistics", type: "tech", featured: false, description: "Aimco manages your retail operation. ITD handles the carrier side of every despatch." },
   { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "ChannelAdvisor manages your multi-channel operation. ITD connects the carrier network behind it.", logo: "/logos/ecommerce/channeladvisor-icon.png" },
-  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "CloudCommercePro manages your multi-channel stock and orders. ITD connects the carrier network.", logo: "/logos/ecommerce/cloudcommerce-icon.png" },
-  { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipstation connects your selling channels for despatch. ITD manages the carrier rates behind it.", logo: "/logos/erp-wms/shipstation_logo.png" },
+  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "CloudCommercePro manages your multi-channel stock and orders. ITD connects the carrier network.", logo: "/logos/ecommerce/cloudcommerce-icon.png", logoFill: true },
+  { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipstation connects your selling channels for despatch. ITD manages the carrier rates behind it.", logo: "/logos/erp-wms/shipstation_logo.png", logoFill: true },
   { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WooCommerce gives you full control of your store. ITD handles the carrier side of every order.", logo: "/logos/erp-wms/woocommerce_logo.svg" },
-  { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Storefeeder manages your multi-channel retail operation. ITD connects the carrier network.", logo: "/logos/erp-wms/storefeeder_logo.png" },
+  { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Storefeeder manages your multi-channel retail operation. ITD connects the carrier network.", logo: "/logos/erp-wms/storefeeder_logo.png", logoFill: true },
   { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Veeqo connects your channels and manages despatch. ITD adds the carrier network and rates.", logo: "/logos/ecommerce/veeqo-icon.webp" },
   { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shopify powers your store. ITD takes care of what happens after the customer buys.", logo: "/logos/ecommerce/shopify_logo.png" },
   { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Mintsoft runs your fulfilment operation. ITD manages the carrier rates across the network.", logo: "/logos/ecommerce/mintsoft-icon.png" },
   // ─── Tech — Marketplace ────────────────────────────────────────────
-  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon connects you to millions of customers. ITD manages the carrier side of each order you fulfil.", logo: "/logos/marketplaces/amazon-icon.webp" },
-  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "TikTok Shop turns your content into orders. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/tiktok-tile.png" },
-  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy connects your shop to buyers who want what you make. ITD handles the carrier side of getting it there.", logo: "/logos/marketplaces/etsy-icon.png" },
+  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon connects you to millions of customers. ITD manages the carrier side of each order you fulfil.", logo: "/logos/marketplaces/amazon-icon.webp", logoFill: true },
+  { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "TikTok Shop turns your content into orders. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/tiktok-tile.png", logoFill: true },
+  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy connects your shop to buyers who want what you make. ITD handles the carrier side of getting it there.", logo: "/logos/marketplaces/etsy-icon.png", logoFill: true },
   { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay puts your products in front of millions of buyers. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/ebay-icon.png" },
-  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Temu connects your products to a fast-growing buyer base. ITD handles the carrier side of each order you fulfil.", logo: "/logos/marketplaces/temu-icon.png" },
+  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Temu connects your products to a fast-growing buyer base. ITD handles the carrier side of each order you fulfil.", logo: "/logos/marketplaces/temu-icon.png", logoFill: true },
   // ─── Carriers — Domestic ───────────────────────────────────────────
   { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
   { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/inpost-icon.png" },
