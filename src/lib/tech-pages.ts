@@ -1,4 +1,4 @@
-import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3, SlidersHorizontal, Boxes, Map, Blocks, Workflow, LayoutDashboard, Sparkles } from "lucide-react";
+import { RefreshCw, Zap, Eye, Globe, ShieldCheck, BarChart3, SlidersHorizontal, Boxes, Map, Blocks, Workflow, LayoutDashboard, Sparkles, BellRing, Wand2, Gauge, Bot } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Integration } from "@/lib/data";
 import { getIntegrationSlug, TECH_CATEGORY_LABELS } from "@/lib/data";
@@ -217,6 +217,32 @@ export const TECH_PAGE_OVERRIDES: Record<
       { icon: Eye, title: "Tracking write-back", desc: "Carrier tracking and proof of delivery return to the order record. Your ops team and customers have one place to check status." },
       RATES_FEATURE,
       { icon: Globe, title: "Multi-channel, multi-carrier", desc: "Orders dispatching from different warehouses all go through the same ITD network. One set of rates and one tracking feed, regardless of which warehouse the order left from." },
+    ],
+  },
+  voila: {
+    featuresHeading: "Features built for your workflow",
+    tagline: "Multi-carrier shipping software connecting you to over 160 couriers and more than 7,000 services.",
+    about: [
+      "Shipping shouldn't mean flicking between courier portals, printing labels one by one and answering \"where's my order?\" emails until home time. Voila puts it all in one place. You can book, label and track parcels across more than 160 couriers from a single platform. Connect ITD and your orders ship on its network rates, right inside the Voila workflow your team already uses.",
+    ],
+    aboutHighlights: {
+      lead: "[Voila](https://heyvoila.io/us/) is multi-carrier shipping software from [The Despatch Company](https://thedespatchcompany.com/), built for eCommerce brands and 3PLs.",
+      items: [
+        { icon: BellRing, title: "Branded tracking", desc: "Branded tracking notifications and custom tracking pages, so your brand doesn't disappear the moment the customer checks out." },
+        { icon: Wand2, title: "AI rules builder", desc: "Describe what you need in plain English, and it builds the rule for you." },
+        { icon: Gauge, title: "AI reporting", desc: "Helps you keep an eye on SLAs before they turn into a problem." },
+        { icon: Bot, title: "The Hey Voila chatbot", desc: "Handles customer questions before they land in your inbox." },
+      ],
+    },
+    aboutAfter: [
+      "ITD sits inside Voila seamlessly, with no new system to learn. Add your ITD account, set your rules, and Voila puts each parcel on the right ITD service automatically, with labels and tracking handled in the same place as everything else.",
+    ],
+    features: [
+      { icon: RefreshCw, title: "Carrier access within the Voila platform", desc: "Voila handles the courier management side of your operation. ITD brings the carrier network and rate access behind it so shipments going through Voila go out on rates that reflect real volume." },
+      { icon: Zap, title: "Label generation on managed rates", desc: "Labels produced through Voila carry the correct carrier, service and weight for each order. ITD manages the carrier relationship behind each label." },
+      { icon: Eye, title: "Real-time tracking across the platform", desc: "Carrier events feed back through Voila as they happen. Delivery performance data stays current across the platform without needing to log in to carrier portals separately." },
+      { icon: Globe, title: "Carrier network access for Voila users", desc: "Voila users typically access couriers through a small number of individually held accounts. With ITD connected the range of services and rates available expands to cover ITD's full carrier network." },
+      RATES_FEATURE,
     ],
   },
   "helm-wms": {
