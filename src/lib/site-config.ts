@@ -8,6 +8,11 @@ export const SITE_NAME = "ITD Global";
 // The Rate Checker now lives as an external tool. Every quote/rate CTA points
 // here; Button auto-opens external (http/https) hrefs in a new tab.
 export const RATE_CHECKER_URL = "https://itdglobal-ratechecker.lovable.app/";
+/**
+ * Connexx customer portal. The nav's Log In button and the "Get Support in
+ * Connexx" link on /peak both point here.
+ */
+export const CONNEXX_SUPPORT_URL = "https://connexx.co.uk/";
 export const SITE_TAGLINE = "Smarter Shipping for a Simpler Tomorrow.";
 export const SITE_DESCRIPTION =
   "ITD Global is the multi-carrier shipping platform for UK retailers, eCommerce brands, marketplace sellers, 3PLs, and exporters. Connexx routes every parcel through the cheapest compliant carrier, automates customs, and gives you one dashboard for every dispatch.";
@@ -54,6 +59,7 @@ export const OG_LOCALE = "en_GB";
 export const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
   { path: "/connexx", priority: 0.95, changeFrequency: "weekly" as const },
+  { path: "/peak", priority: 0.7, changeFrequency: "monthly" as const },
 
   // Solutions
   { path: "/solutions/enterprise", priority: 0.9, changeFrequency: "monthly" as const },

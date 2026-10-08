@@ -69,6 +69,7 @@ const resourcesMenu = {
   ],
   knowledge: [
     { name: "Guides", href: "/resources/guides" },
+    { name: "Peak report", href: "/peak" },
     { name: "Glossary", href: "/resources/glossary" },
   ],
   support: [

@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
 import { JsonLd, breadcrumbSchema, itemListSchema } from "@/components/seo/JsonLd";
-import { ArrowRight, BookOpen, BookMarked, Newspaper, LifeBuoy } from "lucide-react";
+import { ArrowRight, BookOpen, BookMarked, Newspaper, LifeBuoy, TrendingUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const metadata = buildMetadata({
@@ -39,6 +39,14 @@ const sections: ResourceSection[] = [
     description:
       "Operator guides on UK shipping, customs, Far East imports, freight, and marketplace fulfilment. Plain English, no fluff.",
     meta: "In-depth guides for operators",
+  },
+  {
+    name: "Peak report",
+    href: "/peak",
+    icon: TrendingUp,
+    description:
+      "When peak volume really lands, how it differs by segment, and the courier plan to build before it climbs. Real parcel data across ITD's customers.",
+    meta: "Annual report, free download",
   },
   {
     name: "Glossary",
