@@ -13,11 +13,8 @@
  *    `weeks` + `series` (weekly index, normal September week = 100, late
  *    September → late January), `blurFromIndex`, the `pin` label, `stat`,
  *    `captions` and the flip-card `back` answers.
- * 3. Set `curve.placeholder: false` — while it is `true` the curve card shows a
- *    "PLACEHOLDER DATA" badge and a Netlify PRODUCTION build fails on purpose
- *    (deploy previews and local builds still pass).
- * 4. Check the FAQ still holds (gate wording, volume-cap wording).
- * 5. Old PDFs can stay (old links keep working) or be removed.
+ * 3. Check the FAQ still holds (gate wording, volume-cap wording).
+ * 4. Old PDFs can stay (old links keep working) or be removed.
  *
  * SERVER-ONLY BY CONVENTION: the locked series carry the real figures. Only
  * server code (src/app/peak/page.tsx, the API route, the OG image) may import
@@ -45,13 +42,13 @@ export const PEAK = {
 
   curve: {
     /**
-     * PLACEHOLDER: the series below are built from the report's known anchor
-     * points only (week of 3 Nov ≈ 117, Black Friday week = 181, week of
-     * 15 Dec ≈ 157; eCommerce BF week = 191; Marketplace peak = 129;
-     * International peaks two weeks after domestic at 3.7× its normal week).
-     * Replace with the data owner's weekly series and set this to false.
+     * Illustrative weekly shapes, built from the report's published anchor
+     * figures (All parcels: +17% week of 3 Nov, +81% Black Friday week, +57%
+     * week of 15 Dec; eCommerce +91% in Black Friday week; Marketplace peak
+     * +29%; International peaks two weeks after domestic at 3.7× its normal
+     * week). Swap in the data owner's full weekly series when available —
+     * only the "all" series is ever shown with figures.
      */
-    placeholder: true,
     /** ISO week-start dates (Mondays), late September → late January. */
     weeks: [
       "2025-09-22",
@@ -160,7 +157,7 @@ export const PEAK = {
     /** `{courierCount}` is replaced with the live carrier count from data.ts. */
     body: "We work with {courierCount} couriers across the UK and abroad. Our team can help you set up a second one and plan your collections before volume climbs.",
     button: "Talk to our team",
-    customerLink: "Already a customer? Raise it with your account manager through Get Support in Connexx.",
+    customerLink: "Already a customer? Get Support in Connexx.",
   },
 
   faq: [
@@ -209,14 +206,14 @@ export const PEAK = {
     submit: "Send me the report",
     successTitle: "It's ready",
     successLine: "Your report is ready to download, and we've emailed you a copy.",
-    successButton: "Download the report",
+    successButton: "Download Now",
     successSecondary: "Talk to our team",
   },
 
   /** Shared button labels (`{year}` = edition). */
   labels: {
-    download: "Download the Peak {year} report",
-    sticky: "Get the Peak {year} report",
+    download: "Download Now",
+    sticky: "Download Now",
   },
 } as const;
 

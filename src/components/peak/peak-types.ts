@@ -38,7 +38,24 @@ export type CurveSeriesClient =
       shape: number[];
       baseline: number;
       peakIndex: number;
+      /** The All-parcels line as a shape in the same 0..1 space — comparison only. */
+      ghostShape: number[];
+      /** What makes this segment different, drawn without figures. */
+      annotation: CurveAnnotation;
     };
+
+export type CurveAnnotation =
+  | { kind: "band"; range: [number, number]; label: string }
+  | { kind: "drop"; index: number; label: string }
+  | { kind: "lag"; from: number; to: number; label: string };
+
+/** Per-segment accent colour (line, area, pin/lock, tab underline). */
+export const CURVE_ACCENTS: Record<CurveTabKey, string> = {
+  all: "#3a9ea5",
+  ecommerce: "#ffe500",
+  marketplace: "#c4b5fd",
+  international: "#7da2ff",
+};
 
 export type PeakCurveConfig = {
   weeks: PeakWeek[];
@@ -50,7 +67,6 @@ export type PeakCurveConfig = {
   baselineLabel: string;
   lockLabel: string;
   blurLabel: string;
-  placeholder: boolean;
 };
 
 /** What opened the dialog — sent with the lead and on `peak_form_open`. */

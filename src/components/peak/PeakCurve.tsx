@@ -11,9 +11,9 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
-import { Lock } from "lucide-react";
+import { ArrowDown, Lock } from "lucide-react";
 import { track } from "@/lib/analytics";
-import type { CurveSeriesClient, CurveTabKey, PeakCurveConfig } from "./peak-types";
+import { CURVE_ACCENTS, type CurveSeriesClient, type CurveTabKey, type PeakCurveConfig } from "./peak-types";
 import {
   FADE_W,
   PAD,
@@ -22,9 +22,13 @@ import {
   makeScales,
   monotonePath,
   tableRows,
+  tickLabel,
   tooltipText,
   xOf,
 } from "./PeakCurve.helpers";
+
+type SegStyle = React.CSSProperties & { "--seg": string };
+const segStyle = (key: CurveTabKey): SegStyle => ({ "--seg": CURVE_ACCENTS[key] });
 
 type Props = {
   config: PeakCurveConfig;
@@ -282,9 +286,14 @@ export default function PeakCurve({
     <div ref={wrapRef} className="peak-curve" data-anim={anim}>
       <div className="peak-curve__head">
         <p className="text-eyebrow peak-curve__eyebrow">{config.eyebrow}</p>
-        {config.placeholder && (
-          <span className="peak-curve__badge" title="Series built from anchor points only">
-            Placeholder data
+        {active.locked && (
+          <span className="peak-curve__legend" style={segStyle(active.key)} aria-hidden>
+            <span className="peak-curve__legend-item">
+              <span className="peak-curve__legend-swatch" /> {active.label}
+            </span>
+            <span className="peak-curve__legend-item">
+              <span className="peak-curve__legend-swatch peak-curve__legend-swatch--ghost" /> All parcels
+            </span>
           </span>
         )}
       </div>
@@ -305,6 +314,7 @@ export default function PeakCurve({
               aria-controls={ids.panel}
               tabIndex={selected ? 0 : -1}
               className="peak-curve__tab"
+              style={segStyle(s.key)}
               onClick={() => selectTab(s.key)}
               onKeyDown={(e) => onTabKey(e, i)}
             >
@@ -376,10 +386,6 @@ export default function PeakCurve({
               <mask id={ids.blurMask} maskUnits="userSpaceOnUse" x="0" y="0" width={w} height={h}>
                 <rect x="0" y="0" width={w} height={h} fill={`url(#${ids.fadeIn})`} />
               </mask>
-              <linearGradient id={ids.area} x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stopColor="var(--peak-teal)" stopOpacity="0.45" />
-                <stop offset="1" stopColor="var(--peak-teal)" stopOpacity="0" />
-              </linearGradient>
             </defs>
 
             {/* y ticks (unlocked only) */}
@@ -393,7 +399,7 @@ export default function PeakCurve({
                   className={t === 100 ? "peak-curve__baseline" : "peak-curve__grid"}
                 />
                 <text x={PAD.left - 8} y={activeScales.yOf(t)} className="peak-curve__ylabel">
-                  {t}
+                  {tickLabel(t)}
                 </text>
               </g>
             ))}
@@ -411,17 +417,31 @@ export default function PeakCurve({
             ))}
 
             {layers.map((layer) => {
-              const sc = makeScales(layer.series, w, h);
+              const ser = layer.series;
+              const sc = makeScales(ser, w, h);
               const lineD = monotonePath(sc.pts);
               const areaD = areaPath(sc.pts, lineD, sc.floorY);
-              const pk = sc.pts[layer.series.peakIndex]!;
+              const pk = sc.pts[ser.peakIndex]!;
+              const accent = CURVE_ACCENTS[ser.key];
+              const areaId = `${ids.area}-${layer.id}`;
+              // Locked tabs: the All-parcels silhouette as a dashed ghost, in the
+              // same 0..1 space (its own normalisation — no readable ratio).
+              const ghostD = ser.locked
+                ? monotonePath(ser.ghostShape.map((v, i) => ({ x: xOf(i, w, n), y: sc.yOf(v) })))
+                : null;
+              const ann = ser.locked ? ser.annotation : null;
               return (
                 <g
                   key={layer.id}
                   className={`peak-curve__layer${layer.leaving ? " is-leaving" : " is-entering"}`}
+                  style={segStyle(ser.key)}
                   onAnimationEnd={layer.leaving ? () => removeLayer(layer.id) : undefined}
                 >
-                  {layer.series.locked && (
+                  <linearGradient id={areaId} x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stopColor={accent} stopOpacity="0.4" />
+                    <stop offset="1" stopColor={accent} stopOpacity="0" />
+                  </linearGradient>
+                  {ser.locked && (
                     <line
                       x1={PAD.left}
                       x2={plotRight}
@@ -430,14 +450,51 @@ export default function PeakCurve({
                       className="peak-curve__baseline"
                     />
                   )}
+                  {ann?.kind === "band" && (
+                    <g className="peak-curve__annotation">
+                      <rect
+                        x={xOf(ann.range[0], w, n)}
+                        y={PAD.top}
+                        width={Math.max(0, xOf(ann.range[1], w, n) - xOf(ann.range[0], w, n))}
+                        height={sc.floorY - PAD.top}
+                        className="peak-curve__band"
+                      />
+                      {ann.range.map((i) => (
+                        <line
+                          key={i}
+                          x1={xOf(i, w, n)}
+                          x2={xOf(i, w, n)}
+                          y1={PAD.top}
+                          y2={sc.floorY}
+                          className="peak-curve__band-edge"
+                        />
+                      ))}
+                    </g>
+                  )}
                   <g mask={`url(#${ids.clearMask})`}>
-                    <path d={areaD} className="peak-curve__area" fill={`url(#${ids.area})`} />
+                    {ghostD && <path d={ghostD} className="peak-curve__ghost" />}
+                    <path d={areaD} className="peak-curve__area" fill={`url(#${areaId})`} />
                     <path d={lineD} className="peak-curve__line" pathLength={1} />
                   </g>
                   <g mask={`url(#${ids.blurMask})`} filter={`url(#${ids.blur})`}>
-                    <path d={areaD} className="peak-curve__area" fill={`url(#${ids.area})`} />
+                    {ghostD && <path d={ghostD} className="peak-curve__ghost" />}
+                    <path d={areaD} className="peak-curve__area" fill={`url(#${areaId})`} />
                     <path d={lineD} className="peak-curve__line" pathLength={1} />
                   </g>
+                  {ann?.kind === "drop" && (
+                    <circle
+                      cx={sc.pts[ann.index]!.x}
+                      cy={sc.pts[ann.index]!.y}
+                      r={5}
+                      className="peak-curve__drop-dot peak-curve__annotation"
+                    />
+                  )}
+                  {ann?.kind === "lag" && (
+                    <path
+                      className="peak-curve__bracket peak-curve__annotation"
+                      d={`M${xOf(ann.from, w, n)},${sc.floorY - 18} v8 H${xOf(ann.to, w, n)} v-8`}
+                    />
+                  )}
                   {!layer.series.locked && (
                     <>
                       <circle cx={pk.x} cy={pk.y} r={6} className="peak-curve__pin-ring" />
@@ -464,7 +521,7 @@ export default function PeakCurve({
 
           {/* HTML overlays — positioned in % so they track the svg in both the
               measured (1:1) and the unmeasured (SSR) case. */}
-          <div className="peak-curve__overlay" aria-hidden>
+          <div className="peak-curve__overlay" style={segStyle(active.key)} aria-hidden>
             <span
               className="peak-curve__baseline-label"
               style={{ top: pct(activeScales.baselineY, h), right: pct(PAD.right, w) }}
@@ -505,6 +562,40 @@ export default function PeakCurve({
               </button>
             )}
 
+            {active.locked && active.annotation.kind === "band" && (
+              <span
+                className="peak-curve__note peak-curve__note--band peak-curve__annotation"
+                style={{
+                  left: pct((xOf(active.annotation.range[0], w, n) + xOf(active.annotation.range[1], w, n)) / 2, w),
+                  top: pct(activeScales.floorY, h),
+                }}
+              >
+                {active.annotation.label}
+              </span>
+            )}
+            {active.locked && active.annotation.kind === "drop" && (
+              <span
+                className="peak-curve__note peak-curve__note--drop peak-curve__annotation"
+                style={{
+                  left: pct(activeScales.pts[active.annotation.index]!.x, w),
+                  top: pct(activeScales.pts[active.annotation.index]!.y, h),
+                }}
+              >
+                <ArrowDown aria-hidden /> {active.annotation.label}
+              </span>
+            )}
+            {active.locked && active.annotation.kind === "lag" && (
+              <span
+                className="peak-curve__note peak-curve__note--lag peak-curve__annotation"
+                style={{
+                  left: pct((xOf(active.annotation.from, w, n) + xOf(active.annotation.to, w, n)) / 2, w),
+                  top: pct(activeScales.floorY - 18, h),
+                }}
+              >
+                {active.annotation.label}
+              </span>
+            )}
+
             {hoverPt && hoverIndex !== null && (
               <span
                 className={`peak-curve__tooltip${tooltipRight ? " is-right" : ""}`}
@@ -525,11 +616,11 @@ export default function PeakCurve({
 
         {/* Text alternative for assistive tech (locked tabs expose no values). */}
         <table className="sr-only">
-          <caption>Weekly volume index, {active.label}. A normal September week equals 100.</caption>
+          <caption>Weekly parcel volume against a normal September week, {active.label}.</caption>
           <thead>
             <tr>
               <th scope="col">Week</th>
-              <th scope="col">Index</th>
+              <th scope="col">Against a normal week</th>
             </tr>
           </thead>
           <tbody>

@@ -59,6 +59,14 @@ export function makeScales(s: CurveSeriesClient, w: number, h: number): Scales {
   };
 }
 
+/** Axis label for an index tick: the baseline carries its own "Normal week"
+ *  label, every other tick reads as a percentage against it. */
+export function tickLabel(t: number): string {
+  if (t === 100) return "";
+  const d = t - 100;
+  return `${d > 0 ? "+" : "\u2212"}${Math.abs(d)}%`;
+}
+
 /** Round-number y ticks (multiples of 25) inside the domain. */
 export function niceTicks(lo: number, hi: number): number[] {
   const step = hi - lo > 160 ? 50 : 25;
@@ -137,7 +145,7 @@ export function tableRows(
     const pct = Math.round((s.values[i] ?? 100) - 100);
     return {
       week: wk.label,
-      value: `${s.values[i]} (${pct >= 0 ? "+" : ""}${pct}% vs a normal week)`,
+      value: pct === 0 ? "Level with a normal week" : `${pct > 0 ? "+" : "\u2212"}${Math.abs(pct)}% vs a normal week`,
     };
   });
 }

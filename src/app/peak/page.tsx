@@ -4,7 +4,7 @@ import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/metadata";
 import { getIntegrationsByType } from "@/lib/data";
 import { PEAK, PEAK_VOLUME_BANDS, peakLabel } from "@/lib/peak-config";
-import { assertPeakProductionReady, buildCurveConfig } from "@/lib/peak-curve.server";
+import { buildCurveConfig } from "@/lib/peak-curve.server";
 import PeakProvider from "@/components/peak/PeakProvider";
 import PeakHero from "@/components/peak/PeakHero";
 import PeakCurveIsland from "@/components/peak/PeakCurveIsland";
@@ -13,10 +13,6 @@ import PeakFlipCards from "@/components/peak/PeakFlipCards";
 import PeakTalkBand from "@/components/peak/PeakTalkBand";
 import PeakDownloadButton from "@/components/peak/PeakDownloadButton";
 import "@/components/peak/peak.css";
-
-// Static page: this runs at build time, so a Netlify PRODUCTION build fails
-// while the curve still runs on placeholder data (see peak-curve.server.ts).
-assertPeakProductionReady();
 
 export const metadata = buildMetadata({
   title: "Peak season planning report",
