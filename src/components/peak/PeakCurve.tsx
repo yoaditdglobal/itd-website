@@ -32,7 +32,7 @@ const segStyle = (key: CurveTabKey): SegStyle => ({ "--seg": CURVE_ACCENTS[key] 
 
 type Props = {
   config: PeakCurveConfig;
-  onOpenDialog: (trigger: "curve_lock" | "curve_blur", opener?: HTMLElement | null) => void;
+  onOpenDialog: (trigger: "curve_lock", opener?: HTMLElement | null) => void;
   onTabChange?: (tab: CurveTabKey) => void;
   /** When the report is unlocked the lock chip / blur label link straight to the PDF. */
   unlocked?: boolean;
@@ -258,7 +258,7 @@ export default function PeakCurve({
   const xAxisIdx = Array.from({ length: n }, (_, i) => i).filter((i) => i % 4 === 0 && i < n);
   const rows = tableRows(active, weeks, blurFromIndex);
 
-  const gateProps = (trigger: "curve_lock" | "curve_blur", className: string) =>
+  const gateProps = (trigger: "curve_lock", className: string) =>
     unlocked && reportUrl
       ? ({
           as: "a" as const,
@@ -280,7 +280,6 @@ export default function PeakCurve({
         });
 
   const lock = gateProps("curve_lock", "peak-curve__lock");
-  const blur = gateProps("curve_blur", "peak-curve__blur-label");
 
   return (
     <div ref={wrapRef} className="peak-curve" data-anim={anim}>
@@ -543,22 +542,6 @@ export default function PeakCurve({
             ) : (
               <button {...lock.props} style={{ left: pct(peakPt.x, w), top: pct(peakPt.y, h) }}>
                 <Lock aria-hidden /> {config.lockLabel}
-              </button>
-            )}
-
-            {blur.as === "a" ? (
-              <a
-                {...blur.props}
-                style={{ left: pct(xBlur + (plotRight - xBlur) / 2, w), top: pct(PAD.top + (h - PAD.top - PAD.bottom) / 2, h) }}
-              >
-                {config.blurLabel}
-              </a>
-            ) : (
-              <button
-                {...blur.props}
-                style={{ left: pct(xBlur + (plotRight - xBlur) / 2, w), top: pct(PAD.top + (h - PAD.top - PAD.bottom) / 2, h) }}
-              >
-                {config.blurLabel}
               </button>
             )}
 

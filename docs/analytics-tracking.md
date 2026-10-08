@@ -47,7 +47,7 @@ can segment them. Customers additionally fire `peak_customer_download`.
 | `peak_curve_scrub` | first scrub per tab per session | `tab` |
 | `peak_card_flip` | question card flipped to its answer | `card_id` (`monday` \| `first-scan` \| `returns`) |
 
-`trigger` values: `hero`, `hero_cover`, `curve_lock`, `curve_blur`, `flip_card`,
+`trigger` values: `hero`, `hero_cover`, `curve_lock`, `flip_card`,
 `insights_button`, `faq_button`, `sticky`. Section `data-analytics-location`s for
 `cta_click`: `peak_hero`, `peak_insights`, `peak_talk`, `peak_faq`, `peak_form`,
 `peak_sticky`.

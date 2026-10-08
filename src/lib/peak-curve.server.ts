@@ -139,6 +139,5 @@ export function buildCurveConfig(): PeakCurveConfig {
     eyebrow: PEAK.curve.eyebrow,
     baselineLabel: PEAK.curve.baselineLabel,
     lockLabel: PEAK.curve.lockLabel,
-    blurLabel: PEAK.curve.blurLabel,
   };
 }

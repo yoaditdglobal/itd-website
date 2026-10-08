@@ -66,7 +66,6 @@ export type PeakCurveConfig = {
   eyebrow: string;
   baselineLabel: string;
   lockLabel: string;
-  blurLabel: string;
 };
 
 /** What opened the dialog — sent with the lead and on `peak_form_open`. */
@@ -74,7 +73,6 @@ export type PeakTrigger =
   | "hero"
   | "hero_cover"
   | "curve_lock"
-  | "curve_blur"
   | "flip_card"
   | "insights_button"
   | "faq_button"

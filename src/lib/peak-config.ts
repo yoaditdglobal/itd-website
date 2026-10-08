@@ -105,7 +105,6 @@ export const PEAK = {
     eyebrow: "Weekly volume against a normal week",
     baselineLabel: "Normal week",
     lockLabel: "In the report",
-    blurLabel: "The rest of the curve is in the report.",
   },
 
   stat: {
