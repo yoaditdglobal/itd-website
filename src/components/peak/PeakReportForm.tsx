@@ -17,8 +17,6 @@ import type {
   PeakUtms,
 } from "./peak-types";
 
-export const VOLUME_BANDS = ["Under 100", "100–500", "500–2,000", "2,000–10,000", "10,000+"] as const;
-
 type Field = "firstName" | "lastName" | "email" | "company" | "weeklyVolume" | "shipsWithItd";
 
 export type FormValues = {
@@ -336,7 +334,7 @@ export default function PeakReportForm({
             <option value="" disabled>
               Choose a range
             </option>
-            {VOLUME_BANDS.map((b) => (
+            {copy.volumeBands.map((b) => (
               <option key={b} value={b}>
                 {b}
               </option>

@@ -27,7 +27,7 @@
 
 export type PeakCurveTab = "all" | "ecommerce" | "marketplace" | "international";
 
-type RawSeries = {
+export type RawSeries = {
   label: string;
   /** Weekly index, normal September week = 100. One value per entry in `weeks`. */
   values: readonly number[];
@@ -98,13 +98,13 @@ export const PEAK = {
         values: [100, 102, 105, 109, 114, 120, 128, 140, 162, 205, 290, 370, 300, 210, 130, 98, 108, 112, 106],
         locked: true,
       },
-    } satisfies Record<PeakCurveTab, RawSeries>,
+    },
     captions: {
       all: "Volume climbs well before Black Friday and stays high for weeks.",
       ecommerce: "eCommerce runs hottest, and for longest.",
       marketplace: "Marketplace rises less and drops off sooner.",
       international: "International peaks later than domestic, and harder.",
-    } satisfies Record<PeakCurveTab, string>,
+    },
     eyebrow: "Weekly volume against a normal week",
     baselineLabel: "Normal week",
     lockLabel: "In the report",
@@ -221,6 +221,12 @@ export const PEAK = {
 } as const;
 
 export type PeakConfig = typeof PEAK;
+
+// Shape checks (kept outside the `as const` literal so inference stays narrow).
+const _seriesCheck: Record<PeakCurveTab, RawSeries> = PEAK.curve.series;
+const _captionsCheck: Record<PeakCurveTab, string> = PEAK.curve.captions;
+void _seriesCheck;
+void _captionsCheck;
 
 /** Replace `{year}` with the current edition. */
 export function peakLabel(template: string): string {

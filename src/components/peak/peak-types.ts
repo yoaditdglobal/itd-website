@@ -72,6 +72,7 @@ export type PeakUtms = {
 };
 
 export type PeakDialogCopy = {
+  volumeBands: readonly string[];
   title: string; // already has {year} resolved
   sub: string;
   insideHeading: string;

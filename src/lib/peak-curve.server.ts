@@ -1,4 +1,4 @@
-import { PEAK, type PeakCurveTab } from "@/lib/peak-config";
+import { PEAK, type PeakCurveTab, type RawSeries } from "@/lib/peak-config";
 import type {
   CurveSeriesClient,
   CurveTabKey,
@@ -34,7 +34,7 @@ function argmax(values: readonly number[]): number {
 }
 
 function toClientSeries(key: CurveTabKey, blurFromIndex: number): CurveSeriesClient {
-  const raw = PEAK.curve.series[key];
+  const raw: RawSeries = PEAK.curve.series[key];
   const peakIndex = argmax(raw.values);
 
   if (!raw.locked) {

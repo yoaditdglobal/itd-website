@@ -3,7 +3,7 @@ import FaqSection from "@/components/sections/FaqSection";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/metadata";
 import { getIntegrationsByType } from "@/lib/data";
-import { PEAK, peakLabel } from "@/lib/peak-config";
+import { PEAK, PEAK_VOLUME_BANDS, peakLabel } from "@/lib/peak-config";
 import { assertPeakProductionReady, buildCurveConfig } from "@/lib/peak-curve.server";
 import PeakProvider from "@/components/peak/PeakProvider";
 import PeakHero from "@/components/peak/PeakHero";
@@ -47,6 +47,7 @@ export default function PeakPage() {
           stickyLabel={peakLabel(PEAK.labels.sticky)}
           images={{ cover: PEAK.coverImage, spread: PEAK.previewImage }}
           copy={{
+            volumeBands: PEAK_VOLUME_BANDS,
             title: peakLabel(PEAK.dialog.title),
             sub: PEAK.dialog.sub,
             insideHeading: PEAK.dialog.insideHeading,
