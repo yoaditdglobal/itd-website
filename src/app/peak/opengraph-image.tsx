@@ -72,7 +72,7 @@ export default async function Image() {
               {PEAK.hero.h1}
             </div>
             <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 24, lineHeight: 1.35 }}>
-              Real parcel data across ITD&apos;s customers. Download the Peak {PEAK.edition} report.
+              {`Real parcel data across ITD's customers. Download the Peak ${PEAK.edition} report.`}
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16, color: "rgba(255,255,255,0.5)", fontSize: 20 }}>

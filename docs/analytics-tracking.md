@@ -12,8 +12,8 @@ conversion**. This is the event to mark as your **Key Event**.
 
 | param | example | notes |
 |---|---|---|
-| `lead_source` | `contact_form` \| `chat` | which surface produced the lead |
-| `form_name` | `contact_sales` | contact form only |
+| `lead_source` | `contact_form` \| `chat` \| `peak_report` | which surface produced the lead |
+| `form_name` | `contact_sales` \| `peak_report` | contact form / Peak report dialog |
 | `shipping_type` | `Export`, `Air Freight`… | contact form |
 | `weekly_volume` | `250` | contact form (freight sends quantity) |
 | `journey` | `ecommerce`, `3pl`… | chat — ICP journey |
@@ -25,6 +25,44 @@ Code: `src/lib/analytics.ts` owns the schema (`LEAD_EVENT`, `leadParams`, `track
 via **gtag** (`ChatWidget.tsx`). A "lead" = a **Zoho CRM Lead** (contact → `Lead_Source
 "ITD Website"` via Make webhook; chat → `"Chat"` direct). GA events are decoupled
 client signals — the CRM is the system of record.
+
+## Peak report (`/peak`)
+
+The Peak report page gates the annual PDF behind a short form (`PeakReportDialog`,
+`POST /api/peak-report`). It adds a third lead source and a small funnel vocabulary.
+All year-specific values come from `src/lib/peak-config.ts` (`report_edition`).
+
+**Lead counting decision (Yoad, 8 Oct 2026): every successful download fires
+`generate_lead`** — existing customers included — with `customer: true|false` so GA4
+can segment them. Customers additionally fire `peak_customer_download`.
+
+| event | when | params |
+|---|---|---|
+| `generate_lead` | confirmed successful submit (prospects AND customers) | `form_name: "peak_report"`, `lead_source: "peak_report"`, `weekly_volume`, `curve_tab`, `trigger`, `report_edition`, `customer` (bool) — via the GTM dataLayer, like the contact form |
+| `peak_customer_download` | confirmed successful submit, "Yes, I'm a customer" only | `report_edition` |
+| `peak_form_open` | dialog opens | `trigger`, `card_id?` |
+| `peak_form_start` | first field interaction per open | `trigger` |
+| `peak_report_download` | download link clicked (success state, or a direct link once unlocked) | `report_edition`, `unlocked_from_storage` (bool) |
+| `peak_tab_select` | curve segment tab changed | `tab` (`all` \| `ecommerce` \| `marketplace` \| `international`) |
+| `peak_curve_scrub` | first scrub per tab per session | `tab` |
+| `peak_card_flip` | question card flipped to its answer | `card_id` (`monday` \| `first-scan` \| `returns`) |
+
+`trigger` values: `hero`, `hero_cover`, `curve_lock`, `curve_blur`, `flip_card`,
+`insights_button`, `faq_button`, `sticky`. Section `data-analytics-location`s for
+`cta_click`: `peak_hero`, `peak_insights`, `peak_talk`, `peak_faq`, `peak_form`,
+`peak_sticky`.
+
+CRM side: prospects ("Not yet") → Make webhook (`leadType: "prospect"`) + Zoho Lead
+with `Lead_Source "Peak Report"` (add that value to the Zoho picklist) and a "NEW Peak
+report lead" email; customers ("Yes, I'm a customer") → webhook only
+(`leadType: "existing_customer"`, no Zoho Lead) + "Customer downloaded the Peak report"
+to `PEAK_AM_NOTIFY_EMAIL`. Both get the report email. The PDF under `/reports/*` is
+`X-Robots-Tag: noindex` (netlify.toml) so it can't rank and bypass the page.
+
+**GA4 admin to-do (can't be done from code):** register `curve_tab`, `trigger`,
+`report_edition`, `tab`, `card_id` and `customer` as event-scoped custom dimensions;
+confirm the `CE - generate_lead` GTM trigger passes the new params; do NOT mark any
+`peak_*` event as a Key Event.
 
 ## Funnel diagnostics (engagement, NOT conversions — do not mark as Key Events)
 
