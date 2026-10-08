@@ -28,7 +28,7 @@ import {
 
 type Props = {
   config: PeakCurveConfig;
-  onOpenDialog: (trigger: "curve_lock" | "curve_blur") => void;
+  onOpenDialog: (trigger: "curve_lock" | "curve_blur", opener?: HTMLElement | null) => void;
   onTabChange?: (tab: CurveTabKey) => void;
   /** When the report is unlocked the lock chip / blur label link straight to the PDF. */
   unlocked?: boolean;
@@ -268,7 +268,11 @@ export default function PeakCurve({
         })
       : ({
           as: "button" as const,
-          props: { type: "button" as const, className, onClick: () => onOpenDialog(trigger) },
+          props: {
+            type: "button" as const,
+            className,
+            onClick: (e: React.MouseEvent<HTMLButtonElement>) => onOpenDialog(trigger, e.currentTarget),
+          },
         });
 
   const lock = gateProps("curve_lock", "peak-curve__lock");

@@ -28,6 +28,9 @@ type Props = {
   getContext: () => { utms: PeakUtms; pagePath: string };
   onSuccess: (reportUrl: string) => void;
   trackDownload: (opts: { unlockedFromStorage: boolean }) => void;
+  /** The element that opened the dialog — focus returns there on close
+   *  (Safari doesn't focus buttons on click, so Radix's default can miss). */
+  getOpener: () => HTMLElement | null;
 };
 
 /**
@@ -52,6 +55,7 @@ export default function PeakReportDialog({
   getContext,
   onSuccess,
   trackDownload,
+  getOpener,
 }: Props) {
   const [form, setForm] = useState<FormState>(() => emptyValues());
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -78,6 +82,13 @@ export default function PeakReportDialog({
             // Land on the title, not the first input (no keyboard pop on mobile).
             e.preventDefault();
             headingRef.current?.focus();
+          }}
+          onCloseAutoFocus={(e) => {
+            const opener = getOpener();
+            if (opener && opener.isConnected) {
+              e.preventDefault();
+              opener.focus();
+            }
           }}
         >
           <aside className="peak-dialog__visual" aria-hidden>

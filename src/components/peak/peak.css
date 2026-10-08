@@ -293,6 +293,7 @@
 }
 .peak-curve__pin-label {
   position: absolute;
+  width: max-content;
   transform: translate(-50%, calc(-100% - 14px));
   white-space: nowrap;
   background: var(--peak-yellow);
@@ -304,6 +305,7 @@
 }
 .peak-curve__lock {
   position: absolute;
+  width: max-content;
   transform: translate(-50%, calc(-100% - 14px));
   display: inline-flex;
   align-items: center;
@@ -327,6 +329,7 @@
 .peak-curve__blur-label {
   position: absolute;
   transform: translate(-50%, -50%);
+  width: max-content;
   max-width: 11rem;
   text-align: center;
   background: rgba(21, 25, 43, 0.85);
@@ -348,6 +351,7 @@
 }
 .peak-curve__tooltip {
   position: absolute;
+  width: max-content;
   transform: translate(-50%, calc(-100% - 14px));
   white-space: nowrap;
   background: #fff;

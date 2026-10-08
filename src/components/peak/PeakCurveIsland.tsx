@@ -10,7 +10,7 @@ export default function PeakCurveIsland({ config }: { config: PeakCurveConfig })
   return (
     <PeakCurve
       config={config}
-      onOpenDialog={(trigger) => open(trigger)}
+      onOpenDialog={(trigger, opener) => open(trigger, { opener })}
       onTabChange={setCurveTab}
       unlocked={unlocked}
       reportUrl={reportUrl}

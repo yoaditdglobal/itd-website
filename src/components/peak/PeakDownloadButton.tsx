@@ -59,7 +59,7 @@ export default function PeakDownloadButton({
     <button
       type="button"
       className={classes}
-      onClick={() => open(trigger, cardId ? { cardId } : undefined)}
+      onClick={(e) => open(trigger, { cardId, opener: e.currentTarget })}
       {...rest}
     >
       {children}

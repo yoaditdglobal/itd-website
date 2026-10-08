@@ -27,7 +27,7 @@ import PeakStickyCta from "./PeakStickyCta";
  */
 
 export type PeakGate = {
-  open: (trigger: PeakTrigger, extra?: { cardId?: string }) => void;
+  open: (trigger: PeakTrigger, extra?: { cardId?: string; opener?: HTMLElement | null }) => void;
   /** false on the server and during hydration; true once storage says so. */
   unlocked: boolean;
   /** API-returned URL after a successful submit, else the config path. */
@@ -75,6 +75,7 @@ export default function PeakProvider({
 
   // Campaign context captured once on page load (no useSearchParams — it would
   // force a Suspense boundary and bail this static page out to CSR).
+  const openerRef = useRef<HTMLElement | null>(null);
   const utmsRef = useRef<PeakUtms>({});
   const pagePathRef = useRef("/peak");
   useEffect(() => {
@@ -101,13 +102,14 @@ export default function PeakProvider({
   );
 
   const open = useCallback(
-    (t: PeakTrigger, extra?: { cardId?: string }) => {
+    (t: PeakTrigger, extra?: { cardId?: string; opener?: HTMLElement | null }) => {
       if (unlocked) {
         // Residual button that hasn't re-rendered as a link yet.
         trackDownload({ unlockedFromStorage: true });
         window.open(reportUrl, "_blank", "noopener");
         return;
       }
+      openerRef.current = extra?.opener ?? null;
       setTrigger(t);
       setCardId(extra?.cardId);
       setDialogOpen(true);
@@ -145,6 +147,7 @@ export default function PeakProvider({
         getContext={() => ({ utms: utmsRef.current, pagePath: pagePathRef.current })}
         onSuccess={setApiReportUrl}
         trackDownload={trackDownload}
+        getOpener={() => openerRef.current}
       />
       <PeakStickyCta label={stickyLabel} />
     </Ctx.Provider>
