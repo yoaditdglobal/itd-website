@@ -108,31 +108,69 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
         data-nav-group={activeGroup?.id}
       >
         <p className="text-eyebrow text-text-tertiary mb-4">{eyebrow}</p>
-        <ul className={`grid gap-x-8 gap-y-5 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
-          {items.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <span className="flex items-center gap-2">
-                  {item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />}
-                  <span className="text-heading-sm text-text-primary group-hover:text-accent transition-colors">
-                    {item.name}
+        <ul className={`grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+          {items.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={
+                    rail
+                      ? "group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      : "card-hover group flex h-full flex-col rounded-xl border border-border bg-bg-secondary p-4 hover:border-accent/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  }
+                >
+                  <span className="flex items-center gap-2.5">
+                    {Icon ? (
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-light text-accent transition-transform group-hover:scale-105">
+                        <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+                      </span>
+                    ) : (
+                      item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />
+                    )}
+                    <span className="text-heading-sm text-text-primary group-hover:text-accent transition-colors">
+                      {item.name}
+                    </span>
                   </span>
-                </span>
-                <span className="mt-1 block text-body-sm text-text-secondary line-clamp-3">{item.desc}</span>
-              </Link>
-            </li>
-          ))}
+                  <span className={`${rail ? "mt-1" : "mt-2"} block text-body-sm text-text-secondary line-clamp-3`}>
+                    {item.desc}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
-        {footerLink && (
-          <Link
-            href={footerLink.href}
-            className="link-underline mt-6 text-sm font-medium text-accent gap-1"
-          >
-            {footerLink.label} <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
+        {menu.proofLogos ? (
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
+            <div className="flex items-center gap-3">
+              <span className="text-eyebrow text-text-tertiary">Carriers included</span>
+              <div className="flex flex-wrap items-center gap-2">
+                {menu.proofLogos.map((l) => (
+                  <div key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
+                    <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            {footerLink && (
+              <Link
+                href={footerLink.href}
+                className="link-underline shrink-0 text-sm font-medium text-accent gap-1"
+              >
+                {footerLink.label} <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            )}
+          </div>
+        ) : (
+          footerLink && (
+            <Link
+              href={footerLink.href}
+              className="link-underline mt-6 text-sm font-medium text-accent gap-1"
+            >
+              {footerLink.label} <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          )
         )}
       </div>
 

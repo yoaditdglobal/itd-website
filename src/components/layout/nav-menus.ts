@@ -3,7 +3,10 @@ import {
   BookOpen,
   Building2,
   Calculator,
+  Container,
+  Globe,
   LifeBuoy,
+  PackageCheck,
   Plug,
   Store,
   Truck,
@@ -29,6 +32,8 @@ export interface NavItem {
   desc: string;
   href: string;
   logo?: string;
+  /** Railless menus: an accent icon chip in place of a logo (visual anchor). */
+  icon?: LucideIcon;
 }
 
 export interface NavFooterLink {
@@ -74,6 +79,8 @@ export interface NavMenu {
   items?: NavItem[];
   /** Grid columns for railless menus (default 2). */
   columns?: 2 | 3;
+  /** Railless menus: a small carrier-logo proof strip under the item grid. */
+  proofLogos?: { name: string; logo: string }[];
   footerLink?: NavFooterLink;
   promo: NavPromo;
 }
@@ -95,9 +102,17 @@ export const NAV_MENUS: readonly NavMenu[] = [
     sectionBases: ["/shipping"],
     columns: 3,
     items: [
-      { name: "Domestic", desc: "Royal Mail, DPD, Evri, InPost and more on every UK order, from one dashboard", href: "/shipping/domestic" },
-      { name: "International", desc: "EU and worldwide, with HS codes, IOSS and customs paperwork generated automatically", href: "/shipping/international" },
-      { name: "Freight", desc: "UK pallet networks, EU lanes and worldwide LCL/FCL with live rates", href: "/shipping/freight" },
+      { name: "Domestic", desc: "Every UK order on one dashboard — one label, one invoice, full tracking", href: "/shipping/domestic", icon: PackageCheck },
+      { name: "International", desc: "EU and worldwide, with HS codes, IOSS and customs paperwork done for you", href: "/shipping/international", icon: Globe },
+      { name: "Freight", desc: "UK pallet networks, EU road lanes and worldwide LCL/FCL on live rates", href: "/shipping/freight", icon: Container },
+    ],
+    proofLogos: [
+      { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
+      { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
+      { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+      { name: "InPost", logo: "/logos/carriers/inpost-icon.png" },
+      { name: "Parcel Force", logo: "/logos/carriers/parcel-force.svg" },
+      { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
     ],
     footerLink: { label: "Explore all shipping", href: "/shipping" },
     promo: {
