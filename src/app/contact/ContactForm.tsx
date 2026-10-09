@@ -492,7 +492,6 @@ export default function ContactForm() {
                         value={freightVolume}
                         onChange={(e) => setFreightVolume(e.target.value)}
                         required
-                        placeholder="Numbers only"
                         className={fieldClass}
                       />
                     </div>
