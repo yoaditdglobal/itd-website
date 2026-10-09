@@ -118,7 +118,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                   className={
                     rail
                       ? "group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                      : "card-hover group flex h-full flex-col rounded-xl border border-border bg-bg-secondary p-4 hover:border-accent/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      : "nav-lane-card card-hover group flex h-full flex-col rounded-xl border border-border p-4 hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   }
                 >
                   <span className="flex items-center gap-2.5">

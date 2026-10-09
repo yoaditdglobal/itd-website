@@ -331,6 +331,17 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   box-shadow: var(--shadow-lg);
 }
 
+/* Railless nav cards (the Shipping lanes): a card-sized take on --gradient-mesh.
+   Warm paper (white → cream) lit by a faint blue brand glow in the top-left,
+   the same language as the hero background. Token-driven; dark heading text and
+   the pale-blue accent chip both stay legible. Hover feedback is the shared
+   .card-hover lift + accent border, not a background swap. */
+.nav-lane-card {
+  background-image:
+    radial-gradient(115% 100% at 0% 0%, rgb(29 63 184 / 0.07) 0%, transparent 46%),
+    linear-gradient(152deg, #fff 0%, var(--color-bg-secondary) 68%, var(--color-bg-tertiary) 100%);
+}
+
 /* ─── Hero entrance choreography — the differentiation moment ───
    H1 lands, subhead arrives, CTAs follow, aside slides in.
    Total runtime ~800ms. All elements start at opacity 0 to avoid FOUT
