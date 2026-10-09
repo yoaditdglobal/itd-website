@@ -48,6 +48,16 @@ const contactSchema = z.object({
   supplierInvoice: fileMeta,
   freightPhoto: fileMeta,
   collectionPostcode: z.string().max(16).optional().or(z.literal("")),
+  // Sea Freight only
+  volume: z.string().max(40).optional().or(z.literal("")),
+  loadPoint: z
+    .object({ country: z.string().max(80).optional(), location: z.string().max(120).optional() })
+    .partial()
+    .optional(),
+  deliveryPoint: z
+    .object({ country: z.string().max(80).optional(), location: z.string().max(120).optional() })
+    .partial()
+    .optional(),
   company: z.string().max(160).optional().or(z.literal("")),
   firstName: z.string().max(80).optional().or(z.literal("")),
   lastName: z.string().max(80).optional().or(z.literal("")),
@@ -93,12 +103,19 @@ export async function POST(request: Request) {
     splitName(d.firstName || d.email.split("@")[0] || "Website lead").last;
 
   const dims = d.dimensions;
+  const point = (p?: { country?: string; location?: string }) =>
+    p && (p.country || p.location) ? [p.location, p.country].filter(Boolean).join(", ") : "";
+  const loadPoint = point(d.loadPoint);
+  const deliveryPoint = point(d.deliveryPoint);
   const description = [
     d.shippingType && `Shipping type: ${d.shippingType}`,
     d.mainLanes?.length && `Main lanes: ${d.mainLanes.join(", ")}`,
     d.weeklyVolume && `Weekly volume: ${d.weeklyVolume}`,
     d.freightType && `Freight type: ${d.freightType}`,
     d.quantity && `Quantity: ${d.quantity}`,
+    d.volume && `Volume: ${d.volume}`,
+    loadPoint && `Load point: ${loadPoint}`,
+    deliveryPoint && `Delivery point: ${deliveryPoint}`,
     d.weight && `Weight: ${d.weight}`,
     dims &&
       (dims.length || dims.width || dims.height) &&
@@ -148,6 +165,7 @@ export async function POST(request: Request) {
   // freight-only rows on an Import lead (etc.) read as skipped mandatory
   // fields when they were never shown to the submitter.
   const isFreightType = /freight/i.test(d.shippingType || "");
+  const isSeaFreight = d.shippingType === "Sea Freight";
   const isImportExport = d.shippingType === "Export" || d.shippingType === "Import";
   const teamRows: Record<string, unknown> = {
     "First name": d.firstName,
@@ -159,6 +177,11 @@ export async function POST(request: Request) {
     ...(isImportExport && { "Main lanes": d.mainLanes?.join(", ") }),
     ...(!isFreightType && { "Weekly volume": d.weeklyVolume }),
     ...(isFreightType && { "Freight type": d.freightType, Quantity: d.quantity }),
+    ...(isSeaFreight && {
+      Volume: d.volume,
+      "Load point": loadPoint,
+      "Delivery point": deliveryPoint,
+    }),
     ...((isFreightType || isImportExport) && {
       Weight: d.weight,
       "Dimensions (L×W×H)":
@@ -167,7 +190,7 @@ export async function POST(request: Request) {
           : "",
     }),
     ...(!isFreightType && { "Collection postcode": d.collectionPostcode }),
-    ...(isFreightType && {
+    ...(isFreightType && !isSeaFreight && {
       "Supplier invoice file": d.supplierInvoice?.name,
       "Freight photo file": d.freightPhoto?.name,
     }),
@@ -234,6 +257,11 @@ export async function POST(request: Request) {
         ? `${dims.length ?? "?"} x ${dims.width ?? "?"} x ${dims.height ?? "?"} cm`
         : "",
     collectionPostcode: d.collectionPostcode || "",
+    volume: d.volume || "",
+    loadCountry: d.loadPoint?.country || "",
+    loadLocation: d.loadPoint?.location || "",
+    deliveryCountry: d.deliveryPoint?.country || "",
+    deliveryLocation: d.deliveryPoint?.location || "",
     supplierInvoiceFile: d.supplierInvoice?.name || "",
     supplierInvoiceType: d.supplierInvoice?.type || "",
     supplierInvoiceContent: d.supplierInvoice?.content || "",
