@@ -43,7 +43,8 @@ const steps = [
 ];
 
 export default function ContactForm() {
-  const [shippingType, setShippingType] = useState("");
+  // Domestic B2C is pre-selected (the most common enquiry); any other type is one click away.
+  const [shippingType, setShippingType] = useState<string>("Domestic B2C");
   const [mainLanes, setMainLanes] = useState<string[]>([]);
   const [weeklyVolume, setWeeklyVolume] = useState("");
   const [freightType, setFreightType] = useState("");
