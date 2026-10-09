@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import AutoplayVideo from "@/components/ui/AutoplayVideo";
 import type { NavPromo } from "./nav-menus";
 
 type Props = {
@@ -36,6 +37,22 @@ export default function NavPromoCard({ promo, surface = "panel" }: Props) {
             sizes="(min-width: 1280px) 312px, (min-width: 1024px) 272px, 100vw"
             className={`w-full h-auto rounded-lg ${navy ? "ring-1 ring-white/10" : ""}`}
           />
+        )}
+        {promo.art.kind === "video" && (
+          // Reserve the clip's aspect ratio so opening the menu never shifts the
+          // card; the poster still frame shows for reduced-motion / no-JS.
+          <div
+            className={`overflow-hidden rounded-lg ${navy ? "ring-1 ring-white/10" : ""}`}
+            style={{ aspectRatio: `${promo.art.width} / ${promo.art.height}` }}
+          >
+            <AutoplayVideo
+              mp4={promo.art.mp4}
+              webm={promo.art.webm}
+              poster={promo.art.poster}
+              ariaLabel={promo.art.alt || undefined}
+              className="block h-full w-full object-cover"
+            />
+          </div>
         )}
         {promo.art.kind === "icon" && (
           <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10">

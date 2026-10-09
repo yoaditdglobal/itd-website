@@ -47,6 +47,11 @@ export interface NavGroup {
 
 export type NavPromoArt =
   | { kind: "image"; src: string; alt: string; width: number; height: number }
+  // A looping, muted feature animation in place of a still. Reuses the rendered
+  // connexx-*.{mp4,webm} clips (poster = the still frame). AutoplayVideo honours
+  // reduced-motion; the panel body only mounts on open, so nothing loads until
+  // the menu is opened.
+  | { kind: "video"; mp4: string; webm?: string; poster: string; alt: string; width: number; height: number }
   | { kind: "icon"; icon: LucideIcon }
   | { kind: "logos"; logos: { name: string; logo: string }[] };
 
@@ -144,7 +149,15 @@ export const NAV_MENUS: readonly NavMenu[] = [
       title: "The engine behind 17.5m labels a year",
       body: "Every order routed to the best-value carrier, labelled in seconds, tracked and cleared in one place.",
       cta: { label: "Explore", href: "/connexx" },
-      art: { kind: "image", src: "/media/connexx-ecommerce-poster.jpg", alt: "", width: 1200, height: 730 },
+      art: {
+        kind: "video",
+        mp4: "/media/connexx-ecommerce.mp4",
+        webm: "/media/connexx-ecommerce.webm",
+        poster: "/media/connexx-ecommerce-poster.jpg",
+        alt: "Connexx routing orders from Shopify, Amazon, eBay and Veeqo to the best-value carrier.",
+        width: 1200,
+        height: 730,
+      },
       tone: "light",
     },
   },
