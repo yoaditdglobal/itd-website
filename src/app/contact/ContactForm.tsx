@@ -19,6 +19,7 @@ const shippingTypes = [
 
 const isFreightType = (type: string) =>
   type === "Sea Freight" || type === "Air Freight";
+const isSeaFreightType = (type: string) => type === "Sea Freight";
 const isDomesticType = (type: string) => type.startsWith("Domestic");
 
 const freightTypes = ["Parcel", "Box", "Pallet"] as const;
@@ -42,7 +43,8 @@ const steps = [
 ];
 
 export default function ContactForm() {
-  const [shippingType, setShippingType] = useState("");
+  // Domestic B2C is pre-selected (the most common enquiry); any other type is one click away.
+  const [shippingType, setShippingType] = useState<string>("Domestic B2C");
   const [mainLanes, setMainLanes] = useState<string[]>([]);
   const [weeklyVolume, setWeeklyVolume] = useState("");
   const [freightType, setFreightType] = useState("");
@@ -54,6 +56,12 @@ export default function ContactForm() {
   const [supplierInvoiceFile, setSupplierInvoiceFile] = useState<File | null>(null);
   const [freightPhotoFile, setFreightPhotoFile] = useState<File | null>(null);
   const [collectionPostcode, setCollectionPostcode] = useState("");
+  // Sea Freight only: volume + load/delivery points (country + postcode or town).
+  const [freightVolume, setFreightVolume] = useState("");
+  const [loadCountry, setLoadCountry] = useState("");
+  const [loadLocation, setLoadLocation] = useState("");
+  const [deliveryCountry, setDeliveryCountry] = useState("");
+  const [deliveryLocation, setDeliveryLocation] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -99,6 +107,9 @@ export default function ContactForm() {
 
   const showMainLanes = shippingType === "Export" || shippingType === "Import";
   const isFreight = isFreightType(shippingType);
+  const isSeaFreight = isSeaFreightType(shippingType);
+  // Supplier invoice / freight photo uploads: Air Freight only (removed from Sea Freight).
+  const showFreightUploads = isFreight && !isSeaFreight;
   const showWeightDims =
     shippingType === "Export" || shippingType === "Import" || isFreight;
 
@@ -117,8 +128,17 @@ export default function ContactForm() {
     if (!isFreightType(type)) {
       setFreightType("");
       setQuantity("");
+    }
+    if (!isFreightType(type) || isSeaFreightType(type)) {
       setSupplierInvoiceFile(null);
       setFreightPhotoFile(null);
+    }
+    if (!isSeaFreightType(type)) {
+      setFreightVolume("");
+      setLoadCountry("");
+      setLoadLocation("");
+      setDeliveryCountry("");
+      setDeliveryLocation("");
     }
   };
 
@@ -175,6 +195,20 @@ export default function ContactForm() {
       setError("Please select a freight type (Parcel, Box, or Pallet).");
       return;
     }
+    if (isSeaFreight) {
+      if (!freightVolume.trim() || !/^\d+(\.\d+)?$/.test(freightVolume.trim())) {
+        setError("Please enter the volume as a number.");
+        return;
+      }
+      if (!loadCountry || !loadLocation.trim()) {
+        setError("Please enter the load point country and postcode or town.");
+        return;
+      }
+      if (!deliveryCountry || !deliveryLocation.trim()) {
+        setError("Please enter the delivery point country and postcode or town.");
+        return;
+      }
+    }
     const combinedBytes =
       (supplierInvoiceFile?.size ?? 0) + (freightPhotoFile?.size ?? 0);
     if (combinedBytes > MAX_COMBINED_UPLOAD_BYTES) {
@@ -198,8 +232,15 @@ export default function ContactForm() {
           dimensions: showWeightDims
             ? { length: dimL, width: dimW, height: dimH }
             : undefined,
-          supplierInvoice: isFreight ? await filePayload(supplierInvoiceFile) : undefined,
-          freightPhoto: isFreight ? await filePayload(freightPhotoFile) : undefined,
+          supplierInvoice: showFreightUploads ? await filePayload(supplierInvoiceFile) : undefined,
+          freightPhoto: showFreightUploads ? await filePayload(freightPhotoFile) : undefined,
+          volume: isSeaFreight ? freightVolume.trim() : undefined,
+          loadPoint: isSeaFreight
+            ? { country: loadCountry, location: loadLocation.trim() }
+            : undefined,
+          deliveryPoint: isSeaFreight
+            ? { country: deliveryCountry, location: deliveryLocation.trim() }
+            : undefined,
           collectionPostcode: isFreight ? undefined : collectionPostcode,
           company: companyName,
           firstName,
@@ -436,6 +477,96 @@ export default function ContactForm() {
                   </div>
                 )}
 
+                {/* Sea Freight: volume + load / delivery points */}
+                {isSeaFreight && (
+                  <>
+                    <div>
+                      <label htmlFor="freight-volume" className={labelClass}>
+                        Volume <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        id="freight-volume"
+                        type="number"
+                        inputMode="decimal"
+                        min="0"
+                        step="any"
+                        value={freightVolume}
+                        onChange={(e) => setFreightVolume(e.target.value)}
+                        required
+                        className={fieldClass}
+                      />
+                    </div>
+                    <fieldset>
+                      <legend className={labelClass}>
+                        Load point <span className="text-red-500">*</span>
+                      </legend>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="load-country" className="sr-only">Load point country</label>
+                          <select
+                            id="load-country"
+                            value={loadCountry}
+                            onChange={(e) => setLoadCountry(e.target.value)}
+                            required
+                            className={fieldClass}
+                          >
+                            <option value="" disabled>Country</option>
+                            {countries.map((c) => (
+                              <option key={c.code} value={c.name}>{c.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <label htmlFor="load-location" className="sr-only">Load point postcode or town</label>
+                          <input
+                            id="load-location"
+                            type="text"
+                            value={loadLocation}
+                            onChange={(e) => setLoadLocation(e.target.value)}
+                            required
+                            placeholder="Postcode or town"
+                            className={fieldClass}
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend className={labelClass}>
+                        Delivery point <span className="text-red-500">*</span>
+                      </legend>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="delivery-country" className="sr-only">Delivery point country</label>
+                          <select
+                            id="delivery-country"
+                            value={deliveryCountry}
+                            onChange={(e) => setDeliveryCountry(e.target.value)}
+                            required
+                            className={fieldClass}
+                          >
+                            <option value="" disabled>Country</option>
+                            {countries.map((c) => (
+                              <option key={c.code} value={c.name}>{c.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <label htmlFor="delivery-location" className="sr-only">Delivery point postcode or town</label>
+                          <input
+                            id="delivery-location"
+                            type="text"
+                            value={deliveryLocation}
+                            onChange={(e) => setDeliveryLocation(e.target.value)}
+                            required
+                            placeholder="Postcode or town"
+                            className={fieldClass}
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                  </>
+                )}
+
                 {/* Weekly Volume — hidden for Freight */}
                 {!isFreight && (
                   <div>
@@ -520,8 +651,8 @@ export default function ContactForm() {
                   </>
                 )}
 
-                {/* Freight uploads — optional */}
-                {isFreight && (
+                {/* Freight uploads — optional (Air Freight only) */}
+                {showFreightUploads && (
                   <>
                     <div>
                       <label htmlFor="supplier-invoice" className={labelClass}>
