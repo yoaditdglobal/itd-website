@@ -14,6 +14,10 @@ export const metadata = buildMetadata({
 
 type Guide = {
   slug: string;
+  /** Override the card link (default /resources/guides/{slug}). */
+  href?: string;
+  /** Hide the "Updated" line and reading time (e.g. the Peak report). */
+  cta?: string;
   title: string;
   summary: string;
   category: string;
@@ -22,6 +26,17 @@ type Guide = {
 };
 
 const guides: Guide[] = [
+  {
+    slug: "peak-report",
+    href: "/peak",
+    cta: "Get the report",
+    title: "Peak report: know what peak will throw at you",
+    summary:
+      "When volume starts to climb, how eCommerce, marketplace and international peaks differ, and the checklist to work through before it lands. Built from real parcel data across ITD's customers.",
+    category: "Report",
+    readingTime: "Free download",
+    updated: "annually, ahead of peak",
+  },
   {
     slug: "3pl-partnership",
     title: "3PL Partnership: what working with ITD Global looks like",
@@ -72,7 +87,7 @@ export default function GuidesIndexPage() {
       name: "ITD Global Guides",
       items: guides.map((g) => ({
         name: g.title,
-        url: `/resources/guides/${g.slug}`,
+        url: g.href ?? `/resources/guides/${g.slug}`,
         description: g.summary,
       })),
     }),
@@ -101,7 +116,7 @@ export default function GuidesIndexPage() {
             {guides.map((guide, i) => (
               <ScrollReveal key={guide.slug} delay={i * 0.08}>
                 <Link
-                  href={`/resources/guides/${guide.slug}`}
+                  href={guide.href ?? `/resources/guides/${guide.slug}`}
                   className="group block bg-white rounded-xl border border-border p-6 hover:shadow-lg hover:border-accent/20 transition-all h-full"
                 >
                   <div className="flex items-center gap-3 mb-4">
@@ -119,7 +134,7 @@ export default function GuidesIndexPage() {
                   <div className="flex items-center justify-between pt-4 border-t border-border">
                     <span className="text-xs text-text-tertiary">Updated {guide.updated}</span>
                     <span className="inline-flex items-center gap-1 text-sm text-accent font-medium">
-                      Read guide <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      {guide.cta ?? "Read guide"} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </Link>

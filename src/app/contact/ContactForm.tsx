@@ -175,6 +175,11 @@ export default function ContactForm() {
   // GTM dataLayer (loaded globally in layout.tsx).
   type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] };
 
+  const contactSource = () => {
+    const src = new URLSearchParams(window.location.search).get("source")?.trim();
+    return src ? `contact-page:${src.replace(/[^\w-]/g, "").slice(0, 40)}` : "contact-page";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -247,7 +252,9 @@ export default function ContactForm() {
           lastName,
           email,
           phone,
-          source: "contact-page",
+          // "?source=" on the landing URL (e.g. /contact?source=peak) travels
+          // with the lead so the webhook/team email know which page sent it.
+          source: contactSource(),
         }),
       });
 

@@ -59,6 +59,8 @@ const nextConfig: NextConfig = {
   // stale bookmark to the old routes 301s to it instead of 404ing.
   async redirects() {
     return [
+      // Long-form alias for the Peak report landing page.
+      { source: "/resources/peak-report", destination: "/peak", permanent: true },
       // The Carrier updates sub-listing was folded into the category page
       // (topics cards link straight to articles).
       {
