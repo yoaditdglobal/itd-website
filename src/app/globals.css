@@ -331,6 +331,17 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   box-shadow: var(--shadow-lg);
 }
 
+/* Railless nav cards (the Shipping lanes): a card-sized take on --gradient-mesh.
+   Warm paper (white → cream) lit by a faint blue brand glow in the top-left,
+   the same language as the hero background. Token-driven; dark heading text and
+   the pale-blue accent chip both stay legible. Hover feedback is the shared
+   .card-hover lift + accent border, not a background swap. */
+.nav-lane-card {
+  background-image:
+    radial-gradient(115% 100% at 0% 0%, rgb(29 63 184 / 0.07) 0%, transparent 46%),
+    linear-gradient(152deg, #fff 0%, var(--color-bg-secondary) 68%, var(--color-bg-tertiary) 100%);
+}
+
 /* ─── Hero entrance choreography — the differentiation moment ───
    H1 lands, subhead arrives, CTAs follow, aside slides in.
    Total runtime ~800ms. All elements start at opacity 0 to avoid FOUT
@@ -415,6 +426,23 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   pointer-events: auto;
 }
 
+/* Mega panel: content swap when hovering from one trigger to another while
+   the panel is already open. The panel stays open (.nav-dropdown[data-open]);
+   only the keyed inner body remounts and fades in. */
+@keyframes nav-panel-swap {
+  from { opacity: 0; translate: 0 4px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+.nav-panel-swap { animation: nav-panel-swap 150ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Mega panel rail cards (role=tab): selected/unselected crossfade. */
+.nav-rail-tab { transition: background-color 150ms, border-color 150ms, box-shadow 150ms, opacity 150ms; }
+
+/* Peak promo CTA: the report's yellow, local to the navy promo card. Unlayered,
+   so it beats Button's bg-accent utility (Tailwind v4 utilities are layered). */
+.nav-promo-cta--yellow { background-color: #ffe500; color: var(--color-bg-dark); }
+.nav-promo-cta--yellow:hover { background-color: #f2d900; }
+
 /* Mobile menu overlay — slide in from the right. */
 .nav-mobile-overlay {
   visibility: hidden;
@@ -433,6 +461,7 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .nav-mobile-overlay {
     transition: none;
   }
+  .nav-panel-swap { animation: none; }
 }
 
 /* Hide the scrollbar on carousel tracks (they scroll by snap/controls). */
