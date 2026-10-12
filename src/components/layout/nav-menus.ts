@@ -76,6 +76,8 @@ export interface NavStory {
   result: string;
   blurb: string;
   logo?: string;
+  image: string;
+  imageAlt: string;
 }
 
 export interface NavMenu {
@@ -109,16 +111,19 @@ const CARRIERS: NavItem[] = [
 
 /** The Integrations menu's rotating customer-story slides, sourced from the
  *  case-study library so copy stays in sync with /resources/case-studies. */
-const NAV_STORY_SLUGS = ["west-ham-united", "home-bargains", "tatti-lashes", "beauty-bay"];
+const NAV_STORY_SLUGS = ["west-ham-united", "home-bargains", "tatti-lashes", "sifcon-international"];
 const NAV_STORIES: NavStory[] = NAV_STORY_SLUGS.flatMap((slug) => {
   const cs = caseStudies.find((c) => c.slug === slug);
-  return cs
+  // Every slide shows the story's hero image, so a story without one is skipped.
+  return cs?.heroImage
     ? [{
         slug,
         brand: cs.brandName,
         result: cs.headlineResult ?? cs.metric,
         blurb: cs.oneLiner ?? cs.summary,
         logo: cs.logo,
+        image: cs.heroImage,
+        imageAlt: cs.heroImageAlt ?? `${cs.brandName} case study`,
       }]
     : [];
 });

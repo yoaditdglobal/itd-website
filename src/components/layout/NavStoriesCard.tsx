@@ -52,19 +52,28 @@ export default function NavStoriesCard({ stories, surface = "panel" }: Props) {
       onBlurCapture={() => setPaused(false)}
     >
       <Link key={story.slug} href={href} className="nav-story-slide group block flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg">
-        <span className="flex items-center gap-3">
+        <span className={`relative block aspect-[16/9] overflow-hidden rounded-lg ${mobile ? "ring-1 ring-white/10" : ""}`}>
+          <Image
+            src={story.image}
+            alt={story.imageAlt}
+            fill
+            sizes="(min-width: 1280px) 312px, (min-width: 1024px) 272px, 100vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+        </span>
+        <span className="mt-4 flex items-center gap-2.5">
           {story.logo && (
             <Image
               src={story.logo}
               alt={`${story.brand} logo`}
-              width={40}
-              height={40}
-              className="h-10 w-10 shrink-0 rounded-lg bg-white object-cover ring-1 ring-border"
+              width={32}
+              height={32}
+              className="h-8 w-8 shrink-0 rounded-lg bg-white object-cover ring-1 ring-border"
             />
           )}
           <span className="text-heading-sm">{story.brand}</span>
         </span>
-        <span className={`mt-4 block text-heading-md transition-colors ${mobile ? "" : "group-hover:text-accent"}`}>
+        <span className={`mt-2 block text-heading-md transition-colors ${mobile ? "" : "group-hover:text-accent"}`}>
           {story.result}
         </span>
         <span className={`mt-2 block text-body-sm line-clamp-3 ${mobile ? "text-white/75" : "text-text-secondary"}`}>
