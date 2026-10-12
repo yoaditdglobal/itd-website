@@ -342,6 +342,26 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
     var(--gradient-dark);
 }
 
+/* Entrance for each slide of the nav's rotating customer-story card. */
+@keyframes nav-story-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.nav-story-slide {
+  animation: nav-story-in 280ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-story-slide {
+    animation: none;
+  }
+}
+
 /* ─── Hero entrance choreography — the differentiation moment ───
    H1 lands, subhead arrives, CTAs follow, aside slides in.
    Total runtime ~800ms. All elements start at opacity 0 to avoid FOUT

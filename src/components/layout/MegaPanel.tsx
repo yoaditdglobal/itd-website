@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import NavPromoCard from "./NavPromoCard";
+import NavStoriesCard from "./NavStoriesCard";
 import type { NavGroup, NavItem, NavMenu } from "./nav-menus";
 
 type Props = {
@@ -155,15 +156,12 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
         </ul>
         {menu.proofLogos ? (
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
-            <div className="flex items-center gap-3">
-              <span className="text-eyebrow text-text-tertiary">Carriers included</span>
-              <div className="flex flex-wrap items-center gap-2">
-                {menu.proofLogos.map((l) => (
-                  <div key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
-                    <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {menu.proofLogos.map((l) => (
+                <div key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
+                  <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
+                </div>
+              ))}
             </div>
             {footerLink && (
               <Link
@@ -187,7 +185,11 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
       </div>
 
       <div className="w-[320px] xl:w-[360px] shrink-0">
-        <NavPromoCard promo={menu.promo} />
+        {menu.stories ? (
+          <NavStoriesCard stories={menu.stories} />
+        ) : (
+          menu.promo && <NavPromoCard promo={menu.promo} />
+        )}
       </div>
     </div>
   );

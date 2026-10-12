@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import NavPromoCard from "./NavPromoCard";
+import NavStoriesCard from "./NavStoriesCard";
 import { NAV_MENUS, isSectionActive, type NavGroup, type NavItem, type NavMenu } from "./nav-menus";
 
 type Props = {
@@ -75,7 +76,11 @@ function SectionBody({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => vo
           )}
         </div>
       ))}
-      <NavPromoCard promo={menu.promo} surface="mobile" />
+      {menu.stories ? (
+        <NavStoriesCard stories={menu.stories} surface="mobile" />
+      ) : (
+        menu.promo && <NavPromoCard promo={menu.promo} surface="mobile" />
+      )}
     </div>
   );
 }

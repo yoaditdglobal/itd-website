@@ -13,6 +13,7 @@ import {
   Users,
 } from "lucide-react";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
+import { caseStudies } from "@/lib/data";
 
 /**
  * The site's four mega menus, as data. `Navbar` renders the desktop panel
@@ -68,6 +69,15 @@ export interface NavPromo {
   tone: "light" | "navy";
 }
 
+/** One slide of the rotating customer-story promo (NavStoriesCard). */
+export interface NavStory {
+  slug: string;
+  brand: string;
+  result: string;
+  blurb: string;
+  logo?: string;
+}
+
 export interface NavMenu {
   id: NavMenuId;
   label: string;
@@ -81,7 +91,10 @@ export interface NavMenu {
   /** Railless menus: a small carrier-logo proof strip under the item grid. */
   proofLogos?: { name: string; logo: string }[];
   footerLink?: NavFooterLink;
-  promo: NavPromo;
+  /** The right-hand promo card. A menu carries this or `stories`, not both. */
+  promo?: NavPromo;
+  /** Rotating case-study click-throughs in place of the promo card. */
+  stories?: NavStory[];
 }
 
 const CARRIERS: NavItem[] = [
@@ -94,6 +107,22 @@ const CARRIERS: NavItem[] = [
   { name: "DHL", desc: "The leading international express courier, to over 220 countries", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },
 ];
 
+/** The Integrations menu's rotating customer-story slides, sourced from the
+ *  case-study library so copy stays in sync with /resources/case-studies. */
+const NAV_STORY_SLUGS = ["west-ham-united", "home-bargains", "tatti-lashes", "beauty-bay"];
+const NAV_STORIES: NavStory[] = NAV_STORY_SLUGS.flatMap((slug) => {
+  const cs = caseStudies.find((c) => c.slug === slug);
+  return cs
+    ? [{
+        slug,
+        brand: cs.brandName,
+        result: cs.headlineResult ?? cs.metric,
+        blurb: cs.oneLiner ?? cs.summary,
+        logo: cs.logo,
+      }]
+    : [];
+});
+
 export const NAV_MENUS: readonly NavMenu[] = [
   {
     id: "shipping",
@@ -105,15 +134,8 @@ export const NAV_MENUS: readonly NavMenu[] = [
       { name: "International", desc: "EU and worldwide, with HS codes, IOSS and customs paperwork done for you", href: "/shipping/international", icon: Globe },
       { name: "Freight", desc: "UK pallet networks, EU road lanes and worldwide LCL/FCL on live rates", href: "/shipping/freight", icon: Container },
     ],
-    proofLogos: [
-      { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
-      { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
-      { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
-      { name: "InPost", logo: "/logos/carriers/inpost-icon.png" },
-      { name: "Parcel Force", logo: "/logos/carriers/parcel-force.svg" },
-      { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-    ],
-    footerLink: { label: "Explore all shipping", href: "/shipping" },
+    proofLogos: CARRIERS.map((c) => ({ name: c.name, logo: c.logo! })),
+    footerLink: { label: "Explore", href: "/shipping" },
     promo: {
       title: "See what your shipping should cost",
       body: "Live prices across the UK's biggest carrier network, no account needed.",
@@ -203,13 +225,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
         },
       ],
     },
-    promo: {
-      title: "One connection to an entire carrier network",
-      body: "Royal Mail, Evri, DPD, InPost, DHL and more, live from day one with no carrier accounts to set up.",
-      cta: { label: "Explore", href: "/integrations/carriers" },
-      art: { kind: "logos", logos: CARRIERS.slice(0, 5).map((c) => ({ name: c.name, logo: c.logo! })) },
-      tone: "light",
-    },
+    stories: NAV_STORIES,
   },
   {
     id: "resources",
