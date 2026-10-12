@@ -47,6 +47,13 @@ export default function TrackPage() {
           <ScrollReveal>
             <div className="mt-8 space-y-2 text-body-sm text-text-secondary">
               <p>
+                Tracking a container or freight shipment?{" "}
+                <Link href="/track/freight" className="text-accent hover:underline">
+                  Track your freight
+                </Link>
+                .
+              </p>
+              <p>
                 Shipping with us through Connexx?{" "}
                 <a
                   href="https://connexx.co.uk/"
