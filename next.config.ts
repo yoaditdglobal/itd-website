@@ -133,17 +133,11 @@ const nextConfig: NextConfig = {
       // Team page retired (July 2026) — leadership lives on /about now.
       { source: "/about/team", destination: "/about", permanent: true },
       { source: "/track-your-parcel", destination: "/track", permanent: true },
-      // Old freight tracking page. ShipsGo status emails carry the container
-      // code as ?query=, which Next forwards to the destination automatically.
-      // Not permanent: the exact old path in the emails is still to be
-      // confirmed, so keep browsers from caching it.
-      {
-        source: "/track-your-shipment",
-        has: [{ type: "query", key: "query" }],
-        destination: "/track/freight",
-        permanent: false,
-      },
-      { source: "/track-your-shipment", destination: "/track", permanent: false },
+      // ShipsGo status emails' "Go Live Position" button links to the old
+      // /freighttracking?query=<reference> page (confirmed from a live email).
+      // Next carries the ?query= through to the destination automatically.
+      { source: "/freighttracking", destination: "/track/freight", permanent: true },
+      { source: "/track-your-shipment", destination: "/track", permanent: true },
       { source: "/customer-login", destination: "https://connexx.co.uk/", permanent: true },
       { source: "/contact-us", destination: "/contact", permanent: true },
       { source: "/contact-us/:path*", destination: "/contact", permanent: true },
