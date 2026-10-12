@@ -11,7 +11,7 @@ type Props = {
 };
 
 /**
- * The right-hand promo card of a mega menu: art, eyebrow, title, body, one
+ * The right-hand promo card of a mega menu: art, title, body, one
  * full-width CTA. Two tones on the panel (tinted light, or navy) and a single
  * dark-card treatment on mobile. No `.font-display` class here — the nav's
  * light-hero theme rule would recolour it; the type tokens set the face.
@@ -69,8 +69,7 @@ export default function NavPromoCard({ promo, surface = "panel" }: Props) {
           </div>
         )}
       </div>
-      <p className={`text-eyebrow ${navy ? "text-white/60" : "text-accent"}`}>{promo.eyebrow}</p>
-      <p className="text-heading-md mt-2">{promo.title}</p>
+      <p className="text-heading-md">{promo.title}</p>
       <p className={`text-body-sm mt-2 ${navy ? "text-white/75" : "text-text-secondary"}`}>{promo.body}</p>
       <div className="mt-auto pt-5">
         <Button

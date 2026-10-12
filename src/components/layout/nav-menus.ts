@@ -61,7 +61,6 @@ export type NavPromoArt =
   | { kind: "logos"; logos: { name: string; logo: string }[] };
 
 export interface NavPromo {
-  eyebrow: string;
   title: string;
   body: string;
   cta: { label: NavCtaLabel; href: string };
@@ -116,7 +115,6 @@ export const NAV_MENUS: readonly NavMenu[] = [
     ],
     footerLink: { label: "Explore all shipping", href: "/shipping" },
     promo: {
-      eyebrow: "Rate checker",
       title: "Compare carrier rates before you ship",
       body: "Live prices across the UK's biggest carrier network, no account needed.",
       cta: { label: "Get Quote", href: RATE_CHECKER_URL },
@@ -160,7 +158,6 @@ export const NAV_MENUS: readonly NavMenu[] = [
       ],
     },
     promo: {
-      eyebrow: "Connexx platform",
       title: "The engine behind 17.5m labels a year",
       body: "Every order routed to the best-value carrier, labelled in seconds, tracked and cleared in one place.",
       cta: { label: "Explore", href: "/connexx" },
@@ -207,7 +204,6 @@ export const NAV_MENUS: readonly NavMenu[] = [
       ],
     },
     promo: {
-      eyebrow: "Carrier network",
       title: "One connection to an entire carrier network",
       body: "Royal Mail, Evri, DPD, InPost, DHL and more, live from day one with no carrier accounts to set up.",
       cta: { label: "Explore", href: "/integrations/carriers" },
@@ -263,7 +259,6 @@ export const NAV_MENUS: readonly NavMenu[] = [
       ],
     },
     promo: {
-      eyebrow: "Peak planning",
       title: "Know what peak will throw at you",
       body: "Real parcel data across ITD's customers. See when volume lands and plan your courier mix.",
       cta: { label: "Explore", href: "/peak" },
