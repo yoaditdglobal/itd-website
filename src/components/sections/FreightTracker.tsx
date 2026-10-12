@@ -42,6 +42,13 @@ export default function FreightTracker() {
 
   const [input, setInput] = useState(queried);
   const [error, setError] = useState<string | null>(null);
+  // ShipsGo only returns ITD's shipments when the map is framed from
+  // itdglobal.com; localhost and deploy previews always show "no results".
+  const [offSite, setOffSite] = useState(false);
+
+  useEffect(() => {
+    setOffSite(!/(^|\.)itdglobal\.com$/.test(window.location.hostname));
+  }, []);
 
   // Keep the field in step with back/forward navigation.
   useEffect(() => {
@@ -121,6 +128,13 @@ export default function FreightTracker() {
           </p>
         )}
       </form>
+
+      {valid && offSite && (
+        <p className="rounded-lg border border-border bg-white px-4 py-3 text-body-sm text-text-secondary">
+          Test copy of the site: ShipsGo only shows live results on itdglobal.com,
+          so this map will say it can&apos;t find the shipment.
+        </p>
+      )}
 
       {valid && (
         <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
