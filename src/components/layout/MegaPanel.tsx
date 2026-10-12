@@ -242,7 +242,7 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
               aria-selected={selected}
               aria-controls={panelId}
               tabIndex={selected ? 0 : -1}
-              className={`nav-rail-tab flex w-full gap-3 rounded-xl border p-3 xl:p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+              className={`nav-rail-tab flex w-full items-center gap-3 rounded-xl border p-3 xl:p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 selected
                   ? "border-border bg-white shadow-sm text-text-primary"
                   : "border-transparent text-text-tertiary opacity-70 hover:opacity-100"
@@ -260,9 +260,8 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
               }}
             >
               <Icon className="h-9 w-9 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
-              <span className="min-w-0">
-                <span className={`block text-heading-sm ${selected ? "text-text-primary" : ""}`}>{g.title}</span>
-                <span className="mt-1 block text-body-sm text-text-secondary line-clamp-3">{g.description}</span>
+              <span className={`min-w-0 block text-heading-sm ${selected ? "text-text-primary" : ""}`}>
+                {g.title}
               </span>
             </button>
           );
