@@ -25,7 +25,8 @@ const cspReportOnly = [
   // bookings.cloud.microsoft — where that embed actually resolves to (the
   // outlook.office.com /book URL frames it); without it the booking widget is
   // blocked the day this policy is enforced.
-  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com https://outlook.office.com https://outlook.office365.com https://bookings.cloud.microsoft https://www.linkedin.com",
+  // shipsgo.com — the ShipsGo Live Map iframe on /track/freight.
+  "frame-src 'self' https://*.zohopublic.eu https://www.googletagmanager.com https://outlook.office.com https://outlook.office365.com https://bookings.cloud.microsoft https://www.linkedin.com https://shipsgo.com",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
@@ -132,6 +133,11 @@ const nextConfig: NextConfig = {
       // Team page retired (July 2026) — leadership lives on /about now.
       { source: "/about/team", destination: "/about", permanent: true },
       { source: "/track-your-parcel", destination: "/track", permanent: true },
+      // ShipsGo status emails' "Go Live Position" button links to the old
+      // /freighttracking?query=<reference> page (confirmed from a live email).
+      // Next carries the ?query= through to the destination automatically.
+      { source: "/freighttracking", destination: "/track/freight", permanent: true },
+      { source: "/track-your-shipment", destination: "/track", permanent: true },
       { source: "/customer-login", destination: "https://connexx.co.uk/", permanent: true },
       { source: "/contact-us", destination: "/contact", permanent: true },
       { source: "/contact-us/:path*", destination: "/contact", permanent: true },
