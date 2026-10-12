@@ -115,7 +115,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
     ],
     footerLink: { label: "Explore all shipping", href: "/shipping" },
     promo: {
-      title: "Compare carrier rates before you ship",
+      title: "See what your shipping should cost",
       body: "Live prices across the UK's biggest carrier network, no account needed.",
       cta: { label: "Get Quote", href: RATE_CHECKER_URL },
       art: { kind: "icon", icon: Calculator },
