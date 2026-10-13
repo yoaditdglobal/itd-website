@@ -1,179 +1,75 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, type KeyboardEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
-import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import MegaPanel from "./MegaPanel";
+import MobileNavMenu from "./MobileNavMenu";
+import { NAV_MENUS, isSectionActive, type NavMenuId } from "./nav-menus";
 
-// Run the hero-tone read BEFORE the browser paints so the transparent nav never
-// flashes the dark pill first. useLayoutEffect on the client; useEffect on the
-// server (SSR) to avoid React's "useLayoutEffect does nothing on the server".
+// useLayoutEffect on the client (no flash of wrong nav tone), useEffect on the server.
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-// Connexx login — the Connexx app portal, which handles its own auth session.
 const LOGIN_URL = "https://connexx.co.uk/";
+const PANEL_ID = "nav-mega-panel";
 
-const shippingMenu = [
-  { name: "Domestic", desc: "UK & local parcel delivery", href: "/shipping/domestic" },
-  { name: "International", desc: "Cross-border shipping & compliance", href: "/shipping/international" },
-  { name: "Freight", desc: "Bulk & pallet logistics", href: "/shipping/freight" },
-];
-
-const solutionsMenu = {
-  byStage: [
-    { name: "Enterprise", desc: "Scale logistics across global operations", href: "/solutions/enterprise" },
-    { name: "SMEs", desc: "Ship smarter from day one", href: "/solutions/small-business" },
-    { name: "Brands", desc: "Delivery your customers choose", href: "/solutions/brands" },
-  ],
-  byModel: [
-    { name: "eCommerce", desc: "Multi-carrier shipping for online stores", href: "/solutions/ecommerce" },
-    { name: "Marketplace Seller", desc: "Unified fulfilment across platforms", href: "/solutions/marketplace-seller" },
-    { name: "3PL", desc: "Multi-client logistics automation", href: "/solutions/3pl" },
-    { name: "Export", desc: "Compliance and documentation", href: "/solutions/export" },
-    { name: "Import", desc: "Customs and clearance automation", href: "/solutions/import" },
-    { name: "B2B", desc: "ERP-connected dispatch", href: "/solutions/b2b" },
-  ],
-};
-
-const integrationsMenu = {
-  tech: [
-    { label: "ERP / WMS", href: "/integrations/erp-wms", names: "Linnworks, NetSuite, Magento" },
-    { label: "eCommerce & Logistics", href: "/integrations/ecommerce-logistics", names: "Shopify, WooCommerce, Veeqo" },
-    { label: "Marketplaces", href: "/integrations/marketplaces", names: "Amazon, eBay, Etsy" },
-  ],
-  carriers: [
-    { name: "Evri", desc: "UK parcel delivery", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo.png" },
-    { name: "Royal Mail", desc: "UK postal service", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon.png" },
-    { name: "DPD", desc: "European parcel delivery", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
-    { name: "InPost", desc: "Parcel locker delivery", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
-    { name: "Parcel Force", desc: "UK tracked parcel delivery", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
-    { name: "Amazon Shipping", desc: "Amazon logistics network", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
-    { name: "DHL", desc: "Global express & freight", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },
-  ],
-};
-
-const resourcesMenu = {
-  // Only populated solution facets — empty solutions (Marketplace) must not
-  // appear until a story exists for them. Links deep-link the library's
-  // ?solution= filter (server-rendered, shareable).
-  customerStories: [
-    { name: "eCommerce", href: "/resources/case-studies?solution=ecommerce" },
-    { name: "3PL", href: "/resources/case-studies?solution=3pl" },
-    { name: "B2B", href: "/resources/case-studies?solution=b2b" },
-    { name: "Import", href: "/resources/case-studies?solution=import" },
-    { name: "Export", href: "/resources/case-studies?solution=export" },
-    { name: "Freight", href: "/resources/case-studies?solution=freight" },
-  ],
-  knowledge: [
-    { name: "Guides", href: "/resources/guides" },
-    { name: "Peak report", href: "/peak" },
-    { name: "Glossary", href: "/resources/glossary" },
-  ],
-  support: [
-    { name: "Help Centre", href: "/help" },
-    { name: "Submit a request", href: "https://support.itdglobal.com/hc/en-gb/requests/new" },
-    { name: "Track Shipment", href: "/track" },
-  ],
-};
-
-interface NavDropdownProps {
-  id: string;
+interface NavTriggerProps {
+  id: NavMenuId;
   label: string;
   open: boolean;
+  active: boolean;
   onToggle: () => void;
   onHoverOpen: () => void;
-  onHoverClose: () => void;
-  onLinkClick: () => void;
+  onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => void;
   setTriggerRef: (el: HTMLButtonElement | null) => void;
-  /** Width/layout classes for the panel — visual classes only. */
-  panelClassName: string;
-  /** Whether this section matches the current route (active-nav indicator). */
-  active?: boolean;
-  children: ReactNode;
 }
 
 /**
- * Desktop mega-menu disclosure. Opens on mouse hover (pointerType-gated so a
- * touch tap doesn't double-fire) and toggles on click/Enter/Space — fixes
- * "first click does nothing". The panel is always mounted and animated with
- * the .nav-dropdown CSS class (visibility + opacity + translate + scale), so
- * it works without framer-motion and closed panels are out of the tab order.
+ * A mega-menu trigger. Opens on mouse hover (pointerType-gated so a touch tap
+ * doesn't double-fire) and toggles on click/Enter/Space. All four triggers
+ * control the ONE shared panel (`MegaPanel`) mounted at the end of the nav.
  */
-function NavDropdown({
-  id,
-  label,
-  open,
-  onToggle,
-  onHoverOpen,
-  onHoverClose,
-  onLinkClick,
-  setTriggerRef,
-  panelClassName,
-  active,
-  children,
-}: NavDropdownProps) {
+function NavTrigger({ id, label, open, active, onToggle, onHoverOpen, onKeyDown, setTriggerRef }: NavTriggerProps) {
   return (
-    <div
-      className="relative"
+    <button
+      ref={setTriggerRef}
+      id={`nav-trigger-${id}`}
+      type="button"
+      aria-expanded={open}
+      aria-controls={PANEL_ID}
+      aria-current={active ? "page" : undefined}
+      onClick={onToggle}
+      onKeyDown={onKeyDown}
       onPointerEnter={(e) => {
         if (e.pointerType === "mouse") onHoverOpen();
       }}
-      onPointerLeave={(e) => {
-        if (e.pointerType === "mouse") onHoverClose();
-      }}
+      className={`font-display relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+        active ? "text-white" : "text-white/70 hover:text-white"
+      }`}
     >
-      <button
-        ref={setTriggerRef}
-        type="button"
-        aria-expanded={open}
-        aria-controls={`nav-dropdown-${id}`}
-        aria-current={active ? "page" : undefined}
-        onClick={onToggle}
-        className={`font-display relative flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors ${
-          active ? "text-white" : "text-white/70 hover:text-white"
-        }`}
-      >
-        {label}
-        <ChevronDown
-          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`}
-        />
-        {active && (
-          <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
-        )}
-      </button>
-      <div
-        id={`nav-dropdown-${id}`}
-        data-open={open || undefined}
-        onClick={(e) => {
-          // Close when any link inside is clicked — covers query-string-only
-          // navigations where usePathname() doesn't change.
-          if ((e.target as HTMLElement).closest("a")) onLinkClick();
-        }}
-        className={`nav-dropdown before:absolute before:-top-1.5 before:left-0 before:right-0 before:h-1.5 before:content-[''] ${panelClassName}`}
-      >
-        {children}
-      </div>
-    </div>
+      {label}
+      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      {active && (
+        <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
+      )}
+    </button>
   );
 }
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Active top-level section, for nav highlighting.
-  const SECTION_BASE: Record<string, string> = {
-    shipping: "/shipping",
-    solutions: "/solutions",
-    integrations: "/integrations",
-    resources: "/resources",
-  };
   const isActive = (base: string) => pathname === base || pathname.startsWith(`${base}/`);
   const [scrolled, setScrolled] = useState(false);
   const [heroTone, setHeroTone] = useState<"light" | "dark" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<NavMenuId | null>(null);
+  // The menu whose content the panel shows. Kept across close so the panel
+  // doesn't go blank during its 180ms fade-out.
+  const [renderedMenuId, setRenderedMenuId] = useState<NavMenuId | null>(null);
+  const [openCount, setOpenCount] = useState(0);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -195,13 +91,11 @@ export default function Navbar() {
 
   // At the very top of a page the nav goes transparent so the page's hero shows
   // through behind it — the hero "stretches to the top", no separate dark band.
-  // ONLY light heroes go transparent (that was the bug): the nav over a light
-  // hero painted a dark pill that read as a separate header band. Dark/image
-  // heroes (data-hero-tone="dark") and unmarked pages KEEP the solid dark pill,
-  // which already blends with them — the user confirmed those look right, and a
-  // transparent nav over a photo whose top is bright would wash out the links.
+  // ONLY light heroes go transparent: the nav over a light hero painted a dark
+  // pill that read as a separate header band. Dark/image heroes
+  // (data-hero-tone="dark") and unmarked pages KEEP the solid dark pill.
   // The hero is the first section, so querySelector returns IT, not a dark
-  // section lower on the page (the prior detection bug). Scrolling → pill too.
+  // section lower on the page. Scrolling → pill too.
   useIsoLayoutEffect(() => {
     const tone = document.querySelector("[data-hero-tone]")?.getAttribute("data-hero-tone");
     setHeroTone(tone === "light" || tone === "dark" ? tone : null);
@@ -232,7 +126,7 @@ export default function Navbar() {
   // Escape closes the open dropdown and returns focus to its trigger.
   useEffect(() => {
     if (!openDropdown) return;
-    const onKey = (e: KeyboardEvent) => {
+    const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") {
         triggerRefs.current[openDropdown]?.focus();
         setOpenDropdown(null);
@@ -258,34 +152,61 @@ export default function Navbar() {
     setMobileAccordion(mobileAccordion === section ? null : section);
   };
 
-  const dropdownProps = (id: string) => ({
+  const openMenu = (id: NavMenuId, viaHover: boolean) => {
+    // Side effects stay outside state updaters — React double-invokes
+    // updaters in dev, which would flip the ref twice and break the absorb.
+    hoverOpenedRef.current = viaHover;
+    if (openDropdown !== id) setOpenCount((c) => c + 1);
+    setRenderedMenuId(id);
+    setOpenDropdown(id);
+  };
+  const closeMenu = () => setOpenDropdown(null);
+  const closeOnMouse = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") closeMenu();
+  };
+
+  const triggerProps = (id: NavMenuId) => ({
     id,
-    active: SECTION_BASE[id] ? isActive(SECTION_BASE[id]) : false,
     open: openDropdown === id,
     onToggle: () => {
-      // Side effects stay outside the state updater — React double-invokes
-      // updaters in dev, which would flip the ref twice and break the absorb.
       const wasHoverOpened = hoverOpenedRef.current;
       hoverOpenedRef.current = false;
       if (openDropdown === id) {
         // Hover already opened it — absorb this click and let the next one
         // (or pointer-leave / Escape / outside click) close it.
-        if (!wasHoverOpened) setOpenDropdown(null);
+        if (!wasHoverOpened) closeMenu();
       } else {
-        setOpenDropdown(id);
+        openMenu(id, false);
       }
     },
-    onHoverOpen: () => {
-      hoverOpenedRef.current = true;
-      setOpenDropdown(id);
+    onHoverOpen: () => openMenu(id, true),
+    onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
+      // Tab / ArrowDown from an open trigger jumps into the panel (it sits at
+      // the end of the nav in DOM order, after the other triggers and CTAs).
+      if (openDropdown !== id) return;
+      if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) {
+        const first = document.querySelector<HTMLElement>(
+          `#${PANEL_ID} [role="tab"][tabindex="0"], #${PANEL_ID} a[href]`,
+        );
+        if (first) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     },
-    onHoverClose: () =>
-      setOpenDropdown((cur) => (cur === id ? null : cur)),
-    onLinkClick: () => setOpenDropdown(null),
     setTriggerRef: (el: HTMLButtonElement | null) => {
       triggerRefs.current[id] = el;
     },
   });
+
+  const renderedMenu = NAV_MENUS.find((m) => m.id === renderedMenuId) ?? null;
+
+  const platformLinkClass = (mobile: boolean) =>
+    mobile
+      ? `py-3 font-display text-base font-medium ${isActive("/connexx") ? "text-accent" : "text-white"}`
+      : `font-display relative px-3 py-2 text-sm font-medium transition-colors ${
+          isActive("/connexx") ? "text-white" : "text-white/70 hover:text-white"
+        }`;
 
   return (
     <>
@@ -294,17 +215,20 @@ export default function Navbar() {
       <div
         className="fixed inset-0 z-40"
         aria-hidden
-        onClick={() => setOpenDropdown(null)}
+        onClick={closeMenu}
       />
     )}
     {/* Constant height — shrinking the bar on scroll exposed a strip of the
         beige body background between the nav and the page's pt-[72px] offset.
         The scrolled state changes surface treatment only. */}
     <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
+      {/* The whole pill is the hover region: pointer-leave anywhere outside it
+          (or onto a "neutral" item — logo, Platform, CTAs) closes the panel. */}
       <nav
         ref={navRef}
         data-nav-theme={darkInk ? "light" : "dark"}
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
+        onPointerLeave={closeOnMouse}
+        className={`relative mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
           transparent
             ? "border border-transparent"
             : scrolled
@@ -313,7 +237,7 @@ export default function Navbar() {
         }`}
       >
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0" aria-label="ITD Global — home">
+        <Link href="/" className="flex-shrink-0" aria-label="ITD Global — home" onPointerEnter={closeOnMouse}>
           <Image
             src="/logos/itd/itd-global-logo.webp"
             alt="ITD Global"
@@ -325,129 +249,32 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-1 ml-8 flex-1 min-w-0">
-          {/* Shipping */}
-          <NavDropdown
-            {...dropdownProps("shipping")}
-            label="Shipping"
-            panelClassName="absolute top-full left-0 mt-1 w-[280px] bg-white rounded-xl shadow-2xl border border-border p-6"
-          >
-            <div className="text-eyebrow text-text-tertiary mb-3">Shipping Type</div>
-            {shippingMenu.map((item) => (
-              <Link key={item.name} href={item.href} className="block py-2 group">
-                <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                <div className="text-xs text-text-secondary">{item.desc}</div>
-              </Link>
-            ))}
-          </NavDropdown>
-
-          {/* Solutions */}
-          <NavDropdown
-            {...dropdownProps("solutions")}
-            label="Solutions"
-            panelClassName="absolute top-full left-0 mt-1 w-[520px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
-          >
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">By Stage</div>
-              {solutionsMenu.byStage.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-2 group">
-                  <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                  <div className="text-xs text-text-secondary">{item.desc}</div>
+          {NAV_MENUS.map((menu) => (
+            <div key={menu.id} className="contents">
+              {menu.id === "integrations" && (
+                <Link
+                  href="/connexx"
+                  aria-current={isActive("/connexx") ? "page" : undefined}
+                  className={platformLinkClass(false)}
+                  onPointerEnter={closeOnMouse}
+                >
+                  Platform
+                  {isActive("/connexx") && (
+                    <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
+                  )}
                 </Link>
-              ))}
+              )}
+              <NavTrigger
+                {...triggerProps(menu.id)}
+                label={menu.label}
+                active={isSectionActive(menu, pathname)}
+              />
             </div>
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">By Business Model</div>
-              {solutionsMenu.byModel.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1.5 group">
-                  <div className="text-sm font-medium text-text-primary group-hover:text-accent">{item.name}</div>
-                  <div className="text-xs text-text-secondary">{item.desc}</div>
-                </Link>
-              ))}
-            </div>
-          </NavDropdown>
-
-          {/* Platform (Connexx) — direct link */}
-          <Link
-            href="/connexx"
-            aria-current={isActive("/connexx") ? "page" : undefined}
-            className={`font-display relative px-3 py-2 text-sm font-medium transition-colors ${
-              isActive("/connexx") ? "text-white" : "text-white/70 hover:text-white"
-            }`}
-          >
-            Platform
-            {isActive("/connexx") && (
-              <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
-            )}
-          </Link>
-
-          {/* Integrations */}
-          <NavDropdown
-            {...dropdownProps("integrations")}
-            label="Integrations"
-            panelClassName="absolute top-full left-0 mt-1 w-[460px] bg-white rounded-xl shadow-2xl border border-border p-6 grid grid-cols-2 gap-6"
-          >
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Tech Integrations</div>
-              {integrationsMenu.tech.map((cat) => (
-                <Link key={cat.label} href={cat.href} className="block py-2 group">
-                  <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{cat.label}</div>
-                  <div className="text-xs text-text-secondary">{cat.names}</div>
-                </Link>
-              ))}
-              <Link href="/integrations/tech" className="link-underline text-xs text-accent mt-1">Browse integrations →</Link>
-            </div>
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Carrier Integrations</div>
-              <ul className="space-y-1">
-                {integrationsMenu.carriers.map((c) => (
-                  <li key={c.name}>
-                    <Link href={c.href} className="flex items-center gap-2 py-1.5 group">
-                      <IntegrationLogo name={c.name} logo={c.logo} size="xs" />
-                      <div>
-                        <div className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{c.name}</div>
-                        <div className="text-xs text-text-secondary">{c.desc}</div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/integrations/carriers" className="link-underline text-xs text-accent mt-3">Browse carriers →</Link>
-            </div>
-          </NavDropdown>
-
-          {/* Resources */}
-          <NavDropdown
-            {...dropdownProps("resources")}
-            label="Resources"
-            panelClassName="absolute top-full -right-8 mt-1 w-[560px] bg-white rounded-xl shadow-2xl border border-border p-5 grid grid-cols-[1.5fr_1fr_1fr] gap-5"
-          >
-            {/* Customer Stories — the lead section of this menu */}
-            <div className="rounded-lg bg-accent-light/40 p-4 -my-1">
-              <div className="text-eyebrow text-accent mb-3">Customer Stories</div>
-              {resourcesMenu.customerStories.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1.5 text-sm font-medium text-text-primary hover:text-accent">{item.name}</Link>
-              ))}
-              <Link href="/resources/case-studies" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline underline-offset-2">
-                See all stories →
-              </Link>
-            </div>
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Knowledge</div>
-              {resourcesMenu.knowledge.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-              ))}
-            </div>
-            <div>
-              <div className="text-eyebrow text-text-tertiary mb-3">Support</div>
-              {resourcesMenu.support.map((item) => (
-                <Link key={item.name} href={item.href} className="block py-1 text-sm text-text-secondary hover:text-accent">{item.name}</Link>
-              ))}
-            </div>
-          </NavDropdown>
+          ))}
         </div>
 
         {/* Desktop CTAs */}
-        <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+        <div className="hidden lg:flex items-center gap-3 flex-shrink-0" onPointerEnter={closeOnMouse}>
           <Button href={LOGIN_URL} target="_blank" variant="secondary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Log in
           </Button>
@@ -465,6 +292,23 @@ export default function Navbar() {
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
+
+        {/* The shared mega-menu panel — absolute, so it doesn't affect the
+            pill's justify-between layout. */}
+        <MegaPanel
+          id={PANEL_ID}
+          menu={renderedMenu}
+          open={openDropdown !== null}
+          openCount={openCount}
+          labelledBy={renderedMenuId ? `nav-trigger-${renderedMenuId}` : undefined}
+          onLinkClick={closeMenu}
+          onEscapeToTrigger={() => {
+            if (openDropdown) triggerRefs.current[openDropdown]?.focus();
+          }}
+          onBlurOutside={(next) => {
+            if (next && navRef.current && !navRef.current.contains(next)) closeMenu();
+          }}
+        />
       </nav>
     </header>
 
@@ -473,6 +317,7 @@ export default function Navbar() {
     <div
       data-open={mobileOpen || undefined}
       aria-hidden={!mobileOpen}
+      data-analytics-location="nav"
       className="nav-mobile-overlay lg:hidden fixed inset-0 bg-bg-dark z-[60] overflow-y-auto"
     >
           {/* Overlay-internal top bar — the floating pill header sits underneath
@@ -496,103 +341,22 @@ export default function Navbar() {
             </button>
           </div>
           <div className="px-4 py-6 flex flex-col gap-1">
-            {/* Shipping accordion */}
-            <button
-              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/shipping") ? "text-accent" : "text-white"}`}
-              onClick={() => toggleMobileAccordion("shipping")}
-            >
-              Shipping
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileAccordion === "shipping" ? "rotate-180" : ""}`} />
-            </button>
-            {mobileAccordion === "shipping" && (
-              <div className="pl-4 pb-3 space-y-2">
-                {shippingMenu.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-              </div>
-            )}
-
-            {/* Solutions accordion */}
-            <button
-              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/solutions") ? "text-accent" : "text-white"}`}
-              onClick={() => toggleMobileAccordion("solutions")}
-            >
-              Solutions
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileAccordion === "solutions" ? "rotate-180" : ""}`} />
-            </button>
-            {mobileAccordion === "solutions" && (
-              <div className="pl-4 pb-3 space-y-2">
-                <div className="text-xs font-semibold uppercase text-white/40 mt-2">By Stage</div>
-                {solutionsMenu.byStage.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-                <div className="text-xs font-semibold uppercase text-white/40 mt-3">By Business Model</div>
-                {solutionsMenu.byModel.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-              </div>
-            )}
-
-            {/* Platform (Connexx) direct */}
-            <Link
-              href="/connexx"
-              aria-current={isActive("/connexx") ? "page" : undefined}
-              className={`py-3 font-display text-base font-medium ${isActive("/connexx") ? "text-accent" : "text-white"}`}
-              onClick={() => setMobileOpen(false)}
-            >
-              Platform
-            </Link>
-
-            {/* Integrations accordion */}
-            <button
-              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/integrations") ? "text-accent" : "text-white"}`}
-              onClick={() => toggleMobileAccordion("integrations")}
-            >
-              Integrations
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileAccordion === "integrations" ? "rotate-180" : ""}`} />
-            </button>
-            {mobileAccordion === "integrations" && (
-              <div className="pl-4 pb-3 space-y-2">
-                <div className="text-xs font-semibold uppercase text-white/40 mt-2">Tech Integrations</div>
-                {integrationsMenu.tech.map((cat) => (
-                  <Link key={cat.label} href={cat.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{cat.label}</Link>
-                ))}
-                <div className="text-xs font-semibold uppercase text-white/40 mt-3">Carriers</div>
-                {integrationsMenu.carriers.map((c) => (
-                  <Link key={c.name} href={c.href} className="flex items-center gap-2 py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>
-                    <IntegrationLogo name={c.name} logo={c.logo} size="xs" />
-                    {c.name}
-                  </Link>
-                ))}
-                <Link href="/integrations/carriers" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
-              </div>
-            )}
-
-            {/* Resources accordion */}
-            <button
-              className={`flex items-center justify-between w-full py-3 font-display text-base font-medium ${isActive("/resources") ? "text-accent" : "text-white"}`}
-              onClick={() => toggleMobileAccordion("resources")}
-            >
-              Resources
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileAccordion === "resources" ? "rotate-180" : ""}`} />
-            </button>
-            {mobileAccordion === "resources" && (
-              <div className="pl-4 pb-3 space-y-2">
-                <div className="text-xs font-semibold uppercase text-white/40 mt-2">Customer Stories</div>
-                {resourcesMenu.customerStories.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-                <Link href="/resources/case-studies" className="text-sm text-accent" onClick={() => setMobileOpen(false)}>See all →</Link>
-                <div className="text-xs font-semibold uppercase text-white/40 mt-3">Knowledge</div>
-                {resourcesMenu.knowledge.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-                <div className="text-xs font-semibold uppercase text-white/40 mt-3">Support</div>
-                {resourcesMenu.support.map((item) => (
-                  <Link key={item.name} href={item.href} className="block py-1.5 text-sm text-white/70" onClick={() => setMobileOpen(false)}>{item.name}</Link>
-                ))}
-              </div>
-            )}
+            <MobileNavMenu
+              pathname={pathname}
+              openSection={mobileAccordion}
+              onToggleSection={toggleMobileAccordion}
+              onNavigate={() => setMobileOpen(false)}
+              platformLink={
+                <Link
+                  href="/connexx"
+                  aria-current={isActive("/connexx") ? "page" : undefined}
+                  className={`block ${platformLinkClass(true)}`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Platform
+                </Link>
+              }
+            />
 
             {/* Mobile CTAs */}
             <div className="mt-6 flex flex-col gap-3">
