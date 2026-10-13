@@ -80,6 +80,9 @@ export function getNotifyEmails(): {
   leads?: string;
   leadsCc?: string;
   support?: string;
+  /** Account-management inbox for "Customer downloaded the Peak report"
+   *  notifications (PEAK_AM_NOTIFY_EMAIL); falls back to the leads inbox. */
+  peakAm?: string;
   /** Internal CCs on the submitter acknowledgement email (comma-separated).
    *  Visible to the lead — keep it to the people who'd jump into the thread. */
   ackCc: string[];
@@ -88,6 +91,7 @@ export function getNotifyEmails(): {
     leads: read("LEADS_NOTIFY_TO") ?? "yoad.tzor@itdglobal.com",
     leadsCc: read("LEADS_NOTIFY_CC") ?? "cc@itdglobal.com",
     support: read("SUPPORT_NOTIFY_TO"),
+    peakAm: read("PEAK_AM_NOTIFY_EMAIL") ?? read("LEADS_NOTIFY_TO") ?? "yoad.tzor@itdglobal.com",
     ackCc: (read("LEADS_ACK_CC") ?? "yoad.tzor@itdglobal.com")
       .split(",")
       .map((v) => v.trim())
@@ -105,4 +109,15 @@ const DEFAULT_LEAD_WEBHOOK_URL =
 
 export function getLeadWebhookUrl(): string {
   return read("LEAD_WEBHOOK_URL") ?? DEFAULT_LEAD_WEBHOOK_URL;
+}
+
+// ── Peak report webhook (Make.com → Zoho CRM) ───────────────────────────────
+// The Peak report gate (/peak) posts to its OWN Make scenario, separate from
+// Contact Sales, so Peak leads route into Zoho independently. Default baked in;
+// PEAK_LEAD_WEBHOOK_URL overrides it.
+const DEFAULT_PEAK_WEBHOOK_URL =
+  "https://hook.eu2.make.com/wehc5bwtoeyl7esd58b5ox8gqs19j5qd";
+
+export function getPeakWebhookUrl(): string {
+  return read("PEAK_LEAD_WEBHOOK_URL") ?? DEFAULT_PEAK_WEBHOOK_URL;
 }

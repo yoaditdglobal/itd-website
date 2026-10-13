@@ -232,3 +232,59 @@ export function supportAckText(d: { fullName: string; ticketId: string; issueSum
     SITE,
   ].join("\n");
 }
+
+// ── Peak report (/peak) ──────────────────────────────────────────────────────
+
+export interface PeakReportAckFields {
+  firstName?: string;
+  /** Report edition, e.g. "2026". */
+  year: string;
+  /** Absolute URL of the PDF. */
+  reportUrl: string;
+}
+
+/** Report delivery email sent to a /peak form submitter (prospect or customer). */
+export function peakReportAckHtml(d: PeakReportAckFields): string {
+  const hi = d.firstName?.trim() ? `Hi ${esc(d.firstName.trim())},` : "Hi,";
+  const year = esc(d.year);
+  const url = esc(d.reportUrl);
+  const body = `              <h1 style="margin:0 0 16px;font-family:${FONT};font-size:25px;line-height:1.25;font-weight:700">Your Peak ${year} report</h1>
+              <p style="margin:0 0 14px;font-family:${FONT};font-size:15px;line-height:1.6;color:#3d4353">${hi}</p>
+              <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:#3d4353">
+                Here&rsquo;s your <a href="${url}" style="color:#1d3fb8;font-weight:600;text-decoration:underline">Peak ${year} report</a>. It covers last peak week by week, with what each spike means for your courier plan.
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 0">
+                <tr>
+                  <td style="border-radius:9999px;background-color:#1d3fb8">
+                    <a href="${url}" style="display:inline-block;padding:12px 24px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">Open the report</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:24px 0 0;font-family:${FONT};font-size:15px;line-height:1.6;color:#3d4353">
+                If you&rsquo;d like to talk your plan through, reply to this email and our team will pick it up.
+              </p>
+              <p style="margin:24px 0 0;font-family:${FONT};font-size:15px;line-height:1.6;color:#3d4353">
+                <strong>ITD Global</strong>
+              </p>`;
+
+  return emailShell({
+    preheader: `Your Peak ${d.year} report is ready to download.`,
+    body,
+  });
+}
+
+/** Plain-text twin of the Peak report email. */
+export function peakReportAckText(d: PeakReportAckFields): string {
+  const hi = d.firstName?.trim() ? `Hi ${d.firstName.trim()},` : "Hi,";
+  return [
+    hi,
+    "",
+    `Here's your Peak ${d.year} report: ${d.reportUrl}`,
+    "It covers last peak week by week, with what each spike means for your courier plan.",
+    "",
+    "If you'd like to talk your plan through, reply to this email and our team will pick it up.",
+    "",
+    "ITD Global",
+    SITE,
+  ].join("\n");
+}

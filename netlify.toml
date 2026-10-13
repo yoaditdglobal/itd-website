@@ -14,3 +14,13 @@
 # Deploy Previews are generated automatically for every pull request opened
 # against `main` — confirm this is enabled under:
 #   Site configuration → Build & deploy → Deploy contexts → Deploy Previews.
+
+# Peak report PDFs (public/reports/*): soft-gated downloads. Keep them out of
+# search so the PDF can't rank and bypass the /peak lead form; open inline in
+# the browser; cache for a year (filenames change per edition).
+[[headers]]
+  for = "/reports/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Disposition = "inline"

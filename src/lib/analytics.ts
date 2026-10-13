@@ -23,7 +23,7 @@ export const LEAD_CURRENCY = "GBP";
  */
 export const LEAD_VALUE_GBP = 0;
 
-export type LeadSource = "contact_form" | "chat";
+export type LeadSource = "contact_form" | "chat" | "peak_report";
 
 /**
  * Build the unified `generate_lead` parameter set. `lead_source` distinguishes

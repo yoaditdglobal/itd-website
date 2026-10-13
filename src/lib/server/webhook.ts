@@ -11,8 +11,8 @@ import { getLeadWebhookUrl } from "@/lib/server/env";
  */
 export async function postLeadToWebhook(
   payload: Record<string, unknown>,
+  url: string = getLeadWebhookUrl(),
 ): Promise<boolean> {
-  const url = getLeadWebhookUrl();
   const body = JSON.stringify(payload);
 
   for (let attempt = 1; attempt <= 2; attempt++) {
