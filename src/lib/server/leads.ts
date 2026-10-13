@@ -85,6 +85,7 @@ export async function emailSubmitter(opts: {
   text?: string;
   cc?: string | string[];
   replyTo?: string;
+  attachments?: import("@/lib/server/email").MailAttachment[];
 }): Promise<boolean> {
   if (!isEmailConfigured()) return false;
   try {

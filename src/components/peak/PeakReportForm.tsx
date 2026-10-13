@@ -4,9 +4,8 @@ import { useEffect, useId, useRef, useState, type Dispatch, type SetStateAction 
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { FloatingLabelInput } from "@/components/ui/FloatingLabelInput";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LEAD_EVENT, leadParams, track } from "@/lib/analytics";
+import { LEAD_EVENT, leadParams } from "@/lib/analytics";
 import { isFreeMail, setUnlocked } from "./peak-storage";
 import type {
   CurveTabKey,
@@ -17,15 +16,15 @@ import type {
   PeakUtms,
 } from "./peak-types";
 
-type Field = "firstName" | "lastName" | "email" | "company" | "weeklyVolume" | "shipsWithItd";
+type Field = "firstName" | "lastName" | "email" | "company" | "companyWebsite" | "weeklyVolume";
 
 export type FormValues = {
   firstName: string;
   lastName: string;
   email: string;
   company: string;
+  companyWebsite: string;
   weeklyVolume: string;
-  shipsWithItd: "" | "yes" | "no";
   marketingOptIn: boolean;
   website: string; // honeypot
 };
@@ -45,8 +44,8 @@ export function emptyValues(): FormState {
       lastName: "",
       email: "",
       company: "",
+      companyWebsite: "",
       weeklyVolume: "",
-      shipsWithItd: "",
       marketingOptIn: false,
       website: "",
     },
@@ -58,12 +57,12 @@ export function emptyValues(): FormState {
 }
 
 const MESSAGES: Record<Field, string> = {
-  firstName: "Please enter your first name",
-  lastName: "Please enter your last name",
-  email: "Please enter a valid email address",
-  company: "Please enter your company",
-  weeklyVolume: "Please choose a volume",
-  shipsWithItd: "Please tell us if you ship with ITD today",
+  firstName: "Enter your first name",
+  lastName: "Enter your last name",
+  email: "Enter a valid email address",
+  company: "Enter your company",
+  companyWebsite: "Enter your company website",
+  weeklyVolume: "Enter your weekly parcel volume",
 };
 
 const LABELS: Record<Field, string> = {
@@ -71,11 +70,17 @@ const LABELS: Record<Field, string> = {
   lastName: "Last name",
   email: "Work email",
   company: "Company",
+  companyWebsite: "Company website",
   weeklyVolume: "Weekly parcel volume",
-  shipsWithItd: "Do you ship with ITD today?",
 };
 
-const FIELD_ORDER: Field[] = ["firstName", "lastName", "email", "company", "weeklyVolume", "shipsWithItd"];
+const FIELD_ORDER: Field[] = ["firstName", "lastName", "email", "company", "companyWebsite", "weeklyVolume"];
+
+/** Lenient domain check — accepts acme.com, www.acme.com, https://acme.co.uk/x. */
+function isLikelyDomain(s: string): boolean {
+  const t = s.trim();
+  return t.length >= 4 && /\.[a-z]{2,}/i.test(t);
+}
 
 function validate(v: FormValues): Partial<Record<Field, string>> {
   const e: Partial<Record<Field, string>> = {};
@@ -83,8 +88,8 @@ function validate(v: FormValues): Partial<Record<Field, string>> {
   if (!v.lastName.trim()) e.lastName = MESSAGES.lastName;
   if (!/^\S+@\S+\.\S+$/.test(v.email.trim())) e.email = MESSAGES.email;
   if (!v.company.trim()) e.company = MESSAGES.company;
-  if (!v.weeklyVolume) e.weeklyVolume = MESSAGES.weeklyVolume;
-  if (!v.shipsWithItd) e.shipsWithItd = MESSAGES.shipsWithItd;
+  if (!isLikelyDomain(v.companyWebsite)) e.companyWebsite = MESSAGES.companyWebsite;
+  if (!/\d/.test(v.weeklyVolume)) e.weeklyVolume = MESSAGES.weeklyVolume;
   return e;
 }
 
@@ -118,22 +123,16 @@ export default function PeakReportForm({
   trackDownload,
 }: Props) {
   const uid = useId();
-  const fid = (f: Field | "optin" | "summary" | "error") => `${uid}-${f}`;
-  const summaryRef = useRef<HTMLDivElement>(null);
+  const fid = (f: Field | "optin" | "error") => `${uid}-${f}`;
   const successRef = useRef<HTMLAnchorElement>(null);
   const [serverError, setServerError] = useState(false);
 
   const { values, touched, status } = state;
   const errors = validate(values);
+  // Soft validation: a field only shows its error once it's been left (blur) or
+  // after a submit attempt — never a wall of red the moment the dialog opens.
   const showError = (f: Field) => (touched[f] || state.submitAttempt > 0) && errors[f];
-  const visibleErrors = FIELD_ORDER.filter((f) => showError(f));
 
-  // Move focus to the error summary after a failed submit, or to the download
-  // button once the report is ready.
-  useEffect(() => {
-    if (state.submitAttempt > 0 && visibleErrors.length > 0) summaryRef.current?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.submitAttempt]);
   useEffect(() => {
     if (status === "success") successRef.current?.focus();
   }, [status]);
@@ -154,6 +153,12 @@ export default function PeakReportForm({
         submitAttempt: s.submitAttempt + 1,
         touched: Object.fromEntries(FIELD_ORDER.map((f) => [f, true])),
       }));
+      // Quietly take the user to the first field that needs attention instead of
+      // raising an alarming error summary above the form.
+      const firstInvalid = FIELD_ORDER.find((f) => errors[f]);
+      if (firstInvalid) {
+        requestAnimationFrame(() => document.getElementById(fid(firstInvalid))?.focus());
+      }
       return;
     }
     setState((s) => ({ ...s, status: "submitting" }));
@@ -164,8 +169,8 @@ export default function PeakReportForm({
       lastName: values.lastName.trim(),
       email: values.email.trim(),
       company: values.company.trim(),
-      weeklyVolume: values.weeklyVolume,
-      shipsWithItd: values.shipsWithItd as "yes" | "no",
+      companyWebsite: values.companyWebsite.trim(),
+      weeklyVolume: values.weeklyVolume.trim(),
       marketingOptIn: values.marketingOptIn,
       website: values.website,
       context: {
@@ -190,11 +195,9 @@ export default function PeakReportForm({
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = (await res.json()) as PeakReportResponse;
       const reportUrl = json.reportUrl;
-      const isCustomer = values.shipsWithItd === "yes";
 
-      // Lead conversion — counted for prospects AND existing customers (Yoad's
-      // call); `customer` lets GA4 segment them. Pushed to the GTM dataLayer so
-      // existing GTM tags receive it, like the contact form.
+      // Lead conversion — pushed to the GTM dataLayer so existing GTM tags
+      // receive it, like the contact form.
       const w = window as DataLayerWindow;
       w.dataLayer = w.dataLayer || [];
       w.dataLayer.push({
@@ -205,10 +208,8 @@ export default function PeakReportForm({
           curve_tab: curveTab,
           trigger,
           report_edition: edition,
-          customer: isCustomer,
         }),
       });
-      if (isCustomer) track("peak_customer_download", { report_edition: edition });
 
       setUnlocked(edition);
       onSuccess(reportUrl);
@@ -244,27 +245,6 @@ export default function PeakReportForm({
 
   return (
     <form onSubmit={submit} noValidate className="peak-form" aria-busy={busy}>
-      {visibleErrors.length > 0 && (
-        <div
-          ref={summaryRef}
-          id={fid("summary")}
-          role="alert"
-          tabIndex={-1}
-          className="peak-form__summary"
-        >
-          <p className="peak-form__summary-title">Please check the following:</p>
-          <ul>
-            {visibleErrors.map((f) => (
-              <li key={f}>
-                <a href={`#${fid(f)}`} onClick={(e) => { e.preventDefault(); document.getElementById(fid(f))?.focus(); }}>
-                  {errors[f]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       <fieldset disabled={busy} className="peak-form__fields">
         <div className="peak-form__row">
           <FloatingLabelInput
@@ -315,70 +295,33 @@ export default function PeakReportForm({
           onBlur={() => touch("company")}
           error={showError("company") ? errors.company : undefined}
         />
-
-        <div className="peak-form__select-wrap">
-          <label htmlFor={fid("weeklyVolume")} className="text-label peak-form__label">
-            {LABELS.weeklyVolume}
-          </label>
-          <select
-            id={fid("weeklyVolume")}
-            name="weeklyVolume"
-            required
-            value={values.weeklyVolume}
-            onChange={(e) => set("weeklyVolume", e.target.value)}
-            onBlur={() => touch("weeklyVolume")}
-            aria-invalid={showError("weeklyVolume") ? "true" : undefined}
-            aria-describedby={showError("weeklyVolume") ? fid("weeklyVolume") + "-error" : undefined}
-            className={`peak-form__select${showError("weeklyVolume") ? " is-invalid" : ""}`}
-          >
-            <option value="" disabled>
-              Choose a range
-            </option>
-            {copy.volumeBands.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-          {showError("weeklyVolume") && (
-            <p id={fid("weeklyVolume") + "-error"} className="text-caption peak-form__error">
-              {errors.weeklyVolume}
-            </p>
-          )}
-        </div>
-
-        <div
-          role="group"
-          aria-labelledby={fid("shipsWithItd") + "-label"}
-          aria-describedby={showError("shipsWithItd") ? fid("shipsWithItd") + "-error" : undefined}
-          className="peak-form__radio-wrap"
-        >
-          <p id={fid("shipsWithItd") + "-label"} className="text-label peak-form__label">
-            {LABELS.shipsWithItd}
-          </p>
-          <RadioGroup
-            id={fid("shipsWithItd")}
-            value={values.shipsWithItd}
-            onValueChange={(v) => {
-              set("shipsWithItd", v as "yes" | "no");
-              touch("shipsWithItd");
-            }}
-            className="peak-form__radios"
-            aria-invalid={showError("shipsWithItd") ? "true" : undefined}
-          >
-            <label className="peak-form__radio">
-              <RadioGroupItem value="yes" /> <span>Yes, I&rsquo;m a customer</span>
-            </label>
-            <label className="peak-form__radio">
-              <RadioGroupItem value="no" /> <span>Not yet</span>
-            </label>
-          </RadioGroup>
-          {showError("shipsWithItd") && (
-            <p id={fid("shipsWithItd") + "-error"} className="text-caption peak-form__error">
-              {errors.shipsWithItd}
-            </p>
-          )}
-        </div>
+        <FloatingLabelInput
+          id={fid("companyWebsite")}
+          label={LABELS.companyWebsite}
+          name="companyWebsite"
+          type="url"
+          inputMode="url"
+          autoComplete="url"
+          required
+          value={values.companyWebsite}
+          onChange={(e) => set("companyWebsite", e.target.value)}
+          onBlur={() => touch("companyWebsite")}
+          error={showError("companyWebsite") ? errors.companyWebsite : undefined}
+        />
+        <FloatingLabelInput
+          id={fid("weeklyVolume")}
+          label={LABELS.weeklyVolume}
+          name="weeklyVolume"
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          required
+          value={values.weeklyVolume}
+          onChange={(e) => set("weeklyVolume", e.target.value.replace(/[^\d]/g, ""))}
+          onBlur={() => touch("weeklyVolume")}
+          error={showError("weeklyVolume") ? errors.weeklyVolume : undefined}
+          hint={!showError("weeklyVolume") ? "Parcels per week — numbers only" : undefined}
+        />
 
         <label htmlFor={fid("optin")} className="peak-form__optin">
           <Checkbox

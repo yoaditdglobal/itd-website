@@ -1,30 +1,25 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { rateLimit, clientIp } from "@/lib/server/rate-limit";
-import { createLead, findRecentLeadByEmail, isZohoConfigured } from "@/lib/server/zoho";
-import { getNotifyEmails } from "@/lib/server/env";
+import { getNotifyEmails, getPeakWebhookUrl } from "@/lib/server/env";
 import { emailTeam, emailSubmitter } from "@/lib/server/leads";
 import { peakReportAckHtml, peakReportAckText } from "@/lib/server/email-templates";
 import { postLeadToWebhook } from "@/lib/server/webhook";
-import { PEAK, PEAK_VOLUME_BANDS } from "@/lib/peak-config";
+import type { MailAttachment } from "@/lib/server/email";
+import { PEAK } from "@/lib/peak-config";
 import { SITE_URL } from "@/lib/site-config";
 
 /**
  * POST /api/peak-report — the Peak report lead gate (/peak).
  *
- * Mirrors /api/contact: rate limit → validate → honeypot → webhook → Zoho →
- * emails, degrading gracefully at every step. The visitor ALWAYS gets the
- * report (the response carries `reportUrl`) even if CRM and email both fail,
- * and a lead is never lost: when the Zoho write fails the submission is
- * emailed to the team instead.
+ * Flow: rate limit → validate → honeypot → Make webhook (Zoho CRM) → team
+ * notification + report email, degrading gracefully at every step. The visitor
+ * ALWAYS gets the report (the response carries `reportUrl`) even if the webhook
+ * and email both fail, and the lead is never lost: a failed webhook still
+ * emails the team.
  *
- * Routing on "Do you ship with ITD today?":
- *  - "no"  (prospect): webhook + Zoho Lead (Lead_Source "Peak Report", skipped
- *           when the email already created a Lead in the last 24h) + leads
- *           inbox "NEW Peak report lead" + report email to the visitor.
- *  - "yes" (customer): webhook only (leadType existing_customer, NO Zoho
- *           Lead) + account-management inbox "Customer downloaded the Peak
- *           report" + report email to the visitor.
+ * CRM is handled entirely by the Make scenario behind PEAK_LEAD_WEBHOOK_URL,
+ * so the route does not write to Zoho directly and never double-creates a Lead.
  */
 
 export const runtime = "nodejs";
@@ -37,8 +32,8 @@ const peakSchema = z.object({
   lastName: short(80).min(1),
   email: z.string().trim().email().max(160),
   company: short(160).min(1),
-  weeklyVolume: z.enum(PEAK_VOLUME_BANDS),
-  shipsWithItd: z.enum(["yes", "no"]),
+  companyWebsite: short(200).min(1),
+  weeklyVolume: z.string().trim().regex(/^\d{1,9}$/, "weeklyVolume must be a number"),
   marketingOptIn: z.boolean().optional(),
   // Honeypot — must stay empty.
   website: z.string().max(0).optional(),
@@ -57,6 +52,33 @@ const peakSchema = z.object({
     .partial()
     .optional(),
 });
+
+/**
+ * Load the report PDF as an email attachment — best-effort. Fetched from the
+ * same deployment's public path so it works on preview and prod alike; any
+ * failure (or an oversized file) just falls back to the download link in the
+ * email body, so it never blocks delivery.
+ */
+async function loadReportAttachment(request: Request): Promise<MailAttachment[]> {
+  try {
+    const proto = request.headers.get("x-forwarded-proto") || "https";
+    const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
+    const origin = host ? `${proto}://${host}` : SITE_URL;
+    const res = await fetch(`${origin}${PEAK.reportPath}`, { signal: AbortSignal.timeout(6_000) });
+    if (!res.ok) return [];
+    const bytes = Buffer.from(await res.arrayBuffer());
+    if (bytes.byteLength === 0 || bytes.byteLength > 9_000_000) return [];
+    return [
+      {
+        name: `ITD Peak ${PEAK.edition} Report.pdf`,
+        contentType: "application/pdf",
+        contentBase64: bytes.toString("base64"),
+      },
+    ];
+  } catch {
+    return [];
+  }
+}
 
 export async function POST(request: Request) {
   const ip = clientIp(request);
@@ -93,15 +115,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, reportUrl }, { status: 201 });
   }
 
-  const isCustomer = d.shipsWithItd === "yes";
-  const leadType = isCustomer ? "existing_customer" : "prospect";
   const optIn = d.marketingOptIn ? "Yes" : "No";
   const submittedAt = new Date().toISOString();
 
   const description = [
     `Peak ${edition} report download`,
-    `Ships with ITD today: ${isCustomer ? "Yes, I'm a customer" : "Not yet"}`,
     `Weekly parcel volume: ${d.weeklyVolume}`,
+    `Company website: ${d.companyWebsite}`,
     `Marketing opt-in: ${optIn}`,
     ctx.curveTab && `Curve tab: ${ctx.curveTab}`,
     ctx.trigger && `Trigger: ${ctx.trigger}${ctx.cardId ? ` (${ctx.cardId})` : ""}`,
@@ -115,20 +135,18 @@ export async function POST(request: Request) {
     .join("\n");
 
   const notify = getNotifyEmails();
-  const subject = isCustomer ? "Customer downloaded the Peak report" : "NEW Peak report lead";
-  const heading = `${d.company}: ${d.weeklyVolume} parcels/week — ${isCustomer ? "existing customer" : "prospect"}`;
   const teamRows: Record<string, unknown> = {
     "First name": d.firstName,
     "Last name": d.lastName,
     Company: d.company,
+    "Company website": d.companyWebsite,
     Email: d.email,
     "Weekly parcel volume": d.weeklyVolume,
-    "Ships with ITD today": isCustomer ? "Yes, I'm a customer" : "Not yet",
     "Marketing opt-in": optIn,
     "Report edition": edition,
     "Curve tab": ctx.curveTab,
     Trigger: ctx.trigger,
-    "Card": ctx.cardId,
+    Card: ctx.cardId,
     "UTM source": ctx.utmSource,
     "UTM medium": ctx.utmMedium,
     "UTM campaign": ctx.utmCampaign,
@@ -138,17 +156,19 @@ export async function POST(request: Request) {
 
   const notifyTeam = (extra?: { intro?: string; rows?: Record<string, unknown> }) =>
     emailTeam({
-      to: isCustomer ? notify.peakAm : notify.leads,
-      cc: isCustomer ? undefined : notify.leadsCc,
+      to: notify.leads,
+      cc: notify.leadsCc,
       replyTo: d.email,
-      subject,
-      heading,
+      subject: "NEW Peak report lead",
+      heading: `${d.company}: ${d.weeklyVolume} parcels/week`,
       intro: extra?.intro,
       rows: extra?.rows ?? teamRows,
       keepEmptyRows: true,
     });
 
-  // The report itself — fire-and-forget, never blocks the response.
+  // The report itself — emailed to the visitor with the PDF attached (best
+  // effort) and a download link in the body as the always-works fallback.
+  const attachments = await loadReportAttachment(request);
   const ackFields = { firstName: d.firstName, year: edition, reportUrl };
   const sendReport = () =>
     emailSubmitter({
@@ -157,95 +177,58 @@ export async function POST(request: Request) {
       html: peakReportAckHtml(ackFields),
       text: peakReportAckText(ackFields),
       replyTo: notify.leads,
+      attachments,
     });
 
-  // Primary delivery: the Make.com lead webhook (flat keys for its mapping).
-  const webhookDelivered = await postLeadToWebhook({
-    firstName: d.firstName,
-    lastName: d.lastName,
-    fullName: `${d.firstName} ${d.lastName}`,
-    company: d.company,
-    email: d.email,
-    phone: "",
-    weeklyVolume: d.weeklyVolume,
-    leadType,
-    reportEdition: edition,
-    curveTab: ctx.curveTab || "",
-    trigger: ctx.trigger || "",
-    cardId: ctx.cardId || "",
-    marketingOptIn: Boolean(d.marketingOptIn),
-    utmSource: ctx.utmSource || "",
-    utmMedium: ctx.utmMedium || "",
-    utmCampaign: ctx.utmCampaign || "",
-    utmContent: ctx.utmContent || "",
-    description,
-    leadSource: "Peak Report",
-    page: "/peak",
-    submittedAt,
-  });
+  // CRM delivery: the Peak Make.com scenario (writes into Zoho). Flat keys for
+  // its field mapping.
+  const webhookDelivered = await postLeadToWebhook(
+    {
+      firstName: d.firstName,
+      lastName: d.lastName,
+      fullName: `${d.firstName} ${d.lastName}`,
+      company: d.company,
+      companyWebsite: d.companyWebsite,
+      email: d.email,
+      phone: "",
+      weeklyVolume: d.weeklyVolume,
+      reportEdition: edition,
+      curveTab: ctx.curveTab || "",
+      trigger: ctx.trigger || "",
+      cardId: ctx.cardId || "",
+      marketingOptIn: Boolean(d.marketingOptIn),
+      utmSource: ctx.utmSource || "",
+      utmMedium: ctx.utmMedium || "",
+      utmCampaign: ctx.utmCampaign || "",
+      utmContent: ctx.utmContent || "",
+      description,
+      leadSource: "Peak Report",
+      page: "/peak",
+      submittedAt,
+    },
+    getPeakWebhookUrl(),
+  );
 
-  const softSuccess = (extra: Record<string, unknown>) =>
-    NextResponse.json(
-      { success: true, reportUrl, persisted: webhookDelivered, webhookDelivered, ...extra },
-      { status: 201 },
-    );
+  // Notify the team (so a dropped webhook never loses the lead) and email the
+  // report. Both are best-effort; the visitor's download never depends on them.
+  const [emailed, acknowledged] = await Promise.all([
+    notifyTeam(
+      webhookDelivered
+        ? undefined
+        : { intro: "Webhook delivery to the Peak CRM scenario failed — captured here as a fallback." },
+    ),
+    sendReport(),
+  ]);
 
-  // Existing customers: no Zoho Lead — notify account management + send the report.
-  if (isCustomer) {
-    const [emailed, acknowledged] = await Promise.all([notifyTeam(), sendReport()]);
-    return softSuccess({ fallbackEmailed: emailed, acknowledged });
-  }
-
-  // Prospects — Zoho not configured (local dev / before secrets): the webhook
-  // above is the delivery path; email remains a best-effort secondary channel.
-  if (!isZohoConfigured()) {
-    if (!webhookDelivered) {
-      console.warn("[/api/peak-report] Zoho not configured; lead not persisted:", {
-        email: d.email,
-        company: d.company,
-      });
-    }
-    const [emailed, acknowledged] = await Promise.all([notifyTeam(), sendReport()]);
-    return softSuccess({ fallbackEmailed: emailed, acknowledged });
-  }
-
-  try {
-    // Don't create a second Lead for someone who enquired in the last 24h.
-    const deduped = await findRecentLeadByEmail(d.email, 24).catch(() => false);
-    if (deduped) {
-      const [emailed, acknowledged] = await Promise.all([
-        notifyTeam({ intro: "Existing Zoho Lead for this email within 24h — no new Lead created." }),
-        sendReport(),
-      ]);
-      return softSuccess({ deduped: true, fallbackEmailed: emailed, acknowledged });
-    }
-
-    const { id } = await createLead({
-      Last_Name: d.lastName,
-      First_Name: d.firstName,
-      Company: d.company,
-      Email: d.email,
-      Lead_Source: "Peak Report",
-      Description: description,
-    });
-    const [, acknowledged] = await Promise.all([
-      notifyTeam({ rows: { ...teamRows, "Zoho lead ID": id } }),
-      sendReport(),
-    ]);
-    return NextResponse.json(
-      { success: true, reportUrl, id, webhookDelivered, acknowledged },
-      { status: 201 },
-    );
-  } catch (err) {
-    console.error(
-      "[/api/peak-report] Zoho createLead failed:",
-      err instanceof Error ? err.message : err,
-    );
-    // Soft success to the visitor; email the team so the lead is never lost.
-    const [emailed, acknowledged] = await Promise.all([
-      notifyTeam({ intro: "Zoho lead create failed — captured here as a fallback." }),
-      sendReport(),
-    ]);
-    return softSuccess({ fallbackEmailed: emailed, acknowledged });
-  }
+  return NextResponse.json(
+    {
+      success: true,
+      reportUrl,
+      persisted: webhookDelivered,
+      webhookDelivered,
+      fallbackEmailed: emailed,
+      acknowledged,
+    },
+    { status: 201 },
+  );
 }

@@ -228,12 +228,3 @@ void _captionsCheck;
 export function peakLabel(template: string): string {
   return template.replaceAll("{year}", PEAK.edition);
 }
-
-/** Weekly parcel volume bands offered in the dialog (also validated server-side). */
-export const PEAK_VOLUME_BANDS = [
-  "Under 100",
-  "100–500",
-  "500–2,000",
-  "2,000–10,000",
-  "10,000+",
-] as const;

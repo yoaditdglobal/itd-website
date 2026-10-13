@@ -110,3 +110,14 @@ const DEFAULT_LEAD_WEBHOOK_URL =
 export function getLeadWebhookUrl(): string {
   return read("LEAD_WEBHOOK_URL") ?? DEFAULT_LEAD_WEBHOOK_URL;
 }
+
+// ── Peak report webhook (Make.com → Zoho CRM) ───────────────────────────────
+// The Peak report gate (/peak) posts to its OWN Make scenario, separate from
+// Contact Sales, so Peak leads route into Zoho independently. Default baked in;
+// PEAK_LEAD_WEBHOOK_URL overrides it.
+const DEFAULT_PEAK_WEBHOOK_URL =
+  "https://hook.eu2.make.com/wehc5bwtoeyl7esd58b5ox8gqs19j5qd";
+
+export function getPeakWebhookUrl(): string {
+  return read("PEAK_LEAD_WEBHOOK_URL") ?? DEFAULT_PEAK_WEBHOOK_URL;
+}

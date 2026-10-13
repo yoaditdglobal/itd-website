@@ -661,19 +661,6 @@
 .peak-form__privacy { color: #6b7080; margin-top: 1rem; }
 .peak-form__privacy a { color: var(--peak-cobalt); }
 .peak-form .peak-btn[type="submit"] { margin-top: 1.25rem; }
-.peak-form__summary {
-  border: 1px solid var(--color-danger);
-  background: var(--color-danger-light);
-  color: #7f1d1d;
-  border-radius: 0.5rem;
-  padding: 0.875rem 1rem;
-  margin-bottom: 1rem;
-  outline: none;
-}
-.peak-form__summary:focus-visible { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3); }
-.peak-form__summary-title { font-weight: 600; font-size: 0.9375rem; }
-.peak-form__summary ul { margin: 0.375rem 0 0; padding-left: 1.1rem; list-style: disc; font-size: 0.875rem; line-height: 1.5; }
-.peak-form__summary a { text-decoration: underline; text-underline-offset: 2px; }
 .peak-form__server-error { margin-top: 1rem; color: #7f1d1d; background: var(--color-danger-light); border: 1px solid var(--color-danger); border-radius: 0.5rem; padding: 0.75rem 1rem; }
 .peak-form__server-error a { color: inherit; }
 .peak-form__success { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; margin-top: 2rem; }

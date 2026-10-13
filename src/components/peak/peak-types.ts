@@ -86,7 +86,6 @@ export type PeakUtms = {
 };
 
 export type PeakDialogCopy = {
-  volumeBands: readonly string[];
   title: string; // already has {year} resolved
   sub: string;
   insideHeading: string;
@@ -105,8 +104,8 @@ export type PeakReportRequest = {
   lastName: string;
   email: string;
   company: string;
+  companyWebsite: string;
   weeklyVolume: string;
-  shipsWithItd: "yes" | "no";
   marketingOptIn: boolean;
   /** Honeypot — must stay empty. */
   website?: string;
