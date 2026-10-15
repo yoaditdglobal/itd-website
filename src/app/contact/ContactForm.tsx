@@ -19,15 +19,9 @@ const shippingTypes = [
 
 const isFreightType = (type: string) =>
   type === "Sea Freight" || type === "Air Freight";
-const isSeaFreightType = (type: string) => type === "Sea Freight";
 const isDomesticType = (type: string) => type.startsWith("Domestic");
 
 const freightTypes = ["Parcel", "Box", "Pallet"] as const;
-
-// Files travel base64 inside the JSON submission (and on to the lead webhook
-// + notification email), so the cap must fit the serverless request limit.
-const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4MB per file
-const MAX_COMBINED_UPLOAD_BYTES = 4 * 1024 * 1024; // 4MB across both files
 
 // Full country names as values — the submitted mainLanes array (and the
 // lead webhook payload behind it) carries names, not ISO codes.
@@ -53,10 +47,8 @@ export default function ContactForm() {
   const [dimL, setDimL] = useState("");
   const [dimW, setDimW] = useState("");
   const [dimH, setDimH] = useState("");
-  const [supplierInvoiceFile, setSupplierInvoiceFile] = useState<File | null>(null);
-  const [freightPhotoFile, setFreightPhotoFile] = useState<File | null>(null);
   const [collectionPostcode, setCollectionPostcode] = useState("");
-  // Sea Freight only: volume + load/delivery points (country + postcode or town).
+  // Sea + Air Freight: volume + load/delivery points (country + postcode or town).
   const [freightVolume, setFreightVolume] = useState("");
   const [loadCountry, setLoadCountry] = useState("");
   const [loadLocation, setLoadLocation] = useState("");
@@ -107,9 +99,6 @@ export default function ContactForm() {
 
   const showMainLanes = shippingType === "Export" || shippingType === "Import";
   const isFreight = isFreightType(shippingType);
-  const isSeaFreight = isSeaFreightType(shippingType);
-  // Supplier invoice / freight photo uploads: Air Freight only (removed from Sea Freight).
-  const showFreightUploads = isFreight && !isSeaFreight;
   const showWeightDims =
     shippingType === "Export" || shippingType === "Import" || isFreight;
 
@@ -128,48 +117,12 @@ export default function ContactForm() {
     if (!isFreightType(type)) {
       setFreightType("");
       setQuantity("");
-    }
-    if (!isFreightType(type) || isSeaFreightType(type)) {
-      setSupplierInvoiceFile(null);
-      setFreightPhotoFile(null);
-    }
-    if (!isSeaFreightType(type)) {
       setFreightVolume("");
       setLoadCountry("");
       setLoadLocation("");
       setDeliveryCountry("");
       setDeliveryLocation("");
     }
-  };
-
-  // Optional uploads: cap size, keep metadata only (bytes not sent — backend is a stub).
-  const handleFile = (
-    file: File | undefined,
-    setter: (f: File | null) => void,
-  ) => {
-    if (!file) {
-      setter(null);
-      return;
-    }
-    if (file.size > MAX_UPLOAD_BYTES) {
-      setError(`"${file.name}" is over 4MB. Please choose a smaller file.`);
-      return;
-    }
-    setError("");
-    setter(file);
-  };
-
-  /** Read a file into the submission payload — metadata + base64 bytes. */
-  const filePayload = async (file: File | null) => {
-    if (!file) return undefined;
-    const content = await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () =>
-        resolve(String(reader.result).replace(/^data:[^;]*;base64,/, ""));
-      reader.onerror = () => reject(reader.error);
-      reader.readAsDataURL(file);
-    });
-    return { name: file.name, size: file.size, type: file.type, content };
   };
 
   // GTM dataLayer (loaded globally in layout.tsx).
@@ -200,7 +153,7 @@ export default function ContactForm() {
       setError("Please select a freight type (Parcel, Box, or Pallet).");
       return;
     }
-    if (isSeaFreight) {
+    if (isFreight) {
       if (!freightVolume.trim() || !/^\d+(\.\d+)?$/.test(freightVolume.trim())) {
         setError("Please enter the volume as a number.");
         return;
@@ -213,12 +166,6 @@ export default function ContactForm() {
         setError("Please enter the delivery point country and postcode or town.");
         return;
       }
-    }
-    const combinedBytes =
-      (supplierInvoiceFile?.size ?? 0) + (freightPhotoFile?.size ?? 0);
-    if (combinedBytes > MAX_COMBINED_UPLOAD_BYTES) {
-      setError("Attachments are over 4MB combined. Please use smaller files.");
-      return;
     }
 
     setSubmitting(true);
@@ -237,13 +184,11 @@ export default function ContactForm() {
           dimensions: showWeightDims
             ? { length: dimL, width: dimW, height: dimH }
             : undefined,
-          supplierInvoice: showFreightUploads ? await filePayload(supplierInvoiceFile) : undefined,
-          freightPhoto: showFreightUploads ? await filePayload(freightPhotoFile) : undefined,
-          volume: isSeaFreight ? freightVolume.trim() : undefined,
-          loadPoint: isSeaFreight
+          volume: isFreight ? freightVolume.trim() : undefined,
+          loadPoint: isFreight
             ? { country: loadCountry, location: loadLocation.trim() }
             : undefined,
-          deliveryPoint: isSeaFreight
+          deliveryPoint: isFreight
             ? { country: deliveryCountry, location: deliveryLocation.trim() }
             : undefined,
           collectionPostcode: isFreight ? undefined : collectionPostcode,
@@ -484,8 +429,8 @@ export default function ContactForm() {
                   </div>
                 )}
 
-                {/* Sea Freight: volume + load / delivery points */}
-                {isSeaFreight && (
+                {/* Freight (Sea + Air): volume + load / delivery points */}
+                {isFreight && (
                   <>
                     <div>
                       <label htmlFor="freight-volume" className={labelClass}>
@@ -654,70 +599,6 @@ export default function ContactForm() {
                           className={fieldClass}
                         />
                       </div>
-                    </div>
-                  </>
-                )}
-
-                {/* Freight uploads — optional (Air Freight only) */}
-                {showFreightUploads && (
-                  <>
-                    <div>
-                      <label htmlFor="supplier-invoice" className={labelClass}>
-                        Supplier invoice{" "}
-                        <span className="font-normal text-text-tertiary">
-                          (for customs &mdash; optional)
-                        </span>
-                      </label>
-                      <input
-                        id="supplier-invoice"
-                        type="file"
-                        accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx,.xls"
-                        onChange={(e) =>
-                          handleFile(e.target.files?.[0], setSupplierInvoiceFile)
-                        }
-                        className="w-full text-sm text-text-secondary file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-white file:text-text-primary file:text-sm file:font-medium file:cursor-pointer hover:file:bg-bg-secondary"
-                      />
-                      {supplierInvoiceFile && (
-                        <p className="mt-1.5 flex items-center gap-2 text-xs text-text-secondary">
-                          <span className="truncate">{supplierInvoiceFile.name}</span>
-                          <button
-                            type="button"
-                            onClick={() => setSupplierInvoiceFile(null)}
-                            className="text-accent hover:underline"
-                          >
-                            Remove
-                          </button>
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="freight-photo" className={labelClass}>
-                        Photo of the freight{" "}
-                        <span className="font-normal text-text-tertiary">
-                          (optional)
-                        </span>
-                      </label>
-                      <input
-                        id="freight-photo"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                          handleFile(e.target.files?.[0], setFreightPhotoFile)
-                        }
-                        className="w-full text-sm text-text-secondary file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-white file:text-text-primary file:text-sm file:font-medium file:cursor-pointer hover:file:bg-bg-secondary"
-                      />
-                      {freightPhotoFile && (
-                        <p className="mt-1.5 flex items-center gap-2 text-xs text-text-secondary">
-                          <span className="truncate">{freightPhotoFile.name}</span>
-                          <button
-                            type="button"
-                            onClick={() => setFreightPhotoFile(null)}
-                            className="text-accent hover:underline"
-                          >
-                            Remove
-                          </button>
-                        </p>
-                      )}
                     </div>
                   </>
                 )}

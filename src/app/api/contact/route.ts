@@ -48,7 +48,7 @@ const contactSchema = z.object({
   supplierInvoice: fileMeta,
   freightPhoto: fileMeta,
   collectionPostcode: z.string().max(16).optional().or(z.literal("")),
-  // Sea Freight only
+  // Freight (Sea + Air)
   volume: z.string().max(40).optional().or(z.literal("")),
   loadPoint: z
     .object({ country: z.string().max(80).optional(), location: z.string().max(120).optional() })
@@ -165,7 +165,6 @@ export async function POST(request: Request) {
   // freight-only rows on an Import lead (etc.) read as skipped mandatory
   // fields when they were never shown to the submitter.
   const isFreightType = /freight/i.test(d.shippingType || "");
-  const isSeaFreight = d.shippingType === "Sea Freight";
   const isImportExport = d.shippingType === "Export" || d.shippingType === "Import";
   const teamRows: Record<string, unknown> = {
     "First name": d.firstName,
@@ -177,7 +176,7 @@ export async function POST(request: Request) {
     ...(isImportExport && { "Main lanes": d.mainLanes?.join(", ") }),
     ...(!isFreightType && { "Weekly volume": d.weeklyVolume }),
     ...(isFreightType && { "Freight type": d.freightType, Quantity: d.quantity }),
-    ...(isSeaFreight && {
+    ...(isFreightType && {
       Volume: d.volume,
       "Load point": loadPoint,
       "Delivery point": deliveryPoint,
@@ -190,10 +189,6 @@ export async function POST(request: Request) {
           : "",
     }),
     ...(!isFreightType && { "Collection postcode": d.collectionPostcode }),
-    ...(isFreightType && !isSeaFreight && {
-      "Supplier invoice file": d.supplierInvoice?.name,
-      "Freight photo file": d.freightPhoto?.name,
-    }),
     "Form source": d.source,
     Submitted: new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC",
   };
