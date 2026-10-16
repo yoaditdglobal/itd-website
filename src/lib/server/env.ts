@@ -121,3 +121,14 @@ const DEFAULT_PEAK_WEBHOOK_URL =
 export function getPeakWebhookUrl(): string {
   return read("PEAK_LEAD_WEBHOOK_URL") ?? DEFAULT_PEAK_WEBHOOK_URL;
 }
+
+// ── Peak report Google Sheet (Apps Script web app) ──────────────────────────
+// Optional second copy of every /peak submission, appended as a row to a Google
+// Sheet by a small Apps Script (docs/peak-sheet-apps-script.md). No default:
+// unset = the route skips it. The script checks the secret so the public
+// web-app URL can't be used to write junk rows.
+export function getPeakSheetConfig(): { url: string; secret: string } | null {
+  const url = read("PEAK_SHEET_WEBHOOK_URL");
+  const secret = read("PEAK_SHEET_SECRET");
+  return url && secret ? { url, secret } : null;
+}
