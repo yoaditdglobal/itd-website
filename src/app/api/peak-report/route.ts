@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { rateLimit, clientIp } from "@/lib/server/rate-limit";
-import { getNotifyEmails, getPeakWebhookUrl } from "@/lib/server/env";
+import { getNotifyEmails, getPeakSheetConfig, getPeakWebhookUrl } from "@/lib/server/env";
 import { emailTeam, emailSubmitter } from "@/lib/server/leads";
 import { peakReportAckHtml, peakReportAckText } from "@/lib/server/email-templates";
 import { postLeadToWebhook } from "@/lib/server/webhook";
@@ -180,6 +180,32 @@ export async function POST(request: Request) {
       attachments,
     });
 
+  // Google Sheet copy (optional, best-effort): one row per submission, started
+  // alongside the CRM webhook so it adds no latency.
+  const sheet = getPeakSheetConfig();
+  const sheetDelivery = sheet
+    ? postLeadToWebhook(
+        {
+          secret: sheet.secret,
+          submittedAt,
+          firstName: d.firstName,
+          lastName: d.lastName,
+          email: d.email,
+          company: d.company,
+          companyWebsite: d.companyWebsite,
+          weeklyVolume: d.weeklyVolume,
+          marketingOptIn: optIn,
+          reportEdition: edition,
+          trigger: ctx.trigger || "",
+          utmSource: ctx.utmSource || "",
+          utmMedium: ctx.utmMedium || "",
+          utmCampaign: ctx.utmCampaign || "",
+          utmContent: ctx.utmContent || "",
+        },
+        sheet.url,
+      )
+    : Promise.resolve(false);
+
   // CRM delivery: the Peak Make.com scenario (writes into Zoho). Flat keys for
   // its field mapping.
   const webhookDelivered = await postLeadToWebhook(
@@ -211,13 +237,14 @@ export async function POST(request: Request) {
 
   // Notify the team (so a dropped webhook never loses the lead) and email the
   // report. Both are best-effort; the visitor's download never depends on them.
-  const [emailed, acknowledged] = await Promise.all([
+  const [emailed, acknowledged, sheetDelivered] = await Promise.all([
     notifyTeam(
       webhookDelivered
         ? undefined
         : { intro: "Webhook delivery to the Peak CRM scenario failed — captured here as a fallback." },
     ),
     sendReport(),
+    sheetDelivery,
   ]);
 
   return NextResponse.json(
@@ -228,6 +255,7 @@ export async function POST(request: Request) {
       webhookDelivered,
       fallbackEmailed: emailed,
       acknowledged,
+      sheetDelivered,
     },
     { status: 201 },
   );
