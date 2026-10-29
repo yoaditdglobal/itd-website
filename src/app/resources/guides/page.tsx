@@ -32,7 +32,7 @@ const guides: Guide[] = [
     cta: "Get the report",
     title: "Peak report: know what peak will throw at you",
     summary:
-      "When volume starts to climb, how eCommerce, marketplace and international peaks differ, and the checklist to work through before it lands. Built from real parcel data across ITD's customers.",
+      "When volume starts to climb, how eCommerce, marketplace and international peaks differ, and the checklist to work through before it lands. Built from real parcel data across our customers.",
     category: "Report",
     readingTime: "Free download",
     updated: "annually, ahead of peak",

@@ -143,7 +143,7 @@ export const PEAK = {
   hero: {
     eyebrow: "Peak planning",
     h1: "Know what peak will throw at you",
-    sub: "Our peak report is built from real parcel data across ITD's customers. Use it to plan your capacity and courier mix before volume starts to climb.",
+    sub: "Our peak report is built from real parcel data across our customers. Use it to plan your capacity and courier mix before volume starts to climb.",
   },
 
   insights: {
