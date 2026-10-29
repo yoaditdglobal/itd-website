@@ -17,7 +17,7 @@ import "@/components/peak/peak.css";
 export const metadata = buildMetadata({
   title: "Peak season planning report",
   description:
-    "Plan peak with real parcel data from across ITD's customers. See when volume lands, how it differs by segment, and download the full Peak report.",
+    "Plan peak with real parcel data from across our customers. See when volume lands, how it differs by segment, and download the full Peak report.",
   path: "/peak",
 });
 

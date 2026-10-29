@@ -45,7 +45,7 @@ const sections: ResourceSection[] = [
     href: "/peak",
     icon: TrendingUp,
     description:
-      "When peak volume really lands, how it differs by segment, and the courier plan to build before it climbs. Real parcel data across ITD's customers.",
+      "When peak volume really lands, how it differs by segment, and the courier plan to build before it climbs. Real parcel data across our customers.",
     meta: "Annual report, free download",
   },
   {
