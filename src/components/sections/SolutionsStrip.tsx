@@ -39,9 +39,10 @@ const READING_LINE = 0.38;
  * Extra scroll (in vh) the stage stays pinned for while the strip travels.
  * This is the strip's speed control: the full right-to-left travel is spread
  * over this much scroll, so a longer pin = fewer pixels per wheel notch.
- * 130 read as rushed; 220 lets each word land and be read before the next.
+ * 130 read as rushed, 220 still too quick; 300 lets each word land and be
+ * read before the next arrives.
  */
-const PIN_SCROLL_VH = 220;
+const PIN_SCROLL_VH = 300;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // smoothstep: the strip leaves and arrives gently but stays under the
@@ -139,7 +140,7 @@ export default function SolutionsStrip({
       target = startX + (endX - startX) * t;
       // Lagging follow — keeps wheel notches from slamming the strip.
       const delta = target - current;
-      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.1;
+      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.08;
       paint(current);
 
       const rect = track.getBoundingClientRect();
