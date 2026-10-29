@@ -3,14 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 
 export interface ShowcaseCard {
   icon: ReactNode;
   title: string;
   body: string;
-  audiences: string[];
   href: string;
   image: { src: string; alt: string };
 }
@@ -22,7 +20,7 @@ export interface ShowcaseCard {
  * large rounded stage. The active panel (hover / keyboard focus; first by
  * default) grows while the others compress — flex-grow is the one deliberate
  * layout animation here (three panels, below the fold) and is disabled under
- * reduced motion. Copy sits overlaid on a dark scrim; the body/chips/CTA
+ * reduced motion. Copy sits overlaid on a dark scrim; the body/CTA
  * reveal uses the FaqAccordion grid-rows trick plus an opacity fade.
  *
  * Below lg: stacked full-width overlay cards, everything visible, tap
@@ -78,7 +76,7 @@ export default function ShippingShowcase({ cards }: { cards: ShowcaseCard[] }) {
                 </span>
                 <p className="mt-4 text-heading-lg text-white">{card.title}</p>
 
-                {/* Reveal block: body + audience chips + CTA */}
+                {/* Reveal block: body + CTA */}
                 <div
                   className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                     isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -86,22 +84,11 @@ export default function ShippingShowcase({ cards }: { cards: ShowcaseCard[] }) {
                 >
                   <div className="min-h-0 overflow-hidden">
                     <p className="mt-3 max-w-xl text-body-lg text-white/85">{card.body}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {card.audiences.map((a) => (
-                        <span
-                          key={a}
-                          className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white backdrop-blur-sm"
-                        >
-                          {a}
-                        </span>
-                      ))}
-                    </div>
                     <span
                       aria-hidden
-                      className="mt-6 mb-1 inline-flex w-fit items-center gap-1.5 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-accent-dark"
+                      className="mt-6 mb-1 inline-flex w-fit items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-accent-dark"
                     >
                       Explore
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
                     </span>
                   </div>
                 </div>
@@ -138,22 +125,11 @@ export default function ShippingShowcase({ cards }: { cards: ShowcaseCard[] }) {
               </span>
               <p className="mt-3 text-heading-lg text-white">{card.title}</p>
               <p className="mt-2 text-body-md text-white/85">{card.body}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {card.audiences.map((a) => (
-                  <span
-                    key={a}
-                    className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-white backdrop-blur-sm"
-                  >
-                    {a}
-                  </span>
-                ))}
-              </div>
               <span
                 aria-hidden
-                className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                className="mt-5 inline-flex w-fit items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white"
               >
                 Explore
-                <ArrowRight className="h-4 w-4" />
               </span>
             </div>
           </Link>

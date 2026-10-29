@@ -9,7 +9,6 @@ const cards: ShowcaseCard[] = [
     icon: <Truck className={ICON_CLASS} strokeWidth={1.75} />,
     title: "UK domestic parcel delivery",
     body: "All the UK carriers in one place, out to the Highlands, the Islands and Northern Ireland.",
-    audiences: ["eCommerce", "Marketplace Sellers", "3PLs", "B2B", "SMEs"],
     href: "/shipping/domestic",
     image: {
       src: "/shipping/domestic.webp",
@@ -20,7 +19,6 @@ const cards: ShowcaseCard[] = [
     icon: <Globe2 className={ICON_CLASS} strokeWidth={1.75} />,
     title: "International parcel delivery",
     body: "Ship in and out of the UK on the right carrier for each lane, with guidance when the rules change.",
-    audiences: ["Export", "Import", "Cross-border eCommerce", "Enterprise"],
     href: "/shipping/international",
     image: {
       src: "/shipping/international.jpg",
@@ -31,7 +29,6 @@ const cards: ShowcaseCard[] = [
     icon: <PackageOpen className={ICON_CLASS} strokeWidth={1.75} />,
     title: "Freight and pallet shipping",
     body: "Pallets and containers, UK and worldwide, planned and booked without the back-and-forth.",
-    audiences: ["B2B", "3PLs", "Enterprise", "Import", "Freight"],
     href: "/shipping/freight",
     image: {
       src: "/shipping/freight-hero.webp",

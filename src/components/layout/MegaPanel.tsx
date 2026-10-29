@@ -142,13 +142,15 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                       {item.name}
                     </span>
                   </span>
-                  <span
-                    className={`block text-body-sm line-clamp-3 ${
-                      rail ? "mt-1 text-text-secondary" : "mt-2 text-white/65"
-                    }`}
-                  >
-                    {item.desc}
-                  </span>
+                  {item.desc && (
+                    <span
+                      className={`block text-body-sm line-clamp-3 ${
+                        rail ? "mt-1 text-text-secondary" : "mt-2 text-white/65"
+                      }`}
+                    >
+                      {item.desc}
+                    </span>
+                  )}
                 </Link>
               </li>
             );
