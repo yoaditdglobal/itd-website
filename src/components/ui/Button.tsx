@@ -9,8 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-button text-on-button hover:bg-button-hover",
-        primary: "bg-button text-on-button hover:bg-button-hover",
+        default: "bg-button text-white hover:bg-button-hover",
+        primary: "bg-button text-white hover:bg-button-hover",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-transparent border border-border text-text-primary hover:bg-bg-secondary",
@@ -30,7 +30,8 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       // Dark-surface overrides: button sits on bg-bg-dark / bg-bg-dark-card.
-      // Primary on dark: same teal fill + navy label (reads on navy surfaces).
+      // Teal button label rule (user-directed): on a LIGHT surface the label is
+      // white; on a DARK surface the label is navy (text-on-button).
       {
         variant: "primary",
         surface: "dark",

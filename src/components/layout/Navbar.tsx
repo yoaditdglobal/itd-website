@@ -278,7 +278,7 @@ export default function Navbar() {
           <Button href={LOGIN_URL} target="_blank" variant="secondary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Log in
           </Button>
-          <Button href="/contact" variant="primary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2 text-white hover:text-white">
+          <Button href="/contact" variant="primary" surface={darkInk ? "light" : "dark"} className="text-xs px-4 py-2">
             Contact Sales
           </Button>
         </div>
@@ -363,7 +363,7 @@ export default function Navbar() {
               <Button href={LOGIN_URL} target="_blank" variant="secondary" surface="dark" className="w-full justify-center">
                 Log in
               </Button>
-              <Button href="/contact" variant="primary" surface="dark" className="w-full justify-center text-white hover:text-white">
+              <Button href="/contact" variant="primary" surface="dark" className="w-full justify-center">
                 Contact Sales
               </Button>
             </div>

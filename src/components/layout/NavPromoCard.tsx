@@ -77,7 +77,7 @@ export default function NavPromoCard({ promo, surface = "panel" }: Props) {
           variant="primary"
           surface={navy ? "dark" : "light"}
           size={surface === "mobile" ? "lg" : "default"}
-          className={`w-full ${promo.tone === "navy" && surface === "panel" ? "nav-promo-cta--yellow" : "text-white hover:text-white"}`}
+          className={`w-full ${promo.tone === "navy" && surface === "panel" ? "nav-promo-cta--yellow" : ""}`}
         >
           {promo.cta.label}
         </Button>
