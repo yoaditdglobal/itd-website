@@ -331,16 +331,6 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   box-shadow: var(--shadow-lg);
 }
 
-/* Railless nav cards (the Shipping lanes): a card-sized take on the design
-   system's dark surfaces — navy (--gradient-dark) lit by a blue brand glow in
-   the top-left, the same language as --gradient-dark-radial. White heading,
-   white/65 body and a white/10 icon chip keep it legible on the dark ground.
-   Hover feedback is the shared .card-hover lift + lightened border. */
-.nav-lane-card {
-  background-image:
-    radial-gradient(115% 100% at 0% 0%, rgb(59 91 219 / 0.38) 0%, transparent 52%),
-    var(--gradient-dark);
-}
 
 /* Entrance for each slide of the nav's rotating customer-story card. */
 @keyframes nav-story-in {

@@ -30,11 +30,14 @@ export type NavCtaLabel = "Get Quote" | "Learn More" | "Explore" | "Contact Sale
 
 export interface NavItem {
   name: string;
-  desc: string;
+  /** Optional supporting line; the Shipping menu omits it so its cards show icon + name only. */
+  desc?: string;
   href: string;
   logo?: string;
   /** Railless menus: an accent icon chip in place of a logo (visual anchor). */
   icon?: LucideIcon;
+  /** Railless menus: a photo that fills the square tile (icon + name overlay). */
+  image?: { src: string; alt: string };
 }
 
 export interface NavFooterLink {
@@ -135,9 +138,9 @@ export const NAV_MENUS: readonly NavMenu[] = [
     sectionBases: ["/shipping"],
     columns: 3,
     items: [
-      { name: "Domestic", desc: "Every UK order on one dashboard — one label, one invoice, full tracking", href: "/shipping/domestic", icon: PackageCheck },
-      { name: "International", desc: "EU and worldwide, with HS codes, IOSS and customs paperwork done for you", href: "/shipping/international", icon: Globe },
-      { name: "Freight", desc: "UK pallet networks, EU road lanes and worldwide LCL/FCL on live rates", href: "/shipping/freight", icon: Container },
+      { name: "Domestic", href: "/shipping/domestic", icon: PackageCheck, image: { src: "/shipping/domestic.webp", alt: "Royal Mail truck reversing into a UK warehouse loading bay" } },
+      { name: "International", href: "/shipping/international", icon: Globe, image: { src: "/shipping/international.jpg", alt: "Air freight pallets being loaded onto a wide-body aircraft" } },
+      { name: "Freight", href: "/shipping/freight", icon: Container, image: { src: "/shipping/freight-hero.webp", alt: "Container ship laden with freight containers at sea" } },
     ],
     proofLogos: CARRIERS.map((c) => ({ name: c.name, logo: c.logo! })),
     footerLink: { label: "Explore", href: "/shipping" },
