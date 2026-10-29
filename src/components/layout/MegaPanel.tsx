@@ -310,7 +310,8 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
                 onChange(g.id);
               }}
             >
-              <Icon className="h-9 w-9 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+              {/* Logo teal (the button fill), not the cobalt link accent — user-directed. */}
+              <Icon className="h-9 w-9 shrink-0 text-button" strokeWidth={1.5} aria-hidden />
               <span className={`min-w-0 block text-heading-sm ${selected ? "text-text-primary" : ""}`}>
                 {g.title}
               </span>
