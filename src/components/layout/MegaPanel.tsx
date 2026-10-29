@@ -86,6 +86,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
   const footerLink = rail ? activeGroup?.footerLink : menu.footerLink;
   const eyebrow = rail ? (activeGroup?.title ?? "") : menu.label;
   const columns = rail ? 2 : (menu.columns ?? 2);
+  const compact = Boolean(rail && activeGroup?.compact);
   const gridId = `nav-group-${menu.id}-${activeGroup?.id ?? "all"}`;
   const tabId = (g: NavGroup) => `nav-tab-${menu.id}-${g.id}`;
 
@@ -110,9 +111,30 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
         data-nav-group={activeGroup?.id}
       >
         <p className="text-eyebrow text-text-tertiary mb-4">{eyebrow}</p>
-        <ul className={`grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+        <ul
+          className={
+            compact
+              ? "grid grid-cols-3 gap-x-4 gap-y-0.5"
+              : `grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`
+          }
+        >
           {items.map((item) => {
             const Icon = item.icon;
+            if (compact) {
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="group -mx-2 flex min-h-[40px] items-center gap-2.5 rounded-lg px-2 hover:bg-bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    {item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />}
+                    <span className="text-sm font-medium text-text-primary transition-colors group-hover:text-accent">
+                      {item.name}
+                    </span>
+                  </Link>
+                </li>
+              );
+            }
             return (
               <li key={item.href}>
                 {!rail && item.image ? (
