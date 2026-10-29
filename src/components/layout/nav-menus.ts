@@ -157,8 +157,8 @@ export const NAV_MENUS: readonly NavMenu[] = [
     proofLogos: CARRIERS.slice(0, 8).map((c) => ({ name: c.name, logo: c.logo! })),
     footerLink: { label: "Explore", href: "/shipping" },
     promo: {
-      title: "See what your shipping should cost",
-      body: "Live prices across the UK's biggest carrier network, no account needed.",
+      title: "Time to put your rates to the test 🚚",
+      body: "Live prices across the UK's biggest carrier network.",
       cta: { label: "Get Quote", href: RATE_CHECKER_URL },
       // The Rate Checker walkthrough (claude.ai design project, scenes-rate-checker),
       // rendered with the connexx-* pipeline and cropped to the white panel.
