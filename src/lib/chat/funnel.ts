@@ -179,13 +179,13 @@ const PROOF = {
     client: "RIOZ Global",
     line: "turned competitive carrier rates into a revenue stream — five new clients in six months",
     href: "/resources/case-studies/rioz-global",
-    logo: "/case-studies/rioz-global/logo.png",
+    logo: "/case-studies/rioz-global/logo-tile.png",
   },
   export: {
     client: "Arlo Fulfilment",
     line: "unlocked international with the right express lane, turning a gap in their offering into an advantage",
     href: "/resources/case-studies/arlo-fulfilment",
-    logo: "/case-studies/arlo-fulfilment/logo.png",
+    logo: "/case-studies/arlo-fulfilment/logo-tile.png",
   },
   import: {
     client: "Home Bargains",

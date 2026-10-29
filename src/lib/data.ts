@@ -405,7 +405,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "Partnering with ITD Global gave Arlo immediate access to a competitive, fully managed international shipping solution without the complexity of building it themselves. ITD introduced FedEx International Priority into Arlo's carrier mix, with the carrier relationship handled end-to-end by ITD — so Arlo's team could focus on fulfilment. ITD's consolidated buying power unlocked volume-backed rates that wouldn't have been accessible going direct.",
     result: "Arlo can now confidently offer a fast, reliable, and commercially competitive international shipping service as part of their core proposition, enabling their clients to sell into global markets and opening a new dimension of growth for the business.",
     heroImage: "/case-studies/arlo-fulfilment/hero.jpg",
-    logo: "/case-studies/arlo-fulfilment/logo.png",
+    logo: "/case-studies/arlo-fulfilment/logo-tile.png",
     stats: [
       { value: "International", label: "Capability unlocked", sub: "new dimension of client growth", featured: true },
       { value: "FedEx", label: "Carrier added", sub: "International Priority via ITD" },
@@ -483,7 +483,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Rob Osgood, Managing Director at RIOZ Global",
     quoteAuthorPhoto: "/case-studies/rioz-global/author.webp",
     heroImage: "/case-studies/rioz-global/hero.webp",
-    logo: "/case-studies/rioz-global/logo.png",
+    logo: "/case-studies/rioz-global/logo-tile.png",
     stats: [
       { value: 5, label: "New clients onboarded", sub: "within 6 months on ITD rates", featured: true },
       { value: "+1", label: "New warehouse opened", sub: "to support increased demand" },
@@ -597,7 +597,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD Global designed a mixed-mode freight solution that split the cargo across three modes: air, rail and sea. The most time-sensitive stock was moved by air freight, ensuring it arrived in the UK ahead of the earliest required date. The second tranche was routed via rail freight from China, a cost-effective and reliable alternative for stock needed within the mid-range window. The remaining volume, where lead time allowed, was shipped by sea freight, keeping costs at their lowest. Each mode was selected not just for speed, but for commercial logic — every part of the cargo matched to the most cost-effective option that still met its delivery deadline.",
     result:
       "Every part of the shipment landed in the UK within its required window — no delays, no shortfalls, no compromises on availability. By routing each tranche through the most commercially appropriate freight option, ITD Global kept overall freight costs significantly lower than a single air freight solution would have allowed.",
-    logo: "/case-studies/beauty-bay/logo.png",
+    logo: "/case-studies/beauty-bay/logo-tile.png",
     stats: [
       {
         value: 3,
@@ -661,7 +661,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD Global replaced the daily drop off with a proper shipment booking portal and a dedicated collection service — Saime Trading no longer needed to leave the building to get a parcel out the door. Using ITD Global's buying power and multi-carrier network, we brought their shipping costs down significantly compared to what they had been paying. A dedicated account manager and in-house customer service team backed the whole thing, so there was always someone to call when something needed sorting.",
     result:
       "A dedicated collection service replaced the daily trip to the shop counter, giving the team that time back. The online booking portal integrates directly with shopping carts and marketplaces, removing manual admin from the parcel delivery process. Through ITD Global's buying power and access to multiple carriers, Saime Trading secured shipping costs lower than their previous setup without compromising on service — backed by dedicated customer service and account management as a consistent point of contact.",
-    logo: "/case-studies/saime-trading/logo.png",
+    logo: "/case-studies/saime-trading/logo-tile.png",
     stats: [
       { value: "Lower", label: "Shipping costs", sub: "multi-carrier buying power vs their previous setup", featured: true },
       { value: "Daily", label: "Collections", sub: "dedicated collection replaced parcel-shop drop-offs" },
@@ -774,7 +774,7 @@ export const caseStudies: CaseStudy[] = [
       "By securing consistent rail freight capacity from China throughout the disruption, ITD Global ensured Cummins' production lines never stopped for lack of parts. Multiple routes and departure schedules gave Cummins the freight resilience to absorb shocks elsewhere in the global supply chain, daily shipment reports and site-level Zoom calls gave every plant clear, current information on what was moving and when, and transit times and invoicing remained accurate and on schedule throughout 2021 — even as the wider industry struggled with delay and disruption.",
     heroImage: "/case-studies/cummins/hero.jpg",
     heroImageAlt: "Cummins power unit on a rail-served production line",
-    logo: "/case-studies/cummins/logo.png",
+    logo: "/case-studies/cummins/logo-tile.png",
     stats: [
       { value: "Zero", label: "Line Stops", sub: "across European plants throughout the disruption", featured: true },
       { value: 13, label: "China rail terminals", sub: "block trains + daily departures" },
@@ -826,7 +826,7 @@ export const caseStudies: CaseStudy[] = [
     result:
       "Despite the pandemic and the Suez Canal blockage, Regatta's supply chain continued operating without major interruption. Charter vessels, rail freight and air freight combined to give Regatta the flexibility to move stock by whichever route worked depending on urgency, while the sea-air solution from Myanmar kept both UK and Polish distribution centres supplied during a period when conventional routes were under pressure. Real-time tracking through live Freight Management Software and one point of regular, transparent contact kept Regatta's customers and internal teams informed and reassured throughout.",
     heroImage: "/case-studies/regatta/hero.jpg",
-    logo: "/case-studies/regatta/logo.png",
+    logo: "/case-studies/regatta/logo-tile.png",
     stats: [
       { value: 4, label: "Freight modes combined", sub: "charter vessel, rail, air & sea-air", featured: true },
       { value: 13, label: "China rail terminals", sub: "rail freight origins across China" },
@@ -908,7 +908,7 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Wenrit Global",
     industry: "3PL",
-    logo: "/case-studies/wenrit-global/logo.png",
+    logo: "/case-studies/wenrit-global/logo-tile.png",
     headline:
       "How Wenrit Global solved larger parcel delivery where others couldn't",
     metric: "~2,000 parcels/day",
@@ -959,7 +959,7 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Red Label",
     industry: "eCommerce",
-    logo: "/case-studies/red-label/logo.png",
+    logo: "/case-studies/red-label/logo-tile.png",
     heroImage: "/case-studies/red-label/hero.jpg",
     heroImageAlt: "Red Label brand imagery",
     headline:

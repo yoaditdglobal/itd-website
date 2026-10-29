@@ -87,7 +87,7 @@ const BRANDS: SpotlightBrand[] = [
   {
     name: "Red Label",
     sector: "Perfume & beauty",
-    logo: "/case-studies/red-label/logo.png",
+    logo: "/case-studies/red-label/logo-tile.png",
     stat: { value: "3,000", label: "shipments a week through one account" },
     blurb:
       "One multi-carrier setup and a single point of contact for their full beauty volume.",
