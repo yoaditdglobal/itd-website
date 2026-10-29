@@ -170,7 +170,7 @@ export default function BrandsPage() {
                   checkout and pricing that protects your margin.
                 </p>
                 <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
-                  <Button href={RATE_CHECKER_URL}>Get Quote</Button>
+                  <Button surface="dark" href={RATE_CHECKER_URL}>Get Quote</Button>
                   <Button href="/contact?enquiry=brands" variant="secondary" surface="dark">
                     Contact Sales
                   </Button>
