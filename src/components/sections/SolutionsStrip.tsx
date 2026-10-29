@@ -9,8 +9,8 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * needs" — laid out as a single horizontal strip, wider than the viewport,
  * that travels across the screen as the page scrolls (a ticker driven by
  * scroll position, not time). Each word lights up in reading order as its
- * left edge crosses an invisible reading line at 38% of the viewport (ghost
- * outline → accent → ink). Nothing else is on the stage — no eyebrow,
+ * left edge crosses an invisible reading line at 38% of the viewport
+ * (invisible → accent → ink; unlit words carry no ghost outline). Nothing else is on the stage — no eyebrow,
  * counter, guide line or progress rule (removed at Yoad's request).
  *
  * This `<h2>` is the REAL heading of the Solutions section that follows:
