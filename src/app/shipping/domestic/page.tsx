@@ -179,7 +179,7 @@ export default function ShippingDomesticPage() {
         rows: [
           {
             carrier: "Royal Mail",
-            logo: "/logos/carriers/royal-mail-icon.png",
+            logo: "/logos/carriers/royal-mail-icon-fill.png",
             descriptor: "UK's universal postal service",
             speeds: [
               { label: "Special Delivery by 9am / 1pm", tier: "special" },
@@ -232,7 +232,7 @@ export default function ShippingDomesticPage() {
           },
           {
             carrier: "Evri",
-            logo: "/logos/carriers/evri_logo.png",
+            logo: "/logos/carriers/evri_logo-fill.png",
             descriptor: "Cost-led drop-off and locker network",
             speeds: [
               { label: "Next Day (drop off by noon)", tier: "express" },
@@ -299,7 +299,7 @@ export default function ShippingDomesticPage() {
           },
           {
             carrier: "Amazon Shipping",
-            logo: "/logos/carriers/amazonshipping_logo.png",
+            logo: "/logos/carriers/amazonshipping_logo-fill.png",
             descriptor: "Amazon's UK logistics network",
             speeds: [
               { label: "Next Day", tier: "express" },
@@ -350,7 +350,7 @@ export default function ShippingDomesticPage() {
           },
           {
             carrier: "FedEx",
-            logo: "/logos/carriers/fedex-icon.png",
+            logo: "/logos/carriers/fedex-icon-fill.png",
             descriptor: "Global express network, UK domestic",
             speeds: [
               { label: "First (9 / 9:30 / 10am next day)", tier: "special" },
@@ -375,7 +375,7 @@ export default function ShippingDomesticPage() {
           },
           {
             carrier: "UPS",
-            logo: "/logos/carriers/ups_logo.png",
+            logo: "/logos/carriers/ups_logo-fill.png",
             descriptor: "Global network, UK domestic",
             speeds: [
               { label: "Express Plus (9am next day)", tier: "special" },

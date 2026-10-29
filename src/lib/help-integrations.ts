@@ -40,7 +40,7 @@ export const INTEGRATION_GUIDES: IntegrationGuide[] = [
   {
     slug: "shopify",
     name: "Shopify",
-    logo: "/logos/ecommerce/shopify_logo.png",
+    logo: "/logos/ecommerce/shopify_logo-fill.png",
     marketingHref: "/integrations/tech/shopify",
     metaTitle: "How to Connect Shopify to ITD Global",
     metaDescription:
@@ -124,7 +124,7 @@ export const INTEGRATION_GUIDES: IntegrationGuide[] = [
   {
     slug: "ebay",
     name: "eBay",
-    logo: "/logos/marketplaces/ebay-icon.png",
+    logo: "/logos/marketplaces/ebay-icon-fill.png",
     marketingHref: "/integrations/tech/ebay",
     metaTitle: "How to Connect eBay to ITD Global",
     metaDescription:
@@ -268,7 +268,7 @@ export const INTEGRATION_GUIDES: IntegrationGuide[] = [
   {
     slug: "selro",
     name: "Selro",
-    logo: "/logos/erp-wms/selro-mark.png",
+    logo: "/logos/erp-wms/selro-mark-fill.png",
     marketingHref: "/integrations/tech/selro",
     metaTitle: "How to Connect Selro to ITD Global",
     metaDescription:
@@ -462,7 +462,7 @@ export const INTEGRATION_GUIDES: IntegrationGuide[] = [
   {
     slug: "veeqo",
     name: "Veeqo",
-    logo: "/logos/ecommerce/veeqo-icon.webp",
+    logo: "/logos/ecommerce/veeqo-icon-fill.png",
     marketingHref: "/integrations/tech/veeqo",
     metaTitle: "How to Connect Veeqo to ITD Global",
     metaDescription:

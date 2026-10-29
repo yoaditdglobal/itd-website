@@ -53,7 +53,7 @@ const BRANDS: SpotlightBrand[] = [
   {
     name: "Tatti Lashes",
     sector: "Beauty & cosmetics",
-    logo: "/case-studies/tatti-lashes/logo.jpeg",
+    logo: "/case-studies/tatti-lashes/logo-tile.png",
     stat: { value: "60%", label: "of volume shifted to a cheaper carrier" },
     blurb:
       "Delivery choice at checkout and margin back on each order, after adding Evri alongside DPD.",
@@ -62,7 +62,7 @@ const BRANDS: SpotlightBrand[] = [
   {
     name: "West Ham United",
     sector: "Sports retail",
-    logo: "/logos/customers/west-ham.webp",
+    logo: "/logos/customers/west-ham-fill.png",
     stat: { value: "One framework", label: "for multi-carrier control, UK and international" },
     blurb:
       "Steadier collections and a clear view of UK and international spend.",
@@ -80,7 +80,7 @@ const BRANDS: SpotlightBrand[] = [
   {
     name: "KitchenCraft",
     sector: "Kitchen & dining",
-    logo: "/logos/customers/kitchencraft.webp",
+    logo: "/logos/customers/kitchencraft-fill.png",
     blurb: "Kitchen and dining essentials, shipped with ITD Global.",
     href: "/resources/case-studies/lifetime-brands",
   },

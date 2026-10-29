@@ -19,7 +19,7 @@ interface TrackCarrier {
 const CARRIERS: TrackCarrier[] = [
   {
     name: "Royal Mail",
-    logo: "/logos/carriers/royal-mail-icon.png",
+    logo: "/logos/carriers/royal-mail-icon-fill.png",
     url: "https://www.royalmail.com/track-your-item#/tracking-results/{n}",
     pattern: /^[A-Z]{2}\d{9}GB$/i,
   },
@@ -30,7 +30,7 @@ const CARRIERS: TrackCarrier[] = [
   },
   {
     name: "Evri",
-    logo: "/logos/carriers/evri_logo.png",
+    logo: "/logos/carriers/evri_logo-fill.png",
     url: "https://www.evri.com/track/parcel/{n}/details",
   },
   {
@@ -40,7 +40,7 @@ const CARRIERS: TrackCarrier[] = [
   },
   {
     name: "DHL",
-    logo: "/logos/carriers/dhl_logo.webp",
+    logo: "/logos/carriers/dhl_logo-fill.png",
     url: "https://www.dhl.com/gb-en/home/tracking.html?tracking-id={n}",
     pattern: /^JJD\d+$/i,
   },
@@ -51,18 +51,18 @@ const CARRIERS: TrackCarrier[] = [
   },
   {
     name: "Amazon Shipping",
-    logo: "/logos/carriers/amazonshipping_logo.png",
+    logo: "/logos/carriers/amazonshipping_logo-fill.png",
     url: "https://track.amazon.co.uk/tracking/{n}",
     pattern: /^(TBA|A2Z)[A-Z0-9]+$/i,
   },
   {
     name: "FedEx",
-    logo: "/logos/carriers/fedex-icon.png",
+    logo: "/logos/carriers/fedex-icon-fill.png",
     url: "https://www.fedex.com/fedextrack/?trknbr={n}",
   },
   {
     name: "UPS",
-    logo: "/logos/carriers/ups_logo.png",
+    logo: "/logos/carriers/ups_logo-fill.png",
     url: "https://www.ups.com/track?tracknum={n}",
     pattern: /^1Z[A-Z0-9]{16}$/i,
   },

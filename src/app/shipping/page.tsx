@@ -163,14 +163,14 @@ export default function ShippingPage() {
         heading="The UK's biggest carrier network"
         subtext="Royal Mail, DPD, Evri, InPost, DHL, Amazon Shipping and more — every carrier ready to print from one screen, on rates managed by ITD at network scale."
         logos={[
-          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
+          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
           { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
-          { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+          { name: "Evri", logo: "/logos/carriers/evri_logo-fill.png" },
           { name: "InPost", logo: "/logos/carriers/inpost-icon.png" },
-          { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-          { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
-          { name: "FedEx", logo: "/logos/carriers/fedex-icon.png" },
-          { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
+          { name: "DHL", logo: "/logos/carriers/dhl_logo-fill.png" },
+          { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
+          { name: "FedEx", logo: "/logos/carriers/fedex-icon-fill.png" },
+          { name: "UPS", logo: "/logos/carriers/ups_logo-fill.png" },
         ]}
         browseHref="/integrations/carriers"
         browseLabel="Explore"

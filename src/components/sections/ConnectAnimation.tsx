@@ -78,14 +78,14 @@ const PETALS =
   "M 643.25 672.13 C 621.28 1051.28 343.85 1341.38 0.5 1350 C 6 988.09 283.42 695.11 643.25 672.13 Z M 643.25 672.13 C 1005.83 695.11 1283.26 988.09 1291.5 1350 C 945.4 1341.38 665.23 1051.28 643.25 672.13 Z M 0.5 0 C 343.85 5.75 621.28 295.85 643.25 672.13 C 283.42 649.15 6 359.04 0.5 0 Z M 1291.5 0 C 1283.26 359.04 1005.83 649.15 643.25 672.13 C 665.23 295.85 945.4 5.75 1291.5 0 Z";
 
 const TILE: Record<string, string> = {
-  evri: "/logos/carriers/evri_logo.png",
-  dpd: "/logos/carriers/dpd-tile.png",
-  "royal-mail": "/logos/carriers/royal-mail-icon.png",
-  ups: "/logos/carriers/ups_logo.png",
+  evri: "/logos/carriers/evri_logo-fill.png",
+  dpd: "/logos/carriers/dpd-tile-fill.png",
+  "royal-mail": "/logos/carriers/royal-mail-icon-fill.png",
+  ups: "/logos/carriers/ups_logo-fill.png",
   inpost: "/logos/carriers/inpost-icon.png",
-  dhl: "/logos/carriers/dhl_logo.webp",
-  fedex: "/logos/carriers/fedex-icon.png",
-  "amazon-shipping": "/logos/carriers/amazonshipping_logo.png",
+  dhl: "/logos/carriers/dhl_logo-fill.png",
+  fedex: "/logos/carriers/fedex-icon-fill.png",
+  "amazon-shipping": "/logos/carriers/amazonshipping_logo-fill.png",
   "deutsche-post": "/logos/carriers/deutschepost_logo.avif",
 };
 
@@ -94,10 +94,10 @@ const sCy = (i: number) => 50 + i * 62 + 27;
 const cCy = (j: number) => 50 + j * 52 + 22;
 
 const STORES = [
-  { name: "Shopify", icon: "/logos/ecommerce/shopify-tile.png", hs: 1.0 },
-  { name: "eBay", icon: "/logos/marketplaces/ebay-icon.png", hs: 1.15 },
-  { name: "Temu", icon: "/logos/marketplaces/temu-icon.png", hs: 1.3 },
-  { name: "Amazon", icon: "/logos/marketplaces/amazon-icon.webp", hs: 1.45 },
+  { name: "Shopify", icon: "/logos/ecommerce/shopify-tile-fill.png", hs: 1.0 },
+  { name: "eBay", icon: "/logos/marketplaces/ebay-icon-fill.png", hs: 1.15 },
+  { name: "Temu", icon: "/logos/marketplaces/temu-icon-fill.png", hs: 1.3 },
+  { name: "Amazon", icon: "/logos/marketplaces/amazon-icon-fill.png", hs: 1.45 },
   { name: "TikTok Shop", icon: "/logos/marketplaces/tiktok-tile.png", hs: 1.6 },
   { name: "Magento", icon: "/logos/erp-wms/magento-icon.webp", hs: 1.75 },
   { name: "Linnworks", icon: "/logos/erp-wms/linnworks-tile.png", hs: 1.9 },

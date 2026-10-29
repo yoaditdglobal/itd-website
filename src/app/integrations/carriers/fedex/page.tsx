@@ -14,7 +14,7 @@ export default function FedExPage() {
     <CarrierPage
       slug="fedex"
       name="FedEx"
-      logo="/logos/carriers/fedex-icon.png"
+      logo="/logos/carriers/fedex-icon-fill.png"
       logoBg="#4D148C"
       tagline="Time-definite international delivery across 220 countries, with priority and economy options for every shipment type."
       description="FedEx is one of the world's largest express carriers, with an international network spanning over 220 countries and territories. Its services cover everything from next-day priority delivery to economy air-and-ground options, alongside freight services for heavier consignments. Through ITD, you access FedEx's full-service range on rates managed at network scale, with the carrier relationship handled on your behalf."

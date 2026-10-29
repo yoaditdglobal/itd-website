@@ -72,19 +72,19 @@ const PETALS =
   "M 643.25 672.13 C 621.28 1051.28 343.85 1341.38 0.5 1350 C 6 988.09 283.42 695.11 643.25 672.13 Z M 643.25 672.13 C 1005.83 695.11 1283.26 988.09 1291.5 1350 C 945.4 1341.38 665.23 1051.28 643.25 672.13 Z M 0.5 0 C 343.85 5.75 621.28 295.85 643.25 672.13 C 283.42 649.15 6 359.04 0.5 0 Z M 1291.5 0 C 1283.26 359.04 1005.83 649.15 643.25 672.13 C 665.23 295.85 945.4 5.75 1291.5 0 Z";
 
 const TILE: Record<string, string> = {
-  evri: "/logos/carriers/evri_logo.png",
-  dpd: "/logos/carriers/dpd-tile.png",
-  "royal-mail": "/logos/carriers/royal-mail-icon.png",
-  ups: "/logos/carriers/ups_logo.png",
+  evri: "/logos/carriers/evri_logo-fill.png",
+  dpd: "/logos/carriers/dpd-tile-fill.png",
+  "royal-mail": "/logos/carriers/royal-mail-icon-fill.png",
+  ups: "/logos/carriers/ups_logo-fill.png",
   inpost: "/logos/carriers/inpost-icon.png",
-  dhl: "/logos/carriers/dhl_logo.webp",
-  fedex: "/logos/carriers/fedex-icon.png",
+  dhl: "/logos/carriers/dhl_logo-fill.png",
+  fedex: "/logos/carriers/fedex-icon-fill.png",
 };
 const SRC: Record<string, string> = {
-  "shopify.png": "/logos/ecommerce/shopify-tile.png",
-  "ebay.png": "/logos/marketplaces/ebay-icon.png",
-  "temu.png": "/logos/marketplaces/temu-icon.png",
-  "amazon.webp": "/logos/marketplaces/amazon-icon.webp",
+  "shopify.png": "/logos/ecommerce/shopify-tile-fill.png",
+  "ebay.png": "/logos/marketplaces/ebay-icon-fill.png",
+  "temu.png": "/logos/marketplaces/temu-icon-fill.png",
+  "amazon.webp": "/logos/marketplaces/amazon-icon-fill.png",
   "linnworks.png": "/logos/erp-wms/linnworks-tile.png",
 };
 

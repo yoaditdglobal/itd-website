@@ -173,7 +173,7 @@ export default function ShippingInternationalPage() {
         rows: [
           {
             carrier: "DHL Express",
-            logo: "/logos/carriers/dhl_logo.webp",
+            logo: "/logos/carriers/dhl_logo-fill.png",
             cells: [
               "220+ countries and territories",
               "Express Worldwide (next possible working day), Express 9:00 / Express 12:00 (time-definite), Economy Select (1–3 days, EU)",
@@ -183,7 +183,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "FedEx",
-            logo: "/logos/carriers/fedex-icon.png",
+            logo: "/logos/carriers/fedex-icon-fill.png",
             cells: [
               "Up to 220+ countries (varies by service)",
               "International Priority / Priority Express (1–3 days), International Connect Plus (1–4 days, eCommerce), International Economy (2–5 days)",
@@ -193,7 +193,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "UPS",
-            logo: "/logos/carriers/ups_logo.png",
+            logo: "/logos/carriers/ups_logo-fill.png",
             cells: [
               "220+ countries and territories",
               "Worldwide Express Plus / Express (next day, timed), Worldwide Saver (1–3 days), Worldwide Expedited (2–5 days)",
@@ -213,7 +213,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "Starlinks",
-            logo: "/logos/carriers/starlinks_logo.png",
+            logo: "/logos/carriers/starlinks_logo-fill.png",
             cells: [
               "200+ countries",
               "European Express (1–2 days), Rest of World (1–3 days)",
@@ -223,7 +223,7 @@ export default function ShippingInternationalPage() {
           },
           {
             carrier: "Evri EU",
-            logo: "/logos/carriers/evrieu_logo.png",
+            logo: "/logos/carriers/evrieu_logo-fill.png",
             cells: [
               "Europe + 200+ countries",
               "European Tracked (3–7 days), International Tracked (3–7 days)",

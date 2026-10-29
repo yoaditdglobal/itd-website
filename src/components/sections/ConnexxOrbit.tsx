@@ -9,32 +9,32 @@ export interface Brand {
 
 /* Innermost orbit — WMS / ERP / eCommerce platforms (closest to Connexx). */
 const WMS: Brand[] = [
-  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft-tile.png" },
+  { name: "Mintsoft", logo: "/logos/erp-wms/mintsoft-tile-fill.png" },
   { name: "Linnworks", logo: "/logos/erp-wms/linnworks-tile.png" },
-  { name: "Veeqo", logo: "/logos/erp-wms/veeqo-tile.png" },
-  { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png" },
-  { name: "Shopify", logo: "/logos/ecommerce/shopify-tile.png" },
+  { name: "Veeqo", logo: "/logos/erp-wms/veeqo-tile-fill.png" },
+  { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo-fill.png" },
+  { name: "Shopify", logo: "/logos/ecommerce/shopify-tile-fill.png" },
 ];
 
 /* Middle orbit — UK + global carriers. */
 const CARRIERS: Brand[] = [
-  { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
-  { name: "DPD", logo: "/logos/carriers/dpd-tile.png" },
-  { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+  { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
+  { name: "DPD", logo: "/logos/carriers/dpd-tile-fill.png" },
+  { name: "Evri", logo: "/logos/carriers/evri_logo-fill.png" },
   { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg" },
-  { name: "DHL", logo: "/logos/carriers/dhl_logo.webp" },
-  { name: "FedEx", logo: "/logos/carriers/fedex-icon.png" },
-  { name: "UPS", logo: "/logos/carriers/ups_logo.png" },
-  { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
+  { name: "DHL", logo: "/logos/carriers/dhl_logo-fill.png" },
+  { name: "FedEx", logo: "/logos/carriers/fedex-icon-fill.png" },
+  { name: "UPS", logo: "/logos/carriers/ups_logo-fill.png" },
+  { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
 ];
 
 /* Outer orbit — marketplaces. */
 const MARKETPLACES: Brand[] = [
-  { name: "Amazon", logo: "/logos/marketplaces/amazon-icon.webp" },
-  { name: "eBay", logo: "/logos/marketplaces/ebay-icon.png" },
-  { name: "Etsy", logo: "/logos/marketplaces/etsy-icon.png" },
+  { name: "Amazon", logo: "/logos/marketplaces/amazon-icon-fill.png" },
+  { name: "eBay", logo: "/logos/marketplaces/ebay-icon-fill.png" },
+  { name: "Etsy", logo: "/logos/marketplaces/etsy-icon-fill.png" },
   { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok-tile.png" },
-  { name: "Temu", logo: "/logos/marketplaces/temu-icon.png" },
+  { name: "Temu", logo: "/logos/marketplaces/temu-icon-fill.png" },
 ];
 
 const WMS_MOBILE_HIDE = new Set(["ShipStation", "Veeqo"]);

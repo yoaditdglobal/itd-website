@@ -14,7 +14,7 @@ export default function DhlPage() {
     <CarrierPage
       slug="dhl"
       name="DHL Express"
-      logo="/logos/carriers/dhl_logo.webp"
+      logo="/logos/carriers/dhl_logo-fill.png"
       tagline="The world's leading international express courier, delivering to over 220 countries and territories."
       description="DHL Express is the global market leader in international parcel delivery, connecting businesses in the UK with customers and partners in over 220 countries. Its network is built around speed and certainty — time-definite delivery, door-to-door, with customs clearance handled as part of the service. Through ITD, you access DHL Express services on rates managed at network scale, without the overhead of managing a direct account."
       region="International"

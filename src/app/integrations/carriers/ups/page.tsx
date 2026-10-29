@@ -14,7 +14,7 @@ export default function UPSPage() {
     <CarrierPage
       slug="ups"
       name="UPS"
-      logo="/logos/carriers/ups_logo.png"
+      logo="/logos/carriers/ups_logo-fill.png"
       logoBg="#351C15"
       tagline="Global express and standard delivery across 220 countries, with a trusted business parcel network in the UK."
       description="UPS operates one of the world's largest parcel and freight networks, with strong domestic coverage in the UK and express international services reaching over 220 countries. Its range spans from guaranteed next-day air express through to scheduled road services and Access Point collection and drop-off. Through ITD, you access UPS services on rates managed at network scale, with the carrier relationship handled on your behalf."

@@ -167,13 +167,13 @@ const PROOF = {
     client: "Tatti Lashes",
     line: "added delivery choice at checkout and won margin back on every order after putting Evri alongside DPD",
     href: "/resources/case-studies/tatti-lashes",
-    logo: "/case-studies/tatti-lashes/logo.jpeg",
+    logo: "/case-studies/tatti-lashes/logo-tile.png",
   },
   midmarket: {
     client: "West Ham United",
     line: "moved to one managed multi-carrier framework with a clear view of UK and international spend",
     href: "/resources/case-studies/west-ham-united",
-    logo: "/case-studies/west-ham-united/logo.png",
+    logo: "/case-studies/west-ham-united/logo-tile.png",
   },
   partner: {
     client: "RIOZ Global",

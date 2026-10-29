@@ -103,13 +103,13 @@ export interface NavMenu {
 }
 
 const CARRIERS: NavItem[] = [
-  { name: "Evri", desc: "High-volume residential parcel delivery across the full UK network", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo.png" },
-  { name: "Royal Mail", desc: "The UK's national postal network, reaching every address in the country", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon.png" },
+  { name: "Evri", desc: "High-volume residential parcel delivery across the full UK network", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo-fill.png" },
+  { name: "Royal Mail", desc: "The UK's national postal network, reaching every address in the country", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
   { name: "DPD", desc: "Precise tracked delivery across the UK and into Europe, with one-hour windows", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
   { name: "InPost", desc: "The UK's largest parcel locker network, open 24 hours a day", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
   { name: "Parcel Force", desc: "Guaranteed timed delivery across the UK, with international services", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
-  { name: "Amazon Shipping", desc: "Amazon's own delivery network, for shipments beyond the Amazon platform", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo.png" },
-  { name: "DHL", desc: "The leading international express courier, to over 220 countries", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo.webp" },
+  { name: "Amazon Shipping", desc: "Amazon's own delivery network, for shipments beyond the Amazon platform", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
+  { name: "DHL", desc: "The leading international express courier, to over 220 countries", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo-fill.png" },
 ];
 
 /** The Integrations menu's rotating customer-story slides, sourced from the

@@ -14,7 +14,7 @@ export default function DpdPage() {
     <CarrierPage
       slug="dpd"
       name="DPD"
-      logo="/logos/carriers/dpd-tile.png"
+      logo="/logos/carriers/dpd-tile-fill.png"
       tagline="Precise tracked delivery across the UK and into Europe, with one-hour delivery windows as standard."
       description="DPD is one of the UK's most recognised parcel carriers, known for its Predict service — which gives recipients a one-hour delivery window on the morning of delivery. It operates one of the largest depot networks in the UK and offers both domestic next-day services and a strong European road and air network. Through ITD, you access DPD's service range on rates built across the network, with carrier management handled on your behalf."
       region="Domestic"
