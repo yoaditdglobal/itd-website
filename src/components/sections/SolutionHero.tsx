@@ -130,7 +130,11 @@ export default function SolutionHero({
           </p>
           {(primary || secondary) && (
             <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
-              {primary && <Button href={primary.href}>{primary.label}</Button>}
+              {primary && (
+                <Button href={primary.href} surface="dark">
+                  {primary.label}
+                </Button>
+              )}
               {secondary && (
                 <Button href={secondary.href} variant="secondary" surface="dark">
                   {secondary.label}

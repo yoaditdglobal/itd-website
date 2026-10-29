@@ -90,6 +90,7 @@ export interface NavMenu {
   label: string;
   /** Route prefixes that mark this section as the current one. */
   sectionBases: string[];
+  /** `eyebrow` is the rail's accessible name only — it is not rendered. */
   rail?: { eyebrow: string; defaultGroupId: string; groups: NavGroup[] };
   /** Railless menus list their items directly. */
   items?: NavItem[];

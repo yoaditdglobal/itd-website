@@ -40,7 +40,7 @@ export default function ConnexxPreview() {
                 than 6,000 UK businesses for over 20 years.
               </p>
               <div className="mt-8">
-                <Button href="/connexx">Explore</Button>
+                <Button href="/connexx" surface="dark">Explore</Button>
               </div>
             </div>
           </ScrollReveal>

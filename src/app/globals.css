@@ -27,6 +27,14 @@
   --color-accent-600: #1733a0;
   --color-accent-700: #142e8c;
 
+  /* Primary button fill — the ITD logo teal (sampled from itd-global-logo.webp),
+     with a NAVY label: teal on white is only 3.5:1, so white text would fail
+     AA; navy on the teal is 5.0:1. Hover goes lighter (5.96:1), not darker.
+     Links, focus rings and the strip keep the cobalt accent. */
+  --color-button: #0098a0;
+  --color-button-hover: #1aa7ae;
+  --color-on-button: #15192b;
+
   /* Secondary accent — warm terracotta, used sparingly */
   --color-accent-secondary: #c8743d;
   --color-accent-secondary-light: #f5e8dc;
@@ -696,7 +704,7 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
 /* ─── Travelling-strip headline (homepage SolutionsStrip) ───
    One oversized word strip travels across a pinned stage; each word's state
    is flipped by JS via data-state as its left edge crosses the reading line.
-   future = invisible (no ghost outline, user-directed), active = accent, past = ink. */
+   future = invisible (no ghost outline, user-directed), active = logo teal, past = ink. */
 .strip-word {
   color: var(--color-text-primary);
   transition: color 260ms ease-out;
@@ -705,7 +713,7 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   color: transparent;
 }
 .strip-word[data-state="active"] {
-  color: var(--color-accent);
+  color: var(--color-button); /* logo teal, like the buttons (user-directed); 3.5:1 on white passes AA for display-size text */
 }
 @media (prefers-reduced-motion: reduce) {
   .strip-word { transition: none; }

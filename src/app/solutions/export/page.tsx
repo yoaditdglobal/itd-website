@@ -57,7 +57,7 @@ export default function ExportPage() {
       <SolutionHero
         breadcrumbs={CRUMBS}
         label="Export"
-        title="Ship internationally with the rates, reach, and support to do it properly"
+        title="Ship internationally with the rates, reach and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         primary={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondary={{ label: "Contact Sales", href: "/contact?enquiry=export" }}
@@ -158,7 +158,7 @@ export default function ExportPage() {
           },
         ]}
         label="Export"
-        title="Ship internationally with the rates, reach, and support to do it properly"
+        title="Ship internationally with the rates, reach and support to do it properly"
         subtitle="ITD Global gives UK businesses access to a powerful network of international couriers, support with customs, and a platform that keeps your entire export operation visible and under control. All through one account."
         primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
         secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=export" }}

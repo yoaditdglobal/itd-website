@@ -10,7 +10,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * that travels across the screen as the page scrolls (a ticker driven by
  * scroll position, not time). Each word lights up in reading order as its
  * left edge crosses an invisible reading line at 38% of the viewport
- * (invisible → accent → ink; unlit words carry no ghost outline). Nothing else is on the stage — no eyebrow,
+ * (invisible → logo teal → ink; unlit words carry no ghost outline). Nothing else is on the stage — no eyebrow,
  * counter, guide line or progress rule (removed at Yoad's request).
  *
  * This `<h2>` is the REAL heading of the Solutions section that follows:
@@ -31,12 +31,24 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * development `window.__itdStripProgress(p)` drives the strip to a progress
  * value directly (the preview harness can't scroll a pinned section).
  */
-const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs"] as const;
+const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs."] as const;
 const SENTENCE = WORDS.join(" ");
 /** Fraction of the viewport width where the (invisible) reading line sits. */
 const READING_LINE = 0.38;
-/** Extra scroll (in vh) the stage stays pinned for while the strip travels. */
-const PIN_SCROLL_VH = 130;
+/**
+ * Extra scroll (in vh) the stage stays pinned for while the strip travels.
+ * This is the strip's speed control: the full right-to-left travel is spread
+ * over this much scroll, so a longer pin = fewer pixels per wheel notch.
+ * 130 read as rushed, 220 and 300 still too quick for Yoad; 420 lets each
+ * word land and be read before the next arrives. The last HOLD_VH of the pin
+ * is a hold: the strip has parked on "needs." and the stage stays put so the
+ * line is read as a whole before the pager takes over.
+ */
+const TRAVEL_VH = 420;
+const HOLD_VH = 120;
+const PIN_SCROLL_VH = TRAVEL_VH + HOLD_VH;
+/** Share of the pin spent travelling; the rest is the end hold. */
+const TRAVEL_FRACTION = TRAVEL_VH / PIN_SCROLL_VH;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // smoothstep: the strip leaves and arrives gently but stays under the
@@ -108,7 +120,8 @@ export default function SolutionsStrip({
     const scrollProgress = () => {
       const rect = track.getBoundingClientRect();
       const range = rect.height - window.innerHeight;
-      return range > 0 ? clamp01(-rect.top / range) : 0;
+      // Progress reaches 1 at the end of the travel; the hold keeps it there.
+      return range > 0 ? clamp01(-rect.top / (range * TRAVEL_FRACTION)) : 0;
     };
 
     const paint = (x: number) => {
@@ -134,7 +147,7 @@ export default function SolutionsStrip({
       target = startX + (endX - startX) * t;
       // Lagging follow — keeps wheel notches from slamming the strip.
       const delta = target - current;
-      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.14;
+      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.06;
       paint(current);
 
       const rect = track.getBoundingClientRect();

@@ -721,7 +721,7 @@ export default function FbmGuidePage() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/solutions/marketplace-seller"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-button px-5 py-2.5 text-sm font-medium text-on-button hover:bg-button-hover transition-colors"
               >
                 See how Connexx keeps your FBM metrics safe
               </Link>
