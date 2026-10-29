@@ -2,6 +2,7 @@ import VideoHero from "@/components/sections/VideoHero";
 import { RATE_CHECKER_URL } from "@/lib/site-config";
 import SocialProof from "@/components/sections/SocialProof";
 import DomesticInternationalCards from "@/components/sections/DomesticInternationalCards";
+import SolutionsStrip from "@/components/sections/SolutionsStrip";
 import SolutionsRouting from "@/components/sections/SolutionsRouting";
 import LogisticsPartnerBand from "@/components/sections/LogisticsPartnerBand";
 import ConnexxPreview from "@/components/sections/ConnexxPreview";
@@ -28,7 +29,10 @@ export default function Home() {
         <SocialProof />
       </ScrollForward>
       <DomesticInternationalCards />
-      <SolutionsRouting />
+      {/* Scroll-led travelling-strip headline — it IS the Solutions section's
+          <h2>; the pager below is labelled by it and renders no title. */}
+      <SolutionsStrip headingId="solutions-heading" />
+      <SolutionsRouting headingId="solutions-heading" />
       <ConnexxPreview />
       <IntegrationHighlights />
       <LogisticsPartnerBand />
