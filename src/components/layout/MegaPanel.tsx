@@ -2,6 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import NavPromoCard from "./NavPromoCard";
@@ -114,6 +115,29 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
             const Icon = item.icon;
             return (
               <li key={item.href}>
+                {!rail && item.image ? (
+                  <Link
+                    href={item.href}
+                    className="group relative block aspect-square overflow-hidden rounded-xl bg-bg-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  >
+                    <Image
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      fill
+                      sizes="240px"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    />
+                    <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
+                    <span className="absolute inset-x-0 bottom-0 p-4">
+                      {Icon && (
+                        <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/25 bg-white/10 text-white backdrop-blur-sm">
+                          <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+                        </span>
+                      )}
+                      <span className="mt-2 block text-heading-sm text-white">{item.name}</span>
+                    </span>
+                  </Link>
+                ) : (
                 <Link
                   href={item.href}
                   className={
@@ -144,6 +168,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                     </span>
                   )}
                 </Link>
+                )}
               </li>
             );
           })}

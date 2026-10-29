@@ -36,6 +36,8 @@ export interface NavItem {
   logo?: string;
   /** Railless menus: an accent icon chip in place of a logo (visual anchor). */
   icon?: LucideIcon;
+  /** Railless menus: a photo that fills the square tile (icon + name overlay). */
+  image?: { src: string; alt: string };
 }
 
 export interface NavFooterLink {
@@ -136,9 +138,9 @@ export const NAV_MENUS: readonly NavMenu[] = [
     sectionBases: ["/shipping"],
     columns: 3,
     items: [
-      { name: "Domestic", href: "/shipping/domestic", icon: PackageCheck },
-      { name: "International", href: "/shipping/international", icon: Globe },
-      { name: "Freight", href: "/shipping/freight", icon: Container },
+      { name: "Domestic", href: "/shipping/domestic", icon: PackageCheck, image: { src: "/shipping/domestic.webp", alt: "Royal Mail truck reversing into a UK warehouse loading bay" } },
+      { name: "International", href: "/shipping/international", icon: Globe, image: { src: "/shipping/international.jpg", alt: "Air freight pallets being loaded onto a wide-body aircraft" } },
+      { name: "Freight", href: "/shipping/freight", icon: Container, image: { src: "/shipping/freight-hero.webp", alt: "Container ship laden with freight containers at sea" } },
     ],
     proofLogos: CARRIERS.map((c) => ({ name: c.name, logo: c.logo! })),
     footerLink: { label: "Explore", href: "/shipping" },
