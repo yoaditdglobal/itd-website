@@ -18,7 +18,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * instead of rendering its own small title, so the line is never said twice.
  *
  * Desktop + motion allowed: the stage pins (sticky) inside a tall track for
- * ~90vh of scroll while the strip travels, then releases straight into the
+ * ~110vh of scroll while the strip travels, then releases straight into the
  * pager (whose own entry fade takes over). Same idiom as `SolutionsRouting` /
  * `ScrollForward`: passive scroll + a single rAF loop + direct style writes,
  * no React state per frame. The strip position follows scroll through a
@@ -36,7 +36,7 @@ const SENTENCE = WORDS.join(" ");
 /** Fraction of the viewport width where the (invisible) reading line sits. */
 const READING_LINE = 0.38;
 /** Extra scroll (in vh) the stage stays pinned for while the strip travels. */
-const PIN_SCROLL_VH = 90;
+const PIN_SCROLL_VH = 110;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // smoothstep: the strip leaves and arrives gently but stays under the
