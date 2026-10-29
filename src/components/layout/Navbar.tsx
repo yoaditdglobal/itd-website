@@ -221,14 +221,21 @@ export default function Navbar() {
     {/* Constant height — shrinking the bar on scroll exposed a strip of the
         beige body background between the nav and the page's pt-[72px] offset.
         The scrolled state changes surface treatment only. */}
-    <header className="fixed inset-x-0 top-2 z-50 px-3 sm:px-4">
+    <header className="fixed inset-x-0 top-2 z-50">
+      {/* The nav shares the page's content column (max-w-7xl, gutters 16/24/32):
+          the wrapper's side padding is the content gutter MINUS the pill's own
+          padding, so the logo's left edge and the Contact Sales button's right
+          edge land exactly on the content edges (hero headline / hero visual)
+          at every breakpoint. The odd 1px is the pill's border: gutter 16/24/32
+          minus pill padding 8/20/20 minus border 1. */}
+      <div className="mx-auto max-w-7xl px-[7px] sm:px-[3px] lg:px-[11px]">
       {/* The whole pill is the hover region: pointer-leave anywhere outside it
           (or onto a "neutral" item — logo, Platform, CTAs) closes the panel. */}
       <nav
         ref={navRef}
         data-nav-theme={darkInk ? "light" : "dark"}
         onPointerLeave={closeOnMouse}
-        className={`relative mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-4 py-2.5 transition-shadow duration-300 sm:px-5 ${
+        className={`relative flex w-full items-center justify-between gap-3 rounded-full px-2 py-2.5 transition-shadow duration-300 sm:px-5 ${
           transparent
             ? "border border-transparent"
             : scrolled
@@ -310,6 +317,7 @@ export default function Navbar() {
           }}
         />
       </nav>
+      </div>
     </header>
 
     {/* Mobile overlay — outside <header> to avoid backdrop-filter containing block trap.
