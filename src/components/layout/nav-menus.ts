@@ -288,7 +288,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
           icon: BookOpen,
           items: [
             { name: "Guides", desc: "Operator guides for UK shippers, importers and marketplace sellers", href: "/resources/guides" },
-            { name: "Peak report", desc: "Real parcel data across ITD's customers: when volume lands and how to plan", href: "/peak" },
+            { name: "Peak report", desc: "Real parcel data across our customers: when volume lands and how to plan", href: "/peak" },
             { name: "Glossary", desc: "Plain-English definitions of logistics, customs and marketplace terms", href: "/resources/glossary" },
           ],
         },
@@ -307,7 +307,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
     },
     promo: {
       title: "Know what peak will throw at you",
-      body: "Real parcel data across ITD's customers. See when volume lands and plan your courier mix.",
+      body: "Real parcel data across our customers. See when volume lands and plan your courier mix.",
       cta: { label: "Explore", href: "/peak" },
       art: { kind: "image", src: "/reports/peak/peak-report-2026-cover.png", alt: "", width: 1754, height: 1240 },
       tone: "navy",
