@@ -14,7 +14,7 @@ export default function RoyalMailPage() {
     <CarrierPage
       slug="royal-mail"
       name="Royal Mail"
-      logo="/logos/carriers/royal-mail-icon.png"
+      logo="/logos/carriers/royal-mail-icon-fill.png"
       tagline="The UK's national postal network, reaching every address in the country."
       description="Royal Mail delivers to every residential and business address in the UK — something no other carrier matches. For eCommerce businesses, it remains the go-to for lighter parcels, large-letter formats, and services requiring a signature or guaranteed delivery time. Through ITD, you access Royal Mail's full business service range on rates managed at network scale, with the carrier relationship handled on your behalf."
       region="Domestic"

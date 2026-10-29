@@ -283,7 +283,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global introduced Evri alongside DPD via Connexx, giving Tatti Lashes a genuine multi-carrier setup with both 24hr and 48hr service options. Customers could now choose their delivery at checkout. The Mintsoft integration via Connexx was plug-and-play. Dedicated vans were allocated quickly, and the brand was live before peak trading season.",
     result: "60% of Tatti Lashes' volume transferred to Evri — a figure that surprised the team. Evri now handles the majority of their domestic parcel volume, with DPD retained for customers selecting the premium next-day service. Per-order shipping costs dropped significantly across the cheaper service, margins came back under control, and the brand entered peak with capacity already proven.",
     heroImage: "/case-studies/tatti-lashes/hero.jpg",
-    logo: "/case-studies/tatti-lashes/logo.jpeg",
+    logo: "/case-studies/tatti-lashes/logo-tile.png",
     stats: [
       { value: 60, suffix: "%", label: "Volume shifted to Evri", sub: "from a single-carrier DPD-only setup", featured: true },
       { value: "2", suffix: "×", label: "Active carriers", sub: "DPD next-day + Evri 24hr & 48hr" },
@@ -327,7 +327,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Mark Baker, Head of Retail Operations at West Ham United",
     quoteAuthorPhoto: "/case-studies/west-ham-united/author.jpg",
     heroImage: "/case-studies/west-ham-united/hero.webp",
-    logo: "/case-studies/west-ham-united/logo.png",
+    logo: "/case-studies/west-ham-united/logo-tile.png",
     stats: [
       { value: "Match-ready", label: "Collection reliability", sub: "stable across standard and peak trading", featured: true },
       { value: "DHL · FedEx · UPS", label: "Consolidated buying power", sub: "international lane rate alignment" },
@@ -367,7 +367,7 @@ export const caseStudies: CaseStudy[] = [
     quote: "Connexx and ITD's Evri setup removed bottlenecks we'd been living with for years. The improved MI reporting, SLAs, and delivery visibility helped us tighten our operation — and our Health & Wellness client saw an immediate uplift in margin after moving from Royal Mail to Evri. It's been a genuine step-change for our fulfilment performance.",
     quoteAuthor: "Supervisor, Delta Fulfilment",
     heroImage: "/case-studies/delta-fulfilment/hero.jpg",
-    logo: "/case-studies/delta-fulfilment/logo.jpg",
+    logo: "/case-studies/delta-fulfilment/logo-tile.png",
     stats: [
       { value: "Margin ↑", label: "Client profitability", sub: "Health & wellness client, post-switch", featured: true },
       { value: "RM → Evri", label: "Carrier upgrade", sub: "real SLAs, full MI, zone-level data" },
@@ -405,7 +405,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "Partnering with ITD Global gave Arlo immediate access to a competitive, fully managed international shipping solution without the complexity of building it themselves. ITD introduced FedEx International Priority into Arlo's carrier mix, with the carrier relationship handled end-to-end by ITD — so Arlo's team could focus on fulfilment. ITD's consolidated buying power unlocked volume-backed rates that wouldn't have been accessible going direct.",
     result: "Arlo can now confidently offer a fast, reliable, and commercially competitive international shipping service as part of their core proposition, enabling their clients to sell into global markets and opening a new dimension of growth for the business.",
     heroImage: "/case-studies/arlo-fulfilment/hero.jpg",
-    logo: "/case-studies/arlo-fulfilment/logo.png",
+    logo: "/case-studies/arlo-fulfilment/logo-tile.png",
     stats: [
       { value: "International", label: "Capability unlocked", sub: "new dimension of client growth", featured: true },
       { value: "FedEx", label: "Carrier added", sub: "International Priority via ITD" },
@@ -483,7 +483,7 @@ export const caseStudies: CaseStudy[] = [
     quoteAuthor: "Rob Osgood, Managing Director at RIOZ Global",
     quoteAuthorPhoto: "/case-studies/rioz-global/author.webp",
     heroImage: "/case-studies/rioz-global/hero.webp",
-    logo: "/case-studies/rioz-global/logo.png",
+    logo: "/case-studies/rioz-global/logo-tile.png",
     stats: [
       { value: 5, label: "New clients onboarded", sub: "within 6 months on ITD rates", featured: true },
       { value: "+1", label: "New warehouse opened", sub: "to support increased demand" },
@@ -520,7 +520,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global placed their own team on the ground in China and took ownership of the compliance process end-to-end. We reviewed factory paperwork, identified the gaps, and created a standardised documentation template built for a multi-brand environment — giving each factory a clear process for identifying which shipment belonged to which brand. We also introduced FedEx International Priority as a more commercially competitive option, giving Sainsbury's and Argos genuine courier flexibility backed by a single logistics partner managing everything from China to the UK.",
     result: "Customs compliance owned and solved at origin — the standardised factory template removed the ambiguity that had been causing customs holds. Multi-brand clarity built into the process so shipments moved through the right channels every time. Movement away from a single DHL Express contract unlocked more commercially appropriate FedEx International Priority rates. And one accountable logistics partner now manages everything across both brands and both offices.",
     heroImage: "/case-studies/sainsburys-argos/hero.webp",
-    logo: "/case-studies/sainsburys-argos/logo-icon.png",
+    logo: "/case-studies/sainsburys-argos/logo-tile.png",
     stats: [
       { value: "At origin", label: "Compliance solved", sub: "standardised factory documentation", featured: true },
       { value: "DHL → FedEx", label: "Courier flexibility unlocked", sub: "no more single-contract pricing" },
@@ -557,7 +557,7 @@ export const caseStudies: CaseStudy[] = [
     solution: "ITD Global connected Freedom Fire's Linnworks platform to ITD's multi-carrier network via Connexx — a single integrated eCommerce shipping workflow and, for the first time, real visibility of parcel data through Shipment Reports. Alongside the integration: Dangerous Goods approvals handled with InPost, competitive rates across InPost (DG Approved), Evri, and Royal Mail, and a dedicated account manager to keep everything running smoothly.",
     result: "Full DG compliance and management through InPost (something previous resellers couldn't provide). A single dedicated account manager who knows the operation inside out. Commercially competitive rates that weren't available going direct. And complete, real-time visibility through Shipment Reports — performance tracking, SLA monitoring, and a single source of truth for every parcel.",
     heroImage: "/case-studies/freedom-fire/hero.jpeg",
-    logo: "/case-studies/freedom-fire/logo.jpeg",
+    logo: "/case-studies/freedom-fire/logo-tile.png",
     stats: [
       { value: "Real-time", label: "Shipment data via Connexx", sub: "performance, SLAs, single source of truth", featured: true },
       { value: "DG approved", label: "Dangerous Goods compliance", sub: "managed through InPost" },
@@ -597,7 +597,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD Global designed a mixed-mode freight solution that split the cargo across three modes: air, rail and sea. The most time-sensitive stock was moved by air freight, ensuring it arrived in the UK ahead of the earliest required date. The second tranche was routed via rail freight from China, a cost-effective and reliable alternative for stock needed within the mid-range window. The remaining volume, where lead time allowed, was shipped by sea freight, keeping costs at their lowest. Each mode was selected not just for speed, but for commercial logic — every part of the cargo matched to the most cost-effective option that still met its delivery deadline.",
     result:
       "Every part of the shipment landed in the UK within its required window — no delays, no shortfalls, no compromises on availability. By routing each tranche through the most commercially appropriate freight option, ITD Global kept overall freight costs significantly lower than a single air freight solution would have allowed.",
-    logo: "/case-studies/beauty-bay/logo.png",
+    logo: "/case-studies/beauty-bay/logo-tile.png",
     stats: [
       {
         value: 3,
@@ -661,7 +661,7 @@ export const caseStudies: CaseStudy[] = [
       "ITD Global replaced the daily drop off with a proper shipment booking portal and a dedicated collection service — Saime Trading no longer needed to leave the building to get a parcel out the door. Using ITD Global's buying power and multi-carrier network, we brought their shipping costs down significantly compared to what they had been paying. A dedicated account manager and in-house customer service team backed the whole thing, so there was always someone to call when something needed sorting.",
     result:
       "A dedicated collection service replaced the daily trip to the shop counter, giving the team that time back. The online booking portal integrates directly with shopping carts and marketplaces, removing manual admin from the parcel delivery process. Through ITD Global's buying power and access to multiple carriers, Saime Trading secured shipping costs lower than their previous setup without compromising on service — backed by dedicated customer service and account management as a consistent point of contact.",
-    logo: "/case-studies/saime-trading/logo.png",
+    logo: "/case-studies/saime-trading/logo-tile.png",
     stats: [
       { value: "Lower", label: "Shipping costs", sub: "multi-carrier buying power vs their previous setup", featured: true },
       { value: "Daily", label: "Collections", sub: "dedicated collection replaced parcel-shop drop-offs" },
@@ -774,7 +774,7 @@ export const caseStudies: CaseStudy[] = [
       "By securing consistent rail freight capacity from China throughout the disruption, ITD Global ensured Cummins' production lines never stopped for lack of parts. Multiple routes and departure schedules gave Cummins the freight resilience to absorb shocks elsewhere in the global supply chain, daily shipment reports and site-level Zoom calls gave every plant clear, current information on what was moving and when, and transit times and invoicing remained accurate and on schedule throughout 2021 — even as the wider industry struggled with delay and disruption.",
     heroImage: "/case-studies/cummins/hero.jpg",
     heroImageAlt: "Cummins power unit on a rail-served production line",
-    logo: "/case-studies/cummins/logo.png",
+    logo: "/case-studies/cummins/logo-tile.png",
     stats: [
       { value: "Zero", label: "Line Stops", sub: "across European plants throughout the disruption", featured: true },
       { value: 13, label: "China rail terminals", sub: "block trains + daily departures" },
@@ -826,7 +826,7 @@ export const caseStudies: CaseStudy[] = [
     result:
       "Despite the pandemic and the Suez Canal blockage, Regatta's supply chain continued operating without major interruption. Charter vessels, rail freight and air freight combined to give Regatta the flexibility to move stock by whichever route worked depending on urgency, while the sea-air solution from Myanmar kept both UK and Polish distribution centres supplied during a period when conventional routes were under pressure. Real-time tracking through live Freight Management Software and one point of regular, transparent contact kept Regatta's customers and internal teams informed and reassured throughout.",
     heroImage: "/case-studies/regatta/hero.jpg",
-    logo: "/case-studies/regatta/logo.png",
+    logo: "/case-studies/regatta/logo-tile.png",
     stats: [
       { value: 4, label: "Freight modes combined", sub: "charter vessel, rail, air & sea-air", featured: true },
       { value: 13, label: "China rail terminals", sub: "rail freight origins across China" },
@@ -908,7 +908,7 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Wenrit Global",
     industry: "3PL",
-    logo: "/case-studies/wenrit-global/logo.png",
+    logo: "/case-studies/wenrit-global/logo-tile.png",
     headline:
       "How Wenrit Global solved larger parcel delivery where others couldn't",
     metric: "~2,000 parcels/day",
@@ -959,7 +959,7 @@ export const caseStudies: CaseStudy[] = [
     featured: false,
     brandName: "Red Label",
     industry: "eCommerce",
-    logo: "/case-studies/red-label/logo.png",
+    logo: "/case-studies/red-label/logo-tile.png",
     heroImage: "/case-studies/red-label/hero.jpg",
     heroImageAlt: "Red Label brand imagery",
     headline:
@@ -1005,50 +1005,50 @@ export const integrations: Integration[] = [
   // ─── Tech — ERP / WMS ──────────────────────────────────────────────
   { id: "t-linnworks", name: "Linnworks", category: "erp_wms", type: "tech", featured: true, description: "Multi-channel order management", logo: "/logos/erp-wms/linnworks-tile.png", logoFill: true },
   { id: "t-magento", name: "Magento", category: "erp_wms", type: "tech", featured: false, description: "ITD connects directly to your Magento store, so orders move from checkout to carrier without a manual step in between.", logo: "/logos/erp-wms/magento-icon.webp" },
-  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "NetSuite runs your financials, inventory and orders in one system. ITD brings your carrier network into the same workflow.", logo: "/logos/erp-wms/netsuite-icon.png", logoFill: true },
+  { id: "t-netsuite", name: "NetSuite", category: "erp_wms", type: "tech", featured: true, description: "NetSuite runs your financials, inventory and orders in one system. ITD brings your carrier network into the same workflow.", logo: "/logos/erp-wms/netsuite-icon-fill.png", logoFill: true },
   { id: "t-orderwise", name: "OrderWise", category: "erp_wms", type: "tech", featured: false, description: "OrderWise gives UK product businesses precise control of their warehouse and orders. ITD extends that precision to the carrier side.", logo: "/logos/erp-wms/orderwise-icon.webp" },
-  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "Peoplevox runs your warehouse floor; ITD connects it to a carrier network your team doesn't need to build alone.", logo: "/logos/erp-wms/peoplevox-icon.jpg", logoFill: true },
-  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Selro manages your listings and orders across more than 40 channels, and ITD handles the shipping.", logo: "/logos/erp-wms/selro-mark.png" },
-  { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "TradePeg gives wholesale and multi-channel businesses visibility and control of their inventory. ITD takes care of the shipping.", logo: "/logos/erp-wms/tradepeg-icon.png" },
-  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "JonasSports runs the commercial operation of sports organisations. ITD ships the merchandise.", logo: "/logos/erp-wms/jonassports-icon.png", logoFill: true },
-  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "BrightPearl automates your retail operation from order to accounts. ITD connects the carrier network to complete the workflow.", logo: "/logos/erp-wms/brightpearl-icon.png", logoFill: true },
-  { id: "t-helm", name: "Helm WMS", category: "erp_wms", type: "tech", featured: false, description: "Helm WMS brings your multichannel warehouse operations together. ITD handles the carrier side of each despatch.", logo: "/logos/erp-wms/helm-icon.png", logoFill: true },
+  { id: "t-peoplevox", name: "Peoplevox", category: "erp_wms", type: "tech", featured: false, description: "Peoplevox runs your warehouse floor; ITD connects it to a carrier network your team doesn't need to build alone.", logo: "/logos/erp-wms/peoplevox-icon-fill.png", logoFill: true },
+  { id: "t-selro", name: "Selro", category: "erp_wms", type: "tech", featured: false, description: "Selro manages your listings and orders across more than 40 channels, and ITD handles the shipping.", logo: "/logos/erp-wms/selro-mark-fill.png" },
+  { id: "t-tradepeg", name: "Tradepeg", category: "erp_wms", type: "tech", featured: false, description: "TradePeg gives wholesale and multi-channel businesses visibility and control of their inventory. ITD takes care of the shipping.", logo: "/logos/erp-wms/tradepeg-icon-fill.png" },
+  { id: "t-jonassports", name: "JonasSports", category: "erp_wms", type: "tech", featured: false, description: "JonasSports runs the commercial operation of sports organisations. ITD ships the merchandise.", logo: "/logos/erp-wms/jonassports-icon-fill.png", logoFill: true },
+  { id: "t-brightpearl", name: "Brightpearl", category: "erp_wms", type: "tech", featured: false, description: "BrightPearl automates your retail operation from order to accounts. ITD connects the carrier network to complete the workflow.", logo: "/logos/erp-wms/brightpearl-icon-fill.png", logoFill: true },
+  { id: "t-helm", name: "Helm WMS", category: "erp_wms", type: "tech", featured: false, description: "Helm WMS brings your multichannel warehouse operations together. ITD handles the carrier side of each despatch.", logo: "/logos/erp-wms/helm-icon-fill.png", logoFill: true },
   // ─── Tech — eCommerce & Logistics ──────────────────────────────────
   { id: "t-base", name: "Base", category: "ecommerce_logistics", type: "tech", featured: false, description: "Base manages your eCommerce operation. ITD takes care of the carrier side.", logo: "/logos/ecommerce/base-icon.png", logoFill: true },
   { id: "t-aimco", name: "Aimco", category: "ecommerce_logistics", type: "tech", featured: false, description: "Aimco manages your retail operation. ITD handles the carrier side of every despatch." },
-  { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "ChannelAdvisor manages your multi-channel operation. ITD connects the carrier network behind it.", logo: "/logos/ecommerce/channeladvisor-icon.png" },
-  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "CloudCommercePro manages your multi-channel stock and orders. ITD connects the carrier network.", logo: "/logos/ecommerce/cloudcommerce-icon.png", logoFill: true },
-  { id: "t-voila", name: "Voila", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-carrier shipping software connecting you to over 160 couriers and more than 7,000 services.", logo: "/logos/ecommerce/voila-icon.png", logoFill: true },
-  { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipstation connects your selling channels for despatch. ITD manages the carrier rates behind it.", logo: "/logos/erp-wms/shipstation_logo.png", logoFill: true },
-  { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WooCommerce gives you full control of your store. ITD handles the carrier side of every order.", logo: "/logos/erp-wms/woocommerce_logo.svg" },
-  { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Storefeeder manages your multi-channel retail operation. ITD connects the carrier network.", logo: "/logos/erp-wms/storefeeder_logo.png", logoFill: true },
-  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Veeqo connects your channels and manages despatch. ITD adds the carrier network and rates.", logo: "/logos/ecommerce/veeqo-icon.webp" },
-  { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shopify powers your store. ITD takes care of what happens after the customer buys.", logo: "/logos/ecommerce/shopify_logo.png" },
-  { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Mintsoft runs your fulfilment operation. ITD manages the carrier rates across the network.", logo: "/logos/ecommerce/mintsoft-icon.png" },
+  { id: "t-channeladvisor", name: "ChannelAdvisor", category: "ecommerce_logistics", type: "tech", featured: false, description: "ChannelAdvisor manages your multi-channel operation. ITD connects the carrier network behind it.", logo: "/logos/ecommerce/channeladvisor-icon-fill.png" },
+  { id: "t-cloudcommercepro", name: "CloudCommercePro", category: "ecommerce_logistics", type: "tech", featured: false, description: "CloudCommercePro manages your multi-channel stock and orders. ITD connects the carrier network.", logo: "/logos/ecommerce/cloudcommerce-icon-fill.png", logoFill: true },
+  { id: "t-voila", name: "Voila", category: "ecommerce_logistics", type: "tech", featured: false, description: "Multi-carrier shipping software connecting you to over 160 couriers and more than 7,000 services.", logo: "/logos/ecommerce/voila-icon-fill.png", logoFill: true },
+  { id: "t-shipstation", name: "Shipstation", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shipstation connects your selling channels for despatch. ITD manages the carrier rates behind it.", logo: "/logos/erp-wms/shipstation_logo-fill.png", logoFill: true },
+  { id: "t-woocommerce", name: "WooCommerce", category: "ecommerce_logistics", type: "tech", featured: true, description: "WooCommerce gives you full control of your store. ITD handles the carrier side of every order.", logo: "/logos/erp-wms/woocommerce_logo-fill.png" },
+  { id: "t-storefeeder", name: "Storefeeder", category: "ecommerce_logistics", type: "tech", featured: false, description: "Storefeeder manages your multi-channel retail operation. ITD connects the carrier network.", logo: "/logos/erp-wms/storefeeder_logo-fill.png", logoFill: true },
+  { id: "t-veeqo", name: "Veeqo", category: "ecommerce_logistics", type: "tech", featured: false, description: "Veeqo connects your channels and manages despatch. ITD adds the carrier network and rates.", logo: "/logos/ecommerce/veeqo-icon-fill.png" },
+  { id: "t-shopify", name: "Shopify", category: "ecommerce_logistics", type: "tech", featured: true, description: "Shopify powers your store. ITD takes care of what happens after the customer buys.", logo: "/logos/ecommerce/shopify_logo-fill.png" },
+  { id: "t-mintsoft", name: "Mintsoft", category: "ecommerce_logistics", type: "tech", featured: false, description: "Mintsoft runs your fulfilment operation. ITD manages the carrier rates across the network.", logo: "/logos/ecommerce/mintsoft-icon-fill.png" },
   // ─── Tech — Marketplace ────────────────────────────────────────────
-  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon connects you to millions of customers. ITD manages the carrier side of each order you fulfil.", logo: "/logos/marketplaces/amazon-icon.webp", logoFill: true },
+  { id: "t-amazon", name: "Amazon", category: "marketplace", type: "tech", featured: true, description: "Amazon connects you to millions of customers. ITD manages the carrier side of each order you fulfil.", logo: "/logos/marketplaces/amazon-icon-fill.png", logoFill: true },
   { id: "t-tiktok", name: "TikTok Shop", category: "marketplace", type: "tech", featured: true, description: "TikTok Shop turns your content into orders. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/tiktok-tile.png", logoFill: true },
-  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy connects your shop to buyers who want what you make. ITD handles the carrier side of getting it there.", logo: "/logos/marketplaces/etsy-icon.png", logoFill: true },
-  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay puts your products in front of millions of buyers. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/ebay-icon.png" },
-  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Temu connects your products to a fast-growing buyer base. ITD handles the carrier side of each order you fulfil.", logo: "/logos/marketplaces/temu-icon.png", logoFill: true },
+  { id: "t-etsy", name: "Etsy", category: "marketplace", type: "tech", featured: false, description: "Etsy connects your shop to buyers who want what you make. ITD handles the carrier side of getting it there.", logo: "/logos/marketplaces/etsy-icon-fill.png", logoFill: true },
+  { id: "t-ebay", name: "eBay", category: "marketplace", type: "tech", featured: true, description: "eBay puts your products in front of millions of buyers. ITD handles the carrier side of each despatch.", logo: "/logos/marketplaces/ebay-icon-fill.png" },
+  { id: "t-temu", name: "Temu", category: "marketplace", type: "tech", featured: false, description: "Temu connects your products to a fast-growing buyer base. ITD handles the carrier side of each order you fulfil.", logo: "/logos/marketplaces/temu-icon-fill.png", logoFill: true },
   // ─── Carriers — Domestic ───────────────────────────────────────────
-  { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo.png" },
+  { id: "c-evri", name: "Evri", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK parcel delivery", logo: "/logos/carriers/evri_logo-fill.png" },
   { id: "c-inpost", name: "InPost", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel locker delivery network", logo: "/logos/carriers/inpost-icon.png" },
-  { id: "c-royal-mail", name: "Royal Mail", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK postal service", logo: "/logos/carriers/royal-mail-icon.png" },
+  { id: "c-royal-mail", name: "Royal Mail", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "UK postal service", logo: "/logos/carriers/royal-mail-icon-fill.png" },
   { id: "c-dpd", name: "DPD", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Parcel delivery network", logo: "/logos/carriers/DPD-LOGO.png" },
   { id: "c-dhl-parcel", name: "DHL Parcel", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "Parcel delivery", logo: "/logos/carriers/dhlparcel_logo.svg" },
-  { id: "c-amazon-shipping", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo.png" },
+  { id: "c-amazon-shipping", name: "Amazon Shipping", category: "carrier", type: "carrier", region: "Domestic", featured: true, description: "Amazon logistics network", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
   { id: "c-apc", name: "APC", category: "carrier", type: "carrier", region: "Domestic", featured: false, description: "UK overnight parcel network", logo: "/logos/carriers/apc_logo.png" },
   // ─── Carriers — International ───────────────────────────────────────
   { id: "c-parcel-force", name: "Parcel Force", category: "carrier", type: "carrier", region: "International", featured: true, description: "Tracked parcel delivery", logo: "/logos/carriers/parcel-force.svg" },
-  { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo.png" },
-  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & global parcel and freight", logo: "/logos/carriers/fedex-icon.png" },
-  { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & worldwide delivery", logo: "/logos/carriers/ups_logo.png" },
-  { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo.webp" },
+  { id: "c-evri-eu", name: "Evri EU", category: "carrier", type: "carrier", region: "International", featured: false, description: "European parcel delivery", logo: "/logos/carriers/evrieu_logo-fill.png" },
+  { id: "c-fedex", name: "FedEx", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & global parcel and freight", logo: "/logos/carriers/fedex-icon-fill.png" },
+  { id: "c-ups", name: "UPS", category: "carrier", type: "carrier", region: "International", regions: ["Domestic", "International"], featured: true, description: "Domestic & worldwide delivery", logo: "/logos/carriers/ups_logo-fill.png" },
+  { id: "c-dhl", name: "DHL", category: "carrier", type: "carrier", region: "International", featured: true, description: "International express", logo: "/logos/carriers/dhl_logo-fill.png" },
   { id: "c-landmark", name: "Landmark", category: "carrier", type: "carrier", region: "International", featured: false, description: "International parcel delivery", logo: "/logos/carriers/landmark-icon.svg" },
   { id: "c-tnt", name: "TNT", category: "carrier", type: "carrier", region: "International", featured: false, description: "Timed express & European road network", logo: "/logos/carriers/tnt-icon.png" },
   { id: "c-deutsche-post", name: "Deutsche Post", category: "carrier", type: "carrier", region: "International", featured: false, description: "German postal & international mail", logo: "/logos/carriers/deutschepost_logo.avif" },
-  { id: "c-starlinks", name: "Starlinks", category: "carrier", type: "carrier", region: "International", featured: false, description: "Cross-border e-commerce delivery", logo: "/logos/carriers/starlinks_logo.png" },
+  { id: "c-starlinks", name: "Starlinks", category: "carrier", type: "carrier", region: "International", featured: false, description: "Cross-border e-commerce delivery", logo: "/logos/carriers/starlinks_logo-fill.png" },
 ];
 
 // ─── Integration slugs + lookups ───────────────────────────────────────────────
@@ -1528,28 +1528,28 @@ export interface LinkedEntity {
 const LINKED_ENTITIES: Record<string, LinkedEntity> = {
   // Carriers (detail-page where available)
   "dpd": { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png", href: "/integrations/carriers/dpd", kind: "carrier" },
-  "evri": { name: "Evri", logo: "/logos/carriers/evri_logo.png", href: "/integrations/carriers/evri", kind: "carrier" },
-  "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
+  "evri": { name: "Evri", logo: "/logos/carriers/evri_logo-fill.png", href: "/integrations/carriers/evri", kind: "carrier" },
+  "royal-mail": { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon-fill.png", href: "/integrations/carriers/royal-mail", kind: "carrier" },
   "parcelforce": { name: "Parcelforce", logo: "/logos/carriers/parcel-force.svg", href: "/integrations/carriers/parcel-force", kind: "carrier" },
-  "amazon-shipping": { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo.png", href: "/integrations/carriers/amazon-shipping", kind: "carrier" },
+  "amazon-shipping": { name: "Amazon Shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png", href: "/integrations/carriers/amazon-shipping", kind: "carrier" },
   "inpost": { name: "InPost", logo: "/logos/carriers/inpost-icon.png", href: "/integrations/carriers/inpost", kind: "carrier" },
-  "dhl": { name: "DHL", logo: "/logos/carriers/dhl_logo.webp", href: "/integrations/carriers/dhl", kind: "carrier" },
-  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex-icon.png", href: "/integrations/carriers/fedex", kind: "carrier" },
-  "ups": { name: "UPS", logo: "/logos/carriers/ups_logo.png", href: "/integrations/carriers/ups", kind: "carrier" },
+  "dhl": { name: "DHL", logo: "/logos/carriers/dhl_logo-fill.png", href: "/integrations/carriers/dhl", kind: "carrier" },
+  "fedex": { name: "FedEx", logo: "/logos/carriers/fedex-icon-fill.png", href: "/integrations/carriers/fedex", kind: "carrier" },
+  "ups": { name: "UPS", logo: "/logos/carriers/ups_logo-fill.png", href: "/integrations/carriers/ups", kind: "carrier" },
   // SF Express has no detail page yet — fall back to the carriers index.
   "sf-express": { name: "SF Express", href: "/integrations/carriers", kind: "carrier" },
   "apc": { name: "APC", logo: "/logos/carriers/apc_logo.png", href: "/integrations/carriers/apc", kind: "carrier" },
-  "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
+  "starlinks": { name: "Starlinks", logo: "/logos/carriers/starlinks_logo-fill.png", href: "/integrations/carriers/starlinks", kind: "carrier" },
   "landmark": { name: "Landmark", logo: "/logos/carriers/landmark-icon.svg", href: "/integrations/carriers/landmark", kind: "carrier" },
 
   // Tech integrations — link to the entity's own detail page (/integrations/tech/{slug},
   // rendered by the dynamic [slug] route), NOT a category landing.
-  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png", href: "/integrations/tech/mintsoft", kind: "integration" },
+  "mintsoft": { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon-fill.png", href: "/integrations/tech/mintsoft", kind: "integration" },
   "linnworks": { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png", href: "/integrations/tech/linnworks", kind: "integration" },
-  "netsuite": { name: "NetSuite", logo: "/logos/erp-wms/netsuite-icon.png", href: "/integrations/tech/netsuite", kind: "integration" },
-  "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo.png", href: "/integrations/tech/shopify", kind: "integration" },
-  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp", href: "/integrations/tech/veeqo", kind: "integration" },
-  "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo.png", href: "/integrations/tech/shipstation", kind: "integration" },
+  "netsuite": { name: "NetSuite", logo: "/logos/erp-wms/netsuite-icon-fill.png", href: "/integrations/tech/netsuite", kind: "integration" },
+  "shopify": { name: "Shopify", logo: "/logos/ecommerce/shopify_logo-fill.png", href: "/integrations/tech/shopify", kind: "integration" },
+  "veeqo": { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon-fill.png", href: "/integrations/tech/veeqo", kind: "integration" },
+  "shipstation": { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo-fill.png", href: "/integrations/tech/shipstation", kind: "integration" },
 
   // Platform (ITD itself)
   "connexx": { name: "Connexx", href: "/connexx", kind: "platform" },

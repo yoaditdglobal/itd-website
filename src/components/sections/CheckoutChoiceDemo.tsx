@@ -22,7 +22,7 @@ const OPTIONS: DemoOption[] = [
     eta: "Arrives tomorrow",
     price: "£4.99",
     carrier: "DPD",
-    logo: "/logos/carriers/dpd-tile.png",
+    logo: "/logos/carriers/dpd-tile-fill.png",
     lane: "best next-day performance on this lane",
   },
   {
@@ -31,7 +31,7 @@ const OPTIONS: DemoOption[] = [
     eta: "Arrives in 2–3 days",
     price: "£2.99",
     carrier: "Evri",
-    logo: "/logos/carriers/evri_logo.png",
+    logo: "/logos/carriers/evri_logo-fill.png",
     lane: "best value on this lane",
   },
   {

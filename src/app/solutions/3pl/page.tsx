@@ -61,11 +61,11 @@ export default function ThreePLPage() {
           objectPosition: "72% 60%",
         }}
         chips={[
-          { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png" },
+          { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon-fill.png" },
           { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
-          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon.png" },
+          { name: "Royal Mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
           { name: "DPD", logo: "/logos/carriers/DPD-LOGO.png" },
-          { name: "Evri", logo: "/logos/carriers/evri_logo.png" },
+          { name: "Evri", logo: "/logos/carriers/evri_logo-fill.png" },
         ]}
       />
       <SolutionPains
@@ -141,10 +141,10 @@ export default function ThreePLPage() {
           heading="Sits over the WMS you already run"
           subtext="We're the shipping layer over Mintsoft, Linnworks, ShipHero and Veeqo. Orders pull in with each brand's rules, we apply the carrier and rate, and the tracking and cost write back. Nothing gets re-keyed."
           logos={[
-            { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon.png" },
+            { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon-fill.png" },
             { name: "Linnworks", logo: "/logos/erp-wms/linnworks_logo.png" },
-            { name: "ShipHero", logo: "/logos/erp-wms/shiphero_logo.png" },
-            { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon.webp" },
+            { name: "ShipHero", logo: "/logos/erp-wms/shiphero_logo-fill.png" },
+            { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon-fill.png" },
           ]}
           browseHref="/integrations/erp-wms"
         />

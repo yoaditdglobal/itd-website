@@ -14,7 +14,7 @@ export default function AmazonShippingPage() {
     <CarrierPage
       slug="amazon-shipping"
       name="Amazon Shipping"
-      logo="/logos/carriers/amazonshipping_logo.png"
+      logo="/logos/carriers/amazonshipping_logo-fill.png"
       tagline="Amazon's own delivery network, available for eCommerce shipments beyond the Amazon platform."
       description="Amazon Shipping gives businesses access to Amazon's UK logistics infrastructure — the same network behind Prime delivery — for their own eCommerce orders. It covers same-day delivery in major UK cities and next-day and standard services across the country. Through ITD, you access Amazon Shipping's services on rates managed at scale, without requiring a direct Amazon Shipping account."
       region="Domestic"

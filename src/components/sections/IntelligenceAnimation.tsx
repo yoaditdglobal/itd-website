@@ -75,10 +75,10 @@ const PETALS =
 
 // Carrier tiles — reuse the site's existing square brand logos.
 const TILE: Record<string, string> = {
-  evri: "/logos/carriers/evri_logo.png",
-  dpd: "/logos/carriers/dpd-tile.png",
-  "royal-mail": "/logos/carriers/royal-mail-icon.png",
-  ups: "/logos/carriers/ups_logo.png",
+  evri: "/logos/carriers/evri_logo-fill.png",
+  dpd: "/logos/carriers/dpd-tile-fill.png",
+  "royal-mail": "/logos/carriers/royal-mail-icon-fill.png",
+  ups: "/logos/carriers/ups_logo-fill.png",
 };
 
 // ---- data -------------------------------------------------------------------

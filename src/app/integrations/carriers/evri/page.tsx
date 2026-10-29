@@ -14,7 +14,7 @@ export default function EvriPage() {
     <CarrierPage
       slug="evri"
       name="Evri"
-      logo="/logos/carriers/evri_logo.png"
+      logo="/logos/carriers/evri_logo-fill.png"
       tagline="High-volume residential parcel delivery across the full UK network."
       description="Evri is one of the UK's largest parcel carriers, built for eCommerce businesses shipping standard consumer parcels at scale. Its network covers the full UK, with services ranging from standard tracked delivery through to next-day and out-of-home options. Through ITD, you access Evri's services on rates that reflect network-scale buying power, with the carrier relationship managed on your behalf."
       region="Domestic"

@@ -3,11 +3,11 @@
 import Image from "next/image";
 
 const LOGOS = [
-  { name: "Amazon",      src: "/logos/marketplaces/amazon-icon.webp",     bg: undefined    },
-  { name: "eBay",        src: "/logos/marketplaces/ebay-icon.png",        bg: "#FFFFFF"   },
-  { name: "Etsy",        src: "/logos/marketplaces/etsy-icon.png",        bg: undefined   },
+  { name: "Amazon",      src: "/logos/marketplaces/amazon-icon-fill.png",     bg: undefined    },
+  { name: "eBay",        src: "/logos/marketplaces/ebay-icon-fill.png",        bg: "#FFFFFF"   },
+  { name: "Etsy",        src: "/logos/marketplaces/etsy-icon-fill.png",        bg: undefined   },
   { name: "TikTok Shop", src: "/logos/marketplaces/tiktok-tile.png",      bg: undefined   },
-  { name: "Temu",        src: "/logos/marketplaces/temu-icon.png",       bg: undefined   },
+  { name: "Temu",        src: "/logos/marketplaces/temu-icon-fill.png",       bg: undefined   },
 ];
 
 const orbitPct = 52;

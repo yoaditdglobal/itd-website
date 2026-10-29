@@ -28,13 +28,13 @@ import MagneticButton from "@/components/ui/MagneticButton";
  */
 
 const CARRIERS = [
-  { name: "Evri", src: "/logos/carriers/evri_logo.png" },
+  { name: "Evri", src: "/logos/carriers/evri_logo-fill.png" },
   { name: "InPost", src: "/logos/carriers/inpost-icon.png" },
-  { name: "Royal Mail", src: "/logos/carriers/royal-mail-icon.png" },
-  { name: "DPD", src: "/logos/carriers/dpd.png" },
-  { name: "FedEx", src: "/logos/carriers/fedex-icon.png" },
-  { name: "DHL", src: "/logos/carriers/dhl_logo.webp" },
-  { name: "UPS", src: "/logos/carriers/ups_logo.png" },
+  { name: "Royal Mail", src: "/logos/carriers/royal-mail-icon-fill.png" },
+  { name: "DPD", src: "/logos/carriers/dpd-fill.png" },
+  { name: "FedEx", src: "/logos/carriers/fedex-icon-fill.png" },
+  { name: "DHL", src: "/logos/carriers/dhl_logo-fill.png" },
+  { name: "UPS", src: "/logos/carriers/ups_logo-fill.png" },
 ];
 
 const HEADING = (
