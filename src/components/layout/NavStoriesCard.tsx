@@ -110,7 +110,7 @@ export default function NavStoriesCard({ stories, surface = "panel" }: Props) {
           variant="primary"
           surface={mobile ? "dark" : "light"}
           size={mobile ? "lg" : "default"}
-          className="w-full"
+          className="w-full text-white hover:text-white"
         >
           Learn More
         </Button>
