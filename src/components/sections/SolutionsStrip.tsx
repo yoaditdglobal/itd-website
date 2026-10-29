@@ -8,10 +8,10 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * one oversized typographic object — "Shipping solutions built for your
  * needs" — laid out as a single horizontal strip, wider than the viewport,
  * that travels across the screen as the page scrolls (a ticker driven by
- * scroll position, not time). A hairline reading line sits at 38% of the
- * viewport; each word lights up in reading order as its left edge crosses
- * that line (ghost outline → accent → ink). A thin accent rule at the foot of
- * the stage grows with progress.
+ * scroll position, not time). Each word lights up in reading order as its
+ * left edge crosses an invisible reading line at 38% of the viewport (ghost
+ * outline → accent → ink). Nothing else is on the stage — no eyebrow,
+ * counter, guide line or progress rule (removed at Yoad's request).
  *
  * This `<h2>` is the REAL heading of the Solutions section that follows:
  * `SolutionsRouting` takes `headingId` and labels its `<section>` with it
@@ -33,8 +33,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  */
 const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs"] as const;
 const SENTENCE = WORDS.join(" ");
-const EYEBROW = "02 — Solutions";
-/** Fraction of the viewport width where the reading line sits. */
+/** Fraction of the viewport width where the (invisible) reading line sits. */
 const READING_LINE = 0.38;
 /** Extra scroll (in vh) the stage stays pinned for while the strip travels. */
 const PIN_SCROLL_VH = 90;
@@ -44,7 +43,6 @@ const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // reader's control for the whole pin (an ease-out would spend half the travel
 // in the first few notches of scroll).
 const easeOut = (x: number) => x * x * (3 - 2 * x);
-const pad2 = (n: number) => String(n).padStart(2, "0");
 
 type WordState = "future" | "active" | "past";
 
@@ -59,8 +57,6 @@ export default function SolutionsStrip({
   const trackRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLHeadingElement>(null);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const ruleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -115,7 +111,7 @@ export default function SolutionsStrip({
       return range > 0 ? clamp01(-rect.top / range) : 0;
     };
 
-    const paint = (x: number, t: number) => {
+    const paint = (x: number) => {
       strip.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
 
       // Exactly one active word once the first has crossed the line: the last
@@ -131,12 +127,6 @@ export default function SolutionsStrip({
           wordRefs.current[i]?.setAttribute("data-state", next);
         }
       }
-      if (counterRef.current) {
-        counterRef.current.textContent = `${pad2(activeIdx + 1)} / ${pad2(WORDS.length)}`;
-      }
-      if (ruleRef.current) {
-        ruleRef.current.style.transform = `scaleX(${t.toFixed(4)})`;
-      }
     };
 
     const tick = () => {
@@ -145,7 +135,7 @@ export default function SolutionsStrip({
       // Lagging follow — keeps wheel notches from slamming the strip.
       const delta = target - current;
       current = Math.abs(delta) < 0.5 ? target : current + delta * 0.14;
-      paint(current, t);
+      paint(current);
 
       const rect = track.getBoundingClientRect();
       const vh = window.innerHeight || 1;
@@ -184,9 +174,8 @@ export default function SolutionsStrip({
       devWindow.__itdStripProgress = (p) => {
         forced = p === null ? null : clamp01(p);
         if (forced !== null) {
-          const t = easeOut(forced);
-          current = target = startX + (endX - startX) * t;
-          paint(current, t);
+          current = target = startX + (endX - startX) * easeOut(forced);
+          paint(current);
         }
         ensureRunning();
       };
@@ -208,8 +197,7 @@ export default function SolutionsStrip({
       <div className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="text-eyebrow text-text-tertiary">{EYEBROW}</p>
-            <h2 id={headingId} className="mt-4 max-w-4xl text-display-xl text-text-primary">
+            <h2 id={headingId} className="max-w-4xl text-display-xl text-text-primary">
               {SENTENCE}
             </h2>
           </ScrollReveal>
@@ -227,20 +215,6 @@ export default function SolutionsStrip({
         style={{ height: `calc(100vh + ${PIN_SCROLL_VH}vh)` }}
       >
         <div className="sticky top-[72px] flex h-[calc(100vh-72px)] flex-col overflow-hidden">
-          {/* Reading line — the words light as they cross it. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 top-0 w-px bg-text-primary/10"
-            style={{ left: `${READING_LINE * 100}%` }}
-          />
-
-          <div className="mx-auto flex w-full max-w-7xl items-baseline justify-between px-4 pt-12 sm:px-6 lg:px-8">
-            <p className="text-eyebrow text-text-tertiary">{EYEBROW}</p>
-            <p className="text-caption tabular-nums text-text-tertiary" aria-hidden="true">
-              <span ref={counterRef}>00 / {pad2(WORDS.length)}</span>
-            </p>
-          </div>
-
           <div className="flex flex-1 items-center">
             <h2
               id={headingId}
@@ -263,14 +237,6 @@ export default function SolutionsStrip({
               ))}
             </h2>
           </div>
-
-          {/* Progress rule — grows left to right with scroll. */}
-          <div
-            ref={ruleRef}
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-accent"
-            style={{ transform: "scaleX(0)" }}
-          />
         </div>
       </div>
     </div>
