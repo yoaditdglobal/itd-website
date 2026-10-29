@@ -53,8 +53,12 @@ function SectionBody({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => vo
   return (
     <div className="pl-4 pb-4">
       {groups.map((g) => (
-        <div key={g.id} className="mt-2" data-nav-group={g.id}>
-          {menu.rail && <p className="text-eyebrow text-white/40 mt-3 mb-1">{g.title}</p>}
+        <div
+          key={g.id}
+          className="mt-4 first:mt-0"
+          data-nav-group={g.id}
+          {...(menu.rail ? { role: "group", "aria-label": g.title } : {})}
+        >
           {g.items.map((item: NavItem) => (
             <Link
               key={item.href}
