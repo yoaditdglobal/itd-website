@@ -119,34 +119,26 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                   className={
                     rail
                       ? "group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                      : "nav-lane-card card-hover group flex h-full flex-col rounded-xl border border-white/10 p-4 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      : "nav-rail-tab group flex h-full items-center gap-3 rounded-xl border border-border bg-white px-4 py-3 hover:border-accent/40 hover:bg-accent-light/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   }
                 >
                   <span className="flex items-center gap-2.5">
                     {Icon ? (
                       <span
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-105 ${
-                          rail ? "bg-accent-light text-accent" : "bg-white/10 text-white"
-                        }`}
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-light text-accent transition-transform group-hover:scale-105"
                       >
                         <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
                       </span>
                     ) : (
                       item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />
                     )}
-                    <span
-                      className={`text-heading-sm transition-colors ${
-                        rail ? "text-text-primary group-hover:text-accent" : "text-white"
-                      }`}
-                    >
+                    <span className="text-heading-sm text-text-primary transition-colors group-hover:text-accent">
                       {item.name}
                     </span>
                   </span>
                   {item.desc && (
                     <span
-                      className={`block text-body-sm line-clamp-3 ${
-                        rail ? "mt-1 text-text-secondary" : "mt-2 text-white/65"
-                      }`}
+                      className="mt-1 block text-body-sm text-text-secondary line-clamp-3"
                     >
                       {item.desc}
                     </span>
