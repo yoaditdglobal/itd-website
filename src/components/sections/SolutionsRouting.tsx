@@ -170,10 +170,16 @@ function UsedByCluster({ tag }: { tag: SolutionTag }) {
  * `forceEnhanced` bypasses the media-query gate — used only by the isolated dev
  * preview route so the pinned animation can be observed off the scroll-jacked
  * homepage. Production callers pass nothing.
+ *
+ * `headingId` hands the section heading to an element rendered BEFORE this
+ * component (the homepage's `SolutionsStrip` travelling-strip headline): the
+ * section is labelled by that id and no title of its own is rendered, so the
+ * line is never said twice. Without it the section renders its own TITLE.
  */
 export default function SolutionsRouting({
   forceEnhanced = false,
-}: { forceEnhanced?: boolean } = {}) {
+  headingId,
+}: { forceEnhanced?: boolean; headingId?: string } = {}) {
   const [enhanced, setEnhanced] = useState(forceEnhanced);
   const [active, setActive] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -394,10 +400,16 @@ export default function SolutionsRouting({
   if (!enhanced) {
     const icp = ICPS[active];
     return (
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-white py-16 md:py-24" aria-labelledby={headingId}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <SectionLabel title={TITLE} subtitle={SUBTITLE} align="center" />
+            {headingId ? (
+              <p className="mx-auto mb-8 max-w-2xl text-center text-body-lg text-text-secondary md:mb-12">
+                {SUBTITLE}
+              </p>
+            ) : (
+              <SectionLabel title={TITLE} subtitle={SUBTITLE} align="center" />
+            )}
 
             {/* Pill mini-nav — horizontal, edge-bleeding scroll row */}
             <div
@@ -499,7 +511,7 @@ export default function SolutionsRouting({
 
   // ─── Pinned audience pager (desktop) ───
   return (
-    <section className="bg-white">
+    <section className="bg-white" aria-labelledby={headingId}>
       <div
         ref={trackRef}
         className="relative"
@@ -514,11 +526,13 @@ export default function SolutionsRouting({
                 "Used by" case-study logos + explore link directly beneath its
                 headline. Active state is driven by SCROLL ONLY (no hover). */}
             <div>
-              <h2 className="max-w-md text-display-md text-text-primary">
-                {TITLE}
-              </h2>
+              {!headingId && (
+                <h2 className="max-w-md text-display-md text-text-primary">
+                  {TITLE}
+                </h2>
+              )}
 
-              <ul className="mt-7">
+              <ul className={headingId ? "mt-2" : "mt-7"}>
                 {ICPS.map((icp, i) => (
                   <li key={icp.name}>
                     <Link

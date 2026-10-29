@@ -266,6 +266,7 @@ Every text element on the site uses one of these utility classes (defined in `sr
 
 | Token | Use |
 |---|---|
+| `.text-display-2xl` | Oversized typographic statement (homepage travelling-strip H2) — never a page H1 |
 | `.text-display-xl` | Page H1, hero |
 | `.text-display-lg` | Section H2 |
 | `.text-display-md` | Subsection H3 |
