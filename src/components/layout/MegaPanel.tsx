@@ -109,8 +109,12 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
           : {})}
         data-nav-group={activeGroup?.id}
       >
-        <p className="text-eyebrow text-text-tertiary mb-4">{eyebrow}</p>
-        <ul className={`grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+        {/* No visible eyebrow (user-directed): the group name lives on the grid
+            as an accessible label only. */}
+        <ul
+          aria-label={eyebrow}
+          className={`grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`}
+        >
           {items.map((item) => {
             const Icon = item.icon;
             return (
@@ -245,8 +249,9 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
   };
 
   return (
-    <div className="w-[240px] xl:w-[280px] shrink-0 border-r border-border p-4 xl:p-5">
-      <p className="text-eyebrow text-text-tertiary mb-3 px-1">{eyebrow}</p>
+    <div className="w-[240px] xl:w-[280px] shrink-0 border-r border-border px-4 py-6 xl:px-5">
+      {/* The rail eyebrow is an accessible name only; nothing visible sits
+          above the tabs, so py-6 lines the first tab up with the grid. */}
       <div role="tablist" aria-orientation="vertical" aria-label={eyebrow} onKeyDown={onKeyDown} className="space-y-1">
         {groups.map((g, i) => {
           const selected = g.id === activeId;
