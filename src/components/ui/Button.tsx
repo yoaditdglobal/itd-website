@@ -9,8 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-accent text-white hover:bg-accent/90",
-        primary: "bg-accent text-white hover:bg-accent/90",
+        default: "bg-button text-on-button hover:bg-button-hover",
+        primary: "bg-button text-on-button hover:bg-button-hover",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-transparent border border-border text-text-primary hover:bg-bg-secondary",
@@ -30,16 +30,16 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       // Dark-surface overrides: button sits on bg-bg-dark / bg-bg-dark-card.
-      // Primary on dark: keep brand accent fill, no change needed.
+      // Primary on dark: same teal fill + navy label (reads on navy surfaces).
       {
         variant: "primary",
         surface: "dark",
-        className: "bg-accent text-white hover:bg-accent-dark",
+        className: "bg-button text-on-button hover:bg-button-hover",
       },
       {
         variant: "default",
         surface: "dark",
-        className: "bg-accent text-white hover:bg-accent-dark",
+        className: "bg-button text-on-button hover:bg-button-hover",
       },
       // Secondary on dark: transparent with white border + white text.
       {

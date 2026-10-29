@@ -20,7 +20,7 @@ export default function NotFound() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/"
-            className="inline-flex h-10 items-center justify-center rounded-lg bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent/90"
+            className="inline-flex h-10 items-center justify-center rounded-lg bg-button px-5 text-sm font-medium text-on-button transition-colors hover:bg-button-hover"
           >
             Go home
           </Link>
