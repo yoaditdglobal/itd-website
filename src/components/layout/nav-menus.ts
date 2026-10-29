@@ -71,6 +71,9 @@ export interface NavPromo {
   body: string;
   cta: { label: NavCtaLabel; href: string };
   art: NavPromoArt;
+  /** Optional feature animation that sits between the body copy and the CTA
+   *  (desktop panel only — the mobile overlay keeps the card short). */
+  video?: Extract<NavPromoArt, { kind: "video" }>;
   tone: "light" | "navy";
 }
 
@@ -162,6 +165,17 @@ export const NAV_MENUS: readonly NavMenu[] = [
       body: "Live prices across the UK's biggest carrier network, no account needed.",
       cta: { label: "Get Quote", href: RATE_CHECKER_URL },
       art: { kind: "icon", icon: Calculator },
+      // The Rate Checker walkthrough (claude.ai design project, scenes-rate-checker),
+      // rendered with the connexx-* pipeline and cropped to the white panel.
+      video: {
+        kind: "video",
+        mp4: "/media/connexx-rate-checker.mp4",
+        webm: "/media/connexx-rate-checker.webm",
+        poster: "/media/connexx-rate-checker-poster.jpg",
+        alt: "Rate checker walkthrough: three quick questions, then your estimated saving",
+        width: 768,
+        height: 468,
+      },
       tone: "light",
     },
   },
