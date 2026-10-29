@@ -696,15 +696,13 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
 /* ─── Travelling-strip headline (homepage SolutionsStrip) ───
    One oversized word strip travels across a pinned stage; each word's state
    is flipped by JS via data-state as its left edge crosses the reading line.
-   future = hairline ghost outline, active = accent, past = ink. */
+   future = invisible (no ghost outline, user-directed), active = accent, past = ink. */
 .strip-word {
   color: var(--color-text-primary);
-  -webkit-text-stroke: 1.5px transparent;
-  transition: color 260ms ease-out, -webkit-text-stroke-color 260ms ease-out;
+  transition: color 260ms ease-out;
 }
 .strip-word[data-state="future"] {
   color: transparent;
-  -webkit-text-stroke-color: rgb(26 26 31 / 0.3);
 }
 .strip-word[data-state="active"] {
   color: var(--color-accent);
