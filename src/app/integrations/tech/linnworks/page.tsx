@@ -52,8 +52,8 @@ export default function LinnworksPage() {
         },
       ]}
       closingSubtitle="Connect Linnworks and ship your channels through one carrier network."
-      primaryCta={{ label: "Get a quote", href: "/contact?enquiry=linnworks" }}
-      secondaryCta={{ label: "Contact us", href: "/contact" }}
+      primaryCta={{ label: "Get Quote", href: "/contact?enquiry=linnworks" }}
+      secondaryCta={{ label: "Contact Sales", href: "/contact" }}
     />
   );
 }

@@ -56,10 +56,10 @@ export default function TechIntegrationsPage() {
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="https://itdglobal-ratechecker.lovable.app/">
-                  Get a quote
+                  Get Quote
                 </Button>
                 <Button surface="dark" variant="secondary" href="/contact">
-                  Talk to us
+                  Contact Sales
                 </Button>
               </div>
             </div>

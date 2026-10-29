@@ -126,7 +126,7 @@ interface VerticalPageProps {
    *  populate. Falls back to `caseStudy` when undefined or empty. */
   caseStudies?: CaseStudy[];
 
-  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → RATE_CHECKER_URL, secondary="Contact Us" → "/contact". */
+  /** Optional override for the hero CTAs. Defaults: primary="Get Quote" → RATE_CHECKER_URL, secondary="Contact Sales" → "/contact". */
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 
@@ -223,7 +223,7 @@ export default function VerticalPage({
   if (faq && faq.length > 0) ldData.push(faqSchema(faq));
 
   const heroPrimary = primaryCta ?? { label: "Get Quote", href: RATE_CHECKER_URL };
-  const heroSecondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
+  const heroSecondary = secondaryCta ?? { label: "Contact Sales", href: "/contact" };
 
   return (
     <>

@@ -45,7 +45,7 @@ export default function Hero({
     label: "Get Quote",
     href: RATE_CHECKER_URL,
   };
-  const secondary = secondaryCta ?? { label: "Contact Us", href: "/contact" };
+  const secondary = secondaryCta ?? { label: "Contact Sales", href: "/contact" };
 
   return (
     <section data-hero-tone="light" className="bleed-nav relative hero-bg overflow-hidden min-h-[100svh] flex items-center">

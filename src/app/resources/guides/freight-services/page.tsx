@@ -740,7 +740,7 @@ export default function FreightServicesGuidePage() {
                 href="/contact?enquiry=freight"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
               >
-                Get in touch with the freight team
+                Contact Sales
               </Link>
               <Link
                 href="/shipping/freight"

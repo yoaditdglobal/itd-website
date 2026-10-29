@@ -588,7 +588,7 @@ export function getTechIntegrationPageProps(
     partnerLink: override.partnerLink,
     features: override.features ?? DEFAULT_FEATURES,
     closingSubtitle: `Connect ${tool.name} and ship every order through one carrier network.`,
-    primaryCta: { label: "Get a quote", href: `/contact?enquiry=${slug}` },
-    secondaryCta: { label: "Contact us", href: "/contact" },
+    primaryCta: { label: "Get Quote", href: `/contact?enquiry=${slug}` },
+    secondaryCta: { label: "Contact Sales", href: "/contact" },
   };
 }
