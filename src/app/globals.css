@@ -449,10 +449,18 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
    the panel is already open. The panel stays open (.nav-dropdown[data-open]);
    only the keyed inner body remounts and fades in. */
 @keyframes nav-panel-swap {
-  from { opacity: 0; translate: 0 4px; }
-  to   { opacity: 1; translate: 0 0; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* The rail and the item grid also rise 4px. The promo column does NOT: it is a
+   full-bleed card, and translating it inside the clipped panel exposed a 4px
+   strip of the white panel above the navy Resources card on every open. */
+@keyframes nav-panel-rise {
+  from { translate: 0 4px; }
+  to   { translate: 0 0; }
 }
 .nav-panel-swap { animation: nav-panel-swap 150ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.nav-panel-rise { animation: nav-panel-rise 150ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 /* Mega panel rail cards (role=tab): selected/unselected crossfade. */
 .nav-rail-tab { transition: background-color 150ms, border-color 150ms, box-shadow 150ms, opacity 150ms; }
@@ -480,7 +488,8 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .nav-mobile-overlay {
     transition: none;
   }
-  .nav-panel-swap { animation: none; }
+  .nav-panel-swap,
+  .nav-panel-rise { animation: none; }
 }
 
 /* Hide the scrollbar on carousel tracks (they scroll by snap/controls). */

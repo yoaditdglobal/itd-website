@@ -52,7 +52,12 @@ export default function MegaPanel({
       aria-labelledby={labelledBy}
       data-open={open || undefined}
       data-nav-menu={menu?.id}
-      className="nav-dropdown hidden lg:block absolute left-0 right-0 top-full mt-2 rounded-2xl border border-border bg-white shadow-2xl before:absolute before:-top-2 before:left-0 before:right-0 before:h-2 before:content-['']"
+      // The hairline is an `after:` overlay ring rather than a real border: a
+      // border sat OUTSIDE the clipping wrapper, so the navy Resources promo
+      // card showed a light rim plus a white sliver at the two rounded corners
+      // (16px clip inside a 15px padding-box curve). The overlay paints over
+      // the content, so it is invisible on navy and unchanged on white.
+      className="nav-dropdown hidden lg:block absolute left-0 right-0 top-full mt-2 rounded-2xl bg-white shadow-2xl before:absolute before:-top-2 before:left-0 before:right-0 before:h-2 before:content-[''] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:ring-1 after:ring-inset after:ring-border after:content-['']"
       onClick={(e) => {
         // Close when any link inside is clicked — covers query-string-only
         // navigations where usePathname() doesn't change.
@@ -104,7 +109,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
       )}
 
       <div
-        className="flex-1 min-w-0 p-6"
+        className="nav-panel-rise flex-1 min-w-0 p-6"
         {...(rail && activeGroup
           ? { role: "tabpanel", id: gridId, "aria-labelledby": tabId(activeGroup) }
           : {})}
@@ -269,7 +274,7 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
   };
 
   return (
-    <div className="w-[240px] xl:w-[280px] shrink-0 border-r border-border px-4 py-6 xl:px-5">
+    <div className="nav-panel-rise w-[240px] xl:w-[280px] shrink-0 border-r border-border px-4 py-6 xl:px-5">
       {/* The rail eyebrow is an accessible name only; nothing visible sits
           above the tabs, so py-6 lines the first tab up with the grid. */}
       <div role="tablist" aria-orientation="vertical" aria-label={eyebrow} onKeyDown={onKeyDown} className="space-y-1">
