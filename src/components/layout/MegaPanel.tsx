@@ -119,15 +119,15 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                   className={
                     rail
                       ? "group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                      : "nav-rail-tab group flex h-full items-center gap-3 rounded-xl border border-border bg-white px-4 py-3 hover:border-accent/40 hover:bg-accent-light/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      : "nav-rail-tab group flex aspect-square flex-col items-center justify-center gap-3 rounded-xl border border-border bg-white p-4 text-center hover:border-accent/40 hover:bg-accent-light/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   }
                 >
-                  <span className="flex items-center gap-2.5">
+                  <span className={rail ? "flex items-center gap-2.5" : "flex flex-col items-center gap-3"}>
                     {Icon ? (
                       <span
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-light text-accent transition-transform group-hover:scale-105"
+                        className={`flex shrink-0 items-center justify-center rounded-lg bg-accent-light text-accent transition-transform group-hover:scale-105 ${rail ? "h-10 w-10" : "h-12 w-12"}`}
                       >
-                        <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+                        <Icon className={rail ? "h-5 w-5" : "h-6 w-6"} strokeWidth={1.75} aria-hidden />
                       </span>
                     ) : (
                       item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />
