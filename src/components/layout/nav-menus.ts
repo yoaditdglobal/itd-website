@@ -52,6 +52,8 @@ export interface NavGroup {
   icon: LucideIcon;
   items: NavItem[];
   footerLink?: NavFooterLink;
+  /** Dense 3-column logo + name list, no descriptions (fits all carriers). */
+  compact?: boolean;
 }
 
 export type NavPromoArt =
@@ -104,13 +106,23 @@ export interface NavMenu {
 }
 
 const CARRIERS: NavItem[] = [
-  { name: "Evri", desc: "High-volume residential parcel delivery across the full UK network", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo-fill.png" },
-  { name: "Royal Mail", desc: "The UK's national postal network, reaching every address in the country", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
-  { name: "DPD", desc: "Precise tracked delivery across the UK and into Europe, with one-hour windows", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
-  { name: "InPost", desc: "The UK's largest parcel locker network, open 24 hours a day", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
-  { name: "Parcel Force", desc: "Guaranteed timed delivery across the UK, with international services", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
-  { name: "Amazon Shipping", desc: "Amazon's own delivery network, for shipments beyond the Amazon platform", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
-  { name: "DHL", desc: "The leading international express courier, to over 220 countries", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo-fill.png" },
+  // Every carrier on /integrations/carriers, logos as in src/lib/data.ts.
+  { name: "Evri", href: "/integrations/carriers/evri", logo: "/logos/carriers/evri_logo-fill.png" },
+  { name: "Royal Mail", href: "/integrations/carriers/royal-mail", logo: "/logos/carriers/royal-mail-icon-fill.png" },
+  { name: "DPD", href: "/integrations/carriers/dpd", logo: "/logos/carriers/DPD-LOGO.png" },
+  { name: "InPost", href: "/integrations/carriers/inpost", logo: "/logos/carriers/inpost-icon.png" },
+  { name: "Parcel Force", href: "/integrations/carriers/parcel-force", logo: "/logos/carriers/parcel-force.svg" },
+  { name: "Amazon Shipping", href: "/integrations/carriers/amazon-shipping", logo: "/logos/carriers/amazonshipping_logo-fill.png" },
+  { name: "DHL", href: "/integrations/carriers/dhl", logo: "/logos/carriers/dhl_logo-fill.png" },
+  { name: "DHL Parcel", href: "/integrations/carriers/dhl-parcel", logo: "/logos/carriers/dhlparcel_logo.svg" },
+  { name: "FedEx", href: "/integrations/carriers/fedex", logo: "/logos/carriers/fedex-icon-fill.png" },
+  { name: "UPS", href: "/integrations/carriers/ups", logo: "/logos/carriers/ups_logo-fill.png" },
+  { name: "APC", href: "/integrations/carriers/apc", logo: "/logos/carriers/apc_logo.png" },
+  { name: "Evri EU", href: "/integrations/carriers/evri-eu", logo: "/logos/carriers/evrieu_logo-fill.png" },
+  { name: "TNT", href: "/integrations/carriers/tnt", logo: "/logos/carriers/tnt-icon.png" },
+  { name: "Deutsche Post", href: "/integrations/carriers/deutsche-post", logo: "/logos/carriers/deutschepost_logo.avif" },
+  { name: "Landmark", href: "/integrations/carriers/landmark", logo: "/logos/carriers/landmark-icon.svg" },
+  { name: "Starlinks", href: "/integrations/carriers/starlinks", logo: "/logos/carriers/starlinks_logo-fill.png" },
 ];
 
 /** The Integrations menu's rotating customer-story slides, sourced from the
@@ -143,7 +155,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
       { name: "International", href: "/shipping/international", icon: Globe, image: { src: "/shipping/international.jpg", alt: "Air freight pallets being loaded onto a wide-body aircraft" } },
       { name: "Freight", href: "/shipping/freight", icon: Container, image: { src: "/shipping/freight-hero.webp", alt: "Container ship laden with freight containers at sea" } },
     ],
-    proofLogos: CARRIERS.map((c) => ({ name: c.name, logo: c.logo! })),
+    proofLogos: CARRIERS.slice(0, 8).map((c) => ({ name: c.name, logo: c.logo! })),
     footerLink: { label: "Explore", href: "/shipping" },
     promo: {
       title: "See what your shipping should cost",
@@ -230,6 +242,7 @@ export const NAV_MENUS: readonly NavMenu[] = [
           description: "Domestic and international carriers through one connection.",
           icon: Truck,
           items: CARRIERS,
+          compact: true,
           footerLink: { label: "Browse carriers", href: "/integrations/carriers" },
         },
       ],
