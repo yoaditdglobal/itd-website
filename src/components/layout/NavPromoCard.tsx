@@ -42,7 +42,7 @@ export default function NavPromoCard({ promo, surface = "panel" }: Props) {
           // Reserve the clip's aspect ratio so opening the menu never shifts the
           // card; the poster still frame shows for reduced-motion / no-JS.
           <div
-            className={`overflow-hidden rounded-lg ${navy ? "ring-1 ring-white/10" : ""}`}
+            className={`overflow-hidden rounded-lg ${navy ? "ring-1 ring-white/10" : "ring-1 ring-border"}`}
             style={{ aspectRatio: `${promo.art.width} / ${promo.art.height}` }}
           >
             <AutoplayVideo
@@ -71,22 +71,6 @@ export default function NavPromoCard({ promo, surface = "panel" }: Props) {
       </div>
       <p className="text-heading-md">{promo.title}</p>
       <p className={`text-body-sm mt-2 ${navy ? "text-white/75" : "text-text-secondary"}`}>{promo.body}</p>
-      {promo.video && surface === "panel" && (
-        // Sits above the CTA. Aspect ratio reserved so opening the menu never
-        // shifts the button; the poster shows for reduced-motion / no-JS.
-        <div
-          className={`mt-5 overflow-hidden rounded-lg ${navy ? "ring-1 ring-white/10" : "ring-1 ring-border"}`}
-          style={{ aspectRatio: `${promo.video.width} / ${promo.video.height}` }}
-        >
-          <AutoplayVideo
-            mp4={promo.video.mp4}
-            webm={promo.video.webm}
-            poster={promo.video.poster}
-            ariaLabel={promo.video.alt || undefined}
-            className="block h-full w-full object-cover"
-          />
-        </div>
-      )}
       <div className="mt-auto pt-5">
         <Button
           href={promo.cta.href}
