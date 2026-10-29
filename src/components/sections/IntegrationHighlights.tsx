@@ -10,7 +10,7 @@ import IntegrationLogo from "@/components/ui/IntegrationLogo";
 // slugify) so it can't drift from the real slug/overrides in data.ts.
 const techLogos = [
   { name: "Shopify", cat: "eComm", logo: "/logos/ecommerce/shopify_logo-fill.png", href: "/integrations/tech/shopify" },
-  { name: "WooCommerce", cat: "eComm", logo: "/logos/erp-wms/woocommerce_logo-fill.svg", href: "/integrations/tech/woocommerce" },
+  { name: "WooCommerce", cat: "eComm", logo: "/logos/erp-wms/woocommerce_logo-fill.png", href: "/integrations/tech/woocommerce" },
   { name: "Amazon", cat: "Mktpl", logo: "/logos/marketplaces/amazon-icon-fill.png", href: "/integrations/tech/amazon" },
   { name: "eBay", cat: "Mktpl", logo: "/logos/marketplaces/ebay-icon-fill.png", href: "/integrations/tech/ebay" },
   { name: "ShipStation", cat: "Logistics", logo: "/logos/erp-wms/shipstation_logo-fill.png", href: "/integrations/tech/shipstation" },
