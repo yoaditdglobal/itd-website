@@ -31,7 +31,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
  * development `window.__itdStripProgress(p)` drives the strip to a progress
  * value directly (the preview harness can't scroll a pinned section).
  */
-const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs"] as const;
+const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs."] as const;
 const SENTENCE = WORDS.join(" ");
 /** Fraction of the viewport width where the (invisible) reading line sits. */
 const READING_LINE = 0.38;
@@ -40,9 +40,15 @@ const READING_LINE = 0.38;
  * This is the strip's speed control: the full right-to-left travel is spread
  * over this much scroll, so a longer pin = fewer pixels per wheel notch.
  * 130 read as rushed, 220 and 300 still too quick for Yoad; 420 lets each
- * word land and be read before the next arrives.
+ * word land and be read before the next arrives. The last HOLD_VH of the pin
+ * is a hold: the strip has parked on "needs." and the stage stays put so the
+ * line is read as a whole before the pager takes over.
  */
-const PIN_SCROLL_VH = 420;
+const TRAVEL_VH = 420;
+const HOLD_VH = 120;
+const PIN_SCROLL_VH = TRAVEL_VH + HOLD_VH;
+/** Share of the pin spent travelling; the rest is the end hold. */
+const TRAVEL_FRACTION = TRAVEL_VH / PIN_SCROLL_VH;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // smoothstep: the strip leaves and arrives gently but stays under the
@@ -114,7 +120,8 @@ export default function SolutionsStrip({
     const scrollProgress = () => {
       const rect = track.getBoundingClientRect();
       const range = rect.height - window.innerHeight;
-      return range > 0 ? clamp01(-rect.top / range) : 0;
+      // Progress reaches 1 at the end of the travel; the hold keeps it there.
+      return range > 0 ? clamp01(-rect.top / (range * TRAVEL_FRACTION)) : 0;
     };
 
     const paint = (x: number) => {
