@@ -134,7 +134,7 @@ export default async function CaseStudiesPage({
       <ClosingCTA
         headline="Become the next story"
         subtitle="Tell us what you ship and we'll show you what we'd change."
-        primaryCta={{ label: "Contact us", href: "/contact" }}
+        primaryCta={{ label: "Contact Sales", href: "/contact" }}
         secondaryCta={null}
       />
     </>

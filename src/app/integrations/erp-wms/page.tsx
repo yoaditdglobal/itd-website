@@ -21,7 +21,7 @@ export default function ErpWmsPage() {
       heroLabel="ERP and WMS"
       heroH1="Your ERP and WMS stay the source of truth. We handle the carriers"
       heroSubhead="We plug into the ERP or WMS your team already runs, so it stays your single source of truth. Orders pull in, and shipping data writes back the moment a label prints."
-      heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=erp-wms" }}
+      heroPrimaryCta={{ label: "Contact Sales", href: "/contact?enquiry=erp-wms" }}
       heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
       useCasesHeading="How teams use it"
       useCasesIntro="These are setups teams run today. Each one's a native connection, so your orders and shipping data stay in step without anyone copying between screens."
@@ -108,7 +108,7 @@ export default function ErpWmsPage() {
       closingCta={{
         headline: "Request a technical integration review",
         subhead: "Let's go through your integration requirements together, so our dev team can get up to speed.",
-        primary: { label: "Contact Us", href: "/contact?enquiry=erp-wms" },
+        primary: { label: "Contact Sales", href: "/contact?enquiry=erp-wms" },
         secondary: { label: "Explore", href: "/integrations/tech" },
       }}
       breadcrumbs={[

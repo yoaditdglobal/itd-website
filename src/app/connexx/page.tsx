@@ -106,7 +106,7 @@ export default function ConnexxPage() {
               </p>
               <div className="hero-entrance-cta mt-8 flex flex-wrap items-center gap-3">
                 <MagneticButton>
-                  <Button href={RATE_CHECKER_URL}>Get a quote</Button>
+                  <Button href={RATE_CHECKER_URL}>Get Quote</Button>
                 </MagneticButton>
                 <Button href="/contact?enquiry=connexx-demo" variant="secondary">
                   Contact Sales
@@ -179,8 +179,8 @@ export default function ConnexxPage() {
       <ClosingCTA
         headline="Connexx comes with shipping through ITD"
         subtitle="Get a quote and we'll show you the rates you'd ship on, and how Connexx runs day to day."
-        primaryCta={{ label: "Get a quote", href: RATE_CHECKER_URL }}
-        secondaryCta={{ label: "Contact us", href: "/contact?enquiry=connexx-demo" }}
+        primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
+        secondaryCta={{ label: "Contact Sales", href: "/contact?enquiry=connexx-demo" }}
       />
     </>
   );

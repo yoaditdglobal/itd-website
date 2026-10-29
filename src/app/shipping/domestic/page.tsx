@@ -456,8 +456,8 @@ export default function ShippingDomesticPage() {
         headline: "Unlock the margin hiding in your shipping",
         subhead:
           "The Parcel Rate Checker compares live carriers on the postcodes you ship from and shows you where the margin's leaking. Put your current dims, weight and rate in and the gaps show up straight away.",
-        primary: { label: "Check your rates", href: RATE_CHECKER_URL },
-        secondary: { label: "Request a tailored review", href: "/contact?enquiry=domestic" },
+        primary: { label: "Get Quote", href: RATE_CHECKER_URL },
+        secondary: { label: "Contact Sales", href: "/contact?enquiry=domestic" },
       }}
     />
   );

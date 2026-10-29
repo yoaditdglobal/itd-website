@@ -26,7 +26,7 @@ import { caseStudies } from "@/lib/data";
  */
 
 export type NavMenuId = "shipping" | "solutions" | "integrations" | "resources";
-export type NavCtaLabel = "Get Quote" | "Learn More" | "Explore" | "Contact Us";
+export type NavCtaLabel = "Get Quote" | "Learn More" | "Explore" | "Contact Sales";
 
 export interface NavItem {
   name: string;

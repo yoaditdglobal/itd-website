@@ -62,10 +62,10 @@ export default function CarrierIntegrationsPage() {
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="https://itdglobal-ratechecker.lovable.app/">
-                  Get a quote
+                  Get Quote
                 </Button>
                 <Button surface="dark" variant="secondary" href="/contact">
-                  Talk to us
+                  Contact Sales
                 </Button>
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function CarrierIntegrationsPage() {
       <ClosingCTA
         headline="The network keeps growing"
         subtitle="Tell us who you ship with — if a carrier isn't on the list yet, we'll look at adding it."
-        primaryCta={{ label: "Talk to us", href: "/contact" }}
+        primaryCta={{ label: "Contact Sales", href: "/contact" }}
         secondaryCta={{ label: "Browse tech integrations", href: "/integrations/tech" }}
       />
     </>

@@ -42,7 +42,7 @@ export default function RcLandingPage() {
         headline="Every carrier. Every mode. One platform"
         subtitle="See what you'd save with Connexx — compare your current carrier mix against the live rate engine. No card, no call, no obligation."
         primaryCta={{ label: "Get Quote", href: RATE_CHECKER_URL }}
-        secondaryCta={{ label: "Contact Us", href: "/contact" }}
+        secondaryCta={{ label: "Contact Sales", href: "/contact" }}
       />
     </>
   );

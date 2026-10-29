@@ -26,7 +26,7 @@ export default function ClosingCTA({
 }: ClosingCTAProps) {
   const primary = primaryCta ?? { label: "Get Quote", href: RATE_CHECKER_URL };
   const secondary =
-    secondaryCta === null ? null : secondaryCta ?? { label: "Contact Us", href: "/contact" };
+    secondaryCta === null ? null : secondaryCta ?? { label: "Contact Sales", href: "/contact" };
 
   return (
     <section className="bg-bg-dark py-16 md:py-24" data-analytics-location="closing_cta">

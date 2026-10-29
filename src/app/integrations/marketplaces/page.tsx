@@ -22,7 +22,7 @@ export default function MarketplacesPage() {
       heroLabel="Marketplaces"
       heroH1="Marketplace integrations for multi-channel sellers"
       heroSubhead="We connect to Amazon, eBay, Etsy, Temu and TikTok Shop. Orders from each channel land in one queue, routed to a carrier that can meet that marketplace's delivery window, so fewer of them slip into a penalty."
-      heroPrimaryCta={{ label: "Contact Us", href: "/contact?enquiry=marketplaces" }}
+      heroPrimaryCta={{ label: "Contact Sales", href: "/contact?enquiry=marketplaces" }}
       heroSecondaryCta={{ label: "Explore", href: "/integrations/tech" }}
       heroVisual={<MarketplaceOrbit />}
       hideGrid
@@ -112,7 +112,7 @@ export default function MarketplacesPage() {
         headline: "Sell across channels, dispatch from one place",
         subhead:
           "Connect the channels you sell on and dispatch them from one queue, each order on a carrier that can meet its window.",
-        primary: { label: "Contact Us", href: "/contact?enquiry=marketplaces" },
+        primary: { label: "Contact Sales", href: "/contact?enquiry=marketplaces" },
         secondary: { label: "Explore", href: "/integrations/tech" },
       }}
       breadcrumbs={[

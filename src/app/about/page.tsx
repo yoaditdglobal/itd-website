@@ -289,7 +289,7 @@ export default function AboutPage() {
       <ClosingCTA
         headline="Want to see what ITD Global can do for your business?"
         subtitle="Talk to a logistics specialist about your operation, your carriers, and where we can help."
-        primaryCta={{ label: "Get in touch", href: "/contact" }}
+        primaryCta={{ label: "Contact Sales", href: "/contact" }}
         secondaryCta={{ label: "See our services", href: "/solutions" }}
       />
     </>
