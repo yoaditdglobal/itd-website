@@ -20,8 +20,6 @@ interface Icp {
   href: string;
   /** Right-panel image — reuses the destination solution page's hero. */
   image: string;
-  /** Short caption-chip descriptor (top-left of the image). */
-  tag: string;
   /** Drives the "Used by" customer-logo click-throughs for this audience. */
   solutionTag: SolutionTag;
 }
@@ -32,7 +30,6 @@ const ICPS: Icp[] = [
     hook: "Stop logging into four carrier portals to answer one WISMO ticket.",
     href: "/solutions/ecommerce",
     image: "/solutions/ecommerce-hero.webp",
-    tag: "Online retail · DTC",
     solutionTag: "eCommerce",
   },
   {
@@ -40,7 +37,6 @@ const ICPS: Icp[] = [
     hook: "One queue across Amazon, eBay and the rest.",
     href: "/solutions/marketplace-seller",
     image: "/solutions/marketplace-seller-hero.webp",
-    tag: "Amazon · eBay · Etsy · TikTok",
     solutionTag: "Marketplace",
   },
   {
@@ -48,7 +44,6 @@ const ICPS: Icp[] = [
     hook: "Onboard a new client in days.",
     href: "/solutions/3pl",
     image: "/solutions/3pl-hero-v2.webp",
-    tag: "Multi-client fulfilment",
     solutionTag: "3PL",
   },
   {
@@ -56,7 +51,6 @@ const ICPS: Icp[] = [
     hook: "Order confirmed in the ERP, carrier booked automatically.",
     href: "/solutions/b2b",
     image: "/solutions/b2b-hero.webp",
-    tag: "ERP-connected dispatch",
     solutionTag: "B2B",
   },
   {
@@ -64,7 +58,6 @@ const ICPS: Icp[] = [
     hook: "40 carrier relationships, one set of numbers you can trust.",
     href: "/solutions/enterprise",
     image: "/solutions/enterprise-hero.webp",
-    tag: "Consolidated carrier contracts",
     solutionTag: "Enterprise",
   },
   {
@@ -72,7 +65,6 @@ const ICPS: Icp[] = [
     hook: "Sixty labels printed in one batch before 10am.",
     href: "/solutions/small-business",
     image: "/solutions/sme-hero.webp",
-    tag: "Growing UK businesses",
     solutionTag: "Small Business",
   },
   {
@@ -80,7 +72,6 @@ const ICPS: Icp[] = [
     hook: "Six documents per shipment, generated from the data you already have.",
     href: "/solutions/export",
     image: "/solutions/loading plane.png",
-    tag: "Outbound · customs-ready",
     solutionTag: "Export",
   },
   {
@@ -88,7 +79,6 @@ const ICPS: Icp[] = [
     hook: "Landed cost calculated before the goods leave the origin country.",
     href: "/solutions/import",
     image: "/solutions/port container yard.jpg",
-    tag: "Inbound · landed cost",
     solutionTag: "Import",
   },
 ];
@@ -478,9 +468,6 @@ export default function SolutionsRouting({
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-bg-dark/80 px-3 py-1 text-caption text-white backdrop-blur-sm">
-                      {icp.tag}
-                    </span>
                   </Link>
                   <div>
                     <Link href={icp.href} className="group inline-block">
@@ -562,7 +549,8 @@ export default function SolutionsRouting({
               </ul>
             </div>
 
-            {/* Right — zooming media; top aligned with the nav, bottom caption */}
+            {/* Right — zooming media, top aligned with the nav. No chip or caption
+                on the photo (user-directed, Oct 2026): the image stands alone. */}
             <div className="relative h-[calc(100vh-72px-5rem)] overflow-hidden rounded-3xl border border-border bg-bg-secondary shadow-lg">
               {ICPS.map((icp, i) => (
                 <div
@@ -586,17 +574,6 @@ export default function SolutionsRouting({
                 </div>
               ))}
 
-              {/* Tag chip (top-left) */}
-              <div className="absolute left-4 top-4 rounded-full bg-bg-dark/80 px-3.5 py-1.5 text-caption text-white backdrop-blur-sm">
-                {ICPS[active].tag}
-              </div>
-
-              {/* Caption (bottom) — the audience hook, Radian-style */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/45 to-transparent px-6 pb-6 pt-16">
-                <p className="max-w-xl text-body-lg font-medium text-white">
-                  {ICPS[active].hook}
-                </p>
-              </div>
             </div>
           </div>
         </div>
