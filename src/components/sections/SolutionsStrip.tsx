@@ -35,8 +35,14 @@ const WORDS = ["Shipping", "solutions", "built", "for", "your", "needs"] as cons
 const SENTENCE = WORDS.join(" ");
 /** Fraction of the viewport width where the (invisible) reading line sits. */
 const READING_LINE = 0.38;
-/** Extra scroll (in vh) the stage stays pinned for while the strip travels. */
-const PIN_SCROLL_VH = 130;
+/**
+ * Extra scroll (in vh) the stage stays pinned for while the strip travels.
+ * This is the strip's speed control: the full right-to-left travel is spread
+ * over this much scroll, so a longer pin = fewer pixels per wheel notch.
+ * 130 read as rushed, 220 and 300 still too quick for Yoad; 420 lets each
+ * word land and be read before the next arrives.
+ */
+const PIN_SCROLL_VH = 420;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 // smoothstep: the strip leaves and arrives gently but stays under the
@@ -134,7 +140,7 @@ export default function SolutionsStrip({
       target = startX + (endX - startX) * t;
       // Lagging follow — keeps wheel notches from slamming the strip.
       const delta = target - current;
-      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.14;
+      current = Math.abs(delta) < 0.5 ? target : current + delta * 0.06;
       paint(current);
 
       const rect = track.getBoundingClientRect();
