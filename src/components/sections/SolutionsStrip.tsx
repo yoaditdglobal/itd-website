@@ -40,8 +40,10 @@ const READING_LINE = 0.38;
 const PIN_SCROLL_VH = 90;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
-// expo-out: rushes in, settles softly (same curve as ScrollForward).
-const easeOut = (x: number) => (x >= 1 ? 1 : 1 - Math.pow(2, -10 * x));
+// smoothstep: the strip leaves and arrives gently but stays under the
+// reader's control for the whole pin (an ease-out would spend half the travel
+// in the first few notches of scroll).
+const easeOut = (x: number) => x * x * (3 - 2 * x);
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
 type WordState = "future" | "active" | "past";
@@ -101,10 +103,10 @@ export default function SolutionsStrip({
       const first = lefts[0] ?? 0;
       const last = lefts[lefts.length - 1] ?? 0;
       // Start: "Shipping" sits just right of the reading line, already on
-      // screen, so the first notch of scroll lights it. End: "needs" parks
-      // with its left edge on the line.
+      // screen, so the first notch of scroll lights it. End: "needs" parks a
+      // little past the line so it is unambiguously lit before the pin ends.
       startX = line + vw * 0.08 - first;
-      endX = line - last;
+      endX = line - vw * 0.05 - last;
     };
 
     const scrollProgress = () => {
