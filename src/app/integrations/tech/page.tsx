@@ -55,7 +55,7 @@ export default function TechIntegrationsPage() {
                 double entry. Pick a tool to see how it works with Connexx.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button href="https://itdglobal-ratechecker.lovable.app/">
+                <Button href="https://itdglobal-ratechecker.lovable.app/" surface="dark">
                   Get Quote
                 </Button>
                 <Button surface="dark" variant="secondary" href="/contact">

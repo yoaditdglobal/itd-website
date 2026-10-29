@@ -41,7 +41,7 @@ export default function LogisticsPartnerBand() {
               <div className="mt-8">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white hover:bg-accent-dark transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-button px-5 py-3 text-sm font-semibold text-white hover:bg-button-hover transition-colors"
                 >
                   Meet the Team
                 </Link>

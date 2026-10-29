@@ -86,7 +86,7 @@ export default function ShippingShowcase({ cards }: { cards: ShowcaseCard[] }) {
                     <p className="mt-3 max-w-xl text-body-lg text-white/85">{card.body}</p>
                     <span
                       aria-hidden
-                      className="mt-6 mb-1 inline-flex w-fit items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-accent-dark"
+                      className="mt-6 mb-1 inline-flex w-fit items-center rounded-lg bg-button px-5 py-2.5 text-sm font-semibold text-on-button transition-colors group-hover:bg-button-hover"
                     >
                       Explore
                     </span>
@@ -127,7 +127,7 @@ export default function ShippingShowcase({ cards }: { cards: ShowcaseCard[] }) {
               <p className="mt-2 text-body-md text-white/85">{card.body}</p>
               <span
                 aria-hidden
-                className="mt-5 inline-flex w-fit items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white"
+                className="mt-5 inline-flex w-fit items-center rounded-lg bg-button px-5 py-2.5 text-sm font-semibold text-on-button"
               >
                 Explore
               </span>
