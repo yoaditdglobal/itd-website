@@ -83,6 +83,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <QueryProvider>
           <SiteChrome>{children}</SiteChrome>
         </QueryProvider>
+        {/* Zoho SalesIQ chat widget: the official embed, verbatim, as plain
+            tags in <body> (server-rendered into every page's HTML). The bot,
+            operators and appearance are managed in the Zoho SalesIQ console. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}",
+          }}
+        />
+        <script
+          id="zsiqscript"
+          src="https://salesiq.zohopublic.eu/widget?wc=siq42d4b24a5cfcd3ce5cfd0120d26fca9f565a0a51a015874f3c450ea900dac9ae"
+          defer
+        />
       </body>
     </html>
   );
