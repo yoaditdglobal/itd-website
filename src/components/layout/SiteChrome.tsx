@@ -13,10 +13,10 @@ import LinkClickTracker from "@/components/analytics/LinkClickTracker";
  */
 const IMMERSIVE = ["/rc"];
 
-// Zoho SalesIQ chat — temporarily disabled on request. Flip to `true` to
-// re-enable; the embed + CSP allowlist are left in place so it comes straight
+// Zoho SalesIQ chat — enabled. Flip to `false` to temporarily
+// disable; the embed + CSP allowlist stay in place so it can come straight
 // back with no other changes.
-const CHAT_ENABLED = false;
+const CHAT_ENABLED = true;
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "";
