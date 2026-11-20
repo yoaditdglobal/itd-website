@@ -153,7 +153,12 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                       src={item.image.src}
                       alt={item.image.alt}
                       fill
-                      sizes="240px"
+                      // The card is square but the photos are landscape (3:2–16:9),
+                      // so object-cover renders them ~1.8× the card width (~300px
+                      // card → ~540px image). Size for the rendered image, not the
+                      // card, or retina screens get an upscaled, blurry rendition.
+                      sizes="600px"
+                      quality={90}
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                     <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
