@@ -4,6 +4,7 @@ import Script from "next/script";
 import SiteChrome from "@/components/layout/SiteChrome";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import ScrollToTop from "@/components/util/ScrollToTop";
+import UtmPassthrough from "@/components/analytics/UtmPassthrough";
 import { rootMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -79,6 +80,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           `}
         </Script>
         <ScrollToTop />
+        {/* Carries landing utm_* tags on to Rate Checker links (renders nothing). */}
+        <UtmPassthrough />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <QueryProvider>
           <SiteChrome>{children}</SiteChrome>
