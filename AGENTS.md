@@ -19,3 +19,10 @@ Marketing site for ITD Global (UK multi-carrier logistics) and its platform **Co
 - **`globals.css` heading clamps beat Tailwind text utilities**: fluid `font-size: clamp(...)` on `h1`/`h2`/`h3` wins over classes like `text-sm` — `<h3 className="text-sm">` still renders ~28px. Reserve `h1`–`h3` for real section headings; use `<p>`/`<span>` for card labels, grid-item names, and other non-heading text.
 
 Deeper patterns + hard-won gotchas live in the **`website-builder` skill** (auto-loads for this repo) and Claude's project memory — follow them.
+
+## Analytics
+
+- **First-party beacon** (cookieless): `components/analytics/Beacon.tsx` (mounted in root `layout.tsx`) → `POST /api/v` → Netlify Blobs store `beacon` → `GET /api/v/export?day=` read daily by the GTM dashboard with `BEACON_EXPORT_TOKEN`. Pure rules in `src/lib/beacon.ts`.
+- No cookies or client ids; the visit id is a hash with a **daily salt**, and the **IP is never stored**. Only hosts in `BEACON_HOSTS` (default `itdglobal.com,www.itdglobal.com`) record, so previews and localhost store nothing.
+- Removing or moving `<Beacon />`, or renaming the event fields (`ts k p r u ad w f c v`), is a **defect**: the dashboard reads them. The `prebuild` guard (`scripts/check-beacon.mjs`) fails the build without the beacon; Netlify runs `npm run build` for it.
+- **GA4 stays** (`gtag` in `layout.tsx` AND the GA4 tags inside GTM container GTM-M6QJM8F6) until the dashboard's 4-week parallel run passes. **GTM itself stays**: it carries the Apollo website tracker.

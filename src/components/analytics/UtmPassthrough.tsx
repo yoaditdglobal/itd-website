@@ -29,9 +29,9 @@ const KEYS = [
 ] as const;
 const RATE_CHECKER_HOSTS = ["itdglobal-ratechecker.lovable.app"];
 
-type Tags = Partial<Record<(typeof KEYS)[number], string>>;
+export type Tags = Partial<Record<(typeof KEYS)[number], string>>;
 
-function readUrlTags(): Tags {
+export function readUrlTags(): Tags {
   const params = new URLSearchParams(window.location.search);
   const tags: Tags = {};
   for (const k of KEYS) {
@@ -41,7 +41,7 @@ function readUrlTags(): Tags {
   return tags;
 }
 
-function savedTags(): Tags {
+export function savedTags(): Tags {
   try {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "{}") as Tags;
   } catch {
@@ -49,7 +49,8 @@ function savedTags(): Tags {
   }
 }
 
-function isRateChecker(url: URL): boolean {
+/** A Rate Checker link: the Lovable host, or this site's /rate-checker redirect. Also used by Beacon. */
+export function isRateChecker(url: URL): boolean {
   if (RATE_CHECKER_HOSTS.includes(url.host)) return true;
   return (
     url.host === window.location.host &&
