@@ -15,7 +15,8 @@ import {
  * components/analytics/Beacon.tsx). Always answers 204, whether the event was
  * stored or dropped, so the client learns nothing and never retries. Events
  * are recorded only on the production hosts (BEACON_HOSTS), so deploy previews
- * and localhost store nothing. The IP is used for the visit id and the rate
+ * and localhost store nothing. A bot or scanner User-Agent, or the client's
+ * wd: 1, is stored with b: 1 (the dashboard counts and leaves it out). The IP is used for the visit id and the rate
  * limit only and is never stored.
  */
 
@@ -34,7 +35,6 @@ export async function POST(request: Request) {
     if (!recordingHost(h, request.url, process.env.BEACON_HOSTS)) return done();
 
     const ua = h.get("user-agent") ?? "";
-    if (isBot(ua)) return done();
 
     const ip = clientIp(h);
     if (rateLimit(ip || "unknown", { windowMs: 60_000, max: 120, bucket: "beacon" })) return done();
@@ -46,9 +46,11 @@ export async function POST(request: Request) {
     if (!store) return done();
 
     const now = Date.now();
+    const { wd, ...client } = fields;
     const event: BeaconEvent = {
       ts: new Date(now).toISOString(),
-      ...fields,
+      ...client,
+      ...(wd === 1 || isBot(ua) ? { b: 1 as const } : {}),
       c: country(h),
       v: await requestVisitId(store, h, now),
     };

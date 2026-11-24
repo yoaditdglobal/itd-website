@@ -8,6 +8,9 @@
 //     cwv  n (LCP|INP|CLS|FCP|TTFB) x (ms, integer; CLS x1000)
 //     scr  x (25|50|75|100)
 //     nf   (p is the missing path)
+//   any client event may carry int: 1 (a staff browser, ?itd_staff=1) and
+//   b: 1 (set server side: a bot or scanner User-Agent, or the client's wd: 1,
+//   navigator.webdriver). Marked events are stored; the dashboard leaves them out.
 //   server lead  = { ts, k: "lead_srv", f, e, p, c, v }  (e = sha256 of the email)
 
 import { createHash, timingSafeEqual } from "node:crypto";
@@ -30,8 +33,9 @@ export type UtmField = (typeof UTM_FIELDS)[number];
 
 export const MAX_BODY_BYTES = 2048;
 export const PATH_RE = /^\/[A-Za-z0-9\-._~/%]{0,200}$/;
+/** A bot, crawler or mail scanner: its events are stored with b: 1, never dropped. */
 export const BOT_RE =
-  /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|bingpreview|python|curl|wget|go-http|java\/|axios|node-fetch|scanner|monitor|uptime|pingdom|httpclient|okhttp|phantom|selenium|puppeteer|playwright/i;
+  /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|bingpreview|python|curl|wget|go-http|java\/|axios|node-fetch|scanner|monitor|uptime|pingdom|httpclient|okhttp|phantom|selenium|puppeteer|playwright|mimecast|proofpoint|barracuda|safelinks/i;
 export const DEFAULT_HOSTS = "itdglobal.com,www.itdglobal.com";
 const HOST_RE = /^[a-z0-9.-]{1,100}$/;
 const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -49,6 +53,8 @@ export type BeaconEvent = {
   l?: string;
   n?: CwvName;
   x?: number;
+  int?: 1;
+  b?: 1;
   c: string;
   v: string;
 };
@@ -67,7 +73,7 @@ export type ServerLeadEvent = {
 export type StoredEvent = BeaconEvent | ServerLeadEvent;
 
 /** The client-supplied part of an event, validated. `null` = drop. */
-export type ClientFields = Omit<BeaconEvent, "ts" | "c" | "v">;
+export type ClientFields = Omit<BeaconEvent, "ts" | "c" | "v" | "b"> & { wd?: 1 };
 
 export function parseClientBody(text: string): ClientFields | null {
   if (Buffer.byteLength(text, "utf8") > MAX_BODY_BYTES) return null;
@@ -102,6 +108,8 @@ export function parseClientBody(text: string): ClientFields | null {
     ad: b.ad === 1 ? 1 : 0,
     w: b.w,
   };
+  if (b.int === 1) out.int = 1;
+  if (b.wd === 1) out.wd = 1;
   if (out.k === "lead" && typeof b.f === "string" && b.f.trim()) {
     out.f = b.f.trim().slice(0, 60);
   }
