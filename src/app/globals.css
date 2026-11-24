@@ -417,6 +417,37 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .animate-ticker { animation: none; }
 }
 
+/* ─── Dark glow pair: closing CTA flows into the footer ───────────────────
+   Both share the dark base. The CTA's teal glow sits on its BOTTOM edge and
+   the footer's glow on its TOP edge — exact mirror images (same centre,
+   width, fixed 240px depth, strength) — so the join is continuous whatever
+   either section's height. Layers sit behind content via isolation. */
+.cta-glow,
+.footer-glow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.cta-glow::before,
+.footer-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.cta-glow::before {
+  background:
+    radial-gradient(55% 75% at 50% 0%, rgb(29 63 184 / 0.32), transparent 72%),
+    radial-gradient(42% 240px at 50% 100%, rgb(0 152 160 / 0.16), transparent 100%);
+}
+.footer-glow::before {
+  background:
+    radial-gradient(42% 240px at 50% 0%, rgb(0 152 160 / 0.16), transparent 100%),
+    radial-gradient(38% 55% at 8% 85%, rgb(29 63 184 / 0.22), transparent 72%),
+    radial-gradient(34% 50% at 96% 100%, rgb(0 152 160 / 0.1), transparent 72%);
+}
+
 /* ─── Section glow — soft, scroll-reactive gradient backgrounds ───────────
    Two blurred radial layers in the section's OWN tone (white or cream, with
    only a whisper of brand teal) drift in opposite directions as the section
