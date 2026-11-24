@@ -17,6 +17,7 @@ import { isValidDay, safeEqual, utcDay, withDeadline, type BeaconEvent } from "@
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const SETTLE_MS = 10 * 60_000;
 const NO_STORE = { "Cache-Control": "no-store" };
 const json = (body: unknown, status = 200) =>
   Response.json(body, { status, headers: NO_STORE });
@@ -32,7 +33,9 @@ export async function GET(request: Request) {
   const day = new URL(request.url).searchParams.get("day") ?? "";
   const today = utcDay();
   if (!isValidDay(day) || day > today) return json({ error: "bad day" }, 400);
-  const complete = day < today;
+  // A day is complete (and compacted) only 10 minutes after it ends, so a
+  // write still in flight at midnight is never left out of its compacted day.
+  const complete = day < utcDay(Date.now() - SETTLE_MS);
 
   const store = beaconStore();
   if (!store) return json({ error: "storage unavailable" }, 503);
