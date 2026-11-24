@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { resolveLocation } from "./LinkClickTracker";
 
 /**
  * Carries campaign tags from the landing URL on to the Rate Checker.
@@ -13,7 +14,9 @@ import { useEffect } from "react";
  * click time. Tags already on a link win.
  *
  * A visit with no campaign tags tags the link as the site's own: utm_source
- * itdglobal.com, utm_medium website and utm_content the link's label ("get-quote"),
+ * itdglobal.com, utm_medium website and utm_content the link's label and where it
+ * sits ("get-quote-hero", "get-quote-nav": resolveLocation, the names GA's cta_click
+ * and the beacon use),
  * so the Rate Checker can tell a visitor sent by the website's Get Quote from one
  * who arrived with no tag at all. No utm_campaign: website traffic is no campaign.
  *
@@ -43,10 +46,11 @@ const VISIT_PARAM = "wv";
 const SITE_SOURCE = "itdglobal.com";
 const SITE_MEDIUM = "website";
 
-/** The link's label as a utm_content value: "Get Quote" -> "get-quote". */
+/** The link as a utm_content value, its label and where it sits: "Get Quote" in the hero -> "get-quote-hero". */
 function linkLabel(anchor: HTMLAnchorElement): string {
   const text = (anchor.getAttribute("aria-label") || anchor.textContent || "").trim().toLowerCase();
-  return text.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "link";
+  const label = text.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "link";
+  return `${label}-${resolveLocation(anchor).toLowerCase().replace(/[^a-z0-9]+/g, "_")}`;
 }
 const VISIT_REF_RE = /^\d{4}-\d{2}-\d{2}\.[0-9a-f]{16}$/;
 

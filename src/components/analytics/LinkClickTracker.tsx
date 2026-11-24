@@ -28,11 +28,13 @@ import { track } from "@/lib/analytics";
 /** Destinations that represent a lead intent, used to tag the click. */
 const LEAD_PATHS = ["/contact"];
 
-/** Where a link sits: `data-analytics-location`, else nav / footer / body. Also used by Beacon. */
+/** Where a link sits: `data-analytics-location`, else nav / hero / footer / body. Also used by Beacon and UtmPassthrough. */
 export function resolveLocation(anchor: HTMLAnchorElement): string {
   const named = anchor.closest<HTMLElement>("[data-analytics-location]");
   if (named?.dataset.analyticsLocation) return named.dataset.analyticsLocation;
   if (anchor.closest("nav, header")) return "nav";
+  // Every hero is marked by the nav's tone attribute or the shared hero background.
+  if (anchor.closest("[data-hero-tone], .hero-bg")) return "hero";
   if (anchor.closest("footer")) return "footer";
   return "body";
 }
