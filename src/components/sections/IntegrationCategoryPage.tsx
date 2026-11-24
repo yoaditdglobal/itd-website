@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import Button from "@/components/ui/Button";
@@ -13,6 +13,9 @@ import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import type { Integration } from "@/lib/data";
 import { getIntegrationSlug, integrations as ALL_INTEGRATIONS } from "@/lib/data";
 import CategoryOrbit from "@/components/sections/CategoryOrbit";
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import IntegrationCard from "@/components/ui/IntegrationCard";
+import { categoryTheme } from "@/lib/page-themes";
 
 export interface UseCase {
   headline: string;
@@ -153,6 +156,8 @@ export default function IntegrationCategoryPage({
   const headline = heroH1 ?? title;
   const subhead = heroSubhead ?? subtitle;
   const withLogos = integrations.filter((i) => i.logo);
+  // Category identity: ERP/WMS cobalt · eCommerce & Logistics teal · Marketplace amber.
+  const theme = categoryTheme(integrations[0]?.category ?? heroLabel);
 
   // Assemble JSON-LD payload: explicit schemas + auto-generated faq/breadcrumb.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -166,11 +171,7 @@ export default function IntegrationCategoryPage({
 
       {/* Hero — one immersive dark treatment for every category page. */}
       <section data-hero-tone="dark" className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24 lg:py-28">
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-32 left-[30%] h-[460px] w-[760px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute -bottom-40 right-[-8%] h-[420px] w-[560px] rounded-full bg-button/15 blur-3xl" />
-          <div className="absolute inset-0 bg-[radial-gradient(rgb(255_255_255/0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_70%_60%_at_60%_45%,#000_20%,transparent_75%)]" />
-        </div>
+        <HeroBackdrop primary={theme.glow} secondary="#1d3fb8" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
             <ScrollReveal className="max-w-2xl">
@@ -185,7 +186,7 @@ export default function IntegrationCategoryPage({
               </div>
               {heroLabel && (
                 <p className="mt-8 flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-button" aria-hidden />
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: theme.glow }} aria-hidden />
                   {heroLabel}
                 </p>
               )}
@@ -230,7 +231,7 @@ export default function IntegrationCategoryPage({
         <section id="catalogue" className="section-glow section-glow--light bg-white py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <p className="text-eyebrow text-accent">Integrations</p>
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Integrations</p>
               <h2 className="mt-3 text-display-lg text-text-primary">
                 <span className="tabular-nums">{integrations.length}</span> {heroLabel ?? "tech"} integrations
               </h2>
@@ -238,29 +239,15 @@ export default function IntegrationCategoryPage({
             <ScrollReveal>
               <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {integrations.map((integration) => (
-                  <Link
+                  <IntegrationCard
                     key={integration.id}
                     id={integrationAnchor(integration.name)}
                     href={`/integrations/tech/${getIntegrationSlug(integration)}`}
-                    className="group card-hover flex h-full items-start gap-4 rounded-2xl border border-border bg-white p-5 scroll-mt-24 hover:border-accent/25 active:scale-[0.99] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                  >
-                    <IntegrationLogo
-                      name={integration.name}
-                      logo={integration.logo}
-                      size="sm"
-                      className="shadow-[0_1px_2px_rgb(15_23_42/0.08)] ring-1 ring-black/5"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-heading-sm text-text-primary transition-colors group-hover:text-accent">{integration.name}</p>
-                      {integration.description && (
-                        <p className="mt-1 text-body-sm text-text-secondary line-clamp-2">{integration.description}</p>
-                      )}
-                    </div>
-                    <ArrowUpRight
-                      className="mt-0.5 h-4 w-4 shrink-0 text-text-tertiary transition-[color,translate] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent motion-reduce:transition-none"
-                      aria-hidden
-                    />
-                  </Link>
+                    name={integration.name}
+                    logo={integration.logo}
+                    description={integration.description}
+                    theme={theme}
+                  />
                 ))}
               </div>
             </ScrollReveal>
@@ -279,7 +266,7 @@ export default function IntegrationCategoryPage({
         <section className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <p className="text-eyebrow text-accent">Use cases</p>
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Use cases</p>
               <h2 className="mt-3 text-display-lg text-text-primary">{useCasesHeading}</h2>
               {useCasesIntro && (
                 <p className="mt-4 max-w-2xl text-body-lg text-text-secondary">{useCasesIntro}</p>
@@ -289,7 +276,7 @@ export default function IntegrationCategoryPage({
               {useCases.map((uc, i) => (
                 <ScrollReveal key={uc.headline} delay={i * 0.05} className="h-full">
                   <article className="card-hover flex h-full flex-col rounded-2xl border border-border bg-white p-6 lg:p-7 hover:border-accent/25">
-                    <span className="text-sm font-semibold text-accent tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-sm font-semibold tabular-nums" style={{ color: theme.accent }}>{String(i + 1).padStart(2, "0")}</span>
                     <h3 className="mt-3 text-heading-md text-text-primary">{uc.headline}</h3>
                     <p className="mt-3 flex-1 text-body-sm text-text-secondary">{uc.description}</p>
                     {uc.namedIntegrations.length > 0 && (
@@ -325,7 +312,7 @@ export default function IntegrationCategoryPage({
         <section className="section-glow section-glow--light bg-white py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <p className="text-eyebrow text-accent">Process</p>
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Process</p>
               <h2 className="mt-3 text-display-lg text-text-primary">{howItWorksHeading}</h2>
               {howItWorksIntro && (
                 <p className="mt-4 max-w-2xl text-body-lg text-text-secondary whitespace-pre-line">{howItWorksIntro}</p>
@@ -335,13 +322,17 @@ export default function IntegrationCategoryPage({
               {/* The connecting line: vertical on mobile, horizontal on md+. */}
               <span
                 aria-hidden
-                className="absolute bottom-6 left-5 top-6 w-px bg-gradient-to-b from-accent/50 via-accent/20 to-transparent md:bottom-auto md:left-6 md:right-0 md:top-5 md:h-px md:w-auto md:bg-gradient-to-r"
+                className="absolute bottom-6 left-5 top-6 w-px md:bottom-auto md:left-6 md:right-0 md:top-5 md:h-px md:w-auto md:[--tl-dir:90deg]"
+                style={{ background: `linear-gradient(var(--tl-dir, 180deg), ${theme.accent}80, ${theme.accent}26, transparent)` }}
               />
               {howItWorks.map((s, i) => (
                 <li key={s.step} className="relative pl-16 md:pl-0">
                   {/* Positioned against the <li>, NOT inside ScrollReveal: its
                       transform would become the containing block on mobile. */}
-                  <span className="absolute left-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-heading-sm text-accent shadow-[0_4px_14px_-4px_rgb(29_63_184/0.35)] ring-1 ring-accent/30 md:relative">
+                  <span
+                    className="absolute left-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-heading-sm shadow-[0_4px_14px_-4px_rgb(15_23_42/0.25)] ring-1 md:relative"
+                    style={{ color: theme.accent, ["--tw-ring-color" as string]: `${theme.accent}4d` }}
+                  >
                     {s.step}
                   </span>
                   <ScrollReveal delay={i * 0.08}>

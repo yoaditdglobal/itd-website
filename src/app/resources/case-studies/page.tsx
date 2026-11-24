@@ -2,6 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoTicker from "@/components/ui/LogoTicker";
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import IntegrationLogo from "@/components/ui/IntegrationLogo";
+import { SEGMENT_THEMES } from "@/lib/page-themes";
 import StoriesLibrary from "@/components/sections/StoriesLibrary";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import { buildMetadata } from "@/lib/metadata";
@@ -53,25 +56,40 @@ export default async function CaseStudiesPage({
 
   return (
     <>
-      {/* Hero — dark, carrier-page style */}
-      <section
-        data-hero-tone="dark"
-        className="bleed-nav bg-bg-dark py-16 md:py-24 overflow-hidden relative"
-      >
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
-        </div>
+      {/* Hero — editorial, with a colour key for the story segments */}
+      <section data-hero-tone="dark" className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24 lg:py-28">
+        <HeroBackdrop primary="#9b7bff" secondary="#1cc3cb" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="max-w-3xl">
-              <h1 className="text-display-xl text-white">
+              <p className="flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#9b7bff]" aria-hidden />
+                Customer stories
+              </p>
+              <h1 className="mt-5 text-display-xl text-white">
                 The businesses that stopped leaving money on shipping
               </h1>
-              <p className="mt-4 text-body-lg text-white/70">
+              <p className="mt-5 text-body-lg text-white/70">
                 Real UK businesses, from fast-growing brands to 3PLs, shipping
                 better at home and abroad through ITD.
               </p>
+              <ul className="mt-8 flex flex-wrap gap-2" aria-label="Stories by solution">
+                {facets.map(({ segment, slug, count }) => {
+                  const t = SEGMENT_THEMES[segment];
+                  return (
+                    <li key={segment}>
+                      <Link
+                        href={`/resources/case-studies?solution=${slug}#stories`}
+                        className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/80 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+                      >
+                        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: t?.glow }} aria-hidden />
+                        {segment}
+                        <span className="tabular-nums text-white/45">{count}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </ScrollReveal>
         </div>
@@ -89,19 +107,25 @@ export default async function CaseStudiesPage({
         <section className="bg-white pt-16 md:pt-20 pb-16 md:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <div className="relative overflow-hidden rounded-3xl bg-bg-dark px-6 py-10 md:px-12 md:py-14">
-                <div
+              <div className="relative overflow-hidden rounded-3xl bg-bg-dark px-6 py-10 ring-1 ring-white/10 md:px-14 md:py-16">
+                <HeroBackdrop primary="#5b7bff" secondary="#9b7bff" />
+                <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-60"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 20% 20%, rgba(29,63,184,0.35) 0%, transparent 55%)",
-                  }}
-                />
+                  className="pointer-events-none absolute -top-10 right-8 select-none font-display text-[220px] leading-none text-white/[0.06] md:right-16 md:text-[300px]"
+                >
+                  &rdquo;
+                </span>
                 <div className="relative max-w-3xl">
-                  <p className="text-eyebrow text-accent-secondary mb-4">
-                    RIOZ Global · 5 new clients in 6 months
-                  </p>
+                  <div className="mb-6 flex items-center gap-3">
+                    {featured.logo && (
+                      <span className="h-11 w-11 overflow-hidden rounded-xl bg-white ring-1 ring-white/20">
+                        <IntegrationLogo name={featured.brandName} logo={featured.logo} size="fill" />
+                      </span>
+                    )}
+                    <p className="text-eyebrow text-accent-secondary">
+                      RIOZ Global · 5 new clients in 6 months
+                    </p>
+                  </div>
                   <blockquote className="text-display-md text-white">
                     &ldquo;Before ITD, we made nothing on shipping. Now
                     it&rsquo;s one of our strongest revenue streams.&rdquo;
@@ -111,10 +135,10 @@ export default async function CaseStudiesPage({
                   </p>
                   <Link
                     href="/resources/case-studies/rioz-global"
-                    className="mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-white hover:text-accent-secondary transition-colors"
+                    className="group mt-8 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white ring-1 ring-white/15 transition-colors hover:bg-white/15"
                   >
                     Read the full story{" "}
-                    <ArrowRight className="w-4 h-4" aria-hidden />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden />
                   </Link>
                 </div>
               </div>

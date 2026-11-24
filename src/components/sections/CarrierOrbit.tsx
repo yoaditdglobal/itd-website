@@ -1,20 +1,51 @@
 "use client";
 import Image from "next/image";
 
-export default function CarrierOrbit({ name, logo, logoBg }: { name: string; logo?: string; logoBg?: string }) {
+/** `brand` (optional): the carrier's colour — tints the route ring, a trail
+ *  arc and the halo, so each carrier page carries its own identity. */
+export default function CarrierOrbit({ name, logo, logoBg, brand }: { name: string; logo?: string; logoBg?: string; brand?: string }) {
   const rad = ((0 - 90) * Math.PI) / 180;
   const orbitPct = 38;
   return (
     <div className="relative w-72 h-72 md:w-80 md:h-80">
+      {brand && (
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+          style={{ background: `radial-gradient(closest-side, ${brand}40, transparent)` }}
+        />
+      )}
+      {brand && (
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border"
+          style={{ width: `${orbitPct * 2 + 22}%`, height: `${orbitPct * 2 + 22}%`, borderColor: `${brand}26` }}
+        />
+      )}
       <div
         aria-hidden
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/25"
-        style={{ width: `${orbitPct * 2}%`, height: `${orbitPct * 2}%` }}
+        style={{ width: `${orbitPct * 2}%`, height: `${orbitPct * 2}%`, ...(brand ? { borderColor: `${brand}80` } : {}) }}
       />
       <div
         className="connexx-anim absolute inset-0"
         style={{ animation: "connexx-orbit-cw 8s linear infinite" }}
       >
+        {/* Fading trail behind the carrier tile — reads as a delivery route. */}
+        {brand && (
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              width: `${orbitPct * 2}%`,
+              height: `${orbitPct * 2}%`,
+              // Tile sits at 12 o'clock moving clockwise → the trail brightens up to it.
+              background: `conic-gradient(from 0deg, transparent 0deg, ${brand}00 240deg, ${brand}aa 356deg, transparent 360deg)`,
+              WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px))",
+              mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px))",
+            }}
+          />
+        )}
         <div
           style={{
             position: "absolute",
@@ -28,7 +59,7 @@ export default function CarrierOrbit({ name, logo, logoBg }: { name: string; log
             style={{ animation: "connexx-counter-cw 8s linear infinite" }}
           >
             <div
-              className="flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg overflow-hidden"
+              className="flex items-center justify-center w-14 h-14 rounded-2xl shadow-lg overflow-hidden ring-1 ring-white/20"
               style={logo ? undefined : { backgroundColor: logoBg ?? "#ffffff" }}
             >
               {logo ? (

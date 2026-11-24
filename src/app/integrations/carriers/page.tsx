@@ -1,5 +1,8 @@
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import { RATE_CHECKER_URL } from "@/lib/site-config";
+import { REGION_THEMES } from "@/lib/page-themes";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import CarrierDirectory from "@/components/sections/CarrierDirectory";
 import { buildMetadata } from "@/lib/metadata";
@@ -23,74 +26,55 @@ export default function CarrierIntegrationsPage() {
     ),
   })).filter((g) => g.items.length > 0);
 
+  const domestic = groups.find((g) => g.region === "Domestic")?.items.length ?? 0;
+  const international = groups.find((g) => g.region === "International")?.items.length ?? 0;
   const keyFacts = [
-    { value: String(carriers.length), label: "Carriers in the network" },
-    {
-      value: String(groups.find((g) => g.region === "Domestic")?.items.length ?? 0),
-      label: "Domestic carriers",
-    },
-    {
-      value: String(
-        groups.find((g) => g.region === "International")?.items.length ?? 0,
-      ),
-      label: "International carriers",
-    },
-    { value: "17.5m", label: "Labels a year" },
+    { value: String(carriers.length), label: "Carriers in the network", color: "#ffffff" },
+    { value: String(domestic), label: "Domestic carriers", color: REGION_THEMES.Domestic.glow },
+    { value: String(international), label: "International carriers", color: REGION_THEMES.International.glow },
+    { value: "17.5m", label: "Labels a year", color: "#ffffff" },
   ];
 
   return (
     <>
-      {/* Hero */}
-      <section
-        data-hero-tone="dark"
-        className="bleed-nav bg-bg-dark py-16 md:py-24 overflow-hidden relative"
-      >
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
-        </div>
+      {/* Hero — copy left, network stats panel right */}
+      <section data-hero-tone="dark" className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24 lg:py-28">
+        <HeroBackdrop primary="#5b7bff" secondary="#1cc3cb" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="max-w-2xl">
-              <h1 className="text-display-xl text-white">
-                One connection to an entire carrier network
-              </h1>
-              <p className="mt-4 text-body-lg text-white/70">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            <ScrollReveal className="lg:col-span-7">
+              <p className="flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#5b7bff]" aria-hidden />
+                Carrier network
+              </p>
+              <h1 className="mt-5 text-display-xl text-white">One connection to an entire carrier network</h1>
+              <p className="mt-5 text-body-lg text-white/70">
                 Domestic and international carriers in one network, on rates you
                 wouldn&apos;t reach alone. Pick a carrier to see its services and
                 how it works with us.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button href="https://itdglobal-ratechecker.lovable.app/" surface="dark">
-                  Get Quote
-                </Button>
-                <Button surface="dark" variant="secondary" href="/contact">
-                  Contact Sales
-                </Button>
+                <Button href={RATE_CHECKER_URL} surface="dark" size="lg">Get Quote</Button>
+                <Button surface="dark" variant="secondary" href="/contact" size="lg">Contact Sales</Button>
               </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+            </ScrollReveal>
 
-      {/* Key facts */}
-      <section className=" bg-white py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <dl className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
-            {keyFacts.map((s) => (
-              <div key={s.label}>
-                <dd className="text-3xl font-semibold text-text-primary md:text-4xl">
-                  {s.value}
-                </dd>
-                <dt className="mt-1 text-sm text-text-tertiary">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
+            <ScrollReveal delay={0.1} className="lg:col-span-5">
+              <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.6)]">
+                {keyFacts.map((f) => (
+                  <div key={f.label} className="bg-[#141a36]/90 px-6 py-7 backdrop-blur-md">
+                    <dd className="text-stat-lg tabular-nums" style={{ color: f.color }}>{f.value}</dd>
+                    <dt className="mt-1 text-body-sm text-white/55">{f.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* Directory */}
-      <section className="bg-white py-14 md:py-20">
+      <section className="section-glow section-glow--light bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <CarrierDirectory groups={groups} />
         </div>

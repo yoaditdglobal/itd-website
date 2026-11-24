@@ -1,8 +1,12 @@
 import Link from "next/link";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Button from "@/components/ui/Button";
-import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import ConnectionVisual from "@/components/sections/ConnectionVisual";
+import { AboutSplit, FeatureCard, FeatureGrid } from "@/components/sections/DetailSections";
+import { brandGlow, categoryTheme } from "@/lib/page-themes";
 import type { TechFeature } from "@/lib/tech-pages";
 
 interface CtaButton {
@@ -67,6 +71,7 @@ export default function TechIntegrationPage({
   name,
   logo,
   logoFill,
+  eyebrow,
   tagline,
   description,
   about,
@@ -78,174 +83,106 @@ export default function TechIntegrationPage({
   primaryCta,
   secondaryCta,
 }: TechIntegrationPageProps) {
+  // Identity: category colour (ERP/WMS cobalt · eCommerce teal · Marketplace
+  // amber) + the partner's own brand colour on the hero.
+  const theme = categoryTheme(eyebrow);
+  const brand = brandGlow(logo, theme.glow);
+
   return (
     <>
       {/* Hero */}
-      <section
-        data-hero-tone="dark"
-        className="bleed-nav bg-bg-dark py-16 md:py-24 overflow-hidden relative"
-      >
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
-        </div>
+      <section data-hero-tone="dark" className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24 lg:py-28">
+        <HeroBackdrop primary={brand} secondary={theme.glow} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
-              {/* Left — text */}
-              <div className="max-w-2xl">
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
+            <ScrollReveal className="max-w-2xl">
+              <div>
                 <Link
                   href="/integrations/tech"
-                  className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 mb-6 transition-colors"
+                  className="group inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-white"
                 >
-                  ← All tech integrations
+                  <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+                  All tech integrations
                 </Link>
-                {/* Below lg the right-hand tile is hidden — show the mark
-                    above the H1 instead (left-aligned, unlike Helm's page). */}
-                {logo && (
-                  <div
-                    className={`relative mb-6 h-16 w-16 overflow-hidden rounded-2xl shadow-lg lg:hidden ${
-                      logoFill ? "" : "bg-white"
-                    }`}
-                  >
-                    <Image
-                      src={logo}
-                      alt=""
-                      aria-hidden
-                      fill
-                      priority
-                      sizes="64px"
-                      className={logoFill ? "object-cover" : "object-contain p-2"}
-                    />
-                  </div>
-                )}
-                <h1 className="text-display-xl text-white">{`${name} + ITD`}</h1>
-                <p className="mt-4 text-body-lg text-white/70 font-medium">
-                  {tagline}
-                </p>
-                {description && (
-                  <p className="mt-4 text-body-md text-white/50">{description}</p>
-                )}
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Button href="#features">Explore</Button>
-                </div>
               </div>
+              {/* Below lg the connection visual sits above the eyebrow. */}
+              <div className="mt-8 lg:hidden">
+                <ConnectionVisual logo={logo} logoFill={logoFill} brand={brand} size="sm" />
+              </div>
+              <p className="mt-8 flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: theme.glow }} aria-hidden />
+                {eyebrow}
+              </p>
+              <h1 className="mt-5 text-display-xl text-white">{`${name} + ITD`}</h1>
+              <p className="mt-5 text-body-lg font-medium text-white/80">{tagline}</p>
+              {description && <p className="mt-4 text-body-md text-white/55">{description}</p>}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Button href="#features" surface="dark" size="lg">Explore</Button>
+              </div>
+            </ScrollReveal>
 
-              {/* Right — logo tile */}
-              {logo && (
-                <div className="hidden lg:block flex-shrink-0">
-                  <div
-                    className={`relative h-44 w-44 overflow-hidden rounded-3xl shadow-xl ${
-                      logoFill ? "" : "bg-white"
-                    }`}
-                  >
-                    <Image
-                      src={logo}
-                      alt={`${name} logo`}
-                      fill
-                      priority
-                      sizes="176px"
-                      className={logoFill ? "object-cover" : "object-contain p-5"}
-                    />
-                  </div>
-                </div>
-              )}
+            <div className="hidden lg:flex flex-shrink-0 items-center justify-center pr-4">
+              <ConnectionVisual logo={logo} logoFill={logoFill} brand={brand} />
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* About */}
       {about.length > 0 && (
-        <section className="bg-white py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-6">
-                About {name}
-              </h2>
-              <div className="max-w-3xl space-y-4">
-                {about.map((p, i) => (
-                  <p
-                    key={i}
-                    className="text-body-md text-text-secondary leading-relaxed"
-                  >
-                    {renderWithLinks(p)}
-                  </p>
+        <AboutSplit
+          name={name}
+          logo={logo}
+          logoFill={logoFill}
+          theme={theme}
+          eyebrow={theme.label || "About"}
+          paragraphs={about.map((p) => renderWithLinks(p))}
+        >
+          {aboutHighlights && (
+            <div className="mt-10">
+              {aboutHighlights.lead && (
+                <p className="text-body-md leading-relaxed text-text-secondary">
+                  {renderWithLinks(aboutHighlights.lead)}
+                </p>
+              )}
+              <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2">
+                {aboutHighlights.items.map((f) => (
+                  <FeatureCard key={f.title} f={f} theme={theme} />
                 ))}
               </div>
-              {aboutHighlights && (
-                <div className="mt-8">
-                  {aboutHighlights.lead && (
-                    <p className="max-w-3xl text-body-md leading-relaxed text-text-secondary">
-                      {renderWithLinks(aboutHighlights.lead)}
-                    </p>
-                  )}
-                  <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {aboutHighlights.items.map((f) => (
-                      <div
-                        key={f.title}
-                        className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-                      >
-                        <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white motion-reduce:transition-none">
-                          <f.icon className="h-5 w-5" aria-hidden />
-                        </span>
-                        <p className="text-heading-sm text-text-primary">{f.title}</p>
-                        <p className="mt-1.5 text-body-sm text-text-secondary">{f.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {aboutAfter && aboutAfter.length > 0 && (
-                <div className="mt-8 max-w-3xl space-y-4">
-                  {aboutAfter.map((p, i) => (
-                    <p
-                      key={i}
-                      className="text-body-md text-text-secondary leading-relaxed"
-                    >
-                      {renderWithLinks(p)}
-                    </p>
-                  ))}
-                </div>
-              )}
-              {partnerLink && (
-                <a
-                  href={partnerLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent transition-colors hover:text-accent-dark motion-reduce:transition-none"
-                >
-                  {partnerLink.label}
-                  <span aria-hidden>&#8599;</span>
-                </a>
-              )}
-            </ScrollReveal>
-          </div>
-        </section>
+            </div>
+          )}
+          {aboutAfter && aboutAfter.length > 0 && (
+            <div className="mt-8 space-y-4">
+              {aboutAfter.map((p, i) => (
+                <p key={i} className="text-body-md text-text-secondary leading-relaxed">
+                  {renderWithLinks(p)}
+                </p>
+              ))}
+            </div>
+          )}
+          {partnerLink && (
+            <a
+              href={partnerLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent transition-colors hover:text-accent-dark motion-reduce:transition-none"
+            >
+              {partnerLink.label}
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden />
+            </a>
+          )}
+        </AboutSplit>
       )}
 
       {/* Features — the hero "Explore" CTA anchors here */}
-      <section id="features" className="bg-bg-secondary py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <h2 className="text-display-lg text-text-primary mb-10">
-              Features built for your workflow
-            </h2>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <ScrollReveal key={f.title} delay={i * 0.07}>
-                <div className="bg-white rounded-xl border border-border p-6 h-full">
-                  <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4">
-                    <f.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-body-sm text-text-secondary">{f.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureGrid
+        id="features"
+        eyebrow="Features"
+        heading="Features built for your workflow"
+        features={features}
+        theme={theme}
+      />
 
       <ClosingCTA
         headline={`Start shipping with ${name}`}

@@ -6,6 +6,8 @@ import { MapPin, Globe, ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import CarrierNetworkOrbit from "@/components/sections/CarrierNetworkOrbit";
 import { getIntegrationSlug, type Integration } from "@/lib/data";
+import { BRAND_COLORS } from "@/lib/brand-colors";
+import { REGION_THEMES, withAlpha } from "@/lib/page-themes";
 
 type Region = "Domestic" | "International";
 
@@ -77,7 +79,8 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
                 {selected && (
                   <span
                     aria-hidden
-                    className="absolute inset-0 rounded-full bg-accent"
+                    className="absolute inset-0 rounded-full"
+                    style={{ backgroundColor: REGION_THEMES[g.region].accent }}
                   />
                 )}
                 <span className="relative flex items-center gap-2">
@@ -106,18 +109,29 @@ export default function CarrierDirectory({ groups }: { groups: Group[] }) {
           >
             <Link
               href={`/integrations/carriers/${getIntegrationSlug(c)}`}
-              className="group relative flex h-full min-h-[164px] flex-col items-center justify-start rounded-xl border border-border bg-white p-5 text-center transition-all hover:border-accent/30 hover:shadow-md focus-visible:border-accent/40 focus-visible:shadow-md focus-visible:outline-none"
+              className="group card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-5 hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              style={{ ["--brand" as string]: (c.logo && BRAND_COLORS[c.logo]) || "#0098a0" }}
             >
-              <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="mb-3" />
-              <p className="text-label text-text-primary">{c.name}</p>
-              <div className="mt-2 flex flex-col items-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
-                {c.description && (
-                  <p className="text-xs text-text-tertiary">{c.description}</p>
-                )}
-                <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-accent">
-                  View <ArrowRight className="h-3 w-3" aria-hidden />
-                </span>
+              {/* Each carrier lights up in its own brand colour on hover. */}
+              <span
+                aria-hidden
+                className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none"
+                style={{ background: `radial-gradient(120% 80% at 0% 0%, ${withAlpha((c.logo && BRAND_COLORS[c.logo]) || "#0098a0", 0.12)}, transparent 70%)` }}
+              />
+              <span
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[var(--brand)] transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+              />
+              <div className="relative flex items-center gap-3">
+                <IntegrationLogo name={c.name} logo={c.logo} size="sm" className="shadow-[0_1px_2px_rgb(15_23_42/0.08)] ring-1 ring-black/5" />
+                <p className="text-heading-sm text-text-primary">{c.name}</p>
               </div>
+              {c.description && (
+                <p className="relative mt-3 flex-1 text-body-sm text-text-secondary line-clamp-2">{c.description}</p>
+              )}
+              <span className="relative mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                View carrier <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden />
+              </span>
             </Link>
           </div>
         ))}

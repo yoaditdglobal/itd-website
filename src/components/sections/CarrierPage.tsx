@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import Button from "@/components/ui/Button";
-import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import CarrierOrbit from "@/components/sections/CarrierOrbit"; // client component
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import { AboutSplit, FeatureGrid, ServicesList } from "@/components/sections/DetailSections";
 import { JsonLd, serviceSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
-import { Truck, Globe, Clock, ShieldCheck, Zap, BarChart3, Check } from "lucide-react";
+import { REGION_THEMES, brandGlow } from "@/lib/page-themes";
 import type { LucideIcon } from "lucide-react";
 
 export interface CarrierFeature {
@@ -60,6 +62,10 @@ export default function CarrierPage({
   video,
 }: CarrierPageProps) {
   const realServices = services.filter(Boolean);
+  // Identity: region colour (Domestic teal · International cobalt) + the
+  // carrier's own brand colour on the hero, orbit and route trail.
+  const theme = region.includes("International") ? REGION_THEMES.International : REGION_THEMES.Domestic;
+  const brand = brandGlow(logo, theme.glow);
   return (
     <>
       {slug && (
@@ -84,149 +90,102 @@ export default function CarrierPage({
       {/* Hero */}
       <section
         data-hero-tone="dark"
-        className={`bleed-nav ${heroBg ? "" : "bg-bg-dark"} py-16 md:py-24 overflow-hidden relative`}
+        className={`bleed-nav relative overflow-hidden py-16 md:py-24 lg:py-28 ${heroBg ? "" : "bg-bg-dark"}`}
         style={heroBg ? { backgroundColor: heroBg } : undefined}
       >
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
-        </div>
+        <HeroBackdrop primary={brand} secondary={theme.glow} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
-              {/* Left — text */}
-              <div className="max-w-2xl">
-                <Link href="/integrations/carriers" className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 mb-6 transition-colors">
-                  ← All carriers
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
+            <ScrollReveal className="max-w-2xl">
+              <div>
+                <Link
+                  href="/integrations/carriers"
+                  className="group inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-white"
+                >
+                  <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+                  All carriers
                 </Link>
-                <h1 className="text-display-xl text-white">
-                  {`${name} + ITD`}
-                </h1>
-                {/* Mobile orbit — directly below the title; hidden at lg where
-                    the orbit renders in the right-hand column instead. */}
-                <div className="lg:hidden flex justify-center my-8">
-                  <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
-                </div>
-                <p className="mt-4 text-body-lg text-white/70 font-medium">{tagline}</p>
-                <p className="mt-4 text-body-md text-white/50">{description}</p>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Button href="#features">Explore</Button>
-                </div>
               </div>
+              {region && (
+                <p className="mt-8 flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: brand }} aria-hidden />
+                  {region} carrier
+                </p>
+              )}
+              <h1 className="mt-5 text-display-xl text-white">{`${name} + ITD`}</h1>
+              {/* Mobile orbit — below the title; at lg it sits in the right column. */}
+              <div className="lg:hidden flex justify-center my-8">
+                <CarrierOrbit name={name} logo={logo} logoBg={logoBg} brand={brand} />
+              </div>
+              <p className="mt-5 text-body-lg font-medium text-white/80">{tagline}</p>
+              <p className="mt-4 text-body-md text-white/55">{description}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Button href="#features" surface="dark" size="lg">Explore</Button>
+              </div>
+            </ScrollReveal>
 
-              {/* Mini orbit — desktop only (right of the copy). On mobile it's
-                  rendered inside the copy column, directly below the title. */}
-              <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
-                <CarrierOrbit name={name} logo={logo} logoBg={logoBg} />
-              </div>
+            <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
+              <CarrierOrbit name={name} logo={logo} logoBg={logoBg} brand={brand} />
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* About {name} — narrative prose (optional) */}
       {about && about.length > 0 && (
-        <section className="bg-bg-secondary py-16 md:py-24">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-6">About {name}</h2>
-              <div className="space-y-4">
-                {about.map((para, i) => (
-                  <p key={i} className="text-body-md text-text-secondary leading-relaxed">
-                    {para}
-                  </p>
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
+        <AboutSplit name={name} logo={logo} logoFill theme={theme} eyebrow={`${theme.label} carrier`} paragraphs={about} />
       )}
 
       {/* Features — the hero "Explore" CTA anchors here */}
-      <section id="features" className="bg-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <h2 className="text-display-lg text-text-primary mb-3">
-              Features built for your workflow
-            </h2>
-            <p className="text-body-md text-text-secondary mb-10 max-w-2xl">
-              Everything you get from {name}, enhanced with ITD&apos;s automation, analytics, and multi-carrier intelligence.
-            </p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <ScrollReveal key={f.title} delay={i * 0.07}>
-                <div className="bg-bg-secondary rounded-xl border border-border p-6 h-full">
-                  <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mb-4">
-                    <f.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-heading-sm text-text-primary">{f.title}</h3>
-                  <p className="mt-2 text-body-sm text-text-secondary">{f.desc}</p>
+      <FeatureGrid
+        id="features"
+        eyebrow="Features"
+        heading="Features built for your workflow"
+        intro={`Everything you get from ${name}, enhanced with ITD's automation, analytics, and multi-carrier intelligence.`}
+        features={features}
+        theme={theme}
+      />
+
+      {/* Brand film — optional. Player-with-controls, never autoplay (audio);
+          preload="metadata" so the page pays nothing until play; max-w-xl caps
+          upscaling of low-res sources. */}
+      {video && (
+        <section className="section-glow section-glow--light bg-white py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <ScrollReveal>
+                <p className="text-eyebrow" style={{ color: theme.accent }}>Film</p>
+                <h2 className="mt-3 text-display-lg text-text-primary">{video.heading ?? `About ${name}`}</h2>
+                {video.caption && <p className="mt-4 max-w-xl text-body-lg text-text-secondary">{video.caption}</p>}
+              </ScrollReveal>
+              <ScrollReveal delay={0.1}>
+                <div className="max-w-xl">
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <video
+                    src={video.src}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full aspect-video rounded-2xl bg-bg-dark shadow-[0_28px_56px_-28px_rgb(15_23_42/0.5)] ring-1 ring-black/5"
+                  >
+                    Your browser can&apos;t play this video.{" "}
+                    <a href={video.src} className="underline">Download it instead.</a>
+                  </video>
                 </div>
               </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Brand film — optional, after Features. Player-with-controls, never
-          autoplay (audio); preload="metadata" so the page pays nothing until
-          the user presses play. max-w-xl caps upscaling of low-res sources. */}
-      {video && (
-        <section className="bg-bg-secondary py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-3">
-                {video.heading ?? `About ${name}`}
-              </h2>
-              {video.caption && (
-                <p className="text-body-md text-text-secondary mb-10 max-w-2xl">{video.caption}</p>
-              )}
-            </ScrollReveal>
-            <ScrollReveal delay={0.1}>
-              <div className="max-w-xl">
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <video
-                  src={video.src}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full aspect-video rounded-2xl border border-border shadow-md bg-bg-dark"
-                >
-                  Your browser can&apos;t play this video.{" "}
-                  <a href={video.src} className="underline">Download it instead.</a>
-                </video>
-              </div>
-            </ScrollReveal>
+            </div>
           </div>
         </section>
       )}
 
       {/* Services available through ITD */}
       {realServices.length > 0 && (
-        <section className=" bg-bg-secondary py-16 md:py-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <ScrollReveal>
-              <h2 className="text-display-md text-text-primary mb-2">
-                {name} services on Connexx
-              </h2>
-              <p className="text-body-md text-text-secondary mb-8 max-w-2xl">
-                Every {name} service you can book and track from the ITD dashboard.
-              </p>
-            </ScrollReveal>
-            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {realServices.map((svc) => (
-                <li
-                  key={svc}
-                  className="flex items-start gap-2 rounded-lg border border-border bg-white px-4 py-3"
-                >
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
-                  <span className="text-body-sm text-text-primary">{svc}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        <ServicesList
+          heading={`${name} services on Connexx`}
+          intro={`Every ${name} service you can book and track from the ITD dashboard.`}
+          services={realServices}
+          theme={theme}
+        />
       )}
 
       <ClosingCTA

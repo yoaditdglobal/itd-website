@@ -2,6 +2,7 @@ import Link from "next/link";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import StoryCard from "@/components/sections/StoryCard";
 import type { CaseStudy, LibrarySegment } from "@/lib/data";
+import { SEGMENT_THEMES } from "@/lib/page-themes";
 
 const LIBRARY_BASE = "/resources/case-studies";
 
@@ -14,11 +15,17 @@ export interface SolutionFacet {
 /** Pill styling shared by the "All" chip and each solution facet. */
 function chipClass(active: boolean): string {
   return [
-    "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
+    "inline-flex min-h-[40px] items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-[background-color,border-color,color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
     active
-      ? "bg-bg-dark text-white border border-bg-dark"
-      : "bg-white border border-border text-text-secondary hover:text-text-primary hover:border-accent/40",
+      ? "text-white border-transparent"
+      : "bg-white border-border text-text-secondary hover:text-text-primary hover:border-text-tertiary/40",
   ].join(" ");
+}
+
+/** Active chip fill: the segment's own colour ("All" = brand dark). */
+function chipStyle(active: boolean, segment?: LibrarySegment) {
+  if (!active) return undefined;
+  return { backgroundColor: segment ? SEGMENT_THEMES[segment]?.accent : "#151a2e" };
 }
 
 /**
@@ -42,7 +49,7 @@ export default function StoriesLibrary({
   total: number;
 }) {
   return (
-    <section className="bg-bg-secondary py-16 md:py-24">
+    <section id="stories" className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ─── Single-select solution filter ─── */}
         <p className="text-eyebrow text-text-tertiary mb-3">Browse by solution</p>
@@ -56,6 +63,7 @@ export default function StoriesLibrary({
             scroll={false}
             aria-current={active === null ? "page" : undefined}
             className={chipClass(active === null)}
+            style={chipStyle(active === null)}
           >
             All
             <span
@@ -76,7 +84,13 @@ export default function StoriesLibrary({
                 scroll={false}
                 aria-current={isActive ? "page" : undefined}
                 className={chipClass(isActive)}
+                style={chipStyle(isActive, segment)}
               >
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: isActive ? "#fff" : SEGMENT_THEMES[segment]?.accent }}
+                  aria-hidden
+                />
                 {segment}
                 <span
                   className={isActive ? "text-white/60" : "text-text-tertiary"}
