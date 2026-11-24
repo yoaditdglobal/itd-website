@@ -11,11 +11,12 @@ import { REVIEWS, type Review, type ReviewSource } from "@/lib/reviews";
  * Loop = the LogoTicker pattern: two identical groups, gap + trailing pr (no
  * per-item margins), `ticker` keyframe 0 → -50% → seamless, zero drift.
  *
- * Feel: mouse hover, keyboard focus (the strip is focusable) and touch
- * press-and-hold EASE the marquee to a stop (Web Animations playbackRate
- * tween) instead of freezing it mid-glide, and ease it back up on release —
- * this is also the pause mechanism for moving content (no visible button,
- * user-directed). It stops while off-screen or the tab is hidden. Reduced
+ * Feel: mouse hover and KEYBOARD focus (the strip is focusable) EASE the
+ * marquee to a stop (Web Animations playbackRate tween) instead of freezing
+ * it mid-glide, and ease it back up on release — this is also the pause
+ * mechanism for moving content (no visible button, user-directed). A click
+ * or tap never pauses it (user-directed): focus from a pointer is ignored via
+ * :focus-visible, and there is no touch press-and-hold. It stops while off-screen or the tab is hidden. Reduced
  * motion: no animation — one group in a swipeable, snap-scrolling row.
  */
 
@@ -24,7 +25,6 @@ const DUR_S = 140;
 export default function ReviewsCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const holdRef = useRef(false);
   const hoverRef = useRef(false);
   const focusRef = useRef(false);
   const rateRef = useRef(1);
@@ -34,7 +34,7 @@ export default function ReviewsCarousel() {
   const retarget = () => {
     const anim = trackRef.current?.getAnimations()[0];
     if (!anim) return;
-    const target = holdRef.current || hoverRef.current || focusRef.current ? 0 : 1;
+    const target = hoverRef.current || focusRef.current ? 0 : 1;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     const step = () => {
       const r = rateRef.current;
@@ -83,19 +83,6 @@ export default function ReviewsCarousel() {
         className="reviews-marquee relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
         tabIndex={0}
         aria-label="Customer reviews (focus or hover to pause)"
-        onPointerDown={(e) => {
-          if (e.pointerType === "mouse") return;
-          holdRef.current = true;
-          retarget();
-        }}
-        onPointerUp={() => {
-          holdRef.current = false;
-          retarget();
-        }}
-        onPointerCancel={() => {
-          holdRef.current = false;
-          retarget();
-        }}
         onPointerEnter={(e) => {
           if (e.pointerType !== "mouse") return;
           hoverRef.current = true;
@@ -105,7 +92,10 @@ export default function ReviewsCarousel() {
           hoverRef.current = false;
           retarget();
         }}
-        onFocus={() => {
+        onFocus={(e) => {
+          // Keyboard focus only — a click/tap also focuses the strip, but
+          // must not pause it.
+          if (!e.currentTarget.matches(":focus-visible")) return;
           focusRef.current = true;
           retarget();
         }}
