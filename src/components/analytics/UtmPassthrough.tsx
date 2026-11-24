@@ -12,6 +12,12 @@ import { useEffect } from "react";
  * /rate-checker redirect, which keeps its query string) gets them appended at
  * click time. Tags already on a link win; a visit with no tags adds nothing.
  *
+ * It also appends `wv`, the beacon's visit reference (`<day>.<visit id>` from
+ * POST /api/v/ref), so the Rate Checker's records join the site visit. The
+ * reference is fetched once per page load, lazily (first hover or focus of a
+ * Rate Checker link, or at idle when the page has one) and kept in memory; a
+ * click before it arrives simply goes without it.
+ *
  * Mounted once in the root layout (not SiteChrome) so the immersive /rc page
  * is covered too. Renders nothing.
  */
@@ -28,6 +34,27 @@ const KEYS = [
   "li_fat_id",
 ] as const;
 const RATE_CHECKER_HOSTS = ["itdglobal-ratechecker.lovable.app"];
+const VISIT_PARAM = "wv";
+const VISIT_REF_RE = /^\d{4}-\d{2}-\d{2}\.[0-9a-f]{16}$/;
+
+// The visit reference, fetched at most once per page load.
+let visitRef: string | null = null;
+let visitRefRequested = false;
+
+function loadVisitRef() {
+  if (visitRefRequested) return;
+  visitRefRequested = true;
+  try {
+    fetch("/api/v/ref", { method: "POST", cache: "no-store", credentials: "omit" })
+      .then((res) => (res.status === 200 ? res.json() : null))
+      .then((data: { r?: unknown } | null) => {
+        if (typeof data?.r === "string" && VISIT_REF_RE.test(data.r)) visitRef = data.r;
+      })
+      .catch(() => {});
+  } catch {
+    /* no reference: links go out without it */
+  }
+}
 
 export type Tags = Partial<Record<(typeof KEYS)[number], string>>;
 
@@ -58,6 +85,16 @@ export function isRateChecker(url: URL): boolean {
   );
 }
 
+function anchorIsRateChecker(anchor: HTMLAnchorElement): boolean {
+  const raw = anchor.getAttribute("href");
+  if (!raw) return false;
+  try {
+    return isRateChecker(new URL(raw, window.location.href));
+  } catch {
+    return false;
+  }
+}
+
 function tagAnchor(anchor: HTMLAnchorElement) {
   const raw = anchor.getAttribute("href");
   if (!raw) return;
@@ -70,6 +107,10 @@ function tagAnchor(anchor: HTMLAnchorElement) {
   if (!isRateChecker(url)) return;
   const tags = savedTags();
   let changed = false;
+  if (visitRef && !url.searchParams.has(VISIT_PARAM)) {
+    url.searchParams.set(VISIT_PARAM, visitRef);
+    changed = true;
+  }
   for (const k of KEYS) {
     const v = tags[k];
     if (v && !url.searchParams.has(k)) {
@@ -100,7 +141,38 @@ export default function UtmPassthrough() {
     };
     const events = ["click", "auxclick", "contextmenu"] as const;
     events.forEach((e) => document.addEventListener(e, onUse, true));
-    return () => events.forEach((e) => document.removeEventListener(e, onUse, true));
+
+    // Fetch the visit reference on first intent towards a Rate Checker link.
+    const onIntent = (event: Event) => {
+      if (visitRefRequested) return;
+      const anchor = (event.target as Element | null)?.closest?.("a");
+      if (anchor instanceof HTMLAnchorElement && anchorIsRateChecker(anchor)) loadVisitRef();
+    };
+    const intents = ["pointerover", "focusin", "touchstart"] as const;
+    intents.forEach((e) => document.addEventListener(e, onIntent, { capture: true, passive: true }));
+
+    // Or at idle, when the page already shows a Rate Checker link.
+    const atIdle = () => {
+      if (visitRefRequested) return;
+      const anchors = document.querySelectorAll<HTMLAnchorElement>("a[href]");
+      for (const a of anchors) {
+        if (anchorIsRateChecker(a)) {
+          loadVisitRef();
+          return;
+        }
+      }
+    };
+    const idle =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(atIdle, { timeout: 5_000 })
+        : window.setTimeout(atIdle, 2_000);
+
+    return () => {
+      events.forEach((e) => document.removeEventListener(e, onUse, true));
+      intents.forEach((e) => document.removeEventListener(e, onIntent, { capture: true }));
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
+    };
   }, []);
 
   return null;

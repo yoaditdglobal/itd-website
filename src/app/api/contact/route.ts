@@ -6,6 +6,7 @@ import { getNotifyEmails } from "@/lib/server/env";
 import { splitName, emailTeam, emailSubmitter } from "@/lib/server/leads";
 import { contactAckHtml, contactAckText } from "@/lib/server/email-templates";
 import { postLeadToWebhook } from "@/lib/server/webhook";
+import { recordServerLead } from "@/lib/server/beacon-lead";
 
 /**
  * POST /api/contact — capture a website enquiry as a Zoho CRM Lead.
@@ -97,6 +98,9 @@ export async function POST(request: Request) {
   if (d.website && d.website.length > 0) {
     return NextResponse.json({ success: true }, { status: 201 });
   }
+
+  // Accepted: every path below answers success. Link it to the visit (best effort).
+  recordServerLead(request, "contact_sales", d.email);
 
   const lastName =
     (d.lastName && d.lastName.trim()) ||

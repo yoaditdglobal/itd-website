@@ -1,14 +1,12 @@
 import { rateLimit } from "@/lib/server/rate-limit";
-import { beaconStore, dailySalt, writeEvent } from "@/lib/server/beacon-store";
+import { beaconStore, requestVisitId, writeEvent } from "@/lib/server/beacon-store";
 import {
   MAX_BODY_BYTES,
-  allowedHosts,
-  bareHost,
   clientIp,
   country,
   isBot,
   parseClientBody,
-  visitId,
+  recordingHost,
   type BeaconEvent,
 } from "@/lib/beacon";
 
@@ -33,18 +31,7 @@ export async function POST(request: Request) {
     const declared = Number(h.get("content-length") ?? "0");
     if (declared > MAX_BODY_BYTES) return done();
 
-    const host = bareHost(h.get("host") ?? new URL(request.url).host);
-    if (!allowedHosts(process.env.BEACON_HOSTS).includes(host)) return done();
-    const origin = h.get("origin");
-    if (origin) {
-      let originHost = "";
-      try {
-        originHost = bareHost(new URL(origin).host);
-      } catch {
-        /* "null" or garbage: treated as foreign */
-      }
-      if (originHost !== host) return done();
-    }
+    if (!recordingHost(h, request.url, process.env.BEACON_HOSTS)) return done();
 
     const ua = h.get("user-agent") ?? "";
     if (isBot(ua)) return done();
@@ -63,7 +50,7 @@ export async function POST(request: Request) {
       ts: new Date(now).toISOString(),
       ...fields,
       c: country(h),
-      v: visitId(await dailySalt(store, now), ip, ua),
+      v: await requestVisitId(store, h, now),
     };
     await writeEvent(store, event, now);
   } catch (err) {

@@ -3,12 +3,27 @@
 // logic can be exercised with plain Node (`node --experimental-strip-types`).
 //
 // Contract (read by the GTM dashboard; never rename a field):
-//   stored event = { ts, k, p, r, u, ad, w, f?, c, v }
+//   client event = { ts, k, p, r, u, ad, w, f?, t?, l?, n?, x?, c, v }
+//     cta  t (target, <=120) l (location, <=40)
+//     cwv  n (LCP|INP|CLS|FCP|TTFB) x (ms, integer; CLS x1000)
+//     scr  x (25|50|75|100)
+//     nf   (p is the missing path)
+//   server lead  = { ts, k: "lead_srv", f, e, p, c, v }  (e = sha256 of the email)
 
 import { createHash, timingSafeEqual } from "node:crypto";
 
-export const KINDS = ["pv", "eng", "rc", "lead"] as const;
+/** Kinds a browser may send. `lead_srv` is written server side only. */
+export const KINDS = ["pv", "eng", "rc", "lead", "cta", "cwv", "nf", "scr"] as const;
 export type Kind = (typeof KINDS)[number];
+export const SERVER_KINDS = ["lead_srv"] as const;
+
+export const CWV_NAMES = ["LCP", "INP", "CLS", "FCP", "TTFB"] as const;
+export type CwvName = (typeof CWV_NAMES)[number];
+export const SCROLL_DEPTHS = [25, 50, 75, 100] as const;
+/** Upper bound for a CWV value (ms, or CLS x1000): ten minutes. */
+export const MAX_CWV = 600_000;
+const TARGET_RE = /^[\x21-\x7e]{1,120}$/;
+const LOCATION_RE = /^[A-Za-z0-9_-]{1,40}$/;
 
 export const UTM_FIELDS = ["source", "medium", "campaign", "content", "term"] as const;
 export type UtmField = (typeof UTM_FIELDS)[number];
@@ -30,9 +45,26 @@ export type BeaconEvent = {
   ad: 0 | 1;
   w: "m" | "t" | "d";
   f?: string;
+  t?: string;
+  l?: string;
+  n?: CwvName;
+  x?: number;
   c: string;
   v: string;
 };
+
+/** A lead accepted by a form route, linked to the visit server side. */
+export type ServerLeadEvent = {
+  ts: string;
+  k: "lead_srv";
+  f: string;
+  e: string;
+  p: string;
+  c: string;
+  v: string;
+};
+
+export type StoredEvent = BeaconEvent | ServerLeadEvent;
 
 /** The client-supplied part of an event, validated. `null` = drop. */
 export type ClientFields = Omit<BeaconEvent, "ts" | "c" | "v">;
@@ -73,7 +105,42 @@ export function parseClientBody(text: string): ClientFields | null {
   if (out.k === "lead" && typeof b.f === "string" && b.f.trim()) {
     out.f = b.f.trim().slice(0, 60);
   }
+
+  if (out.k === "cta") {
+    if (typeof b.t !== "string" || !TARGET_RE.test(b.t)) return null;
+    if (typeof b.l !== "string" || !LOCATION_RE.test(b.l)) return null;
+    out.t = b.t;
+    out.l = b.l;
+  } else if (out.k === "cwv") {
+    if (typeof b.n !== "string" || !(CWV_NAMES as readonly string[]).includes(b.n)) return null;
+    if (!Number.isInteger(b.x) || (b.x as number) < 0 || (b.x as number) > MAX_CWV) return null;
+    out.n = b.n as CwvName;
+    out.x = b.x as number;
+  } else if (out.k === "scr") {
+    if (!(SCROLL_DEPTHS as readonly unknown[]).includes(b.x)) return null;
+    out.x = b.x as number;
+  }
   return out;
+}
+
+/** sha256 hex of an email, trimmed and lower-cased. The email itself is never stored. */
+export function emailHash(email: string): string {
+  return createHash("sha256").update(email.trim().toLowerCase()).digest("hex");
+}
+
+/**
+ * The path of a same-origin Referer (`host` is the request's Host header),
+ * else "". A path the beacon would not accept is "" too.
+ */
+export function refererPath(referer: string | null | undefined, host: string | null | undefined): string {
+  if (!referer || !host) return "";
+  try {
+    const url = new URL(referer);
+    if (url.host.toLowerCase() !== host.trim().toLowerCase()) return "";
+    return PATH_RE.test(url.pathname) ? url.pathname : "";
+  } catch {
+    return "";
+  }
 }
 
 export function isBot(userAgent: string): boolean {
@@ -93,6 +160,33 @@ export function allowedHosts(env: string | undefined): string[] {
     .split(",")
     .map((h) => bareHost(h))
     .filter(Boolean);
+}
+
+/**
+ * The request's bare host when it is a recording host (BEACON_HOSTS) and any
+ * Origin is that same host; else null. Shared by every beacon endpoint.
+ */
+export function recordingHost(headers: Headers, requestUrl: string, env: string | undefined): string | null {
+  let host = bareHost(headers.get("host"));
+  if (!host) {
+    try {
+      host = bareHost(new URL(requestUrl).host);
+    } catch {
+      return null;
+    }
+  }
+  if (!allowedHosts(env).includes(host)) return null;
+  const origin = headers.get("origin");
+  if (origin) {
+    let originHost = "";
+    try {
+      originHost = bareHost(new URL(origin).host);
+    } catch {
+      /* "null" or garbage: treated as foreign */
+    }
+    if (originHost !== host) return null;
+  }
+  return host;
 }
 
 /** Client IP: Netlify's connection IP, else the first X-Forwarded-For hop. */

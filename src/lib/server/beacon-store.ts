@@ -1,6 +1,12 @@
 import { randomBytes } from "node:crypto";
 import { getStore, type Store } from "@netlify/blobs";
-import { utcDay, withDeadline, type BeaconEvent } from "@/lib/beacon";
+import {
+  clientIp,
+  utcDay,
+  visitId,
+  withDeadline,
+  type StoredEvent,
+} from "@/lib/beacon";
 
 /**
  * Netlify Blobs access for the first-party beacon (store `beacon`):
@@ -73,9 +79,26 @@ export async function dailySalt(
   return salt;
 }
 
+/**
+ * The visit id of a request: the day's salt, the client IP and the user agent.
+ * The one derivation used by /api/v, /api/v/ref and the lead routes, so a
+ * server-side lead joins the browser's events of the same visit.
+ */
+export async function requestVisitId(
+  store: Store,
+  headers: Headers,
+  now = Date.now(),
+): Promise<string> {
+  return visitId(
+    await dailySalt(store, now),
+    clientIp(headers),
+    headers.get("user-agent") ?? "",
+  );
+}
+
 export async function writeEvent(
   store: Store,
-  event: BeaconEvent,
+  event: StoredEvent,
   now = Date.now(),
 ) {
   const key = `ev/${utcDay(now)}/${now}-${randomBytes(4).toString("hex")}`;
@@ -111,15 +134,15 @@ export async function readEvents(
   keys: string[],
   concurrency = 32,
   ms?: number,
-): Promise<{ events: BeaconEvent[]; failed: number }> {
-  const events: BeaconEvent[] = [];
+): Promise<{ events: StoredEvent[]; failed: number }> {
+  const events: StoredEvent[] = [];
   let failed = 0;
   for (let i = 0; i < keys.length; i += concurrency) {
     const batch = keys.slice(i, i + concurrency);
     const results = await Promise.allSettled(
       batch.map((k) =>
         withDeadline(
-          store.get(k, { type: "json" }) as Promise<BeaconEvent | null>,
+          store.get(k, { type: "json" }) as Promise<StoredEvent | null>,
           ms,
         ),
       ),

@@ -5,6 +5,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createLead, findRecentLeadByEmail, isZohoConfigured } from "@/lib/server/zoho";
 import { getNotifyEmails } from "@/lib/server/env";
 import { splitName, emailTeam } from "@/lib/server/leads";
+import { recordServerLead } from "@/lib/server/beacon-lead";
 
 /**
  * POST /api/chat/lead — capture + route a lead from the ITD Global chat widget.
@@ -125,6 +126,9 @@ export async function POST(request: Request) {
   if (d.website && d.website.length > 0) {
     return NextResponse.json({ success: true }, { status: 200 });
   }
+
+  // Accepted: every path below answers success. Link it to the visit (best effort).
+  recordServerLead(request, "chat", d.email);
 
   // Guided answers when present; otherwise enrich a free-text lead from the transcript.
   const answers: FunnelAnswers = {
