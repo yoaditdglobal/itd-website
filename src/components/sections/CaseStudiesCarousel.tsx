@@ -136,7 +136,7 @@ export default function CaseStudiesCarousel({
             aria-label="Previous stories"
             onClick={() => scrollByCards(-1)}
             disabled={!canLeft}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-colors hover:border-accent/40 hover:text-accent disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-[color,border-color,transform] duration-200 hover:border-accent/40 hover:text-accent active:scale-95 motion-reduce:active:scale-100 disabled:active:scale-100 disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -145,7 +145,7 @@ export default function CaseStudiesCarousel({
             aria-label="Next stories"
             onClick={() => scrollByCards(1)}
             disabled={!canRight}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-colors hover:border-accent/40 hover:text-accent disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-[color,border-color,transform] duration-200 hover:border-accent/40 hover:text-accent active:scale-95 motion-reduce:active:scale-100 disabled:active:scale-100 disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

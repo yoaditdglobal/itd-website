@@ -93,7 +93,7 @@ export default function IntegrationHighlights() {
                 <Link
                   key={logo.name}
                   href={logo.href}
-                  className="group card-hover flex flex-col items-center justify-center rounded-2xl border border-border bg-white px-4 py-6 hover:border-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="group card-hover flex flex-col items-center justify-center rounded-2xl border border-border bg-white px-4 py-6 hover:border-accent/25 active:scale-[0.98] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
                   <IntegrationLogo
                     name={logo.name}
