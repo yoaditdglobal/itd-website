@@ -417,6 +417,23 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .animate-ticker { animation: none; }
 }
 
+/* Homepage reviews marquee (ReviewsCarousel) — reuses the ticker keyframe.
+   Speed easing on hover/focus/pause is done in JS via playbackRate, so no
+   animation-play-state here (it would fight the tween). */
+.reviews-track {
+  animation: ticker var(--reviews-dur, 140s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Static, swipeable row: one group, native scroll with snap. */
+  .reviews-track { animation: none; padding-inline: 1rem; }
+  .reviews-marquee { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .reviews-marquee::-webkit-scrollbar { display: none; }
+  .reviews-item { scroll-snap-align: center; }
+  .reviews-dup, .reviews-fade { display: none; }
+}
+
 /* ─── Navbar menus — CSS-only open/close (no framer-motion) ───
    Panels stay mounted; [data-open] drives the transition. `visibility` is in
    the transition list on purpose: it animates discretely (visible throughout

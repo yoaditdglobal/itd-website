@@ -10,6 +10,7 @@ import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import { getRelevantCaseStudies } from "@/lib/data";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
 import ScrollForward from "@/components/animations/ScrollForward";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -28,6 +29,8 @@ export default function Home() {
       <ScrollForward>
         <SocialProof />
       </ScrollForward>
+      {/* Directly under the customer-logo strip (same white surface). */}
+      <ReviewsCarousel />
       <DomesticInternationalCards />
       {/* Scroll-led travelling-strip headline — it IS the Solutions section's
           <h2>; the pager below is labelled by it and renders no title. */}
