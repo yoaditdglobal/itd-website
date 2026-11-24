@@ -72,7 +72,7 @@ export default function ReviewsCarousel() {
   }, []);
 
   return (
-    <section className="bg-white py-16 md:py-24" aria-labelledby="reviews-heading" data-analytics-location="reviews">
+    <section className="bg-white pt-4 pb-16 md:pt-6 md:pb-20" aria-labelledby="reviews-heading" data-analytics-location="reviews">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 id="reviews-heading" className="mb-10 md:mb-12 text-display-lg text-text-primary">
           What our customers say
