@@ -10,6 +10,7 @@ import IntegrationHighlights from "@/components/sections/IntegrationHighlights";
 import CaseStudyCards from "@/components/sections/CaseStudyCards";
 import { getRelevantCaseStudies } from "@/lib/data";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
 import ScrollForward from "@/components/animations/ScrollForward";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -39,6 +40,7 @@ export default function Home() {
       {/* subtitle="" removes the meta line under the heading (per copy doc)
           without touching the default other pages rely on. */}
       <CaseStudyCards studies={getRelevantCaseStudies({})} subtitle="" />
+      <ReviewsCarousel />
       <ClosingCTA
         headline="Put your carrier costs to the test"
         subtitle="The rate checker compares your current shipping against ITD's rates and shows the saving. Send a recent invoice and see for yourself."
