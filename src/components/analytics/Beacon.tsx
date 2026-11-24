@@ -18,12 +18,51 @@ import { isRateChecker, readUrlTags, savedTags, type Tags } from "./UtmPassthrou
  *   cwv   a Core Web Vital: n = name, x = value (ms; CLS x1000), once per page view
  *   scr   the page view's deepest scroll quarter, x = 25|50|75|100, sent when it ends
  *   nf    the not-found page rendered (sent by NotFoundBeacon)
- * No cookies, no localStorage, no client identifiers: the server derives a
- * daily visit id. Never throws, never blocks. Mounted once in the root layout;
- * removing it, or renaming a body field, breaks the dashboard (see AGENTS.md).
+ * No cookies and no client identifiers: the server derives a daily visit id.
+ * The one localStorage key is the staff flag: ?itd_staff=1 sets itd_staff and
+ * every event then carries int: 1 (?itd_staff=0 clears it); the param is
+ * stripped from the address bar. wd: 1 says navigator.webdriver is set (the
+ * server marks the event as a bot). Nothing is sent off itdglobal.com.
+ * Never throws, never blocks. Mounted once in the root layout; removing it, or renaming a body field, breaks the dashboard (see AGENTS.md).
  */
 
 type Kind = "pv" | "eng" | "rc" | "lead" | "cta" | "cwv" | "nf" | "scr";
+const SITE_HOSTS = ["itdglobal.com", "www.itdglobal.com"];
+const STAFF_KEY = "itd_staff";
+const STAFF_PARAM = "itd_staff";
+let staff: boolean | null = null;
+
+/**
+ * Whether this browser is flagged as staff. Read once per document; the first
+ * call applies ?itd_staff=1|0 from the address bar and strips the param.
+ */
+function isStaff(): boolean {
+  if (staff !== null) return staff;
+  staff = false;
+  try {
+    const url = new URL(location.href);
+    const param = url.searchParams.get(STAFF_PARAM);
+    if (param !== null) {
+      try {
+        if (param === "1") localStorage.setItem(STAFF_KEY, "1");
+        else if (param === "0") localStorage.removeItem(STAFF_KEY);
+      } catch {
+        /* storage blocked */
+      }
+      url.searchParams.delete(STAFF_PARAM);
+      history.replaceState(history.state, "", url.pathname + url.search + url.hash);
+    }
+    try {
+      staff = localStorage.getItem(STAFF_KEY) === "1";
+    } catch {
+      staff = param === "1";
+    }
+  } catch {
+    /* never interfere with the page */
+  }
+  return staff;
+}
+
 type Extra = { p?: string; f?: string; t?: string; l?: string; n?: string; x?: number };
 type DataLayerWindow = Window & { dataLayer?: unknown[] };
 
@@ -62,6 +101,8 @@ let scroll = { path: "", sent: true, max: 0, short: false, long: false };
 /** Send one beacon event. Never throws. Also used by NotFoundBeacon. */
 export function send(k: Kind, extra: Extra = {}) {
   try {
+    if (!SITE_HOSTS.includes(location.hostname)) return;
+    const internal = isStaff();
     const tags = visitTags();
     const u: Record<string, string> = {};
     for (const [from, to] of Object.entries(UTM)) {
@@ -84,6 +125,8 @@ export function send(k: Kind, extra: Extra = {}) {
       ad: AD_CLICK_IDS.some((id) => tags[id]) ? 1 : 0,
       w: width < 768 ? "m" : width < 1024 ? "t" : "d",
     };
+    if (internal) body.int = 1;
+    if (navigator.webdriver) body.wd = 1;
     if (k === "lead" && extra.f) body.f = extra.f.slice(0, 60);
     if (extra.t !== undefined) body.t = extra.t.slice(0, 120);
     if (extra.l !== undefined) body.l = extra.l.slice(0, 40);
@@ -190,6 +233,7 @@ export default function Beacon() {
 
   // Link clicks (cta, rc), scroll depth and the dataLayer lead scan: once per document.
   useEffect(() => {
+    isStaff();
     scanDataLayer();
     const poll = setInterval(() => {
       if (!document.hidden) scanDataLayer();
