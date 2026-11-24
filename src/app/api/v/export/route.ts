@@ -18,6 +18,9 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const SETTLE_MS = 10 * 60_000;
+// The export is read server to server, so a storage call may take longer than
+// the 3 s the visitor-facing beacon allows; a cold Blobs call took over 3 s.
+const EXPORT_MS = 20_000;
 const NO_STORE = { "Cache-Control": "no-store" };
 const json = (body: unknown, status = 200) =>
   Response.json(body, { status, headers: NO_STORE });
@@ -40,37 +43,44 @@ export async function GET(request: Request) {
   const store = beaconStore();
   if (!store) return json({ error: "storage unavailable" }, 503);
 
+  let step = "list";
   try {
     if (!complete) {
-      const { events, failed } = await readEvents(store, await listEventKeys(store, day));
+      const { events, failed } = await readEvents(store, await listEventKeys(store, day, EXPORT_MS), 32, EXPORT_MS);
       if (failed) return json({ error: "storage read failed, retry" }, 503);
       return json({ day, complete, events });
     }
 
-    const stored = (await withDeadline(store.get(`day/${day}`, { type: "json" }))) as {
+    step = "get day";
+    const stored = (await withDeadline(store.get(`day/${day}`, { type: "json" }), EXPORT_MS)) as {
       events?: BeaconEvent[];
     } | null;
     if (stored?.events) return json({ day, complete, events: stored.events });
 
-    const keys = await listEventKeys(store, day);
-    const { events, failed } = await readEvents(store, keys);
+    step = "list";
+    const keys = await listEventKeys(store, day, EXPORT_MS);
+    step = "read";
+    const { events, failed } = await readEvents(store, keys, 32, EXPORT_MS);
     // Never compact a day with an unread event: it would be lost for good.
     if (failed) return json({ error: "storage read failed, retry" }, 503);
 
+    step = "compact";
     const res = await withDeadline(
       store.setJSON(`day/${day}`, { day, complete, events }, { onlyIfNew: true }),
+      EXPORT_MS,
     );
     if (!res.modified) {
       // A concurrent export compacted first: serve its copy.
-      const won = (await withDeadline(store.get(`day/${day}`, { type: "json" }))) as {
+      const won = (await withDeadline(store.get(`day/${day}`, { type: "json" }), EXPORT_MS)) as {
         events?: BeaconEvent[];
       } | null;
       return json({ day, complete, events: won?.events ?? events });
     }
-    await deleteKeys(store, keys);
+    step = "delete";
+    await deleteKeys(store, keys, 32, EXPORT_MS);
     return json({ day, complete, events });
   } catch (err) {
-    console.warn("[beacon] export failed:", (err as Error).message);
+    console.warn(`[beacon] export failed at ${step}:`, (err as Error).message);
     return json({ error: "storage unavailable" }, 503);
   }
 }
