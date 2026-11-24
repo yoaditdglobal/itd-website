@@ -18,8 +18,9 @@ type Props = {
 
 /**
  * The mobile overlay's accordion, rendered from the same NAV_MENUS config as
- * the desktop panel: every item keeps its description (when it has one), each group its footer
- * link, and each section ends with its promo card.
+ * the desktop panel, but names only: item descriptions are desktop-only (too
+ * noisy in a narrow accordion). Items with a `logos` row keep it; each group
+ * keeps its footer link, and each section ends with its promo card.
  */
 export default function MobileNavMenu({ pathname, openSection, onToggleSection, onNavigate, platformLink }: Props) {
   return (
@@ -70,7 +71,7 @@ function SectionBody({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => vo
                 {item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />}
                 {item.name}
               </span>
-              {item.logos ? (
+              {item.logos && (
                 <span className="mt-1.5 flex flex-wrap items-center gap-1.5">
                   {item.logos.map((l) => (
                     <span key={l.name} title={l.name} className="rounded bg-white p-0.5">
@@ -78,8 +79,6 @@ function SectionBody({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => vo
                     </span>
                   ))}
                 </span>
-              ) : (
-                item.desc && <span className="text-caption text-white/50">{item.desc}</span>
               )}
             </Link>
           ))}
