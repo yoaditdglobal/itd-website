@@ -447,31 +447,31 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
 }
 .section-glow--light::before {
   background:
-    radial-gradient(38% 60% at 20% 45%, rgb(244 240 232 / 0.95), transparent 70%),
-    radial-gradient(32% 55% at 82% 58%, rgb(0 152 160 / 0.06), transparent 70%);
+    radial-gradient(46% 70% at 18% 45%, rgb(240 233 220 / 1), transparent 72%),
+    radial-gradient(38% 62% at 84% 58%, rgb(0 152 160 / 0.09), transparent 72%);
 }
 .section-glow--light::after {
   background:
-    radial-gradient(30% 50% at 72% 40%, rgb(244 240 232 / 0.75), transparent 70%),
-    radial-gradient(26% 45% at 38% 62%, rgb(236 229 216 / 0.55), transparent 70%);
+    radial-gradient(34% 56% at 70% 38%, rgb(243 237 226 / 0.9), transparent 72%),
+    radial-gradient(30% 50% at 40% 64%, rgb(230 221 204 / 0.65), transparent 72%);
 }
 .section-glow--warm::before {
   background:
-    radial-gradient(40% 60% at 22% 42%, rgb(252 250 246 / 0.95), transparent 70%),
-    radial-gradient(34% 55% at 80% 60%, rgb(232 222 204 / 0.7), transparent 70%);
+    radial-gradient(46% 70% at 20% 42%, rgb(255 253 249 / 1), transparent 72%),
+    radial-gradient(40% 62% at 80% 60%, rgb(226 214 191 / 0.85), transparent 72%);
 }
 .section-glow--warm::after {
   background:
-    radial-gradient(30% 48% at 75% 40%, rgb(0 152 160 / 0.05), transparent 70%),
-    radial-gradient(32% 50% at 32% 62%, rgb(252 250 246 / 0.85), transparent 70%);
+    radial-gradient(34% 54% at 74% 38%, rgb(0 152 160 / 0.08), transparent 72%),
+    radial-gradient(34% 54% at 32% 64%, rgb(255 253 249 / 0.9), transparent 72%);
 }
 @keyframes section-glow-a {
-  from { transform: translate3d(-7%, 3%, 0) scale(1); }
-  to   { transform: translate3d(7%, -3%, 0) scale(1.05); }
+  from { transform: translate3d(-9%, 3%, 0) scale(1); }
+  to   { transform: translate3d(9%, -3%, 0) scale(1.08); }
 }
 @keyframes section-glow-b {
-  from { transform: translate3d(7%, -3%, 0) rotate(-1.5deg); }
-  to   { transform: translate3d(-7%, 3%, 0) rotate(1.5deg); }
+  from { transform: translate3d(9%, -3%, 0) rotate(-2deg); }
+  to   { transform: translate3d(-9%, 3%, 0) rotate(2deg); }
 }
 @supports (animation-timeline: view()) {
   .section-glow::before,
