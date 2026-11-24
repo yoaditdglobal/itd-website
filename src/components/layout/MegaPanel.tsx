@@ -189,12 +189,22 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                       {item.name}
                     </span>
                   </span>
-                  {item.desc && (
-                    <span
-                      className="mt-1 block text-body-sm text-text-secondary line-clamp-3"
-                    >
-                      {item.desc}
+                  {item.logos ? (
+                    <span className="mt-2.5 flex flex-wrap items-center gap-2">
+                      {item.logos.map((l) => (
+                        <span key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
+                          <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
+                        </span>
+                      ))}
                     </span>
+                  ) : (
+                    item.desc && (
+                      <span
+                        className="mt-1 block text-body-sm text-text-secondary line-clamp-3"
+                      >
+                        {item.desc}
+                      </span>
+                    )
                   )}
                 </Link>
                 )}

@@ -70,7 +70,17 @@ function SectionBody({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => vo
                 {item.logo && <IntegrationLogo name={item.name} logo={item.logo} size="xs" />}
                 {item.name}
               </span>
-              {item.desc && <span className="text-caption text-white/50">{item.desc}</span>}
+              {item.logos ? (
+                <span className="mt-1.5 flex flex-wrap items-center gap-1.5">
+                  {item.logos.map((l) => (
+                    <span key={l.name} title={l.name} className="rounded bg-white p-0.5">
+                      <IntegrationLogo name={l.name} logo={l.logo} size="xs" />
+                    </span>
+                  ))}
+                </span>
+              ) : (
+                item.desc && <span className="text-caption text-white/50">{item.desc}</span>
+              )}
             </Link>
           ))}
           {g.footerLink && (
