@@ -465,11 +465,14 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .connect-carrier--back { transform: translateX(70%); }
 }
 
-/* ─── Dark glow pair: closing CTA flows into the footer ───────────────────
-   Both share the dark base. The CTA's teal glow sits on its BOTTOM edge and
-   the footer's glow on its TOP edge — exact mirror images (same centre,
-   width, fixed 240px depth, strength) — so the join is continuous whatever
-   either section's height. Layers sit behind content via isolation. */
+/* ─── Dark glow pair: closing CTA → footer, seamless on EVERY page ────────
+   Rule: the footer's TOP edge is always the plain dark base (#151a2e via
+   bg-bg-dark), because every dark closing section on the site ends on that
+   base — the shared ClosingCTA, page-specific CTAs, solution/vertical CTAs.
+   So neither layer may paint colour at the join: the CTA's glow lives in its
+   upper part, the footer's pools in its lower half. (An earlier version put
+   matching glows on both edges; it only matched the shared ClosingCTA and
+   left a visible band under every other CTA.) */
 .cta-glow,
 .footer-glow {
   position: relative;
@@ -485,15 +488,15 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   pointer-events: none;
 }
 .cta-glow::before {
-  background:
-    radial-gradient(55% 75% at 50% 0%, rgb(29 63 184 / 0.32), transparent 72%),
-    radial-gradient(42% 240px at 50% 100%, rgb(0 152 160 / 0.16), transparent 100%);
+  background: radial-gradient(55% 70% at 50% 0%, rgb(29 63 184 / 0.32), transparent 72%);
 }
 .footer-glow::before {
   background:
-    radial-gradient(42% 240px at 50% 0%, rgb(0 152 160 / 0.16), transparent 100%),
-    radial-gradient(38% 55% at 8% 85%, rgb(29 63 184 / 0.22), transparent 72%),
-    radial-gradient(34% 50% at 96% 100%, rgb(0 152 160 / 0.1), transparent 72%);
+    radial-gradient(38% 55% at 8% 100%, rgb(29 63 184 / 0.22), transparent 72%),
+    radial-gradient(34% 50% at 96% 100%, rgb(0 152 160 / 0.12), transparent 72%);
+  /* Belt and braces: whatever the pools do, the top 30% is guaranteed base. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 30%, #000 70%);
+  mask-image: linear-gradient(to bottom, transparent 30%, #000 70%);
 }
 
 /* ─── Section glow — soft, scroll-reactive gradient backgrounds ───────────
