@@ -33,6 +33,8 @@ export interface NavItem {
   desc?: string;
   href: string;
   logo?: string;
+  /** Rail menus: a row of platform logo tiles shown in place of `desc`. */
+  logos?: { name: string; logo: string }[];
   /** Railless menus: an accent icon chip in place of a logo (visual anchor). */
   icon?: LucideIcon;
   /** Railless menus: a photo that fills the square tile (icon + name overlay). */
@@ -239,9 +241,38 @@ export const NAV_MENUS: readonly NavMenu[] = [
           description: "The ERP, WMS, store and marketplace tools you already run.",
           icon: Plug,
           items: [
-            { name: "ERP / WMS", desc: "NetSuite, Linnworks, Mintsoft and Magento: orders in, tracking written back", href: "/integrations/erp-wms" },
-            { name: "eCommerce & Logistics", desc: "Shopify, WooCommerce, Veeqo and ShipStation shipping on our carrier rates", href: "/integrations/ecommerce-logistics" },
-            { name: "Marketplaces", desc: "Amazon, eBay, Etsy, Temu and TikTok Shop orders in one queue", href: "/integrations/marketplaces" },
+            // Logos (as in src/lib/data.ts) instead of a description line.
+            {
+              name: "ERP / WMS",
+              href: "/integrations/erp-wms",
+              logos: [
+                { name: "NetSuite", logo: "/logos/erp-wms/netsuite-icon-fill.png" },
+                { name: "Linnworks", logo: "/logos/erp-wms/linnworks-tile.png" },
+                { name: "Mintsoft", logo: "/logos/ecommerce/mintsoft-icon-fill.png" },
+                { name: "Magento", logo: "/logos/erp-wms/magento-icon.webp" },
+              ],
+            },
+            {
+              name: "eCommerce & Logistics",
+              href: "/integrations/ecommerce-logistics",
+              logos: [
+                { name: "Shopify", logo: "/logos/ecommerce/shopify_logo-fill.png" },
+                { name: "WooCommerce", logo: "/logos/erp-wms/woocommerce_logo-fill.png" },
+                { name: "Veeqo", logo: "/logos/ecommerce/veeqo-icon-fill.png" },
+                { name: "ShipStation", logo: "/logos/erp-wms/shipstation_logo-fill.png" },
+              ],
+            },
+            {
+              name: "Marketplaces",
+              href: "/integrations/marketplaces",
+              logos: [
+                { name: "Amazon", logo: "/logos/marketplaces/amazon-icon-fill.png" },
+                { name: "eBay", logo: "/logos/marketplaces/ebay-icon-fill.png" },
+                { name: "Etsy", logo: "/logos/marketplaces/etsy-icon-fill.png" },
+                { name: "Temu", logo: "/logos/marketplaces/temu-icon-fill.png" },
+                { name: "TikTok Shop", logo: "/logos/marketplaces/tiktok-tile.png" },
+              ],
+            },
           ],
           footerLink: { label: "Browse all integrations", href: "/integrations/tech" },
         },
