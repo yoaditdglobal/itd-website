@@ -22,9 +22,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function CaseStudiesCarousel({
   children,
   label = "Customer stories",
+  footer,
 }: {
   children: ReactNode;
   label?: string;
+  /** Shown at the left of the control row (e.g. a "Browse all" link), with
+   *  the arrows on the right — one row instead of two stacked controls. */
+  footer?: ReactNode;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -121,15 +125,18 @@ export default function CaseStudiesCarousel({
         <span aria-hidden className="w-px shrink-0" />
       </div>
 
-      {/* Desktop controls: end-aware arrows. */}
-      <div className="mt-6 hidden items-center justify-end gap-4 lg:flex">
-        <div className="flex items-center gap-2">
+      {/* Control row: optional footer left; end-aware arrows right (desktop). */}
+      <div
+        className={`mt-8 items-center gap-4 ${footer ? "flex justify-center lg:justify-between" : "hidden justify-end lg:flex"}`}
+      >
+        {footer}
+        <div className="hidden items-center gap-2 lg:flex">
           <button
             type="button"
             aria-label="Previous stories"
             onClick={() => scrollByCards(-1)}
             disabled={!canLeft}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-colors hover:border-accent/40 hover:text-accent disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-[color,border-color,transform] duration-200 hover:border-accent/40 hover:text-accent active:scale-95 motion-reduce:active:scale-100 disabled:active:scale-100 disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -138,7 +145,7 @@ export default function CaseStudiesCarousel({
             aria-label="Next stories"
             onClick={() => scrollByCards(1)}
             disabled={!canRight}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-colors hover:border-accent/40 hover:text-accent disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-text-primary transition-[color,border-color,transform] duration-200 hover:border-accent/40 hover:text-accent active:scale-95 motion-reduce:active:scale-100 disabled:active:scale-100 disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

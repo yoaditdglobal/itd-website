@@ -32,7 +32,7 @@ export default function CaseStudyCards({
   if (studies.length === 0) return null;
 
   return (
-    <section className="bg-bg-secondary py-16 md:py-24">
+    <section className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (
           <ScrollReveal>
@@ -40,7 +40,19 @@ export default function CaseStudyCards({
           </ScrollReveal>
         )}
 
-        <CaseStudiesCarousel label={title}>
+        <CaseStudiesCarousel
+          label={title}
+          footer={
+            showFooter ? (
+              <Link
+                href="/resources/case-studies"
+                className="link-underline gap-1 text-sm text-accent font-medium"
+              >
+                Browse customer stories <ArrowRight className="w-4 h-4" aria-hidden />
+              </Link>
+            ) : undefined
+          }
+        >
           {studies.map((cs) => (
             <div
               key={cs.id}
@@ -51,16 +63,6 @@ export default function CaseStudyCards({
           ))}
         </CaseStudiesCarousel>
 
-        {showFooter && (
-          <div className="mt-10 text-center">
-            <Link
-              href="/resources/case-studies"
-              className="link-underline gap-1 text-sm text-accent font-medium"
-            >
-              Browse customer stories <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

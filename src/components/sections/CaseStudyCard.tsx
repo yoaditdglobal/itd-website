@@ -14,20 +14,20 @@ export default function CaseStudyCard({ cs }: { cs: CaseStudy }) {
     <Link
       href={`/resources/case-studies/${cs.slug}`}
       aria-label={`Read the ${cs.brandName} case study`}
-      className="card-hover group flex h-full flex-col rounded-xl border border-border bg-white p-6 hover:border-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      className="card-hover group flex h-full flex-col rounded-2xl border border-border bg-white p-6 lg:p-7 hover:border-accent/25 active:scale-[0.99] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
     >
-      <div className="mb-4 flex items-center gap-3">
-        <IntegrationLogo name={cs.brandName} logo={cs.logo} size="sm" />
+      <div className="mb-5 flex items-center gap-3">
+        <IntegrationLogo name={cs.brandName} logo={cs.logo} size="sm" className="ring-1 ring-black/5" />
         <span className="text-eyebrow text-text-tertiary bg-bg-secondary rounded-full px-2 py-0.5">
           {cs.industry}
         </span>
       </div>
       <div className="text-stat-lg text-accent mb-1">{cs.metric}</div>
       <p className="text-heading-sm text-text-primary mb-2">{cs.brandName}</p>
-      <p className="text-body-sm text-text-secondary mb-4 line-clamp-2">
+      <p className="text-body-sm text-text-secondary mb-6 line-clamp-2">
         {cs.oneLiner ?? cs.summary}
       </p>
-      <div className="mt-auto flex items-center gap-1 text-sm font-medium text-accent">
+      <div className="mt-auto flex items-center gap-1 border-t border-border/70 pt-4 text-sm font-medium text-accent">
         Read case study
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
       </div>

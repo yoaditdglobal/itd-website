@@ -102,7 +102,7 @@ export default function ImageCarousel({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden rounded-2xl shadow-xl ${className}`}
+      className={`relative overflow-hidden rounded-2xl shadow-[0_28px_56px_-28px_rgb(15_23_42/0.45),0_2px_6px_rgb(15_23_42/0.06)] ${className}`}
       style={aspect ? { aspectRatio: aspect } : undefined}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -137,7 +137,7 @@ export default function ImageCarousel({
             type="button"
             onClick={() => go(index - 1)}
             aria-label="Previous photo"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 text-text-primary shadow-[0_2px_8px_rgb(15_23_42/0.18)] backdrop-blur-sm hover:bg-white hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-[background-color,transform] duration-200 motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -145,13 +145,13 @@ export default function ImageCarousel({
             type="button"
             onClick={() => go(index + 1)}
             aria-label="Next photo"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 text-text-primary shadow-[0_2px_8px_rgb(15_23_42/0.18)] backdrop-blur-sm hover:bg-white hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-[background-color,transform] duration-200 motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Dots */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-4">
             {images.map((img, i) => (
               <button
                 key={img.src}
@@ -159,7 +159,8 @@ export default function ImageCarousel({
                 onClick={() => setIndex(i)}
                 aria-label={`Go to photo ${i + 1}`}
                 aria-current={i === index}
-                className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+                // after: = invisible hit area (24×28px) around the 8px dot; fills the gap.
+                className={`relative h-2 rounded-full transition-all after:absolute after:-inset-x-2 after:-inset-y-2.5 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                   i === index ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
                 }`}
               />
