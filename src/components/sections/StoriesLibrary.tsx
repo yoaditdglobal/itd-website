@@ -49,7 +49,7 @@ export default function StoriesLibrary({
   total: number;
 }) {
   return (
-    <section id="stories" className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24 scroll-mt-20">
+    <section id="stories" data-analytics-location="stories_library" className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ─── Single-select solution filter ─── */}
         <p className="text-eyebrow text-text-tertiary mb-3">Browse by solution</p>

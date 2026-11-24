@@ -49,7 +49,8 @@ export default function StoryCard({ story }: { story: CaseStudy }) {
           </div>
         </div>
       </div>
-      <p className="relative mb-2 text-stat-lg" style={{ color: t.accent }}>{story.headlineResult}</p>
+      {/* Headline stays ink: segment colour lives on the chips and hairline only. */}
+      <p className="relative mb-2 text-stat-lg text-text-primary">{story.headlineResult}</p>
       <p className="relative mb-5 flex-1 text-body-sm text-text-secondary">{story.oneLiner}</p>
       <span className="relative inline-flex items-center gap-1 border-t border-border/70 pt-4 text-sm font-medium text-text-primary">
         Read the story{" "}
