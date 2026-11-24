@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import Button from "@/components/ui/Button";
@@ -10,7 +11,11 @@ import FaqSection from "@/components/sections/FaqSection";
 import type { FaqItem } from "@/components/sections/FaqSection";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import type { Integration } from "@/lib/data";
-import { getIntegrationSlug } from "@/lib/data";
+import { getIntegrationSlug, integrations as ALL_INTEGRATIONS } from "@/lib/data";
+import CategoryOrbit from "@/components/sections/CategoryOrbit";
+import HeroBackdrop from "@/components/ui/HeroBackdrop";
+import IntegrationCard from "@/components/ui/IntegrationCard";
+import { categoryTheme } from "@/lib/page-themes";
 
 export interface UseCase {
   headline: string;
@@ -102,8 +107,8 @@ interface IntegrationCategoryPageProps {
   jsonLd?: Record<string, any>[];
 
   /**
-   * Optional visual rendered on the right side of the hero. When provided the
-   * hero switches to a two-column layout (text left, visual right).
+   * Optional visual on the right of the (dark) hero. Defaults to a
+   * CategoryOrbit generated from `integrations`.
    */
   heroVisual?: ReactNode;
 }
@@ -116,10 +121,20 @@ function integrationAnchor(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+/** Use-case names that differ from their data.ts entry name. */
+const NAME_ALIASES: Record<string, string> = { "DHL Express": "DHL" };
+
+/** Logo for a named integration or carrier mentioned in a use case. */
+function logoFor(name: string): string | undefined {
+  const target = NAME_ALIASES[name] ?? name;
+  return ALL_INTEGRATIONS.find((i) => i.name === target)?.logo;
+}
+
 export default function IntegrationCategoryPage({
   title,
   subtitle,
   integrations,
+  heroLabel,
   heroH1,
   heroSubhead,
   heroPrimaryCta,
@@ -140,6 +155,9 @@ export default function IntegrationCategoryPage({
 }: IntegrationCategoryPageProps) {
   const headline = heroH1 ?? title;
   const subhead = heroSubhead ?? subtitle;
+  const withLogos = integrations.filter((i) => i.logo);
+  // Category identity: ERP/WMS cobalt · eCommerce & Logistics teal · Marketplace amber.
+  const theme = categoryTheme(integrations[0]?.category ?? heroLabel);
 
   // Assemble JSON-LD payload: explicit schemas + auto-generated faq/breadcrumb.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,70 +169,85 @@ export default function IntegrationCategoryPage({
     <>
       {ldData.length > 0 && <JsonLd data={ldData} />}
 
-      {/* Hero */}
-      <section data-hero-tone={heroVisual ? "dark" : "light"} className={`bleed-nav ${heroVisual ? "bg-bg-dark" : "bg-bg-secondary"} py-16 md:py-24 overflow-hidden relative`}>
-        {heroVisual && (
-          <div className="absolute inset-0 pointer-events-none" aria-hidden>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-3xl" />
-          </div>
-        )}
+      {/* Hero — one immersive dark treatment for every category page. */}
+      <section data-hero-tone="dark" className="bleed-nav relative overflow-hidden bg-bg-dark py-16 md:py-24 lg:py-28">
+        <HeroBackdrop primary={theme.glow} secondary="#1d3fb8" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className={`flex ${heroVisual ? "flex-col lg:flex-row lg:items-center lg:justify-between gap-12" : "flex-col"}`}>
-              {/* Text */}
-              <div className="max-w-2xl">
-                <div className="mb-8">
-                  <Link
-                    href="/integrations/tech"
-                    className={`inline-flex items-center gap-1.5 text-sm transition-colors ${heroVisual ? "text-white/50 hover:text-white/80" : "text-text-secondary hover:text-accent"}`}
-                  >
-                    <span aria-hidden>←</span> Tech integrations
-                  </Link>
-                </div>
-                <h1 className={`text-display-xl ${heroVisual ? "text-white" : "text-text-primary"}`}>{headline}</h1>
-                <p className={`mt-4 text-lg ${heroVisual ? "text-white/70 font-medium" : "text-text-secondary"}`}>{subhead}</p>
-                {(heroPrimaryCta || heroSecondaryCta) && (
-                  <div className="mt-8 flex flex-wrap items-center gap-3">
-                    {heroPrimaryCta && (
-                      <Button href={heroPrimaryCta.href}>{heroPrimaryCta.label}</Button>
-                    )}
-                    {heroSecondaryCta && (
-                      <Button href={heroSecondaryCta.href} variant="secondary" surface={heroVisual ? "dark" : undefined}>{heroSecondaryCta.label}</Button>
-                    )}
-                  </div>
-                )}
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
+            <ScrollReveal className="max-w-2xl">
+              <div>
+                <Link
+                  href="/integrations/tech"
+                  className="group inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-white"
+                >
+                  <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+                  Tech integrations
+                </Link>
               </div>
-
-              {/* Optional visual (e.g. orbit) */}
-              {heroVisual && (
-                <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
-                  {heroVisual}
+              {heroLabel && (
+                <p className="mt-8 flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-eyebrow text-white/80 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: theme.glow }} aria-hidden />
+                  {heroLabel}
+                </p>
+              )}
+              <h1 className={`${heroLabel ? "mt-5" : "mt-8"} text-display-xl text-white`}>{headline}</h1>
+              <p className="mt-5 text-body-lg text-white/70">{subhead}</p>
+              {(heroPrimaryCta || heroSecondaryCta) && (
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  {heroPrimaryCta && (
+                    <Button href={heroPrimaryCta.href} surface="dark" size="lg">{heroPrimaryCta.label}</Button>
+                  )}
+                  {heroSecondaryCta && (
+                    <Button href={heroSecondaryCta.href} variant="secondary" surface="dark" size="lg">{heroSecondaryCta.label}</Button>
+                  )}
                 </div>
               )}
+              {withLogos.length > 0 && (
+                <div className="mt-10 flex items-center gap-4">
+                  {/* Spaced, not overlapped: overlapping clipped wide marks ("Ets", "eba"). */}
+                  <div className="flex gap-1.5">
+                    {withLogos.slice(0, 6).map((i) => (
+                      <span key={i.id} className="h-9 w-9 overflow-hidden rounded-xl bg-white ring-1 ring-white/20">
+                        <IntegrationLogo name={i.name} logo={i.logo} size="fill" />
+                      </span>
+                    ))}
+                  </div>
+                  <p className="whitespace-nowrap text-sm text-white/60">
+                    <span className="font-semibold text-white tabular-nums">{integrations.length}</span> integrations
+                  </p>
+                </div>
+              )}
+            </ScrollReveal>
+
+            <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
+              {heroVisual ?? <CategoryOrbit brands={integrations} />}
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      {/* Integration grid */}
+      {/* Integration catalogue */}
       {!hideGrid && (
-        <section id="catalogue" className="bg-bg-secondary py-16 md:py-24">
+        <section id="catalogue" className="section-glow section-glow--light bg-white py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Integrations</p>
+              <h2 className="mt-3 text-display-lg text-text-primary">
+                <span className="tabular-nums">{integrations.length}</span> {heroLabel ?? "tech"} integrations
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {integrations.map((integration) => (
-                  <Link
+                  <IntegrationCard
                     key={integration.id}
                     id={integrationAnchor(integration.name)}
                     href={`/integrations/tech/${getIntegrationSlug(integration)}`}
-                    className="group block card-hover bg-white rounded-xl border border-border p-5 hover:border-accent/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center h-full scroll-mt-24 transition-all"
-                  >
-                    <IntegrationLogo name={integration.name} logo={integration.logo} size="sm" className="mx-auto mb-3" />
-                    <p className="text-heading-sm text-text-primary">{integration.name}</p>
-                    {integration.description && (
-                      <p className="text-caption text-text-tertiary mt-1">{integration.description}</p>
-                    )}
-                  </Link>
+                    name={integration.name}
+                    logo={integration.logo}
+                    description={integration.description}
+                    theme={theme}
+                  />
                 ))}
               </div>
             </ScrollReveal>
@@ -230,33 +263,43 @@ export default function IntegrationCategoryPage({
 
       {/* Common use cases */}
       {useCases && useCases.length > 0 && (
-        <section className="bg-white py-16 md:py-24">
+        <section className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-3">{useCasesHeading}</h2>
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Use cases</p>
+              <h2 className="mt-3 text-display-lg text-text-primary">{useCasesHeading}</h2>
               {useCasesIntro && (
-                <p className="text-text-secondary max-w-2xl mb-10">{useCasesIntro}</p>
+                <p className="mt-4 max-w-2xl text-body-lg text-text-secondary">{useCasesIntro}</p>
               )}
             </ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
               {useCases.map((uc, i) => (
-                <ScrollReveal key={uc.headline} delay={i * 0.05}>
-                  <div className="bg-bg-secondary rounded-2xl border border-border p-6 h-full flex flex-col">
-                    <h3 className="text-heading-md text-text-primary mb-3">{uc.headline}</h3>
-                    <p className="text-body-sm text-text-secondary mb-5 flex-1">{uc.description}</p>
+                <ScrollReveal key={uc.headline} delay={i * 0.05} className="h-full">
+                  <article className="card-hover flex h-full flex-col rounded-2xl border border-border bg-white p-6 lg:p-7 hover:border-accent/25">
+                    <span className="text-sm font-semibold tabular-nums" style={{ color: theme.accent }}>{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="mt-3 text-heading-md text-text-primary">{uc.headline}</h3>
+                    <p className="mt-3 flex-1 text-body-sm text-text-secondary">{uc.description}</p>
                     {uc.namedIntegrations.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {uc.namedIntegrations.map((name) => (
-                          <span
-                            key={name}
-                            className="inline-block text-[11px] font-medium uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded-full"
-                          >
-                            {name}
-                          </span>
-                        ))}
-                      </div>
+                      <ul className="mt-6 flex flex-wrap gap-2 border-t border-border/70 pt-5" aria-label="Integrations used">
+                        {uc.namedIntegrations.map((name) => {
+                          const logo = logoFor(name);
+                          return (
+                            <li
+                              key={name}
+                              className={`inline-flex items-center gap-2 rounded-full border border-border bg-white py-1 pr-3 text-xs font-medium text-text-primary ${logo ? "pl-1" : "pl-3"}`}
+                            >
+                              {logo && (
+                                <span className="h-6 w-6 overflow-hidden rounded-full ring-1 ring-black/5">
+                                  <IntegrationLogo name={name} logo={logo} size="fill" />
+                                </span>
+                              )}
+                              {name}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     )}
-                  </div>
+                  </article>
                 </ScrollReveal>
               ))}
             </div>
@@ -264,29 +307,41 @@ export default function IntegrationCategoryPage({
         </section>
       )}
 
-      {/* How the integration works */}
+      {/* How the integration works — connected timeline */}
       {howItWorks && howItWorks.length > 0 && (
-        <section className="bg-bg-secondary py-16 md:py-24">
+        <section className="section-glow section-glow--light bg-white py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-display-lg text-text-primary mb-3">{howItWorksHeading}</h2>
+              <p className="text-eyebrow" style={{ color: theme.accent }}>Process</p>
+              <h2 className="mt-3 text-display-lg text-text-primary">{howItWorksHeading}</h2>
               {howItWorksIntro && (
-                <p className="text-text-secondary max-w-2xl mb-10 whitespace-pre-line">{howItWorksIntro}</p>
+                <p className="mt-4 max-w-2xl text-body-lg text-text-secondary whitespace-pre-line">{howItWorksIntro}</p>
               )}
             </ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-6">
+            <ol className="relative mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+              {/* The connecting line: vertical on mobile, horizontal on md+. */}
+              <span
+                aria-hidden
+                className="absolute bottom-6 left-5 top-6 w-px md:bottom-auto md:left-6 md:right-0 md:top-5 md:h-px md:w-auto md:[--tl-dir:90deg]"
+                style={{ background: `linear-gradient(var(--tl-dir, 180deg), ${theme.accent}80, ${theme.accent}26, transparent)` }}
+              />
               {howItWorks.map((s, i) => (
-                <ScrollReveal key={s.step} delay={i * 0.05}>
-                  <div className="bg-white rounded-2xl border border-border p-6 h-full">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent-light text-accent text-heading-sm mb-4">
-                      {s.step}
-                    </span>
-                    <h3 className="text-heading-sm text-text-primary mb-2">{s.title}</h3>
-                    <p className="text-body-sm text-text-secondary whitespace-pre-line">{s.description}</p>
-                  </div>
-                </ScrollReveal>
+                <li key={s.step} className="relative pl-16 md:pl-0">
+                  {/* Positioned against the <li>, NOT inside ScrollReveal: its
+                      transform would become the containing block on mobile. */}
+                  <span
+                    className="absolute left-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-heading-sm shadow-[0_4px_14px_-4px_rgb(15_23_42/0.25)] ring-1 md:relative"
+                    style={{ color: theme.accent, ["--tw-ring-color" as string]: `${theme.accent}4d` }}
+                  >
+                    {s.step}
+                  </span>
+                  <ScrollReveal delay={i * 0.08}>
+                    <h3 className="pt-1.5 text-heading-md text-text-primary md:mt-6 md:pt-0">{s.title}</h3>
+                    <p className="mt-2 text-body-sm text-text-secondary whitespace-pre-line">{s.description}</p>
+                  </ScrollReveal>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
       )}
@@ -301,15 +356,15 @@ export default function IntegrationCategoryPage({
 
       {/* Closing CTA — custom override or default */}
       {closingCta ? (
-        <section className="bg-bg-dark py-16 md:py-20 text-center">
+        <section className="cta-glow bg-bg-dark py-16 md:py-24 text-center">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="text-display-lg text-white mb-3">{closingCta.headline}</h2>
-              <p className="text-body-lg text-white/80 mb-8">{closingCta.subhead}</p>
+              <h2 className="text-display-lg text-white mb-4">{closingCta.headline}</h2>
+              <p className="text-body-lg text-white/75 mb-8">{closingCta.subhead}</p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <Button href={closingCta.primary.href} surface="dark">{closingCta.primary.label}</Button>
+                <Button href={closingCta.primary.href} surface="dark" size="lg">{closingCta.primary.label}</Button>
                 {closingCta.secondary && (
-                  <Button href={closingCta.secondary.href} variant="secondary" surface="dark">
+                  <Button href={closingCta.secondary.href} variant="secondary" surface="dark" size="lg">
                     {closingCta.secondary.label}
                   </Button>
                 )}

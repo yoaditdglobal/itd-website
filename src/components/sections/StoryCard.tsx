@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import IntegrationLogo from "@/components/ui/IntegrationLogo";
 import type { CaseStudy } from "@/lib/data";
+import { DEFAULT_THEME, SEGMENT_THEMES } from "@/lib/page-themes";
 
 /**
  * Shared customer-story card. Used by the Customer Stories library index
@@ -12,33 +13,52 @@ import type { CaseStudy } from "@/lib/data";
  * accessible name is specific rather than a generic "Read more".
  */
 export default function StoryCard({ story }: { story: CaseStudy }) {
+  // Card identity follows the story's primary segment (eCommerce teal, 3PL
+  // cobalt, Import amber, Export violet).
+  const primary = story.primarySegment ?? story.segments?.[0];
+  const t = (primary && SEGMENT_THEMES[primary]) || DEFAULT_THEME;
   return (
     <Link
       href={`/resources/case-studies/${story.slug}`}
       aria-label={`Read the ${story.brandName} story`}
-      className="group block h-full bg-white rounded-xl border border-border p-6 hover:shadow-lg hover:border-accent/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+      className="group card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <IntegrationLogo name={story.brandName} logo={story.logo} size="sm" />
+      <span aria-hidden className="absolute inset-x-0 top-0 h-[3px]" style={{ background: `linear-gradient(90deg, ${t.accent}, ${t.glow})` }} />
+      <span
+        aria-hidden
+        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none"
+        style={{ background: `radial-gradient(120% 70% at 100% 0%, ${t.soft}, transparent 70%)` }}
+      />
+      <div className="relative mb-5 flex items-center gap-3">
+        <IntegrationLogo name={story.brandName} logo={story.logo} size="sm" className="ring-1 ring-black/5" />
         <div className="min-w-0">
           <p className="text-label text-text-primary">{story.brandName}</p>
           <div className="mt-1 flex flex-wrap gap-1.5">
-            {(story.segments ?? []).map((seg) => (
-              <span
-                key={seg}
-                className="inline-flex items-center text-eyebrow text-accent bg-accent-light/60 px-2 py-0.5 rounded-full"
-              >
-                {seg}
-              </span>
-            ))}
+            {(story.segments ?? []).map((seg) => {
+              const st = SEGMENT_THEMES[seg] ?? DEFAULT_THEME;
+              return (
+                <span
+                  key={seg}
+                  className="inline-flex items-center rounded-full px-2 py-0.5 text-eyebrow"
+                  style={{ backgroundColor: st.soft, color: st.accent }}
+                >
+                  {seg}
+                </span>
+              );
+            })}
           </div>
         </div>
       </div>
-      <p className="text-stat-lg text-accent mb-2">{story.headlineResult}</p>
-      <p className="text-body-sm text-text-secondary mb-4">{story.oneLiner}</p>
-      <span className="inline-flex items-center gap-1 text-sm text-accent font-medium">
+      {/* Headline stays ink: segment colour lives on the chips and hairline only. */}
+      <p className="relative mb-2 text-stat-lg text-text-primary">{story.headlineResult}</p>
+      <p className="relative mb-5 flex-1 text-body-sm text-text-secondary">{story.oneLiner}</p>
+      <span className="relative inline-flex items-center gap-1 border-t border-border/70 pt-4 text-sm font-medium text-text-primary">
         Read the story{" "}
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform motion-reduce:group-hover:translate-x-0" />
+        <ArrowRight
+          className="h-4 w-4 transition-transform group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+          style={{ color: t.accent }}
+          aria-hidden
+        />
       </span>
     </Link>
   );
