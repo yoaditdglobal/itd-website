@@ -417,6 +417,78 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .animate-ticker { animation: none; }
 }
 
+/* ─── Section glow — soft, scroll-reactive gradient backgrounds ───────────
+   Two blurred radial layers in the section's OWN tone (white or cream, with
+   only a whisper of brand teal) drift in opposite directions as the section
+   scrolls through the viewport. Pure CSS scroll-driven animation (compositor
+   thread, no JS). Unsupported browsers get the static gradient; reduced
+   motion keeps it still. Layers fade out before the section's top/bottom
+   edges, so the seam to neighbouring sections stays the exact base colour.
+   Usage: add `section-glow section-glow--light` (white) or
+   `section-glow section-glow--warm` (cream, bg-bg-secondary) to a <section>. */
+.section-glow {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  view-timeline: --section-glow block;
+}
+.section-glow::before,
+.section-glow::after {
+  content: "";
+  position: absolute;
+  /* Same height as the section (wider for horizontal drift), so the mask
+     below is anchored to the section's own edges. Vertical motion stays
+     under the 10% clear band → the top/bottom seams are always pure base. */
+  inset: 0 -15%;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+  mask-image: linear-gradient(to bottom, transparent 10%, #000 32%, #000 68%, transparent 90%);
+}
+.section-glow--light::before {
+  background:
+    radial-gradient(38% 60% at 20% 45%, rgb(244 240 232 / 0.95), transparent 70%),
+    radial-gradient(32% 55% at 82% 58%, rgb(0 152 160 / 0.06), transparent 70%);
+}
+.section-glow--light::after {
+  background:
+    radial-gradient(30% 50% at 72% 40%, rgb(244 240 232 / 0.75), transparent 70%),
+    radial-gradient(26% 45% at 38% 62%, rgb(236 229 216 / 0.55), transparent 70%);
+}
+.section-glow--warm::before {
+  background:
+    radial-gradient(40% 60% at 22% 42%, rgb(252 250 246 / 0.95), transparent 70%),
+    radial-gradient(34% 55% at 80% 60%, rgb(232 222 204 / 0.7), transparent 70%);
+}
+.section-glow--warm::after {
+  background:
+    radial-gradient(30% 48% at 75% 40%, rgb(0 152 160 / 0.05), transparent 70%),
+    radial-gradient(32% 50% at 32% 62%, rgb(252 250 246 / 0.85), transparent 70%);
+}
+@keyframes section-glow-a {
+  from { transform: translate3d(-7%, 3%, 0) scale(1); }
+  to   { transform: translate3d(7%, -3%, 0) scale(1.05); }
+}
+@keyframes section-glow-b {
+  from { transform: translate3d(7%, -3%, 0) rotate(-1.5deg); }
+  to   { transform: translate3d(-7%, 3%, 0) rotate(1.5deg); }
+}
+@supports (animation-timeline: view()) {
+  .section-glow::before,
+  .section-glow::after {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --section-glow;
+    animation-range: entry 0% exit 100%;
+  }
+  .section-glow::before { animation-name: section-glow-a; }
+  .section-glow::after { animation-name: section-glow-b; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-glow::before,
+  .section-glow::after { animation: none; }
+}
+
 /* Homepage reviews marquee (ReviewsCarousel) — reuses the ticker keyframe.
    Speed easing on hover/focus/pause is done in JS via playbackRate, so no
    animation-play-state here (it would fight the tween). */

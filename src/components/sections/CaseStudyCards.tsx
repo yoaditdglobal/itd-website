@@ -32,7 +32,7 @@ export default function CaseStudyCards({
   if (studies.length === 0) return null;
 
   return (
-    <section className="bg-bg-secondary py-16 md:py-24">
+    <section className="section-glow section-glow--warm bg-bg-secondary py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showHeader && (
           <ScrollReveal>

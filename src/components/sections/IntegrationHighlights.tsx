@@ -41,7 +41,7 @@ export default function IntegrationHighlights() {
   const [tab, setTab] = useState<"tech" | "carriers">("tech");
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="section-glow section-glow--light bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <SectionLabel
