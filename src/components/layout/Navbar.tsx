@@ -23,6 +23,7 @@ interface NavTriggerProps {
   active: boolean;
   onToggle: () => void;
   onHoverOpen: () => void;
+  onHoverLeave: () => void;
   onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => void;
   setTriggerRef: (el: HTMLButtonElement | null) => void;
 }
@@ -32,7 +33,7 @@ interface NavTriggerProps {
  * doesn't double-fire) and toggles on click/Enter/Space. All four triggers
  * control the ONE shared panel (`MegaPanel`) mounted at the end of the nav.
  */
-function NavTrigger({ id, label, open, active, onToggle, onHoverOpen, onKeyDown, setTriggerRef }: NavTriggerProps) {
+function NavTrigger({ id, label, open, active, onToggle, onHoverOpen, onHoverLeave, onKeyDown, setTriggerRef }: NavTriggerProps) {
   return (
     <button
       ref={setTriggerRef}
@@ -46,12 +47,15 @@ function NavTrigger({ id, label, open, active, onToggle, onHoverOpen, onKeyDown,
       onPointerEnter={(e) => {
         if (e.pointerType === "mouse") onHoverOpen();
       }}
-      className={`font-display relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-        active ? "text-white" : "text-white/70 hover:text-white"
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") onHoverLeave();
+      }}
+      className={`font-display relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+        active || open ? "text-white" : "text-white/70 hover:text-white"
       }`}
     >
       {label}
-      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? "rotate-180" : ""}`} />
       {active && (
         <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" aria-hidden />
       )}
@@ -77,6 +81,15 @@ export default function Navbar() {
   // after a hover-open is absorbed (mouse users click the already-open menu
   // expecting it to stay open — closing it reads as "the button is broken").
   const hoverOpenedRef = useRef(false);
+  // Hover forgiveness: a brief slip outside the nav doesn't slam the panel
+  // shut, and sweeping across a neighbouring trigger on the way down into the
+  // panel doesn't swap its content.
+  const closeTimerRef = useRef<number | null>(null);
+  const switchTimerRef = useRef<number | null>(null);
+  const triggerRowRef = useRef<HTMLDivElement | null>(null);
+  // Sliding highlight behind the open trigger.
+  const pillRef = useRef<HTMLSpanElement | null>(null);
+  const prevOpenRef = useRef<NavMenuId | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -152,7 +165,29 @@ export default function Navbar() {
     setMobileAccordion(mobileAccordion === section ? null : section);
   };
 
+  const clearTimers = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    if (switchTimerRef.current) window.clearTimeout(switchTimerRef.current);
+    closeTimerRef.current = null;
+    switchTimerRef.current = null;
+  };
+  useEffect(() => clearTimers, []);
+
+  useIsoLayoutEffect(() => {
+    // Positioned imperatively (no re-render). Slide only when moving between
+    // triggers; a fresh open fades in place.
+    const el = openDropdown ? triggerRefs.current[openDropdown] : null;
+    const p = pillRef.current;
+    if (el && p) {
+      p.toggleAttribute("data-slide", prevOpenRef.current !== null);
+      p.style.transform = `translateX(${el.offsetLeft}px)`;
+      p.style.width = `${el.offsetWidth}px`;
+    }
+    prevOpenRef.current = openDropdown;
+  }, [openDropdown]);
+
   const openMenu = (id: NavMenuId, viaHover: boolean) => {
+    clearTimers();
     // Side effects stay outside state updaters — React double-invokes
     // updaters in dev, which would flip the ref twice and break the absorb.
     hoverOpenedRef.current = viaHover;
@@ -160,9 +195,19 @@ export default function Navbar() {
     setRenderedMenuId(id);
     setOpenDropdown(id);
   };
-  const closeMenu = () => setOpenDropdown(null);
+  const closeMenu = () => {
+    clearTimers();
+    setOpenDropdown(null);
+  };
   const closeOnMouse = (e: React.PointerEvent) => {
-    if (e.pointerType === "mouse") closeMenu();
+    if (e.pointerType !== "mouse" || !openDropdown) return;
+    if (switchTimerRef.current) window.clearTimeout(switchTimerRef.current);
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = window.setTimeout(closeMenu, 140);
+  };
+  const cancelClose = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = null;
   };
 
   const triggerProps = (id: NavMenuId) => ({
@@ -179,7 +224,21 @@ export default function Navbar() {
         openMenu(id, false);
       }
     },
-    onHoverOpen: () => openMenu(id, true),
+    onHoverOpen: () => {
+      cancelClose();
+      if (openDropdown && openDropdown !== id) {
+        // Already open on another menu: wait a beat so a diagonal sweep
+        // towards the panel doesn't flip it.
+        if (switchTimerRef.current) window.clearTimeout(switchTimerRef.current);
+        switchTimerRef.current = window.setTimeout(() => openMenu(id, true), 90);
+      } else if (openDropdown !== id) {
+        openMenu(id, true);
+      }
+    },
+    onHoverLeave: () => {
+      if (switchTimerRef.current) window.clearTimeout(switchTimerRef.current);
+      switchTimerRef.current = null;
+    },
     onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
       // Tab / ArrowDown from an open trigger jumps into the panel (it sits at
       // the end of the nav in DOM order, after the other triggers and CTAs).
@@ -235,6 +294,7 @@ export default function Navbar() {
         ref={navRef}
         data-nav-theme={darkInk ? "light" : "dark"}
         onPointerLeave={closeOnMouse}
+        onPointerEnter={cancelClose}
         className={`relative flex w-full items-center justify-between gap-3 rounded-full px-2 py-2.5 transition-shadow duration-300 sm:px-5 ${
           transparent
             ? "border border-transparent"
@@ -255,7 +315,15 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-1 ml-8 flex-1 min-w-0">
+        <div ref={triggerRowRef} className="relative hidden lg:flex items-center gap-1 ml-8 flex-1 min-w-0">
+          <span
+            ref={pillRef}
+            aria-hidden
+            data-visible={openDropdown ? true : undefined}
+            className={`nav-trigger-pill pointer-events-none absolute left-0 top-1/2 h-9 -translate-y-1/2 rounded-full ${
+              darkInk ? "bg-black/[0.06]" : "bg-white/10"
+            }`}
+          />
           {NAV_MENUS.map((menu) => (
             <div key={menu.id} className="contents">
               {menu.id === "integrations" && (

@@ -427,22 +427,28 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
 .nav-dropdown {
   visibility: hidden;
   opacity: 0;
-  translate: 0 -4px;
-  scale: 0.96;
+  translate: 0 -6px;
+  scale: 0.98;
   pointer-events: none;
   transform-origin: top center;
   transition:
-    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    translate 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    scale 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 180ms;
+    opacity 160ms cubic-bezier(0.4, 0, 1, 1),
+    translate 160ms cubic-bezier(0.4, 0, 1, 1),
+    scale 160ms cubic-bezier(0.4, 0, 1, 1),
+    visibility 160ms;
 }
+/* Opening is a touch slower and eases out; closing (above) is quicker. */
 .nav-dropdown[data-open] {
   visibility: visible;
   opacity: 1;
   translate: 0 0;
   scale: 1;
   pointer-events: auto;
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    translate 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    scale 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
 }
 
 /* Mega panel: content swap when hovering from one trigger to another while
@@ -459,11 +465,38 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   from { translate: 0 4px; }
   to   { translate: 0 0; }
 }
-.nav-panel-swap { animation: nav-panel-swap 150ms cubic-bezier(0.16, 1, 0.3, 1) both; }
-.nav-panel-rise { animation: nav-panel-rise 150ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.nav-panel-swap { animation: nav-panel-swap 220ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.nav-panel-rise { animation: nav-panel-rise 260ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Panel height glides between menus / rail groups (armed once open settles). */
+.nav-panel-size[data-settled] { transition: height 300ms cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Items fade + rise in, softly staggered by --i (set inline, capped). */
+@keyframes nav-item-in {
+  from { opacity: 0; translate: 0 6px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+.nav-item-in {
+  animation: nav-item-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 30ms + 40ms);
+}
+.nav-item-link { transition: background-color 200ms ease; }
+.nav-logo-tile { transition: translate 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease; }
+.nav-logo-tile:hover { translate: 0 -2px; box-shadow: 0 4px 10px -4px rgb(15 23 42 / 0.18); }
+.nav-footer-link svg { transition: translate 200ms cubic-bezier(0.16, 1, 0.3, 1); }
+.nav-footer-link:hover svg { translate: 3px 0; }
 
 /* Mega panel rail cards (role=tab): selected/unselected crossfade. */
-.nav-rail-tab { transition: background-color 150ms, border-color 150ms, box-shadow 150ms, opacity 150ms; }
+.nav-rail-tab { transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease; }
+.nav-rail-icon { transition: scale 300ms cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Sliding highlight behind the open nav trigger. Fades in place on first
+   open; slides between triggers while the panel stays open. */
+.nav-trigger-pill { opacity: 0; transition: opacity 200ms ease; }
+.nav-trigger-pill[data-visible] { opacity: 1; }
+.nav-trigger-pill[data-slide] {
+  transition: opacity 200ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1), width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 /* Peak promo CTA: the report's yellow, local to the navy promo card. Unlayered,
    so it beats Button's bg-accent utility (Tailwind v4 utilities are layered). */
@@ -489,7 +522,16 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
     transition: none;
   }
   .nav-panel-swap,
-  .nav-panel-rise { animation: none; }
+  .nav-panel-rise,
+  .nav-item-in { animation: none; }
+  .nav-panel-size[data-settled],
+  .nav-trigger-pill,
+  .nav-trigger-pill[data-slide],
+  .nav-logo-tile,
+  .nav-footer-link svg,
+  .nav-rail-icon { transition: none; }
+  .nav-logo-tile:hover,
+  .nav-footer-link:hover svg { translate: none; }
 }
 
 /* Hide the scrollbar on carousel tracks (they scroll by snap/controls). */

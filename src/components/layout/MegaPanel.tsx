@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -43,6 +43,30 @@ export default function MegaPanel({
   onBlurOutside,
 }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  // The panel glides between content heights (menu or rail-group switch)
+  // instead of snapping. Measured from the inner body; the height transition
+  // is only armed once the panel has finished opening ("settled"), so a fresh
+  // open never animates from a stale height.
+  const [bodyHeight, setBodyHeight] = useState<number | null>(null);
+  const [settled, setSettled] = useState(false);
+
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => setBodyHeight(el.offsetHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const t = window.setTimeout(() => setSettled(true), 240);
+    return () => {
+      window.clearTimeout(t);
+      setSettled(false);
+    };
+  }, [open]);
 
   return (
     <div
@@ -75,8 +99,14 @@ export default function MegaPanel({
       }}
       onBlur={(e) => onBlurOutside(e.relatedTarget as Element | null)}
     >
-      <div className="rounded-[inherit] overflow-hidden max-h-[calc(100vh-var(--nav-h)-1.5rem)] overflow-y-auto">
-        {menu && <MegaPanelBody key={`${menu.id}-${openCount}`} menu={menu} />}
+      <div
+        className="nav-panel-size rounded-[inherit] overflow-hidden max-h-[calc(100vh-var(--nav-h)-1.5rem)] overflow-y-auto"
+        data-settled={(open && settled) || undefined}
+        style={bodyHeight ? { height: bodyHeight } : undefined}
+      >
+        <div ref={bodyRef}>
+          {menu && <MegaPanelBody key={`${menu.id}-${openCount}`} menu={menu} />}
+        </div>
       </div>
     </div>
   );
@@ -109,6 +139,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
       )}
 
       <div
+        key={activeGroup?.id ?? "all"}
         className="nav-panel-rise flex-1 min-w-0 p-6"
         {...(rail && activeGroup
           ? { role: "tabpanel", id: gridId, "aria-labelledby": tabId(activeGroup) }
@@ -125,11 +156,13 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
               : `grid gap-x-6 gap-y-4 ${columns === 3 ? "grid-cols-3" : "grid-cols-2"}`
           }
         >
-          {items.map((item) => {
+          {items.map((item, i) => {
             const Icon = item.icon;
+            // Soft staggered entrance; capped so long lists (carriers) don't drag.
+            const stagger = { "--i": Math.min(i, 8) } as CSSProperties;
             if (compact) {
               return (
-                <li key={item.href}>
+                <li key={item.href} className="nav-item-in" style={stagger}>
                   <Link
                     href={item.href}
                     className="group -mx-2 flex min-h-[40px] items-center gap-2.5 rounded-lg px-2 hover:bg-bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
@@ -143,7 +176,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
               );
             }
             return (
-              <li key={item.href}>
+              <li key={item.href} className="nav-item-in" style={stagger}>
                 {!rail && item.image ? (
                   <Link
                     href={item.href}
@@ -171,7 +204,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                   href={item.href}
                   className={
                     rail
-                      ? "group block rounded-lg -m-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      ? "nav-item-link group block rounded-xl -m-3 p-3 hover:bg-bg-secondary/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                       : "nav-rail-tab group flex aspect-square flex-col items-center justify-center gap-3 rounded-xl border border-border bg-white p-4 text-center hover:border-accent/40 hover:bg-accent-light/50 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   }
                 >
@@ -192,7 +225,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
                   {item.logos ? (
                     <span className="mt-2.5 flex flex-wrap items-center gap-2">
                       {item.logos.map((l) => (
-                        <span key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
+                        <span key={l.name} title={l.name} className="nav-logo-tile rounded-md bg-white p-1 ring-1 ring-border">
                           <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
                         </span>
                       ))}
@@ -213,10 +246,10 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
           })}
         </ul>
         {menu.proofLogos ? (
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
+          <div className="nav-item-in mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5" style={{ "--i": Math.min(items.length, 8) } as CSSProperties}>
             <div className="flex flex-wrap items-center gap-2">
               {menu.proofLogos.map((l) => (
-                <div key={l.name} title={l.name} className="rounded-md bg-white p-1 ring-1 ring-border">
+                <div key={l.name} title={l.name} className="nav-logo-tile rounded-md bg-white p-1 ring-1 ring-border">
                   <IntegrationLogo name={l.name} logo={l.logo} size="sm" />
                 </div>
               ))}
@@ -224,7 +257,7 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
             {footerLink && (
               <Link
                 href={footerLink.href}
-                className="link-underline shrink-0 text-sm font-medium text-accent gap-1"
+                className="nav-footer-link link-underline shrink-0 text-sm font-medium text-accent gap-1"
               >
                 {footerLink.label} <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
@@ -234,7 +267,8 @@ function MegaPanelBody({ menu }: { menu: NavMenu }) {
           footerLink && (
             <Link
               href={footerLink.href}
-              className="link-underline mt-6 text-sm font-medium text-accent gap-1"
+              className="nav-item-in nav-footer-link link-underline mt-6 text-sm font-medium text-accent gap-1"
+              style={{ "--i": Math.min(items.length, 8) } as CSSProperties}
             >
               {footerLink.label} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -306,7 +340,7 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
               className={`nav-rail-tab flex w-full items-center gap-3 rounded-xl border p-3 xl:p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 selected
                   ? "border-border bg-white shadow-sm text-text-primary"
-                  : "border-transparent text-text-tertiary opacity-70 hover:opacity-100"
+                  : "border-transparent text-text-tertiary opacity-70 hover:opacity-100 hover:bg-bg-secondary/60"
               }`}
               onPointerEnter={(e) => {
                 if (e.pointerType !== "mouse") return;
@@ -321,7 +355,7 @@ function NavRail({ eyebrow, groups, activeId, onChange, tabId, panelId }: RailPr
               }}
             >
               {/* Logo teal (the button fill), not the cobalt link accent — user-directed. */}
-              <Icon className="h-9 w-9 shrink-0 text-button" strokeWidth={1.5} aria-hidden />
+              <Icon className={`nav-rail-icon h-9 w-9 shrink-0 text-button ${selected ? "scale-100" : "scale-95"}`} strokeWidth={1.5} aria-hidden />
               <span className={`min-w-0 block text-heading-sm ${selected ? "text-text-primary" : ""}`}>
                 {g.title}
               </span>
