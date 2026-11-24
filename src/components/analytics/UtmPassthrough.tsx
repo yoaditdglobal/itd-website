@@ -10,7 +10,12 @@ import { useEffect } from "react";
  * what is on its own URL. So: the first page of a visit saves its tags in
  * sessionStorage, and any link to the Rate Checker (the Lovable host, or the
  * /rate-checker redirect, which keeps its query string) gets them appended at
- * click time. Tags already on a link win; a visit with no tags adds nothing.
+ * click time. Tags already on a link win.
+ *
+ * A visit with no campaign tags tags the link as the site's own: utm_source
+ * itdglobal.com, utm_medium website and utm_content the link's label ("get-quote"),
+ * so the Rate Checker can tell a visitor sent by the website's Get Quote from one
+ * who arrived with no tag at all. No utm_campaign: website traffic is no campaign.
  *
  * It also appends `wv`, the beacon's visit reference (`<day>.<visit id>` from
  * POST /api/v/ref), so the Rate Checker's records join the site visit. The
@@ -35,6 +40,14 @@ const KEYS = [
 ] as const;
 const RATE_CHECKER_HOSTS = ["itdglobal-ratechecker.lovable.app"];
 const VISIT_PARAM = "wv";
+const SITE_SOURCE = "itdglobal.com";
+const SITE_MEDIUM = "website";
+
+/** The link's label as a utm_content value: "Get Quote" -> "get-quote". */
+function linkLabel(anchor: HTMLAnchorElement): string {
+  const text = (anchor.getAttribute("aria-label") || anchor.textContent || "").trim().toLowerCase();
+  return text.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "link";
+}
 const VISIT_REF_RE = /^\d{4}-\d{2}-\d{2}\.[0-9a-f]{16}$/;
 
 // The visit reference, fetched at most once per page load.
@@ -111,12 +124,20 @@ function tagAnchor(anchor: HTMLAnchorElement) {
     url.searchParams.set(VISIT_PARAM, visitRef);
     changed = true;
   }
+  const campaignTags = KEYS.some((k) => tags[k]);
   for (const k of KEYS) {
     const v = tags[k];
     if (v && !url.searchParams.has(k)) {
       url.searchParams.set(k, v);
       changed = true;
     }
+  }
+  // No campaign brought this visit: the click is the website's own.
+  if (!campaignTags && !url.searchParams.has("utm_source")) {
+    url.searchParams.set("utm_source", SITE_SOURCE);
+    url.searchParams.set("utm_medium", SITE_MEDIUM);
+    url.searchParams.set("utm_content", linkLabel(anchor));
+    changed = true;
   }
   if (changed) anchor.setAttribute("href", url.toString());
 }
