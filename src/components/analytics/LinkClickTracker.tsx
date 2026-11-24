@@ -28,7 +28,8 @@ import { track } from "@/lib/analytics";
 /** Destinations that represent a lead intent, used to tag the click. */
 const LEAD_PATHS = ["/contact"];
 
-function resolveLocation(anchor: HTMLAnchorElement): string {
+/** Where a link sits: `data-analytics-location`, else nav / footer / body. Also used by Beacon. */
+export function resolveLocation(anchor: HTMLAnchorElement): string {
   const named = anchor.closest<HTMLElement>("[data-analytics-location]");
   if (named?.dataset.analyticsLocation) return named.dataset.analyticsLocation;
   if (anchor.closest("nav, header")) return "nav";
@@ -36,7 +37,8 @@ function resolveLocation(anchor: HTMLAnchorElement): string {
   return "body";
 }
 
-function resolveUrl(anchor: HTMLAnchorElement): string | null {
+/** Internal path + query, or host + path for external links; null for #, mailto, tel. Also used by Beacon. */
+export function resolveUrl(anchor: HTMLAnchorElement): string | null {
   const raw = anchor.getAttribute("href");
   if (!raw) return null;
   // Ignore in-page anchors, mailto and tel — they are not navigation.

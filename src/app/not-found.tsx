@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NotFoundBeacon from "@/components/analytics/NotFoundBeacon";
 
 /**
  * Branded 404 for any unmatched URL (including dynamic [slug] routes with
@@ -8,6 +9,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="bg-bg-secondary py-24 md:py-32">
+      <NotFoundBeacon />
       <div className="mx-auto max-w-xl px-4 text-center sm:px-6 lg:px-8">
         <p className="text-eyebrow text-accent mb-3">404</p>
         <h1 className="text-display-md text-text-primary">

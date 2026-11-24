@@ -4,6 +4,7 @@ import { rateLimit, clientIp } from "@/lib/server/rate-limit";
 import { getNotifyEmails, getPeakSheetConfig, getPeakWebhookUrl } from "@/lib/server/env";
 import { emailTeam, emailSubmitter } from "@/lib/server/leads";
 import { peakReportAckHtml, peakReportAckText } from "@/lib/server/email-templates";
+import { recordServerLead } from "@/lib/server/beacon-lead";
 import { postLeadToWebhook } from "@/lib/server/webhook";
 import type { MailAttachment } from "@/lib/server/email";
 import { PEAK } from "@/lib/peak-config";
@@ -114,6 +115,9 @@ export async function POST(request: Request) {
   if (d.website && d.website.length > 0) {
     return NextResponse.json({ success: true, reportUrl }, { status: 201 });
   }
+
+  // Accepted: every path below answers success. Link it to the visit (best effort).
+  recordServerLead(request, "peak_report", d.email);
 
   const optIn = d.marketingOptIn ? "Yes" : "No";
   const submittedAt = new Date().toISOString();

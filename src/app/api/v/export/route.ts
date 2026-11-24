@@ -10,7 +10,7 @@ import {
   safeEqual,
   utcDay,
   withDeadline,
-  type BeaconEvent,
+  type StoredEvent,
 } from "@/lib/beacon";
 
 /**
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
           store.get(`day/${day}`, { type: "json" }),
           EXPORT_MS,
         )) as {
-          events?: BeaconEvent[];
+          events?: StoredEvent[];
         } | null);
     if (stored?.events) return json({ day, complete, events: stored.events });
 
@@ -97,7 +97,7 @@ export async function GET(request: Request) {
         store.get(`day/${day}`, { type: "json" }),
         EXPORT_MS,
       )) as {
-        events?: BeaconEvent[];
+        events?: StoredEvent[];
       } | null;
       return json({ day, complete, events: won?.events ?? events });
     }
