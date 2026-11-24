@@ -40,7 +40,19 @@ export default function CaseStudyCards({
           </ScrollReveal>
         )}
 
-        <CaseStudiesCarousel label={title}>
+        <CaseStudiesCarousel
+          label={title}
+          footer={
+            showFooter ? (
+              <Link
+                href="/resources/case-studies"
+                className="link-underline gap-1 text-sm text-accent font-medium"
+              >
+                Browse customer stories <ArrowRight className="w-4 h-4" aria-hidden />
+              </Link>
+            ) : undefined
+          }
+        >
           {studies.map((cs) => (
             <div
               key={cs.id}
@@ -51,16 +63,6 @@ export default function CaseStudyCards({
           ))}
         </CaseStudiesCarousel>
 
-        {showFooter && (
-          <div className="mt-10 text-center">
-            <Link
-              href="/resources/case-studies"
-              className="link-underline gap-1 text-sm text-accent font-medium"
-            >
-              Browse customer stories <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

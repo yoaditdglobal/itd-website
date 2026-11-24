@@ -153,7 +153,9 @@ export default function AboutPage() {
             <ScrollReveal delay={0.15} className="h-full">
               <ImageCarousel
                 images={PHOTOS}
-                className="h-full min-h-[300px]"
+                // w-full: with h-full the 4:3 aspect otherwise derives the WIDTH
+                // from the stretched row height and overflows the column.
+                className="h-full w-full min-h-[300px]"
                 sizes="(max-width: 1024px) 100vw, 600px"
               />
             </ScrollReveal>

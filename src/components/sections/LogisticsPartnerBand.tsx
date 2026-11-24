@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ImageCarousel from "@/components/ui/ImageCarousel";
 import { companyPhotos } from "@/lib/data";
@@ -29,22 +29,20 @@ export default function LogisticsPartnerBand() {
           {/* Copy */}
           <ScrollReveal delay={0.1}>
             <div>
-              <h2 className="text-display-lg text-text-primary">
+              <p className="text-eyebrow text-accent">About ITD</p>
+              <h2 className="mt-3 text-display-lg text-text-primary">
                 Run by people who ship for a living
               </h2>
               <p className="mt-5 text-body-lg text-text-secondary">
-                ITD Global has been in logistics for +20 years, run from our HQ
+                ITD Global has been in logistics for 20+ years, run from our HQ
                 in Manchester. Our team handles carriers, customs and peak
                 season for hundreds of UK businesses, and when you call, you get
                 a person who knows your account.
               </p>
               <div className="mt-8">
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2 rounded-lg bg-button px-5 py-3 text-sm font-semibold text-white hover:bg-button-hover transition-colors"
-                >
+                <Button href="/about" variant="primary" surface="light" size="lg">
                   Meet the Team
-                </Link>
+                </Button>
               </div>
             </div>
           </ScrollReveal>
