@@ -199,11 +199,14 @@ export default function Navbar() {
     clearTimers();
     setOpenDropdown(null);
   };
-  const closeOnMouse = (e: React.PointerEvent) => {
+  // `delay`: Platform sits BETWEEN triggers, so a sweep from Shipping to
+  // Integrations crosses it; it gets a longer grace so that pass-through never
+  // closes (and re-opens) the panel mid-glide.
+  const closeOnMouse = (e: React.PointerEvent, delay = 140) => {
     if (e.pointerType !== "mouse" || !openDropdown) return;
     if (switchTimerRef.current) window.clearTimeout(switchTimerRef.current);
     if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
-    closeTimerRef.current = window.setTimeout(closeMenu, 140);
+    closeTimerRef.current = window.setTimeout(closeMenu, delay);
   };
   const cancelClose = () => {
     if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
@@ -331,7 +334,7 @@ export default function Navbar() {
                   href="/connexx"
                   aria-current={isActive("/connexx") ? "page" : undefined}
                   className={platformLinkClass(false)}
-                  onPointerEnter={closeOnMouse}
+                  onPointerEnter={(e) => closeOnMouse(e, 320)}
                 >
                   Platform
                   {isActive("/connexx") && (
