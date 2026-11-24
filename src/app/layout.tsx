@@ -5,6 +5,7 @@ import SiteChrome from "@/components/layout/SiteChrome";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import ScrollToTop from "@/components/util/ScrollToTop";
 import UtmPassthrough from "@/components/analytics/UtmPassthrough";
+import Beacon from "@/components/analytics/Beacon";
 import { rootMetadata } from "@/lib/metadata";
 import {
   JsonLd,
@@ -82,6 +83,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ScrollToTop />
         {/* Carries landing utm_* tags on to Rate Checker links (renders nothing). */}
         <UtmPassthrough />
+        {/* First-party analytics (Beacon -> /api/v): must not be removed; the prebuild guard fails without it. */}
+        <Beacon />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <QueryProvider>
           <SiteChrome>{children}</SiteChrome>

@@ -3,7 +3,9 @@
 # Netlify auto-applies the Next.js runtime, so no publish dir / plugin block is needed here.
 
 [build]
-  command = "next build"
+  # `npm run build` (not `next build`) so the `prebuild` script runs first:
+  # scripts/check-beacon.mjs fails the build if the analytics beacon is removed.
+  command = "npm run build"
 
 [build.environment]
   # Pin the Node version so local machines and Netlify build the same way.
