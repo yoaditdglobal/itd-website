@@ -34,7 +34,11 @@ const AD_CLICK_IDS = ["gclid", "fbclid", "li_fat_id"] as const;
 // The first page view of the document: UtmPassthrough may not have saved the
 // landing tags yet (effect order is not guaranteed), so read the URL as well.
 let firstPage = true;
-let dataLayerWrapped = false;
+// Lead detection reads the dataLayer array rather than wrapping its push():
+// GTM installs its own push, and every push (GTM's included) still appends.
+let scanArray: unknown[] | null = null;
+let scanIndex = 0;
+const scanned = new WeakSet<object>();
 
 function visitTags(): Tags {
   const saved = savedTags();
@@ -92,28 +96,30 @@ function leadForm(entry: unknown): string | false {
   return false;
 }
 
-function wrapDataLayer() {
-  if (dataLayerWrapped) return;
+/**
+ * Send a lead for every new generate_lead entry in window.dataLayer. Starts at
+ * 0 so a lead pushed before mount still counts (the array is per page load);
+ * the WeakSet keeps an entry from counting twice, also when the array is
+ * replaced and the index resets.
+ */
+function scanDataLayer() {
   try {
-    const w = window as DataLayerWindow;
-    w.dataLayer = w.dataLayer || [];
-    const dl = w.dataLayer;
-    const original = dl.push;
-    dl.push = function (...items: unknown[]) {
-      const result = original.apply(dl, items);
-      try {
-        for (const item of items) {
-          const form = leadForm(item);
-          if (form !== false) send("lead", form || undefined);
-        }
-      } catch {
-        /* never interfere with the push */
-      }
-      return result;
-    };
-    dataLayerWrapped = true;
+    const dl = (window as DataLayerWindow).dataLayer;
+    if (!Array.isArray(dl)) return;
+    if (dl !== scanArray) {
+      scanArray = dl;
+      scanIndex = 0;
+    }
+    if (scanIndex > dl.length) scanIndex = 0;
+    for (; scanIndex < dl.length; scanIndex++) {
+      const item = dl[scanIndex];
+      if (!item || typeof item !== "object" || scanned.has(item)) continue;
+      scanned.add(item);
+      const form = leadForm(item);
+      if (form !== false) send("lead", form || undefined);
+    }
   } catch {
-    /* leave the dataLayer untouched */
+    /* never interfere with the page */
   }
 }
 
@@ -121,9 +127,18 @@ export default function Beacon() {
   const pathname = usePathname();
   const lastPath = useRef<string | null>(null);
 
-  // Rate Checker clicks and the lead wrapper: once per document.
+  // Rate Checker clicks and the dataLayer lead scan: once per document.
   useEffect(() => {
-    wrapDataLayer();
+    scanDataLayer();
+    const poll = setInterval(() => {
+      if (!document.hidden) scanDataLayer();
+    }, 1_000);
+    const onLeave = () => scanDataLayer();
+    const onHide = () => {
+      if (document.hidden) scanDataLayer();
+    };
+    window.addEventListener("pagehide", onLeave);
+    document.addEventListener("visibilitychange", onHide);
     const onClick = (event: MouseEvent) => {
       try {
         const anchor = (event.target as Element | null)?.closest?.("a");
@@ -137,6 +152,9 @@ export default function Beacon() {
     document.addEventListener("click", onClick, true);
     document.addEventListener("auxclick", onClick, true);
     return () => {
+      clearInterval(poll);
+      window.removeEventListener("pagehide", onLeave);
+      document.removeEventListener("visibilitychange", onHide);
       document.removeEventListener("click", onClick, true);
       document.removeEventListener("auxclick", onClick, true);
     };
