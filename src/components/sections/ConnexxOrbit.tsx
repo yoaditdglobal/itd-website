@@ -61,8 +61,8 @@ export function IconChip({
   sizeClass = "w-9 h-9 md:w-10 md:h-10",
 }: {
   brand: Brand;
-  /** Tailwind width/height classes for the tile. Defaults to the fixed 36/40px
-   *  used by CarrierNetworkOrbit; ConnexxOrbit passes a smaller mobile size. */
+  /** Tailwind width/height classes for the tile. Defaults to 36/40px;
+   *  ConnexxOrbit passes a smaller mobile size. */
   sizeClass?: string;
 }) {
   // Edge-to-edge square rounded brand tile — every orbit asset is a full-bleed

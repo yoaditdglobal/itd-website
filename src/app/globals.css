@@ -417,6 +417,16 @@ nav[data-nav-theme="light"] .font-display[aria-current="page"] {
   .animate-ticker { animation: none; }
 }
 
+/* Carriers hub logo wall: tiles bob gently, staggered via inline delay. */
+@keyframes carrier-wall-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.carrier-wall-tile { animation: carrier-wall-float 6s ease-in-out infinite both; }
+@media (prefers-reduced-motion: reduce) {
+  .carrier-wall-tile { animation: none; }
+}
+
 /* ─── Connection link (tech-integration hero, ConnectionVisual) ───────────
    A carrier span is exactly the link's width with the dot at its left edge;
    translating the carrier 0 → 100% runs the dot end-to-end (transform-only).
