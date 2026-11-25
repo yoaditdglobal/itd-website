@@ -10,7 +10,8 @@ import { safeEqual, withDeadline } from "@/lib/beacon";
  *        each person in the body is kept as `phone/<apollo id>` (store `apollo`)
  *   GET  /api/apollo/phone?ids=<id>,<id>                  the dashboard, with
  *        `Authorization: Bearer <BEACON_EXPORT_TOKEN>`; answers
- *        { people: { <id>: { at, person } | null } }
+ *        { ready, people: { <id>: { at, person } | null } }, `ready` false
+ *        while the webhook key is unset (the dashboard then asks for no mobiles)
  *
  * Nothing else is stored: no request data, no IP. A body Apollo sends without
  * a person id is kept once under `raw/<ms>` so a format change can be seen.
@@ -115,7 +116,7 @@ export async function GET(request: Request) {
           : null;
       }),
     );
-    return json({ people });
+    return json({ ready: !!process.env.APOLLO_PHONE_WEBHOOK_KEY, people });
   } catch {
     return json({ error: "storage read failed, retry" }, 503);
   }
